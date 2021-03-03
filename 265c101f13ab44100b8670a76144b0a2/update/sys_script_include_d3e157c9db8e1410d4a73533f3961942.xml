@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtInstanceManipulationFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected script for performing operation on the Assessments. Not extensible.</description>
+        <name>CIRAssmtInstanceManipulationFP</name>
+        <script><![CDATA[var CIRAssmtInstanceManipulationFP = function() {
+    /**
+     * Function to trigger the creation or update the Assessment Instance,
+     * its Assessment Instance Sections and Assessment Answers.
+     *
+     * @param {Object} objOperationData - Object containing:
+     * categoryId - String containing the SysID of the Category
+     * assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     * sectionId - String containing the SysID of the Record Producer
+     * fieldIds - Array containing all the variables SysIDs
+     * fieldValues - Array of JSON objects with the fields info
+     * scoreCalculated - Float containing the value of the score calculated
+     * @return {Boolean} - True in case the creation was successful, false if something failed
+     */
+    var performOperationOnAssessment = function(objOperationData) {
+        var objInstanceData = {
+            categoryId: objOperationData.assessmentId,
+            assessmentInstanceId: objOperationData.assessmentInstanceId
+        };
+        var objInstanceSectionData = {
+            sectionId: objOperationData.sectionToSave,
+            scoreCalculated: objOperationData.scoreCalculated
+        };
+        var objAnswerData = {
+            fieldIds: objOperationData.fieldIds,
+            fieldValues: objOperationData.fieldValues
+        };
+        var logObj = actOnAssessmentInstance(objInstanceData, objInstanceSectionData, objAnswerData, {});
+
+        return !(logObj && logObj[gs.getMessage('cir_assmt_fail_log')] && logObj[gs.getMessage('cir_assmt_fail_log')].length > 0);
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Instance record (create or update records).
+     *
+     * @param {Object} objInstanceData - JSON object containing the data needed for
+     *                                   manipulating the Assessment Instance record
+     * @param {Object} objInstanceSectionData - JSON object containing the data needed for
+     *                                   manipulating the Assessment Instance Section record
+     * @param {Object} objAnswerData - JSON object containing the data needed for
+     *                                   manipulating the Assessment Answer record
+     * @param {Object} logObj - JSON object containing the log messages
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentInstance = function(objInstanceData, objInstanceSectionData, objAnswerData, logObj) {
+        var QUERY_SECTION = 'active=true^assessment_definition=';
+        var QUERY_INSTANCE_SECTION = 'assessment_instance=';
+        var QUERY_FIELD = 'assessment_section.assessment_definition=';
+        var QUERY_ANSWER = 'assessment_instance_section.assessment_instance=';
+
+        var grAssessmentDefinition = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        if(!grAssessmentDefinition.get('category', objInstanceData.categoryId)) {
+            return logObj;
+        }
+        var assessmentDefinitionId = grAssessmentDefinition.getValue('sys_id');
+
+        // Fetch the Assessment Section records
+        queryProps = CIRAssmtUtilsFP().GetQueryProps(
+            'assessmentSection', [QUERY_SECTION, assessmentDefinitionId].join(''));
+        var arrAssessmentSections = new CIRGenericUtils().QueryTable(queryProps);
+        // Fetch the Assessment Instance Section records
+        queryProps = CIRAssmtUtilsFP().GetQueryProps('assessmentInstanceSection',
+            [QUERY_INSTANCE_SECTION, objInstanceData.assessmentInstanceId].join(''));
+        var arrAssessmentInstanceSections = new CIRGenericUtils().QueryTable(queryProps);
+        objInstanceSectionData.arrAssessmentSections = arrAssessmentSections;
+        objInstanceSectionData.arrAssessmentInstanceSections = arrAssessmentInstanceSections;
+
+        // Fetch the Assessment Field records
+        queryProps = CIRAssmtUtilsFP().GetQueryProps(
+            'assessmentField', [QUERY_FIELD, assessmentDefinitionId].join(''));
+        var arrAssessmentFields = new CIRGenericUtils().QueryTable(queryProps);
+        // Fetch the Assessment Answer records
+        queryProps = CIRAssmtUtilsFP().GetQueryProps('assessmentAnswer',
+            [QUERY_ANSWER, objInstanceData.assessmentInstanceId].join(''));
+        var arrAssessmentAnswers = new CIRGenericUtils().QueryTable(queryProps);
+        objAnswerData.arrAssessmentFields = arrAssessmentFields;
+        objAnswerData.arrAssessmentAnswers = arrAssessmentAnswers;
+
+        // Create or Update the Assessment Instance Record
+        var instanceId = '';
+        var grAssessmentInstance = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+        if(grAssessmentInstance.get(objInstanceData.assessmentInstanceId)) {
+            instanceId = grAssessmentInstance.getValue('sys_id');
+        } else {
+            var assessmentInstance = {
+                assessment_definition: assessmentDefinitionId,
+                user: gs.getUserID(),
+                new_guid_sys_id: objInstanceData.assessmentInstanceId,
+                state: 'in_progress'
+            };
+            var createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps(
+                'assessmentInstance', assessmentInstance, instanceId);
+            instanceId = new CIRGenericUtils().CreateUpdateRecord(createUpdateProps);
+        }
+        if(instanceId) {
+            logObj = actOnAssessmentInstanceSection(instanceId, objInstanceSectionData, objAnswerData, logObj);
+        } else {
+            logObj = new CIRGenericUtils().LogStack(logObj, false,
+                gs.getMessage('cir_assmt_assessment_instance_log'));
+        }
+
+        return logObj;
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Instance Section record (create or update records).
+     *
+     * @param {String} instanceId - String contaning the SysID of the Assessment Instance
+     * @param {Object} objInstanceSectionData - JSON object containing the data needed for
+     *                                   manipulating the Assessment Instance Section record
+     * @param {Object} objAnswerData - JSON object containing the data needed for
+     *                                   manipulating the Assessment Answer record
+     * @param {Object} logObj - JSON object containing the log messages
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentInstanceSection = function(instanceId, objInstanceSectionData, objAnswerData, logObj) {
+        var instanceComplete = true;
+        objInstanceSectionData.arrAssessmentSections.forEach(function(assessmentSection) {
+            var assessmentSectionId = assessmentSection.sys_id;
+            var recordProducerId = assessmentSection.record_producer;
+
+            var instanceSectionId = '';
+            var instanceSectionScore = 0;
+            // Create or Update the Assessment Instance Section Record
+            var assessmentInstanceSection = new CIRGenericUtils().Find(
+                objInstanceSectionData.arrAssessmentInstanceSections,
+                function(instanceSection) {
+                    return instanceSection.assessment_section === assessmentSectionId;
+                }, this);
+            if(assessmentInstanceSection) {
+                instanceSectionId = assessmentInstanceSection.sys_id;
+                instanceSectionScore = assessmentInstanceSection.score ? parseInt(
+                    assessmentInstanceSection.score) : 0;
+            } else {
+                assessmentInstanceSection = {
+                    assessment_section: assessmentSectionId,
+                    assessment_instance: instanceId
+                };
+            }
+            if(recordProducerId === objInstanceSectionData.sectionId) {
+                assessmentInstanceSection.score = 100 - objInstanceSectionData.scoreCalculated;
+            } else {
+                assessmentInstanceSection.score = instanceSectionScore;
+            }
+            if(assessmentInstanceSection.score < 100) {
+                instanceComplete = false;
+            }
+            var createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps(
+                'assessmentInstanceSection', assessmentInstanceSection, instanceSectionId);
+            instanceSectionId = new CIRGenericUtils().CreateUpdateRecord(createUpdateProps);
+            if(instanceSectionId) {
+                logObj = actOnAssessmentAnswer(instanceSectionId, recordProducerId, objAnswerData,
+                    logObj);
+            } else {
+                logObj = new CIRGenericUtils().LogStack(logObj, false,
+                    gs.getMessage('cir_assmt_assessment_instance_section_log'));
+            }
+        });
+
+        return logObj;
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Answer record (create or update records).
+     *
+     * @param {String} instanceSectionId - String contaning the SysID of the Assessment Instance Section
+     * @param {String} recordProducerId - String contaning the SysID of the Record Producer
+     * @param {Object} objAnswerData - JSON object containing the data needed for
+     *                                   manipulating the Assessment Answer record
+     * @param {Object} logObj - JSON object containing the log messages
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentAnswer = function(instanceSectionId, recordProducerId, objAnswerData, logObj) {
+        objAnswerData.arrAssessmentFields.forEach(function(assessmentField) {
+            if(recordProducerId !== assessmentField.assessment_section.record_producer) {
+                return;
+            }
+            var assessmentFieldId = assessmentField.sys_id;
+            var variableId = assessmentField.variable;
+
+            if(!objAnswerData.fieldIds || (objAnswerData.fieldIds && objAnswerData.fieldIds.indexOf(
+                    variableId) < 0)) {
+                return;
+            }
+            var answerId = '';
+            // Create or Update the Assessment Answer Record
+            var assessmentAnswer = new CIRGenericUtils().Find(
+                objAnswerData.arrAssessmentAnswers,
+                function(answer) {
+                    return answer.assessment_field === assessmentFieldId &&
+                        answer.assessment_instance_section === instanceSectionId;
+                });
+            if(assessmentAnswer) {
+                answerId = assessmentAnswer.sys_id;
+            } else {
+                assessmentAnswer = {
+                    assessment_field: assessmentFieldId,
+                    assessment_instance_section: instanceSectionId
+                };
+            }
+            objAnswerData.fieldValues.forEach(function(fieldObj) {
+                if(fieldObj.fieldId === variableId) {
+                    assessmentAnswer.display_value = fieldObj.fieldDisplayValue;
+                    assessmentAnswer.value = fieldObj.fieldValue;
+                    return;
+                }
+            });
+            var createUpdateProps =
+                CIRAssmtUtilsFP().GetCreateUpdateProps('assessmentAnswer', assessmentAnswer,
+                    answerId);
+            answerId = new CIRGenericUtils().CreateUpdateRecord(createUpdateProps);
+            if(!answerId) {
+                logObj = new CIRGenericUtils().LogStack(logObj, false,
+                    gs.getMessage('cir_assmt_assessment_answer_log'));
+            }
+        });
+
+        return logObj;
+    };
+
+    /**
+     * Function to complete the Assessment Instance.
+     *
+     * @param {String} assessmentInstaceId - String contaning the SysID of the Assessment Instance
+     * @return {boolean} - True if the Assessment Instance was completed, false otherwise
+     */
+    var completeAssessmentSectionInstance = function(assessmentInstanceId) {
+        // Update the Assessment Instance Record with the state
+        var arrIncompleteSections =
+            CIRAssmtReadFP().GetIncompleteAssesmentInstanceSections(assessmentInstanceId);
+        if(arrIncompleteSections && arrIncompleteSections.length > 0) {
+            return false;
+        }
+
+        // TODO: update this when the CIR State mapper is finished
+        var assessmentInstance = {
+            state: 'complete'
+        };
+        var createUpdatePropsInstance = CIRAssmtUtilsFP().GetCreateUpdateProps(
+            'assessmentInstance', assessmentInstance, assessmentInstanceId);
+        assessmentInstaceId = new CIRGenericUtils().CreateUpdateRecord(createUpdatePropsInstance);
+
+        return true;
+    };
+
+    return {
+        PerformOperationOnAssessment: performOperationOnAssessment,
+        CompleteAssessmentSectionInstance: completeAssessmentSectionInstance
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:07:29</sys_created_on>
+        <sys_id>d3e157c9db8e1410d4a73533f3961942</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIRAssmtInstanceManipulationFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_d3e157c9db8e1410d4a73533f3961942</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-21 15:25:19</sys_updated_on>
+    </sys_script_include>
+</record_update>

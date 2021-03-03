@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Cir M2m Near Miss Incidents" max_length="40" name="x_fru_cir_m2m_near_miss_incidents" sizeclass="1" type="collection">
+        <element attributes="encode_utf8=false" label="Incident" max_length="32" name="incident" reference="x_fru_cir_incident" type="reference"/>
+        <element attributes="encode_utf8=false" label="Near Miss" max_length="32" name="near_miss" reference="x_fru_cir_near_miss" type="reference"/>
+        <index name="index">
+            <element name="near_miss"/>
+        </index>
+        <index name="index2">
+            <element name="incident"/>
+        </index>
+    </element>
+</database>

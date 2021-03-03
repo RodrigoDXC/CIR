@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_in_email_action">
+    <sysevent_in_email_action action="INSERT_OR_UPDATE">
+        <action>record_action</action>
+        <active>true</active>
+        <assignment_operator/>
+        <condition_script/>
+        <description/>
+        <event_name>email.read</event_name>
+        <filter_condition table="sys_email">subjectLIKEOk^EQ<item endquery="false" field="subject" goto="false" newquery="false" operator="LIKE" or="false" value="Ok"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <from/>
+        <name>CIR Situation Feedback</name>
+        <order>100</order>
+        <reply_email/>
+        <required_roles/>
+        <script><![CDATA[(function runAction(/*GlideRecord*/ current, /*GlideRecord*/ event, /*EmailWrapper*/ email, /*ScopedEmailLogger*/ logger, /*EmailClassifier*/ classifier) {
+
+	//Separate the subject of the received email, and split it by the spaces
+	//if it has more than 3 words, the response will be 'Not Ok', in this case '1'
+	//if not, it will be 'Ok', in this case '0'
+	
+	var sub = email.subject.match(/(RPEXS)[0-9]{0,7}/g);
+	var response = '';
+	var user = getUser(email.from);
+
+	if (email.subject.indexOf('Not Ok') != -1) {
+		response = '1';
+	} else {
+		response = '0';
+	}
+
+	//GlideRecord to the 'Message Execution Recipient' table
+	//used to find a record that matches the email address received and the current step execution record
+	//it will then update the record with the user feedback
+	
+	var msgRecipientGr = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);
+	msgRecipientGr.addEncodedQuery('user=' + user + '^ORprimary_backup=' + user + '^ORsecondary_backup=' + user);
+	msgRecipientGr.addQuery('step_message_execution.number', sub);
+	msgRecipientGr.addQuery('state', '2');
+	msgRecipientGr.query();
+
+	while (msgRecipientGr.next()) {
+		msgRecipientGr.setValue('state', 3);
+		msgRecipientGr.setValue('feedback', response);
+		msgRecipientGr.setValue('feedback_message', email.body_text);
+		msgRecipientGr.update();
+	}
+
+})(current, event, email, logger, classifier);
+
+
+function getUser(emailUser) {
+	var userGr = new GlideRecord('sys_user');
+	userGr.addQuery('email', emailUser);
+	userGr.query();
+
+	if (userGr.next()) {
+		return userGr.sys_id.toString();
+	}
+}]]></script>
+        <stop_processing>false</stop_processing>
+        <sys_class_name>sysevent_in_email_action</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-04-01 07:34:43</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>549275db1bff4090df7e43f4bd4bcb8b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR Situation Feedback</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sysevent_in_email_action_549275db1bff4090df7e43f4bd4bcb8b</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-04-01 07:38:09</sys_updated_on>
+        <table>x_fru_cir_response_plan_execution_step_message</table>
+        <template/>
+        <type>reply</type>
+    </sysevent_in_email_action>
+</record_update>

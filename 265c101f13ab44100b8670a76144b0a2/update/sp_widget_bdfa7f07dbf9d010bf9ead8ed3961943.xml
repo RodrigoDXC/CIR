@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($scope) {
+	/* widget controller */
+	var c = this;
+	c.searchInput = '';
+	c.selectedCat = false;
+
+	var $j = jQuery;
+	//DISABLE enter for search field
+	$("form").keypress(function(e) {
+		if (e.which == 13) { //Enter key
+			return false;
+		}
+	});
+	var g_form = $scope.page.g_form;
+	var arrayPushed = [];
+		
+
+	$scope.load= "yes";
+	loadCategories();
+	
+		function loadCategories() {
+			c.server.get({
+				load: $scope.load,
+				type: g_form.getValue('order_type_inc') //this is the type used in the filter for the categories server side. change it if needed
+		
+			}).then(function (r) {
+				c.data.categories = r.data.categories;		
+				arrayPushed.push(JSON.stringify(c.data.categories).toLowerCase());
+					//c.searchInput = r.data.receivedLvl3Category.display;
+				
+				//AUtoselect if there is only 1 category on LVL 4 and 5
+				/*
+				if(r.data.autoSelectCategory){
+					var selectedElement = $j('#' + r.data.categories[0].sysID);
+					c.selectedCat = r.data.categories[0].sysID;
+					g_form.setValue("category_inc", r.data.categories[0].sysID);
+				}
+				*/
+				
+				//g_form.setValue("selected_cat", r.data.receivedLvl3Category.sysId);
+			
+			});			
+		}
+		$scope.selectCategory = function (event,cat) {
+			
+			if (event.target.id.indexOf('dummy') != -1){
+				return;
+			}
+			var selectedElement = $('#' + event.target.id);			
+			var category = selectedElement.parent('li').attr('id');
+			
+			
+			c.selectedCat = category; //pass value to angular template 
+		    c.searchInput = cat.name;
+			//g_form.setValue("selected_cat", category); //populate the field on the form.
+		};
+	
+	
+	c.expandedArray = [];
+	$scope.hideShowChild2 = function(id){
+		c.selectedCat = id;
+		var arrIndex = c.expandedArray.indexOf(id);
+		if(arrIndex == -1){
+			c.expandedArray.push(id);
+		} else {
+			c.expandedArray.splice(arrIndex);
+		}
+	};
+	
+	}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>li {&#13;
+  display: table;&#13;
+  user-select: none;&#13;
+}&#13;
+&#13;
+#categories {&#13;
+  padding-left: 3px;&#13;
+  width: 100%;&#13;
+}&#13;
+&#13;
+#category_picker_inc {&#13;
+  position:absolute;&#13;
+  box-sizing: content-box;&#13;
+  width:100%;&#13;
+}&#13;
+&#13;
+.special_size {&#13;
+  font-size: 14.5pt;&#13;
+}&#13;
+&#13;
+.category-item {&#13;
+  cursor: pointer;&#13;
+  padding-left: 15px;&#13;
+}&#13;
+&#13;
+.collapsed {&#13;
+  display: none;&#13;
+}&#13;
+&#13;
+.form-control {&#13;
+  max-width: 100%;&#13;
+  margin-bottom: 10pt&#13;
+}&#13;
+&#13;
+.expanded {&#13;
+  display: table;&#13;
+  padding-left: 15px;&#13;
+}&#13;
+&#13;
+.fa-circle {&#13;
+  font-size: 5pt;&#13;
+  vertical-align: middle; &#13;
+  visibility: hidden;&#13;
+}&#13;
+&#13;
+.fa-caret-down {&#13;
+  padding-right: 2.5pt;&#13;
+  font-size: 19px;&#13;
+}&#13;
+.fa-caret-right {&#13;
+  padding-right: 5pt;&#13;
+  font-size: 19px;&#13;
+  vertical-align: -2px;&#13;
+}&#13;
+&#13;
+.fas:not(.fa-caret-down):not(.fa-caret-right) {&#13;
+  padding-right: 3pt;&#13;
+  font-size: 19px;&#13;
+  vertical-align: -2px;&#13;
+}&#13;
+&#13;
+.selected, .fa-caret-down,  .fa-caret-right  {&#13;
+  /*Defined in the FM Habitum Header CSS variables*/&#13;
+  color: $brand-info;&#13;
+}&#13;
+&#13;
+ol div {&#13;
+  /*display: initial;*/&#13;
+  display: inline;&#13;
+  line-height: 0;&#13;
+}&#13;
+&#13;
+ol div:hover:not(#div_dummy), .selected {&#13;
+  text-decoration: underline;&#13;
+}&#13;
+&#13;
+#dummy, .selected {&#13;
+  font-weight: bold;&#13;
+}&#13;
+&#13;
+#dummy [role="button"] {&#13;
+  cursor: default !important;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-psi-asset-picker</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR PSI Asset Picker</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.psi_global_manager,x_fru_cir.psi_internal_manager,x_fru_cir.psi_internal_user,x_fru_cir.psi_local_manager</roles>
+        <script><![CDATA[(function() {
+	/*	************
+	************** */
+	
+	data.msg = {};
+	data.msg.selectedCat = gs.getMessage('cir_psi_selected_asset');
+	data.categories = [];
+	data.autoSelectCategory = false;
+
+	
+	if (input && input.load){
+	
+		//GET record prodcuer and order_category
+		/*var rpSysId = $sp.getParameter("category");
+		
+		var selectedPSICategory;
+		
+		var selectedCategory = new GlideRecord('x_lsmcb_fsm_fsi_category');
+		if(selectedCategory.get(rpSysId)){
+			selectedPSICategory = selectedCategory.getValue('sys_id');
+		}*/
+		
+		var categoryName, categorySysID;
+		var categoryObj = {};
+		
+		
+		
+		/*data.receivedLvl3Category = {};
+		var categoryLvl3 = new GlideRecord('x_lsmcb_fsm_fsi_category');
+		
+		if(categoryLvl3.get(selectedPSICategory)){
+			data.receivedLvl3Category.display = categoryLvl3.getDisplayValue();
+			data.receivedLvl3Category.sysId = categoryLvl3.getUniqueValue();
+		}*/
+		
+		
+		
+		var assetName, assetSysID, assetType, categoryType;
+		var assetObj = {};
+		
+		
+		var categoriesGR = new GlideRecordSecure(CIRConstants.Tables.SECURITY_ASSET);
+		categoriesGR.addEncodedQuery('u_type=1');
+		//categoriesGR.addEncodedQuery('name=SEGURIDAD');
+		categoriesGR.orderBy('name');
+		categoriesGR.query();
+		
+		
+		//console.log("family asset: " + categoriesGR.getRowCount());
+	
+		
+		while (categoriesGR.next()){
+			categoryName = categoriesGR.getDisplayValue();
+			categorySysID = categoriesGR.getValue('sys_id');
+			categoryType = categoriesGR.getValue('u_type');
+			
+			categoryObj = {
+				name: categoryName,
+				sysID: categorySysID,
+				type: categoryType 
+			};
+			
+			var children = getChildren(categorySysID, categoryType, '');
+			
+			if (children){
+				categoryObj.children = children;	
+			}
+			
+			data.categories.push(categoryObj);
+		}
+		
+		//getting the root level in the category tree
+		
+		
+		/*var selectedObj = {};
+		selectedObj.name = data.receivedLvl3Category.display;
+		selectedObj.sysID = data.receivedLvl3Category.sysId;
+		//data.categories.unshift(selectedObj); 
+ 
+
+		
+		
+		if(!data.categories.length) { //If no tier 4 and 5 are found, use original tier
+			categoriesGR = new GlideRecordSecure('x_lsmcb_fsm_fsi_category');
+			if(categoriesGR.get(selectedPSICategory)){
+				categoryName = categoriesGR.getDisplayValue('name');
+				categorySysID = categoriesGR.getValue('sys_id');
+
+				categoryObj = {
+					name: categoryName,
+					sysID: categorySysID
+				};
+				data.categories.push(categoryObj);
+				data.autoSelectCategory = true;
+			} else {
+				categoryObj = {
+					name: 'DATA ERROR',
+					sysID: 'DATA ERROR'
+				};
+				data.categories.push(categoryObj);
+			}
+		}*/
+		
+		//console.log(JSON.stringify(data.categories));
+		
+		return data.categories;
+	}
+	
+	function getChildren (parentSysID, type, grandParent){
+		
+		if(parseInt(type) <= 3) {
+		
+			var node = [];
+			var catName = '';
+			var catObj = {};
+			
+			var currentType = parseInt(type) + 1;
+		
+			var catGR = new GlideRecordSecure(CIRConstants.Tables.SECURITY_ASSET);
+			type != 1 ? catGR.addEncodedQuery("u_parent.u_parent=" + grandParent) : '';
+			catGR.addQuery('u_parent', parentSysID);
+			catGR.addEncodedQuery('u_type=' + currentType);
+			catGR.orderBy('name');
+			catGR.query();
+			
+			//console.log("Our encoded Query is: " + catGR.getEncodedQuery());
+		
+			if (!catGR.hasNext()){
+				return '';
+			}
+
+			while (catGR.next()){
+
+				catName = catGR.getDisplayValue('name');
+				catObj = {
+					name: catName,
+					sysID: catGR.getValue('sys_id'),
+					type: catGR.getValue('u_type')
+				};
+
+				var newChildren = getChildren(catGR.getValue('sys_id'), catGR.getValue('u_type'), parentSysID);
+
+				if (newChildren){
+					catObj.children = newChildren;
+				}
+				node.push(catObj);
+			}
+		
+			return node;
+		
+		} else {
+			return ;
+		}
+	}
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-09 08:59:34</sys_created_on>
+        <sys_id>bdfa7f07dbf9d010bf9ead8ed3961943</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR PSI Asset Picker</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_bdfa7f07dbf9d010bf9ead8ed3961943</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-09 09:03:49</sys_updated_on>
+        <template><![CDATA[<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="form-group">
+      <div  class="col-sm-5">
+        <label class="control-label">{{data.msg.selectedCat}}: </label>
+        <label class="control-label selected" id="selectedCategory" value="{{c.selectedCat}}" >{{c.searchInput}}</label> <br/>
+      </div>
+      <!--<div class="col-sm-3">
+        <input id="search_input" ng-model="c.searchInput" class="form-control"/>
+      </div>-->
+      <div class="col-sm-7">
+        <br class="special_size"/>
+        <ol id="categories" >
+           <li ng-repeat="category in data.categories" id="{{category.sysID}}" class="category-item" ng-include="'category-listing-external'"> 
+          </li>
+        </ol>      
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+]]></template>
+    </sp_widget>
+</record_update>

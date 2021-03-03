@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRRiskManagementUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRRiskManagementUtils</name>
+        <script><![CDATA[var CIRRiskManagementUtils = Class.create(); 
+CIRRiskManagementUtils.prototype = Object.extendsObject(CIRRiskManagementUtilsFP, {
+
+	/**
+	 * Initialize Function 
+	 */
+	initialize: function() {
+		CIRRiskManagementUtilsFP.prototype.initialize.call(this);
+	},
+
+	type: 'CIRRiskManagementUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-16 14:05:25</sys_created_on>
+        <sys_id>2854ea7bdb1d141003b3533fd39619e9</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIRRiskManagementUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_2854ea7bdb1d141003b3533fd39619e9</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-09 13:31:22</sys_updated_on>
+    </sys_script_include>
+</record_update>

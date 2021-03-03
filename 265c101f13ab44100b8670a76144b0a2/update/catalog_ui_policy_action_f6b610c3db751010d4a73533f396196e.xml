@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
+    <catalog_ui_policy_action action="INSERT_OR_UPDATE">
+        <catalog_item/>
+        <catalog_variable>IO:688a31e61b71901024c896ce0a4bcb4c</catalog_variable>
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field/>
+        <mandatory>ignore</mandatory>
+        <order>100</order>
+        <sys_class_name>catalog_ui_policy_action</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-08 16:20:39</sys_created_on>
+        <sys_id>f6b610c3db751010d4a73533f396196e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>city</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>catalog_ui_policy_action_f6b610c3db751010d4a73533f396196e</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-08 16:20:39</sys_updated_on>
+        <table/>
+        <ui_policy display_value="Make field read only">3f2ff9aa1b71901024c896ce0a4bcbab</ui_policy>
+        <variable>city</variable>
+        <variable_set display_value="Location">94f8f9661b71901024c896ce0a4bcbd6</variable_set>
+        <visible>ignore</visible>
+    </catalog_ui_policy_action>
+</record_update>

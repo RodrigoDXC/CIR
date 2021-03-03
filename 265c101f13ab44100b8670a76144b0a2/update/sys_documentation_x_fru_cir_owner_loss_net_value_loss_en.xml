@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="net_value_loss" label="Net Value Loss" language="en" table="x_fru_cir_owner_loss">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>net_value_loss</element>
+            <help/>
+            <hint/>
+            <label>Net Value Loss</label>
+            <language>en</language>
+            <name>x_fru_cir_owner_loss</name>
+            <plural>Net Value Loss</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-20 07:56:00</sys_created_on>
+            <sys_id>fa9fff6cdb361810bf9ead8ed396198b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Net Value Loss</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_owner_loss_net_value_loss_en</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-20 07:56:00</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

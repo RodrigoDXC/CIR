@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_screen_param_map">
+    <sys_sg_screen_param_map action="INSERT_OR_UPDATE">
+        <item_parameter display_value="response_plan">6e8ea20ddbf3085049959a82ca961900</item_parameter>
+        <screen display_value="Current Step ">402feacddbf3085049959a82ca96196e</screen>
+        <sys_class_name>sys_sg_screen_param_map</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 12:19:08</sys_created_on>
+        <sys_id>da80b281db37085049959a82ca96192c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>6e8ea20ddbf3085049959a82ca961900</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_screen_param_map_da80b281db37085049959a82ca96192c</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 12:19:08</sys_updated_on>
+        <ui_parameter display_value="responsePlan">9000b6c11b770850df7e43f4bd4bcb4d</ui_parameter>
+    </sys_sg_screen_param_map>
+</record_update>

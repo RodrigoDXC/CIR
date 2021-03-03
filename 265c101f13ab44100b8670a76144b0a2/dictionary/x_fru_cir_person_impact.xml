@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_impact" label="Person Impact" max_length="40" name="x_fru_cir_person_impact" sizeclass="6" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Activity during impact" mandatory="true" max_length="40" name="activity_during_impact" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Performing Job Tasks" sequence="10" value="job_tasks"/>
+                <element inactive_on_update="false" label="Non-Job Related Task" sequence="20" value="non_job_related"/>
+                <element inactive_on_update="false" label="Social Activity" sequence="30" value="social_activity"/>
+                <element inactive_on_update="false" label="On Break" sequence="40" value="on_break"/>
+            </choice>
+        </element>
+        <element label="Address" max_length="4000" name="address" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Age group" max_length="40" name="age_group" read_only="true" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="0-14" sequence="10" value="0_14"/>
+                <element inactive_on_update="false" label="15-24" sequence="20" value="15_24"/>
+                <element inactive_on_update="false" label="25-34" sequence="30" value="25_34"/>
+                <element inactive_on_update="false" label="35-44" sequence="40" value="35_44"/>
+                <element inactive_on_update="false" label="45-54" sequence="50" value="45_54"/>
+                <element inactive_on_update="false" label="55-64" sequence="60" value="55_64"/>
+                <element inactive_on_update="false" label="65-74" sequence="70" value="65_74"/>
+                <element inactive_on_update="false" label="75+" sequence="80" value="75_plus"/>
+            </choice>
+        </element>
+        <element label="Company" max_length="255" name="company" type="string"/>
+        <element label="Date of birth" max_length="40" name="date_of_birth" type="glide_date"/>
+        <element label="Date started at company" max_length="40" name="date_started_at_company" type="glide_date"/>
+        <element label="Date started in current role" max_length="40" name="date_started_in_current_role" type="glide_date"/>
+        <element label="Email" max_length="100" name="email" type="string"/>
+        <element label="First name" max_length="40" name="first_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Gender" max_length="40" name="gender" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Male" sequence="10" value="male"/>
+                <element inactive_on_update="false" label="Female" sequence="20" value="female"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Individual" max_length="32" name="individual" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Individual not found" max_length="40" name="individual_not_found" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Individual type" mandatory="true" max_length="40" name="individual_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Employee (Full time/Part time)" sequence="10" value="employee"/>
+                <element inactive_on_update="false" label="Employee (Temp/Other)" sequence="20" value="employee_other"/>
+                <element inactive_on_update="false" label="Contractor" sequence="30" value="contractor"/>
+                <element inactive_on_update="false" label="Vendor" sequence="40" value="vendor"/>
+                <element inactive_on_update="false" label="Visitor" sequence="50" value="visitor"/>
+            </choice>
+        </element>
+        <element label="Job description" max_length="4000" name="job_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Job impact" mandatory="true" max_length="40" name="job_impact" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Lost Time" sequence="10" value="lost_time"/>
+                <element inactive_on_update="false" label="Restricted Duties" sequence="20" value="restricted_duties"/>
+                <element inactive_on_update="false" label="No Job Impact" sequence="30" value="no_impact"/>
+                <element inactive_on_update="false" label="Deceased" sequence="40" value="deceased"/>
+            </choice>
+        </element>
+        <element label="Job title" max_length="100" name="job_title" type="string"/>
+        <element label="Last name" max_length="40" name="last_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Ongoing" max_length="40" name="ongoing" type="boolean"/>
+        <element label="Phone" max_length="40" name="phone" type="string"/>
+        <element label="Preferred language" max_length="40" name="preferred_language" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Shift" mandatory="true" max_length="40" name="shift" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Day" sequence="10" value="day"/>
+                <element inactive_on_update="false" label="Afternoon" sequence="20" value="afternoon"/>
+                <element inactive_on_update="false" label="Night" sequence="30" value="night"/>
+                <element inactive_on_update="false" label="Other" sequence="40" value="other"/>
+            </choice>
+        </element>
+        <element label="Shift End" max_length="40" name="shift_end" type="glide_date_time"/>
+        <element label="Shift notes" max_length="255" name="shift_notes" type="string"/>
+        <element label="Shift Start" max_length="40" name="shift_start" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Shift worked %" max_length="40" name="shift_worked" type="percent_complete"/>
+        <element label="Statement" mandatory="true" max_length="4000" name="statement" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Time lost/restricted" max_length="40" name="time_lost_restricted" type="glide_duration"/>
+        <element label="Time of death" max_length="40" name="time_of_death" type="glide_date_time"/>
+        <element label="Usual job tasks" max_length="4000" name="usual_job_tasks" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Visible to users" max_length="1024" name="visible_to_users" reference="sys_user" type="glide_list"/>
+        <index name="index">
+            <element name="individual"/>
+        </index>
+    </element>
+</database>

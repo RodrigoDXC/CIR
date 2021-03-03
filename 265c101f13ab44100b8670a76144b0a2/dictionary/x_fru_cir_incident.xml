@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="email_client=true" audit="true" extends="x_fru_cir_case" label="Incident" max_length="40" name="x_fru_cir_incident" sizeclass="19" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Has Product" max_length="40" name="has_product" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Level" max_length="40" name="level" type="integer"/>
+    </element>
+</database>

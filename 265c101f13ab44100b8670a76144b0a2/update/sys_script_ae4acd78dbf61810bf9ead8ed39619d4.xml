@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>true</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>true</add_message>
+        <advanced>false</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_fru_cir_police_report</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_fru_cir_police_report">drive_off.progress=10^EQ<item display_value="10" endquery="false" field="drive_off.progress" goto="false" newquery="false" operator="=" or="false" value="10"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message><![CDATA[<p><span id="section_tab.41394f20d7321100b9a5c7400e610312"><span id="section-41394f20d7321100b9a5c7400e610312"><span id="sys_readonly.sys_script.message">Please Re-open the Parent Drive Off Before Creating a Police Report.</span></span></span></p>]]></message>
+        <name>CIR Police Prevent New if Parent Closed</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	// Add your code here
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-20 13:23:56</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ae4acd78dbf61810bf9ead8ed39619d4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR Police Prevent New if Parent Closed</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_ae4acd78dbf61810bf9ead8ed39619d4</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-20 13:23:56</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=ae4acd78dbf61810bf9ead8ed39619d4"/>
+</record_update>

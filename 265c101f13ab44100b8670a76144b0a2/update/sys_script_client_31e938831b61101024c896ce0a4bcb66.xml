@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>custom_message</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Show fields based on Custom Message</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	if (isLoading || newValue === '') {
+		return;
+	}
+	if (newValue == 'true') {
+		g_form.setVisible('template_name', true);
+	} else {
+		g_form.setValue('template_name', '');
+		g_form.setVisible('template_name', false);	
+	}
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 08:40:39</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>31e938831b61101024c896ce0a4bcb66</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Show fields based on Custom Message</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_31e938831b61101024c896ce0a4bcb66</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-11-06 09:52:05</sys_updated_on>
+        <table>x_fru_cir_situation_task_execution</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

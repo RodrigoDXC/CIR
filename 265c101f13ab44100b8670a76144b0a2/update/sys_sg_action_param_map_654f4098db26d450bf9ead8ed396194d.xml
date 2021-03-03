@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_action_param_map">
+    <sys_sg_action_param_map action="INSERT_OR_UPDATE">
+        <button display_value="Update Driver Report">535dc018db26d450bf9ead8ed39619d6</button>
+        <item_parameter display_value="Obtained date">d7be8858db26d450bf9ead8ed396199c</item_parameter>
+        <sys_class_name>sys_sg_action_param_map</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-06 09:31:47</sys_created_on>
+        <sys_id>654f4098db26d450bf9ead8ed396194d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>d7be8858db26d450bf9ead8ed396199c</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_action_param_map_654f4098db26d450bf9ead8ed396194d</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-06 14:07:35</sys_updated_on>
+        <ui_parameter display_value="Obtained">69cd8818db26d450bf9ead8ed3961903</ui_parameter>
+    </sys_sg_action_param_map>
+</record_update>

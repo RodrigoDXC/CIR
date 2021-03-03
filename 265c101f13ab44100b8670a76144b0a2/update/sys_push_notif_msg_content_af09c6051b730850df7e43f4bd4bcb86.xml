@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_push_notif_msg_content">
+    <sys_push_notif_msg_content action="INSERT_OR_UPDATE">
+        <name>CIR Response Team Push Content</name>
+        <push_app display_value="ServiceNow Mobile Application">05ed2fb177002300258da2e2c81061c2</push_app>
+        <script><![CDATA[(function buildJSON(/*GlideRecord*/ current, /*String*/ message, /*Object*/ attributes) {
+
+	var response ='';
+	var content= '';
+	var sender= '';
+	var layoutFieldGenerator = new global.NotificationLayoutFieldGenerator();
+	//var response = layoutFieldGenerator.layoutField(current.getTableName(), current.sys_id, "response_execution_id");
+	//var content = layoutFieldGenerator.layoutField(current.getTableName(), current.sys_id, "message_content");
+//	var sender = layoutFieldGenerator.layoutField(current.getTableName(), current.sys_id, "user");
+	var json = {};
+
+	json = {
+		"aps" : {
+			"sound" : "default"
+		},
+		
+		"Redirection" : {
+			"Title" : "",
+			"To" : "Embedded",
+			"Destination": {
+				"DocumentId": "e3da66c9dbf3085049959a82ca961941"
+			}
+		},
+		
+		"Layout" : {
+			"Identifier" :  response,
+			"Description" : sender,
+			"Body" : content,
+			
+		}
+	};
+
+	return json;
+
+})(current, message, attributes);]]></script>
+        <sys_class_name>sys_push_notif_msg_content</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 09:26:38</sys_created_on>
+        <sys_id>af09c6051b730850df7e43f4bd4bcb86</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CIR Response Team Push Content</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_push_notif_msg_content_af09c6051b730850df7e43f4bd4bcb86</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-04-01 14:00:02</sys_updated_on>
+    </sys_push_notif_msg_content>
+</record_update>

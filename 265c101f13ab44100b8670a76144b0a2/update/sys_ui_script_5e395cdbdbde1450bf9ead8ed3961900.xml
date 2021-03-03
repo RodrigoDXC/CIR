@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_fru_cir.cir_bg_schedule_moment</name>
+        <script><![CDATA[/*!
+FullCalendar Moment Plugin v4.1.0
+Docs & License: https://fullcalendar.io/
+(c) 2019 Adam Shaw
+*/
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('moment'), require('@fullcalendar/core')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'moment', '@fullcalendar/core'], factory) :
+    (global = global || self, factory(global.FullCalendarMoment = {}, global.moment, global.FullCalendar));
+}(this, function (exports, moment, core) { 'use strict';
+
+    moment = moment && moment.hasOwnProperty('default') ? moment['default'] : moment;
+
+    function toMoment(date, calendar) {
+        if (!(calendar instanceof core.Calendar)) {
+            throw new Error('must supply a Calendar instance');
+        }
+        return convertToMoment(date, calendar.dateEnv.timeZone, null, calendar.dateEnv.locale.codes[0]);
+    }
+    function toDuration(fcDuration) {
+        return moment.duration(fcDuration); // momment accepts all the props that fc.Duration already has!
+    }
+    function formatWithCmdStr(cmdStr, arg) {
+        var cmd = parseCmdStr(cmdStr);
+        if (arg.end) {
+            var startMom = convertToMoment(arg.start.array, arg.timeZone, arg.start.timeZoneOffset, arg.localeCodes[0]);
+            var endMom = convertToMoment(arg.end.array, arg.timeZone, arg.end.timeZoneOffset, arg.localeCodes[0]);
+            return formatRange(cmd, createMomentFormatFunc(startMom), createMomentFormatFunc(endMom), arg.separator);
+        }
+        return convertToMoment(arg.date.array, arg.timeZone, arg.date.timeZoneOffset, arg.localeCodes[0]).format(cmd.whole); // TODO: test for this
+    }
+    var main = core.createPlugin({
+        cmdFormatter: formatWithCmdStr
+    });
+    function createMomentFormatFunc(mom) {
+        return function (cmdStr) {
+            return cmdStr ? mom.format(cmdStr) : ''; // because calling with blank string results in ISO8601 :(
+        };
+    }
+    function convertToMoment(input, timeZone, timeZoneOffset, locale) {
+        var mom;
+        if (timeZone === 'local') {
+            mom = moment(input);
+        }
+        else if (timeZone === 'UTC') {
+            mom = moment.utc(input);
+        }
+        else if (moment.tz) {
+            mom = moment.tz(input, timeZone);
+        }
+        else {
+            mom = moment.utc(input);
+            if (timeZoneOffset != null) {
+                mom.utcOffset(timeZoneOffset);
+            }
+        }
+        mom.locale(locale);
+        return mom;
+    }
+    function parseCmdStr(cmdStr) {
+        var parts = cmdStr.match(/^(.*?)\{(.*)\}(.*)$/); // TODO: lookbehinds for escape characters
+        if (parts) {
+            var middle = parseCmdStr(parts[2]);
+            return {
+                head: parts[1],
+                middle: middle,
+                tail: parts[3],
+                whole: parts[1] + middle.whole + parts[3]
+            };
+        }
+        else {
+            return {
+                head: null,
+                middle: null,
+                tail: null,
+                whole: cmdStr
+            };
+        }
+    }
+    function formatRange(cmd, formatStart, formatEnd, separator) {
+        if (cmd.middle) {
+            var startHead = formatStart(cmd.head);
+            var startMiddle = formatRange(cmd.middle, formatStart, formatEnd, separator);
+            var startTail = formatStart(cmd.tail);
+            var endHead = formatEnd(cmd.head);
+            var endMiddle = formatRange(cmd.middle, formatStart, formatEnd, separator);
+            var endTail = formatEnd(cmd.tail);
+            if (startHead === endHead && startTail === endTail) {
+                return startHead +
+                    (startMiddle === endMiddle ? startMiddle : startMiddle + separator + endMiddle) +
+                    startTail;
+            }
+        }
+        return formatStart(cmd.whole) + separator + formatEnd(cmd.whole);
+    }
+
+    exports.default = main;
+    exports.toDuration = toDuration;
+    exports.toMoment = toMoment;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+}));]]></script>
+        <script_name>cir_bg_schedule_moment</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-03 07:41:20</sys_created_on>
+        <sys_id>5e395cdbdbde1450bf9ead8ed3961900</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.cir_bg_schedule_moment</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_script_5e395cdbdbde1450bf9ead8ed3961900</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-03 07:41:20</sys_updated_on>
+        <ui_type>0</ui_type>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

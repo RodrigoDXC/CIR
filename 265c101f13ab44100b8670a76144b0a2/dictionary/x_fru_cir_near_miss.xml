@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="email_client=true" audit="true" extends="x_fru_cir_case" label="Near Miss" max_length="40" name="x_fru_cir_near_miss" sizeclass="13" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Has Product" max_length="40" name="has_product" type="boolean"/>
+    </element>
+</database>

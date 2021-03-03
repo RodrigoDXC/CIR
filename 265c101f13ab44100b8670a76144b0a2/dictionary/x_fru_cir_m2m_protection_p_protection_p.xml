@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Cir M2m Protection P Protection P" max_length="40" name="x_fru_cir_m2m_protection_p_protection_p" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Bodyguard" max_length="32" name="protection_profile_bodyguard" reference="x_fru_cir_protection_profile" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="VIP" max_length="32" name="protection_profile_vip" reference="x_fru_cir_protection_profile" type="reference"/>
+        <index name="index">
+            <element name="protection_profile_bodyguard"/>
+        </index>
+        <index name="index2">
+            <element name="protection_profile_vip"/>
+        </index>
+    </element>
+</database>

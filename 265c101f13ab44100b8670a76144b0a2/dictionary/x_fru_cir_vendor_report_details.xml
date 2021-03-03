@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Vendor Report Details" max_length="40" name="x_fru_cir_vendor_report_details" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Building" mandatory="true" max_length="32" name="building" reference="x_fru_cir_security_location" reference_qual="type=1^protection_required=true^security_managed=false^EQ" reference_qual_condition="type=1^protection_required=true^security_managed=false^EQ" type="reference"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element label="Type of news" max_length="120" name="type_of_news" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Vendor report" max_length="32" name="vendor_report" reference="x_fru_cir_vendor_report" type="reference"/>
+        <index name="index">
+            <element name="vendor_report"/>
+        </index>
+        <index name="index2">
+            <element name="building"/>
+        </index>
+    </element>
+</database>

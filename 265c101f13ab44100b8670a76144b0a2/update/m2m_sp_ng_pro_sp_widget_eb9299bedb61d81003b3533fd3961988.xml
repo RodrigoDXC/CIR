@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_ng_pro_sp_widget">
+    <m2m_sp_ng_pro_sp_widget action="INSERT_OR_UPDATE">
+        <sp_angular_provider display_value="spAttachmentManager">06e836f0d722120023c84f80de6103a1</sp_angular_provider>
+        <sp_widget display_value="CIR CIRI Form">016159bedb61d81003b3533fd39619dc</sp_widget>
+        <sys_class_name>m2m_sp_ng_pro_sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 15:48:02</sys_created_on>
+        <sys_id>eb9299bedb61d81003b3533fd3961988</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>spAttachmentManager.CIR CIRI Form</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>m2m_sp_ng_pro_sp_widget_eb9299bedb61d81003b3533fd3961988</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-25 15:48:02</sys_updated_on>
+    </m2m_sp_ng_pro_sp_widget>
+</record_update>

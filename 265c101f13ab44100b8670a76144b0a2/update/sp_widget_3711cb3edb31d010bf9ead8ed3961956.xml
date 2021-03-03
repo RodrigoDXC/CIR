@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($scope, $rootScope, spModal, $timeout, spUtil, $window) {
+	/* widget controller */
+	var c = this;
+	var g_form;
+
+	c.submitting = false;
+	c.data.id = getParameterValue('sys_id');
+	c.data.table = getParameterValue('table');
+
+	$rootScope.$on('sendingGForm', function (event, obj) {
+		g_form = obj;
+	});
+
+	c.sendSummary = function () {
+		if (!g_form.getValue('report_to')) {
+			spUtil.addErrorMessage(c.data.msgs.noPeopleToReport);
+			return;
+		}
+		c.submitting = true;
+		c.save();
+		c.server.get(
+			{
+				action : 'sendSummary',
+				id: c.data.id,
+				table:c.data.table
+			}
+		).then(function () {
+			c.submitting = false;
+		});
+	};
+
+
+	c.showSubmit = function () {
+		return g_form && (g_form.getValue('state') == '20' || g_form.getValue('state') == '1'); //state draft or open
+	};
+
+	c.showSendSummary = function () {
+		return g_form && g_form.getValue('state') == '21'; //state submited
+	};
+
+	c.showCancel = function () {
+		return g_form && g_form.getValue('state') == '20'; //state draft
+	};
+
+	c.showSubmitAndCopy = function() {
+
+		return g_form && g_form.getValue('state') == '20' && c.data.table === 'x_fru_cir_internal_physical_security_incident'; // state draft and table is internal psi
+
+
+	}
+
+	c.showSave = function() {
+		return g_form && (g_form.getValue('state') == '20' || g_form.getValue('state') == '21'); // state draft
+	}
+
+	c.submit = function () {
+		c.submitting = true;
+		g_form.setValue('state', '21');
+		c.save();
+		c.submitting = false;
+		var hosturl = 'https://' + $window.location.host;
+		if(c.data.table === 'x_fru_cir_internal_physical_security_incident') {
+			$window.location.href = hosturl + '/cir?id=cir_psi_sc_cat_item&sys_id='+ c.data.internalRPid +'&category=' + g_form.getValue('category') + ''; 
+		}
+		if(c.data.table === 'x_fru_cir_external_physical_security_incident') {
+			$window.location.href = hosturl + '/cir?id=cir_psi_sc_cat_item&sys_id='+ c.data.externalRPid +'&category=' + g_form.getValue('category') + ''; 
+		}
+
+	};
+
+	c.submitAndCopy = function() {
+		c.submitting = true;
+		g_form.setValue('state', '21');
+		c.save();
+		c.submitting = false;
+		if(c.data.table === 'x_fru_cir_internal_physical_security_incident') {
+			var hosturl = 'https://' + $window.location.host;
+			$window.location.href = hosturl + '/cir?id=cir_psi_sc_cat_item&sys_id='+c.data.internalRPid+'&category=' + g_form.getValue('category') +
+				'&country=' + g_form.getValue('country') +
+				'&state=' + g_form.getValue('state_province') +
+				'&city=' + g_form.getValue('city') +
+				'&building=' + g_form.getValue('building_name') +
+				'&floor=' + g_form.getValue('floor') + '';
+		}
+	};
+
+
+	c.save = function () {
+		//g_form.save();
+		var primaryAction = $scope.getPrimaryAction();
+		if (primaryAction)
+			$scope.triggerUIAction(primaryAction);
+	};
+
+	$scope.getPrimaryAction = function() {
+		var primaryActions = $scope.data.f._ui_actions.filter(function(action) {
+			return action.primary;
+		});
+		return (primaryActions.length) ? primaryActions[0] : null;
+	}
+
+	$scope.triggerUIAction = function(action) {
+		if ($scope.data.disableUIActions && !action.primary) {
+			return;
+		}
+		$rootScope.$broadcast('sp.form.ui_action.triggered');
+
+		var activeElement = document.activeElement;
+		if (activeElement) {
+			activeElement.blur();
+		}
+
+		$scope.$evalAsync(function() {
+			if (g_form) {
+				$scope.submitting = true;
+				if (!g_form.submit(action.action_name || action.sys_id))
+					$scope.submitting = false;
+			}
+		});
+	}
+
+
+	c.cancelIncident = function () {
+		c.submitting = true;
+		g_form.setValue('state', '3');
+		c.save();
+		c.submitting = false;
+	};
+
+
+	function getParameterValue(name) {
+		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		var regexS = "[\\?&]" + name + "=([^&#]*)";
+		var regex = new RegExp(regexS);
+		var results = regex.exec(top.location);
+		if (results == null) {
+			return "";
+		} else {
+			return unescape(results[1]);
+		}
+	}
+}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.btn-form-menu {&#13;
+	vertical-align: inherit;&#13;
+  padding: inherit;&#13;
+  background: none;&#13;
+}&#13;
+&#13;
+.panel-title {&#13;
+  word-wrap: break-word;&#13;
+}&#13;
+&#13;
+.panel-heading {&#13;
+  .dropdown-menu {&#13;
+    a {&#13;
+      white-space: normal;&#13;
+    }&#13;
+  }&#13;
+}&#13;
+&#13;
+.sc-field-error-label {&#13;
+  margin-right: .5em;&#13;
+  display: inline-block;&#13;
+  background-color: $sc-field-error-color;&#13;
+}&#13;
+&#13;
+.comment {&#13;
+	font-weight: bold;&#13;
+	margin-top: 2px;&#13;
+	margin-bottom: 2px;&#13;
+}&#13;
+.mce-panel, .mce-btn {&#13;
+	background-image: none;&#13;
+	background-color: #f0f3f4;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+  margin-right: 5px;&#13;
+  margin-bottom: 10px;&#13;
+  width:-webkit-fill-available;&#13;
+  width:-moz-available;&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.timeline-container {&#13;
+   max-height: 50vh;&#13;
+   height: 100%;&#13;
+   overflow-y: auto;&#13;
+}&#13;
+&#13;
+.panel .panel {&#13;
+    height: auto !important;&#13;
+}&#13;
+&#13;
+.attachment-button {&#13;
+  .glyphicon-paperclip {&#13;
+    font-size: 18px;&#13;
+  }&#13;
+}&#13;
+&#13;
+.dropdown {&#13;
+  .glyphicon-menu-hamburger:focus {&#13;
+ 		outline: thin dotted;&#13;
+		outline: 5px auto $input-border-focus;&#13;
+		outline-offset: -2px; &#13;
+	}&#13;
+}&#13;
+&#13;
+.empty-state-wrapper {&#13;
+  width: 100%;&#13;
+  height: 100%;&#13;
+  align-items: center;&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  padding: 10vh 20px 20px;&#13;
+&#13;
+  .empty-state {&#13;
+    border: 1px solid #e7e9eb;&#13;
+    border-radius: 10px;&#13;
+    max-width: 700px;&#13;
+    padding: 30px 40px 20px;&#13;
+    position: relative;&#13;
+&#13;
+    .empty-state-badge {&#13;
+      top: -36px;&#13;
+      left: 50%;&#13;
+      position: absolute;&#13;
+      height: 72px;&#13;
+      width: 72px;&#13;
+      -webkit-align-items: center;&#13;
+      -ms-flex-align: center;&#13;
+      align-items: center;&#13;
+      border-radius: 100%;&#13;
+      color: #ffffff;&#13;
+      display: -webkit-flex;&#13;
+      display: -ms-flexbox;&#13;
+      display: flex;&#13;
+      font-size: 40px;&#13;
+      -webkit-justify-content: center;&#13;
+      -ms-flex-pack: center;&#13;
+      justify-content: center;&#13;
+      margin-left: -36px;&#13;
+      text-align: center;&#13;
+    }&#13;
+&#13;
+    .empty-state-header {&#13;
+      font-size: 30px;&#13;
+      text-align: center;&#13;
+      color: #343d47;&#13;
+    }&#13;
+&#13;
+    .empty-state-content {&#13;
+      ul {&#13;
+        list-style: disc outside;&#13;
+        margin: 0 0 10px 0;&#13;
+        padding: 0 0 0 30px;&#13;
+      }&#13;
+    }&#13;
+  }&#13;
+}&#13;
+&#13;
+.text-success-alt {&#13;
+	background-color: $state-success-text;&#13;
+}&#13;
+&#13;
+.text-info-alt {&#13;
+	background-color: $state-info-text;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-psi-form-buttons</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR PSI Form Buttons</name>
+        <option_schema>[{"name":"internal_rp_sys_id","section":"Data","default_value":"21a03d881b5604101eff3112cd4bcbd0","label":"Internal RP sys_id","type":"string"},{"name":"external_rp_sys_id","section":"Data","default_value":"2cac9ecfdb4f7b40be406def4b9619f9","label":"External RP sys_id","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.psi_global_manager,x_fru_cir.psi_internal_manager,x_fru_cir.psi_internal_user,x_fru_cir.psi_local_manager</roles>
+        <script><![CDATA[(function () {
+	data.internalRPid = options.internal_rp_sys_id;
+	data.externalRPid = options.external_rp_sys_id;
+    data.msgs = {};
+    data.msgs.sendSummary = gs.getMessage("cir_psi_send_summary");
+    data.msgs.noPeopleToReport = gs.getMessage("cir_psi_no_people_to_send_summary");
+    data.msgs.summarySent = gs.getMessage("cir_psi_summary_sent");
+    data.msgs.errorSummary = gs.getMessage('cir_psi_error_sending_summary');
+    data.msgs.actions = gs.getMessage("cir_sit_actions");
+    data.msgs.saveAsDraft = gs.getMessage('cir_psi_save_as_draft');
+    data.msgs.submit = gs.getMessage('cir_sit_submit');
+    data.msgs.cancelIncident = gs.getMessage('cir_sit_cancel');
+	data.msgs.save = gs.getMessage('cir_sit_save');
+	data.msgs.submitAndCopy = gs.getMessage('cir_psi_submit_and_copy');
+	data.table = $sp.getParameter("table");
+	data.sys_id = $sp.getParameter("sys_id") || -1;
+	data.f = $sp.getForm(data.table, data.sys_id, '', 'portalview');
+	
+    if (input && input.action == "sendSummary"){
+       data.reportSuccess = new CIRPSIUtils().SendSummary(input.id, input.table);
+			
+			if (data.reportSuccess) {
+                gs.addInfoMessage(data.msgs.summarySent);
+            } else {
+                gs.addErrorMessage(data.msgs.errorSummary);
+            }
+			
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-08 10:09:57</sys_created_on>
+        <sys_id>3711cb3edb31d010bf9ead8ed3961956</sys_id>
+        <sys_mod_count>48</sys_mod_count>
+        <sys_name>CIR PSI Form Buttons</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_3711cb3edb31d010bf9ead8ed3961956</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-31 08:38:51</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+    <div class="panel-heading">{{c.data.msgs.actions}}</div>
+    <div class="panel-body">
+        <button ng-show="c.showSendSummary()" ng-click="c.sendSummary()"  ng-disabled="c.submitting"
+                class="btn btn-primary action-btn center" ng-class="::getButtonClass(action)">
+            {{c.data.msgs.sendSummary}}
+        </button>
+        <button ng-show="c.showSubmit()" ng-click="c.submit()" ng-disabled="c.submitting"
+                class="btn btn-primary action-btn center" ng-class="::getButtonClass(action)">{{c.data.msgs.submit}}
+        </button>
+      	<button ng-show="c.showSubmitAndCopy()" ng-click="c.submitAndCopy()" ng-disabled="c.submitting" class="btn btn-primary action-btn center"
+                ng-class="::getButtonClass(action)">{{c.data.msgs.submitAndCopy}}
+        </button> 
+      	<button ng-show="c.showSave()" ng-click="c.save()" ng-disabled="c.submitting" class="btn btn-primary action-btn center"
+                ng-class="::getButtonClass(action)">{{c.data.msgs.save}}
+        </button>
+        <button ng-show="c.showCancel()" ng-click="c.cancelIncident()" ng-disabled="c.submitting" class="btn btn-primary action-btn center"
+                ng-class="::getButtonClass(action)">{{c.data.msgs.cancelIncident}}
+        </button>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

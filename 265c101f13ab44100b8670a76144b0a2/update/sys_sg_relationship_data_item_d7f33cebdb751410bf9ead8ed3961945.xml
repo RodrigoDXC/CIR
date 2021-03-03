@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_relationship_data_item">
+    <sys_sg_relationship_data_item action="INSERT_OR_UPDATE">
+        <condition_type>declarative</condition_type>
+        <description/>
+        <group_by/>
+        <instance_relative_url_qc/>
+        <name>Embedded List Involved people</name>
+        <query_condition/>
+        <query_condition_script/>
+        <relationship>x_fru_cir_psi_involved_person.incident</relationship>
+        <sys_class_name>sys_sg_relationship_data_item</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-10 07:45:22</sys_created_on>
+        <sys_id>d7f33cebdb751410bf9ead8ed3961945</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Embedded List Involved people</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_relationship_data_item_d7f33cebdb751410bf9ead8ed3961945</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 07:45:22</sys_updated_on>
+        <table>x_fru_cir_psi_involved_person</table>
+        <table_related_to>x_fru_cir_internal_physical_security_incident</table_related_to>
+    </sys_sg_relationship_data_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=d7f33cebdb751410bf9ead8ed3961945"/>
+</record_update>

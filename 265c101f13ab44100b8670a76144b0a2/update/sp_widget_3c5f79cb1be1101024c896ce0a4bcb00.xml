@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, $http) {
+    /* widget controller */
+    var c = this;
+    $rootScope.updateGrid = function() {
+        var filter = $rootScope.locationFilter;
+        var queryString = "/api/x_fru_cir/portal/getGridStatus?locationTypes=" + filter.locationTypes +
+            '&caseTypes=' + filter.caseTypes + '&favorites_only=' + filter.favorites_only + '&searchText=' + filter
+            .searchText;
+
+        var req = {
+            method: 'GET',
+            url: queryString,
+            headers: {
+                "X-UserToken": window.g_ck,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        };
+
+        $http(req).then(function successCallback(response) {
+            if(response) {
+                var gridObjects = response.data.result;
+                for(var attribute in gridObjects) {
+                    if(gridObjects.hasOwnProperty(attribute)) {
+                        $scope.data.gridStatus[attribute] = gridObjects[attribute];
+                    }
+                }
+            }
+        }, function errorCallback(response) {
+            var logMessage = gs.getMessage('grid_status_lookup_via_rest', response);
+            jslog(logMessage);
+
+            //jslog('Error with Grid Status lookup via REST: ' + response);
+        });
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.gridEntry{&#13;
+  border: solid gray;&#13;
+  padding: 20px;&#13;
+  text-align: center;&#13;
+  color: #bdc0c4;&#13;
+}&#13;
+.gridCount{&#13;
+  color:white;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-location-grid-status</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Location Grid Status</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+
+    // Get the field labels from sys_documentation table
+
+    var nearMissTableName = CIRConstants.Tables.NEAR_MISS;
+    var incidentName = CIRConstants.Tables.INCIDENT;
+    var hazardTableName = CIRConstants.Tables.HAZARD;
+    var element = '';
+
+    var cirCaseManagementUtils = new CIRCaseManagementUtilsFP();
+
+    var nearMissGR = cirCaseManagementUtils.GetFieldLabels(nearMissTableName, element);
+    var incGR = cirCaseManagementUtils.GetFieldLabels(incidentName, element);
+    var hazardGR = cirCaseManagementUtils.GetFieldLabels(hazardTableName, element);
+
+    data.nearMissLabel = nearMissGR.plural.toString();
+    data.incLabel = incGR.plural.toString();
+    data.hazardLabel = hazardGR.plural.toString();
+
+    data.gridStatus = cirCaseManagementUtils.GetGridStatus(cirCaseManagementUtils.GetLocationsFromFilter());
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 13:45:30</sys_created_on>
+        <sys_id>3c5f79cb1be1101024c896ce0a4bcb00</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR CIRI Location Grid Status</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_3c5f79cb1be1101024c896ce0a4bcb00</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-26 13:45:30</sys_updated_on>
+        <template><![CDATA[<div class="col-sm-12 panel hidden-xs">
+  <div class="col-sm-12 panel-body">
+    <div class="col-sm-4 gridEntry navbar-inverse">{{data.nearMissLabel}}</div>
+    <div class="col-sm-4 gridEntry navbar-inverse">{{data.incLabel}}</div>
+    <div class="col-sm-4 gridEntry navbar-inverse">{{data.hazardLabel}}</div>
+    <div class="col-sm-4 gridEntry gridCount" style="background-color:{{data.gridStatus.x_fru_cir_near_miss.status}};color:{{data.gridStatus.x_fru_cir_near_miss.color}}">{{data.gridStatus.x_fru_cir_near_miss.count}}</div>
+    <div class="col-sm-4 gridEntry gridCount" style="background-color:{{data.gridStatus.x_fru_cir_incident.status}};color:{{data.gridStatus.x_fru_cir_incident.color}}">{{data.gridStatus.x_fru_cir_incident.count}}</div>
+    <div class="col-sm-4 gridEntry gridCount" style="background-color:{{data.gridStatus.x_fru_cir_hazard.status}};color:{{data.gridStatus.x_fru_cir_hazard.color}}">{{data.gridStatus.x_fru_cir_hazard.count}}</div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

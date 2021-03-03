@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Assessment Choice" max_length="40" name="x_fru_cir_assessment_choice" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" read_only="true" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Assessment Field" mandatory="true" max_length="32" name="assessment_field" reference="x_fru_cir_assessment_field" reference_cascade_rule="delete" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Choice" max_length="32" name="choice" read_only="true" reference="question_choice" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Default" max_length="40" name="default" type="boolean"/>
+        <element label="Label" mandatory="true" max_length="80" name="label" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Order" max_length="40" name="order" type="integer"/>
+        <element label="Value" mandatory="true" max_length="80" name="value" type="string"/>
+        <index name="index">
+            <element name="assessment_field"/>
+        </index>
+        <index name="index2">
+            <element name="choice"/>
+        </index>
+    </element>
+</database>

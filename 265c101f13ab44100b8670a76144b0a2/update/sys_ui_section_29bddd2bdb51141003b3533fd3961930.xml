@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="29bddd2bdb51141003b3533fd3961930" sys_domain="global" table="x_fru_cir_non_conformance_compliance" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>cir_case</element>
+            <position>0</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>a65c3d921b79501024c896ce0a4bcb89</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>response</element>
+            <position>1</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>2e5c3d921b79501024c896ce0a4bcb89</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>response_notes</element>
+            <position>2</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>a25c3d921b79501024c896ce0a4bcb8a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>source</element>
+            <position>3</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>2a5c3d921b79501024c896ce0a4bcb8a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>source_notes</element>
+            <position>4</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>ae5c3d921b79501024c896ce0a4bcb8a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>recovery_cost</element>
+            <position>5</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>265c3d921b79501024c896ce0a4bcb8b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>6</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>aa5c3d921b79501024c896ce0a4bcb8b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>actual_severity</element>
+            <position>7</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>225c3d921b79501024c896ce0a4bcb8c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>potential_consequence</element>
+            <position>8</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>a65c3d921b79501024c896ce0a4bcb8c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>future_likelihood</element>
+            <position>9</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>2e5c3d921b79501024c896ce0a4bcb8c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>potential_severity</element>
+            <position>10</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>a25c3d921b79501024c896ce0a4bcb8d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>11</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>2a5c3d921b79501024c896ce0a4bcb8d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>description</element>
+            <position>12</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:49:07</sys_created_on>
+            <sys_id>ae5c3d921b79501024c896ce0a4bcb8d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_non_conformance_compliance" sys_domain="global" view="Default view">29bddd2bdb51141003b3533fd3961930</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:49:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_fru_cir_non_conformance_compliance</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:16:15</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>29bddd2bdb51141003b3533fd3961930</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_non_conformance_compliance</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_section_29bddd2bdb51141003b3533fd3961930</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:16:15</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

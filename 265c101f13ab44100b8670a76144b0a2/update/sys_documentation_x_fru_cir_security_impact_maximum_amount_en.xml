@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="maximum_amount" label="Maximum amount" language="en" table="x_fru_cir_security_impact">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>maximum_amount</element>
+            <help/>
+            <hint/>
+            <label>Maximum amount</label>
+            <language>en</language>
+            <name>x_fru_cir_security_impact</name>
+            <plural>Maximum amounts</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-24 14:30:45</sys_created_on>
+            <sys_id>d2d4a1991be6e410de011fc11a4bcb0b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Maximum amount</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_security_impact_maximum_amount_en</sys_update_name>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-24 14:30:45</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

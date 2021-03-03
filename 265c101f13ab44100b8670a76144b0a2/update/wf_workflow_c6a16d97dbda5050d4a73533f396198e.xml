@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="wf_workflow_version">
+    <wf_workflow_version action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <activity_stages>{"ends":["37ce32ffdb1a9450bf9ead8ed3961986"],"subflows":[],"activities":{},"stages":{}}</activity_stages>
+        <after_business_rules>false</after_business_rules>
+        <checked_out/>
+        <checked_out_by/>
+        <column_renderer display_value="Workflow-driven">a56213111b030100adca1e094f0713ac</column_renderer>
+        <condition/>
+        <condition_type>run_match</condition_type>
+        <description/>
+        <expected_sequences>33ceba7fdb1a9450bf9ead8ed396198c,f7ce32ffdb1a9450bf9ead8ed3961987,7bce32ffdb1a9450bf9ead8ed396198a,3fceba7fdb1a9450bf9ead8ed396198d,37ce32ffdb1a9450bf9ead8ed3961986</expected_sequences>
+        <expected_time>1970-01-01 14:00:00</expected_time>
+        <expected_time_type/>
+        <full_sequences>33ceba7fdb1a9450bf9ead8ed396198c,f7ce32ffdb1a9450bf9ead8ed3961987,7bce32ffdb1a9450bf9ead8ed396198a,3fceba7fdb1a9450bf9ead8ed396198d,b3ce32ffdb1a9450bf9ead8ed3961989,37ce32ffdb1a9450bf9ead8ed3961986</full_sequences>
+        <journal/>
+        <max_activity_count>100</max_activity_count>
+        <name>CIR Expenses Rejection handler</name>
+        <not_cacheable>false</not_cacheable>
+        <on_cancel><![CDATA[// This script executes if the workflow is cancelled.// The global variable context_sys_id contains the sys_id of the cancelled workflow context.]]></on_cancel>
+        <order>100</order>
+        <pin_type>set_by_activity</pin_type>
+        <published>true</published>
+        <relative_duration/>
+        <requires_ert>true</requires_ert>
+        <run_multiple>false</run_multiple>
+        <schedule/>
+        <stage_field/>
+        <stage_order>computed</stage_order>
+        <start display_value="Begin">33ceba7fdb1a9450bf9ead8ed396198c</start>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>3fceba7fdb1a9450bf9ead8ed3961989</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_updated_by>dpayes@dxc.com</sys_updated_by>
+        <sys_updated_on>2020-12-07 17:59:52</sys_updated_on>
+        <table>x_fru_cir_expense</table>
+        <timezone/>
+        <validated>true</validated>
+        <workflow display_value="CIR Expenses Rejection handler">c6a16d97dbda5050d4a73533f396198e</workflow>
+    </wf_workflow_version>
+    <wf_workflow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <description/>
+        <name>CIR Expenses Rejection handler</name>
+        <preview/>
+        <sys_class_name>wf_workflow</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-03 12:57:48</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c6a16d97dbda5050d4a73533f396198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR Expenses Rejection handler</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>wf_workflow_c6a16d97dbda5050d4a73533f396198e</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-03 12:57:48</sys_updated_on>
+        <table>x_fru_cir_expense</table>
+        <template>false</template>
+        <vars/>
+    </wf_workflow>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Begin">c7a5e32c0a0a0b3a002377c24ed8ea76</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>1</databus_lookup_id>
+        <height/>
+        <input/>
+        <is_parent>false</is_parent>
+        <name>Begin</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>33ceba7fdb1a9450bf9ead8ed396198c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width>80</width>
+        <workflow_version display_value="CIR Expenses Rejection handler">3fceba7fdb1a9450bf9ead8ed3961989</workflow_version>
+        <x>20</x>
+        <y>20</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=33ceba7fdb1a9450bf9ead8ed396198c"/>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Begin">33ceba7fdb1a9450bf9ead8ed396198c</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>73ceba7fdb1a9450bf9ead8ed396198d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Switch">f84eda480a0a3c1800a6fa8c7badf346</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>5</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>Check state</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>3fceba7fdb1a9450bf9ead8ed396198d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Expenses Rejection handler">3fceba7fdb1a9450bf9ead8ed3961989</workflow_version>
+        <x>559</x>
+        <y>248</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=3fceba7fdb1a9450bf9ead8ed396198d"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>3fceba7fdb1a9450bf9ead8ed396198d</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>7fceba7fdb1a9450bf9ead8ed396198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value/>
+        <variable display_value="">f855a43e0a0a3c180106a59800a50a22</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>3fceba7fdb1a9450bf9ead8ed396198d</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>b3ceba7fdb1a9450bf9ead8ed396198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>status</value>
+        <variable display_value="">f8575c7d0a0a3c1800b8f4d25403c852</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>3fceba7fdb1a9450bf9ead8ed396198d</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>bbceba7fdb1a9450bf9ead8ed396198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>field</value>
+        <variable display_value="">f85385830a0a3c18008599b17b971cbd</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>3fceba7fdb1a9450bf9ead8ed396198d</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>bbceba7fdb1a9450bf9ead8ed396198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>field</value>
+        <variable display_value="">f85385830a0a3c18008599b17b971cbd</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>3fceba7fdb1a9450bf9ead8ed396198d</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>7fceba7fdb1a9450bf9ead8ed396198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value/>
+        <variable display_value="">f855a43e0a0a3c180106a59800a50a22</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>3fceba7fdb1a9450bf9ead8ed396198d</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>b3ceba7fdb1a9450bf9ead8ed396198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>status</value>
+        <variable display_value="">f8575c7d0a0a3c1800b8f4d25403c852</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</activity>
+        <condition>activity.result == ''</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>false</is_positive>
+        <name>-- None --</name>
+        <order>1000</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>77ce32ffdb1a9450bf9ead8ed3961985</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</activity>
+        <condition>activity.result == '3'</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Approved</name>
+        <order>1004</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>f3ce32ffdb1a9450bf9ead8ed3961985</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</activity>
+        <condition>activity.result == '1'</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>false</is_positive>
+        <name>Draft</name>
+        <order>1002</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>7bce32ffdb1a9450bf9ead8ed3961985</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</activity>
+        <condition>activity.result == '0'</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>false</is_positive>
+        <name>New</name>
+        <order>1001</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>7fce32ffdb1a9450bf9ead8ed3961985</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</activity>
+        <condition>activity.result == '4'</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>false</is_positive>
+        <name>Rejected</name>
+        <order>1005</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>fbce32ffdb1a9450bf9ead8ed3961985</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</activity>
+        <condition>activity.result == '2'</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>false</is_positive>
+        <name>Submitted</name>
+        <order>1003</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>f7ce32ffdb1a9450bf9ead8ed3961985</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="End">c7a66f7d0a0a0b3a004544a6d2f14076</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>2</databus_lookup_id>
+        <height/>
+        <input/>
+        <is_parent>false</is_parent>
+        <name>End</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>37ce32ffdb1a9450bf9ead8ed3961986</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width>80</width>
+        <workflow_version display_value="CIR Expenses Rejection handler">3fceba7fdb1a9450bf9ead8ed3961989</workflow_version>
+        <x>940</x>
+        <y>369</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=37ce32ffdb1a9450bf9ead8ed3961986"/>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Run Script">db8c65aec0a8016501d00259bc7203a4</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>6</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>Send notification</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>b3ce32ffdb1a9450bf9ead8ed3961989</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:04:54</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Expenses Rejection handler">3fceba7fdb1a9450bf9ead8ed3961989</workflow_version>
+        <x>857</x>
+        <y>128</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=b3ce32ffdb1a9450bf9ead8ed3961989"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>b3ce32ffdb1a9450bf9ead8ed3961989</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>3bce32ffdb1a9450bf9ead8ed3961989</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:04:54</sys_updated_on>
+        <value>var utils = new CIRPersonalProtectionUtils();&#13;
+&#13;
+var grUserPref = new GlideRecord('sys_user_preference');&#13;
+grUserPref.addQuery('user', current.bodyguard.user);&#13;
+grUserPref.addQuery('name', 'user.language');&#13;
+grUserPref.query();&#13;
+&#13;
+if (grUserPref.next()) {&#13;
+	sendCorrectNotification(grUserPref.getValue('value'));&#13;
+	&#13;
+} else {&#13;
+	sendCorrectNotification(gs.getProperty('glide.sys.language'));&#13;
+}&#13;
+&#13;
+function sendCorrectNotification(language) {&#13;
+	switch (language) {&#13;
+		case 'es':&#13;
+			utils.SendExpenseNotification('x_fru_cir.push.expense.rejected.es', current, current.bodyguard.user);&#13;
+			break;&#13;
+		default:&#13;
+			utils.SendExpenseNotification('x_fru_cir.push.expense.rejected.en', current, current.bodyguard.user);&#13;
+			break;&#13;
+	}&#13;
+}&#13;
+</value>
+        <variable display_value="">c35ddef20a0a0ba96248a7090eccd518</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>b3ce32ffdb1a9450bf9ead8ed3961989</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>3bce32ffdb1a9450bf9ead8ed3961989</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:04:54</sys_updated_on>
+        <value>var utils = new CIRPersonalProtectionUtils();&#13;
+&#13;
+var grUserPref = new GlideRecord('sys_user_preference');&#13;
+grUserPref.addQuery('user', current.bodyguard.user);&#13;
+grUserPref.addQuery('name', 'user.language');&#13;
+grUserPref.query();&#13;
+&#13;
+if (grUserPref.next()) {&#13;
+	sendCorrectNotification(grUserPref.getValue('value'));&#13;
+	&#13;
+} else {&#13;
+	sendCorrectNotification(gs.getProperty('glide.sys.language'));&#13;
+}&#13;
+&#13;
+function sendCorrectNotification(language) {&#13;
+	switch (language) {&#13;
+		case 'es':&#13;
+			utils.SendExpenseNotification('x_fru_cir.push.expense.rejected.es', current, current.bodyguard.user);&#13;
+			break;&#13;
+		default:&#13;
+			utils.SendExpenseNotification('x_fru_cir.push.expense.rejected.en', current, current.bodyguard.user);&#13;
+			break;&#13;
+	}&#13;
+}&#13;
+</value>
+        <variable display_value="">c35ddef20a0a0ba96248a7090eccd518</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Send notification">b3ce32ffdb1a9450bf9ead8ed3961989</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>b3ce32ffdb1a9450bf9ead8ed396198a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Wait for condition">d93a02ae0a0a0aa30077abad3fdac035</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>4</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>State is draft or approved</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>7bce32ffdb1a9450bf9ead8ed396198a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Expenses Rejection handler">3fceba7fdb1a9450bf9ead8ed3961989</workflow_version>
+        <x>267</x>
+        <y>210</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=7bce32ffdb1a9450bf9ead8ed396198a"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>7bce32ffdb1a9450bf9ead8ed396198a</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>bfce32ffdb1a9450bf9ead8ed396198a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>statusIN1,3^EQ</value>
+        <variable display_value="">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>7bce32ffdb1a9450bf9ead8ed396198a</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>fbce32ffdb1a9450bf9ead8ed396198a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>// Set the variable 'answer' to true or false to indicate if the condition has been met or not.&#13;
+answer = true;&#13;
+</value>
+        <variable display_value="">c35debce0a0a0ba96248a709440cf31a</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>7bce32ffdb1a9450bf9ead8ed396198a</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>bfce32ffdb1a9450bf9ead8ed396198a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>statusIN1,3^EQ</value>
+        <variable display_value="">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>7bce32ffdb1a9450bf9ead8ed396198a</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>fbce32ffdb1a9450bf9ead8ed396198a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>// Set the variable 'answer' to true or false to indicate if the condition has been met or not.&#13;
+answer = true;&#13;
+</value>
+        <variable display_value="">c35debce0a0a0ba96248a709440cf31a</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="State is draft or approved">7bce32ffdb1a9450bf9ead8ed396198a</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>b7ce32ffdb1a9450bf9ead8ed396198b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Wait for condition">d93a02ae0a0a0aa30077abad3fdac035</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>3</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>State is submitted</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>f7ce32ffdb1a9450bf9ead8ed3961987</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Expenses Rejection handler">3fceba7fdb1a9450bf9ead8ed3961989</workflow_version>
+        <x>265</x>
+        <y>57</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=f7ce32ffdb1a9450bf9ead8ed3961987"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>f7ce32ffdb1a9450bf9ead8ed3961987</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>33ce32ffdb1a9450bf9ead8ed3961988</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>status=2^EQ</value>
+        <variable display_value="">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>f7ce32ffdb1a9450bf9ead8ed3961987</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>7fce32ffdb1a9450bf9ead8ed3961987</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>// Set the variable 'answer' to true or false to indicate if the condition has been met or not.&#13;
+answer = true;&#13;
+</value>
+        <variable display_value="">c35debce0a0a0ba96248a709440cf31a</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>f7ce32ffdb1a9450bf9ead8ed3961987</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>33ce32ffdb1a9450bf9ead8ed3961988</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>status=2^EQ</value>
+        <variable display_value="">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>f7ce32ffdb1a9450bf9ead8ed3961987</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>7fce32ffdb1a9450bf9ead8ed3961987</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <value>// Set the variable 'answer' to true or false to indicate if the condition has been met or not.&#13;
+answer = true;&#13;
+</value>
+        <variable display_value="">c35debce0a0a0ba96248a709440cf31a</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="State is submitted">f7ce32ffdb1a9450bf9ead8ed3961987</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>bbce32ffdb1a9450bf9ead8ed3961988</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+    </wf_condition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Approved">f3ce32ffdb1a9450bf9ead8ed3961985</condition>
+        <from display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>3bce32ffdb1a9450bf9ead8ed396198c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <to display_value="End">37ce32ffdb1a9450bf9ead8ed3961986</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">b3ce32ffdb1a9450bf9ead8ed396198a</condition>
+        <from display_value="Send notification">b3ce32ffdb1a9450bf9ead8ed3961989</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>3bce32ffdb1a9450bf9ead8ed396198d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <to display_value="State is submitted">f7ce32ffdb1a9450bf9ead8ed3961987</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">bbce32ffdb1a9450bf9ead8ed3961988</condition>
+        <from display_value="State is submitted">f7ce32ffdb1a9450bf9ead8ed3961987</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>73ce32ffdb1a9450bf9ead8ed396198d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <to display_value="State is draft or approved">7bce32ffdb1a9450bf9ead8ed396198a</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">b7ce32ffdb1a9450bf9ead8ed396198b</condition>
+        <from display_value="State is draft or approved">7bce32ffdb1a9450bf9ead8ed396198a</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>77ce32ffdb1a9450bf9ead8ed396198d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <to display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">73ceba7fdb1a9450bf9ead8ed396198d</condition>
+        <from display_value="Begin">33ceba7fdb1a9450bf9ead8ed396198c</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>bfce32ffdb1a9450bf9ead8ed396198c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <to display_value="State is submitted">f7ce32ffdb1a9450bf9ead8ed3961987</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Draft">7bce32ffdb1a9450bf9ead8ed3961985</condition>
+        <from display_value="Check state">3fceba7fdb1a9450bf9ead8ed396198d</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>fbce32ffdb1a9450bf9ead8ed396198c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <to display_value="Send notification">b3ce32ffdb1a9450bf9ead8ed3961989</to>
+    </wf_transition>
+    <wf_estimated_runtime_config action="INSERT_OR_UPDATE">
+        <estimated_run_time/>
+        <no_of_data_points>1</no_of_data_points>
+        <percentage_threshold_ert>20</percentage_threshold_ert>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 09:01:45</sys_created_on>
+        <sys_id>33ceba7fdb1a9450bf9ead8ed396198a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:01:45</sys_updated_on>
+        <workflow_version display_value="CIR Expenses Rejection handler">3fceba7fdb1a9450bf9ead8ed3961989</workflow_version>
+    </wf_estimated_runtime_config>
+    <wf_workflow_version action="update_multiple" query="workflow=c6a16d97dbda5050d4a73533f396198e^sys_id!=3fceba7fdb1a9450bf9ead8ed3961989">
+        <published>false</published>
+    </wf_workflow_version>
+</record_update>

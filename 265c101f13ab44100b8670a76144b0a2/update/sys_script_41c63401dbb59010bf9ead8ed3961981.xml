@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_email</collection>
+        <condition>current.target_table.toString()=='x_fru_cir_external_physical_security_incident' || current.target_table.toString()=='x_fru_cir_internal_physical_security_incident'</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>cir_psi_set_notification_log</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	
+	var recipients = current.recipients.split(",");
+	var userEmail = '';
+	
+	for (var i = 0; i < recipients.length; i++){
+		var users = new GlideRecord("sys_user");
+		users.addEncodedQuery("email=" + recipients[i]);
+		users.query();
+		if(users.next()){
+			userEmail +=  i == 0 ? users.sys_id : "," + users.sys_id;
+		}
+	}
+	
+	var log = new GlideRecord('x_fru_cir_notification_log');
+	log.initialize();
+	
+	log.source_table = current.target_table + '';
+	log.psi_id = current.instance;
+	log.time = new GlideDateTime();
+	log.users = userEmail;
+	log.message = current.body;
+	
+	log.insert();
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-02 13:34:07</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>41c63401dbb59010bf9ead8ed3961981</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>cir_psi_set_notification_log</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_41c63401dbb59010bf9ead8ed3961981</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:02:52</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=41c63401dbb59010bf9ead8ed3961981"/>
+</record_update>

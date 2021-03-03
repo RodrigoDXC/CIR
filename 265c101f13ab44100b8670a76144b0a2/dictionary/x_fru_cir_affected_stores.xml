@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Affected Stores" max_length="40" name="x_fru_cir_affected_stores" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Location" max_length="32" name="location" reference="cmn_location" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Product Recall" max_length="32" name="product_recall" reference="x_fru_cir_product_recall" type="reference"/>
+        <index name="index">
+            <element name="product_recall"/>
+        </index>
+        <index name="index2">
+            <element name="location"/>
+        </index>
+    </element>
+</database>

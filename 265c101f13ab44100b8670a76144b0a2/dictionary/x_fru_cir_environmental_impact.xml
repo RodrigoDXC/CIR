@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_impact" label="Environmental Impact" max_length="40" name="x_fru_cir_environmental_impact" sizeclass="2" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Cause" mandatory="true" max_length="40" name="cause" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Release" sequence="10" value="release"/>
+                <element inactive_on_update="false" label="Spill" sequence="20" value="spill"/>
+                <element inactive_on_update="false" label="Other" sequence="30" value="other"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Clean up by" max_length="40" name="clean_up_by" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Agency" sequence="10" value="agency"/>
+                <element inactive_on_update="false" label="Government" sequence="20" value="governement"/>
+                <element inactive_on_update="false" label="Internal (Offsite)" sequence="30" value="internal_offsite"/>
+                <element inactive_on_update="false" label="Internal (Onsite)" sequence="40" value="internal_onsite"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Environmental factors" mandatory="true" max_length="40" name="environmental_factors" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Lightning" sequence="10" value="lightning"/>
+                <element inactive_on_update="false" label="Rain" sequence="20" value="rain"/>
+                <element inactive_on_update="false" label="Slick" sequence="30" value="slick"/>
+                <element inactive_on_update="false" label="Snow" sequence="40" value="snow"/>
+                <element inactive_on_update="false" label="Temperature" sequence="50" value="temperature"/>
+                <element inactive_on_update="false" label="Wet" sequence="60" value="wet"/>
+                <element inactive_on_update="false" label="Windspeed" sequence="70" value="windspeed"/>
+                <element inactive_on_update="false" label="Other" sequence="80" value="other"/>
+            </choice>
+        </element>
+        <element label="Environmental factors notes" max_length="40" name="environmental_factors_notes" type="string"/>
+        <element label="Quantity unit of measure" max_length="40" name="quantity_unit_of_measure" type="string"/>
+        <element label="Reportable quantity" max_length="40" name="reportable_quantity" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Air" sequence="10" value="air"/>
+                <element inactive_on_update="false" label="Dust" sequence="20" value="dust"/>
+                <element inactive_on_update="false" label="Fauna" sequence="30" value="fauna"/>
+                <element inactive_on_update="false" label="Flora" sequence="40" value="flora"/>
+                <element inactive_on_update="false" label="Groundwater" sequence="50" value="groundwater"/>
+                <element inactive_on_update="false" label="Heritage Site/Landmark" sequence="60" value="heritage_landmark"/>
+                <element inactive_on_update="false" label="Land" sequence="70" value="land"/>
+                <element inactive_on_update="false" label="Noise" sequence="80" value="noise"/>
+                <element inactive_on_update="false" label="Waste" sequence="90" value="waste"/>
+                <element inactive_on_update="false" label="Water" sequence="100" value="water"/>
+                <element inactive_on_update="false" label="Other" sequence="110" value="other"/>
+            </choice>
+        </element>
+        <element label="Type notes" max_length="40" name="type_notes" type="string"/>
+    </element>
+</database>

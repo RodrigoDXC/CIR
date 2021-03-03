@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="all_tables.text_index_translations=true" label="Response Plan Step" max_length="40" name="x_fru_cir_response_plan_step" sizeclass="5" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,staticDependent=x_fru_cir_response_plan_execution_step_condition" label="Condition" max_length="4000" name="condition" type="conditions"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Copied from" max_length="32" name="copied_from" reference="x_fru_cir_response_plan_step" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Dependent on" max_length="4000" name="dependent_on" reference="x_fru_cir_response_plan_step" reference_qual="javascript: 'response_plan_template=' + current.response_plan_template;" type="glide_list" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="2000" name="description" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true" label="Name" mandatory="true" max_length="120" name="name" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true,isOrder=true" label="Order" max_length="40" name="order" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Response Plan Template" max_length="32" name="response_plan_template" read_only="true" reference="x_fru_cir_response_plan_template" reference_cascade_rule="delete" type="reference"/>
+        <element attributes="serializer=com.glide.script.TranslatedTextXMLSerializer" label="Action Required" mandatory="true" max_length="255" name="short_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" default="javascript:current.getTableName();" dynamic_default_value="b5cb83a85f220100a9ad2572f2b4773c" label="Class" max_length="80" name="sys_class_name" type="sys_class_name" use_dynamic_default="true"/>
+        <index name="index">
+            <element name="response_plan_template"/>
+        </index>
+        <index name="index2">
+            <element name="copied_from"/>
+        </index>
+        <index name="index3">
+            <element name="sys_class_name"/>
+        </index>
+    </element>
+</database>

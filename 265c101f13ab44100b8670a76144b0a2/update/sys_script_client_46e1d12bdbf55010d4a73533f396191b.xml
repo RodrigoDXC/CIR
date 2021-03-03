@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>If the logged in user is not a certification_manager then lock the person field to them.</description>
+        <field>certification</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Lock down person if not cert admin</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+    if(!g_user.hasRole('x_fru_cir.certification_manager')) {
+        g_form.setReadOnly('person', true);
+    }
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 09:57:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>46e1d12bdbf55010d4a73533f396191b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Lock down person if not cert admin</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_46e1d12bdbf55010d4a73533f396191b</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 09:57:33</sys_updated_on>
+        <table>x_fru_cir_personnel_certification</table>
+        <type>onLoad</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

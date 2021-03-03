@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Static Service Order" max_length="40" name="x_fru_cir_static_service_order" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true,serializer=com.glide.script.PriceXMLSerializer" label="Actual cost" max_length="20" name="actual_cost" read_only="true" type="price"/>
+        <element attributes="edge_encryption_enabled=true" label="Actual from time" max_length="40" name="actual_from_time" type="glide_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Actual guard" max_length="32" name="actual_guard" reference="sys_user" reference_qual="javascript: new CIRStaticProtectionUtils().FilterBodyguards(current.static_service);" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true" label="Actual hours" max_length="40" name="actual_hours" read_only="true" type="glide_duration"/>
+        <element attributes="edge_encryption_enabled=true" label="Actual to time" max_length="40" name="actual_to_time" type="glide_time"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Exception control" max_length="40" name="exception_control" read_only="true" type="boolean"/>
+        <element default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true,serializer=com.glide.script.PriceXMLSerializer" label="Planned cost" max_length="20" name="planned_cost" read_only="true" type="price"/>
+        <element attributes="edge_encryption_enabled=true" label="Planned from time" max_length="40" name="planned_from_time" read_only="true" type="glide_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Planned guard" max_length="32" name="planned_guard" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Planned hours" max_length="40" name="planned_hours" read_only="true" type="glide_duration"/>
+        <element attributes="edge_encryption_enabled=true" label="Planned to time" max_length="40" name="planned_to_time" read_only="true" type="glide_time"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="0" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="New" sequence="1" value="0"/>
+                <element inactive_on_update="false" label="Assigned" sequence="2" value="1"/>
+                <element inactive_on_update="false" label="Confirmed" sequence="3" value="4"/>
+                <element inactive_on_update="false" label="Closed" sequence="4" value="3"/>
+                <element inactive_on_update="false" label="Canceled" sequence="5" value="2"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Static service" max_length="32" name="static_service" read_only="true" reference="x_fru_cir_static_service" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Static service order template" max_length="32" name="static_service_order_template" read_only="true" reference="x_fru_cir_static_service_order_template" type="reference"/>
+        <index name="index">
+            <element name="actual_guard"/>
+        </index>
+        <index name="index2">
+            <element name="static_service_order_template"/>
+        </index>
+        <index name="index3">
+            <element name="planned_guard"/>
+        </index>
+        <index name="index4">
+            <element name="static_service"/>
+        </index>
+    </element>
+</database>

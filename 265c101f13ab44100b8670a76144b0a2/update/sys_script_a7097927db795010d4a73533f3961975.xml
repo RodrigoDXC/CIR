@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_fru_cir_kpi_working_hours</collection>
+        <condition/>
+        <description>This business rule will verify if already exists any record for the seletect location, month and year</description>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Prevent duplicates</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	// Check whether combination of Month, Year, Location and Working Hours exist in the table by record update
+	var gr = new GlideRecord('x_fru_cir_kpi_working_hours');
+	gr.addQuery('month', current.month);
+	gr.addQuery('year', current.year);
+	gr.addQuery('location', current.location);
+	gr.query();
+
+	if (gr.hasNext() && gr.sys_id != current.sys_id){
+		gs.addErrorMessage('Working hours for ' + current.month.getDisplayValue() + ' ' + current.year + ' for location: ' + current.location.name + ' already exists.');
+		current.setAbortAction(true);	
+	}
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 12:49:43</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a7097927db795010d4a73533f3961975</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Prevent duplicates</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_a7097927db795010d4a73533f3961975</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 12:49:43</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=a7097927db795010d4a73533f3961975"/>
+</record_update>

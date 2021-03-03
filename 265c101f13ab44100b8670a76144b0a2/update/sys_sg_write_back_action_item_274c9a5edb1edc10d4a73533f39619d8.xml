@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description>Action  Iitem that will update an incident record with info comming from the Edit incident function.</description>
+        <execution_script/>
+        <name>CIR - Update Incident</name>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-31 14:40:08</sys_created_on>
+        <sys_id>274c9a5edb1edc10d4a73533f39619d8</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR - Update Incident</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_274c9a5edb1edc10d4a73533f39619d8</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-31 14:46:17</sys_updated_on>
+        <table>x_fru_cir_incident</table>
+        <template>severity={{cirActualSeverity}}^assigned_to={{cirAssignedTo}}^assignment_group={{cirAssignmentGroup}}^category={{cirCategory}}^description={{cirDescription}}^likelihood={{cirFutureLikelihood}}^immediate_action={{cirImmediateAction}}^location={{cirLocation}}^location_notes={{cirLocationNotes}}^location_type={{cirLocationType}}^occurred_on={{cirOccurredOn}}^consequence={{cirPotentialConsequence}}^reported_by={{cirReportedBy}}^short_description={{cirShortDescription}}^EQ</template>
+        <type>update</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=274c9a5edb1edc10d4a73533f39619d8"/>
+</record_update>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="x_fru_cir_injury_illness" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>display_name</element>
+            <list_id display_value="x_fru_cir_injury_illness" element="NULL" name="x_fru_cir_injury_illness" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">db90e5ebdb51141003b3533fd396193a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:56</sys_created_on>
+            <sys_id>9790e5ebdb51141003b3533fd396193b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:28:56</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>type</element>
+            <list_id display_value="x_fru_cir_injury_illness" element="NULL" name="x_fru_cir_injury_illness" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">db90e5ebdb51141003b3533fd396193a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:56</sys_created_on>
+            <sys_id>1b90e5ebdb51141003b3533fd396193b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:28:56</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>classification</element>
+            <list_id display_value="x_fru_cir_injury_illness" element="NULL" name="x_fru_cir_injury_illness" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">db90e5ebdb51141003b3533fd396193a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:56</sys_created_on>
+            <sys_id>9b90e5ebdb51141003b3533fd396193b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:28:56</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>mechanism_of_injury_illness</element>
+            <list_id display_value="x_fru_cir_injury_illness" element="NULL" name="x_fru_cir_injury_illness" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">db90e5ebdb51141003b3533fd396193a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:56</sys_created_on>
+            <sys_id>1f90e5ebdb51141003b3533fd396193b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:28:56</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>injury_illness_caused_by</element>
+            <list_id display_value="x_fru_cir_injury_illness" element="NULL" name="x_fru_cir_injury_illness" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">db90e5ebdb51141003b3533fd396193a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:56</sys_created_on>
+            <sys_id>9f90e5ebdb51141003b3533fd396193b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:28:56</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>body_location</element>
+            <list_id display_value="x_fru_cir_injury_illness" element="NULL" name="x_fru_cir_injury_illness" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">db90e5ebdb51141003b3533fd396193a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:56</sys_created_on>
+            <sys_id>1390e5ebdb51141003b3533fd396193c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:28:56</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_fru_cir_injury_illness</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>db90e5ebdb51141003b3533fd396193a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_injury_illness</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_list_x_fru_cir_injury_illness_null</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:28:56</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

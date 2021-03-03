@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="cmdb_ci" label="Equipment" max_length="40" name="x_fru_cir_equipment" sizeclass="0" type="collection">
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Equipment ID" max_length="40" name="number" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Machinery" sequence="10" value="machinery"/>
+                <element inactive_on_update="false" label="PPE" sequence="20" value="ppe"/>
+            </choice>
+        </element>
+    </element>
+</database>

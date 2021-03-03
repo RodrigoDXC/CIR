@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="task" label="Situation" max_length="40" name="x_fru_cir_situation" sizeclass="56" type="collection">
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Buildings" max_length="4000" name="buildings" reference="x_fru_cir_security_location" reference_qual="javascript: new CIRSituationUtils().GetBuildingsByCountries(current.buildings,current.country);" type="glide_list" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Category" mandatory="true" max_length="32" name="category" reference="x_fru_cir_situation_category" reference_qual="javascript: var query = new CIRSituationUtils().FilterCatByDimensionQuery(current.dimension.sys_id); query" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" choice="1" choice_field="country" choice_table="cmn_location" label="Country" max_length="1024" name="country" reference="x_fru_cir_security_address_value" reference_qual="javascript: new CIRSituationUtils().GetCrisisCountries(current.country);" type="glide_list" use_reference_qualifier="advanced">
+            <choice>
+                <element inactive_on_update="false" label="Belgium" sequence="0" value="Belgium"/>
+                <element inactive_on_update="false" label="Canada" sequence="1" value="Canada"/>
+                <element inactive_on_update="false" label="France" sequence="2" value="France"/>
+                <element inactive_on_update="false" label="Germany" sequence="3" value="Germany"/>
+                <element inactive_on_update="false" label="Italy" sequence="4" value="Italy"/>
+                <element inactive_on_update="false" label="Japan" sequence="5" value="Japan"/>
+                <element inactive_on_update="false" label="Mexico" sequence="6" value="Mexico"/>
+                <element inactive_on_update="false" label="United Kingdom" sequence="7" value="United Kingdom"/>
+                <element inactive_on_update="false" label="USA" sequence="8" value="USA"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" mandatory="true" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Escalation level" max_length="1024" name="escalation_level" reference="x_fru_cir_situation_escalation_level" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Locations" max_length="4000" name="locations" reference_qual="javascript: CIRSituationUtils().FilterByCountry(current);" type="string" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Location groups" max_length="4000" name="location_groups" reference="x_fru_cir_location_group" reference_qual="javascript: new CIRSituationUtils().GetLocationsListField(&quot;countries&quot;, current.location_groups, current.country);" type="glide_list" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Mobile location" max_length="32" name="mobile_location" reference="x_fru_cir_security_location" reference_qual="javascript: new CIRSituationUtils().FilterByCountry(current);" type="reference" use_reference_qualifier="advanced"/>
+        <element label="Name" max_length="4000" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Parametrization" max_length="4000" name="parametrization" reference="x_fru_cir_situation_parametrization" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="People affected - Calculated" max_length="40" name="people_affected" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="People affected - Manual" max_length="40" name="people_affected_manual" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Virtual locations" max_length="4000" name="virtual_locations" reference="x_fru_cir_security_virtual_location" reference_qual="javascript: new CIRSituationUtils().GetLocationsListField(&quot;country&quot;,  current.virtual_locations, current.country);" type="glide_list" use_reference_qualifier="advanced"/>
+    </element>
+</database>

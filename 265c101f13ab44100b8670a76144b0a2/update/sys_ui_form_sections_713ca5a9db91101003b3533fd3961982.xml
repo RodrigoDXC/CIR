@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="713ca5a9db91101003b3533fd3961982" sys_domain="global" table="x_fru_cir_risk" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f93ca5a9db91101003b3533fd3961984</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_fru_cir_risk" name="x_fru_cir_risk" sys_domain="global" view="Default view">713ca5a9db91101003b3533fd3961982</sys_ui_form>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_risk" sys_domain="global" view="Default view">5f7be569db91101003b3533fd396196f</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f93ca5a9db91101003b3533fd3961985</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_fru_cir_risk" name="x_fru_cir_risk" sys_domain="global" view="Default view">713ca5a9db91101003b3533fd3961982</sys_ui_form>
+            <sys_ui_section caption="Assessment" display_value="Assessment" name="x_fru_cir_risk" sys_domain="global" view="Default view">313ca5a9db91101003b3533fd396197f</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>2</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>793ca5a9db91101003b3533fd39619ae</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_fru_cir_risk" name="x_fru_cir_risk" sys_domain="global" view="Default view">713ca5a9db91101003b3533fd3961982</sys_ui_form>
+            <sys_ui_section caption="Mitigation Plan" display_value="Mitigation Plan" name="x_fru_cir_risk" sys_domain="global" view="Default view">fd3ca5a9db91101003b3533fd396197f</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>3</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>353ca5a9db91101003b3533fd39619b2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_fru_cir_risk" name="x_fru_cir_risk" sys_domain="global" view="Default view">713ca5a9db91101003b3533fd3961982</sys_ui_form>
+            <sys_ui_section caption="Activity" display_value="Activity" name="x_fru_cir_risk" sys_domain="global" view="Default view">bd3ca5a9db91101003b3533fd3961980</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_fru_cir_risk</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>713ca5a9db91101003b3533fd3961982</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_risk</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_form_sections_713ca5a9db91101003b3533fd3961982</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

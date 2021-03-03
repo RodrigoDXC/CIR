@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_action_role">
+    <sys_ui_action_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_ui_action_role</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-24 17:36:43</sys_created_on>
+        <sys_id>7dae2ef4db73c45049959a82ca961959</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>.x_fru_cir.senior_situation_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_ui_action display_value="Create copy">bcaea238db73c45049959a82ca9619bc</sys_ui_action>
+        <sys_update_name>sys_ui_action_role_7dae2ef4db73c45049959a82ca961959</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-24 17:36:43</sys_updated_on>
+        <sys_user_role display_value="x_fru_cir.senior_situation_manager" name="x_fru_cir.senior_situation_manager">b795d0ab1ba34050df7e43f4bd4bcb6c</sys_user_role>
+    </sys_ui_action_role>
+</record_update>

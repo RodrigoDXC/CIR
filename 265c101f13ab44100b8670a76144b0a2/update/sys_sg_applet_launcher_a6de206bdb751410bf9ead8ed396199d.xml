@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_applet_launcher">
+    <sys_sg_applet_launcher action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <available_offline>false</available_offline>
+        <header_button/>
+        <header_titles/>
+        <hide_empty_sections>true</hide_empty_sections>
+        <name>Internal Incidents</name>
+        <required_roles>x_fru_cir.psi_internal_manager,x_fru_cir.psi_internal_user</required_roles>
+        <search_config/>
+        <sys_class_name>sys_sg_applet_launcher</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-10 07:23:38</sys_created_on>
+        <sys_id>a6de206bdb751410bf9ead8ed396199d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Internal Incidents</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_applet_launcher_a6de206bdb751410bf9ead8ed396199d</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 07:24:02</sys_updated_on>
+        <title>Internal Incidents</title>
+    </sys_sg_applet_launcher>
+</record_update>

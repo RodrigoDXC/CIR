@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRPersonalProtectionClientUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>CIRPersonalProtectionClientUtils</name>
+        <script><![CDATA[var CIRPersonalProtectionClientUtils = Class.create();
+CIRPersonalProtectionClientUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+	getAgenda: function(){
+		var service = this.getParameter('sysparm_service');
+		var servStart = this.getParameter('sysparm_servStart');
+		var agenda = new CIRPersonalProtectionUtils().GetAgenda(service, servStart);
+
+		return JSON.stringify(agenda);
+	},
+
+
+	/**
+		*  This function will create an array with the Service Orders, where a bodyguard has been assigned
+		*  @param {String} sysparm_bgSysID - bodyguard sys_id passed through the URL. 
+		*                                    It will change depending on the BG profile where the ui action was called
+		* 
+		**/
+	getBodyguardSO: function () {
+		var services = [];
+		var bgSysID = this.getParameter('sysparm_bgSysID');
+
+		var serviceOrderGR = new GlideRecord(CIRConstants.Tables.PROTECTION_SERVICE_ORDER);
+		serviceOrderGR.addEncodedQuery('bodyguardsLIKE' + bgSysID);
+		serviceOrderGR.query();
+
+		while (serviceOrderGR.next()) {
+			var url = gs.getProperty('glide.servlet.uri') + CIRConstants.Tables.PROTECTION_SERVICE_ORDER + '.do?sys_id=' + serviceOrderGR.getUniqueValue();
+			var startDate = serviceOrderGR.getValue('start_date') + ' ' + serviceOrderGR.getDisplayValue('start_time');
+			var endDate = serviceOrderGR.getValue('end_date') + ' ' + serviceOrderGR.getDisplayValue('end_time');
+			var soNumber = serviceOrderGR.getValue('number');
+
+			services.push(this.createService(url, startDate, endDate, soNumber));
+		}
+		return JSON.stringify(services);
+	},
+
+
+	/**
+		*  This function will create an array with an event for each of the BGs and for each of the Service Orders
+		*  Which means that if a Service Order has 5 BGs assigned, there will be created 5 events, and all of them redirect the user to the same Service Order
+		**/
+	getAllBGSchedule: function () {
+		var services = [];
+
+		var serviceOrders = new GlideRecord(CIRConstants.Tables.PROTECTION_SERVICE_ORDER);
+		serviceOrders.addEncodedQuery('stateIN2,9,3');
+		serviceOrders.query();
+
+		while (serviceOrders.next()) {
+			var url = gs.getProperty('glide.servlet.uri') + CIRConstants.Tables.PROTECTION_SERVICE_ORDER + '.do?sys_id=' + serviceOrders.getUniqueValue();
+			var startDate = serviceOrders.getValue('start_date') + ' ' + serviceOrders.getDisplayValue('start_time');
+			var endDate = serviceOrders.getValue('end_date') + ' ' + serviceOrders.getDisplayValue('end_time');
+			var bgs = serviceOrders.getValue('bodyguards').split(',');
+
+			if (bgs.length > 0) {
+				for (var i = 0; i < bgs.length; i++) {
+					var bodyG = ' ';
+					bodyG += this.getBodyguardAlias(bgs[i]);
+					services.push(this.createService(url, startDate, endDate, bodyG));
+				}
+			} else {
+				services.push(this.createService(url, startDate, endDate, bgs[0]));
+			}
+		}
+		return JSON.stringify(services);
+	},
+
+
+	/**
+		*  This function will return a bodyguard alias
+		*  @param {String} sysId - bodyguard sys_id
+		* 
+		**/
+	getBodyguardAlias: function (sysId) {
+		var bgGr = new GlideRecord(CIRConstants.Tables.PROTECTION_PROFILE);
+
+		if (bgGr.get(sysId)) {
+			return bgGr.getValue('alias');
+		}
+		return '';
+	},
+
+
+	/**
+		*  This function will return an array with different choices to be used by the filters on the vehicles unavailability ui page
+		* 
+		**/
+	getChoiceLists: function () {
+		var choices = [];
+		var instanceLanguage = gs.getSession().getLanguage();
+
+		var grChoiceType = new GlideRecord('sys_choice');
+		grChoiceType.addQuery('name', CIRConstants.Tables.VEHICLE);
+		grChoiceType.addQuery('language', instanceLanguage);
+		grChoiceType.addQuery('element', 'type');
+		grChoiceType.query();
+
+		while (grChoiceType.next()) {
+			choices.push({
+				'choice': 'type',
+				'value': grChoiceType.getValue('value'),
+				'text': grChoiceType.getValue('label')
+			});
+		}
+
+		var grChoiceEngine = new GlideRecord('sys_choice');
+		grChoiceEngine.addQuery('name', CIRConstants.Tables.VEHICLE);
+		grChoiceEngine.addQuery('language', instanceLanguage);
+		grChoiceEngine.addQuery('element', 'engine');
+		grChoiceEngine.query();
+
+		while (grChoiceEngine.next()) {
+			choices.push({
+				'choice': 'engine',
+				'value': grChoiceEngine.getValue('value'),
+				'text': grChoiceEngine.getValue('label')
+			});
+		}
+		return JSON.stringify(choices);
+	},
+
+
+	/**
+		*  This function will create an array with an event for each record of an unavailable vehicle
+		**/
+	getAllUnavailableVehicles: function () {
+		var vehicles = [];
+
+		var grVehicle = new GlideRecord(CIRConstants.Tables.VEHICLE_UNAVAILABILITY);
+		grVehicle.addEncodedQuery('vehicle.registration_plateISNOTEMPTY');
+		grVehicle.query();
+
+		while (grVehicle.next()) {
+			var url = gs.getProperty('glide.servlet.uri') + CIRConstants.Tables.VEHICLE_UNAVAILABILITY + '.do?sys_id=' + grVehicle.getUniqueValue();
+			var startDate = grVehicle.getValue('from_date') + ' 00:00:00';
+			var endDate = grVehicle.getValue('to_date') + ' 23:59:59';
+			var title = grVehicle.getDisplayValue('vehicle.registration_plate') + ' ' + this.checkUnavailabilityType(grVehicle.getValue('sys_class_name'));
+
+			vehicles.push(this.createService(url, startDate, endDate, title));
+		}
+		
+		return JSON.stringify(vehicles);		
+	},
+
+
+	/**
+		*  This function will create an array with unavailable vehicules, that match the options selected in the filters
+		*  @param {String} sysparm_vehicleType - vehicle type selected on the first filter on the UI page
+		*  @param {String} sysparm_vehicleEngine - vehicle engine type selected on the second filter on the UI page
+		*  @param {String} sysparm_type - used to fetch the available or unavailable vehicules
+		* 
+		**/
+	getVehicles: function () {
+		var vehicles = [];
+		var queryString = '';
+
+		var vehicleType = this.getParameter('sysparm_vehicleType');
+		var vehicleEngine = this.getParameter('sysparm_vehicleEngine');
+		var availability = this.getParameter('sysparm_availability');
+		var date = this.getParameter('sysparm_date');
+
+		if (vehicleType === 'All' && vehicleEngine !== 'All') {
+			queryString += 'vehicle.engine=' + vehicleEngine;
+		}
+
+		if (vehicleType !== 'All' && vehicleEngine === 'All') {
+			queryString += 'vehicle.type=' + vehicleType;
+		}
+
+		if (vehicleType !== 'All' && vehicleEngine !== 'All') {
+			queryString += 'vehicle.type=' + vehicleType + '^vehicle.engine=' + vehicleEngine;
+		}
+
+		//this will fetch the unavailable records
+		if (availability === 'unavailable') {
+
+			var gdt = new GlideDateTime();
+			var gd = gdt.getLocalDate();
+
+			var month = gdt.getMonthUTC();
+			var year = gdt.getYearUTC();
+
+			vehicles.push({
+				date: gd.getByFormat('yyyy-MM-dd')
+			});
+
+			var grVehicle = new GlideRecord(CIRConstants.Tables.VEHICLE_UNAVAILABILITY);
+			grVehicle.addEncodedQuery(queryString);
+			grVehicle.query();
+
+			while (grVehicle.next()) {
+				var url = gs.getProperty('glide.servlet.uri') + CIRConstants.Tables.VEHICLE_UNAVAILABILITY + '.do?sys_id=' + grVehicle.getUniqueValue();
+				var startDate = grVehicle.getValue('from_date') + ' 00:00:00';
+				var endDate = grVehicle.getValue('to_date') + ' 23:59:59';
+				var title = grVehicle.getDisplayValue('vehicle.registration_plate') + ' ' + this.checkUnavailabilityType(grVehicle.getValue('sys_class_name'));
+
+				vehicles.push(this.createService(url, startDate, endDate, title));
+			}
+			return JSON.stringify(vehicles);
+		}
+
+		if (availability === 'available') {
+			// remove 'vehicle.' from the query, because the getAvailableVehicles() is looking for records on the vehicle table
+			return this.getAvailableVehicles(date, queryString.replace(/vehicle./g, ''));
+		}
+	},
+
+
+	/**
+		*  This function is used to find the type of unavailability
+		*  @param {String} classType - sys_class of a record
+		* 
+		**/
+	checkUnavailabilityType: function (classType) { //TABLES REFERENCES NEEDS TO BE UPDATED
+		switch (classType) {
+			case CIRConstants.Tables.ASSIGNED_UNAVAILABILITY:
+				return '- ' + gs.getMessage('cir_vehicles_schedule_assigned');
+			case CIRConstants.Tables.MAINTENANCE_UNAVAILABILITY:
+				return '- ' + gs.getMessage('cir_vehicles_schedule_maintenance');
+			case CIRConstants.Tables.RESERVED_UNAVAILABILITY:
+				return '- ' + gs.getMessage('cir_vehicles_schedule_reserved');
+		}
+	},
+
+
+	/**
+		*  This function is used on the availability calendar, and runs when the page is open
+		* 
+		**/
+	getAllAvailableVehiclesAjax: function() {
+		return this.getAvailableVehicles('', '');
+	},
+
+
+	getAvailableVehicles: function(date, query) {
+		var vehicles = [];
+		var url, startDate, endDate, title;
+
+		var gdt = new GlideDateTime();
+		var gd = gdt.getLocalDate();
+
+		if (query != '') {
+			// will get the available cars for the day selected on the date filter
+			vehicles.push({
+				date: date
+			});
+
+			var grVehicles = new GlideRecord(CIRConstants.Tables.VEHICLE);
+			grVehicles.addEncodedQuery('registration_plateISNOTEMPTY');
+
+			if (query) {
+				grVehicles.addEncodedQuery(query);
+			}
+			grVehicles.query();
+
+			while (grVehicles.next()) {
+				if (!this.checkIfVehicleAvailable(date, grVehicles.getUniqueValue())) {
+					url = gs.getProperty('glide.servlet.uri') + CIRConstants.Tables.VEHICLE + '.do?sys_id=' + grVehicles.getUniqueValue();
+					startDate = date + ' 00:00:00';
+					endDate = date + ' 23:59:59';
+					title = grVehicles.getDisplayValue('registration_plate');
+
+					vehicles.push(this.createService(url, startDate, endDate, title));
+				}
+			}
+		} else {
+			// this will get the available cars for the current day
+			// will retrieve them when the calendar page is open
+			date = date ? date : gd.getByFormat('yyyy-MM-dd');
+
+			vehicles.push({
+				date: date
+			});
+
+			var grVehiclesCurrentDay = new GlideRecord(CIRConstants.Tables.VEHICLE);
+			grVehiclesCurrentDay.addEncodedQuery('registration_plateISNOTEMPTY');
+			grVehiclesCurrentDay.query();
+
+			while (grVehiclesCurrentDay.next()) {
+				if (!this.checkIfVehicleAvailable(date, grVehiclesCurrentDay.getUniqueValue())) {
+					url = gs.getProperty('glide.servlet.uri') + CIRConstants.Tables.VEHICLE + '.do?sys_id=' + grVehiclesCurrentDay.getUniqueValue();
+					startDate = date + ' 00:00:00';
+					endDate = date + ' 23:59:59';
+					title = grVehiclesCurrentDay.getDisplayValue('registration_plate');
+
+					vehicles.push(this.createService(url, startDate, endDate, title));
+				}
+			}
+		}
+		return JSON.stringify(vehicles);
+	},
+
+
+	checkIfVehicleAvailable: function(date, vehicle_sysId) {
+		var grUnavailableVehicle = new GlideRecord(CIRConstants.Tables.VEHICLE_UNAVAILABILITY); //GLIDERECORD TABLE NEEDS TO BE UPDATED
+		grUnavailableVehicle.addEncodedQuery('vehicle=' + vehicle_sysId);
+		grUnavailableVehicle.addEncodedQuery('from_date<=' + date + '^to_date>=' + date);
+		grUnavailableVehicle.query();
+
+		return grUnavailableVehicle.hasNext();
+	},
+
+
+	/**
+		*  This function will return a calendar event
+		*  @param {String} url - user is redirected tio this url once he clicks on the calendar event
+		*  @param {String} start - start date of the calendar event
+		*  @param {String} end - end date of the calendar event
+		*  @param {String} title - title of the calendar event (what will be showed on the calendar)
+		*
+		** @param {String} color is not being used, but in case its necessary to create events with different colors,
+		*   just uncomment the color variable, and the defineEventsColor() function
+		* 
+		**/
+	createService: function (url, start, end, title) {
+		return {
+			'url': url,
+			'start': start,
+			'end': end,
+			'title': title
+		};
+	},
+
+	type: 'CIRPersonalProtectionClientUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-30 09:46:47</sys_created_on>
+        <sys_id>24dd00c2dbde9c10d4a73533f39619d8</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>CIRPersonalProtectionClientUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_24dd00c2dbde9c10d4a73533f39619d8</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-07 08:14:01</sys_updated_on>
+    </sys_script_include>
+</record_update>

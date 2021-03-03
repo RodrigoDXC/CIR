@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>b442f815dbbd9010bf9ead8ed3961920</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_psi_tool">
+    <x_fru_cir_psi_tool action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <name>Gun</name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-03 07:51:29</sys_created_on>
+        <sys_id>b442f815dbbd9010bf9ead8ed3961920</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-21 08:49:47</sys_updated_on>
+        <type>tool</type>
+        <value>t1</value>
+    </x_fru_cir_psi_tool>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-21 08:51:21</sys_created_on>
+        <sys_id>c59c2547dbce1810d4a73533f3961997</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Gun</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_c59c2547dbce1810d4a73533f3961997</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-21 08:51:21</sys_updated_on>
+        <tablename>x_fru_cir_psi_tool</tablename>
+    </sys_metadata_link>
+</record_update>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_icon_section">
+    <sys_sg_icon_section action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applets>ea97cba9dbd25050bf9ead8ed396199a,64694fe9dbd25050bf9ead8ed396195a,643b4f2ddbd25050bf9ead8ed39619a2,027807e9dbd25050bf9ead8ed396194e</applets>
+        <data_item/>
+        <display_feed_count>false</display_feed_count>
+        <hide_header>false</hide_header>
+        <hide_section_if_empty>false</hide_section_if_empty>
+        <orientation>horizontal</orientation>
+        <required_roles>x_fru_cir.protection_agent,x_fru_cir.static_protection_manager,x_fru_cir.static_protection_coordinator</required_roles>
+        <sys_class_name>sys_sg_icon_section</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-29 10:53:19</sys_created_on>
+        <sys_id>c334db25db165050bf9ead8ed3961973</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Static Protection</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_icon_section_c334db25db165050bf9ead8ed3961973</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-29 10:53:19</sys_updated_on>
+        <table/>
+        <title>Static Protection</title>
+        <visible_condition/>
+    </sys_sg_icon_section>
+</record_update>

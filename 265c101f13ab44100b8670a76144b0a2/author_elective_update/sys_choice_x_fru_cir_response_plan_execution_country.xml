@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="country" table="x_fru_cir_response_plan_execution" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>country</element>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_id>4018930f134694500b8670a76144b09b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>country</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_response_plan_execution_country</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Belgium</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>0</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>37e5b1f7db99141003b3533fd396195d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>Belgium</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Canada</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>1</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b7e5b1f7db99141003b3533fd396195f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>Canada</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>France</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>2</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>77e5b1f7db99141003b3533fd3961961</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>France</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Germany</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>3</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>37e5b1f7db99141003b3533fd3961963</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>Germany</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Italy</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>4</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f3e5b1f7db99141003b3533fd3961965</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>Italy</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Japan</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>5</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b3e5b1f7db99141003b3533fd3961967</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>Japan</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Mexico</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>6</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>40f5b1f7db99141003b3533fd3961969</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>Mexico</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>United Kingdom</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>7</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>00f5b1f7db99141003b3533fd396196b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>United Kingdom</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>country</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>USA</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_execution</name>
+            <sequence>8</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ccf5b1f7db99141003b3533fd396196c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:40:35</sys_updated_on>
+            <value>USA</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>location</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Populate Address from Location</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading) {
+        return;
+    }
+
+    var location = g_form.getValue('location');
+
+    if (location) {
+        g_form.setReadOnly('country', true);
+        g_form.setReadOnly('state_province', true);
+        g_form.setReadOnly('city', true);
+        g_form.setReadOnly('street', true);
+
+        //if (!g_form.getValue('state_province') || !g_form.getValue('city') || !g_form.getValue('country')) {
+        var ga = new GlideAjax('CIRAjaxUtils');
+        ga.addParam('sysparm_name', 'getLocationData');
+        ga.addParam('sysparm_location', g_form.getValue('location'));
+        ga.getXML(getData);
+        //}
+    }
+
+    if (!location) {
+        g_form.setReadOnly('country', false);
+        g_form.setReadOnly('state_province', false);
+        g_form.setReadOnly('city', false);
+        g_form.setReadOnly('street', false);
+    }
+
+    function getData(response) {
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        var address = JSON.parse(answer);
+
+        if (address.country) {
+            g_form.setValue('country', address.country);
+        } else {
+            g_form.setValue('country', '');
+        }
+
+        if (address.state) {
+            g_form.setValue('state_province', address.state);
+        } else {
+            g_form.setValue('state_province', '');
+        }
+
+        if (address.city) {
+            g_form.setValue('city', address.city);
+        } else {
+            g_form.setValue('city', '');
+        }
+
+        if (address.street) {
+            g_form.setValue('street', address.street);
+        } else {
+            g_form.setValue('street', '');
+        }
+    }
+
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-24 14:59:31</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>3b6b615d1b2aa410d4bca977b04bcb8a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Populate Address from Location</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_3b6b615d1b2aa410d4bca977b04bcb8a</sys_update_name>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-24 14:59:40</sys_updated_on>
+        <table>x_fru_cir_near_miss</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_script_client_3b6b615d1b2aa410d4bca977b04bcb8a</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field&gt;location&lt;/field&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;Populate Address from Location&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading) {
+        return;
+    }
+
+    var location = g_form.getValue('location');
+
+    if (location) {
+        g_form.setReadOnly('country', true);
+        g_form.setReadOnly('state_province', true);
+        g_form.setReadOnly('city', true);
+        g_form.setReadOnly('street', true);
+
+        //if (!g_form.getValue('state_province') || !g_form.getValue('city') || !g_form.getValue('country')) {
+        var ga = new GlideAjax('CIRAjaxUtils');
+        ga.addParam('sysparm_name', 'getLocationData');
+        ga.addParam('sysparm_location', g_form.getValue('location'));
+        ga.getXML(getData);
+        //}
+    }
+
+    if (!location) {
+        g_form.setReadOnly('country', false);
+        g_form.setReadOnly('state_province', false);
+        g_form.setReadOnly('city', false);
+        g_form.setReadOnly('street', false);
+    }
+
+    function getData(response) {
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        var address = JSON.parse(answer);
+
+        if (address.country) {
+            g_form.setValue('country', address.country);
+        } else {
+            g_form.setValue('country', '');
+        }
+
+        if (address.state) {
+            g_form.setValue('state_province', address.state);
+        } else {
+            g_form.setValue('state_province', '');
+        }
+
+        if (address.city) {
+            g_form.setValue('city', address.city);
+        } else {
+            g_form.setValue('city', '');
+        }
+
+        if (address.street) {
+            g_form.setValue('street', address.street);
+        } else {
+            g_form.setValue('street', '');
+        }
+    }
+
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;lopez-aznar@dxc.com&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-02-24 14:59:31&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;3b6b615d1b2aa410d4bca977b04bcb8a&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;Populate Address from Location&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_3b6b615d1b2aa410d4bca977b04bcb8a&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;lopez-aznar@dxc.com&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-02-24 14:59:40&lt;/sys_updated_on&gt;&lt;table&gt;x_fru_cir_near_miss&lt;/table&gt;&lt;type&gt;onChange&lt;/type&gt;&lt;ui_type&gt;10&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>952872517</payload_hash>
+        <record_name>Populate Address from Location</record_name>
+        <reverted_from/>
+        <source>20f0dcaf1b566010d4bca977b04bcb1a</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-24 14:59:40</sys_created_on>
+        <sys_id>8e7b215d1b2aa410d4bca977b04bcbb9</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>177d48d86a80000001</sys_recorded_at>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:38</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>067b215dfb2aa410d8cf795a46e4c1b9</update_guid>
+        <update_guid_history>067b215dfb2aa410d8cf795a46e4c1b9:952872517,ff6b615ddd2aa410e10c14fa5a29be8c:981743744</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-26 08:42:38</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>52ad5ea7b45d4ef49878b7d412abd890</sys_id>
+        <sys_metadata>3b6b615d1b2aa410d4bca977b04bcb8a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Populate Address from Location</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Near Miss">665e80f9db45101003b3533fd3961908</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_script_client_3b6b615d1b2aa410d4bca977b04bcb8a</sys_update_name>
+        <sys_update_version display_value="sys_script_client_3b6b615d1b2aa410d4bca977b04bcb8a">8e7b215d1b2aa410d4bca977b04bcbb9</sys_update_version>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:38</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

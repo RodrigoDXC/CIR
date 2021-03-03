@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application/>
+        <key>cir_risk_mng_state_tips</key>
+        <language>en</language>
+        <message>-Draft: Authority Document that is not yet released to be used. This could be due to insufficient data or not validated data. &lt;br&gt;&#13;
+- Active: Authority Document with a complete set of data and that has been validated and is ready to be used. &lt;br&gt;&#13;
+- Inactive: Authority Document that is not supposed to be used anymore.</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-03 15:52:35</sys_created_on>
+        <sys_id>678bff70db106450d4a73533f396193a</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>cir_risk_mng_state_tips</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_message_678bff70db106450d4a73533f396193a</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-03 16:30:49</sys_updated_on>
+    </sys_ui_message>
+</record_update>

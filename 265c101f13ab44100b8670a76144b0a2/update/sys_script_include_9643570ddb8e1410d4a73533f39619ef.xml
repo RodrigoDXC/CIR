@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtPortalListManagerFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRAssmtPortalListManagerFP</name>
+        <script><![CDATA[var CIRAssmtPortalListManagerFP = function() {
+    var ASSESSMENT_LIST_MANAGER_REF_FIELD = {};
+    ASSESSMENT_LIST_MANAGER_REF_FIELD[CIRConstants.Tables.ASSESSMENT_SECTION] = 'assessment_definition';
+    ASSESSMENT_LIST_MANAGER_REF_FIELD[CIRConstants.Tables.ASSESSMENT_FIELD] = 'assessment_section';
+    ASSESSMENT_LIST_MANAGER_REF_FIELD[CIRConstants.Tables.ASSESSMENT_CHOICE] = 'assessment_field';
+    /**
+     * Get the instance of the GlideRecord class to be used and all the table data for a specific reference field.
+     *
+     * @param {String} table - String containing the table name
+     * @param {String} refFieldId - String containing the referencefield SysID
+     * @param {Array} listViewColumns - Array containing the column names of a specific list view
+     * @param {Boolean} editionMode -True if allow edition of elements 
+     * @return {Object} - Object containing the instance of the GlideRecord class and the data content
+     */
+    var getTableData = function(table, refFieldId, listViewColumns, editionMode) {
+        var QUERYTYPESALLOWEDCHOICE = 'type=3^ORtype=5';
+        var objContent = {};
+        var tableContent = [];
+        var localIndex = 0;
+        var grData = new GlideRecord(table);
+        if (refFieldId) {
+            grData.addActiveQuery();
+            if (table === CIRConstants.Tables.ASSESSMENT_FIELD && !editionMode) {
+                grData.addQuery('assessment_section.assessment_definition', refFieldId);
+                grData.addEncodedQuery(QUERYTYPESALLOWEDCHOICE);
+            } else {
+                grData.addQuery(ASSESSMENT_LIST_MANAGER_REF_FIELD[table], refFieldId);
+            }
+            if(table === CIRConstants.Tables.ASSESSMENT_CHOICE) {
+                grData.addEncodedQuery('choiceISNOTEMPTY');
+            }
+            grData.query();
+            while (grData.next()) {
+                objContent = getData(listViewColumns, localIndex, grData);
+                tableContent.push(objContent);
+                localIndex++;
+            }
+        }
+
+        return {
+            grInstance: grData,
+            tableContent: tableContent
+        };
+    };
+
+    /**
+     * Get the data of a record.
+     *
+     * @param {Object} listViewColumns - object containing the column information
+     * @param {int} localIndex - local index for each data object
+     * @param {Object} grData - GlideRecord object for the current object
+     * @return {Object} - Object containing the data
+     */
+    var getData = function(listViewColumns, localIndex, grData) {
+        var objContent = {};
+        Object.keys(listViewColumns).forEach(function(columnName) {
+            var fieldValue = grData.getValue(columnName);
+            objContent[columnName] = {
+                value: listViewColumns[columnName].type === 'boolean' && fieldValue === '1' ?
+                    'true' : fieldValue,
+                displayValue: grData.getDisplayValue(columnName)
+            };
+            if (grData.getTableName() === CIRConstants.Tables.ASSESSMENT_SECTION && columnName ===
+                'description' && objContent[columnName].displayValue) {
+                objContent[columnName].displayValue = objContent[columnName].displayValue.replace(
+                    /<[^>]*>/g, '');
+            }
+        });
+        if (grData.getTableName() === CIRConstants.Tables.ASSESSMENT_SECTION) {
+            objContent.recordProducer = grData.getValue('record_producer');
+        }
+        var orderNumber = grData.getValue('order');
+        objContent.order = orderNumber ? parseInt(orderNumber) : 0;
+        objContent.sys_id = grData.getValue('sys_id');
+        objContent.localIndex = localIndex;
+
+        return objContent;
+    };
+
+    /**
+     * Store and remove data (if applicable).
+     *
+     * @param {Object} dataToManipulate - Object containing:
+     *                                    The table name
+     *                                    The reference field SysID
+     *                                    The array with all the data
+     *                                    The array with all the SysIDs to delete
+     * @param {String} action - action that will be taken
+     * @return {void}
+     */
+    var manipulateData = function(dataToManipulate, action) {
+        if (action === 'remove') {
+            removeData(dataToManipulate);
+            return;
+        }
+        if (action === 'save') {
+            saveData(dataToManipulate);
+            return;
+        }
+    };
+
+    /**
+     * Save the data into the Database.
+     *
+     * @param {Object} dataToManipulate - Object containing the data to be used
+     * @return {void}
+     */
+    var saveData = function(dataToManipulate) {
+        var refFieldName = ASSESSMENT_LIST_MANAGER_REF_FIELD[dataToManipulate.tableName];
+
+        var objectToSave = dataToManipulate.fields;
+        objectToSave = transformObjString(objectToSave);
+        objectToSave.active = true;
+        objectToSave[refFieldName] = dataToManipulate.refFieldId;
+        var saveData = {
+            tableName: dataToManipulate.tableName,
+            fieldValues: objectToSave
+        };
+        if (!objectToSave.sys_id) {
+            saveData.isCreate = true;
+        } else {
+            saveData.updateRecordId = objectToSave.sys_id;
+        }
+        new CIRAssmtModel().SaveDataAssessment(saveData);
+    };
+
+    var transformObjString = function(object) {
+        Object.keys(object).forEach(function(field) {
+            if (typeof object[field] === "object" && object[field] != null) {
+                object[field] = object[field].value;
+            }
+        });
+        return object;
+    };
+    /**
+     * Remove the records from the Database, if applicable.
+     *
+     * @param {Object} dataToManipulate - Object containing the data to be used
+     * @return {void}
+     */
+    var removeData = function(dataToManipulate) {
+        CIRAssmtRemoveAssessmentFP().RemoveAssessmentObjects(dataToManipulate.tableName, dataToManipulate
+            .sysId);
+    };
+
+    /**
+     * Check for duplicates in the data stored in the memory and the database.
+     *
+     * @param {Object} dataToCheck - Object containing:
+     *                               The table name
+     *                               The reference field SysID
+     *                               The array with all the data
+     *                               The array with all the objects to be checked
+     * @return {Boolean} - True if duplicates exist, false otherwise
+     */
+    var validateDuplicates = function(dataToCheck) {
+        var ASSESSMENT_LIST_MANAGER_VALIDATOR = {};
+        ASSESSMENT_LIST_MANAGER_VALIDATOR[CIRConstants.Tables.ASSESSMENT_SECTION] = {
+            validationFields: ['name'],
+            validationLabels: [gs.getMessage('cir_assmt_list_manager_ass_obj_section_name')]
+        };
+        ASSESSMENT_LIST_MANAGER_VALIDATOR[CIRConstants.Tables.ASSESSMENT_FIELD] = {
+            validationFields: ['name'],
+            validationLabels: [gs.getMessage('cir_assmt_list_manager_ass_obj_field_name')]
+        };
+        ASSESSMENT_LIST_MANAGER_VALIDATOR[CIRConstants.Tables.ASSESSMENT_CHOICE] = {
+            validationFields: ['value', 'label'],
+            validationLabels: [gs.getMessage('cir_assmt_list_manager_ass_obj_choice_value'), gs.getMessage(
+                'cir_assmt_list_manager_ass_obj_choice_label')]
+        };
+
+        var refFieldName = ASSESSMENT_LIST_MANAGER_REF_FIELD[dataToCheck.tableName];
+        var validator = ASSESSMENT_LIST_MANAGER_VALIDATOR[dataToCheck.tableName];
+
+        for (var x = 0; x < validator.validationFields.length; x++) {
+            var validationField = validator.validationFields[x];
+            var objToCheck = dataToCheck.fields;
+            if (hasDuplicatesInDb(dataToCheck, objToCheck, refFieldName, validationField)) {
+                return {
+                    field: validator.validationLabels[x],
+                    value: true
+                };
+            }
+        }
+        return {
+            value: false
+        };
+
+    };
+
+    /**
+     * Check for duplicates in the database for a specific object.
+     *
+     * @param {Object} dataToCheck - Object containing the data to be used
+     * @param {Object} objToCheck - Object to be validated
+     * @param {Object} refFieldName - Reference field name to be used
+     * @param {Object} validationField - Validation field name to be used in the validation
+     * @return {Boolean} - True if duplicates exist, false otherwise
+     */
+    var hasDuplicatesInDb = function(dataToCheck, objToCheck, refFieldName, validationField) {
+        var DUPLICATE_NO_ID = refFieldName + '=' + dataToCheck.refFieldId + '^' + validationField + '=' +
+            objToCheck[validationField].value;
+        var DUPLICATE_WITH_ID = '^sys_id!=';
+        if (dataToCheck.fields.sys_id) {
+            DUPLICATE_WITH_ID += dataToCheck.fields.sys_id;
+        }
+        var queryProps = {
+            tableName: dataToCheck.tableName,
+            fields: ['sys_id'],
+            query: DUPLICATE_NO_ID + DUPLICATE_WITH_ID
+        };
+        if ((new CIRGenericUtils().QueryTable(queryProps)).length > 0) {
+            return true;
+        }
+        return false;
+    };
+
+    /**
+     * Object containing all the options required for a specific table.
+     *@param {String} assessmentId - Sys id of the assessment 
+     * @param {String} tableName - Name of the table being managed in the CIR CIRI Assessment List Manager widget
+     * @param {Boolean} isEditable - True if the Table will be editable
+     * @return {Object} - Object containing all the options required for the specific table
+     */
+    var getListManagerDefinitions = function(tableName, isEditable, assessmentId) {
+        var ASSESSMENT_LIST_MANAGER_DEFINITIONS = {};
+
+        ASSESSMENT_LIST_MANAGER_DEFINITIONS[CIRConstants.Tables.ASSESSMENT_SECTION] = {
+            //Redirect definitions
+            backPage: CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION,
+            backTable: CIRConstants.Tables.ASSESSMENT_DEFINITION,
+            backView: 'cir_portal_view',
+            nextPage: CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_ADD_FIELD,
+            nextTable: CIRConstants.Tables.ASSESSMENT_FIELD,
+            nextView: 'cir_portal_view',
+            isDisableNextWhenEmpty: true,
+            //Message definitions
+            assessmentObjName: gs.getMessage('cir_assmt_list_manager_ass_obj_section'),
+            assessmentObjField: gs.getMessage('cir_assmt_list_manager_ass_obj_section_name'),
+            title: gs.getMessage('cir_assmt_list_manager_title'),
+            //Widget options
+            canPreview: false,
+            hasParent: false,
+			confirmDeleteMessage: gs.getMessage('cir_assmt_remove_assessment_section_no_instances')
+        };
+
+        ASSESSMENT_LIST_MANAGER_DEFINITIONS[CIRConstants.Tables.ASSESSMENT_FIELD] = {
+            //Redirect definitions
+            backPage: CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_ADD_SECTION,
+            backTable: CIRConstants.Tables.ASSESSMENT_SECTION,
+            backView: 'cir_portal_view',
+            nextPage: CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_PUBLISH,
+            nextTable: CIRConstants.Tables.ASSESSMENT_CHOICE,
+            nextView: 'cir_portal_view',
+            isDisableNextWhenEmpty: false,
+            //Message definitions
+            assessmentObjName: gs.getMessage('cir_assmt_list_manager_ass_obj_field'),
+            assessmentObjField: gs.getMessage('cir_assmt_list_manager_ass_obj_field_name'),
+            title: gs.getMessage('cir_assmt_list_manager_ass_obj_field'),
+            //Widget options
+            canPreview: true,
+            hasParent: true,
+			confirmDeleteMessage: gs.getMessage('cir_assmt_remove_assessment_field_no_instances')
+        };
+
+
+        ASSESSMENT_LIST_MANAGER_DEFINITIONS[CIRConstants.Tables.ASSESSMENT_CHOICE] = {
+            //Redirect definitions
+            backPage: CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_ADD_FIELD,
+            backTable: CIRConstants.Tables.ASSESSMENT_FIELD,
+            backView: 'cir_portal_view',
+            nextPage: CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_PUBLISH,
+            nextTable: CIRConstants.Tables.ASSESSMENT_CHOICE,
+            nextView: 'cir_portal_view',
+            isDisableNextWhenEmpty: false,
+            //Message definitions
+            assessmentObjName: gs.getMessage('cir_assmt_list_manager_ass_obj_choice'),
+            assessmentObjField: gs.getMessage('cir_assmt_list_manager_ass_obj_choice_label'),
+            title: gs.getMessage('cir_assmt_list_manager_ass_obj_choice'),
+            //Widget options
+            canPreview: false,
+            hasParent: true,
+			confirmDeleteMessage: gs.getMessage('cir_assmt_remove_assessment_choice_no_instances')
+        };
+        var toreturn = ASSESSMENT_LIST_MANAGER_DEFINITIONS[tableName];
+        if (tableName === CIRConstants.Tables.ASSESSMENT_FIELD && !isEditable) {
+            toreturn.title = gs.getMessage('cir_assmt_list_manager_ass_obj_choice_fields');
+        }
+        if (tableName === CIRConstants.Tables.ASSESSMENT_FIELD && isEditable && assessmentId) {
+            if (haveFieldsChoices(assessmentId)) {
+                toreturn.nextPage = CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_FIELD_CHOICE;
+            }
+        }
+
+        return toreturn;
+    };
+
+    /**
+     * Validate the Assessment Definition ID.
+     *
+     * @param {String} assessmentDefinitionId - SysID of the Assessment Definition
+     * @return {boolean} - True in case the Assessment Definition exists, false otherwise
+     */
+    var validateAssessmentDefinitionId = function(assessmentDefinitionId) {
+        var grData = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        if (grData.get('sys_id', assessmentDefinitionId)) {
+            return true;
+        }
+        return false;
+    };
+
+    /**
+     * Validate if the parent table have data.
+     *
+     * @param {String} assessmentDefinitionId - SysID of the Assessment Definition
+     * @param {String} tableInput - name of table being used
+     * @return {boolean} - True in case the parent has records, false otherwise
+     */
+    var validateAssessmentParentData = function(assessmentDefinitionId, tableInput) {
+        var ASSESSMENT_LIST_PARENT = {};
+        ASSESSMENT_LIST_PARENT[CIRConstants.Tables.ASSESSMENT_FIELD] = {
+            table: CIRConstants.Tables.ASSESSMENT_SECTION,
+            query: 'assessment_definition=' + assessmentDefinitionId
+        };
+        ASSESSMENT_LIST_PARENT[CIRConstants.Tables.ASSESSMENT_CHOICE] = {
+            table: CIRConstants.Tables.ASSESSMENT_FIELD,
+            query: 'assessment_definition=' + assessmentDefinitionId
+        };
+
+        var gr = new GlideRecord(ASSESSMENT_LIST_PARENT[tableInput].table);
+        gr.addQuery(ASSESSMENT_LIST_PARENT[tableInput].query);
+        gr.query();
+        return gr.hasNext();
+
+    };
+
+    /**
+     * Validate if the assessment have fields that allow choicess.
+     * @param {String} assessmentDefinitionId - SysID of the Assessment Definition
+     * 
+     * @return {boolean} - True in case the assessment have fields that allow choices
+     */
+    var haveFieldsChoices = function(assessmentDefinitionId) {
+        var QUERYTYPESALLOWEDCHOICE = 'type=3^ORtype=5';
+        var gr = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+        gr.addQuery('assessment_section.assessment_definition', assessmentDefinitionId);
+        gr.addEncodedQuery(QUERYTYPESALLOWEDCHOICE);
+        gr.query();
+        return gr.hasNext();
+    };
+
+    /**
+     * Validate if all assessment fields of type '3' and mandatory 'true' have one default choice chosen.
+     * @param {String} assessment - SysID of the Assessment Definition
+     * Example of arrayContentsEdited - [{"idsToDelete":[],"refFieldId":"7f951175db091010bf9ead8ed396197c","content":[{"default":{"displayValue":"true","value":"true"},"label":{"displayValue":"q","value":"q"},"localIndex":0,"value":{"displayValue":"q","value":"q"},"order":0}]}]
+     * @return {boolean} - True in case the field have default_value setted or in case of eddited, one choice is selected as default
+     */
+    var checkAllDefaultSetted = function(assessment) {
+        var listFields = getAllFieldsChoiceDefaultMandatory(assessment);
+        for (var i = 0; i < listFields.length; i++) {
+            if (!isDefaultValueSettedDB(listFields[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    /**
+     * Validate if a field have default value
+     * @param {Object} field - Field to be checked
+     * @return {boolean} - True when the default value is setted
+     */
+    var isDefaultValueSettedDB = function(field) {
+        return field.defaultValue && field.hasDefaultChoice ? true : false;
+    };
+
+    /**
+     * Validate if a already exists one choice marked as default when objToCheck is marked as default
+     * @param {String} tableName - table being processed
+     * @param {Array} tableContent - Field to be checked
+     Example of tableContent [{"default":{"displayValue":"false","value":"false"},"label":{"displayValue":"q","value":"q"},"localIndex":0,"value":{"displayValue":"q","value":"q"},"order":0},{"default":{"displayValue":"false","value":"false"},"label":{"displayValue":"a","value":"a"},"localIndex":1,"value":{"displayValue":"a","value":"a"},"order":0}]
+     * @param {Array} objToCheck - object to check inside array
+     * @return {boolean} - True when the default value is setted
+     */
+    var checkOnlyOneDefault = function(tableName, tableContent, objToCheck) {
+        if (objToCheck && tableName === CIRConstants.Tables.ASSESSMENT_CHOICE) {
+            if (objToCheck['default'].value === 'false' ||
+                objToCheck['default'].value === '0' ||
+                objToCheck['default'].value === 0) {
+                return true;
+            }
+            return !isOnlyOneDefaultValue(tableContent, objToCheck);
+        }
+        return true;
+    };
+
+    /**
+     * Validate for an array of choices if there are only one choice marked as default
+     * @param {Array} tableContent - SysID of the Assessment Definition
+     * Example of arrayChoices - [{"default":{"displayValue":"true","value":"true"},"label":{"displayValue":"q","value":"q"},"value":{"displayValue":"q","value":"q"}}]
+     * @param {Array} objToCheck - Array with the object to be eddited/inserted
+     * @return {boolean} - True when the array only contains one object with default true
+     */
+    var isOnlyOneDefaultValue = function(tableContent, objToCheck) {
+        for (var i = 0; i < tableContent.length; i++) {
+            if (objToCheck && tableContent[i].localIndex === objToCheck.localIndex) {
+                continue;
+            }
+            if (tableContent[i]['default'].value === "true") {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    /**
+     * Get all fields that need to have a choice as defaultt
+     * @param {String} assessment - assessment sys_id 
+     * @return {Array} - List of fields that need to have a choice marked as default
+     */
+    var getAllFieldsChoiceDefaultMandatory = function(assessment) {
+        var toReturn = [];
+        var QUERYFIELDNEEDDEFAULT = 'type=3^mandatory=true';
+        var gr = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+        gr.addQuery('assessment_section.assessment_definition', assessment);
+        gr.addEncodedQuery(QUERYFIELDNEEDDEFAULT);
+        gr.query();
+        while (gr.next()) {
+            var obj = {
+                sys_id: gr.getValue('sys_id'),
+                defaultValue: gr.getValue('default_value'),
+                hasDefaultChoice: getDefaultChoice(gr.getUniqueValue(), gr.getValue('default_value'))
+            };
+            toReturn.push(obj);
+        }
+        return toReturn;
+    };
+
+    /**
+     * Get all fields that need to have a choice as defaultt
+     * @param {String} assessment - assessment sys_id 
+     * @return {Array} - List of fields that need to have a choice marked as default
+     */
+    var getDefaultChoice = function(fieldSysId, defaultValue) {
+        var grChoice = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+        grChoice.addQuery('assessment_field', fieldSysId);
+        grChoice.addQuery('value', defaultValue);
+        grChoice.addQuery('default', 'true');
+        grChoice.query();
+        return grChoice.hasNext();
+    };
+
+    /**
+     * Get the Category field of an assessment
+     * @param {String} assessment - assessment sys_id 
+     * @return {String} - Category sys_id
+     */
+    var getCatalogCategoryFromAssessment = function(assessment) {
+        var grCategory = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        if (grCategory.get(assessment)) {
+            return grCategory.getValue('category');
+        }
+        return;
+    };
+
+    return {
+        GetTableData: getTableData,
+        ManipulateData: manipulateData,
+        ValidateDuplicates: validateDuplicates,
+        GetListManagerDefinitions: getListManagerDefinitions,
+        ValidateAssessmentDefinitionId: validateAssessmentDefinitionId,
+        ValidateAssessmentParentData: validateAssessmentParentData,
+        CheckAllDefaultSetted: checkAllDefaultSetted,
+        CheckOnlyOneDefault: checkOnlyOneDefault,
+        GetCatalogCategoryFromAssessment: getCatalogCategoryFromAssessment
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:12:57</sys_created_on>
+        <sys_id>9643570ddb8e1410d4a73533f39619ef</sys_id>
+        <sys_mod_count>56</sys_mod_count>
+        <sys_name>CIRAssmtPortalListManagerFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_9643570ddb8e1410d4a73533f39619ef</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-09 13:57:04</sys_updated_on>
+    </sys_script_include>
+</record_update>

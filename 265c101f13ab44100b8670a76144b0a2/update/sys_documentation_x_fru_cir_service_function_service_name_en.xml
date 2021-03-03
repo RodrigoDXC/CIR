@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="service_name" label="Service name" language="en" table="x_fru_cir_service_function">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>service_name</element>
+            <help/>
+            <hint/>
+            <label>Service name</label>
+            <language>en</language>
+            <name>x_fru_cir_service_function</name>
+            <plural>Service names</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-07-27 09:44:37</sys_created_on>
+            <sys_id>bf42bc4ddbdadc10bf9ead8ed3961948</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Service name</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_service_function_service_name_en</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-07-27 09:44:37</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

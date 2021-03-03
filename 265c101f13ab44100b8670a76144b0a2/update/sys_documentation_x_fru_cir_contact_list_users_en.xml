@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="users" label="Users" language="en" table="x_fru_cir_contact_list">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>users</element>
+            <help/>
+            <hint/>
+            <label>Users</label>
+            <language>en</language>
+            <name>x_fru_cir_contact_list</name>
+            <plural>Users</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-03-20 10:30:14</sys_created_on>
+            <sys_id>d7d73a1b1bc114107a7d624d6e4bcb03</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Users</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_contact_list_users_en</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-03-20 10:30:14</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

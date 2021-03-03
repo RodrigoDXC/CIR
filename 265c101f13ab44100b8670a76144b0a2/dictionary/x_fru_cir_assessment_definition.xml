@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Assessment Definition" max_length="40" name="x_fru_cir_assessment_definition" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" read_only="true" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Catalog" mandatory="true" max_length="32" name="catalog" reference="sc_catalog" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Category" max_length="32" name="category" read_only="true" reference="sc_category" reference_qual="javascript: 'sc_catalog=' + current.catalog;" type="reference" use_reference_qualifier="advanced"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element display="true" label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Processed Files" max_length="4000" name="processed_files" reference="sys_attachment" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="Published" max_length="40" name="published" read_only="true" type="boolean"/>
+        <index name="index">
+            <element name="catalog"/>
+        </index>
+        <index name="index2">
+            <element name="category"/>
+        </index>
+    </element>
+</database>

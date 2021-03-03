@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Notification Log" max_length="40" name="x_fru_cir_notification_log" sizeclass="1" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Message" max_length="8000" name="message" read_only="true" type="html"/>
+        <element attributes="edge_encryption_enabled=true" label="PSI ID" max_length="32" name="psi_id" read_only="true" type="document_id"/>
+        <element attributes="base_start=true,edge_encryption_enabled=true" label="Source table" max_length="80" name="source_table" read_only="true" type="table_name"/>
+        <element label="Time" max_length="40" name="time" read_only="true" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Users" max_length="4000" name="users" read_only="true" reference="sys_user" type="glide_list"/>
+        <index name="index">
+            <element name="psi_id"/>
+        </index>
+    </element>
+</database>

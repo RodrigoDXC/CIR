@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="PSI Tool" max_length="40" name="x_fru_cir_psi_tool" sizeclass="8" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Description" max_length="400" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Name" mandatory="true" max_length="40" name="name" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Measure" sequence="1" value="measure"/>
+                <element inactive_on_update="false" label="Method" sequence="2" value="method"/>
+                <element inactive_on_update="false" label="Role" sequence="3" value="role"/>
+                <element inactive_on_update="false" label="Escape Type" sequence="4" value="escape_type"/>
+                <element inactive_on_update="false" label="Tool" sequence="5" value="tool"/>
+            </choice>
+        </element>
+        <element label="Value" mandatory="true" max_length="40" name="value" type="string" unique="true"/>
+        <index name="index">
+            <element name="value"/>
+        </index>
+    </element>
+</database>

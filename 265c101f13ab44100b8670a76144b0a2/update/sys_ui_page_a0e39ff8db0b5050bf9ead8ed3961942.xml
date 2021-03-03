@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function onCancel() {
+    var c = gel('cancelled');
+    c.value = "true";
+    GlideDialogWindow.get().destroy();
+    return false;
+}
+
+function validateForm() {
+	
+    if (gel('shortD').value == '') {
+        alert("${JS:gs.getMessage('Please insert Short Description')}");
+        return false;
+    } else if (gel('desc').value == '') {
+        alert("${JS:gs.getMessage('Please insert Description')}");
+        return false;
+    } else if (gel('priority').value == '') {
+        alert("${JS:gs.getMessage('Please insert Priority')}");
+        return false;
+    } else if (gel('due_date').value == '') {
+        alert("${JS:gs.getMessage('Please insert Due Date')}");
+        return false;
+    }
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_cir_product_recall_create_action.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	
+   <g:ui_form>
+	 <input type="hidden" id="cancelled" name="cancelled" value="false"/>
+	<input type="hidden" id="productRecallSysId" name="productRecallSysId" value="${sysparm_sysID}"/>
+      <table  cellpadding="0" cellspacing="0" class="wide">
+         <tr>
+            <td nowrap="true">
+               <g:ui_input_field label="Short Description" name="shortD" id="shortD" style="width: 100%" mandatory="true"/>
+            </td>
+         </tr>
+         <tr style="margin-top: 5px">
+            <td nowrap="true">
+               <g:ui_multiline_input_field label="Description" name="desc" id="desc" mandatory="true" max-size="4000" />
+            </td>
+         </tr>
+         <tr>
+            <td nowrap="true">
+               <table class="wide">
+                  <tr>
+                     <td id="label.priority" class="label" choice="0" style="vertical-align: top; padding-top: 5px;" type="string" nowrap="true">
+                        <label for="priority" ><b>Priority:</b></label>
+                     </td>
+                     <td>
+                        <select name="priority" id="priority" style="vertical-align: top; width: 100%">
+                           <option value="1">1 - Critical</option>
+                           <option value="2">2 - High</option>
+                           <option value="3">3 - Moderate</option>
+                           <option value="4">4 - Low</option>
+                           <option value="5">5 - Planning</option>
+                        </select>
+                     </td>
+                  </tr>
+               </table>
+            </td>
+            <td nowrap="true">	
+            </td>
+         </tr>
+         <tr>
+            <td nowrap="true">
+				<table class="wide">
+				 <tr>
+					 <td id="label.due_date" class="label" choice="0" style="vertical-align: top; padding-top: 5px;" type="string" nowrap="true">
+               <label for="due_date" ><b>Due Date:</b></label>
+					</td>
+					  <td>
+               <g:ui_date_time name='due_date' id='due_date'/>
+            </td>
+					 </tr>
+					 </table>
+			 
+			 
+			 </td>
+         </tr>
+      </table>
+      <g:dialog_buttons_ok_cancel ok="return validateForm();" cancel="return onCancel();"/>
+   </g:ui_form>
+</j:jelly>]]></html>
+        <name>cir_product_recall_create_action</name>
+        <processing_script><![CDATA[var count = new CIRProductRecall().CreateActions(productRecallSysId, shortD, desc, priority, due_date);
+if(count===0){
+	gs.addInfoMessage(gs.getMessage('No actions created, all stores already have actions'));
+}
+response.sendRedirect("x_fru_cir_product_recall?sys_id=" + productRecallSysId);]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-09-02 09:59:14</sys_created_on>
+        <sys_id>a0e39ff8db0b5050bf9ead8ed3961942</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_product_recall_create_action</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_a0e39ff8db0b5050bf9ead8ed3961942</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-09-02 09:59:14</sys_updated_on>
+    </sys_ui_page>
+</record_update>

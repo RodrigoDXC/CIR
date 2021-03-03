@@ -1,0 +1,1145 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($uibModal, $scope, spUtil, $timeout, $window) {
+	var c = this;
+	var creatingRespRoom = false;
+
+	$scope.location = {
+		value: '',
+		name: 'location'
+	};
+
+	$scope.response_plan = {
+		value: '',
+		name: 'response_plan'
+	};
+
+	$scope.current_location = {
+		displayValue: "",
+		value: "",
+		name: 'current_location'
+	};
+
+	c.query_response_plans = "none";
+	c.resp_plan = '';
+	c.selectLocation = c.data.message_select_building;
+	c.currentPicker = "buildings";
+	c.response_plan_disabled = true;
+	c.all_locations = false;
+	c.currentQuery = c.data.query_buildings;
+	c.crisisBuildings = c.data.query_buildings;
+	c.crisisGroups = c.data.query_location_groups;
+	c.crisisVirtual = c.data.query_virtual_location;
+
+	c.addResponsePlan = function () {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'addResponsePlan',
+			scope: $scope
+		})
+		c.selectLocation = c.data.message_select_building;
+		c.currentPicker = "buildings";
+		c.clearValues();
+	};
+
+	c.closeModal = function () {
+		c.clearValues();
+		c.selectLocation = c.data.message_select_building;
+		c.currentPicker = "buildings";
+		c.modalInstance.close();   
+	};
+
+	// execution record watcher
+	spUtil.recordWatch($scope, c.data.tables.RESP_PLAN_EXEC, "parent_situation=" + c.data.parent, function (name, data) {
+		var obj = {};
+		obj.action = 'update_records';
+		c.server.get(obj).then(function(response){
+			c.data.records = response.data.records;
+		});
+	});
+
+	// crisis record record watcher
+	spUtil.recordWatch($scope, c.data.tables.SITUATION, "sys_id=" + c.data.parent, function (name, data) {
+		var changes = name.data.changes;
+		var locfields = ['buildings', 'virtual_locations', 'location_groups', 'state'];
+		var obj = {};
+		
+		if(changes.indexOf('state') != -1) {
+			obj.action = 'state_updated';
+		} else {
+			var changed = c.checkIfInArray(changes, locfields);
+			if(changed) {
+				obj.action = 'update_queries';
+			}
+		}
+		
+		if(obj.action) {
+			c.server.get(obj).then(function(response){
+				if(response.data.state_updated) {
+					c.data.canCreate = response.data.canCreate;
+				} else {
+					c.data.query_buildings = response.data.query_buildings;
+					c.data.query_location_groups = response.data.query_location_groups;
+					c.data.query_virtual_location = response.data.query_virtual_location;
+				}
+			});
+		}
+	});
+
+	// crisis members record watcher
+	spUtil.recordWatch($scope, c.data.tables.SITUATION_MEMBER, "situation=" + c.data.parent, function (name, data) {
+		var obj = {};
+		obj.action = 'state_updated';
+		
+		c.server.get(obj).then(function(response) {
+			c.data.canCreate = response.data.canCreate;
+		});
+	});
+
+	c.checkIfInArray = function (arr1, arr2) {
+		for(var i = 0; i<arr1.length; i++) {
+			for (var k = 0; k < arr2.length; k ++) {
+				if(arr1[i] == arr2[k])
+					return true;
+			}
+		}
+	}
+
+
+	$scope.$on("field.change", function (evt, parms) {
+
+		if (parms.field.name == 'current_location') {
+			c.response_plan_disabled = true;
+			$scope.response_plan.value = "";
+
+			var obj = {};
+			obj.getResponsePlans = true;
+			obj.all_locations = c.all_locations;
+			obj.locationID = parms.newValue;
+			obj.field = c.currentPicker;
+
+			c.server.get(obj).then(function (response) {
+				spUtil.update($scope);
+				c.query_response_plans = response.data.response_query;
+				c.response_plan_disabled = false;
+			});
+		}
+
+		if (parms.field.name == 'response_plan') {
+			c.resp_plan = parms.newValue;
+		}
+	});
+
+	c.createRecord = function () {
+
+		if ($scope.current_location.value != '' && c.resp_plan != '') {
+
+			var obj = {};
+			obj.create_plan = true;
+			obj.location = $scope.current_location.value;
+			obj.add_parametrization = c.all_locations;
+			obj.field = c.currentPicker;
+			obj.response_plan = c.resp_plan;
+
+			c.closeModal();
+			c.server.get(obj).then(function (result) {
+				$scope.location.value = '';
+				$scope.response_plan.value = '';
+				c.data.create_plan = false;
+			});
+
+		} else {
+			alert(c.data.empty_mandatory_fields);
+		}
+	};
+
+
+	c.redirectTo = function (table, sys_id) {
+		var hosturl = 'https://' + $window.location.host;
+		$window.location.href = hosturl + '/cir?id=cir_response_plan_room&table=' + table + '&sys_id=' + sys_id;
+	};
+
+
+	c.updateQuery = function () {
+		if (c.all_locations == true) {
+			c.crisisBuildings = c.data.buildingsQuery;
+			c.crisisGroups = c.data.locationGroupQuery;
+			c.crisisVirtual = c.data.virtualLocationQuery;
+
+		} else {
+			c.crisisBuildings = c.data.query_buildings;
+			c.crisisGroups = c.data.query_location_groups;
+			c.crisisVirtual = c.data.query_virtual_location;
+		}
+
+		$scope.current_location.value = "";
+		$scope.current_location.displayValue = "";
+		$scope.response_plan.value = "";
+		c.response_plan_disabled = true;
+		c.query_response_plans = "sys_idIN"; // reset the response plans to empty
+		spUtil.update($scope);
+	};
+
+	c.openTab = function (evt, tabName) {
+		var i, tablinks;
+
+		switch (tabName) {
+			case 'buildings':
+				c.currentPicker = "buildings";
+				c.selectLocation = c.data.message_select_building;
+
+				break;
+			case 'location_groups':
+				c.currentPicker = "location_groups";
+				c.selectLocation = c.data.message_select_location_group;
+
+				break;
+			case 'virtual_locations':
+				c.currentPicker = "virtual_locations";
+				c.selectLocation = c.data.message_select_virtual_location;
+
+				break;
+		}
+
+		c.clearValues();
+
+		// Get all elements with class="tablinks" and remove the class "active"
+		tablinks = document.getElementsByClassName("tablink");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+
+		// Show the current tab, and add an "active" class to the button that opened the tab
+		document.getElementById("response-plan").style.display = "block";
+		evt.currentTarget.className += " active";
+	};
+
+
+	c.clearValues = function () {
+		$scope.current_location.value = "";
+		$scope.current_location.displayValue = "";
+		$scope.response_plan.value = "";
+		c.all_locations = false;
+
+		c.updateQuery();
+	};
+
+	var selected_rp = '';
+
+	c.addCoordinator = function(respPlanId) {
+
+		selected_rp = respPlanId;
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'addCoordinator',
+			scope: $scope
+		});
+	};
+
+	c.assignCoordinator = function(userId, userName) {
+		if(!userId) {
+			alert(c.data.empty_mandatory_fields);
+			return;
+		}
+		c.closeModal();
+
+		var obj = {};
+		obj.action = 'assign_coordinator'
+		obj.userId = userId;
+		obj.userName = userName;
+		obj.selected_rp = selected_rp;
+
+		c.closeModal();
+		c.server.get(obj).then(function() {
+			spUtil.update($scope);
+		});
+	};
+
+	c.openStep = function(stepId, respPlanId) {
+		var obj = {};
+		obj.action = 'open_step';
+		obj.step_id = stepId;
+		obj.respPlanId = respPlanId;
+		
+		c.server.get(obj).then(function(resp){
+			c.data.step = resp.data;
+		});
+
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'seeStepDetails',
+			scope: $scope
+		});
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.action-btn {&#13;
+    color: #2e2e2e;&#13;
+    display: block;&#13;
+  	border-radius: 3px;&#13;
+  	border: solid 1px #cccccc;&#13;
+  	background-color: #ffffff;&#13;
+}&#13;
+&#13;
+.header-title{&#13;
+ 	vertical-align: -webkit-baseline-middle;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.06;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+}&#13;
+&#13;
+table {&#13;
+  border-collapse: collapse;&#13;
+  width: 100%;&#13;
+}&#13;
+&#13;
+th, td {&#13;
+  text-align: left;&#13;
+  padding: 8px;&#13;
+}&#13;
+&#13;
+th {&#13;
+	border: 1px solid #ddd;&#13;
+  color: $brand-primary;&#13;
+  border-top: 0;&#13;
+  position: sticky;&#13;
+  top: 0;&#13;
+  background: white;&#13;
+  border-collapse: collapse;&#13;
+}&#13;
+&#13;
+table {&#13;
+	border: 0;&#13;
+}&#13;
+&#13;
+tr {&#13;
+	border-bottom: solid 1px #dee5e7;&#13;
+}&#13;
+&#13;
+td {&#13;
+  height: 56px;&#13;
+  &#13;
+}&#13;
+th:first-child {&#13;
+	border-left: 0;&#13;
+}&#13;
+&#13;
+th:last-child {&#13;
+	border-right: 0;&#13;
+}&#13;
+&#13;
+&#13;
+tr:first-child {&#13;
+	border: 0;&#13;
+}&#13;
+&#13;
+tr:hover {&#13;
+ background-color: $list-hover-color !important;;&#13;
+}&#13;
+&#13;
+tr:last-child {&#13;
+	 border-collapse: collapse;&#13;
+}&#13;
+&#13;
+tr:nth-child(even) {background-color: #f9f9f9;}&#13;
+&#13;
+.panel-body{&#13;
+	padding:0;&#13;
+  overflow-y:auto;&#13;
+  height: 258px !important;&#13;
+}&#13;
+&#13;
+.required {&#13;
+    color: red;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Shows a list of response plans</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-response-plans</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Response Plans</name>
+        <option_schema>[{"name":"table","section":"Data","default_value":"x_fru_cir_response_plan_execution","label":"Table","type":"string"},{"name":"parent_field","section":"Data","default_value":"parent_situation","label":"Parent field","type":"string"},{"name":"fields","section":"Data","default_value":"number,situation_location,response_plan_template,sys_created_on,people_affected,state","label":"Fields","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.situation_user</roles>
+        <script><![CDATA[(function () {
+	data.tables = CIRConstants.Tables;
+	data.parent = $sp.getParameter('sys_id');
+	
+	if(!input) {
+		setMessages();
+		setRecords();
+		setQueries();
+		data.coordinators_query = getCoordinators(); 
+	} else {
+		if(input.action == 'open_step') {
+			openStep();
+
+		} else if (input.action == 'assign_coordinator'){
+			data.coordinatorName = input.userName;
+			setCoordinator(input.userId, input.selected_rp);
+
+		} else if (input.getResponsePlans === true) { 
+			data.parametrization = getParentRecord().parametrization;
+			if (!data.all_locations) {
+				data.response_query = getResponsePlansQuery(data.parametrization, input.locationID, input.field);
+			} else if (data.all_locations) {
+				data.response_query = getAllResponsePlansQuery(input.locationID, input.field);
+			}
+			input.getResponsePlans = false;
+
+		} else if (input.create_plan === true) {
+			data.newsys_id = createResponsePlan(input.field, input.location, input.response_plan, input.add_parametrization);
+			data.create_plan = false;
+			input.create_plan = false;
+
+		} else if (input.action == 'update_records') {
+			setRecords();
+
+		} else if (input.action == 'update_queries') {
+			setQueries();
+			
+		} else if (input.action == 'state_updated') {
+			data.state_updated = true;
+			var gr = new GlideRecordSecure(data.tables.RESP_PLAN_EXEC);
+			data.canCreate = gr.canCreate();
+		}
+	}
+
+	function setMessages() {
+		data.no_records = gs.getMessage('cir_sit_no_records');
+		data.empty_mandatory_fields = gs.getMessage('cir_sit_fill_mandatory_fields');
+		data.message_select_locations = gs.getMessage('cir_sit_select_response_plan');
+
+		data.message_select_building = gs.getMessage("cir_sit_select_building");
+		data.message_select_location_group = gs.getMessage("cir_sit_select_location_group");
+		data.message_select_virtual_location = gs.getMessage("cir_sit_select_virtual_location");
+
+		data.coordinatorMsg = gs.getMessage('cir_sit_coordinator');
+		data.selectCoordinatorMsg = gs.getMessage('cir_sit_select_coordinator');
+		data.assignCoordinatorMsg = gs.getMessage('cir_sit_assign_coordinator');
+	}
+
+	function setRecords() {
+		data.parent_field = options.parent_field;
+		data.records = [];
+		data.labels = [];
+		data.fields = options.fields.split(',');
+		var gr = new GlideRecordSecure(data.tables.RESP_PLAN_EXEC);
+		data.canCreate = gr.canCreate(); // checking rigths to create
+		gr.addQuery(data.parent_field, data.parent);
+		//gr.addEncodedQuery(data.record_to_filter);
+		gr.orderByDesc('sys_created_on');
+		gr.query();
+		while (gr.next()) {
+			var obj = {};
+			obj.fieldsData = [];
+			for (var i = 0; i < data.fields.length; i++) {
+				var fieldData = {};
+				fieldData.id = gr.getValue(data.fields[i]);
+				fieldData.field_name = data.fields[i].toString();
+				fieldData.field_value = gr[data.fields[i]].getDisplayValue();
+				// if there is no coordinator assigend, will show an 'add' message to assign a new coordinator though the list
+				if (fieldData.field_name == 'assigned_to' && !fieldData.field_value && gr.canWrite()) {
+					fieldData.field_value = gs.getMessage('cir_sit_add');
+				}
+				obj.fieldsData.push(fieldData);
+			}
+			obj.sys_id = gr.getUniqueValue();
+			obj.canWriteCoordinator = gr.assigned_to.canWrite();
+			data.records.push(obj);
+		}
+		data.canRead = gr.canRead();
+		var fieldsAux = $sp.getFields(gr, options.fields.toString());
+
+		if (fieldsAux.length > 0  && data.canRead) {
+			for (var j = 0; j < data.fields.length; j++) {
+				data.labels.push(fieldsAux[j].label);
+			}
+		}
+	}
+
+	function setQueries() {
+		var utils = new CIRSituationUtils();
+		data.parent_record = getParentRecord();
+		data.parent_buildings = data.parent_record.buildings.toString();
+		data.parent_groups = data.parent_record.location_groups.toString();
+		data.parent_virtual = data.parent_record.virtual_locations.toString();
+		data.parent_country = data.parent_record.country.toString();
+
+		data.dimension = data.parent_record.dimension.toString();
+		data.category = data.parent_record.category.toString();
+		data.parametrization = data.parent_record.parametrization;
+		data.query_buildings = "sys_idIN" + data.parent_buildings + getGroupsLocations(data.parent_groups, "0", "buildings");
+		data.query_location_groups = "sys_idIN" + data.parent_groups;
+		data.query_virtual_location = "sys_idIN" + data.parent_virtual + getGroupsLocations(data.parent_groups, "1", "system_locations");
+
+		data.buildingsEncodedQuery = utils.GetBuildingsByCountries(data.parent_buildings, data.parent_country);
+		data.locationGroupEncodedQuery = utils.GetLocationsListField("countries", data.parent_groups, data.parent_country);
+		data.virtualLocationEncodedQuery = utils.GetLocationsListField("country", data.parent_virtual, data.parent_country);
+		data.buildingsQuery = getLocationsWithParamt("buildings",data.tables.SECURITY_LOCATION, data.buildingsEncodedQuery); // NEEDS TO BE CHANGED
+		data.locationGroupQuery = getLocationsWithParamt("location_groups", data.tables.LOCATION_GROUP, data.locationGroupEncodedQuery);
+		data.virtualLocationQuery = getLocationsWithParamt("virtual_locations",  data.tables.SECURITY_VIRTUAL_LOCATION, data.virtualLocationEncodedQuery); 
+	}
+
+	function openStep() {
+		data.step_id = getTemplateId(input.step_id);
+
+		var grStep = new GlideRecord(data.tables.RESP_PLAN_STEP);
+		if (grStep.get(data.step_id)) {
+			var stepType = grStep.getValue('sys_class_name');
+			data.step_name = grStep.name + '';
+			data.description = grStep.description ? grStep.description+ '' : "-";
+			data.is_message = stepType === data.tables.RESP_PLAN_STEP_MSG ? true : false;
+			data.is_condition = stepType === data.tables.RESP_PLAN_STEP_COND ? true : false;
+			data.is_action = stepType === data.tables.RESP_PLAN_STEP_ACTN ? true : false;
+			fetchFlowData(grStep.sys_class_name);
+		}
+
+		if (data.is_message) {
+			data.distributionList = [];
+			data.labels_dist = [];
+
+
+			if (!getExecutionInfo(grStep).sys_id || getExecutionInfo(grStep).state == 1) {
+				data.distributionList = getDistribuitionList(fetchFlowData(grStep.sys_class_name));
+
+				data.labels_dist.push(gs.getMessage('cir_sit_name'));
+				data.labels_dist.push(gs.getMessage('cir_sit_email'));
+				data.labels_dist.push(gs.getMessage('cir_sit_phone_nr'));
+
+			} else {
+				var msgRec = getMessageRecipients(getExecutionInfo(grStep));
+				data.distributionList = msgRec.records;
+				data.labels_dist = msgRec.labels;
+			}
+		}
+	}
+
+	function createResponsePlan(field, location, respPlan, addParametrization) {
+		data.parent = $sp.getParameter('sys_id');
+		var gr = new GlideRecord(data.tables.RESP_PLAN_EXEC);
+		gr.initialize();
+		gr.setValue(field, location);
+		gr.response_plan_template = respPlan;
+		gr.parent_situation = data.parent;
+		var newid = gr.insert();
+
+		updateCrisis(respPlan, field, location, addParametrization);
+		data.location = '';
+		data.response_plan = '';
+		data.create_plan = false;
+		return newid;
+	}
+
+
+	function updateCrisis(respPlan, field, location, addParametrization) {
+		data.parent_record = getParentRecord();
+		if (data.parent_record) {
+			var parentLocations = data.parent_record.getValue(field);
+
+			if (addParametrization) {
+
+				if (!parentLocations) {
+					data.parent_record.setValue(field, location);
+				}
+
+				if (parentLocations && parentLocations.indexOf(location) == -1) {
+					var locations = parentLocations + ',' + location;
+					data.parent_record.setValue(field, locations);
+				}
+
+				var parametrization = getParametrization(data.parent_record.parametrization, respPlan);
+				data.parent_record.setValue("parametrization", parametrization);
+			}
+
+			data.parent_record.update();
+		}
+	}
+
+	function getParametrization(currentValue, responsePlanId) {
+		var newValue = null;
+		var grResp = new GlideRecord(data.tables.RESP_PLAN_TEMPLATE);
+		if (grResp.get(responsePlanId)) {
+			if (grResp.situation_parametrization) {
+				newValue = grResp.situation_parametrization.toString();
+			}
+		}
+		if (!currentValue && newValue) {
+			return newValue;
+		}
+		if (newValue && currentValue && currentValue.indexOf(newValue) == -1) {
+			return currentValue + ',' + newValue;
+		}
+		return "";
+	}
+
+	function getParentRecord() {
+		var gr = new GlideRecord(data.tables.SITUATION);
+		if (gr.get(data.parent)) {
+			return gr;
+		}
+	}
+
+	function getLocationsWithParamt(field, table, encodedQuery) {
+		var valideLocations = [];
+		var auxArray = [];
+		var paramArray = [];
+
+		var gr = new GlideRecord(table);
+		gr.addEncodedQuery(encodedQuery);
+		gr.query();
+
+		while (gr.next()) {
+			auxArray.push(gr.getUniqueValue() + '');
+		}
+
+		var grParam = new GlideRecord(data.tables.PARAMETRIZATION);
+		grParam.addEncodedQuery('sys_idIN' + data.parametrization);
+		grParam.query();
+
+		while (grParam.next()) {
+			if (grParam.getValue(field)) {
+				if (grParam.getValue(field).length > 1) {
+					var locs = grParam.getValue(field).split(",");
+					for (var i = 0; i < grParam.getValue(field).length; i++) {
+						if (paramArray.indexOf(locs[i]) < 0) {
+							paramArray.push(locs[i]);
+						}
+					}
+				} else {
+					if (paramArray.indexOf(grParam.getValue(field) + '') < 0) {
+						paramArray.push(grParam.getValue(field) + '');
+					}
+				}
+			}
+		}
+		valideLocations = new global.ArrayUtil().intersect(paramArray, auxArray);
+
+		return "sys_idIN" + valideLocations.join(",");
+	}
+
+	function getResponsePlansQuery(parametrizations, location, field) {
+		if (!parametrizations) {
+			return "none";
+		}
+
+		var array_param = parametrizations.split(",");
+		var response_plans = [];
+		var param_array = [];
+		var grParam = new GlideRecord(data.tables.PARAMETRIZATION);
+		grParam.addQuery("sys_id", 'IN', array_param);
+		grParam.addQuery(field, "CONTAINS", location);
+		grParam.query();
+		while (grParam.next()) {
+			param_array.push(grParam.getUniqueValue());
+		}
+
+		return "situation_parametrizationIN" + param_array;
+	}
+
+	function getAllResponsePlansQuery(location, field) {
+		var response_plans = [];
+
+		var grParam = new GlideRecord(data.tables.PARAMETRIZATION);
+		grParam.addQuery(field, "CONTAINS", location);
+		grParam.addQuery('dimension', data.dimension);
+		grParam.addQuery('category', data.category);
+		grParam.query();
+
+		return "situation_parametrization=" + grParam.getUniqueValue();
+	}
+
+	function setCoordinator(userId, execId) {
+		var grRespPlan = new GlideRecord(data.tables.RESP_PLAN_EXEC);
+		if (grRespPlan.get(execId)) {
+			grRespPlan.setValue('assigned_to', userId);
+			grRespPlan.update();
+		}
+	}
+
+	function fetchFlowData(table) {
+		var gr = new GlideRecord(table.toString());
+		if (gr.get(data.step_id)) {
+
+			data.message_type = gr.message_type ? gr.message_type.getDisplayValue() : '';
+			data.contact_list = gr.contact_list ? gr.contact_list.getDisplayValue() : '';
+			data.feedback = gr.feedback != undefined ? gr.feedback.toString() : '';
+			data.timer = gr.feedback == true ? gr.timer.toString() + ' min' : 'n/a';
+			data.action_required = gr.short_description.toString();
+
+			if (gr.message_type) {
+				data.message_type = gr.message_type.toString();
+				var messageBody = gr.message_type == 'email' ? gr.message.body.toString() : gr.message.plain_text.toString();
+				data.message = formatMessage(messageBody)
+			}
+
+			getExecutionInfo(gr);
+
+		}
+		return gr;
+	}
+
+	function getExecutionInfo(gr) {
+		var grExStep = new GlideRecord(data.tables.RESP_PLAN_EXEC_STEP);
+		grExStep.addQuery('response_plan_step', gr.getUniqueValue()); // step template
+		grExStep.addQuery('response_plan', input.respPlanId ); // response plan
+		grExStep.setLimit(1);
+		grExStep.query();
+
+		if (grExStep.next()) {
+			data.step_state = grExStep.state.getDisplayValue();
+			data.step_number = grExStep.number.toString();
+			data.result = grExStep.result.getDisplayValue();
+			fetchSpecificExecData(grExStep);
+
+		} else {
+			data.step_state = 'n/a';
+			data.step_number = 'n/a';
+			data.result = 'n/a';
+		}
+		return grExStep;
+	}
+
+	function getDistribuitionList(gr) {
+		if (!gr.contact_list) {
+			return;
+		}
+
+		var crisisUtils = new CIRSituationUtils();
+		var recipients = crisisUtils.GetUnverifiedContacts(gr.contact_list);
+		var recipientsInfo = [];
+
+		recipients = crisisUtils.GetSingleContacts(recipients);
+
+		for (var i = 0; i < recipients.length; i++) {
+
+			var tempRecipInfo = crisisUtils.GetUserInfo(recipients[i]);
+			if (tempRecipInfo.name || tempRecipInfo.email) {
+				recipientsInfo.push(tempRecipInfo);
+			}
+		}
+		var array = [];
+		for (var j = 0; j < recipientsInfo.length; j++) {
+			var aux = [];
+			aux.push(recipientsInfo[j].name ? recipientsInfo[j].name : '-');
+			aux.push(recipientsInfo[j].email ? recipientsInfo[j].email : '-');
+			aux.push(recipientsInfo[j].phone_number ? recipientsInfo[j].phone_number : '-');
+			array.push(aux);
+		}
+		return array;
+	}
+
+
+	function getMessageRecipients(gr) {
+		var array = [];
+		var finalObj = {};
+		var grMsgRec = new GlideRecord(data.tables.MSG_EXEC_RECIPIENT);
+		grMsgRec.addQuery('step_message_execution', gr.getUniqueValue());
+		grMsgRec.query();
+
+		while (grMsgRec.next()) {
+			var obj = [];
+
+			obj.push(grMsgRec.user ? grMsgRec.user.getDisplayValue() : '-');
+			obj.push(grMsgRec.contact.getDisplayValue());
+			obj.push(grMsgRec.state.getDisplayValue());
+			obj.push(grMsgRec.feedback.getDisplayValue());
+
+			array.push(obj);
+		}
+
+		var fieldsAux = $sp.getFields(grMsgRec, ['user', 'contact', 'state', 'feedback']);
+		var labels = [];
+
+		for (var j = 0; j < 4; j++) {
+			labels.push(fieldsAux[j].label);
+		}
+
+		finalObj.records = array;
+		finalObj.labels = labels;
+
+		return finalObj;
+	}
+
+	function fetchSpecificExecData(gr) {
+		var grSpecStep = new GlideRecord(gr.sys_class_name.toString());
+		if (grSpecStep.get(gr.getUniqueValue())) {
+
+			data.notif_sent = grSpecStep.notifications_sent + '';
+			data.notif_rec = grSpecStep.feedback_received + '';
+			return grSpecStep;
+		}
+	}
+
+	function fetchStepRecord(stepId) {
+		var gr = new GlideRecord(data.tables.RESP_PLAN_EXEC_STEP);
+		if (gr.get(stepId)) {
+			return gr;
+		}
+	}
+
+	function getTemplateId(stepId) {
+
+		var gr = new GlideRecord(data.tables.RESP_PLAN_EXEC_STEP);
+		if (gr.get(stepId)) {
+			return gr.getValue('response_plan_step');
+		}
+	}
+
+	function getGroupsLocations(groups, type, field) {
+		if (groups == "") { return ""; }
+		var newLocations = [];
+		var gr = new GlideRecord(data.tables.LOCATION_GROUP);
+		gr.addQuery("group_type", type);
+		gr.addEncodedQuery("sys_idIN" + groups);
+		gr.query();
+		while (gr.next()) {
+			if (gr.getValue(field)) {
+				var fieldArray = gr.getValue(field).split(",");
+				newLocations = newLocations.concat(fieldArray);
+			}
+		}
+		return "," + newLocations.join(",");
+	}
+
+	function fetchResponsePlan() {
+		var gr = new GlideRecord(data.tables.RESP_PLAN_EXEC);
+		if(gr.get(input.respPlanId)) {
+			return gr;
+		}
+	}
+	
+	function getCoordinators () {
+		var users = [];
+		var grUser = new GlideRecord('sys_user');
+		grUser.addEncodedQuery('roles=x_fru_cir.situation_operator^active=true');
+		grUser.query();
+		
+		while(grUser.next()) {
+				users.push(grUser.getUniqueValue());
+		}
+		
+		return 'sys_idIN' + users;
+	}
+
+	function formatMessage(message) {
+		var count = 0;
+		if (message.indexOf("#{") != -1) {
+			while (message.indexOf("#{") != -1 && count < 50) {
+				var occ = message.match("\#{(.*?)\}")[1];
+				if (occ.indexOf('record_link') != -1) {
+					var table = CIRConstants.Tables.RESP_PLAN_EXEC;
+					var page = 'cir_response_plan_room';
+					var field = 'response_plan';
+
+					// checking the table of the message set
+					var grMS = new GlideRecord(CIRConstants.Tables.MSG_SET);
+					if (tableName === CIRConstants.Tables.TASK_EXECUTION || (grMS.get(record.response_plan_step.message_set) && grMS.getValue('table') === CIRConstants.Tables.SITUATION)) {
+						table = CIRConstants.Tables.SITUATION;
+						page = 'cir_situation_room';
+						field = 'situation';
+					}
+
+					var url = 'https://' + gs.getProperty('instance_name') + '.service-now.com/cir?id=' + page + '&table=' + table + '&sys_id=' + record.getValue(field);
+					body = body.replace(occ, ' ' + gs.getMessage('cir_sit_link_to_record') + ': ' + url);
+				} else {
+					var value = getValue(occ);
+					message = message.replace(occ, value);
+					message = message.replace('#{', '');
+					message = message.replace('}', '');
+					count++;
+				}
+			}
+		} 
+
+		return message;
+	}	
+
+	function getValue(occ) {
+		var responsePlan = fetchResponsePlan();
+		var auxValue = '';
+
+		if(occ.indexOf('response_plan.') != -1) {
+			occ = occ.replace('response_plan.', '');
+			auxValue = responsePlan.getDisplayValue(occ);
+		}
+
+		if(auxValue) {
+			return auxValue;
+
+		} else {
+			if(occ.indexOf('situation.') != -1) {
+				occ = occ.replace('situation.', 'parent_situation.');
+				auxValue = responsePlan.getDisplayValue(occ);
+				return auxValue ? auxValue : '';
+			}
+		}	
+	}			
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 18:26:44</sys_created_on>
+        <sys_id>83a40c151bbf0850df7e43f4bd4bcb5e</sys_id>
+        <sys_mod_count>138</sys_mod_count>
+        <sys_name>CIR Response Plans</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_83a40c151bbf0850df7e43f4bd4bcb5e</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2021-01-04 08:44:26</sys_updated_on>
+        <template><![CDATA[<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix"><span class="header-title">${cir_sit_response_plans}</span>
+            <button ng-disabled="!c.data.canCreate" ng-click="c.addResponsePlan()" class="btn btn-primary action-btn pull-right">${cir_sit_add_response_plan}
+            </button>
+        </div>
+        <div class="panel-body">
+            <table ng-if="data.records.length > 0">
+                <tr>
+                    <th ng-repeat="label in c.data.labels">
+                        {{label}}
+                    </th>
+                </tr>
+                <tr ng-repeat="record in c.data.records">
+					<td ng-repeat="value in record.fieldsData track by $index" >
+                       <span  ng-if="value.field_name!='current_step' && value.field_name!='assigned_to' && value.field_name!='response_plan_template'" >
+                       {{value.field_value}} </span>
+                       	<span ng-if="value.field_name=='assigned_to' && record.canWriteCoordinator" 
+                              ng-click="c.addCoordinator(record.sys_id)">
+                          <u>{{value.field_value}}</u></span>
+                       <span ng-if="value.field_name=='assigned_to' && !record.canWriteCoordinator && data.canRead">
+                          {{value.field_value}}</span> 
+                      	<span ng-if="value.field_name=='current_step'" 
+                              ng-click="c.openStep(value.id, record.sys_id)">
+                          <u>{{value.field_value}}</u></span> 
+                      	<span ng-if="value.field_name=='response_plan_template'" 
+                              ng-click="c.redirectTo(data.tables.RESP_PLAN_EXEC, record.sys_id)"
+                   			  >
+                          <u>{{value.field_value}}</u></span> 
+                    </td>
+                </tr>
+            </table>
+            <div style="margin:20px" ng-if="data.records.length == 0">
+                <span style="font-weight: 500;">{{data.no_records}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="addCoordinator">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">{{data.coordinatorMsg}}</h4>
+  </div>
+		<div class="panel-body wrapper-xl">
+  			
+        <div style="margin-bottom:30px" > 
+          <div >
+          <span style="color:red" class="required">* </span>{{data.selectCoordinatorMsg}}
+  </div>
+        	<sn-record-picker name="user_name" default-query="c.data.coordinators_query" field="user_name" style="margin-top:5px" table="'sys_user'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+  </div> 	
+				
+  </div>
+		<div class="panel-footer text-right">
+    		<button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+			<button class="btn btn-primary" ng-click="c.assignCoordinator(user_name.value, user_name.name)">{{data.assignCoordinatorMsg}}</button>
+  </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="seeStepDetails">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body wrapper-xl">
+        <table style="width: 100%;">
+        	<tr>
+          	
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_name}</h5>
+            	<h6 style="font-size:13px;">{{data.step.step_name}}</h6>
+            </td>
+            
+            <td style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_description}</h5>
+            	<h6 style="font-size:13px;">{{data.step.description}}</h6>
+            </td>
+            
+          </tr>
+          
+          <tr>
+          	<td>
+          		<h5 style="font-weight: bold;">${cir_sit_state}</h5>
+            	<h6 style="font-size:13px;">{{data.step.step_state}}</h6>
+           	</td>
+            
+          	<td  style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_number}</h5>
+            	<h6 style="font-size:13px;">{{data.step.step_number}}</h6>
+        		</td>
+            
+          </tr>
+          
+           <tr ng-if="data.step.is_message">
+          	
+         		<td>
+          		<h5 style="font-weight: bold;">${cir_sit_message_type}</h5>
+            	<h6 style="font-size:13px;">{{data.step.message_type}}</h6>
+          
+            
+       			<td style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_contact_list}</h5>
+            	<h6 style="font-size:13px;">{{data.step.contact_list}}</h6>
+      			</td>
+            
+          </tr>
+          
+          <tr ng-if="data.step.is_message">
+          	
+						<td>
+          		<h5 style="font-weight: bold;">${cir_sit_feedback}</h5>
+            	<h6 style="font-size:13px;">{{data.step.feedback}}</h6>
+						</td>
+            
+       			<td style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_timer}</h5>
+            	<h6 style="font-size:13px;">{{data.step.timer}}</h6>
+       			</td>
+            
+          </tr>
+          
+            <tr ng-if="data.step.is_message">
+          	
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_notifications_sent}</h5>
+            	<h6 style="font-size:13px;">{{data.step.notif_sent}}</h6>
+            </td>
+            
+            <td style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_feedback_received}</h5>
+            	<h6 style="font-size:13px;">{{data.step.notif_rec}}</h6>
+            </td>
+            
+          </tr>
+          
+           <tr ng-if="data.step.is_message">
+          	
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_message}</h5>
+              <div ng-if="data.step.message_type == 'email'" ng-bind-html="data.step.message"></div>
+            	<h6 ng-if="data.step.message_type != 'email'" style="font-size:13px;">{{data.step.message}}</h6>
+            </td>
+       
+          </tr>
+          
+           <tr ng-if="data.step.is_condition">
+          	
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_result}</h5>
+            	<h6 style="font-size:13px;">{{data.result}}</h6>
+            </td>
+          </tr>
+          
+           <tr ng-if="data.step.is_action">
+          	
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_action_required}</h5>
+            	<h6 style="font-size:13px;">{{data.step.action_required}}</h6>
+            </td>
+          </tr>
+          
+         </table>
+         
+         <div ng-if="data.step.is_message">
+					<hr></hr>         
+         		<h4 style="font-weight: bold;">${cir_sit_distribution_list}</h5>
+            
+            <table style="width: 100%">
+            	<tr style="border-bottom: solid 1px #dee5e7;">
+            		<th ng-repeat="label in c.data.step.labels_dist">{{label}}</th>
+                
+              </tr>
+              
+              <tr style="padding:8px; border-bottom: solid 1px #dee5e7;" ng-repeat="record in c.data.step.distributionList">
+              	<td ng-repeat="value in record track by $index">
+                	 {{value}}
+              	</td>	
+              </tr>
+              
+            </table>
+            
+         </div>
+         
+        </div>    
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="addResponsePlan">
+    <div style="width: 125%" class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${cir_sit_add_response_plan}</h4>
+        </div>
+            <div class="tab" style="font-weight: bolder; font-size: 16px;">
+                <button class="tablink active" ng-click="c.openTab($event, 'buildings')">${cir_sit_buildings}</button>
+                <button class="tablink" ng-click="c.openTab($event, 'location_groups')">${cir_sit_location_groups}</button>
+                <button class="tablink" ng-click="c.openTab($event, 'virtual_locations')">${cir_sit_virtual_locations}</button>
+            </div>
+        
+        <div id="response-plan" class="panel-body wrapper-xl" style="display:block; margin-top:7%" >
+            <input ng-model="c.all_locations" ng-change="c.updateQuery()" style="margin-bottom:30px" type="checkbox"
+            name="all_locations">
+            <span style="margin-left: 5px;">${cir_sit_other_locations}</span>
+        </input>
+        <div style="margin-bottom:30px">
+            <div>
+                <span style="color:red" class="required">* </span>{{c.selectLocation}}
+            </div>
+                <div>
+                    <sn-record-picker field="current_location" name="current_location" ng-if="c.currentPicker == 'buildings'"  default-query="c.crisisBuildings" 
+                    style="margin-top:5px" table="'x_fru_cir_security_location'" display-field="'name'"
+                    value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+                </div>
+                <div>
+                    <sn-record-picker field="current_location" name="current_location" ng-if="c.currentPicker == 'location_groups'" default-query="c.crisisGroups" style="margin-top:5px" table="'x_fru_cir_location_group'" display-field="'name'"
+                         value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+                </div>
+                <div>
+                    <sn-record-picker field="current_location" name="current_location" ng-if="c.currentPicker == 'virtual_locations'" default-query="c.crisisVirtual" style="margin-top:5px" table="'x_fru_cir_security_virtual_location'"
+                         display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+                </div>
+        </div>
+        <div>
+            <div><span style="color:red" class="required">* </span>${cir_sit_select_response_plan}</div>
+            <sn-record-picker sn-disabled="c.response_plan_disabled" name="response_plan" default-query="c.query_response_plans" field="response_plan"
+            style="margin-top:5px" table="'x_fru_cir_response_plan_template'"
+            display-field="'name'" value-field="'sys_id'" search-fields="'name'"
+            page-size="100"></sn-record-picker>
+        </div>
+        </div>
+           
+        <!--  -->
+        
+
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+            <button class="btn btn-primary" ng-click="c.createRecord()">${Add}</button>
+        </div>
+    </div>
+</script>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_action_param_map">
+    <sys_sg_action_param_map action="INSERT_OR_UPDATE">
+        <button display_value="Edit near miss">79ab8d5bdb9a5050d4a73533f3961943</button>
+        <item_parameter display_value="cirLocationType">5b5e56dedb1edc10d4a73533f39619e6</item_parameter>
+        <sys_class_name>sys_sg_action_param_map</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-03 11:42:19</sys_created_on>
+        <sys_id>e550591fdb9a5050d4a73533f3961938</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>5b5e56dedb1edc10d4a73533f39619e6</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_action_param_map_e550591fdb9a5050d4a73533f3961938</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-03 11:42:19</sys_updated_on>
+        <ui_parameter display_value="Location type">1cecc59bdb9a5050d4a73533f3961986</ui_parameter>
+    </sys_sg_action_param_map>
+</record_update>

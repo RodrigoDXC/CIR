@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function clickedNo(){    
+	var oldValue = gel('oldValue').value;
+	g_form.setValue('country', oldValue);
+	GlideDialogWindow.get().destroy();
+}
+
+function clickedYes(){    
+	GlideDialogWindow.get().destroy();
+	g_form.save();
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_cir_situation_remove_country.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <g:ui_form>
+        <g:evaluate var="jvar_oldValue" expression="RP.getWindowProperties().oldValue" />
+        <input type="hidden" id="oldValue" value="${jvar_oldValue}" />
+
+        <g:evaluate var="jvar_newValue" expression="RP.getWindowProperties().newValue" />
+        <input type="hidden" id="newValue" value="${jvar_newValue}" />
+
+    </g:ui_form>
+
+    <div>
+        <div>
+        	<h4>${gs.getMessage('cir_situation_remove_country_text')}</h4>
+        </div>
+
+        <div style="float:right; margin-right: 2px;">
+            <input type="button" class="btn btn-success" onclick="clickedYes()" value="${gs.getMessage('Yes')}" />
+			<input type="button" class="btn btn-danger" onclick="clickedNo()" value="${gs.getMessage('No')}" />
+        </div>
+
+    </div>
+</j:jelly>]]></html>
+        <name>cir_situation_remove_country</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-19 09:51:23</sys_created_on>
+        <sys_id>eb074d38db2d941003b3533fd39619bf</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>cir_situation_remove_country</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_eb074d38db2d941003b3533fd39619bf</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-20 19:12:19</sys_updated_on>
+    </sys_ui_page>
+</record_update>

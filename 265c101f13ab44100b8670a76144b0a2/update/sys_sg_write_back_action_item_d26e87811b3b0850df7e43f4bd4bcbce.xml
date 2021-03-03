@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description/>
+        <execution_script><![CDATA[(function WriteBackAction(input) {
+    
+	var gr = new GlideRecord(x_fru_cir.CIRConstants.Tables.SITUATION);
+	
+	if (gr.get(input.sys_id)) {
+		
+		var locations = gr.getValue('locations') ? gr.getValue('locations') : '';
+		locations += locations ?   ',' + input.locations : input.locations;
+		gr.setValue('locations', locations);
+		gr.update();
+	}
+ 
+})(input);]]></execution_script>
+        <name>CIR Add Locations</name>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 14:30:01</sys_created_on>
+        <sys_id>d26e87811b3b0850df7e43f4bd4bcbce</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR Add Locations</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_d26e87811b3b0850df7e43f4bd4bcbce</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 16:45:00</sys_updated_on>
+        <table/>
+        <template/>
+        <type>script</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=d26e87811b3b0850df7e43f4bd4bcbce"/>
+</record_update>

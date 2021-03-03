@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>true</advanced>
+        <condition/>
+        <description>Write access to x_fru_cir_message_set for roles x_fru_cir.senior_situation_manager</description>
+        <name>x_fru_cir_message_set.table</name>
+        <operation display_value="write">write</operation>
+        <script><![CDATA[answer = false;]]></script>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-24 15:18:08</sys_created_on>
+        <sys_id>22efc2b81bbf8450df7e43f4bd4bcb1f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir_message_set.table</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_security_acl_22efc2b81bbf8450df7e43f4bd4bcb1f</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-24 15:18:08</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_security_acl_22efc2b81bbf8450df7e43f4bd4bcb1f</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_security_acl"&gt;&lt;sys_security_acl action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;admin_overrides&gt;true&lt;/admin_overrides&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;condition/&gt;&lt;description&gt;Write access to x_fru_cir_message_set for roles x_fru_cir.senior_situation_manager&lt;/description&gt;&lt;name&gt;x_fru_cir_message_set.table&lt;/name&gt;&lt;operation display_value="write"&gt;write&lt;/operation&gt;&lt;script&gt;&lt;![CDATA[answer = false;]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_security_acl&lt;/sys_class_name&gt;&lt;sys_created_by&gt;hugo.reis&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-03-24 15:18:08&lt;/sys_created_on&gt;&lt;sys_id&gt;22efc2b81bbf8450df7e43f4bd4bcb1f&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;x_fru_cir_message_set.table&lt;/sys_name&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_security_acl_22efc2b81bbf8450df7e43f4bd4bcb1f&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;hugo.reis&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-03-24 15:18:08&lt;/sys_updated_on&gt;&lt;type display_value="record"&gt;record&lt;/type&gt;&lt;/sys_security_acl&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-547675047</payload_hash>
+        <record_name>x_fru_cir_message_set.table</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-24 15:18:08</sys_created_on>
+        <sys_id>aaefc2b81bbf8450df7e43f4bd4bcb21</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1710d1f503c0000001</sys_recorded_at>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-24 15:18:08</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>a2efc2b826bf8450e69ce9c1efc7af21</update_guid>
+        <update_guid_history>a2efc2b826bf8450e69ce9c1efc7af21:-547675047</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-26 11:17:33</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>bda98e9588634c6a9b8727a459657844</sys_id>
+        <sys_metadata>22efc2b81bbf8450df7e43f4bd4bcb1f</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_fru_cir_message_set.table</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="">7c1ba06bdb67405049959a82ca9619e7</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_bda98e9588634c6a9b8727a459657844</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_22efc2b81bbf8450df7e43f4bd4bcb1f">aaefc2b81bbf8450df7e43f4bd4bcb21</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

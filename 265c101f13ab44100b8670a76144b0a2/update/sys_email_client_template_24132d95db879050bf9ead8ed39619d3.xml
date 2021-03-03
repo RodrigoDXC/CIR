@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_email_client_template">
+    <sys_email_client_template action="INSERT_OR_UPDATE">
+        <blind_copied/>
+        <body/>
+        <body_html><![CDATA[<p>Number: ${number}</p>
+<p>Impact: ${impact}</p>
+<p>State: ${state}</p>
+<p>Issuer: ${issuer}</p>
+<p>Location: ${location}</p>
+<p>Stakeholders: ${assignment_group}</p>
+<p>Private brand: ${private_brand}</p>
+<p>Supplier: ${supplier}</p>
+<p>Product Category: ${product_category}</p>
+<p>Product Name: ${product_name}</p>
+<p>Product BarCode: ${product_barcode}</p>
+<p>Batch Number: ${batch_number}</p>
+<p>Expiration date of Product: ${expiration_date_of_product}</p>
+<p>Description: ${description}</p>
+<p>Reason for Recall: ${reason_for_recall}</p>]]></body_html>
+        <condition/>
+        <content_type>text/html</content_type>
+        <copied/>
+        <email_client_from_address/>
+        <from/>
+        <from_generation_type/>
+        <name>Send Email Product Recall</name>
+        <order>100</order>
+        <recipients>emailsendto</recipients>
+        <reply_to/>
+        <script_from><![CDATA[(function (fromAddressQuery, targetRecord) {
+		/**
+		 * fromAddressQuery: A GlideRecord on the table "sys_email_client_from_address". Add conditions to filter the
+		 * 		the email addresses displayed in the Email Client. 
+		 * targetRecord: A GlideRecord representing the record in which the Email Client was opened from
+		 */
+
+})(fromAddressQuery, targetRecord);]]></script_from>
+        <subject>${number} : ${reason_for_recall}</subject>
+        <sys_class_name>sys_email_client_template</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-09-03 14:43:14</sys_created_on>
+        <sys_id>24132d95db879050bf9ead8ed39619d3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Send Email Product Recall</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_email_client_template_24132d95db879050bf9ead8ed39619d3</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-09-03 15:01:56</sys_updated_on>
+        <table>x_fru_cir_product_recall</table>
+    </sys_email_client_template>
+</record_update>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Owner Loss" max_length="40" name="x_fru_cir_owner_loss" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Assigned To" max_length="32" name="assigned_to" reference="sys_user" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Drive Off" max_length="32" name="drive_off" read_only="true" reference="x_fru_cir_drive_off" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Fuel Amount (in liters) " max_length="20" name="fuel_amount_in_liters" type="decimal"/>
+        <element label="Gross Value (in words)" max_length="2000" name="gross_value_in_words" type="string"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Gross Value Loss" max_length="20" name="gross_value_loss" type="currency"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="0" label="Is it a canister drive off?" max_length="40" name="is_it_a_canister_drive_off" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="No" sequence="20" value="0"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="0" label="Is there a 2nd Drive off?" max_length="40" name="is_there_a_2nd_drive_off" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="No" sequence="20" value="0"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Net Value Loss" max_length="20" name="net_value_loss" type="currency"/>
+        <element label="Pump Number" max_length="250" name="pump_number" type="string"/>
+        <element label="Second Pump Number" max_length="250" name="second_pump_number" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="type_of_fuel" choice_table="x_fru_cir_owner_loss" label="Second Type Of Fuel" max_length="40" name="second_type_of_fuel" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type of Fuel" max_length="40" name="type_of_fuel" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="AdBlue" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="LPG SupraGaz" sequence="20" value="2"/>
+                <element inactive_on_update="false" label="miles 95" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="miles 98" sequence="40" value="4"/>
+                <element inactive_on_update="false" label="miles Diesel" sequence="50" value="5"/>
+                <element inactive_on_update="false" label="miles+ 95" sequence="60" value="6"/>
+                <element inactive_on_update="false" label="miles+ 98" sequence="70" value="7"/>
+                <element inactive_on_update="false" label="editdelete" sequence="80" value="8"/>
+                <element inactive_on_update="false" label="miles+ ADiesel" sequence="90" value="9"/>
+                <element inactive_on_update="false" label="Windshield washer" sequence="100" value="10"/>
+                <element inactive_on_update="false" label="miles+ Diesel" sequence="110" value="11"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="drive_off"/>
+        </index>
+        <index name="index2">
+            <element name="assigned_to"/>
+        </index>
+    </element>
+</database>

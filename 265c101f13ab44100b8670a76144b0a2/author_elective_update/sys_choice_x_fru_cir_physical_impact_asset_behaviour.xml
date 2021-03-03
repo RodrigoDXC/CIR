@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="asset_behaviour" table="x_fru_cir_physical_impact" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>asset_behaviour</element>
+            <name>x_fru_cir_physical_impact</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-19 18:18:16</sys_created_on>
+            <sys_id>56f86cfb1bdaa010de011fc11a4bcb2e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>asset_behaviour</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_physical_impact_asset_behaviour</sys_update_name>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 18:18:16</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>asset_behaviour</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>It has worked properly</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>10</sequence>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-19 18:18:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>71e8207f1bdaa010de011fc11a4bcbc9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 18:18:16</sys_updated_on>
+            <value>It has worked properly</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>asset_behaviour</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>It has not worked properly</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>20</sequence>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-19 18:18:28</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>53f8207f1bdaa010de011fc11a4bcbcc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 18:18:28</sys_updated_on>
+            <value>It has not worked properly</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>asset_behaviour</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>It was turn off</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>30</sequence>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-19 18:18:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b609e0bb1bdaa010de011fc11a4bcbd2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 18:18:42</sys_updated_on>
+            <value>It was turn off</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>asset_behaviour</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>It was broken</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>40</sequence>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-19 18:18:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1619ec3f1bdaa010de011fc11a4bcbf0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 18:18:56</sys_updated_on>
+            <value>It was broken</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

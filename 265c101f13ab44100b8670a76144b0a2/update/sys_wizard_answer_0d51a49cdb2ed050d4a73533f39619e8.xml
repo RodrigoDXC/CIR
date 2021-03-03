@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_wizard_answer">
+    <sys_wizard_answer action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <answer>Maintenance: Schedule a maintenance service</answer>
+        <button_label/>
+        <dependent_value/>
+        <element/>
+        <name>Maintenance Unavailablity</name>
+        <next_question/>
+        <order>100</order>
+        <payload_name>x_fru_cir_maintenance_unavailability.d</payload_name>
+        <question display_value="Unavailability type" name="Unavailability type">1430e85cdb2ed050d4a73533f396197d</question>
+        <roles>x_fru_cir.workshop_manager</roles>
+        <script/>
+        <sys_class_name>sys_wizard_answer</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-06 10:51:20</sys_created_on>
+        <sys_id>0d51a49cdb2ed050d4a73533f39619e8</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Maintenance Unavailablity</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_wizard_answer_0d51a49cdb2ed050d4a73533f39619e8</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-06 10:52:46</sys_updated_on>
+        <table/>
+        <target_url>x_fru_cir_maintenance_unavailability.do</target_url>
+        <type>1</type>
+    </sys_wizard_answer>
+</record_update>

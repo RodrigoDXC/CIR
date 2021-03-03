@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[$j( document ).ready(function(){
+	var url = document.URL.parseQuery();
+	var table = url.table;
+	var sys_id = url.sys_id;
+	var isPortal = url.portal;
+
+	var connections = [];	
+	var flow = '';
+	var ga = new GlideAjax('CIRSituationUtilsClient');
+	ga.addParam('sysparm_name', 'getSteps');
+	ga.addParam('sysparm_sys_id', sys_id);
+	ga.addParam('sysparm_table', table);
+	ga.getXML(getIt);
+
+	function getIt(response) {
+		var answer = JSON.parse(response.responseXML.documentElement.getAttribute("answer"));
+		var arraySteps = answer ? answer.steps : '';
+		var count = 0;
+
+		var currentStep = [''];
+		var success = "yes";
+		var unsuccess = "no";
+		var parent = 'header_page';
+
+		if (arraySteps.length > 0) {
+			while(count < arraySteps.length) {
+				var obj = getStepObject(arraySteps, currentStep);
+				drawRow(obj);
+				currentStep = getCurrentSteps(obj);
+
+				count+= obj.length;
+			}
+
+			if (!isPortal) {
+				$j("#subtitle_container").show();
+			}
+			drawConnections(connections);
+			$j("path[id^=path_]").addClass('arrow');
+			$j('svg').css('overflow', 'visible');
+			//$j('#title').html(getMessage('Crisis scenario') + ' ' +  answer.scenario);
+			//$j('#description').html(answer.description);
+			$j('#subtitle_title').html(getMessage('Color codes'));
+
+			$j('#sucecss').html(getMessage('Result yes')+'&nbsp;');
+			$j('#not_sucecss').html(getMessage('Result no') +'&nbsp;');
+			$j('#normal').html(getMessage('Normal transition') +'&nbsp;');
+
+			if (table !== 'x_fru_cir_response_plan_template') {
+				$j('#completed').html(getMessage('Step completed_') +'&nbsp;'+'&nbsp;');
+				$j('#not_completed').html(getMessage('Not created') +'&nbsp;'+'&nbsp;');
+				$j('#current').html(getMessage('Current step') +'&nbsp;' + '&nbsp;');
+			} else {
+				$j('.square').css('display', 'none');
+			} 
+
+			$j('body').css('height', $j('.panel').last().offset().top+'');
+			//$j(".panel-primary").get(0).scrollIntoView();
+			if($j(".panel-primary").get(0)) {
+				$j(".panel-primary").get(0).scrollIntoView({ behavior: 'smooth', block: 'center'});
+			}
+			$j('#page_timing_div').hide();
+		}
+
+		function getStepObject(stepArray, currentSteps) {
+			var helper = [];
+
+			for (var i = 0; i < stepArray.length; i++) {
+				var dependents = stepArray[i].dependent_on.split(',') ? stepArray[i].dependent_on.split(',') : stepArray[i].dependent_on;
+
+				if (foundMatch(dependents, currentSteps) && !elementExists(stepArray[i].sys_id)){
+					var obj = stepArray[i];
+					helper.push(obj);
+				}	
+			} return helper.length > 0 ? helper : null;
+		}
+
+		function getCurrentSteps(obj) {
+			var steps = [];
+			for (var i = 0; i < obj.length; i++) {
+				steps.push(obj[i].sys_id.toString());
+			}
+			return steps;
+		}
+
+
+		function drawRow(steps){
+			var str = '';
+
+			if (steps && steps.length > 1) {
+				str += drawMultipleStepRow(steps);	
+			}  else if (steps && steps.length == 1) {
+				str += drawStepRow(steps);	
+			}
+
+			return str;
+		}
+
+
+		function foundMatch(dependents, currentSteps) {
+			if (Array.isArray(dependents)) {
+				for (var i = 0; i < dependents.length; i++) {
+					for (var j = 0; j < currentSteps.length; j++) {
+						if(dependents[i] == currentSteps[j]) {
+							return true;
+						}
+					}
+				}
+			} else {
+				return currentSteps.indexOf(dependents) != -1;
+			}
+		}
+
+		function drawStepRow(step) {
+			addConnection(step[0]);
+
+			if (!elementExists(step[0].sys_id)) {
+				var str = drawStep(step[0], '12');
+				$j('#' + parent).append(str);
+			}
+			parent = step[0].sys_id;
+		}
+
+		function drawMultipleStepRow(steps) {
+			steps = sortSteps(steps);
+
+			for (var i = 0; i < steps.length; i++) {
+				addConnection(steps[i]);
+
+				var col = getColumnSize(steps[i]);
+				var str = '';
+				if (!elementExists(steps[i].sys_id)) {
+					str += drawStep(steps[i], col);
+
+					if(col == '12') {
+						$j('#' + parent).append(str);
+						parent = steps[i].sys_id;
+
+					} else {
+						$j('#' + steps[i].dependent_on).append(str);
+					}	
+				}
+			}
+		}
+
+		function drawStep(step, col) {
+			return '<div id="' + step.sys_id + '" class="col-sm-' + col + ' text-center column">'
+				+ '<a><div onClick="triggerModal(this.id)" id="' + step.sys_id + 'panel" class="panel panel-' + step.exec_state + ' col-md-offset-4">'
+			// + '<div class="panel-heading text-center"><p target="_blank" href=' + step.sys_class_name + '.do?sys_id=' + step.sys_id +'>' + step.name + '</a></div>'	
+			// + "<div class='panel-heading text-center'><p  ng-click='cenas("+JSON.stringify(step.sys_id) +"); $event.stopPropagation();'</p>" + step.name + "</div>"
+				+ "<div class='panel-heading text-center'><p name="+ step.sys_id +" </p>" + step.name + "</div>"
+				+ '<div class="panel-body">'
+				+ '<p>'+ step.description.replace(/(\r\n|\n|\r)/gm,'<br/>') +'</p>'
+				+ '</div>'
+				+ '</div></a>'
+				+ '</div>';
+		}
+
+		function getColumnSize(step) {
+			for (var i = 0; i < arraySteps.length; i++) {
+				if (arraySteps[i].sys_id === step.dependent_on) {
+					return arraySteps[i].sys_class_name.indexOf('condition') != -1 ? '6' :'12';
+				}	
+			} return '6';
+		}
+
+		function sortSteps(stepArray) {
+			for (var i = 0; i < stepArray.length; i++) {
+				if (stepArray[i].condition.toString().indexOf(unsuccess) != -1) {
+					var helper = stepArray[0];
+					stepArray[0] = stepArray[i];
+					stepArray[i] = helper;
+				}
+			} return stepArray;
+		}
+
+		function elementExists(id) {
+			var container = $j('#header_page').html().toString();
+			return container.indexOf(id) != -1;
+		}
+
+		function drawConnections(array) {
+			for (var i = 0; i < array.length; i++){
+				var obj = array[i];
+				if (obj.start === '#panel' || obj.end === '#panel') {
+					array.splice(i, 1);
+				}			
+			}
+
+			$j("#svgContainer").HTMLSVGconnect({
+				strokeWidth:2,
+				paths: array
+			});	
+		}
+
+		function calculateRealLength(array) {
+			for (var i = 0; i < array.length; i++) {
+				if(flow.indexOf(array[i].sys_id) !== -1) {
+					array.splice(i, 1);
+				}
+			} return array.length;
+		}
+
+		function addConnection(step){
+			var obj;
+			if (step.dependent_on.indexOf(',') !== -1) {
+				var array = step.dependent_on.split(',');
+
+				for (var i = 0; i < array.length; i++) {
+					newConnection(step, array[i]);
+				} 
+			} else {
+				newConnection(step, step.dependent_on);
+			}
+		}
+
+		function newConnection(step, dependent_on) {
+			var obj = {};
+			obj.start = '#' + dependent_on + 'panel';
+			obj.end = '#' + step.sys_id + 'panel';
+			//obj.text = step.condition.toString().split("^")[0];
+			obj.stroke = getColor(step);
+			obj.orientation = 'auto';
+			connections.push(obj);
+		}
+
+		function getColor(step) {
+			var color = "";
+			if (!step.condition) {
+				color = '#000000';
+			} else {
+				color = step.condition.indexOf(success) != -1 ? '#009900' : '#ff0000';
+			}
+			return color;
+		}
+	}
+});	]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_showWorkflow.do</endpoint>
+        <html><![CDATA[<link href="7bddde891bf30850df7e43f4bd4bcb0a.cssdbx?" rel="stylesheet" type="text/css" />
+<script src="x_fru_cir.svgConnect.jsdbx"></script> 
+<div style="max-width:1385px">
+	<!-- <div>
+ <h2 id="title"></h2> 
+ <h4 id="description"></h4>
+</div> -->
+	<!--<hr></hr> -->
+
+	<div id="subtitle_container" style="display:none">
+
+		<h5 id="subtitle_title"></h5>
+		<table>
+			<tr>
+				<div>
+					<td><p id="sucecss" class="subtitle color:" style="display:inline-block"></p><hr class="sub_line green_line" style="display:inline-block"/></td>
+
+				</div>
+			</tr>
+			<tr>
+				<div>
+					<td><p id="not_sucecss" class="subtitle color:" style="display:inline-block"></p><hr class="sub_line red_line" style="display:inline-block"/></td>
+
+				</div>
+			</tr>
+
+			<tr>
+				<div>
+					<td><p id="normal" class="subtitle color:" style="display:inline-block"></p><hr class="sub_line default_line" style="display:inline-block"/></td>
+
+				</div>
+			</tr>
+
+			<tr>
+				<td><p id="completed" class="subtitle color:" style="display:inline-block;"></p><div class="square completed" style="display:inline-block"></div></td>
+			</tr>
+
+			<tr>
+				<td><p id="current" class="subtitle color:" style="display:inline-block;"></p><div class="square current" style="display:inline-block"></div></td>
+			</tr>
+
+			<tr>
+				<td><p id="not_completed" class="subtitle color:" style="display:inline-block;"></p><div class="square not_created" style="display:inline-block"></div></td>
+			</tr>
+		</table>
+	</div>	
+	<svg 
+		 width="0"
+		 height="0"
+		 z-index="-100"
+		 viewBox="0 0 800 200">
+		<defs>
+			<marker
+					id="triangle"
+					markerUnits="strokeWidth"
+					markerWidth="12"
+					markerHeight="12"
+					viewBox="0 0 12 12"
+					refX="9.4"
+					refY="6"
+					orient="auto">
+				<path d="M2,2 L10,6 L2,10 L6,6 L2,2" style="fill: #000000;"></path>
+			</marker>
+		</defs>
+	</svg>	
+
+	<div id="svgContainer"></div>
+	<div id="header_page"></div>	
+</div>	
+
+
+<script>
+	function triggerModal(id) {
+		var obj = {};
+		obj.event = 'triggerModal';
+		obj.id = id;
+		window.parent.postMessage(JSON.stringify(obj), '*');
+	}
+</script>	
+]]></html>
+        <name>showWorkflow</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 08:39:12</sys_created_on>
+        <sys_id>a43efd011b330850df7e43f4bd4bcb1d</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>showWorkflow</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_a43efd011b330850df7e43f4bd4bcb1d</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-24 12:16:04</sys_updated_on>
+    </sys_ui_page>
+</record_update>

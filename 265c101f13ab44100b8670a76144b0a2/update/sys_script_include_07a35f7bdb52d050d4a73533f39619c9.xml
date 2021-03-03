@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRFleetUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRFleetUtils</name>
+        <script><![CDATA[var CIRFleetUtils = Class.create();
+CIRFleetUtils.prototype = Object.extendsObject(CIRFleetUtilsFP,{
+    initialize: function() {
+		
+		CIRFleetUtilsFP.prototype.initialize.call(this);
+    },
+
+    type: 'CIRFleetUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-05 10:33:58</sys_created_on>
+        <sys_id>07a35f7bdb52d050d4a73533f39619c9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIRFleetUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_07a35f7bdb52d050d4a73533f39619c9</sys_update_name>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-09-16 14:38:17</sys_updated_on>
+    </sys_script_include>
+</record_update>

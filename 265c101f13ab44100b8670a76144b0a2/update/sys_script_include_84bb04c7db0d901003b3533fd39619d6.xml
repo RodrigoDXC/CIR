@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRCaseManagementUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Override script include for Server side code for the CIR Case Management functionality</description>
+        <name>CIRCaseManagementUtils</name>
+        <script><![CDATA[var CIRCaseManagementUtils = Class.create();
+CIRCaseManagementUtils.prototype = Object.extendsObject(CIRCaseManagementUtilsFP, {
+
+	/**
+	 * Initialize Function 
+	 */
+	initialize: function() {
+		CIRCaseManagementUtilsFP.prototype.initialize.call(this);
+	},
+
+	type: 'CIRCaseManagementUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-01 08:47:58</sys_created_on>
+        <sys_id>84bb04c7db0d901003b3533fd39619d6</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIRCaseManagementUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_84bb04c7db0d901003b3533fd39619d6</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-09 13:30:33</sys_updated_on>
+    </sys_script_include>
+</record_update>

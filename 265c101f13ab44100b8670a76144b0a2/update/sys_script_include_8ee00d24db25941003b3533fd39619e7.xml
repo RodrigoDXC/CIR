@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRCaseRiskImpGenericUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRCaseRiskImpGenericUtilsFP</name>
+        <script><![CDATA[var CIRCaseRiskImpGenericUtilsFP = function() {
+    var CLASS_MAP = {};
+    CLASS_MAP[CIRConstants.Tables.INCIDENT] = 'incidents';
+    CLASS_MAP[CIRConstants.Tables.NEAR_MISS] = 'nearMisses';
+    CLASS_MAP[CIRConstants.Tables.HAZARD] = 'hazards';
+    var STATE_MAP = {
+        caseStateObject: {
+            in_review: 90,
+            under_investigation: 92,
+            awaiting_closure: 94,
+            non_cir: 96,
+            duplicate_case: 98,
+            complete: 99
+        },
+        investigationStateObject: {
+            draft: 110,
+            investigation_in_progress: 112,
+            conclusion_observations: 114,
+            sign_off: 116,
+            closed_complete: 118,
+            closed_cancelled: 119
+        },
+        riskStateObject: {
+            pending: -5,
+            open: 1,
+            work_in_progress: 2,
+            closed_complete: 3,
+            closed_incomplete: 4,
+            closed_skipped: 7
+        },
+        controlStateObject: {
+            draft: 100,
+            active: 102,
+            in_review: 104,
+            retired: 106,
+            cancelled: 108
+        },
+        actionStateObject: {
+            pending: -5,
+            open: 1,
+            work_in_progress: 2,
+            closed_complete: 3,
+            closed_incomplete: 4,
+            closed_skipped: 7
+        }
+    };
+    var TABLES_ALLOWED = [{
+            role: 'x_fru_cir.approver',
+            tables: [
+                CIRConstants.Tables.INVESTIGATION,
+                CIRConstants.Tables.RISK,
+                CIRConstants.Tables.SYS_APPROVAL,
+                CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR,
+                CIRConstants.Tables.CONTROL,
+                CIRConstants.Tables.SCHEDULED_ACTION,
+                CIRConstants.Tables.RISK_HAZARD,
+                CIRConstants.Tables.M2M_RISK_HAZARD,
+                CIRConstants.Tables.AUTHORITY_DOCUMENT,
+                CIRConstants.Tables.M2M_AUTHORITY_DOC_CONTROL,
+				CIRConstants.Tables.M2M_CASE_RISK
+            ],
+        },
+        {
+            role: 'x_fru_cir.expert',
+            tables: [
+                CIRConstants.Tables.WITNESS,
+                CIRConstants.Tables.PHYSICAL_IMPACT,
+                CIRConstants.Tables.SECURITY_IMPACT,
+                CIRConstants.Tables.NON_CONFORMANCE_COMPLIANCE,
+                CIRConstants.Tables.ENVIRONMENTAL_IMPACT,
+                CIRConstants.Tables.IMAGE_IMPACT,
+                CIRConstants.Tables.M2M_INCIDENTS_HAZARDS,
+                CIRConstants.Tables.M2M_NEAR_MISSES_HAZARDS,
+				CIRConstants.Tables.M2M_CASE_RISK
+            ]
+        },
+        {
+            role: 'x_fru_cir.investigator',
+            tables: [
+                CIRConstants.Tables.INVESTIGATION,
+                CIRConstants.Tables.WITNESS,
+                CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR,
+                CIRConstants.Tables.SYS_APPROVAL,
+				CIRConstants.Tables.M2M_CASE_RISK
+            ]
+        },
+        {
+            role: 'x_fru_cir.personal_info',
+            tables: [
+                CIRConstants.Tables.PERSON_IMPACT,
+                CIRConstants.Tables.INJURY_ILLNESS,
+                CIRConstants.Tables.MEDICAL_DOCUMENTATION
+            ]
+        },
+        {
+            role: 'x_fru_cir.risk_manager',
+            tables: [
+                CIRConstants.Tables.RISK,
+                CIRConstants.Tables.SCHEDULED_ACTION,
+                CIRConstants.Tables.CONTROL,
+                CIRConstants.Tables.RISK_HAZARD,
+                CIRConstants.Tables.M2M_RISK_HAZARD,
+                CIRConstants.Tables.AUTHORITY_DOCUMENT,
+                CIRConstants.Tables.M2M_AUTHORITY_DOC_CONTROL,
+                CIRConstants.Tables.EQUIPMENT,
+                CIRConstants.Tables.COMPONENT,
+                CIRConstants.Tables.SUB_COMPONENT,
+				CIRConstants.Tables.M2M_CASE_RISK
+            ]
+        },
+        {
+            role: 'x_fru_cir.user',
+            tables: [
+                CIRConstants.Tables.ACTION,
+                CIRConstants.Tables.CASE
+            ]
+        },
+        {
+            role: 'x_fru_cir.drive_off',
+            tables: [
+                CIRConstants.Tables.ACTION,
+                CIRConstants.Tables.CASE,
+                CIRConstants.Tables.PHYSICAL_IMPACT,
+                CIRConstants.Tables.DRIVE_OFF
+            ]
+        }
+    ];
+
+    /**
+     * Gets the integer value from the state object 
+     * USED IN - UI Action: Begin Investigation, Ready for Sign-off
+     *           Business Rule: Cancel Child Records, Cancel Investigations and Actions, Close Scheduled Actions, Move Case to Awaiting Closure, Retire Controls
+     * 
+     * @param  {String} stateName - name from state object to get value of
+     * @param  {String} tableName - name of the table to pull from (investigation or case)
+     * @return {int} - returns the int value from the name pair
+     */
+    var getStateValue = function(stateName, tableName) {
+        return _getStateObject(tableName)[stateName];
+    };
+
+    /**
+     * Gets the appropriate state object based upon table name
+     * @param  {String} tableName - name of the table to pull state values from (investigation or case)
+     * @return {Object} - Object containing the state mapping values for a given table name
+     */
+    var _getStateObject = function(tableName) {
+        return STATE_MAP[typeof tableName !== 'string' ? 'caseStateObject' : tableName + 'StateObject'];
+    };
+
+    /**
+     * Returns the url suffix for the CIR portal.
+     * USED IN - Script Include: CIRCaseManagementAjaxFP
+     * 
+     * @return {String} - the url suffix or empty string if not found
+     */
+    var getCirPortalName = function() {
+        var grCirPortal = new GlideRecord(CIRConstants.Tables.SERVICE_PORTAL);
+        if (grCirPortal.get(gs.getProperty('x_fru_cir.cir.portal'))) {
+            return grCirPortal.getValue('url_suffix');
+        }
+        return '';
+    };
+
+    /**
+     * Returns true if current user only contains the CIR Role
+     * USED IN - Script Include: CIRCaseManagementAjaxFP
+     * 
+     * @return {Boolean} - True if the role match, false otherwise
+     */
+    var isCirRoleOnly = function() {
+        //REMOVE THE COMMENT FROM CERTIFICATION_MANAGER AFTER CREATION OF THE ROLE
+        var higherRole = false;
+        var viewAllRoles = ['admin',
+            'x_fru_cir.admin',
+            'x_fru_cir.approver',
+            'x_fru_cir.expert',
+            'x_fru_cir.investigator',
+            'x_fru_cir.personal_info',
+            'x_fru_cir.risk_manager'
+        ];
+        for (index = 0; index < viewAllRoles.length; index++) {
+            var roleName = viewAllRoles[index];
+            if (gs.hasRole(roleName)) {
+                higherRole = true;
+                break;
+            }
+        }
+        var p = higherRole ? false : gs.hasRole('x_fru_cir.user');
+        return higherRole ? false : gs.hasRole('x_fru_cir.user');
+    };
+
+    /**
+     * Gets the primary information for a user for person impact and witnesses
+     * USED IN - Script Include: CIRCaseManagementAjaxFP
+     * 
+     * @param {String} userSys - SysID of the user
+     * @return {String} - returns a JSON encoded object if the user is found, null otherwise
+     */
+    var getUserInformation = function(userSys) {
+        var user = new GlideRecord(CIRConstants.Tables.USER);
+        if (user.get(userSys)) {
+            var address = user.street ? user.street + '\n' + user.city + ', ' + user.state + ', ' + user
+                .zip +
+                '\n' + user.country : '';
+            var userObject = {
+                first_name: user.first_name.getDisplayValue(),
+                last_name: user.last_name.getDisplayValue(),
+                email: user.email.getDisplayValue(),
+                phone: user.phone.getDisplayValue(),
+                company: user.company.getDisplayValue(),
+                address: address
+            };
+            var result = new global.JSON().encode(userObject);
+            gs.debug('Created user object from user: ' + userSys + ' object: ' + result);
+            return result;
+        } else {
+            gs.debug('No user found using sys id: ' + userSys);
+            return null;
+        }
+    };
+
+    /**
+     * Passes all state object pairs to the client in g_scratchpad where the value is statename_state
+     * USED IN - Business Rule: Pass values to Client (for Case), Pass values to Client (for Investigation)
+     * 
+     * @param  {String} tableName - name of the table to pull state values from (investigation or case)
+     * @return {void}
+     */
+    var passStateValuesToClient = function(tableName) {
+        gs.debug('Passing state values into g_scratchpad using format using Table limiter: ' + tableName);
+        _setClientStateValue(_getStateObject(tableName));
+    };
+
+    /**
+     * Sets the g_scratchpad values for a specific state object using name_state for values
+     * 
+     * @param  {String} stateObject - Object containing the states mapped
+     * @return {void}
+     */
+    var _setClientStateValue = function(stateObject) {
+        for (var state in stateObject) {
+            var key = 'cir_' + state + '_state';
+            var value = stateObject[state];
+            gs.debug('Pushing g_scratchpad value with name: ' + key + ' with value: ' + value);
+            g_scratchpad[key] = value;
+        }
+    };
+
+    /**
+     * Updates the values of multiple records based on a specific filter criteria (sysID) and filterField
+     * USED IN - Script Include: CIRRiskManagementUtilsFP, CIRCaseManagementUtilsFP
+     * 
+     * @param  {sys_id} sysID - sysID to be filtered on
+     * @param  {string} debugMessage - debugMessage to be logged
+     * @param  {string} updateTable - table to filtered / updated (passed to GlideRecord)
+     * @param  {string} filterField - field to be filtered on by sysID
+     * @param  {string} updateField - field to be updated
+     * @param  {string} newValue - new value of updateField
+     * @return {void}
+     */
+    var updateValues = function(objParams) {
+        var gr = new GlideRecord(objParams.updateTable);
+        gr.addQuery(objParams.filterField, objParams.sysID);
+        gr.query();
+        gr.setValue(objParams.updateField, objParams.newValue);
+        gr.updateMultiple();
+    };
+
+    /**
+     * Get the age group of a user from the date on a person impact
+     * USED IN - Script Include: CIRCaseManagementAjaxFP
+     * 
+     * @return {String} - returns the choice value for the age group
+     */
+    var getUserAgeGroup = function(dob) {
+        var dobGDT = new GlideDateTime(dob);
+        var totalSeconds = _getDateDiff(dobGDT.toString(), new GlideDateTime().toString());
+        if (totalSeconds > 0) {
+            var totalYears = totalSeconds / 86400 / 365.25;
+            gs.debug('Found total age in years: ' + totalYears);
+            if (totalYears < 14)
+                return '0_14';
+            else if (totalYears < 25)
+                return '15_24';
+            else if (totalYears < 35)
+                return '25_34';
+            else if (totalYears < 45)
+                return '35_44';
+            else if (totalYears < 55)
+                return '45_54';
+            else if (totalYears < 65)
+                return '55_64';
+            else if (totalYears < 75)
+                return '65_74';
+            else
+                return '75_plus';
+        } else
+            return '0_14';
+    };
+
+    /**
+     * Gets the amount of seconds between to date/times
+     * USED IN - Script Include: CIRCaseManagementAjaxFP
+     *
+     * @param {String} firstDateTime - of the date/time to start with
+     * @param {String} secondDateTime - of the date/time to subtract from the first
+     * @return {int} of the total seconds in between them (rounds)
+     */
+    var _getDateDiff = function(firstDateTime, secondDateTime) {
+        // TODO: Use built-in date difference calculator?
+        if (firstDateTime.indexOf(':') == -1)
+            firstDateTime += ' 00:00:00';
+        if (secondDateTime.indexOf(':') == -1)
+            secondDateTime += ' 00:00:00';
+        var firstGlideDateTime = new GlideDateTime(firstDateTime);
+        var secondGlideDateTime = new GlideDateTime(secondDateTime);
+        gs.debug('Getting difference in seconds for dates: ' + firstDateTime + ' and: ' + secondDateTime +
+            ' with difference being: ' + Math.round((secondGlideDateTime.getNumericValue() -
+                firstGlideDateTime
+                .getNumericValue()) / 1000));
+        return Math.round((secondGlideDateTime.getNumericValue() - firstGlideDateTime.getNumericValue()) /
+            1000);
+    };
+
+    /**
+     * Get the default group of selected location
+     * USED IN - Script Include: CIRCaseManagementAjaxFP
+     *
+     * @return {String} - returns the sys_id of the default group based on the location.
+     */
+    var getDefaultAssignmentGroup = function(selectedLocation) {
+        var assignmentGroup;
+        var defaultCirCaseGroup = gs.getProperty('x_fru_cir.default.case.manager.group');
+
+        var locationRec = new GlideRecord(CIRConstants.Tables.LOCATION);
+        locationRec.addQuery('sys_id', selectedLocation);
+        locationRec.query();
+        if (locationRec.next()) {
+            if (locationRec.x_fru_cir_case_management_group == '') {
+                assignmentGroup = defaultCirCaseGroup;
+            } else {
+                assignmentGroup = locationRec.x_fru_cir_case_management_group;
+            }
+        }
+
+        return assignmentGroup;
+    };
+
+    /**
+     * This function will decide if the new button should appear in the CIR CIRI Form.
+     * 
+     * @param {String} currentTableName - Name of the record's table
+     * @param {String} currentSysId - SysID of the record
+     * @param {String} relatedTableName - Name of the table in the related list
+     * @param {String} relatedFieldName - Name of the related field
+     * @param {Boolean} - True if the button should be displayed, false otherwise
+     */
+    var showNewButtonRelatedList = function(currentTableName, currentSysId, relatedTableName, relatedFieldName) {
+        var showNewButton = true;
+
+        grCurrent = new GlideRecord(currentTableName);
+        if (grCurrent.get(currentSysId)) {
+
+            var evaluator = new GlideScopedEvaluator();
+            evaluator.putVariable('parent', grCurrent);
+            evaluator.putVariable('answer', null);
+
+            var grListControl = new GlideRecord(CIRConstants.Tables.LIST_CONTROL);
+            grListControl.addQuery('name', currentTableName);
+            grListControl.addQuery('related_list', relatedTableName + '.' + relatedFieldName);
+            grListControl.query();
+            if (grListControl.next()) {
+                if (grListControl.getValue('omit_new_button') == true) {
+                    showNewButton = false;
+                } else if (grListControl.getValue('new_condition') !== '') {
+                    evaluator.evaluateScript(grListControl, 'new_condition', null);
+                    showNewButton = !evaluator.getVariable('answer');
+                }
+            }
+        }
+
+        return showNewButton;
+    };
+
+    /**
+     * Returns true if current user only contains the CIR Role
+     * USED IN - Script Include: CIRCaseManagementAjaxFP
+     * 
+     * @return {Boolean} - True if the role match, false otherwise
+     */
+    var getRoleAllowedRelatedLists = function() {
+        var allowedTables = [];
+        if (gs.hasRole('admin') || gs.hasRole('x_fru_cir.admin')) {
+            return allowedTables;
+        }
+        for (var i in TABLES_ALLOWED) {
+            if (gs.hasRole(TABLES_ALLOWED[i].role)) {
+                allowedTables = allowedTables.concat(TABLES_ALLOWED[i].tables);
+            }
+        }
+        return allowedTables ? allowedTables : [];
+    };
+
+    return {
+        CLASS_MAP: CLASS_MAP,
+        GetStateValue: getStateValue,
+        GetCirPortalName: getCirPortalName,
+        IsCirRoleOnly: isCirRoleOnly,
+        GetUserInformation: getUserInformation,
+        PassStateValuesToClient: passStateValuesToClient,
+        UpdateValues: updateValues,
+        GetUserAgeGroup: getUserAgeGroup,
+        GetDefaultAssignmentGroup: getDefaultAssignmentGroup,
+        ShowNewButtonRelatedList: showNewButtonRelatedList,
+        GetRoleAllowedRelatedLists: getRoleAllowedRelatedLists
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-18 14:44:34</sys_created_on>
+        <sys_id>8ee00d24db25941003b3533fd39619e7</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>CIRCaseRiskImpGenericUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_8ee00d24db25941003b3533fd39619e7</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-12-07 10:24:47</sys_updated_on>
+    </sys_script_include>
+</record_update>

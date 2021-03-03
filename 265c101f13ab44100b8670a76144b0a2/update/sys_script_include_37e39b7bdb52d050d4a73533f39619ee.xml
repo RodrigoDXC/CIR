@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRFleetUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRFleetUtilsFP</name>
+        <script><![CDATA[var CIRFleetUtilsFP = (function() {
+	var CIRFleetUtilsFP = Class.create();
+	var initialize = function() {};
+
+	/**
+	*  Returns the list of all the registrated vehicles
+	**/
+	var getVehicles = function () {
+		var vehicles = [];
+
+		var vehiclesGr = new GlideRecord(CIRConstants.Tables.VEHICLE);
+		vehiclesGr.query();
+
+		while (vehiclesGr.next()) {
+			vehicles.push(vehiclesGr.getUniqueValue());
+		}
+		return vehicles;
+	};
+
+
+	/**
+	*  Returns the unavailability record for a specific service order
+	*  @param {string} serviceOrder - Protection Service Order record sys_id
+	*  @return {GlideRecord} - glide record of the unavailability record (if found), or an empty string (if not found)
+	**/
+	var getUnavailability = function (serviceOrder) {
+		var unavailableVehiclesGr = new GlideRecord(CIRConstants.Tables.ASSIGNED_UNAVAILABILITY);
+		unavailableVehiclesGr.addQuery('protection_service_order', serviceOrder);
+		unavailableVehiclesGr.query();
+
+		if (unavailableVehiclesGr.next()) {
+			return unavailableVehiclesGr;
+		}
+		return '';
+	};
+
+
+	/**
+	*  Checks if an unavailability record, with a specific service order, already exists
+	*  @param {string} serviceOrder - Protection Service Order record sys_id
+	*  @param {GlideRecord} unavailabilityRec - glide record of an unavailability vehicle record
+	*  @return {boolean}
+	**/
+	var checkUnavailabilityExistence = function (serviceOrder, unavailabilityRec) {
+		var unavailableVehiclesGr = new GlideRecord(CIRConstants.Tables.ASSIGNED_UNAVAILABILITY);
+		unavailableVehiclesGr.addQuery('sys_id', unavailabilityRec.getUniqueValue());
+		unavailableVehiclesGr.addQuery('protection_service_order', serviceOrder + '');
+		unavailableVehiclesGr.setLimit(1);
+		unavailableVehiclesGr.query();
+
+		return unavailableVehiclesGr.hasNext();
+	};
+
+
+	/**
+	*  Creates a new unavailability record, of the assigned type
+	*  @param {string} vehicle - sys_id of the vehicule selected in the service order
+	*  @param {date} startDate - date selected on the service_start field
+	*  @param {date} endDate - date selected on the service_end field
+	*  @param {string} serviceOrder - sys_id of the service order
+	**/
+	var createUnavailabilityRec = function (vehicle, startDate, endDate, serviceOrder) {
+		var unavailableVehiclesGr = new GlideRecord(CIRConstants.Tables.ASSIGNED_UNAVAILABILITY);
+		unavailableVehiclesGr.setValue('vehicle', vehicle);
+		unavailableVehiclesGr.setValue('from_date', startDate);
+		unavailableVehiclesGr.setValue('protection_service_order', serviceOrder);
+
+		if (endDate + '' === '') {
+			unavailableVehiclesGr.setValue('to_date', startDate);
+		} else {
+			unavailableVehiclesGr.setValue('to_date', endDate);
+		}
+		unavailableVehiclesGr.insert();
+	};
+
+
+	/**
+	*  Updates the unavailability record with the new vehicle selected on the service order
+	*  @param {GlideRecord} unavailabilityRec - glide record of the unavailability vehicle record that will be updated
+	*  @param {string} vehicle - sys_id of the vehicle that will be assigned to the unavailability record
+	**/
+	var updateUnavailabilityRec = function (unavailabilityRec, vehicle) {
+		unavailabilityRec.setValue('vehicle', vehicle);
+		unavailabilityRec.update();
+	};
+
+
+	/**
+	*  Updates the unavailability record with the new dates selected on the service order
+	*  @param {GlideRecord} unavailabilityRec - glide record of the unavailability vehicle record that will be updated
+	*  @param {date} startDate - date selected on the service_start field
+	*  @param {date} endDate - date selected on the service_end field
+	**/
+	var updateUnavailabilityRecDates = function (unavailabilityRec, startDate, endDate) {
+		if (endDate + '' === '') {
+			unavailabilityRec.setValue('to_date', startDate);
+		} else {
+			unavailabilityRec.setValue('to_date', endDate);
+		}		
+		unavailabilityRec.setValue('from_date', startDate);
+		unavailabilityRec.update();
+	};
+
+
+	/**
+	*
+	* - Returns encoded query with sys_ids of users that have job_title=mechanic in the FSM User Profiles
+	* - called in the Assigned mechanic reference qualifier of the table Maintenance availability
+	* @param {Gliderecord} serviceorder - Protection Service Order that triggers the workflow
+	* @return {String} - encoded query with sys_ids of users that have job_title=mechanic
+	**/
+	var getMechanics = function () {
+		var mechanicJobTitle = [];
+		var grJobTitles = new GlideRecord(CIRConstants.Tables.JOB_TITLE);
+		grJobTitles.addQuery('mechanical_role', true);
+		grJobTitles.query();
+		while (grJobTitles.next()) {
+			mechanicJobTitle.push(grJobTitles.getUniqueValue());
+		}
+
+		var answer = [];
+		for (var i = 0; i < mechanicJobTitle.length; i++) {
+			answer.push(getUserProfile(mechanicJobTitle[i]));
+		}
+		return 'sys_idIN' + answer;
+	};
+
+	/**
+	*
+	* - Function used to get all the user profiles associated with a Job Title marked as Mechanic Role
+	* - called in the getMechanics function
+	* @param {String} mechanicJobTitle - sys_id of a Job Title marked as Mechanic Role
+	* @return {Array} - array with all the user profiles that have that Job Title
+	**/
+	var getUserProfile = function(mechanicJobTitle) {
+		var userProfiles = [];
+		var grUsrPrfl = new GlideRecord(CIRConstants.Tables.USER_PROFILE);
+		grUsrPrfl.addQuery('job_title', mechanicJobTitle);
+		grUsrPrfl.query();
+
+		while (grUsrPrfl.next()) {
+			userProfiles.push(grUsrPrfl.user.toString());
+		}
+		return userProfiles;
+	};
+
+
+	var createDriverReports = function (glideRecord) {  
+		switch (glideRecord.sys_class_name.toString()) {
+			case CIRConstants.Tables.PROTECTION_SERVICE_ORDER:
+				var unvRecord = getUnvRecord(glideRecord);
+				var createdReports = createReport('bodyguards', glideRecord.bodyguards.toString(),unvRecord);
+				linkDriverServiceReports(glideRecord.sys_id, createdReports);
+				break;
+
+			case CIRConstants.Tables.RESERVED_UNAVAILABILITY: 
+				createReport('user', glideRecord.user.toString(),glideRecord);
+				break;
+		}
+	};
+
+
+	var linkDriverServiceReports = function(serviceOrderId, driverReports){
+		for (var i = 0; i < driverReports.length; i++) {
+			var grServiceRep = new GlideRecord(CIRConstants.Tables.PROTECTION_AGENT_REPORT);
+			grServiceRep.addQuery('state', '0');
+			grServiceRep.addQuery('service_order', serviceOrderId);
+			grServiceRep.addQuery('service_date', driverReports[i].date.toString());
+			grServiceRep.query();
+
+			while (grServiceRep.next()) {
+				grServiceRep.setValue('driver_report', driverReports[i].sys_id.toString());
+				grServiceRep.update();
+			}
+		}
+	};
+
+
+	var getUnvRecord = function(service_order) {
+		var grUnv = new GlideRecord(CIRConstants.Tables.ASSIGNED_UNAVAILABILITY);
+		grUnv.addQuery('protection_service_order', service_order.sys_id.toString());
+		grUnv.setLimit(1); 
+		grUnv.query();
+
+		if (grUnv.next()) {
+			return grUnv;
+		}
+	};
+
+
+	var createReport = function(userField, fieldValue, unvRecord) {
+		var nrDays = new CIRPersonalProtectionUtilsFP().GetServiceDurationDays(unvRecord.from_date, unvRecord.to_date);
+		var date = new GlideDateTime(unvRecord.from_date);
+		var createdReports = [];
+
+		for (var i = 0; i < nrDays; i++) {
+			var gr = new GlideRecord(CIRConstants.Tables.DRIVER_REPORT);
+			gr.initialize();
+			gr.setValue(userField, fieldValue);
+			gr.setValue('report_date', date);
+			gr.setValue('vehicle', unvRecord.vehicle);
+			gr.setValue('state', '1');
+			gr.setValue('unavailability', unvRecord.sys_id.toString());
+			gr.setValue('protection_service_order', unvRecord.protection_service_order ? unvRecord.protection_service_order.toString() : '');
+			gr.insert();
+
+			if (unvRecord.protection_service_order) {
+				var report = {date: unvRecord.from_date, sys_id: gr.getUniqueValue()};
+				createdReports.push(report);
+			}
+			date.addDaysUTC(1);
+		}
+		return createdReports;
+	};
+
+
+	var getProtectionProfile = function(user_id) {
+		var grProfile = new GlideRecord(CIRConstants.Tables.PROTECTION_PROFILE);
+		grProfile.addQuery('user', user_id.toString());
+		grProfile.addQuery('role', '1');
+		grProfile.setLimit(1);
+		grProfile.query();
+
+		if (grProfile.next()) {
+			return grProfile.getUniqueValue().toString();
+		}
+	};
+
+
+	CIRFleetUtilsFP.prototype = {
+		initialize: initialize,
+		GetVehicles: getVehicles,
+		GetUnavailability: getUnavailability,
+		CheckUnavailabilityExistence: checkUnavailabilityExistence,
+		CreateUnavailabilityRec: createUnavailabilityRec,
+		UpdateUnavailabilityRec: updateUnavailabilityRec,
+		UpdateUnavailabilityRecDates: updateUnavailabilityRecDates,
+		GetMechanics: getMechanics,
+		CreateDriverReports: createDriverReports,
+		LinkDriverServiceReports: linkDriverServiceReports,
+		GetUnvRecord: getUnvRecord,
+		CreateReport: createReport,
+		GetProtectionProfile: getProtectionProfile
+	};
+
+	return CIRFleetUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-05 10:49:08</sys_created_on>
+        <sys_id>37e39b7bdb52d050d4a73533f39619ee</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>CIRFleetUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_37e39b7bdb52d050d4a73533f39619ee</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-22 13:09:22</sys_updated_on>
+    </sys_script_include>
+</record_update>

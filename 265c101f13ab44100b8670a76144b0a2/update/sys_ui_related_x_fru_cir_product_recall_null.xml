@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_related sys_domain="global" table="x_fru_cir_product_recall" version="2" view="">
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Product Recall - Default view" name="x_fru_cir_product_recall" related_list="NULL" sys_domain="global" view="Default view">d3d03d1fdb729c10bf9ead8ed396195a</list_id>
+            <order_by/>
+            <position>0</position>
+            <related_list>x_fru_cir_affected_stores.product_recall</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-28 10:35:38</sys_created_on>
+            <sys_id>53d03d1fdb729c10bf9ead8ed396195b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-28 10:35:38</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Product Recall - Default view" name="x_fru_cir_product_recall" related_list="NULL" sys_domain="global" view="Default view">d3d03d1fdb729c10bf9ead8ed396195a</list_id>
+            <order_by/>
+            <position>1</position>
+            <related_list>x_fru_cir_action.parent</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-28 10:35:38</sys_created_on>
+            <sys_id>d7d03d1fdb729c10bf9ead8ed396195b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-28 10:35:38</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Product Recall - Default view" name="x_fru_cir_product_recall" related_list="NULL" sys_domain="global" view="Default view">d3d03d1fdb729c10bf9ead8ed396195a</list_id>
+            <order_by/>
+            <position>2</position>
+            <related_list>x_fru_cir_near_miss_product_recall.product_recall</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-28 10:35:38</sys_created_on>
+            <sys_id>5fd03d1fdb729c10bf9ead8ed396195b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-28 10:35:38</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Product Recall - Default view" name="x_fru_cir_product_recall" related_list="NULL" sys_domain="global" view="Default view">d3d03d1fdb729c10bf9ead8ed396195a</list_id>
+            <order_by/>
+            <position>3</position>
+            <related_list>x_fru_cir_incident_product_recall.product_recall</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-28 10:35:38</sys_created_on>
+            <sys_id>d3d03d1fdb729c10bf9ead8ed396195c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-28 10:35:38</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list action="INSERT_OR_UPDATE">
+            <calculated_name>Product Recall - Default view</calculated_name>
+            <filter/>
+            <name>x_fru_cir_product_recall</name>
+            <order_by/>
+            <position/>
+            <related_list/>
+            <sys_class_name>sys_ui_related_list</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-28 10:35:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d3d03d1fdb729c10bf9ead8ed396195a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Product Recall - Default view</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_related_x_fru_cir_product_recall_null</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-28 10:35:38</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_related_list>
+    </sys_ui_related>
+</record_update>

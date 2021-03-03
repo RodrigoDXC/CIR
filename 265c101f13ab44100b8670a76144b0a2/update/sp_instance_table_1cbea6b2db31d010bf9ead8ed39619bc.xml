@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_table">
+    <sp_instance_table action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <display_field>active</display_field>
+        <field_list>number,category,country,inc_location,date_occurred,state</field_list>
+        <filter/>
+        <glyph/>
+        <id/>
+        <maximum_entries>5</maximum_entries>
+        <order>1</order>
+        <order_by/>
+        <order_direction>asc</order_direction>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">3c9ee272db31d010bf9ead8ed39619d3</sp_column>
+        <sp_page/>
+        <sp_widget display_value="CIR PSI List">ffd762bedbfd9010bf9ead8ed39619d9</sp_widget>
+        <sys_class_name>sp_instance_table</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-08 08:46:01</sys_created_on>
+        <sys_id>1cbea6b2db31d010bf9ead8ed39619bc</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Internal Physical Security Incidents</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_instance_table_1cbea6b2db31d010bf9ead8ed39619bc</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 11:51:06</sys_updated_on>
+        <table>x_fru_cir_internal_physical_security_incident</table>
+        <title>Internal Physical Security Incidents</title>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"new_url": {
+		"value": "cir?id=cir_psi_new&sys_id=a00be16e1b31901024c896ce0a4bcba0",
+		"displayValue": "cir?id=cir_psi_new&sys_id=a00be16e1b31901024c896ce0a4bcba0"
+	},
+	"reference_table": {
+		"value": "",
+		"displayValue": ""
+	},
+	"reference_field": {
+		"value": "",
+		"displayValue": ""
+	},
+	"hide_on_empty": {
+		"value": "false",
+		"displayValue": "false"
+	},
+	"limit": {
+		"value": 10,
+		"displayValue": "10"
+	},
+	"parent": {
+		"value": "",
+		"displayValue": ""
+	},
+	"new_records": {
+		"value": "true",
+		"displayValue": "true"
+	},
+	"record_page_id": {
+		"value": "cir_internal_psi_form",
+		"displayValue": "cir_internal_psi_form"
+	},
+	"manager_role": {
+		"value": "x_fru_cir.psi_internal_manager",
+		"displayValue": "x_fru_cir.psi_internal_manager"
+	},
+	"user_role": {
+		"value": "x_fru_cir.psi_internal_user",
+		"displayValue": "x_fru_cir.psi_internal_user"
+	}
+}]]></widget_parameters>
+    </sp_instance_table>
+    <sys_translated_text action="delete_multiple" query="documentkey=1cbea6b2db31d010bf9ead8ed39619bc"/>
+</record_update>

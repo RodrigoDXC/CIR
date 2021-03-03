@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="257416a5db15101003b3533fd39619b5" sys_domain="global" table="x_fru_cir_image_impact" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>cir_case</element>
+            <position>0</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>8c9cbd921b79501024c896ce0a4bcb8b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>complaint_raised_by</element>
+            <position>1</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>049cbd921b79501024c896ce0a4bcb8c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>complaint_notes</element>
+            <position>2</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>889cbd921b79501024c896ce0a4bcb8c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>media_coverage_type</element>
+            <position>3</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>009cbd921b79501024c896ce0a4bcb8d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>media_coverage</element>
+            <position>4</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>849cbd921b79501024c896ce0a4bcb8d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>stakeholders</element>
+            <position>5</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>0c9cbd921b79501024c896ce0a4bcb8d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>6</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>809cbd921b79501024c896ce0a4bcb8e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>actual_severity</element>
+            <position>7</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>089cbd921b79501024c896ce0a4bcb8e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>potential_consequence</element>
+            <position>8</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>8c9cbd921b79501024c896ce0a4bcb8e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>future_likelihood</element>
+            <position>9</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>049cbd921b79501024c896ce0a4bcb8f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>potential_severity</element>
+            <position>10</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>889cbd921b79501024c896ce0a4bcb8f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>recovery_cost</element>
+            <position>11</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>009cbd921b79501024c896ce0a4bcb90</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>12</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>849cbd921b79501024c896ce0a4bcb90</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>description</element>
+            <position>13</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>0c9cbd921b79501024c896ce0a4bcb90</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>media_coverage_details</element>
+            <position>14</position>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-06 15:50:03</sys_created_on>
+            <sys_id>809cbd921b79501024c896ce0a4bcb91</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_image_impact" sys_domain="global" view="Default view">257416a5db15101003b3533fd39619b5</sys_ui_section>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-06 15:50:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_fru_cir_image_impact</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:07:37</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>257416a5db15101003b3533fd39619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_image_impact</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_section_257416a5db15101003b3533fd39619b5</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:07:37</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

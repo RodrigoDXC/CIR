@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="status" table="x_fru_cir_location" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>status</element>
+            <name>x_fru_cir_location</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:09:29</sys_created_on>
+            <sys_id>309725a31b6b4050df7e43f4bd4bcb63</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>status</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_location_status</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:09:29</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>New</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>0</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:09:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8f67a5a31b6b4050df7e43f4bd4bcbe9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:09:29</sys_updated_on>
+            <value>new</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>In use</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>1</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:09:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e8a769a31b6b4050df7e43f4bd4bcb6d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:09:44</sys_updated_on>
+            <value>in_use</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Not in use</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>2</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:10:04</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>59b7a9a31b6b4050df7e43f4bd4bcbb0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:10:04</sys_updated_on>
+            <value>not_in_use</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>To be sold</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>3</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:10:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4ec7eda31b6b4050df7e43f4bd4bcb5b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:10:23</sys_updated_on>
+            <value>to_be_sold</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Sold</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>4</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:10:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f8d721e31b6b4050df7e43f4bd4bcbca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:10:35</sys_updated_on>
+            <value>sold</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>To rent</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>5</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:10:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8ce761e31b6b4050df7e43f4bd4bcb12</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:10:48</sys_updated_on>
+            <value>to_rent</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Rent cancelled</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>6</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:11:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>10f7e1e31b6b4050df7e43f4bd4bcb1a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:11:05</sys_updated_on>
+            <value>rent_cancelled</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

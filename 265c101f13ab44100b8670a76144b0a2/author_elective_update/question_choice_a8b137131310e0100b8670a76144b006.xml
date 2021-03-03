@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="DELETE">
+        <misc>0</misc>
+        <order>100</order>
+        <question display_value="qw">6ea1f3131310e0100b8670a76144b00f</question>
+        <rec_misc>0</rec_misc>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-11 09:32:43</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>a8b137131310e0100b8670a76144b006</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>question_choice_a8b137131310e0100b8670a76144b006</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-11 09:32:43</sys_updated_on>
+        <text>1</text>
+        <value>1</value>
+    </question_choice>
+    <fx_price action="DELETE" query="id=a8b137131310e0100b8670a76144b006"/>
+    <fx_price action="DELETE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>misc</field>
+        <id>a8b137131310e0100b8670a76144b006</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-11 09:32:43</sys_created_on>
+        <sys_id>e0b137131310e0100b8670a76144b008</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-11 09:32:43</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="DELETE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>rec_misc</field>
+        <id>a8b137131310e0100b8670a76144b006</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-11 09:32:43</sys_created_on>
+        <sys_id>a8b137131310e0100b8670a76144b007</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-11 09:32:43</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>832241aa6f5ebd80ffcca9cc5d3ee4d0</instance_id>
+        <instance_name>ven01084</instance_name>
+        <name>question_choice_a8b137131310e0100b8670a76144b006</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice"><question_choice action="INSERT_OR_UPDATE"><misc>0</misc><order>100</order><question display_value="qw">6ea1f3131310e0100b8670a76144b00f</question><rec_misc>0</rec_misc><sys_class_name>question_choice</sys_class_name><sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by><sys_created_on>2020-11-11 09:32:43</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>a8b137131310e0100b8670a76144b006</sys_id><sys_mod_count>0</sys_mod_count><sys_name>1</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>question_choice_a8b137131310e0100b8670a76144b006</sys_update_name><sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by><sys_updated_on>2020-11-11 09:32:43</sys_updated_on><text>1</text><value>1</value></question_choice><fx_price action="delete_multiple" query="id=a8b137131310e0100b8670a76144b006"/><fx_price action="INSERT_OR_UPDATE"><amount>0</amount><currency display_value="USD">USD</currency><field>misc</field><id>a8b137131310e0100b8670a76144b006</id><parent/><reference_amount>0</reference_amount><reference_currency display_value="USD">USD</reference_currency><sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by><sys_created_on>2020-11-11 09:32:43</sys_created_on><sys_id>e0b137131310e0100b8670a76144b008</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by><sys_updated_on>2020-11-11 09:32:43</sys_updated_on><table>question_choice</table><type>calculated</type></fx_price><fx_price action="INSERT_OR_UPDATE"><amount>0</amount><currency display_value="USD">USD</currency><field>rec_misc</field><id>a8b137131310e0100b8670a76144b006</id><parent/><reference_amount>0</reference_amount><reference_currency display_value="USD">USD</reference_currency><sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by><sys_created_on>2020-11-11 09:32:43</sys_created_on><sys_id>a8b137131310e0100b8670a76144b007</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by><sys_updated_on>2020-11-11 09:32:43</sys_updated_on><table>question_choice</table><type>calculated</type></fx_price></record_update>]]></payload>
+        <payload_hash>-1312128499</payload_hash>
+        <record_name>1</record_name>
+        <reverted_from/>
+        <source>7f72d78413f2d4100b8670a76144b07b</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-11 09:32:43</sys_created_on>
+        <sys_id>a4b137131310e0100b8670a76144b061</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>175b6a673520000001</sys_recorded_at>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-11 09:32:43</sys_updated_on>
+        <type>Question Choice</type>
+        <update_guid>6cb13713b210e01063c89be6c87f8b09</update_guid>
+        <update_guid_history>6cb13713b210e01063c89be6c87f8b09:-1312128499</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">4bc177131310e0100b8670a76144b09b</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-11 09:33:09</sys_created_on>
+        <sys_db_object display_value="" name="question_choice">question_choice</sys_db_object>
+        <sys_id>9d10121ed4f444a4a2fa4a76c8ce8290</sys_id>
+        <sys_metadata>a8b137131310e0100b8670a76144b006</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="qw">6ea1f3131310e0100b8670a76144b00f</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>question_choice_a8b137131310e0100b8670a76144b006</sys_update_name>
+        <sys_update_version display_value="question_choice_a8b137131310e0100b8670a76144b006">a4b137131310e0100b8670a76144b061</sys_update_version>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-11 09:33:09</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

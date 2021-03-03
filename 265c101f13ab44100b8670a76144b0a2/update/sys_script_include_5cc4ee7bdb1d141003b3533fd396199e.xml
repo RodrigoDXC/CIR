@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRRiskManagementUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRRiskManagementUtilsFP</name>
+        <script><![CDATA[var CIRRiskManagementUtilsFP = (function() {
+	/**
+     * Cancels risks associated with an investigation when it is cancelled 
+     * USED IN - Business Rule: Cancel Child Records
+     *
+     * @param {sys_id} incidentSys - sys_id of the incident we have cancelled
+     * @return {void}
+     */
+	var cancelInvestigationChildRecords = function(incidentSys) {
+		CIRCaseRiskImpGenericUtilsFP().UpdateValues({
+			sysID: incidentSys,
+			updateTable: CIRConstants.Tables.RISK,
+			filterField: 'investigation',
+			updateField: 'state',
+			newValue: CIRCaseRiskImpGenericUtilsFP().GetStateValue('closed_incomplete', 'risk')
+		});
+	};
+
+	/**
+     * Cancels (sets end Date to current date) Scheduled Actions associated with an Control when it is cancelled
+     * USED IN - Business Rule: Close Scheduled Actions
+     *
+     * @param {sys_id} controlSys - sys_id of the Control we have cancelled
+     * @return {void}
+     */
+	var cancelControlAssociatedScheduleActions = function(controlSys) {
+		CIRCaseRiskImpGenericUtilsFP().UpdateValues({
+			sysID: controlSys,
+			updateTable: CIRConstants.Tables.SCHEDULED_ACTION,
+			filterField: 'control',
+			updateField: 'end_date',
+			newValue: new GlideDateTime().toString()
+		});
+	};
+
+	/**
+     * Cancels controls associated with a case when it is cancelled
+     * USED IN - Business Rule: Retire Controls
+     *
+     * @param {sys_id} riskSys - sys_id of the risk we have cancelled
+     * @return {void}
+     */
+	var retireRiskAssociatedControls = function(riskSys) {
+		CIRCaseRiskImpGenericUtilsFP().UpdateValues({
+			sysID: riskSys,
+			updateTable: CIRConstants.Tables.CONTROL,
+			filterField: 'risk',
+			updateField: 'state',
+			newValue: CIRCaseRiskImpGenericUtilsFP().GetStateValue('retired', 'control')
+		});
+	};
+
+	/**
+     * Moves a case into the awaiting closure state
+     * USED IN - Business Rule: Move Case to Awaiting Closure
+     *
+     * @param  {GlideRecord} investigation  - the investigation record we are updating from
+     * @return {void}
+     */
+	var markCaseAwaitingClosure = function(investigation) {
+		var caseRecord = investigation.getElement('cir_case').getRefRecord();
+		caseRecord.state = CIRCaseRiskImpGenericUtilsFP().GetStateValue('awaiting_closure');
+		gs.debug('Case state set to: ' + caseRecord.state);
+		caseRecord.update();
+	};
+
+	/**
+     * Triggers an event to notify the members of an investigation team that have been added to an investigation
+     * USED IN - Business Rule: Notify new Investigation team members
+     *
+     * @param  {GlideRecord} current - the current database object for the investigation
+     * @param  {GlideRecord} previous - the previous database object for the investigation
+     * @return {void}
+     */
+	var notifyInvestigationTeamMembers = function(current, previous) {
+		var previousMembers = previous.investigation_team.toString().split(',').reduce(function(dict, id) {
+			dict[id] = true;
+			return dict;
+		}, {});
+		var newMembers = current.investigation_team.toString().split(',').reduce(function(arr, id) {
+			if(!previousMembers[id]) {
+				arr.push(id);
+			}
+			return arr;
+		}, []);
+		gs.debug('Notifying new members of the investigation team: ' + newMembers);
+		if(newMembers.length > 0) {
+			gs.eventQueue('x_fru_cir.new.investigation.team.member', current, newMembers.toString(), '');
+		}
+	};
+
+	/**
+     * Send the control.review.due event to any controls that are expiring today or in 30 days
+     * USED IN - Scheduled Script Execution: Notify controls coming to review date
+     *
+     * @return {void}
+     */
+	var notifyControlReviewsDue = function() {
+		var reviewQuery =
+			'active=true^next_reviewONToday@javascript:gs.daysAgoStart(0)@javascript:gs.daysAgoEnd(0)^ORnext_reviewRELATIVEEE@dayofweek@ahead@30';
+		var controls = new GlideRecord(CIRConstants.Tables.CONTROL);
+		controls.addQuery(reviewQuery);
+		controls.query();
+		while(controls.next()) {
+			gs.eventQueue('x_fru_cir.control.review.due', controls, '', '');
+		}
+	};
+
+	/**
+     * Creates actions from all scheduled actions where next run is on today
+     * USED IN - Scheduled Script Execution: Run Scheduled Actions
+     *
+     * @return {void}
+     */
+	var runScheduledActions = function() {
+		var currentDate = new GlideDateTime(new GlideDateTime().getDate());
+		var scheduledActions = new GlideRecord(CIRConstants.Tables.SCHEDULED_ACTION);
+		scheduledActions.addQuery(
+			'start_date<=javascript:gs.daysAgoEnd(0)^end_date>=javascript:gs.daysAgoStart(0)^ORend_dateISEMPTY^next_run_dateISEMPTY^ORnext_run_date<=javascript:gs.daysAgo(0)'
+		);
+		scheduledActions.query();
+		while(scheduledActions.next()) {
+			var action = new GlideRecord(CIRConstants.Tables.ACTION);
+			action.initialize();
+			action.assignment_group = scheduledActions.assignment_group.toString();
+			action.priority = scheduledActions.priority.toString();
+			action.short_description = scheduledActions.short_description.toString();
+			action.description = scheduledActions.description.toString();
+			action.control = scheduledActions.control.toString();
+
+			var dueDate = new GlideDateTime(currentDate);
+			dueDate.add(new GlideDateTime(scheduledActions.getValue('start_date')).getTime());
+			dueDate.add(new GlideDateTime(scheduledActions.getValue('time_to_complete')).getNumericValue());
+			action.due_date.setValue(dueDate);
+
+			action.insert();
+			gs.debug('Action created: ' + action.sys_id.toString() + ' from scheduled action: ' +
+					 scheduledActions
+					 .sys_id.toString());
+
+			scheduledActions.last_run_date.setValue(currentDate);
+			var nextRunDate = new GlideDateTime(currentDate);
+			nextRunDate.addDaysUTC(parseInt(scheduledActions.reoccurrance.toString()));
+			scheduledActions.next_run_date.setValue(nextRunDate);
+			gs.debug('Scheduled action: ' + scheduledActions.sys_id.toString() + ' next set to run: ' +
+					 scheduledActions.next_run_date.getDisplayValue());
+			scheduledActions.update();
+		}
+	};
+
+	/**
+     * Adds contributing factors to the M2M with investigations
+     * USED IN - UI Page: contributing_factors
+     *
+     * @param {array} of {sys_id} selectedFactors - sys_ids of the contributing factors to add
+     * @param {sys_id} investigation - id of the investigation we are adding factors to
+     * @return {void}
+     */
+	var addContributingFactors = function(selectedFactors, investigation) {
+		if(investigation === '') {
+			throw new Error('Investigation is empty');
+		}
+		var contributingFactor = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		contributingFactor.addQuery('investigation', investigation);
+		contributingFactor.deleteMultiple();
+		gs.debug('Deleted all existing contributing factors to re-create with selections: ' +
+				 selectedFactors);
+		if(selectedFactors.length === 1 && selectedFactors[0] === '') {
+			return;
+		}
+		contributingFactor = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		selectedFactors = selectedFactors.toString().split(',');
+		for(var i = 0; i < selectedFactors.length; i++) {
+			contributingFactor.contributing_factor = selectedFactors[i];
+			contributingFactor.investigation = investigation;
+			contributingFactor.insert();
+		}
+	};
+
+	/**
+     * Gets contributing factors that are active grouped by category for an investigation
+     * USED IN - UI Page: contributing_factors
+     *
+     * @param  {sys_id} investigationSys - sys_id of the investigation to get factors for
+     * @return {array} of {object} - category objects with name and associated factors
+     * @return {Array} - Array ob objects containing the category name and the contributing factors
+     */
+	var getFactorsByCategory = function(investigationSys) {
+		var categories = [];
+		var categoryAggregate = new GlideAggregate(CIRConstants.Tables.CONTRIBUTING_FACTOR);
+		categoryAggregate.addQuery('active', true);
+		categoryAggregate.addAggregate('COUNT', 'category');
+		categoryAggregate.query();
+		while(categoryAggregate.next()) {
+			var entry = {
+				name: categoryAggregate.category.getDisplayValue(),
+				factors: _getFactorsInCategory(categoryAggregate.category.toString(),
+											   investigationSys)
+			};
+			gs.debug('Found category: ' + entry.name + ' with factors: ' + entry.factors);
+			categories.push(entry);
+		}
+		return categories;
+	};
+
+	/**
+     * Gets all of the contributing factors for a specific category
+     * 
+     * @param  {string} categoryName - name of the category to search by
+     * @param  {sys_id} investigationSys - sys_id of the investigation to check against for if it is already selected
+     * @return {array} of {object} - returns an array of factor objects
+     */
+	var _getFactorsInCategory = function(categoryName, investigationSys) {
+		var factorArr = [];
+		var contributingFactor = new GlideRecord(CIRConstants.Tables.CONTRIBUTING_FACTOR);
+		contributingFactor.addQuery('active', true);
+		contributingFactor.addQuery('category', categoryName);
+		contributingFactor.orderBy('name');
+		contributingFactor.query();
+		while(contributingFactor.next()) {
+			factorArr.push({
+				name: contributingFactor.name.toString(),
+				selected: _checkFactorSelected(investigationSys, contributingFactor.sys_id
+											   .toString()),
+				sys_id: contributingFactor.sys_id.toString()
+			});
+		}
+		gs.debug('Found total contributing factors: ' + factorArr.length + ' for category: ' +
+				 categoryName);
+
+		return factorArr;
+	};
+
+	/**
+     * Checks if a contributing factor already is associated to an investigation
+     * 
+     * @param  {sys_id} investigationSys - sys_id of the investigation to check against
+     * @param  {sys_id} factorSys - sys_id of the contributing factor to check
+     * @return {boolean} - returns true if an association already exists
+     */
+	var _checkFactorSelected = function(investigationSys, factorSys) {
+		var contributingFactor = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		contributingFactor.addQuery('investigation', investigationSys);
+		contributingFactor.addQuery('contributing_factor', factorSys);
+		contributingFactor.query();
+		gs.debug('Checking for contributing factor: ' + factorSys + ' associated to investigation: ' +
+				 investigationSys + ' with result: ' + contributingFactor.hasNext());
+		return contributingFactor.hasNext();
+	};
+
+	/**
+     * Gets the query for finding actions for the current user
+     * @return {string} - encoded query for filtering lists
+     */
+	var getMyActionsQuery = function() {
+		// TODO: Use standard Dynamic Is Me criteria instead of this entire function?
+		gs.debug('Returning Actions Query: active=true^assigned_to=' + gs.getUserID());
+		return 'active=true^assigned_to=' + gs.getUserID();
+	};
+
+	/**
+     * - will create a new Investigation record for a given Case
+     * - called CIR Form widget
+     * 
+     * @param {GlideRecord} caseRecord - GlideRecord of the case
+     * @return {string} - sys_id of the investigation record created
+     **/
+	var createInvestigation = function(caseRecord) {
+		if(!caseRecord)
+			return;
+
+		var invstGr = new GlideRecord(CIRConstants.Tables.INVESTIGATION);
+		invstGr.initialize();
+		invstGr.cir_case = caseRecord.sys_id.toString();
+		var type = 'basic';
+
+		if(caseRecord.sys_class_name == CIRConstants.Tables.INCIDENT && caseRecord.severity <= 2) {
+			type = 'formal';
+		}
+
+		invstGr.type = type;
+		return invstGr.insert();
+	};
+
+	/**
+     * Function to return the event timeline of an investigation. It is called on the CIR Event Timeline widget
+     * 
+     * @param {string} table - name of the table
+     * @param {array} fields - fields that will be presented on the list, on the pop-up
+     * @param {string} parent - sys_id of the parent investigation
+     */
+	var getInvestigationEvents = function(table, fields, parent) {
+		var records = [];
+
+		var grEvent = new GlideRecord(table);
+		grEvent.addQuery('investigation', parent);
+		grEvent.orderBy('sequence');
+		grEvent.query();
+
+		while(grEvent.next()) {
+			var obj = {};
+			obj.sys_id = parent;
+			obj.data = [];
+
+			for(var i = 0; i < fields.length; i++) {
+				obj.data.push(grEvent[fields[i]].getDisplayValue());
+			}
+
+			records.push(obj);
+		}
+		return records;
+	};
+
+	/**
+     * Gets the query for finding investigations for the current user
+     * @return {string} - encoded query for filtering lists
+     */
+	var getInvestigationsQuery = function(locationSys) {
+		var query = 'active=true';
+		if(locationSys)
+			query += '^cir_case.location=' + locationSys;
+		gs.debug('Returning Investigations Query: ' + query);
+		return query;
+	};
+
+	/**
+     * Checks if the current user has Read access to the sys approval table
+     * @return {string} - current investigation SysID
+     */
+	var canApproverReadRecord = function(currentInvestigation) {
+		var grApproval = new GlideRecord(CIRConstants.Tables.SYS_APPROVAL);
+		grApproval.addQuery('sysapproval', currentInvestigation);
+		grApproval.addQuery('approver', gs.getUserID());
+		grApproval.setLimit(1);
+		grApproval.query();
+		return grApproval.hasNext();
+	};
+
+	/**
+     * Function to return the All the Contributing Factors of an investigation. It is called on the HSE Contributing Factors
+     * @param {string} table - name of the table
+     * @param {array} fields - fields that will be presented on the list, on the pop-up
+     * @param {string} investigation - sys_id of the investigation
+     */
+
+	var getContributingFactors = function(table, fields, investigation) {
+		var records = [];
+		records = records.concat(getContributingFactorsCategories());
+		records.forEach(function(item) {
+			item.records = getContributingFactorsByCategory(table, fields, item.value, investigation);
+		});
+		return records;
+	};
+
+	/**
+     * Function to return the Contributing Factor by Category.
+     * @param {string} table - name of the table
+     * @param {array} fields - fields that will be presented on the list, on the pop-up
+     * @param {string} parent - sys_id of the parent investigation
+	 * @param {string} category - name of Category
+
+     */
+	var getContributingFactorsByCategory = function(table, fields, category, investigation) {
+		var records = [];
+		var grContributing = new GlideRecord(table);
+		grContributing.addQuery('category', category);
+		grContributing.orderBy(fields[0]);
+		grContributing.query();
+
+		while (grContributing.next()) {
+			var obj = {};
+			obj.data = [];
+
+			for (var i = 0; i < fields.length; i++) {
+				obj.data.push(grContributing[fields[i]].getDisplayValue());
+			}
+			obj.data.unshift({
+				check: checkIfRelated(grContributing.getUniqueValue(), investigation),
+				updatedCheck: null,
+				sys_id: grContributing.getUniqueValue()
+			});
+			records.push(obj);
+		}
+
+		return records;
+	};
+	/**
+     * Function to verify if a specific Contributing Record is related with a Investigation
+     * @param {string} grContributing - sys_id of Contributing Factor
+     * @param {string} investigation - sys_id of Investigation
+     * @return {Boolean} - True if exists , false otherwisw
+     */
+	var checkIfRelated = function(grContributing, investigation) {
+		var gr = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		gr.addQuery('investigation', investigation);
+		gr.addQuery('contributing_factor', grContributing);
+		gr.query();
+		return gr.hasNext();
+	};
+
+	/**
+     * Function to return all the categories of Contributing Factors
+     * 
+     * @return {Array} - [{label : xxx , value yyy}]
+     */
+	var getContributingFactorsCategories = function() {
+		toReturn = [];
+		var grContributingCategory = new GlideRecord('sys_choice');
+		grContributingCategory.addEncodedQuery('name=x_fru_hse_contributing_factor^language=en^element=category');
+		grContributingCategory.query();
+		while (grContributingCategory.next()) {
+			toReturn.push({
+				label: grContributingCategory.getValue('label'),
+				value: grContributingCategory.getValue('value'),
+				selected: toReturn.length === 0 ? true : false
+			});
+		}
+
+		return toReturn;
+	};
+	/**
+     * Function Save modifications of Contributing factors in an investigation
+     * @param {array} listSysIds - List of modified sys_ids
+     * @param {string} investigation - sys_id of Investigation
+     */
+	var saveContributingactors = function(investigation, listSysIds) {
+		listSysIds.forEach(function(sys_id) {
+			if (checkIfRelated(sys_id, investigation)) {
+				removeFromM2M(sys_id, investigation);
+			} else {
+				addToM2M(sys_id, investigation);
+			}
+		});
+		return contributingFactorsCount(investigation);
+	};
+
+	/**
+     * Function to create a new Record in the M2M
+     * @param {string} sys_id - sys_id of Contributing Factor
+     * @param {string} investigation - sys_id of Investigation
+     */
+	var addToM2M = function(sys_id, investigation) {
+		var gr = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		gr.initialize();
+		gr.setValue('investigation', investigation);
+		gr.setValue('contributing_factor', sys_id);
+		return gr.insert();
+	};
+
+	/**
+     * Function to remove record in the M2M
+     * @param {string} sys_id - sys_id of Contributing Factor
+     * @param {string} investigation - sys_id of Investigation
+     */
+	var removeFromM2M = function(sys_id, investigation) {
+		var gr = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		gr.addQuery('investigation', investigation);
+		gr.addQuery('contributing_factor', sys_id);
+		gr.query();
+		if (gr.next()) {
+			return gr.deleteRecord();
+		}
+
+	};
+
+	var contributingFactorsCount = function(investigation) {
+		var count = 0;
+		var aggCont = new GlideAggregate(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		aggCont.addAggregate('COUNT');
+		aggCont.addQuery('investigation', investigation);
+		aggCont.query();
+		if (aggCont.next()) {
+			count = aggCont.getAggregate('COUNT');
+		}
+		return count;
+
+	};
+
+	/**
+     * Checks if the current user has Read access to read the record
+	 *
+     * @param {String} currentRiskHazardId - sys_id of the Risk Hazard
+     * @param {String} currentRiskId - sys_id of the Risk
+     * @return {Boolean} - True if the user is allowed to read the record, false otherwise
+     */
+	var canApproverReadRecordFromHazard = function(currentRiskHazardId, currentRiskId) {
+		var grRiskHazards = new GlideRecord(CIRConstants.Tables.M2M_RISK_HAZARD);
+		grRiskHazards.addQuery('risk_hazard', currentRiskHazardId);
+		if(currentRiskId) {
+			grRiskHazards.addQuery('risk', currentRiskId);
+		}
+		grRiskHazards.query();
+		while(grRiskHazards.next()) {
+			var grRisk = grRiskHazards.getElement('risk').getRefRecord();
+			var investigationId = grRisk.getValue('investigation');
+			var caseId = grRisk.getValue('parent');
+			var hasAccess = false;
+			if(investigationId) {
+				hasAccess = canApproverReadRecord(investigationId);
+			}
+			else if(caseId) {
+				hasAccess = new CIRCaseManagementUtils().CanApproverReadRecord(caseId);
+			}
+			if(hasAccess && !currentRiskId) {
+				return true;
+			} else if(currentRiskId) {
+				return hasAccess;
+			}
+		}
+		return false;
+	};
+
+	/**
+     * Checks if the current user has Read access to read the record
+	 *
+     * @param {String} currentId - sys_id of Contributing Factor
+     * @return {Boolean} - True if the user is allowed to read the record, false otherwise
+     */
+	var canApproverReadRecordFromAuthorityDoc = function(currentAuthorityDocId, currentControlId) {
+		var grAuthDocControl = new GlideRecord(CIRConstants.Tables.M2M_AUTHORITY_DOC_CONTROL);
+		grAuthDocControl.addQuery('authority_document', currentAuthorityDocId);
+		if(currentControlId) {
+			grAuthDocControl.addQuery('control', currentControlId);
+		}
+		grAuthDocControl.query();
+		while(grAuthDocControl.next()) {
+			var grControl = grAuthDocControl.getElement('control').getRefRecord();
+			var grRisk = grControl.getElement('risk').getRefRecord();
+			var grRiskHazard = grControl.getElement('hazard').getRefRecord();
+			var investigationId = grRisk.getValue('investigation');
+			var caseId = grRisk.getValue('parent');
+			var hasAccess = false;
+			if(investigationId) {
+				hasAccess = canApproverReadRecord(investigationId);
+			} else if(caseId) {
+				hasAccess = new CIRCaseManagementUtils().CanApproverReadRecord(caseId);
+			}
+			var canReadFromHazard = canApproverReadRecordFromHazard(grRiskHazard.getUniqueValue());
+			if(canReadFromHazard) {
+				return true;
+			}
+			if(hasAccess && !currentControlId) {
+				return true;
+			} else if(currentControlId) {
+				return hasAccess;
+			}
+		}
+		return false;
+	};
+
+
+	/**
+	 * Called in client script Populate Contact Person on sub-component form
+     * Get the sys_id of the contact person on the Equipment record
+	 *
+     * @param {String} componentId - sys_id of Contributing Factor
+     * @return {String} - sys_id of the contact person
+     */
+	var getContactPerson =  function(componentId) {
+		var grComponent = new GlideRecord(CIRConstants.Tables.COMPONENT);
+		if (grComponent.get(componentId)) {
+			return grComponent.equipment.managed_by + '';
+		}
+	};
+
+
+	var CIRRiskManagementUtilsFP = Class.create();
+	var initialize = function() {};
+
+	CIRRiskManagementUtilsFP.prototype = {
+		initialize: initialize,
+		CancelInvestigationChildRecords: cancelInvestigationChildRecords,
+		CancelControlAssociatedScheduleActions: cancelControlAssociatedScheduleActions,
+		RetireRiskAssociatedControls: retireRiskAssociatedControls,
+		MarkCaseAwaitingClosure: markCaseAwaitingClosure,
+		NotifyInvestigationTeamMembers: notifyInvestigationTeamMembers,
+		NotifyControlReviewsDue: notifyControlReviewsDue,
+		RunScheduledActions: runScheduledActions,
+		AddContributingFactors: addContributingFactors,
+		GetFactorsByCategory: getFactorsByCategory,
+		GetMyActionsQuery: getMyActionsQuery,
+		CreateInvestigation: createInvestigation,
+		GetInvestigationEvents: getInvestigationEvents,
+		GetInvestigationsQuery: getInvestigationsQuery,
+		CanApproverReadRecord: canApproverReadRecord,
+		GetContributingFactors: getContributingFactors,
+		SaveContributingactors: saveContributingactors,
+		ContributingFactorsCount: contributingFactorsCount,
+		CanApproverReadRecordFromHazard: canApproverReadRecordFromHazard,
+		CanApproverReadRecordFromAuthorityDoc: canApproverReadRecordFromAuthorityDoc,
+		GetContactPerson: getContactPerson
+	};
+
+	return CIRRiskManagementUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-16 14:06:17</sys_created_on>
+        <sys_id>5cc4ee7bdb1d141003b3533fd396199e</sys_id>
+        <sys_mod_count>36</sys_mod_count>
+        <sys_name>CIRRiskManagementUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_5cc4ee7bdb1d141003b3533fd396199e</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-06 11:06:14</sys_updated_on>
+    </sys_script_include>
+</record_update>

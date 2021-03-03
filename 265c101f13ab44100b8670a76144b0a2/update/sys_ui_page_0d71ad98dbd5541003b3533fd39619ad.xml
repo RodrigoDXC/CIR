@@ -1,0 +1,1295 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>Printable version of the OSHA 300 form with populated information</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_osha_form_300_page_1.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta charset="utf-8" />
+</head>
+
+<body style="margin: 0;">
+
+<div id="p1" style="overflow: hidden; position: relative; width: 1540px; height: 935px;">
+
+<!-- Begin shared CSS values -->
+<style class="shared-css" type="text/css" >
+.t {
+	-webkit-transform-origin: top left;
+	-moz-transform-origin: top left;
+	-o-transform-origin: top left;
+	-ms-transform-origin: top left;
+	-webkit-transform: scale(0.25);
+	-moz-transform: scale(0.25);
+	-o-transform: scale(0.25);
+	-ms-transform: scale(0.25);
+	z-index: 2;
+	position: absolute;
+	white-space: pre;
+	overflow: visible;
+}
+</style>
+<!-- End shared CSS values -->
+
+
+<!-- Begin inline CSS -->
+<style type="text/css" >
+
+#t1_1{left:1320px;top:84px;}
+#t2_1{left:1267px;top:101px;}
+#t3_1{left:25px;top:35px;letter-spacing:0.1px;word-spacing:-0.1px;}
+#t4_1{left:253px;top:49px;letter-spacing:-0.4px;word-spacing:0.9px;}
+#t5_1{left:1327px;top:52px;letter-spacing:-0.6px;word-spacing:0.8px;}
+#t6_1{left:31px;top:72px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t7_1{left:28px;top:126px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t8_1{left:28px;top:141px;}
+#t9_1{left:28px;top:156px;word-spacing:0.1px;}
+#ta_1{left:28px;top:171px;}
+#tb_1{left:28px;top:186px;}
+#tc_1{left:1345px;top:122px;letter-spacing:-0.1px;word-spacing:0.2px;}
+#td_1{left:1189px;top:877px;}
+#te_1{left:1373px;top:346px;}
+#tf_1{left:1401px;top:346px;}
+#tg_1{left:1411px;top:346px;}
+#th_1{left:1436px;top:346px;letter-spacing:-0.2px;}
+#ti_1{left:1464px;top:346px;}
+#tj_1{left:1489px;top:346px;}
+#tk_1{left:1500px;top:346px;}
+#tl_1{left:825px;top:827px;}
+#tm_1{left:828px;top:800px;}
+#tn_1{left:1206px;top:160px;}
+#to_1{left:1206px;top:186px;}
+#tp_1{left:1391px;top:186px;}
+#tq_1{left:1344px;top:346px;letter-spacing:0.3px;}
+#tr_1{left:1207px;top:242px;}
+#ts_1{left:1207px;top:253px;}
+#tt_1{left:1207px;top:263px;}
+#tu_1{left:1342px;top:251px;}
+#tv_1{left:1342px;top:265px;}
+#tw_1{left:362px;top:388px;}
+#tx_1{left:360px;top:787px;}
+#ty_1{left:361px;top:422px;}
+#tz_1{left:362px;top:455px;}
+#t10_1{left:361px;top:487px;}
+#t11_1{left:361px;top:521px;}
+#t12_1{left:361px;top:554px;}
+#t13_1{left:362px;top:586px;}
+#t14_1{left:361px;top:619px;}
+#t15_1{left:362px;top:652px;}
+#t16_1{left:362px;top:685px;}
+#t17_1{left:362px;top:719px;}
+#t18_1{left:361px;top:751px;}
+#t19_1{left:28px;top:828px;}
+#t1a_1{left:28px;top:841px;}
+#t1b_1{left:28px;top:854px;}
+#t1c_1{left:28px;top:867px;}
+#t1d_1{left:28px;top:879px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t1e_1{left:35px;top:248px;}
+#t1f_1{left:112px;top:248px;}
+#t1g_1{left:285px;top:248px;}
+#t1h_1{left:390px;top:248px;}
+#t1i_1{left:526px;top:248px;}
+#t1j_1{left:743px;top:248px;}
+#t1k_1{left:1337px;top:290px;}
+#t1l_1{left:1212px;top:351px;}
+#t1m_1{left:1279px;top:351px;}
+#t1n_1{left:936px;top:349px;}
+#t1o_1{left:991px;top:349px;}
+#t1p_1{left:1063px;top:349px;}
+#t1q_1{left:1132px;top:349px;}
+#t1r_1{left:928px;top:333px;}
+#t1s_1{left:980px;top:322px;}
+#t1t_1{left:980px;top:334px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t1u_1{left:1268px;top:308px;}
+#t1v_1{left:1259px;top:320px;}
+#t1w_1{left:1257px;top:333px;letter-spacing:-0.1px;}
+#t1x_1{left:1207px;top:308px;letter-spacing:-0.2px;}
+#t1y_1{left:1210px;top:321px;letter-spacing:-0.2px;}
+#t1z_1{left:1208px;top:333px;}
+#t20_1{left:857px;top:23px;letter-spacing:-0.2px;}
+#t21_1{left:944px;top:23px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t22_1{left:857px;top:40px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t23_1{left:857px;top:57px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t24_1{left:857px;top:75px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t25_1{left:857px;top:92px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t26_1{left:934px;top:240px;letter-spacing:-0.2px;word-spacing:0.2px;}
+#t27_1{left:934px;top:252px;}
+#t28_1{left:934px;top:265px;}
+#t29_1{left:1042px;top:322px;letter-spacing:-0.6px;word-spacing:0.4px;}
+#t2a_1{left:1042px;top:334px;letter-spacing:-0.7px;word-spacing:0.2px;}
+#t2b_1{left:1116px;top:322px;letter-spacing:-0.8px;word-spacing:0.5px;}
+#t2c_1{left:1116px;top:334px;letter-spacing:-0.6px;word-spacing:0.4px;}
+#t2d_1{left:1061px;top:295px;letter-spacing:-0.1px;}
+#t2e_1{left:937px;top:365px;}
+#t2f_1{left:937px;top:398px;}
+#t2g_1{left:937px;top:432px;}
+#t2h_1{left:937px;top:465px;}
+#t2i_1{left:937px;top:498px;}
+#t2j_1{left:937px;top:532px;}
+#t2k_1{left:937px;top:565px;}
+#t2l_1{left:937px;top:598px;}
+#t2m_1{left:937px;top:632px;}
+#t2n_1{left:937px;top:665px;}
+#t2o_1{left:937px;top:698px;}
+#t2p_1{left:937px;top:732px;}
+#t2q_1{left:937px;top:765px;}
+#t2r_1{left:937px;top:367px;}
+#t2s_1{left:937px;top:400px;}
+#t2t_1{left:937px;top:433px;}
+#t2u_1{left:937px;top:467px;}
+#t2v_1{left:937px;top:500px;}
+#t2w_1{left:937px;top:533px;}
+#t2x_1{left:937px;top:567px;}
+#t2y_1{left:937px;top:600px;}
+#t2z_1{left:937px;top:633px;}
+#t30_1{left:937px;top:667px;}
+#t31_1{left:937px;top:700px;}
+#t32_1{left:937px;top:733px;}
+#t33_1{left:937px;top:767px;}
+#t34_1{left:937px;top:367px;}
+#t35_1{left:937px;top:400px;}
+#t36_1{left:937px;top:434px;}
+#t37_1{left:937px;top:467px;}
+#t38_1{left:937px;top:500px;}
+#t39_1{left:937px;top:533px;}
+#t3a_1{left:937px;top:567px;}
+#t3b_1{left:937px;top:600px;}
+#t3c_1{left:937px;top:633px;}
+#t3d_1{left:937px;top:667px;}
+#t3e_1{left:937px;top:700px;}
+#t3f_1{left:937px;top:733px;}
+#t3g_1{left:937px;top:767px;}
+#t3h_1{left:1060px;top:363px;}
+#t3i_1{left:1060px;top:397px;}
+#t3j_1{left:1060px;top:430px;}
+#t3k_1{left:1060px;top:463px;}
+#t3l_1{left:1060px;top:497px;}
+#t3m_1{left:1060px;top:530px;}
+#t3n_1{left:1060px;top:563px;}
+#t3o_1{left:1060px;top:597px;}
+#t3p_1{left:1060px;top:630px;}
+#t3q_1{left:1060px;top:663px;}
+#t3r_1{left:1060px;top:697px;}
+#t3s_1{left:1060px;top:730px;}
+#t3t_1{left:1060px;top:763px;}
+#t3u_1{left:1060px;top:365px;}
+#t3v_1{left:1060px;top:399px;}
+#t3w_1{left:1060px;top:432px;}
+#t3x_1{left:1060px;top:465px;}
+#t3y_1{left:1060px;top:498px;}
+#t3z_1{left:1060px;top:532px;}
+#t40_1{left:1060px;top:565px;}
+#t41_1{left:1060px;top:598px;}
+#t42_1{left:1060px;top:632px;}
+#t43_1{left:1060px;top:665px;}
+#t44_1{left:1060px;top:698px;}
+#t45_1{left:1060px;top:732px;}
+#t46_1{left:1060px;top:765px;}
+#t47_1{left:1060px;top:365px;}
+#t48_1{left:1060px;top:399px;}
+#t49_1{left:1060px;top:432px;}
+#t4a_1{left:1060px;top:465px;}
+#t4b_1{left:1060px;top:498px;}
+#t4c_1{left:1060px;top:532px;}
+#t4d_1{left:1060px;top:565px;}
+#t4e_1{left:1060px;top:598px;}
+#t4f_1{left:1060px;top:632px;}
+#t4g_1{left:1060px;top:665px;}
+#t4h_1{left:1060px;top:698px;}
+#t4i_1{left:1060px;top:732px;}
+#t4j_1{left:1060px;top:765px;}
+#t4k_1{left:993px;top:365px;}
+#t4l_1{left:993px;top:398px;}
+#t4m_1{left:993px;top:431px;}
+#t4n_1{left:993px;top:465px;}
+#t4o_1{left:993px;top:498px;}
+#t4p_1{left:993px;top:531px;}
+#t4q_1{left:993px;top:565px;}
+#t4r_1{left:993px;top:598px;}
+#t4s_1{left:993px;top:631px;}
+#t4t_1{left:993px;top:664px;}
+#t4u_1{left:993px;top:698px;}
+#t4v_1{left:993px;top:731px;}
+#t4w_1{left:993px;top:764px;}
+#t4x_1{left:993px;top:366px;}
+#t4y_1{left:993px;top:400px;}
+#t4z_1{left:993px;top:433px;}
+#t50_1{left:993px;top:466px;}
+#t51_1{left:993px;top:500px;}
+#t52_1{left:993px;top:533px;}
+#t53_1{left:993px;top:566px;}
+#t54_1{left:993px;top:600px;}
+#t55_1{left:993px;top:633px;}
+#t56_1{left:993px;top:666px;}
+#t57_1{left:993px;top:700px;}
+#t58_1{left:993px;top:733px;}
+#t59_1{left:993px;top:766px;}
+#t5a_1{left:993px;top:366px;}
+#t5b_1{left:993px;top:400px;}
+#t5c_1{left:993px;top:433px;}
+#t5d_1{left:993px;top:466px;}
+#t5e_1{left:993px;top:500px;}
+#t5f_1{left:993px;top:533px;}
+#t5g_1{left:993px;top:566px;}
+#t5h_1{left:993px;top:600px;}
+#t5i_1{left:993px;top:633px;}
+#t5j_1{left:993px;top:666px;}
+#t5k_1{left:993px;top:700px;}
+#t5l_1{left:993px;top:733px;}
+#t5m_1{left:993px;top:766px;}
+#t5n_1{left:1131px;top:363px;}
+#t5o_1{left:1131px;top:397px;}
+#t5p_1{left:1131px;top:430px;}
+#t5q_1{left:1131px;top:463px;}
+#t5r_1{left:1131px;top:497px;}
+#t5s_1{left:1131px;top:530px;}
+#t5t_1{left:1131px;top:563px;}
+#t5u_1{left:1131px;top:597px;}
+#t5v_1{left:1131px;top:630px;}
+#t5w_1{left:1131px;top:663px;}
+#t5x_1{left:1131px;top:697px;}
+#t5y_1{left:1131px;top:730px;}
+#t5z_1{left:1131px;top:763px;}
+#t60_1{left:1130px;top:365px;}
+#t61_1{left:1130px;top:399px;}
+#t62_1{left:1130px;top:432px;}
+#t63_1{left:1130px;top:465px;}
+#t64_1{left:1130px;top:498px;}
+#t65_1{left:1130px;top:532px;}
+#t66_1{left:1130px;top:565px;}
+#t67_1{left:1130px;top:598px;}
+#t68_1{left:1130px;top:632px;}
+#t69_1{left:1130px;top:665px;}
+#t6a_1{left:1130px;top:698px;}
+#t6b_1{left:1130px;top:732px;}
+#t6c_1{left:1130px;top:765px;}
+#t6d_1{left:1130px;top:365px;}
+#t6e_1{left:1130px;top:399px;}
+#t6f_1{left:1130px;top:432px;}
+#t6g_1{left:1130px;top:465px;}
+#t6h_1{left:1130px;top:498px;}
+#t6i_1{left:1130px;top:532px;}
+#t6j_1{left:1130px;top:565px;}
+#t6k_1{left:1130px;top:598px;}
+#t6l_1{left:1130px;top:632px;}
+#t6m_1{left:1130px;top:665px;}
+#t6n_1{left:1130px;top:698px;}
+#t6o_1{left:1130px;top:732px;}
+#t6p_1{left:1130px;top:765px;}
+#t6q_1{left:1342px;top:350px;}
+#t6r_1{left:1373px;top:350px;}
+#t6s_1{left:1404px;top:350px;}
+#t6t_1{left:1435px;top:350px;}
+#t6u_1{left:1462px;top:349px;}
+#t6v_1{left:1494px;top:349px;}
+#t6w_1{left:1341px;top:877px;}
+#t6x_1{left:1372px;top:877px;}
+#t6y_1{left:1402px;top:877px;}
+#t6z_1{left:1434px;top:877px;}
+#t70_1{left:1461px;top:877px;}
+#t71_1{left:1493px;top:877px;}
+#t72_1{left:1373px;top:875px;}
+#t73_1{left:1400px;top:868px;}
+#t74_1{left:1410px;top:861px;}
+#t75_1{left:1436px;top:862px;letter-spacing:-0.2px;}
+#t76_1{left:1465px;top:872px;}
+#t77_1{left:1491px;top:858px;}
+#t78_1{left:1502px;top:855px;}
+#t79_1{left:1341px;top:851px;letter-spacing:0.3px;}
+#t7a_1{left:37px;top:221px;}
+#t7b_1{left:373px;top:221px;}
+#t7c_1{left:933px;top:221px;}
+#t7d_1{left:34px;top:264px;}
+#t7e_1{left:83px;top:264px;}
+#t7f_1{left:272px;top:264px;}
+#t7g_1{left:366px;top:265px;}
+#t7h_1{left:460px;top:264px;}
+#t7i_1{left:624px;top:264px;}
+#t7j_1{left:366px;top:297px;}
+#t7k_1{left:622px;top:296px;}
+#t7l_1{left:34px;top:280px;}
+#t7m_1{left:366px;top:281px;}
+#t7n_1{left:623px;top:281px;}
+#t7o_1{left:732px;top:296px;letter-spacing:-0.1px;}
+#t7p_1{left:275px;top:280px;letter-spacing:-0.4px;}
+#t7q_1{left:461px;top:280px;letter-spacing:0.1px;word-spacing:-0.1px;}
+#t7r_1{left:623px;top:313px;letter-spacing:-0.1px;word-spacing:0.1px;}
+#t7s_1{left:271px;top:280px;}
+#t7t_1{left:333px;top:280px;}
+#t7u_1{left:457px;top:280px;}
+#t7v_1{left:602px;top:280px;}
+#t7w_1{left:787px;top:313px;}
+#t7x_1{left:34px;top:372px;}
+#t7y_1{left:83px;top:372px;}
+#t7z_1{left:272px;top:372px;}
+#t80_1{left:365px;top:372px;}
+#t81_1{left:366px;top:372px;}
+#t82_1{left:369px;top:372px;}
+#t83_1{left:461px;top:372px;}
+#t84_1{left:556px;top:372px;}
+#t85_1{left:617px;top:372px;}
+#t86_1{left:703px;top:372px;}
+#t87_1{left:906px;top:372px;}
+#t88_1{left:1200px;top:371px;}
+#t89_1{left:1261px;top:371px;}
+#t8a_1{left:34px;top:405px;}
+#t8b_1{left:83px;top:405px;}
+#t8c_1{left:272px;top:405px;}
+#t8d_1{left:365px;top:405px;}
+#t8e_1{left:366px;top:405px;}
+#t8f_1{left:369px;top:405px;}
+#t8g_1{left:461px;top:405px;letter-spacing:-0.1px;}
+#t8h_1{left:617px;top:405px;}
+#t8i_1{left:793px;top:405px;}
+#t8j_1{left:906px;top:405px;}
+#t8k_1{left:1200px;top:404px;}
+#t8l_1{left:1261px;top:404px;}
+#t8m_1{left:34px;top:438px;}
+#t8n_1{left:83px;top:438px;}
+#t8o_1{left:272px;top:438px;}
+#t8p_1{left:365px;top:438px;}
+#t8q_1{left:366px;top:438px;}
+#t8r_1{left:369px;top:438px;}
+#t8s_1{left:461px;top:438px;letter-spacing:-0.1px;}
+#t8t_1{left:617px;top:438px;}
+#t8u_1{left:724px;top:438px;}
+#t8v_1{left:906px;top:438px;}
+#t8w_1{left:1200px;top:437px;}
+#t8x_1{left:1261px;top:437px;}
+#t8y_1{left:34px;top:471px;}
+#t8z_1{left:83px;top:471px;}
+#t90_1{left:272px;top:471px;}
+#t91_1{left:365px;top:471px;}
+#t92_1{left:366px;top:471px;}
+#t93_1{left:369px;top:471px;}
+#t94_1{left:461px;top:471px;letter-spacing:-0.1px;}
+#t95_1{left:617px;top:471px;}
+#t96_1{left:724px;top:471px;}
+#t97_1{left:906px;top:471px;}
+#t98_1{left:1200px;top:470px;}
+#t99_1{left:1261px;top:470px;}
+#t9a_1{left:34px;top:504px;}
+#t9b_1{left:83px;top:504px;}
+#t9c_1{left:272px;top:504px;}
+#t9d_1{left:365px;top:504px;}
+#t9e_1{left:366px;top:504px;}
+#t9f_1{left:369px;top:504px;}
+#t9g_1{left:461px;top:504px;letter-spacing:-0.1px;}
+#t9h_1{left:617px;top:504px;}
+#t9i_1{left:703px;top:504px;}
+#t9j_1{left:906px;top:504px;}
+#t9k_1{left:1200px;top:503px;}
+#t9l_1{left:1261px;top:503px;}
+#t9m_1{left:34px;top:537px;}
+#t9n_1{left:83px;top:537px;}
+#t9o_1{left:272px;top:537px;}
+#t9p_1{left:365px;top:537px;}
+#t9q_1{left:366px;top:537px;}
+#t9r_1{left:369px;top:537px;}
+#t9s_1{left:461px;top:537px;letter-spacing:-0.1px;}
+#t9t_1{left:617px;top:537px;}
+#t9u_1{left:779px;top:537px;}
+#t9v_1{left:906px;top:537px;}
+#t9w_1{left:1200px;top:536px;}
+#t9x_1{left:1261px;top:536px;}
+#t9y_1{left:34px;top:570px;}
+#t9z_1{left:83px;top:570px;}
+#ta0_1{left:272px;top:570px;}
+#ta1_1{left:365px;top:570px;}
+#ta2_1{left:366px;top:570px;}
+#ta3_1{left:369px;top:570px;}
+#ta4_1{left:461px;top:570px;letter-spacing:-0.1px;}
+#ta5_1{left:617px;top:570px;}
+#ta6_1{left:779px;top:570px;}
+#ta7_1{left:906px;top:570px;}
+#ta8_1{left:1200px;top:569px;}
+#ta9_1{left:1261px;top:569px;}
+#taa_1{left:34px;top:603px;}
+#tab_1{left:83px;top:603px;}
+#tac_1{left:272px;top:603px;}
+#tad_1{left:365px;top:603px;}
+#tae_1{left:366px;top:603px;}
+#taf_1{left:369px;top:603px;}
+#tag_1{left:461px;top:603px;letter-spacing:-0.1px;}
+#tah_1{left:617px;top:603px;}
+#tai_1{left:779px;top:603px;}
+#taj_1{left:906px;top:603px;}
+#tak_1{left:1200px;top:602px;}
+#tal_1{left:1261px;top:602px;}
+#tam_1{left:34px;top:636px;}
+#tan_1{left:83px;top:636px;}
+#tao_1{left:272px;top:636px;}
+#tap_1{left:365px;top:636px;}
+#taq_1{left:366px;top:636px;}
+#tar_1{left:369px;top:636px;}
+#tas_1{left:461px;top:636px;letter-spacing:-0.1px;}
+#tat_1{left:617px;top:636px;}
+#tau_1{left:779px;top:636px;}
+#tav_1{left:906px;top:636px;}
+#taw_1{left:1200px;top:635px;}
+#tax_1{left:1261px;top:635px;}
+#tay_1{left:34px;top:669px;}
+#taz_1{left:83px;top:669px;}
+#tb0_1{left:272px;top:669px;}
+#tb1_1{left:365px;top:669px;}
+#tb2_1{left:366px;top:669px;}
+#tb3_1{left:369px;top:669px;}
+#tb4_1{left:461px;top:669px;letter-spacing:-0.1px;}
+#tb5_1{left:617px;top:669px;}
+#tb6_1{left:703px;top:669px;}
+#tb7_1{left:906px;top:669px;}
+#tb8_1{left:1200px;top:668px;}
+#tb9_1{left:1261px;top:668px;}
+#tba_1{left:34px;top:702px;}
+#tbb_1{left:83px;top:702px;}
+#tbc_1{left:272px;top:702px;}
+#tbd_1{left:365px;top:702px;}
+#tbe_1{left:366px;top:702px;}
+#tbf_1{left:369px;top:702px;}
+#tbg_1{left:461px;top:702px;letter-spacing:-0.1px;}
+#tbh_1{left:617px;top:702px;}
+#tbi_1{left:779px;top:702px;}
+#tbj_1{left:906px;top:702px;}
+#tbk_1{left:1200px;top:701px;}
+#tbl_1{left:1261px;top:701px;}
+#tbm_1{left:34px;top:735px;}
+#tbn_1{left:83px;top:735px;}
+#tbo_1{left:272px;top:735px;}
+#tbp_1{left:365px;top:735px;}
+#tbq_1{left:366px;top:735px;}
+#tbr_1{left:369px;top:735px;}
+#tbs_1{left:461px;top:735px;letter-spacing:-0.1px;}
+#tbt_1{left:617px;top:735px;}
+#tbu_1{left:779px;top:735px;}
+#tbv_1{left:906px;top:735px;}
+#tbw_1{left:1200px;top:734px;}
+#tbx_1{left:1261px;top:734px;}
+#tby_1{left:34px;top:768px;}
+#tbz_1{left:83px;top:768px;}
+#tc0_1{left:272px;top:768px;}
+#tc1_1{left:365px;top:768px;}
+#tc2_1{left:366px;top:768px;}
+#tc3_1{left:369px;top:768px;}
+#tc4_1{left:461px;top:768px;}
+#tc5_1{left:556px;top:768px;}
+#tc6_1{left:617px;top:768px;}
+#tc7_1{left:703px;top:768px;}
+#tc8_1{left:906px;top:768px;}
+#tc9_1{left:1200px;top:767px;}
+#tca_1{left:1261px;top:767px;}
+#tcb_1{left:1231px;top:374px;}
+#tcc_1{left:1292px;top:374px;}
+#tcd_1{left:1231px;top:407px;}
+#tce_1{left:1292px;top:407px;}
+#tcf_1{left:1231px;top:440px;}
+#tcg_1{left:1292px;top:440px;}
+#tch_1{left:1231px;top:473px;}
+#tci_1{left:1292px;top:473px;}
+#tcj_1{left:1231px;top:506px;}
+#tck_1{left:1292px;top:506px;}
+#tcl_1{left:1231px;top:539px;}
+#tcm_1{left:1292px;top:539px;}
+#tcn_1{left:1231px;top:572px;}
+#tco_1{left:1292px;top:572px;}
+#tcp_1{left:1231px;top:605px;}
+#tcq_1{left:1292px;top:605px;}
+#tcr_1{left:1231px;top:638px;}
+#tcs_1{left:1292px;top:638px;}
+#tct_1{left:1231px;top:671px;}
+#tcu_1{left:1292px;top:671px;}
+#tcv_1{left:1231px;top:704px;}
+#tcw_1{left:1292px;top:704px;}
+#tcx_1{left:1231px;top:737px;}
+#tcy_1{left:1292px;top:737px;}
+#tcz_1{left:1231px;top:770px;}
+#td0_1{left:1292px;top:770px;}
+
+.s1_1{
+	FONT-SIZE: 55.8px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s2_1{
+	FONT-SIZE: 38.2px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s3_1{
+	FONT-SIZE: 110px;
+	FONT-FAMILY: Swiss721BT-LightItalic_2b;
+	color: rgb(35,31,32);
+}
+
+.s4_1{
+	FONT-SIZE: 55px;
+	FONT-FAMILY: Swiss721BT-Light_2d;
+	color: rgb(35,31,32);
+}
+
+.s5_1{
+	FONT-SIZE: 85.6px;
+	FONT-FAMILY: Swiss721BT-LightItalic_2b;
+	color: rgb(35,31,32);
+}
+
+.s6_1{
+	FONT-SIZE: 136.5px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s7_1{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: Swiss721BT-LightItalic_2b;
+	color: rgb(35,31,32);
+}
+
+.s8_1{
+	FONT-SIZE: 39.7px;
+	FONT-FAMILY: BaskervilleWin95BT_2f;
+	color: rgb(35,31,32);
+}
+
+.s9_1{
+	FONT-SIZE: 37.2px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s10_1{
+	FONT-SIZE: 36.7px;
+	FONT-FAMILY: Aldine401BT_2q;
+	color: rgb(35,31,32);
+}
+
+.s11_1{
+	FONT-SIZE: 42.8px;
+	FONT-FAMILY: Swiss721BT-LightItalic_2b;
+	color: rgb(35,31,32);
+}
+
+.s12_1{
+	FONT-SIZE: 49.6px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s13_1{
+	FONT-SIZE: 39.7px;
+	FONT-FAMILY: Swiss721BT-LightItalic_2b;
+	color: rgb(35,31,32);
+}
+
+.s14_1{
+	FONT-SIZE: 36.7px;
+	FONT-FAMILY: Aldine401BT-Bold_2s;
+	color: rgb(35,31,32);
+}
+
+.s15_1{
+	FONT-SIZE: 43.5px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s16_1{
+	FONT-SIZE: 43.4px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s17_1{
+	FONT-SIZE: 36.7px;
+	FONT-FAMILY: Swiss721BT-Light_2d;
+	color: rgb(35,31,32);
+}
+
+.s18_1{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: Helvetica_2h;
+	color: rgb(35,31,32);
+}
+
+.s19_1{
+	FONT-SIZE: 39.7px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s20_1{
+	FONT-SIZE: 36.7px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s21_1{
+	FONT-SIZE: 61.1px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(35,31,32);
+}
+
+.s22_1{
+	FONT-SIZE: 61.1px;
+	FONT-FAMILY: Swiss721BT-Light_2d;
+	color: rgb(35,31,32);
+}
+
+.s23_1{
+	FONT-SIZE: 43.4px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(255,255,255);
+}
+
+.s24_1{
+	FONT-SIZE: 97.8px;
+	FONT-FAMILY: ZapfDingbats_2k;
+	color: rgb(35,31,32);
+}
+
+.s25_1{
+	FONT-SIZE: 79.4px;
+	FONT-FAMILY: ZapfDingbats_2k;
+	color: rgb(255,255,255);
+}
+
+.s26_1{
+	FONT-SIZE: 79.4px;
+	FONT-FAMILY: ZapfDingbats_2k;
+	color: rgb(35,31,32);
+}
+
+.s27_1{
+	FONT-SIZE: 55.8px;
+	FONT-FAMILY: Helvetica-Black_29;
+	color: rgb(255,255,255);
+}
+
+.s28_1{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: BaskervilleWin95BT-Bold_2m;
+	color: rgb(35,31,32);
+}
+
+.s29_1{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: BaskervilleWin95BT-NormalIt_2o;
+	color: rgb(35,31,32);
+}
+
+.s30_1{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: BaskervilleWin95BT_2f;
+	color: rgb(35,31,32);
+}
+
+.s31_1{
+	FONT-SIZE: 55px;
+	FONT-FAMILY: Aldine401BT_2q;
+	color: rgb(35,31,32);
+}
+
+.s32_1{
+	FONT-SIZE: 42.8px;
+	FONT-FAMILY: Aldine401BT_2q;
+	color: rgb(35,31,32);
+}
+
+.t.m1_1{
+	-webkit-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+	-ms-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+	-moz-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+	-o-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+}
+
+.t.m2_1{
+	-webkit-transform: matrix(1.05,0,0,1,0, 0) scale(0.25);
+	-ms-transform: matrix(1.05,0,0,1,0, 0) scale(0.25);
+	-moz-transform: matrix(1.05,0,0,1,0, 0) scale(0.25);
+	-o-transform: matrix(1.05,0,0,1,0, 0) scale(0.25);
+}
+
+.t.m3_1{
+	-webkit-transform: matrix(0.98,0,-0.17,0.99,0, 0) scale(0.25);
+	-ms-transform: matrix(0.98,0,-0.17,0.99,0, 0) scale(0.25);
+	-moz-transform: matrix(0.98,0,-0.17,0.99,0, 0) scale(0.25);
+	-o-transform: matrix(0.98,0,-0.17,0.99,0, 0) scale(0.25);
+}
+
+.t.m4_1{
+	-webkit-transform: matrix(0,-1,1,0,0, 0) scale(0.25);
+	-ms-transform: matrix(0,-1,1,0,0, 0) scale(0.25);
+	-moz-transform: matrix(0,-1,1,0,0, 0) scale(0.25);
+	-o-transform: matrix(0,-1,1,0,0, 0) scale(0.25);
+}
+
+.t.m5_1{
+	-webkit-transform: matrix(1,0,-0.18,0.98,0, 0) scale(0.25);
+	-ms-transform: matrix(1,0,-0.18,0.98,0, 0) scale(0.25);
+	-moz-transform: matrix(1,0,-0.18,0.98,0, 0) scale(0.25);
+	-o-transform: matrix(1,0,-0.18,0.98,0, 0) scale(0.25);
+}
+
+</style>
+<!-- End inline CSS -->
+
+<!-- Begin embedded font definitions -->
+<style id="fonts1" type="text/css" >
+
+@font-face {
+	font-family: BaskervilleWin95BT-NormalIt_2o;
+	src: url("fonts/BaskervilleWin95BT-NormalIt_2o.woff") format("woff");
+}
+
+@font-face {
+	font-family: Swiss721BT-Light_2d;
+	src: url("fonts/Swiss721BT-Light_2d.woff") format("woff");
+}
+
+@font-face {
+	font-family: BaskervilleWin95BT_2f;
+	src: url("fonts/BaskervilleWin95BT_2f.woff") format("woff");
+}
+
+@font-face {
+	font-family: ZapfDingbats_2k;
+	src: url("fonts/ZapfDingbats_2k.woff") format("woff");
+}
+
+@font-face {
+	font-family: Helvetica-Black_29;
+	src: url("fonts/Helvetica-Black_29.woff") format("woff");
+}
+
+@font-face {
+	font-family: Aldine401BT_2q;
+	src: url("fonts/Aldine401BT_2q.woff") format("woff");
+}
+
+@font-face {
+	font-family: Aldine401BT-Bold_2s;
+	src: url("fonts/Aldine401BT-Bold_2s.woff") format("woff");
+}
+
+@font-face {
+	font-family: Helvetica_2h;
+	src: url("fonts/Helvetica_2h.woff") format("woff");
+}
+
+@font-face {
+	font-family: Swiss721BT-LightItalic_2b;
+	src: url("fonts/Swiss721BT-LightItalic_2b.woff") format("woff");
+}
+
+@font-face {
+	font-family: BaskervilleWin95BT-Bold_2m;
+	src: url("fonts/BaskervilleWin95BT-Bold_2m.woff") format("woff");
+}
+
+</style>
+<!-- End embedded font definitions -->
+
+<!-- Begin page background -->
+<div id="pg1Overlay" style="width:100%; height:100%; position:absolute; z-index:1; background-color:rgba(0,0,0,0); -webkit-user-select: none;"></div>
+<div id="pg1" style="-webkit-user-select: none;"><object width="1540" height="935" data="1/1.svg" type="image/svg+xml" id="pdf1" style="width:1540px; height:935px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
+<!-- End page background -->
+
+
+<!-- Begin text definitions (Positioned/styled in CSS) -->
+<div id="t1_1" class="t m1_1 s1_1">U.S. Department of Labor</div>
+<div id="t2_1" class="t m1_1 s2_1">Occupational Safety and Health Administration</div>
+<div id="t3_1" class="t m2_1 s3_1">OSHA's Form 300</div>
+<div id="t4_1" class="t m2_1 s4_1">(Rev. 01/2004)</div>
+<div id="t5_1" class="t m2_1 s5_1">Year 20__ __</div>
+<div id="t6_1" class="t m3_1 s6_1">Log of Work-Related Injuries and Illnesses</div>
+<div id="t7_1" class="t s7_1">You must record information about every work-related death and about every work-related injury or illness that involves loss of consciousness, restricted work activity or job transfer,</div>
+<div id="t8_1" class="t s7_1">days away from work, or medical treatment beyond first aid. You must also record significant work-related injuries and illnesses that are diagnosed by a physician or licensed health</div>
+<div id="t9_1" class="t s7_1">care professional. You must also record work-related injuries and illnesses that meet any of the specific recording criteria listed in 29 CFR Part 1904.8 through 1904.12. Feel free to</div>
+<div id="ta_1" class="t s7_1">use two lines for a single case if you need to. You must complete an Injury and Illness Incident Report (OSHA Form 301) or equivalent form for each injury or illness recorded on this</div>
+<div id="tb_1" class="t s7_1">form. If you're not sure whether a case is recordable, call your local OSHA office for help.</div>
+<div id="tc_1" class="t s8_1">Form approved OMB no. 1218-0176</div>
+<div id="td_1" class="t m1_1 s9_1">Page ____ of ____</div>
+<div id="te_1" class="t m4_1 s10_1">Skin disorder</div>
+<div id="tf_1" class="t m4_1 s10_1">Respiratory</div>
+<div id="tg_1" class="t m4_1 s10_1">condition</div>
+<div id="th_1" class="t m4_1 s10_1">Poisoning</div>
+<div id="ti_1" class="t m4_1 s10_1">Hearing loss</div>
+<div id="tj_1" class="t m4_1 s10_1">All other</div>
+<div id="tk_1" class="t m4_1 s10_1">illnesses</div>
+<div id="tl_1" class="t s11_1">Be sure to transfer these totals to the Summary page (Form 300A) before you post it.</div>
+<div id="tm_1" class="t m1_1 s12_1">Page totals</div>
+<div id="tn_1" class="t s13_1">Establishment name ___________________________________________</div>
+<div id="to_1" class="t s13_1">City ________________________________ </div>
+<div id="tp_1" class="t s13_1">State ___________________</div>
+<div id="tq_1" class="t m4_1 s14_1">Injury</div>
+<div id="tr_1" class="t m5_1 s15_1">Enter the number of</div>
+<div id="ts_1" class="t m5_1 s15_1">days the injured or</div>
+<div id="tt_1" class="t m5_1 s15_1">ill worker was:</div>
+<div id="tu_1" class="t m1_1 s16_1">Check the "Injury" column or</div>
+<div id="tv_1" class="t m1_1 s16_1">choose one type of illness:</div>
+<div id="tw_1" class="t s17_1">month/day</div>
+<div id="tx_1" class="t s17_1">month/day</div>
+<div id="ty_1" class="t s17_1">month/day</div>
+<div id="tz_1" class="t s17_1">month/day</div>
+<div id="t10_1" class="t s17_1">month/day</div>
+<div id="t11_1" class="t s17_1">month/day</div>
+<div id="t12_1" class="t s17_1">month/day</div>
+<div id="t13_1" class="t s17_1">month/day</div>
+<div id="t14_1" class="t s17_1">month/day</div>
+<div id="t15_1" class="t s17_1">month/day</div>
+<div id="t16_1" class="t s17_1">month/day</div>
+<div id="t17_1" class="t s17_1">month/day</div>
+<div id="t18_1" class="t s17_1">month/day</div>
+<div id="t19_1" class="t s8_1">Public reporting burden for this collection of information is estimated to average 14 minutes per response, including time to review</div>
+<div id="t1a_1" class="t s8_1">the instructions, search and gather the data needed, and complete and review the collection of information. Persons are not required</div>
+<div id="t1b_1" class="t s8_1">to respond to the collection of information unless it displays a currently valid OMB control number. If you have any comments</div>
+<div id="t1c_1" class="t s8_1">about these estimates or any other aspects of this data collection, contact: US Department of Labor, OSHA Office of Statistical</div>
+<div id="t1d_1" class="t s8_1">Analysis, Room N-3644, 200 Constitution Avenue, NW, Washington, DC 20210. Do not send the completed forms to this office.</div>
+<div id="t1e_1" class="t s18_1">(A) </div>
+<div id="t1f_1" class="t s18_1">(B) </div>
+<div id="t1g_1" class="t s18_1">(C) </div>
+<div id="t1h_1" class="t s18_1">(D) </div>
+<div id="t1i_1" class="t s18_1">(E) </div>
+<div id="t1j_1" class="t s18_1">(F)</div>
+<div id="t1k_1" class="t s18_1">(M)</div>
+<div id="t1l_1" class="t s18_1">(K) </div>
+<div id="t1m_1" class="t s18_1">(L)</div>
+<div id="t1n_1" class="t s18_1">(G) </div>
+<div id="t1o_1" class="t s18_1">(H) </div>
+<div id="t1p_1" class="t s18_1">(I) </div>
+<div id="t1q_1" class="t s18_1">(J)</div>
+<div id="t1r_1" class="t s19_1">Death</div>
+<div id="t1s_1" class="t s20_1">Days away</div>
+<div id="t1t_1" class="t s20_1">from work</div>
+<div id="t1u_1" class="t s19_1">On job</div>
+<div id="t1v_1" class="t s19_1">transfer or</div>
+<div id="t1w_1" class="t s19_1">restriction</div>
+<div id="t1x_1" class="t s19_1">Away</div>
+<div id="t1y_1" class="t s19_1">from</div>
+<div id="t1z_1" class="t s19_1">work</div>
+<div id="t20_1" class="t s21_1">Attention:</div>
+<div id="t21_1" class="t s22_1">This form contains information relating to</div>
+<div id="t22_1" class="t s22_1">employee health and must be used in a manner that</div>
+<div id="t23_1" class="t s22_1">protects the confidentiality of employees to the extent</div>
+<div id="t24_1" class="t s22_1">possible while the information is being used for</div>
+<div id="t25_1" class="t s22_1">occupational safety and health purposes.</div>
+<div id="t26_1" class="t m1_1 s23_1">CHECK ONLY ONE box for each case</div>
+<div id="t27_1" class="t m1_1 s23_1">based on the most serious outcome for</div>
+<div id="t28_1" class="t m1_1 s23_1">that case:</div>
+<div id="t29_1" class="t s20_1">Job transfer</div>
+<div id="t2a_1" class="t s20_1">or restriction</div>
+<div id="t2b_1" class="t s20_1">Other record-</div>
+<div id="t2c_1" class="t s20_1">able cases</div>
+<div id="t2d_1" class="t m1_1 s16_1">Remained at Work</div>
+<div id="t2e_1" class="t s24_1">❑</div>
+<div id="t2f_1" class="t s24_1">❑</div>
+<div id="t2g_1" class="t s24_1">❑</div>
+<div id="t2h_1" class="t s24_1">❑</div>
+<div id="t2i_1" class="t s24_1">❑</div>
+<div id="t2j_1" class="t s24_1">❑</div>
+<div id="t2k_1" class="t s24_1">❑</div>
+<div id="t2l_1" class="t s24_1">❑</div>
+<div id="t2m_1" class="t s24_1">❑</div>
+<div id="t2n_1" class="t s24_1">❑</div>
+<div id="t2o_1" class="t s24_1">❑</div>
+<div id="t2p_1" class="t s24_1">❑</div>
+<div id="t2q_1" class="t s24_1">❑</div>
+<div id="t2r_1" class="t s25_1">■</div>
+<div id="t2s_1" class="t s25_1">■</div>
+<div id="t2t_1" class="t s25_1">■</div>
+<div id="t2u_1" class="t s25_1">■</div>
+<div id="t2v_1" class="t s25_1">■</div>
+<div id="t2w_1" class="t s25_1">■</div>
+<div id="t2x_1" class="t s25_1">■</div>
+<div id="t2y_1" class="t s25_1">■</div>
+<div id="t2z_1" class="t s25_1">■</div>
+<div id="t30_1" class="t s25_1">■</div>
+<div id="t31_1" class="t s25_1">■</div>
+<div id="t32_1" class="t s25_1">■</div>
+<div id="t33_1" class="t s25_1">■</div>
+<div id="t34_1" class="t s26_1">■</div>
+<div id="t35_1" class="t s26_1">■</div>
+<div id="t36_1" class="t s26_1">■</div>
+<div id="t37_1" class="t s26_1">■</div>
+<div id="t38_1" class="t s26_1">■</div>
+<div id="t39_1" class="t s26_1">■</div>
+<div id="t3a_1" class="t s26_1">■</div>
+<div id="t3b_1" class="t s26_1">■</div>
+<div id="t3c_1" class="t s26_1">■</div>
+<div id="t3d_1" class="t s26_1">■</div>
+<div id="t3e_1" class="t s26_1">■</div>
+<div id="t3f_1" class="t s26_1">■</div>
+<div id="t3g_1" class="t s26_1">■</div>
+<div id="t3h_1" class="t s24_1">❑</div>
+<div id="t3i_1" class="t s24_1">❑</div>
+<div id="t3j_1" class="t s24_1">❑</div>
+<div id="t3k_1" class="t s24_1">❑</div>
+<div id="t3l_1" class="t s24_1">❑</div>
+<div id="t3m_1" class="t s24_1">❑</div>
+<div id="t3n_1" class="t s24_1">❑</div>
+<div id="t3o_1" class="t s24_1">❑</div>
+<div id="t3p_1" class="t s24_1">❑</div>
+<div id="t3q_1" class="t s24_1">❑</div>
+<div id="t3r_1" class="t s24_1">❑</div>
+<div id="t3s_1" class="t s24_1">❑</div>
+<div id="t3t_1" class="t s24_1">❑</div>
+<div id="t3u_1" class="t s25_1">■</div>
+<div id="t3v_1" class="t s25_1">■</div>
+<div id="t3w_1" class="t s25_1">■</div>
+<div id="t3x_1" class="t s25_1">■</div>
+<div id="t3y_1" class="t s25_1">■</div>
+<div id="t3z_1" class="t s25_1">■</div>
+<div id="t40_1" class="t s25_1">■</div>
+<div id="t41_1" class="t s25_1">■</div>
+<div id="t42_1" class="t s25_1">■</div>
+<div id="t43_1" class="t s25_1">■</div>
+<div id="t44_1" class="t s25_1">■</div>
+<div id="t45_1" class="t s25_1">■</div>
+<div id="t46_1" class="t s25_1">■</div>
+<div id="t47_1" class="t s26_1">■</div>
+<div id="t48_1" class="t s26_1">■</div>
+<div id="t49_1" class="t s26_1">■</div>
+<div id="t4a_1" class="t s26_1">■</div>
+<div id="t4b_1" class="t s26_1">■</div>
+<div id="t4c_1" class="t s26_1">■</div>
+<div id="t4d_1" class="t s26_1">■</div>
+<div id="t4e_1" class="t s26_1">■</div>
+<div id="t4f_1" class="t s26_1">■</div>
+<div id="t4g_1" class="t s26_1">■</div>
+<div id="t4h_1" class="t s26_1">■</div>
+<div id="t4i_1" class="t s26_1">■</div>
+<div id="t4j_1" class="t s26_1">■</div>
+<div id="t4k_1" class="t s24_1">❑</div>
+<div id="t4l_1" class="t s24_1">❑</div>
+<div id="t4m_1" class="t s24_1">❑</div>
+<div id="t4n_1" class="t s24_1">❑</div>
+<div id="t4o_1" class="t s24_1">❑</div>
+<div id="t4p_1" class="t s24_1">❑</div>
+<div id="t4q_1" class="t s24_1">❑</div>
+<div id="t4r_1" class="t s24_1">❑</div>
+<div id="t4s_1" class="t s24_1">❑</div>
+<div id="t4t_1" class="t s24_1">❑</div>
+<div id="t4u_1" class="t s24_1">❑</div>
+<div id="t4v_1" class="t s24_1">❑</div>
+<div id="t4w_1" class="t s24_1">❑</div>
+<div id="t4x_1" class="t s25_1">■</div>
+<div id="t4y_1" class="t s25_1">■</div>
+<div id="t4z_1" class="t s25_1">■</div>
+<div id="t50_1" class="t s25_1">■</div>
+<div id="t51_1" class="t s25_1">■</div>
+<div id="t52_1" class="t s25_1">■</div>
+<div id="t53_1" class="t s25_1">■</div>
+<div id="t54_1" class="t s25_1">■</div>
+<div id="t55_1" class="t s25_1">■</div>
+<div id="t56_1" class="t s25_1">■</div>
+<div id="t57_1" class="t s25_1">■</div>
+<div id="t58_1" class="t s25_1">■</div>
+<div id="t59_1" class="t s25_1">■</div>
+<div id="t5a_1" class="t s26_1">■</div>
+<div id="t5b_1" class="t s26_1">■</div>
+<div id="t5c_1" class="t s26_1">■</div>
+<div id="t5d_1" class="t s26_1">■</div>
+<div id="t5e_1" class="t s26_1">■</div>
+<div id="t5f_1" class="t s26_1">■</div>
+<div id="t5g_1" class="t s26_1">■</div>
+<div id="t5h_1" class="t s26_1">■</div>
+<div id="t5i_1" class="t s26_1">■</div>
+<div id="t5j_1" class="t s26_1">■</div>
+<div id="t5k_1" class="t s26_1">■</div>
+<div id="t5l_1" class="t s26_1">■</div>
+<div id="t5m_1" class="t s26_1">■</div>
+<div id="t5n_1" class="t s24_1">❑</div>
+<div id="t5o_1" class="t s24_1">❑</div>
+<div id="t5p_1" class="t s24_1">❑</div>
+<div id="t5q_1" class="t s24_1">❑</div>
+<div id="t5r_1" class="t s24_1">❑</div>
+<div id="t5s_1" class="t s24_1">❑</div>
+<div id="t5t_1" class="t s24_1">❑</div>
+<div id="t5u_1" class="t s24_1">❑</div>
+<div id="t5v_1" class="t s24_1">❑</div>
+<div id="t5w_1" class="t s24_1">❑</div>
+<div id="t5x_1" class="t s24_1">❑</div>
+<div id="t5y_1" class="t s24_1">❑</div>
+<div id="t5z_1" class="t s24_1">❑</div>
+<div id="t60_1" class="t s25_1">■</div>
+<div id="t61_1" class="t s25_1">■</div>
+<div id="t62_1" class="t s25_1">■</div>
+<div id="t63_1" class="t s25_1">■</div>
+<div id="t64_1" class="t s25_1">■</div>
+<div id="t65_1" class="t s25_1">■</div>
+<div id="t66_1" class="t s25_1">■</div>
+<div id="t67_1" class="t s25_1">■</div>
+<div id="t68_1" class="t s25_1">■</div>
+<div id="t69_1" class="t s25_1">■</div>
+<div id="t6a_1" class="t s25_1">■</div>
+<div id="t6b_1" class="t s25_1">■</div>
+<div id="t6c_1" class="t s25_1">■</div>
+<div id="t6d_1" class="t s26_1">■</div>
+<div id="t6e_1" class="t s26_1">■</div>
+<div id="t6f_1" class="t s26_1">■</div>
+<div id="t6g_1" class="t s26_1">■</div>
+<div id="t6h_1" class="t s26_1">■</div>
+<div id="t6i_1" class="t s26_1">■</div>
+<div id="t6j_1" class="t s26_1">■</div>
+<div id="t6k_1" class="t s26_1">■</div>
+<div id="t6l_1" class="t s26_1">■</div>
+<div id="t6m_1" class="t s26_1">■</div>
+<div id="t6n_1" class="t s26_1">■</div>
+<div id="t6o_1" class="t s26_1">■</div>
+<div id="t6p_1" class="t s26_1">■</div>
+<div id="t6q_1" class="t s18_1">(1)</div>
+<div id="t6r_1" class="t s18_1">(2)</div>
+<div id="t6s_1" class="t s18_1">(3)</div>
+<div id="t6t_1" class="t s18_1">(4)</div>
+<div id="t6u_1" class="t s18_1">(5)</div>
+<div id="t6v_1" class="t s18_1">(6)</div>
+<div id="t6w_1" class="t s18_1">(1)</div>
+<div id="t6x_1" class="t s18_1">(2)</div>
+<div id="t6y_1" class="t s18_1">(3)</div>
+<div id="t6z_1" class="t s18_1">(4)</div>
+<div id="t70_1" class="t s18_1">(5)</div>
+<div id="t71_1" class="t s18_1">(6)</div>
+<div id="t72_1" class="t m4_1 s10_1">Skin disorder</div>
+<div id="t73_1" class="t m4_1 s10_1">Respiratory</div>
+<div id="t74_1" class="t m4_1 s10_1">condition</div>
+<div id="t75_1" class="t m4_1 s10_1">Poisoning</div>
+<div id="t76_1" class="t m4_1 s10_1">Hearing loss</div>
+<div id="t77_1" class="t m4_1 s10_1">All other</div>
+<div id="t78_1" class="t m4_1 s10_1">illnesses</div>
+<div id="t79_1" class="t m4_1 s14_1">Injury</div>
+<div id="t7a_1" class="t m1_1 s27_1">Identify the person</div>
+<div id="t7b_1" class="t m1_1 s27_1">Describe the case</div>
+<div id="t7c_1" class="t m1_1 s27_1">Classify the case</div>
+<div id="t7d_1" class="t s28_1">Case</div>
+<div id="t7e_1" class="t s28_1">Employee's name</div>
+<div id="t7f_1" class="t s28_1">Job title</div>
+<div id="t7g_1" class="t s28_1">Date of injury</div>
+<div id="t7h_1" class="t s28_1">Where the event occurred</div>
+<div id="t7i_1" class="t s28_1">Describe injury or illness, parts of body affected,</div>
+<div id="t7j_1" class="t s28_1">of illness</div>
+<div id="t7k_1" class="t s28_1">or made person ill (</div>
+<div id="t7l_1" class="t s28_1">no.</div>
+<div id="t7m_1" class="t s28_1">or onset</div>
+<div id="t7n_1" class="t s28_1">and object/substance that directly injured</div>
+<div id="t7o_1" class="t s29_1">e.g., Second degree burns on</div>
+<div id="t7p_1" class="t s29_1">e.g., Welder</div>
+<div id="t7q_1" class="t s29_1">e.g., Loading dock north end</div>
+<div id="t7r_1" class="t s29_1">right forearm from acetylene torch</div>
+<div id="t7s_1" class="t s30_1">(</div>
+<div id="t7t_1" class="t s30_1">)</div>
+<div id="t7u_1" class="t s30_1">(</div>
+<div id="t7v_1" class="t s30_1">)</div>
+<div id="t7w_1" class="t s30_1">)</div>
+<div id="t7x_1" class="t s31_1">_____</div>
+<div id="t7y_1" class="t s31_1">________________________</div>
+<div id="t7z_1" class="t s31_1">____________</div>
+<div id="t80_1" class="t s31_1">__</div>
+<div id="t81_1" class="t s31_1">____/___</div>
+<div id="t82_1" class="t s31_1">_______</div>
+<div id="t83_1" class="t s31_1">__________________</div>
+<div id="t84_1" class="t s31_1">____</div>
+<div id="t85_1" class="t s31_1">___________________</div>
+<div id="t86_1" class="t s31_1">_______________________________</div>
+<div id="t87_1" class="t s31_1">_</div>
+<div id="t88_1" class="t s31_1">____</div>
+<div id="t89_1" class="t s31_1">____</div>
+<div id="t8a_1" class="t s31_1">_____</div>
+<div id="t8b_1" class="t s31_1">________________________</div>
+<div id="t8c_1" class="t s31_1">____________</div>
+<div id="t8d_1" class="t s31_1">__</div>
+<div id="t8e_1" class="t s31_1">____/___</div>
+<div id="t8f_1" class="t s31_1">_______</div>
+<div id="t8g_1" class="t s31_1">__________________</div>
+<div id="t8h_1" class="t s31_1">________________________________</div>
+<div id="t8i_1" class="t s31_1">__________________</div>
+<div id="t8j_1" class="t s31_1">_</div>
+<div id="t8k_1" class="t s31_1">____</div>
+<div id="t8l_1" class="t s31_1">____</div>
+<div id="t8m_1" class="t s31_1">_____</div>
+<div id="t8n_1" class="t s31_1">________________________</div>
+<div id="t8o_1" class="t s31_1">____________</div>
+<div id="t8p_1" class="t s31_1">__</div>
+<div id="t8q_1" class="t s31_1">____/___</div>
+<div id="t8r_1" class="t s31_1">_______</div>
+<div id="t8s_1" class="t s31_1">__________________</div>
+<div id="t8t_1" class="t s31_1">______________________</div>
+<div id="t8u_1" class="t s31_1">____________________________</div>
+<div id="t8v_1" class="t s31_1">_</div>
+<div id="t8w_1" class="t s31_1">____</div>
+<div id="t8x_1" class="t s31_1">____</div>
+<div id="t8y_1" class="t s31_1">_____</div>
+<div id="t8z_1" class="t s31_1">________________________</div>
+<div id="t90_1" class="t s31_1">____________</div>
+<div id="t91_1" class="t s31_1">__</div>
+<div id="t92_1" class="t s31_1">____/___</div>
+<div id="t93_1" class="t s31_1">_______</div>
+<div id="t94_1" class="t s31_1">__________________</div>
+<div id="t95_1" class="t s31_1">______________________</div>
+<div id="t96_1" class="t s31_1">____________________________</div>
+<div id="t97_1" class="t s31_1">_</div>
+<div id="t98_1" class="t s31_1">____</div>
+<div id="t99_1" class="t s31_1">____</div>
+<div id="t9a_1" class="t s31_1">_____</div>
+<div id="t9b_1" class="t s31_1">________________________</div>
+<div id="t9c_1" class="t s31_1">____________</div>
+<div id="t9d_1" class="t s31_1">__</div>
+<div id="t9e_1" class="t s31_1">____/___</div>
+<div id="t9f_1" class="t s31_1">_______</div>
+<div id="t9g_1" class="t s31_1">__________________</div>
+<div id="t9h_1" class="t s31_1">___________________</div>
+<div id="t9i_1" class="t s31_1">_______________________________</div>
+<div id="t9j_1" class="t s31_1">_</div>
+<div id="t9k_1" class="t s31_1">____</div>
+<div id="t9l_1" class="t s31_1">____</div>
+<div id="t9m_1" class="t s31_1">_____</div>
+<div id="t9n_1" class="t s31_1">________________________</div>
+<div id="t9o_1" class="t s31_1">____________</div>
+<div id="t9p_1" class="t s31_1">__</div>
+<div id="t9q_1" class="t s31_1">____/___</div>
+<div id="t9r_1" class="t s31_1">_______</div>
+<div id="t9s_1" class="t s31_1">__________________</div>
+<div id="t9t_1" class="t s31_1">______________________________</div>
+<div id="t9u_1" class="t s31_1">____________________</div>
+<div id="t9v_1" class="t s31_1">__</div>
+<div id="t9w_1" class="t s31_1">____</div>
+<div id="t9x_1" class="t s31_1">____</div>
+<div id="t9y_1" class="t s31_1">_____</div>
+<div id="t9z_1" class="t s31_1">________________________</div>
+<div id="ta0_1" class="t s31_1">____________</div>
+<div id="ta1_1" class="t s31_1">__</div>
+<div id="ta2_1" class="t s31_1">____/___</div>
+<div id="ta3_1" class="t s31_1">_______</div>
+<div id="ta4_1" class="t s31_1">__________________</div>
+<div id="ta5_1" class="t s31_1">______________________________</div>
+<div id="ta6_1" class="t s31_1">____________________</div>
+<div id="ta7_1" class="t s31_1">__</div>
+<div id="ta8_1" class="t s31_1">____</div>
+<div id="ta9_1" class="t s31_1">____</div>
+<div id="taa_1" class="t s31_1">_____</div>
+<div id="tab_1" class="t s31_1">________________________</div>
+<div id="tac_1" class="t s31_1">____________</div>
+<div id="tad_1" class="t s31_1">__</div>
+<div id="tae_1" class="t s31_1">____/___</div>
+<div id="taf_1" class="t s31_1">_______</div>
+<div id="tag_1" class="t s31_1">__________________</div>
+<div id="tah_1" class="t s31_1">______________________________</div>
+<div id="tai_1" class="t s31_1">____________________</div>
+<div id="taj_1" class="t s31_1">__</div>
+<div id="tak_1" class="t s31_1">____</div>
+<div id="tal_1" class="t s31_1">____</div>
+<div id="tam_1" class="t s31_1">_____</div>
+<div id="tan_1" class="t s31_1">________________________</div>
+<div id="tao_1" class="t s31_1">____________</div>
+<div id="tap_1" class="t s31_1">__</div>
+<div id="taq_1" class="t s31_1">____/___</div>
+<div id="tar_1" class="t s31_1">_______</div>
+<div id="tas_1" class="t s31_1">__________________</div>
+<div id="tat_1" class="t s31_1">______________________________</div>
+<div id="tau_1" class="t s31_1">____________________</div>
+<div id="tav_1" class="t s31_1">__</div>
+<div id="taw_1" class="t s31_1">____</div>
+<div id="tax_1" class="t s31_1">____</div>
+<div id="tay_1" class="t s31_1">_____</div>
+<div id="taz_1" class="t s31_1">________________________</div>
+<div id="tb0_1" class="t s31_1">____________</div>
+<div id="tb1_1" class="t s31_1">__</div>
+<div id="tb2_1" class="t s31_1">____/___</div>
+<div id="tb3_1" class="t s31_1">_______</div>
+<div id="tb4_1" class="t s31_1">__________________</div>
+<div id="tb5_1" class="t s31_1">___________________</div>
+<div id="tb6_1" class="t s31_1">_______________________________</div>
+<div id="tb7_1" class="t s31_1">__</div>
+<div id="tb8_1" class="t s31_1">____</div>
+<div id="tb9_1" class="t s31_1">____</div>
+<div id="tba_1" class="t s31_1">_____</div>
+<div id="tbb_1" class="t s31_1">________________________</div>
+<div id="tbc_1" class="t s31_1">____________</div>
+<div id="tbd_1" class="t s31_1">__</div>
+<div id="tbe_1" class="t s31_1">____/___</div>
+<div id="tbf_1" class="t s31_1">_______</div>
+<div id="tbg_1" class="t s31_1">__________________</div>
+<div id="tbh_1" class="t s31_1">______________________________</div>
+<div id="tbi_1" class="t s31_1">____________________</div>
+<div id="tbj_1" class="t s31_1">__</div>
+<div id="tbk_1" class="t s31_1">____</div>
+<div id="tbl_1" class="t s31_1">____</div>
+<div id="tbm_1" class="t s31_1">_____</div>
+<div id="tbn_1" class="t s31_1">________________________</div>
+<div id="tbo_1" class="t s31_1">____________</div>
+<div id="tbp_1" class="t s31_1">__</div>
+<div id="tbq_1" class="t s31_1">____/___</div>
+<div id="tbr_1" class="t s31_1">_______</div>
+<div id="tbs_1" class="t s31_1">__________________</div>
+<div id="tbt_1" class="t s31_1">______________________________</div>
+<div id="tbu_1" class="t s31_1">____________________</div>
+<div id="tbv_1" class="t s31_1">__</div>
+<div id="tbw_1" class="t s31_1">____</div>
+<div id="tbx_1" class="t s31_1">____</div>
+<div id="tby_1" class="t s31_1">_____</div>
+<div id="tbz_1" class="t s31_1">________________________</div>
+<div id="tc0_1" class="t s31_1">____________</div>
+<div id="tc1_1" class="t s31_1">__</div>
+<div id="tc2_1" class="t s31_1">____/___</div>
+<div id="tc3_1" class="t s31_1">_______</div>
+<div id="tc4_1" class="t s31_1">__________________</div>
+<div id="tc5_1" class="t s31_1">____</div>
+<div id="tc6_1" class="t s31_1">___________________</div>
+<div id="tc7_1" class="t s31_1">_______________________________</div>
+<div id="tc8_1" class="t s31_1">__</div>
+<div id="tc9_1" class="t s31_1">____</div>
+<div id="tca_1" class="t s31_1">____</div>
+<div id="tcb_1" class="t s32_1">days</div>
+<div id="tcc_1" class="t s32_1">days</div>
+<div id="tcd_1" class="t s32_1">days</div>
+<div id="tce_1" class="t s32_1">days</div>
+<div id="tcf_1" class="t s32_1">days</div>
+<div id="tcg_1" class="t s32_1">days</div>
+<div id="tch_1" class="t s32_1">days</div>
+<div id="tci_1" class="t s32_1">days</div>
+<div id="tcj_1" class="t s32_1">days</div>
+<div id="tck_1" class="t s32_1">days</div>
+<div id="tcl_1" class="t s32_1">days</div>
+<div id="tcm_1" class="t s32_1">days</div>
+<div id="tcn_1" class="t s32_1">days</div>
+<div id="tco_1" class="t s32_1">days</div>
+<div id="tcp_1" class="t s32_1">days</div>
+<div id="tcq_1" class="t s32_1">days</div>
+<div id="tcr_1" class="t s32_1">days</div>
+<div id="tcs_1" class="t s32_1">days</div>
+<div id="tct_1" class="t s32_1">days</div>
+<div id="tcu_1" class="t s32_1">days</div>
+<div id="tcv_1" class="t s32_1">days</div>
+<div id="tcw_1" class="t s32_1">days</div>
+<div id="tcx_1" class="t s32_1">days</div>
+<div id="tcy_1" class="t s32_1">days</div>
+<div id="tcz_1" class="t s32_1">days</div>
+<div id="td0_1" class="t s32_1">days</div>
+
+</div>
+</body>
+</html>
+
+</j:jelly>]]></html>
+        <name>osha_form_300_page_1</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-05 12:12:21</sys_created_on>
+        <sys_id>0d71ad98dbd5541003b3533fd39619ad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>osha_form_300_page_1</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_0d71ad98dbd5541003b3533fd39619ad</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-05 12:12:21</sys_updated_on>
+    </sys_ui_page>
+</record_update>

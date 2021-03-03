@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="CIR Incident Management">19ba9003db4d901003b3533fd3961917</category>
+        <order>900</order>
+        <property display_value="x_fru_cir.default.case.manager.group" name="x_fru_cir.default.case.manager.group">7a0ad4cfdb0d901003b3533fd39619fc</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-01 09:51:06</sys_created_on>
+        <sys_id>85ca5c8fdb0d901003b3533fd39619aa</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_fru_cir.default.case.manager.group.CIR Incident Management</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_85ca5c8fdb0d901003b3533fd39619aa</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-01 09:37:58</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>

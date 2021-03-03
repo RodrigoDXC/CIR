@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_response_plan_execution_step" label="Response Plan Execution Step Condition" max_length="40" name="x_fru_cir_response_plan_execution_step_condition" sizeclass="0" type="collection"/>
+</database>

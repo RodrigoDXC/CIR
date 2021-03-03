@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application/>
+        <key>cir_case_management_must_have_location</key>
+        <language>en</language>
+        <message>This location does not have a map and you will not be able to mark the location of the case.</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-01 15:06:47</sys_created_on>
+        <sys_id>d103e10fdbcd901003b3533fd39619c1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_case_management_must_have_location</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_message_d103e10fdbcd901003b3533fd39619c1</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-01 15:06:47</sys_updated_on>
+    </sys_ui_message>
+</record_update>

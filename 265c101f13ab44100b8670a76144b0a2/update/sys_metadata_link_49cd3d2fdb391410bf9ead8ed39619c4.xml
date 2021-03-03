@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>37b181dddbbd9010bf9ead8ed396191a</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_psi_category">
+    <x_fru_cir_psi_category action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class/>
+        <description/>
+        <icon/>
+        <message/>
+        <message_es/>
+        <name>Internal</name>
+        <parent/>
+        <short_description/>
+        <sys_created_by>psi.internal.manager</sys_created_by>
+        <sys_created_on>2020-07-03 08:59:36</sys_created_on>
+        <sys_id>37b181dddbbd9010bf9ead8ed396191a</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:06:39</sys_updated_on>
+        <tier>0</tier>
+        <type>1</type>
+        <value>root_internal_category</value>
+    </x_fru_cir_psi_category>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-10 13:07:42</sys_created_on>
+        <sys_id>49cd3d2fdb391410bf9ead8ed39619c4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Internal</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_49cd3d2fdb391410bf9ead8ed39619c4</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:07:42</sys_updated_on>
+        <tablename>x_fru_cir_psi_category</tablename>
+    </sys_metadata_link>
+</record_update>

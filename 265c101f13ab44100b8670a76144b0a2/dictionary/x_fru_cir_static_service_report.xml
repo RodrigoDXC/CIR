@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Static Service Report" max_length="40" name="x_fru_cir_static_service_report" sizeclass="0" type="collection">
+        <element label="Access control issues" max_length="4000" name="access_control_issues" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="From time" max_length="40" name="from_time" type="glide_time"/>
+        <element label="Incidents" max_length="4000" name="incidents" type="string"/>
+        <element default="javascript:getNextObjNumberPadded();" dynamic_default_value="fdcb83a85f220100a9ad2572f2b4773c" label="Number" max_length="40" name="number" read_only="true" type="string" use_dynamic_default="true"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service order" max_length="32" name="service_order" read_only="true" reference="x_fru_cir_static_service_order" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="0" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Pending" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="In Progress" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Closed" sequence="2" value="2"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Static service" mandatory="true" max_length="32" name="static_service" read_only="true" reference="x_fru_cir_static_service" type="reference"/>
+        <element label="System issues" max_length="4000" name="system_issues" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="To time" max_length="40" name="to_time" type="glide_time"/>
+        <index name="index">
+            <element name="service_order"/>
+        </index>
+        <index name="index2">
+            <element name="static_service"/>
+        </index>
+    </element>
+</database>

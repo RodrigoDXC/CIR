@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_list_screen">
+    <sys_sg_list_screen action="INSERT_OR_UPDATE">
+        <available_offline>false</available_offline>
+        <description>List of active cases that were reported by me, or assigned to me, or assigned to one of my groups.</description>
+        <dynamic_prefetch_count/>
+        <fetch_type>on_demand</fetch_type>
+        <filter/>
+        <hide_filters>false</hide_filters>
+        <hide_screen_name>false</hide_screen_name>
+        <icon display_value="icon-Address-Book">7e962ddadb9adc10d4a73533f3961984</icon>
+        <name>My cases</name>
+        <roles_override>x_fru_cir.user</roles_override>
+        <sys_class_name>sys_sg_list_screen</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-18 11:18:58</sys_created_on>
+        <sys_id>acea5648db32d410bf9ead8ed39619dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My cases</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_list_screen_acea5648db32d410bf9ead8ed39619dd</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-18 11:18:58</sys_updated_on>
+    </sys_sg_list_screen>
+    <sys_translated_text action="delete_multiple" query="documentkey=acea5648db32d410bf9ead8ed39619dd"/>
+</record_update>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtBusinessRulesFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRAssmtBusinessRulesFP</name>
+        <script><![CDATA[var CIRAssmtBusinessRulesFP = (function() {
+    var CIRAssmtBusinessRulesFP = Class.create();
+    var initialize = function() {};
+
+    // object with operators used in encoded queries
+    var queryOps = {
+        fieldValueOps: ['=', '!=', 'STARTSWITH', 'ENDSWITH', 'LIKE', 'NOTLIKE', '<', '>', '<=', '>=',
+            'SAMEAS', 'NSAMEAS', 'IN', 'NOT IN', 'BETWEEN', 'GT_FIELD', 'LT_FIELD',
+            'GT_OR_EQUALS_FIELD', 'LT_OR_EQUALS_FIELD', 'CHANGESFROM', 'CHANGESTO', 'DYNAMIC'
+        ], // operators that follow the syntax [field][operator][value] ex: active=true
+
+        fieldOps: ['ISEMPTY', 'ISNOTEMPTY', 'ANYTHING', 'EMPTYSTRING',
+            'VALCHANGES'
+        ] // operators that follow the syntax [field][operator] ex: short_descriptionISEMPTY
+    };
+
+    /*
+     * Validates the field name so no undesired characters are allowed.
+     *
+     * @param {String} assessmentFieldName - Field name of the Assessment Field
+     * @return {boolean} - True if the field name is valid, false otherwise
+     */
+    var validAssessmentFieldName = function(assessmentFieldName) {
+        var fieldNameRegex = CIRConstants.AssessmentValidations.ALLOWED_FIELD_NAME_REGEX;
+        if(assessmentFieldName == '' || (assessmentFieldName && !assessmentFieldName.match(
+            fieldNameRegex))) {
+            return false;
+        }
+        return true;
+    };
+
+
+    /*
+     * checks the syntax of condition fields of the Assessment field record
+     * called in the Validate Condition Fields BR
+     * @param {GlideRecord} fieldRecord - GlideRecord of the Assemssment field
+     * @return {Object} - object containing a isValid flag and an array with all the condition fields wrong if any
+     */
+    var validAssessmentFieldConditions = function(fieldRecord) {
+        var conditionFields = ['mandatory_condition', 'read_only_condition', 'visible_condition',
+            'field_message_condition'
+        ];
+        var respObj = {};
+
+        respObj.isValid = true;
+        respObj.fieldsWrong = [];
+
+        for(var i = 0; i < conditionFields.length; i++) {
+            if(!checkEncodedQuery(fieldRecord.getValue(conditionFields[i]))) {
+                respObj.fieldsWrong.push(fieldRecord[conditionFields[i]].getLabel());
+            }
+        }
+
+        respObj.isValid = respObj.fieldsWrong.length == 0;
+
+        return respObj;
+    };
+
+    /*
+     * checks the syntax of an encoded query using regex expressions
+     * called in the validAssessmnetFieldConditions function
+     * @param {String} query - encoded query to validate
+     * @return {Boolean} - true/false stating if the query is valid or not
+     */
+    var checkEncodedQuery = function(query) {
+        if(!query) {
+            return true;
+        }
+
+        // operators that follow the syntax [field][operator][value] ex: active=true
+        var fieldValueOpsReg = queryOps.fieldValueOps.join('|');
+        // operators that follow the syntax [field][operator] ex: short_descriptionISEMPTY
+        var fieldOpsReg = queryOps.fieldOps.join('|');
+        // split the encodede query in chunks by ^ operator
+        var querySplit = query && query.indexOf('^') !== -1 ? query.split('^') : [query];
+        //regex expressions to check syntaxes. One for each type of operators
+        var exps = [
+            "^([A-Za-z0-9_]*)((" + fieldValueOpsReg + ")(?!" + fieldOpsReg + "))((?!.*(" + fieldOpsReg +
+            "))([A-Za-z0-9]+[_().:,A-Za-z0-9]*))$",
+            "^\\S*([A-Za-z0-9_])(" + fieldOpsReg + ")$"
+        ];
+        var valid = true;
+
+        for(var i = 0; i < querySplit.length && valid === true; i++) {
+            var queryBlock = querySplit[i];
+            var validCond = false;
+
+            for(var j = 0; j < exps.length; j++) {
+                var match = queryBlock.match(exps[j]);
+                if(match) {
+                    validCond = true;
+                    break;
+                }
+            }
+            if(!validCond) {
+                valid = false;
+            }
+        }
+
+        return valid;
+    };
+
+    CIRAssmtBusinessRulesFP.prototype = {
+        initialize: initialize,
+        ValidAssessmentFieldName: validAssessmentFieldName,
+        ValidAssessmentFieldConditions: validAssessmentFieldConditions
+    };
+
+    return CIRAssmtBusinessRulesFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:16:09</sys_created_on>
+        <sys_id>7ff39f0ddb8e1410d4a73533f3961990</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIRAssmtBusinessRulesFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_7ff39f0ddb8e1410d4a73533f3961990</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 08:52:47</sys_updated_on>
+    </sys_script_include>
+</record_update>

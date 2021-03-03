@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_fru_cir_response_room_message</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_fru_cir_response_room_message">message_type=voice^EQ<item display_value="Voice" endquery="false" field="message_type" goto="false" newquery="false" operator="=" or="false" value="voice"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>cir_send_voice_message</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	var users = [];
+
+	var grTeam = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);
+	grTeam.addQuery("response_execution_id", current.response_execution_id);
+	grTeam.query();
+
+	while(grTeam.next()){
+		users.push(grTeam.user.toString());                 
+	}
+
+	var numbers = new CIRSituationUtils().GetPhoneNumbers(users.join(","));
+	var fromNumber = gs.getProperty('x_fru_cir.twilio.phone.number').toString();
+	var notify = new sn_notify.NotifyScoped();
+
+	for (var i = 0; i < numbers.length; i++) {
+		notify.call(fromNumber, numbers[i].toString(), null, null, null, current);
+	}
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-16 09:23:24</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4b43613fdb59141003b3533fd39619b7</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>cir_send_voice_message</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_4b43613fdb59141003b3533fd39619b7</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-26 10:58:06</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=4b43613fdb59141003b3533fd39619b7"/>
+</record_update>

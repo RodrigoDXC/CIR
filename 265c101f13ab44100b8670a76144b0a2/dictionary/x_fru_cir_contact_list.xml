@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Contact List" max_length="40" name="x_fru_cir_contact_list" sizeclass="9" type="collection">
+        <element label="Description" max_length="250" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Groups" max_length="4000" name="groups" reference="sys_user_group" type="glide_list"/>
+        <element display="true" label="Name" mandatory="true" max_length="40" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Escalation Team" value="0"/>
+                <element inactive_on_update="false" label="Response Team" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true,start_locked=false" label="Users" max_length="4000" name="users" reference="sys_user" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,staticDependent=sys_user" label="Users by condition" max_length="4000" name="users_condition" type="conditions"/>
+        <index name="index">
+            <element name="dimension"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" label="Injury/Illness" max_length="40" name="x_fru_cir_injury_illness" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Body location" max_length="32" name="body_location" read_only="true" reference="x_fru_cir_body_location" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="type" dependent_on_field="type" label="Category" mandatory="true" max_length="40" name="category" type="choice" use_dependent_field="true">
+            <choice>
+                <element dependent_value="illness" inactive_on_update="false" label="Diseases &amp; Disorders" sequence="10" value="diseases_and_disorders"/>
+                <element dependent_value="illness" inactive_on_update="false" label="Infectious &amp; Parasitic Diseases" sequence="20" value="infections_and_parasitic"/>
+                <element dependent_value="illness" inactive_on_update="false" label="Neoplasms, Tumors, &amp; Cancers" sequence="30" value="neoplasms_tumors_cancers"/>
+                <element dependent_value="illness" inactive_on_update="false" label="Other Diseases &amp; Disorders" sequence="40" value="other_diseases_disorders"/>
+                <element dependent_value="injury" inactive_on_update="false" label="Traumatic Injuries" sequence="50" value="traumatic_injuries"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Classification" mandatory="true" max_length="40" name="classification" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Undetermined" sequence="10" value="undetermined"/>
+                <element inactive_on_update="false" label="Not Work Related (NWR)" sequence="20" value="not_work_related"/>
+                <element inactive_on_update="false" label="Not Treated (NT)" sequence="30" value="not_treated"/>
+                <element inactive_on_update="false" label="First Aid (FAI)" sequence="40" value="first_aid"/>
+                <element inactive_on_update="false" label="Medical Treatment (MTI)" sequence="50" value="medical_treatment"/>
+                <element inactive_on_update="false" label="Restricted Work (RWI)" sequence="60" value="restricted_work"/>
+                <element inactive_on_update="false" label="Lost Time (LTI)" sequence="70" value="lost_time"/>
+                <element inactive_on_update="false" label="Fatality (FAT)" sequence="80" value="fatality"/>
+            </choice>
+        </element>
+        <element label="Date of death" max_length="40" name="date_of_death" type="glide_date"/>
+        <element display="true" label="Display Name" max_length="255" name="display_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Equipment involved" max_length="32" name="equipment_involved" reference="cmdb_ci" type="reference"/>
+        <element label="Follow-up treatment" max_length="4000" name="follow_up_treatment" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Impacted person" max_length="32" name="impacted_person" read_only="true" reference="x_fru_cir_person_impact" type="reference"/>
+        <element label="Injury coordinates" max_length="40" name="injury_coordinates" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Injury/illness caused by" mandatory="true" max_length="40" name="injury_illness_caused_by" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Biological agencies" sequence="10" value="biological_agencies"/>
+                <element inactive_on_update="false" label="Chemicals" sequence="20" value="chemicals"/>
+                <element inactive_on_update="false" label="Human agencies" sequence="30" value="human_agencies"/>
+                <element inactive_on_update="false" label="Indoor environment" sequence="40" value="indoor_environment"/>
+                <element inactive_on_update="false" label="Live animals" sequence="50" value="live_animals"/>
+                <element inactive_on_update="false" label="Machinery and fixed plant" sequence="60" value="fixed_plant"/>
+                <element inactive_on_update="false" label="Mobile plant" sequence="70" value="mobile_plant"/>
+                <element inactive_on_update="false" label="Non-living animals" sequence="80" value="non_living_animals"/>
+                <element inactive_on_update="false" label="Non-metallic substances" sequence="90" value="non_metallic_substance"/>
+                <element inactive_on_update="false" label="Non-physical agencies" sequence="100" value="non_physical_agencies"/>
+                <element inactive_on_update="false" label="Non-powered equipment" sequence="110" value="non_power_equipment"/>
+                <element inactive_on_update="false" label="Non-powered hand tools" sequence="120" value="hand_tools"/>
+                <element inactive_on_update="false" label="Other agencies" sequence="130" value="other_agencies"/>
+                <element inactive_on_update="false" label="Other materials, substances or objects" sequence="140" value="other_materials"/>
+                <element inactive_on_update="false" label="Other transport" sequence="150" value="other_transport"/>
+                <element inactive_on_update="false" label="Outdoor environment" sequence="160" value="outdoor_environment"/>
+                <element inactive_on_update="false" label="Powered equipment, tools and appliances" sequence="170" value="power_tools"/>
+                <element inactive_on_update="false" label="Road transport" sequence="180" value="road_transport"/>
+                <element inactive_on_update="false" label="Underground environment" sequence="190" value="underground_environment"/>
+                <element inactive_on_update="false" label="Unspecified agencies" sequence="200" value="unspecified_agencies"/>
+            </choice>
+        </element>
+        <element label="Justification" max_length="4000" name="justification" type="journal_input"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Mechanism of injury/illness" mandatory="true" max_length="40" name="mechanism_of_injury_illness" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Being hit by moving objects" sequence="10" value="hit_by_moving_object"/>
+                <element inactive_on_update="false" label="Contact or exposure to heat and cold" sequence="20" value="temperature_exposure"/>
+                <element inactive_on_update="false" label="Contact with electricity" sequence="30" value="electricity"/>
+                <element inactive_on_update="false" label="Contact with, or exposure to, biological factors" sequence="40" value="biological_exposure"/>
+                <element inactive_on_update="false" label="Exposure to mechanical vibration" sequence="50" value="mechanical_vibration"/>
+                <element inactive_on_update="false" label="Exposure to mental stress factors" sequence="60" value="mental_stress_factors"/>
+                <element inactive_on_update="false" label="Exposure to radiation" sequence="70" value="radiation_exposure"/>
+                <element inactive_on_update="false" label="Exposure to sharp, sudden sound" sequence="80" value="sudden_sound"/>
+                <element inactive_on_update="false" label="Exposure to variations in pressure (other than sound)" sequence="90" value="pressure_exposure"/>
+                <element inactive_on_update="false" label="Falls from a height" sequence="100" value="falling_from_height"/>
+                <element inactive_on_update="false" label="Falls on the same level (including trips and slips)" sequence="110" value="fall_from_same_level"/>
+                <element inactive_on_update="false" label="Hitting objects with a part of the body" sequence="120" value="hitting_objects"/>
+                <element inactive_on_update="false" label="Long term contact with chemical or substance" sequence="130" value="long_term_chemical_contact"/>
+                <element inactive_on_update="false" label="Long term exposure to sounds" sequence="140" value="long_term_sound"/>
+                <element inactive_on_update="false" label="Other contact with chemical or substance (includes insect and spider bites and stings)" sequence="150" value="other_chemical_contact"/>
+                <element inactive_on_update="false" label="Other mechanism of injury" sequence="160" value="other_mechanism"/>
+                <element inactive_on_update="false" label="Other muscular stress" sequence="170" value="other_muscle_stress"/>
+                <element inactive_on_update="false" label="Repetitive movement with low muscle loading" sequence="180" value="low_muscle_loading"/>
+                <element inactive_on_update="false" label="Single contact with chemical or substance (excludes insect and spider bites and stings)" sequence="190" value="single_chemical_contact"/>
+                <element inactive_on_update="false" label="Slide or cave-in" sequence="200" value="slide_or_cave_in"/>
+                <element inactive_on_update="false" label="Unspecified mechanisms of injury" sequence="210" value="unspecified_mechanisms"/>
+                <element inactive_on_update="false" label="Vehicle accident" sequence="220" value="vehicle"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="subcategory" dependent_on_field="subcategory" label="Nature of illness" max_length="40" name="nature_of_illness" type="choice" use_dependent_field="true">
+            <choice>
+                <element dependent_value="mental_disorders_syndromes" inactive_on_update="false" label="Adjustment Disorder" value="adjustment_disorder"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Aluminosis" value="aluminosis"/>
+                <element dependent_value="blood_diseases_disorders" inactive_on_update="false" label="Anemia" value="anemia"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Angina" value="angina"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Anthrax" value="anthrax"/>
+                <element dependent_value="mental_disorders_syndromes" inactive_on_update="false" label="Anxiety / Stress" value="anxiety_stress"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Anxiety or Panic Disorder" value="acquired_immune_deficiency_syndrome_aids"/>
+                <element dependent_value="mental_disorders_syndromes" inactive_on_update="false" label="Anxiety or Panic Disorder" value="anxiety_or_panic_disorder"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Arteries, Arterioles, &amp; Capillaries" value="arteries_arterioles_capillaries"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Arthropathies (i.e. Arthritis)" value="arthropathies"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Bone and Articular Cartilage" value="bone_and_articular_cartilage"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Skin" value="skin"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive="true" inactive_on_update="true" label="Acne" sequence="0" value="acne"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Asbestosis" sequence="1" value="asbestosis"/>
+                <element dependent_value="respiratory_system" inactive="true" inactive_on_update="true" label="Acute Respiratory Infections" sequence="2" value="acute_respiratory_infections"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Asthma" sequence="2" value="asthma"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Atelectasis / Collapsed Lung" sequence="3" value="atelectasis_collapsed_lung"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Bacterial Food Poisoning" sequence="4" value="bacterial_food_poisoning"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Berylliosis" sequence="5" value="berylliosis"/>
+                <element dependent_value="blood_diseases_disorders" inactive_on_update="false" label="Bleeding Disorders" sequence="6" value="bleeding_disorders"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Blindness" sequence="7" value="blindness"/>
+                <element dependent_value="blood_diseases_disorders" inactive_on_update="false" label="Blood Cancers" sequence="8" value="blood_cancers"/>
+                <element dependent_value="blood_diseases_disorders" inactive_on_update="false" label="Blood Clots" sequence="9" value="blood_clots"/>
+                <element dependent_value="benign_neoplasms_tumors" inactive="true" inactive_on_update="true" label="Bone and Articular Cartilage" sequence="11" value="bone_and_articular_cartilage"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Bronchitis" sequence="11" value="bronchitis"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Brucellosis" sequence="12" value="brucellosis"/>
+                <element dependent_value="benign_neoplasms_tumors" inactive="true" inactive_on_update="true" label="Skin" sequence="12" value="skin"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Byssinosis / Mill Fever" sequence="13" value="byssinosis_mill_fever"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Cataracts" sequence="14" value="cataracts"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Cellulitis and Abscess" sequence="15" value="cellulitis_and_abscess"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Central Nervous System" sequence="16" value="central_nervous_system"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Cerebrovascular Disease" sequence="17" value="cerebrovascular_disease"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Chickenpox" sequence="18" value="chickenpox"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Cholera" sequence="19" value="cholera"/>
+                <element dependent_value="musculoskeletal_system" inactive_on_update="false" label="Chondropathies" sequence="20" value="chondropathies"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Chronic Skin Ulcers" sequence="21" value="chronic_skin_ulcers"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Coccidioidomycosis" sequence="22" value="coccidioidomycosis"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Colitis" sequence="23" value="colitis"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Corns and Calluses" sequence="24" value="corns_and_calluses"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Cowpox and Paravaccinia" sequence="25" value="cowpox_and_paravaccinia"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Deafness" sequence="26" value="deafness"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Dengue Fever" sequence="27" value="dengue_fever"/>
+                <element dependent_value="mental_disorders_syndromes" inactive_on_update="false" label="Depression or Depressive Episode" sequence="28" value="depression_or_depressive_episode"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Dermatophytosis" sequence="29" value="dermatophytosis"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Digestive Organs" sequence="30" value="digestive_organs"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Diphtheria (whooping cough)" sequence="31" value="diphtheria_whooping_cough"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Diseases &amp; Disorders of Breast" sequence="32" value="diseases_disorders_of_breast"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Diseases &amp; Disorders of Genital Tract" sequence="33" value="diseases_disorders_of_genital_tract"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Diseases &amp; Disorders of Urinary System" sequence="34" value="diseases_disorders_of_urinary_system"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Diseases of Sebaceous Glands" sequence="35" value="diseases_of_sebaceous_glands"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Dorsopathies" sequence="36" value="dorsopathies"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Dysentery" sequence="37" value="dysentery"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Emphysema" sequence="38" value="emphysema"/>
+                <element dependent_value="digestive_system" inactive_on_update="false" label="Esophagus, Stomach, and Duodenum" sequence="39" value="esophagus_stomach_and_duodenum"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Foot and Mouth Disease" sequence="40" value="foot_and_mouth_disease"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Glaucoma" sequence="41" value="glaucoma"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Hearing Loss" sequence="42" value="hearing_loss"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Heart Failure" sequence="43" value="heart_failure"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Helminthiases (worm infections)" sequence="44" value="helminthiases_worm_infections"/>
+                <element dependent_value="benign_neoplasms_tumors" inactive_on_update="false" label="Hemangioma and Lymphangioma" sequence="45" value="hemangioma_and_lymphangioma"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Hemorrhagic Fever" sequence="46" value="hemorrhagic_fever"/>
+                <element dependent_value="digestive_system" inactive_on_update="false" label="Hernia (nontraumatic)" sequence="47" value="hernia_nontraumatic"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Herpes Simplex or Zoster" sequence="48" value="herpes_simplex_or_zoster"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Hodgkin's Disease" sequence="49" value="hodgkins_disease"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Human Immunodeficiency Virus (HIV)" sequence="50" value="human_immunodeficiency_virus_hiv"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Hypertensive Disease" sequence="51" value="hypertensive_disease"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Impetigo" sequence="52" value="impetigo"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Infectious Mononucleosis" sequence="53" value="infectious_mononucleosis"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Infertility" sequence="54" value="infertility"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Inflamation of the Eye" sequence="55" value="inflamation_eye"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Influenza" sequence="56" value="influenza"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Ingrown Nails &amp; Other Nail Diseases" sequence="57" value="ingrown_nails_other_nail_diseases"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Ischemic Heart Disease" sequence="58" value="ischemic_heart_disease"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Leprosy" sequence="59" value="leprosy"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Leptospirosis" sequence="60" value="leptospirosis"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Leukemias" sequence="61" value="leukemias"/>
+                <element dependent_value="benign_neoplasms_tumors" inactive_on_update="false" label="Lipoma (fatty tumor)" sequence="62" value="lipoma_fatty_tumor"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Lyme Disease" sequence="63" value="lyme_disease"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Lymphoma" sequence="64" value="lymphoma"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Malaria" sequence="65" value="malaria"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Measles" sequence="66" value="measles"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Meningitis" sequence="67" value="meningitis"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Meningococcal Infection" sequence="68" value="meningococcal_infection"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Mesothelial and Soft Tissue" sequence="69" value="mesothelial_and_soft_tissue"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Mesothelioma" sequence="70" value="mesothelioma"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Metabolic Disorders" sequence="71" value="metabolic_disorders"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Methicillin-resistant Infection" sequence="72" value="methicillin-resistant_infection"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="MRSA Infection" sequence="73" value="mrsa_infection"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Multiple Myeloma" sequence="74" value="multiple_myeloma"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Mumps" sequence="75" value="mumps"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Mycoses" sequence="76" value="mycoses"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Myocardial Infarction (heart attack)" sequence="77" value="heart_attack"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Nephritis" sequence="78" value="nephritis"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Nephrosis" sequence="79" value="nephrosis"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Nephrotic Syndrome" sequence="80" value="nephrotic_syndrome"/>
+                <element dependent_value="digestive_system" inactive_on_update="false" label="Noninfectious Enteritis and Colitis" sequence="81" value="noninfectious_enteritis_and_colitis"/>
+                <element dependent_value="digestive_system" inactive_on_update="false" label="Oral Cavity, Salivary Glands, and Jaws" sequence="82" value="oral_cavity_salivary_glands_and_jaws"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Ornithosis" sequence="83" value="ornithosis"/>
+                <element dependent_value="musculoskeletal_system" inactive_on_update="false" label="Osteopathies" sequence="84" value="osteopathies"/>
+                <element dependent_value="digestive_system" inactive_on_update="false" label="Other Digestive System Diseases and Disorders" sequence="85" value="other_digestive_system_diseases_and_disorders"/>
+                <element dependent_value="mental_disorders_syndromes" inactive_on_update="false" label="Other Mental Disorders" sequence="86" value="other_mental_disorders"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Other Skin Infections" sequence="87" value="other_skin_infections"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Other Spirochetal Diseases" sequence="88" value="other_spirochetal_diseases"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Pediculosis and Phthirus Infestation (lice)" sequence="89" value="pediculosis_and_phthirus_infestation_lice"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Peripheral Nervous System" sequence="90" value="peripheral_nervous_system"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Pneumoconioses" sequence="91" value="pneumoconioses"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Pneumonia" sequence="92" value="pneumonia"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Pneumonitis" sequence="93" value="pneumonitis"/>
+                <element dependent_value="mental_disorders_syndromes" inactive_on_update="false" label="Post-Traumatic Stress" sequence="94" value="post_traumatic_stress"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Pulmonary Edema" sequence="95" value="pulmonary_edema"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Pulmonary Embolism" sequence="96" value="pulmonary_embolism"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Pulmonary Fibrosis" sequence="97" value="pulmonary_fibrosis"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Pulmonary Heart Disease" sequence="98" value="pulmonary_heart_disease"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Q Fever" sequence="99" value="q_fever"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Rabies" sequence="100" value="rabies"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Reduced Vision" sequence="101" value="reduced_vision"/>
+                <element dependent_value="malignant_neoplasms_tumors" inactive_on_update="false" label="Respiratory and Intrathoracic" sequence="102" value="respiratory_and_intrathoracic"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Rickettsioses" sequence="103" value="rickettsioses"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Rubella" sequence="104" value="rubella"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Salmonella Infections" sequence="105" value="salmonella_infections"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Scabies and Other Acariases" sequence="106" value="scabies_and_other_acariases"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Sebaceous Cyst" sequence="107" value="sebaceous_cyst"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Septicemia" sequence="108" value="septicemia"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Shingles" sequence="109" value="shingles"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Siderosis" sequence="110" value="siderosis"/>
+                <element dependent_value="respiratory_system" inactive_on_update="false" label="Silicosis / Talcosis" sequence="111" value="silicosis_talcosis"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Smallpox" sequence="113" value="smallpox"/>
+                <element dependent_value="musculoskeletal_system" inactive_on_update="false" label="Soft Tissue Disorders" sequence="114" value="soft_tissue_disorders"/>
+                <element dependent_value="genitourinary_system" inactive_on_update="false" label="Spontaneous Abortion/Miscarriage" sequence="115" value="spontaneous_abortion_miscarriage"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Spotted Fevers &amp; Tick Typhus" sequence="116" value="spotted_fevers_tick_typhus"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Streptococcal Sore Throat and Scarlatina" sequence="117" value="streptococcal_sore_throat_and_scarlatina"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Stroke" sequence="118" value="stroke"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Sweat Gland Disorders (i.e. Heat Rash)" sequence="119" value="sweat_gland_disorders"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Tetanus" sequence="120" value="tetanus"/>
+                <element dependent_value="skin_subcutaneous_tissue" inactive_on_update="false" label="Thyroid Glands" sequence="121" value="thyroid_glands"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Tinnitis" sequence="122" value="tinnitis"/>
+                <element dependent_value="digestive_system" inactive_on_update="false" label="Toxic Hepatitis (noninfective)" sequence="123" value="toxic_hepatitis_noninfective"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Transient Ischemia" sequence="124" value="transient_ischemia"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Tuberculosis" sequence="125" value="tuberculosis"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Type A Viral Hepatitis" sequence="126" value="type_a_viral_hepatitis"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Type B viral Hepatitis" sequence="127" value="type_b_viral_hepatitis"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Type C viral Hepatitis" sequence="128" value="type_c_viral_hepatitis"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Type E viral Hepatitis" sequence="129" value="type_e_viral_hepatitis"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Typhoid and Paratyphoid Fevers" sequence="130" value="typhoid_and_paratyphoid_fevers"/>
+                <element dependent_value="circulatory_system" inactive_on_update="false" label="Veins &amp; Lymphatics" sequence="131" value="veins_lymphatics"/>
+                <element dependent_value="bacterial_diseases" inactive_on_update="false" label="Venereal Diseases" sequence="132" value="venereal_diseases"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Viral Conjunctivitis (ophthalmia)" sequence="133" value="viral_conjunctivitis_ophthalmia"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Viral Encephalitis" sequence="134" value="viral_encephalitis"/>
+                <element dependent_value="nervous_system_sense_organs" inactive_on_update="false" label="Visual Disturbances" sequence="135" value="visual_disturbances"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="West Nile Virus" sequence="136" value="west_nile_virus"/>
+                <element dependent_value="viral_diseases" inactive_on_update="false" label="Yellow Fever" sequence="137" value="yellow_fever"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="subcategory" dependent_on_field="subcategory" label="Nature of injury" max_length="40" name="nature_of_injury" type="choice" use_dependent_field="true">
+            <choice>
+                <element dependent_value="surface_wounds_bruises" inactive_on_update="false" label="Abrasions and Scratches" value="abrasions_scratches"/>
+                <element dependent_value="open_wounds" inactive_on_update="false" label="Amputations" value="amputations"/>
+                <element dependent_value="open_wounds" inactive_on_update="false" label="Avulsions" value="avulsions"/>
+                <element dependent_value="surface_wounds_bruises" inactive_on_update="false" label="Blisters" value="blisters"/>
+                <element dependent_value="surface_wounds_bruises" inactive_on_update="false" label="Bruises and Contusions" value="bruises_contusions"/>
+                <element dependent_value="muscles_tendons_ligameents_joints" inactive_on_update="false" label="Cartilage Fractures or Tears" value="cartilage_fractures_tears"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Chemical (First Degree)" value="chemical_first"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Chemical (Second Degree)" value="chemical_second"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Chemical (Third Degree)" value="chemical_third"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Cold/Frostbite (First Degree)" value="cold_frostbite_first"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Cold/Frostbite (Fourth Degree)" value="cold_frostbite_fourth"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Cold/Frostbite (Second Degree)" value="cold_frostbite_second"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Cold/Frostbite (Third Degree)" value="cold_frostbite_third"/>
+                <element dependent_value="intracranial" inactive_on_update="false" label="Concussions" value="concussions"/>
+                <element dependent_value="open_wounds" inactive_on_update="false" label="Cuts and Lacerations" value="cuts_lacerations"/>
+                <element dependent_value="muscles_tendons_ligameents_joints" inactive_on_update="false" label="Dislocations" value="dislocations"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Electrical (First Degree)" value="electrical_first"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Electrical (Second Degree)" value="electrical_second"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Electrical (Third Degree)" value="electrical_third"/>
+                <element dependent_value="open_wounds" inactive_on_update="false" label="Enucleations" value="enucleations"/>
+                <element dependent_value="bones_nerves_spinal_cord" inactive_on_update="false" label="Fractures" value="fractures"/>
+                <element dependent_value="open_wounds" inactive_on_update="false" label="Gunshot Wounds" value="gunshot_wounds"/>
+                <element dependent_value="intracranial" inactive_on_update="false" label="Haemorrhages" value="haemorrhages"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Heat (First Degree)" value="heat_first"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Heat (Second Degree)" value="heat_second"/>
+                <element dependent_value="burns_corrosions" inactive_on_update="false" label="Heat (Third Degree)" value="heat_third"/>
+                <element dependent_value="muscles_tendons_ligameents_joints" inactive_on_update="false" label="Herniated Discs" value="herniated_discs"/>
+                <element dependent_value="muscles_tendons_ligameents_joints" inactive_on_update="false" label="Ligament Tears" value="ligament_tears"/>
+                <element dependent_value="muscles_tendons_ligameents_joints" inactive_on_update="false" label="Meniscus Tears" value="meniscus_tears"/>
+                <element dependent_value="muscles_tendons_ligameents_joints" inactive_on_update="false" label="Muscle Pulls or Tears" value="muscle_pulls_tears"/>
+                <element dependent_value="bones_nerves_spinal_cord" inactive_on_update="false" label="Nerve Damage" value="nerve_damage"/>
+                <element dependent_value="bones_nerves_spinal_cord" inactive_on_update="false" label="Paralysis" value="paralysis"/>
+                <element dependent_value="bones_nerves_spinal_cord" inactive_on_update="false" label="Paraplegia" value="paraplegia"/>
+                <element dependent_value="bones_nerves_spinal_cord" inactive_on_update="false" label="Pinched Nerve" value="pinched_nerve"/>
+                <element dependent_value="open_wounds" inactive_on_update="false" label="Puncture Wounds" value="puncture_wounds"/>
+                <element dependent_value="bones_nerves_spinal_cord" inactive_on_update="false" label="Quadriplegia" value="quadriplegia"/>
+                <element dependent_value="intracranial" inactive_on_update="false" label="Skull Fracture" value="skull_fracture"/>
+                <element dependent_value="bones_nerves_spinal_cord" inactive_on_update="false" label="Spinal Cord Damage" value="spinal_cord_damage"/>
+                <element dependent_value="muscles_tendons_ligameents_joints" inactive_on_update="false" label="Strains or Sprains" value="strains_sprains"/>
+                <element dependent_value="muscles_tendons_ligameents_joints" inactive_on_update="false" label="Tendon Tears" value="tendon_tears"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="category" dependent_on_field="category" label="Subcategory" mandatory="true" max_length="40" name="subcategory" type="choice" use_dependent_field="true">
+            <choice>
+                <element dependent_value="infections_and_parasitic" inactive_on_update="false" label="Bacterial Diseases" sequence="10" value="bacterial_diseases"/>
+                <element dependent_value="neoplasms_tumors_cancers" inactive_on_update="false" label="Benign Neoplasms and Tumors" sequence="20" value="benign_neoplasms_tumors"/>
+                <element dependent_value="diseases_and_disorders" inactive_on_update="false" label="Blood Diseases &amp; Disorders" sequence="30" value="blood_diseases_disorders"/>
+                <element dependent_value="traumatic_injuries" inactive_on_update="false" label="Bones, Nerves, and Spinal Cord" sequence="40" value="bones_nerves_spinal_cord"/>
+                <element dependent_value="traumatic_injuries" inactive_on_update="false" label="Burns and Corrosions" sequence="50" value="burns_corrosions"/>
+                <element dependent_value="diseases_and_disorders" inactive_on_update="false" label="Circulatory System" sequence="60" value="circulatory_system"/>
+                <element dependent_value="diseases_and_disorders" inactive_on_update="false" label="Digestive System" sequence="70" value="digestive_system"/>
+                <element dependent_value="diseases_and_disorders" inactive_on_update="false" label="Genitourinary System" sequence="80" value="genitourinary_system"/>
+                <element dependent_value="traumatic_injuries" inactive_on_update="false" label="Intracranial" sequence="90" value="intracranial"/>
+                <element dependent_value="neoplasms_tumors_cancers" inactive_on_update="false" label="Malignant Neoplasms and Tumors" sequence="100" value="malignant_neoplasms_tumors"/>
+                <element dependent_value="other_diseases_disorders" inactive_on_update="false" label="Mental Disorders &amp; Syndromes" sequence="110" value="mental_disorders_syndromes"/>
+                <element dependent_value="traumatic_injuries" inactive_on_update="false" label="Muscles, Tendons, Ligameents, and Joints" sequence="120" value="muscles_tendons_ligameents_joints"/>
+                <element dependent_value="diseases_and_disorders" inactive_on_update="false" label="Musculoskeletal System" sequence="130" value="musculoskeletal_system"/>
+                <element dependent_value="diseases_and_disorders" inactive_on_update="false" label="Nervous System &amp; Sense Organs" sequence="140" value="nervous_system_sense_organs"/>
+                <element dependent_value="traumatic_injuries" inactive_on_update="false" label="Open Wounds" sequence="150" value="open_wounds"/>
+                <element dependent_value="diseases_and_disorders" inactive_on_update="false" label="Respiratory System" sequence="160" value="respiratory_system"/>
+                <element dependent_value="diseases_and_disorders" inactive_on_update="false" label="Skin &amp; Subcutaneous Tissue" sequence="170" value="skin_subcutaneous_tissue"/>
+                <element dependent_value="traumatic_injuries" inactive_on_update="false" label="Surface Wounds and Bruises" sequence="180" value="surface_wounds_bruises"/>
+                <element dependent_value="infections_and_parasitic" inactive_on_update="false" label="Viral Diseases" sequence="190" value="viral_diseases"/>
+            </choice>
+        </element>
+        <element label="Treatment description" max_length="4000" name="treatment_description" type="string"/>
+        <element label="Treatment provided by" max_length="255" name="treatment_provided_by" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Injury" sequence="10" value="injury"/>
+                <element inactive_on_update="false" label="Illness" sequence="20" value="illness"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="body_location"/>
+        </index>
+        <index name="index2">
+            <element name="equipment_involved"/>
+        </index>
+        <index name="index3">
+            <element name="impacted_person"/>
+        </index>
+    </element>
+</database>

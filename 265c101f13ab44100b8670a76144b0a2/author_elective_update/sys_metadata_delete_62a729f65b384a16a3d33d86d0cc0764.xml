@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="DELETE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-20 08:38:34</sys_created_on>
+        <sys_id>561ec0e31ba34050df7e43f4bd4bcbac</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir_situation.x_fru_cir.situation_user</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_security_acl display_value="x_fru_cir_situation">961ec0e31ba34050df7e43f4bd4bcba9</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_561ec0e31ba34050df7e43f4bd4bcbac</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-20 08:38:34</sys_updated_on>
+        <sys_user_role display_value="x_fru_cir.situation_user" name="x_fru_cir.situation_user">9a1ecca31ba34050df7e43f4bd4bcb3d</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_security_acl_role_561ec0e31ba34050df7e43f4bd4bcbac</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>hugo.reis</sys_created_by><sys_created_on>2020-03-20 08:38:34</sys_created_on><sys_id>561ec0e31ba34050df7e43f4bd4bcbac</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_fru_cir_situation.x_fru_cir.situation_user</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_security_acl display_value="x_fru_cir_situation">961ec0e31ba34050df7e43f4bd4bcba9</sys_security_acl><sys_update_name>sys_security_acl_role_561ec0e31ba34050df7e43f4bd4bcbac</sys_update_name><sys_updated_by>hugo.reis</sys_updated_by><sys_updated_on>2020-03-20 08:38:34</sys_updated_on><sys_user_role display_value="x_fru_cir.situation_user" name="x_fru_cir.situation_user">9a1ecca31ba34050df7e43f4bd4bcb3d</sys_user_role><transaction_id/></sys_security_acl_role></record_update>]]></payload>
+        <payload_hash>1185109955</payload_hash>
+        <record_name>x_fru_cir_situation.x_fru_cir.situation_user</record_name>
+        <reverted_from/>
+        <source>9edc14dbdb63005049959a82ca961963</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-20 08:38:34</sys_created_on>
+        <sys_id>5e1ec0e31ba34050df7e43f4bd4bcbae</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>170f7180f580000001</sys_recorded_at>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-20 08:52:39</sys_updated_on>
+        <type>Access Roles</type>
+        <update_guid>561ec0e3b6a34050698040f8e3d131ae</update_guid>
+        <update_guid_history>561ec0e3b6a34050698040f8e3d131ae:1185109955</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">a3ff88671ba34050df7e43f4bd4bcb5a</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-20 08:46:49</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl_role">sys_security_acl_role</sys_db_object>
+        <sys_id>62a729f65b384a16a3d33d86d0cc0764</sys_id>
+        <sys_metadata>561ec0e31ba34050df7e43f4bd4bcbac</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_fru_cir_situation.x_fru_cir.situation_user</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="x_fru_cir_situation">961ec0e31ba34050df7e43f4bd4bcba9</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_62a729f65b384a16a3d33d86d0cc0764</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_role_561ec0e31ba34050df7e43f4bd4bcbac">5e1ec0e31ba34050df7e43f4bd4bcbae</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

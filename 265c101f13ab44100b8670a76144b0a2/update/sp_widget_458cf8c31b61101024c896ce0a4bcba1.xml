@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-osha-301</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI OSHA Form 301</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    var personSys = options.record_id || '';
+    var year = new GlideDate();
+    data.currentYear = year.getByFormat("yy").split('');
+    var dateFormat = gs.getProperty('x_fru_cir.osha.date.format', 'MM-dd-yyyy');
+
+    //Must be glide record due to security that we have to bypass only for these OSHA forms
+    var personImpact = new GlideRecordSecure(CIRConstants.Tables.PERSON_IMPACT);
+    personImpact.addQuery('sys_id', personSys);
+    personImpact.query();
+    if(personImpact.next()) {
+        var grCase = personImpact.getElement('cir_case').getRefRecord();
+        var gdt = new GlideDateTime(grCase.occurred_on.toString());
+        var caseTime = gdt.getLocalTime();
+        var caseDate = new GlideDate();
+        caseDate.setValue(grCase.occurred_on);
+        var birthGDT = new GlideDate();
+        birthGDT.setValue(personImpact.date_of_birth);
+        var workStart = '';
+        if(personImpact.shift_start.toString()) {
+            workStart = new GlideDateTime(personImpact.shift_start.toString());
+            workStart = workStart.getLocalTime();
+            workStart = workStart.getByFormat('hh:mm:ss');
+        }
+        var companyStart = new GlideDate();
+        companyStart.setValue(personImpact.date_started_at_company.toString());
+        var today = new GlideDate();
+        today.setValue(new GlideDateTime().toString());
+        var dateOfDeath = new GlideDate();
+        dateOfDeath.setValue(personImpact.time_of_death.toString());
+
+        var assignedTo = grCase.assigned_to;
+        var assignedPhone = assignedTo.phone.toString().replaceAll(' ', '-');
+        assignedPhone = assignedPhone.replace('(', '');
+        assignedPhone = assignedPhone.replace(')', '');
+        assignedPhone = assignedPhone.split('-');
+
+
+        var address = personImpact.address.toString();
+        address = address.replaceAll('/n', ',');
+        address = address.split(',');
+        data.personObject = {
+            name: personImpact.first_name + ' ' + personImpact.last_name,
+            dob: birthGDT.getByFormat(dateFormat).toString().split('-'),
+            startDate: companyStart.getByFormat(dateFormat).toString().split('-'),
+            gender: personImpact.gender.toString(),
+            caseNumber: grCase.getDisplayValue(),
+            caseDate: caseDate.getByFormat(dateFormat).toString().split('-'),
+            caseTime: caseTime.getByFormat('hh:mm:ss'),
+            workStart: workStart,
+            street: address[0],
+            city: address[1],
+            state: address[2],
+            zip: address[3],
+            assignedTo: assignedTo.getDisplayValue(),
+            assignedTitle: assignedTo.title.toString(),
+            assignedPhone: assignedPhone,
+            today: today.getByFormat(dateFormat).toString().split('-'),
+            jobActivity: personImpact.activity_during_impact + ': ' + personImpact.job_description,
+            statement: personImpact.statement.toString(),
+            dateOfDeath: dateOfDeath.getByFormat(dateFormat).toString().split('-')
+        };
+
+        //Must be glide record due to security that we have to bypass only for these OSHA forms
+        var medicalDocumentation = new GlideRecordSecure(CIRConstants.Tables.MEDICAL_DOCUMENTATION);
+        medicalDocumentation.addQuery('impacted_person', personImpact.sys_id.toString());
+        medicalDocumentation.orderByDesc('issue_date');
+        medicalDocumentation.query();
+        if(medicalDocumentation.next()) {
+            data.personObject.provider = medicalDocumentation.provider_name.getDisplayValue();
+        }
+
+        var injuryArr = [];
+        var mechanism = [];
+        var count = 1;
+        //Must be glide record due to security that we have to bypass only for these OSHA forms
+        var injuries = new GlideRecordSecure(CIRConstants.Tables.INJURY_ILLNESS);
+        injuries.addQuery('impacted_person', personImpact.sys_id.toString());
+        injuries.query();
+        while(injuries.next()) {
+            injuryArr.push(count + '). ' + injuries.type.getDisplayValue() + ' - ' + injuries.category
+                .getDisplayValue() + ' - ' + injuries.subcategory.getDisplayValue() + ' - ' + injuries
+                .nature_of_injury.getDisplayValue());
+            var causedby = count + '). ' + injuries.injury_illness_caused_by.getDisplayValue() + ' - ' + injuries
+                .mechanism_of_injury_illness.getDisplayValue();
+            if(injuries.equipment_involved) {
+                causedby += ' - ' + injuries.equipment_involved.getDisplayValue();
+            }
+            mechanism.push(causedby);
+            count++;
+        }
+        data.personObject.injuries = injuryArr.toString().replace(/,/g, ', ');
+        data.personObject.mechanisms = mechanism.toString().replace(/,/g, ', ');
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 08:54:23</sys_created_on>
+        <sys_id>458cf8c31b61101024c896ce0a4bcba1</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIR CIRI OSHA Form 301</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_458cf8c31b61101024c896ce0a4bcba1</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-06 13:29:14</sys_updated_on>
+        <template><![CDATA[<div style="overflow: hidden; position: relative; width: 1500px; height: 935px;margin-left:-20px;background-color:white">
+  <!-- header -->
+  <div id="formLabel" class="t headerText noWrap"><em>OSHA's Form 301</em></div>
+  <div id="injuryHeaderLabel" class="t subHeaderText noWrap boldAndItalic">Injury and Illness Incident Report</div>
+  <div id="attention" class="t attentionBox questionText" style="left: 750px;font-size: 50px;">
+    <strong>Attention:</strong> This form contains information relating to employee health and must be used in a manner that protects the confidentiality of employees to the extent possible while the information is being used for occupational safety and health purposes.
+  </div>
+  <div id="yearLabel" class="t yearHeader">Year 20<div class="underlined" style="width:50px;height:110px">{{data.currentYear[0]}}</div><div class="underlined" style="width:50px;height:110px">{{data.currentYear[1]}}</div></div>
+  <img src="cir_osha.png" width="60" height="60" style="left: 1400px;top: 30px;position: absolute;"/>
+  <div id="departmentLaborLabel" class="t usLaborLabel noWrap boldAndItalic">U.S. Department of Labor</div>
+  <div id="oshaAdminLabel" class="t occupationalSafetyLabel noWrap boldAndItalic">Occupational Safety and Health Administration</div>
+  <div id="formApprovedLabel" class="t formApproval noWrap">Form approved OMB no. 1218-0176</div>
+  <div class="t" style="border: solid #c1c1c1 11px;top: 129px;height:1px;width: 5780px;left: 20px;"/>
+  <!-- end of header -->
+
+  <div id="leftDivider" style="left: 439px;height: 690px;border:solid 1px #D3D3D3;position: absolute;top: 150px;"/>
+  <!-- left side block -->
+  <div id="leftTextBlock" class="t leftText questionText" style="font-size: 62px;">
+    This <em>Injury and Illness Incident Report</em> is one of the first forms you must fill out when a recordable work-related injury or illness has occurred. Together with the <em>Log of Work-Related Injuries and Illnesses</em> and the <em>Summary</em>, these forms help the employer and OSHA develop a picture of the extent and severity of work-related incidents.<br/>
+    <span style="padding-left:50px"></span>Within 7 calendar days after you receive information that a recordable work-related injury or illness has occurred, you must fill out this form or an equivalent. Some state workers' compensation, insurance, or other reports may be acceptable substitutes. To be considered an equivalent form, any substitute must contain all the information asked for on this form.<br/>
+    <span style="padding-left:50px"></span>According to Public Law 91-596 and 29 CFR 1904, OSHA's recordkeeping rule, you must keep this form on file for 5 years following the year to which it pertains.<br/>
+    <span style="padding-left:50px"></span>If you need additional copies of this form, you may photocopy and use as many as you need.
+  </div>
+  <div id="completedLabel" class="t fieldLabel fieldTextSizing">Completed by</div>
+  <div id="titleLabel" class="t fieldLabel fieldTextSizing">Title</div>
+  <div id="phoneLabel" class="t fieldLabel fieldTextSizing">Phone</div>
+  <div id="dateLabel" class="t fieldLabel fieldTextSizing">Date</div>
+  <div id="assignedToField" class="t fieldTextSizing"><div class="underlined" style="width:1230px">{{data.personObject.assignedTo}}</div></div>
+  <div id="titleField" class="t fieldTextSizing"><div class="underlined" style="width:1430px">{{data.personObject.assignedTitle}}</div></div>
+  <div id="phoneField" class="t fieldTextSizing">(<div class="underlined" style="width:150px">{{data.personObject.assignedPhone[0]}}</div> )<div class="underlined" style="width:150px">{{data.personObject.assignedPhone[1]}}</div> - <div class="underlined" style="width:150px">{{data.personObject.assignedPhone[2]}}</div></div>
+  <div id="dateEntriesLabel" class="t fieldTextSizing">
+    <div class="underlined" style="width:150px">{{data.personObject.today[0]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.today[1]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.today[2]}}</div>
+  </div>
+  <!-- end of left side block -->
+
+  <!-- middle block -->
+  <div id="employeeInfo" class="t sectionHeader boldAndItalic"><em>Information about the employee</em></div>
+  <div id="question1" class="t questionText"><span class="numbering">1)</span>Full name</div>
+  <div id="question2" class="t questionText"><span class="numbering">2)</span>Street</div>
+  <div id="cityLabel" class="t questionText">City</div>
+  <div id="stateLabel" class="t questionText">State</div>
+  <div id="zipLabel" class="t questionText">ZIP</div>
+  <div id="question3" class="t questionText"><span class="numbering">3)</span>Date of birth</div>
+  <div id="question4" class="t questionText"><span class="numbering">4)</span>Date hired</div>
+  <div id="question5" class="t questionText">
+    <span class="numbering">5)</span>
+    <span><i ng-class="data.personObject.gender == 'male' ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i></span>
+    <span style="padding-left:50px">Male</span>
+  </div>
+  <div id="question5Female" class="t questionText">
+    <span><i ng-class="data.personObject.gender == 'female' ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i></span>
+    <span style="padding-left:50px">Female</span>
+  </div>
+  <div id="physicianInfo" class="t sectionHeader"><em>Information about the physician or other health care professional</em></div>
+  <div id="question6" class="t questionText"><span class="numbering">6)</span>Name of physician or other health care professional</div>
+  <div id="question7" class="t questionText noWrap"><span class="numbering">7)</span>If treatment was given away from the worksite, where was it given?</div>
+  <div id="facilityLabel" class="t questionText">Facility</div>
+  <div id="cityLabel" class="t questionText">City</div>
+  <div id="stateLabel" class="t questionText">State</div>
+  <div id="zipLabel" class="t questionText">ZIP</div>
+  <div id="nameField" class="t fieldTextSizing"><div class="underlined" style="width:1300px">{{data.personObject.name}}</div></div>
+  <div id="streetField" class="t fieldTextSizing"><div class="underlined" style="width:1300px">{{data.personObject.street}}</div></div>
+  <div id="cityField" class="t fieldTextSizing"><div class="underlined" style="width:600px">{{data.personObject.city}}</div></div>
+  <div id="stateField" class="t fieldTextSizing"><div class="underlined" style="width:350px">{{data.personObject.state}}</div></div>
+  <div id="zipField" class="t fieldTextSizing"><div class="underlined" style="width:300px">{{data.personObject.zip}}</div></div>
+  <div id="dobField" class="t fieldTextSizing noWrap" width="700px">
+    <div class="underlined" style="width:150px">{{data.personObject.dob[0]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.dob[1]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.dob[2]}}</div>
+  </div>
+  <div id="startDateField" class="t fieldTextSizing noWrap">
+    <div class="underlined" style="width:150px">{{data.personObject.startDate[0]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.startDate[1]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.startDate[2]}}</div>
+  </div>
+  <div id="blankLine" class="t fieldTextSizing">__________________________</div>
+  <div id="physicianField" class="t fieldTextSizing"><div class="underlined" style="width:1610px">{{data.personObject.provider}}</div></div>
+  <div id="facilityField" class="t fieldTextSizing">_________________________________________________________________</div>
+  <div id="facilityStreetField" class="t fieldTextSizing">_______________________________________________________________</div>
+  <div id="facilityCityField" class="t fieldTextSizing">______________________________________</div>
+  <div id="facilityStateField" class="t fieldTextSizing">_________</div>
+  <div id="facilityZipField" class="t fieldTextSizing">___________</div>
+  <div id="question8" class="t questionText"><span class="numbering">8)</span>Was employee treated in an emergency room?</div>
+  <div id="yes8" class="t questionText">
+    <i class="fa fa-square-o" aria-hidden="true"></i>
+    <span style="padding-left:20px">Yes</span>
+  </div>
+  <div id="no8" class="t questionText">
+    <i class="fa fa-square-o" aria-hidden="true"></i>
+    <span style="padding-left:20px">No</span>
+  </div>
+  <div id="question9" class="t questionText"><span class="numbering">9)</span>Was employee hospitalized overnight as an in-patient?</div>
+  <div id="yes9" class="t questionText">
+    <i class="fa fa-square-o" aria-hidden="true"></i>
+    <span style="padding-left:20px">Yes</span>
+  </div>
+  <div id="no9" class="t questionText">
+    <i class="fa fa-square-o" aria-hidden="true"></i>
+    <span style="padding-left:20px">No</span>
+  </div>
+  <!-- end of middle block -->
+
+  <div id="rightDivider" style="left: 900px;height: 690px;height: 690px;border:solid 1px #D3D3D3;position: absolute;top: 150px;"/>
+
+  <!-- right block -->
+  <div id="caseInformationSection" class="t boldAndItalic sectionHeader">Information about the case</div>
+  <div id="question10" class="t questionText"><span class="numbering">10)</span>Case number from the Log</div>
+  <div id="question11" class="t questionText noWrap"><span class="numbering">11)</span>Date of injury or illness</div>
+  <div id="question12" class="t questionText" style="width: 600px;"><span class="numbering">12)</span>Time employee began work</div>
+  <div id="question13" class="t questionText"><span class="numbering">13)</span>Time of event</div>
+  <div id="checkTimeNotDetermined" class="t questionText noWrap" style="padding-left:20px">Check if time cannot be determined</div>
+  <div id="deathDateLabel" class="t questionText">Date of death</div>
+  <div id="caseNumberField" class="t caseNumberField noWrap">
+    <div class="underlined" style="width:430px">{{data.personObject.caseNumber}}</div>
+    <span style="padding-left:30px">(Transfer the case number from the Log after you record the case.)</span>
+  </div>
+  <div id="caseDateField" class="t fieldTextSizing noWrap">
+    <div class="underlined" style="width:150px">{{data.personObject.caseDate[0]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.caseDate[1]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.caseDate[2]}}</div>
+  </div>
+  <div id="workStartField" class="t fieldTextSizing"><div class="underlined" style="width:430px">{{data.personObject.workStart}}</div></div>
+  <div id="caseTimeField" class="t fieldTextSizing"><div class="underlined" style="width:430px">{{data.personObject.caseTime}}</div></div>
+  <div id="eventTimeField" class="t fieldTextSizing noWrap">
+    <div class="underlined" style="width:150px">{{data.personObject.dateOfDeath[0]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.dateOfDeath[1]}}</div>
+    <span style="padding: 0px 10px"> / </span>
+    <div class="underlined" style="width:150px">{{data.personObject.dateOfDeath[2]}}</div>
+  </div>
+  <div id="timeNotDeterminedField" class="t timeNotDetermined"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+  <div id="question14" class="t noWrap">
+    <div class="numbering noWrap">14)</div>
+    <div class="questionSpacing questionText" style="width: 2150px;">
+      <span class="boldAndItalic">What was the employee doing just before the incident occurred?</span>
+      <span>Describe the activity, as well as the tools, equipment, or material the employee was using. Be specific. <i>Examples:</i> "climbing a ladder while carrying roofing materials"; "spraying chlorine from hand sprayer"; "daily computer key-entry."</span>
+    </div>
+  </div>
+  <div id="question15" class="t noWrap">
+    <div class="numbering noWrap">15)</div>
+    <div class="questionSpacing questionText" style="width: 2150px;">
+      <span class="boldAndItalic">What happened?</span>
+      <span>Tell us how the injury occurred.<em>Examples:</em> "When ladder slipped on wet floor, worker fell 20 feet"; "Worker was sprayed with chlorine when gasket broke during replacement"; "Worker developed soreness in wrist over time."</span>
+    </div>
+    <div class="questionAnswer">{{data.personObject.statement}}</div>
+  </div>
+  <div id="question16" class="t noWrap">
+    <div class="numbering noWrap">16)</div>
+    <div class="questionSpacing questionText" style="width: 2150px;">
+      <span class="boldAndItalic">What was the injury or illness?</span>
+      <span>Tell us the part of the body that was affected and how it was affected; be more specific than "hurt," "pain," or sore."<em>Examples:</em> "strained back"; "chemical burn, hand"; "carpal tunnel syndrome."</span>
+    </div>
+    <div class="questionAnswer">{{data.personObject.injuries}}</div>
+  </div>
+  <div id="question17" class="t noWrap">
+    <div class="numbering noWrap">17)</div>
+    <div class="questionSpacing questionText" style="width: 2150px;">
+      <span class="boldAndItalic">What object or substance directly harmed the employee?</span>
+      <span><em>Examples:</em> "concrete floor"; "chlorine"; "radial arm saw." <em>If this question does not apply to the incident, leave it blank.</em></span>
+    </div>
+    <div class="questionAnswer">{{data.personObject.mechanisms}}</div>
+  </div>
+  <div id="question18" class="t boldAndItalic questionText"><span class="numbering">18)</span><strong>If the employee died, when did death occur?</strong></div>
+  <!-- end of right block -->
+
+  <!-- footer -->
+  <div class="t" style="border: solid grey 11px;top: 850px;height:1px;width: 6150px;"/>
+  <div id="footer" class="t footerBox questionText">Public reporting burden for this collection of information is estimated to average 22 minutes per response, including time for reviewing instructions, searching existing data sources, gathering and maintaining the data needed, and completing and reviewing the collection of information. Persons are not required to respond to the collection of information unless it displays a current valid OMB control number. If you have any comments about this estimate or any other aspects of this data collection, including suggestions for reducing this burden, contact: US Department of Labor, OSHA Office of Statistical Analysis, Room N-3644, 200 Constitution Avenue, NW, Washington, DC 20210. Do not send the completed forms to this office.</div>
+  <!-- end of footer -->
+</div>]]></template>
+    </sp_widget>
+</record_update>

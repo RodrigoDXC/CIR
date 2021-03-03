@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>When a Message Template is selected, all the other fields are filled with the template's info</description>
+        <field>message_template</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Message Template selected</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (isLoading) {
+        return;
+    }
+
+    var templateField = g_form.getValue('message_template');
+    if (!g_form.isNewRecord()) {
+        if (oldValue !== newValue) {
+            g_form.clearValue('message_type');
+        }
+    }
+
+    var ga = new GlideAjax('CIRSituationUtilsClient');
+    ga.addParam('sysparm_name', 'getMessageTemplate');
+    ga.addParam('sysparm_message_template', templateField);
+    ga.getXML(updateType);
+}
+
+function updateType(response) {
+    var usedTemplate = g_form.getValue('message_template').toString();
+    var answer = response.responseXML.documentElement.getAttribute('answer');
+    var template = JSON.parse(answer);
+
+    if (usedTemplate !== '') {
+        if (template) {
+            g_form.setValue('message_type', template.type);
+            if (template.type === 'email') {
+                g_form.setValue('msg_subject', template.subject);
+                g_form.setValue('body', template.body);
+				g_form.setVisible('body', true);
+            } else {
+				g_form.setValue('msg_subject', template.name);
+                g_form.setValue('message', template.plain);
+				g_form.setVisible('message', true);
+            }
+           // g_form.setReadOnly('message_type', true);
+        }
+    }
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 10:05:58</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>113d418f1b61101024c896ce0a4bcb28</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>Message Template selected</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_113d418f1b61101024c896ce0a4bcb28</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-11-06 11:41:01</sys_updated_on>
+        <table>x_fru_cir_situation_task_execution</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

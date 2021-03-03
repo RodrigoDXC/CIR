@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="type" table="x_fru_cir_vehicle" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>type</element>
+            <name>x_fru_cir_vehicle</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-05 09:51:39</sys_created_on>
+            <sys_id>6c69aaec132290900b8670a76144b0ae</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>type</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_vehicle_type</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-05 09:51:39</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Great Sedan</label>
+            <language>en</language>
+            <name>x_fru_cir_vehicle</name>
+            <sequence>0</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-05 09:51:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7e3acf73db52d050d4a73533f39619ee</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-05 09:52:21</sys_updated_on>
+            <value>0</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Saloon</label>
+            <language>en</language>
+            <name>x_fru_cir_vehicle</name>
+            <sequence>1</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-05 09:52:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f84a03b3db52d050d4a73533f39619d8</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-05 09:52:59</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Van</label>
+            <language>en</language>
+            <name>x_fru_cir_vehicle</name>
+            <sequence>2</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-05 09:51:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fe3acf73db52d050d4a73533f39619f2</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-05 09:52:41</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>All Terrain</label>
+            <language>en</language>
+            <name>x_fru_cir_vehicle</name>
+            <sequence>3</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-05 09:51:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>323acf73db52d050d4a73533f39619f1</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-05 09:53:02</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

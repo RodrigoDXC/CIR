@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="83de43b7db52d050d4a73533f39619db" sys_domain="global" table="x_fru_cir_maintenance_unavailability" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>0</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:12:59</sys_created_on>
+            <sys_id>2f7b8aacdb621850bf9ead8ed39619eb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:12:59</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>number</element>
+            <position>1</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>e77b8aacdb621850bf9ead8ed39619ec</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>from_date</element>
+            <position>2</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>6f7b8aacdb621850bf9ead8ed39619ec</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>to_date</element>
+            <position>3</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>e37b8aacdb621850bf9ead8ed39619ed</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>vehicle</element>
+            <position>4</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>6b7b8aacdb621850bf9ead8ed39619ed</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>5</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>ef7b8aacdb621850bf9ead8ed39619ed</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>type_of_maintenance</element>
+            <position>6</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>677b8aacdb621850bf9ead8ed39619ee</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>assigned_mechanic</element>
+            <position>7</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>eb7b8aacdb621850bf9ead8ed39619ee</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>maintenance_complete</element>
+            <position>8</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>637b8aacdb621850bf9ead8ed39619ef</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>maintenance_cost</element>
+            <position>9</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>e77b8aacdb621850bf9ead8ed39619ef</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>10</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>6f7b8aacdb621850bf9ead8ed39619ef</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>maintenance_description</element>
+            <position>11</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>e37b8aacdb621850bf9ead8ed39619f0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>parts_used</element>
+            <position>12</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-07 13:13:00</sys_created_on>
+            <sys_id>6b7b8aacdb621850bf9ead8ed39619f0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_maintenance_unavailability" sys_domain="global" view="Default view">83de43b7db52d050d4a73533f39619db</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-07 13:13:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_fru_cir_maintenance_unavailability</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-05 10:11:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>83de43b7db52d050d4a73533f39619db</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_maintenance_unavailability</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_section_83de43b7db52d050d4a73533f39619db</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-05 10:11:53</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

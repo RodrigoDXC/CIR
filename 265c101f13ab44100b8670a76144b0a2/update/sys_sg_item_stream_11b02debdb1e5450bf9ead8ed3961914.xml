@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_stream">
+    <sys_sg_item_stream action="INSERT_OR_UPDATE">
+        <data_item display_value="All Service Orders (Protection Agent Reports)">e000a9ebdb1e5450bf9ead8ed3961900</data_item>
+        <interleaved_field/>
+        <name>All Service Orders Item Stream</name>
+        <sys_class_name>sys_sg_item_stream</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-04 07:32:08</sys_created_on>
+        <sys_id>11b02debdb1e5450bf9ead8ed3961914</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>All Service Orders Item Stream</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_item_stream_11b02debdb1e5450bf9ead8ed3961914</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-04 07:32:08</sys_updated_on>
+        <table>x_fru_cir_protection_agent_report</table>
+    </sys_sg_item_stream>
+</record_update>

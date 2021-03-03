@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-osha-300a</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI OSHA Form 300A</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    var summaryObject = {
+        deceased: 0,
+        missedWork: 0,
+        jobTransfers: 0,
+        otherCaseTypes: 0,
+        daysAway: 0,
+        daysRestricted: 0,
+        injuries: 0,
+        respiratory: 0,
+        skin: 0,
+        hearing: 0,
+        poison: 0,
+        otherIllnesses: 0
+    };
+    var query = options.query ||
+        'cir_case.occurred_onONthisyear@javascript:gs.beginningOfThisYear()@javascript:gs.endOfThisYear()';
+    var year = new GlideDate();
+    data.currentYear = year.getByFormat("yy").split('');
+
+    var impacts = new GlideAggregate(CIRConstants.Tables.PERSON_IMPACT);
+    impacts.addQuery(query);
+    impacts.addAggregate('COUNT', 'job_impact');
+    impacts.query();
+    while(impacts.next()) {
+        var impactTotal = impacts.getAggregate('COUNT', 'job_impact');
+        if(impacts.job_impact == 'deceased') {
+            summaryObject.deceased = impactTotal;
+        } else if(impacts.job_impact == 'lost_time') {
+            summaryObject.missedWork = impactTotal;
+        } else if(impacts.job_impact == 'restricted_duties') {
+            summaryObject.jobTransfers = impactTotal;
+        } else {
+            summaryObject.otherCaseTypes = impactTotal;
+        }
+    }
+
+    //Must be glide record due to security that we have to bypass only for these OSHA forms
+    impacts = new GlideRecordSecure(CIRConstants.Tables.PERSON_IMPACT);
+    impacts.addEncodedQuery(query);
+    impacts.addQuery('job_impact', 'IN', 'lost_time,restricted_duties');
+    impacts.query();
+    while(impacts.next()) {
+        var time = new GlideDateTime(impacts.time_lost_restricted.toString());
+        if(impacts.job_impact.toString() == 'lost_time')
+            summaryObject.daysAway += Math.floor((time.getNumericValue() / 1000) / 86400);
+        else
+            summaryObject.daysRestricted += Math.floor((time.getNumericValue() / 1000) / 86400);
+    }
+
+    var injuries = new GlideAggregate(CIRConstants.Tables.INJURY_ILLNESS);
+    injuries.addQuery('impacted_person.' + query);
+    injuries.query('type', 'injury');
+    injuries.addAggregate('COUNT');
+    injuries.query();
+    if(injuries.next()) {
+        summaryObject.injuries = injuries.getAggregate('COUNT');
+    }
+
+    var illnesses = new GlideAggregate(CIRConstants.Tables.INJURY_ILLNESS);
+    illnesses.addEncodedQuery('impacted_person.' + query);
+    illnesses.addQuery('type', 'illness');
+    illnesses.addQuery('subcategory', 'IN', 'respiratory_system,skin_subcutaneous_tissue');
+    illnesses.addAggregate('COUNT', 'subcategory');
+    illnesses.query();
+    while(illnesses.next()) {
+        if(illnesses.subcategory == 'respiratory_system') {
+            summaryObject.respiratory = illnesses.getAggregate('COUNT', 'subcategory');
+        } else {
+            summaryObject.skin = illnesses.getAggregate('COUNT', 'subcategory');
+        }
+    }
+
+    illnesses = new GlideAggregate(CIRConstants.Tables.INJURY_ILLNESS);
+    illnesses.addEncodedQuery('impacted_person.' + query);
+    illnesses.addQuery('type', 'illness');
+    illnesses.addQuery('nature_of_illness', 'hearing_loss');
+    illnesses.addAggregate('COUNT');
+    illnesses.query();
+    while(illnesses.next()) {
+        summaryObject.hearing = illnesses.getAggregate('COUNT');
+    }
+
+    illnesses = new GlideAggregate(CIRConstants.Tables.INJURY_ILLNESS);
+    illnesses.addEncodedQuery('impacted_person.' + query);
+    illnesses.addQuery('type', 'illness');
+    illnesses.addQuery('nature_of_illness', 'bacterial_food_poisoning');
+    illnesses.addAggregate('COUNT');
+    illnesses.query();
+    if(illnesses.next()) {
+        summaryObject.poison = illnesses.getAggregate('COUNT');
+    }
+
+    illnesses = new GlideAggregate(CIRConstants.Tables.INJURY_ILLNESS);
+    illnesses.addEncodedQuery('impacted_person.' + query);
+    illnesses.addQuery('type', 'illness');
+    illnesses.addQuery('subcategory', 'NOT IN', 'respiratory_system,skin_subcutaneous_tissue');
+    illnesses.addQuery('nature_of_illness', 'NOT IN', 'bacterial_food_poisoning,hearing_loss');
+    illnesses.addAggregate('COUNT');
+    illnesses.query();
+    if(illnesses.next()) {
+        summaryObject.otherIllnesses = illnesses.getAggregate('COUNT');
+    }
+
+    data.summaryObject = summaryObject;
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 08:56:58</sys_created_on>
+        <sys_id>e3adfc071b61101024c896ce0a4bcbb8</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIR CIRI OSHA Form 300A</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_e3adfc071b61101024c896ce0a4bcbb8</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-06 14:04:24</sys_updated_on>
+        <template><![CDATA[<div style="overflow: hidden; position: relative; width: 1500px; height: 935px;margin-left:-20px;background-color:white">
+  <!-- header -->
+  <div id="formLabel" class="t headerText noWrap"><em>OSHA's Form 300A</em> <span style="font-size:55px">(Rev. 01/2004)</span></div>
+  <div id="injuryHeaderLabel" class="t subHeaderText noWrap boldAndItalic">Summary of Work-Related Injuries and Illnesses</div>
+  <div id="yearLabel" class="t yearHeader">Year 20<div class="underlined" style="width:50px;height:110px">{{data.currentYear[0]}}</div><div class="underlined" style="width:50px;height:110px">{{data.currentYear[1]}}</div></div>
+  <img src="cir_osha.png" width="60" height="60" style="left: 1400px;top: 30px;position: absolute;"/>
+  <div id="departmentLaborLabel" class="t usLaborLabel noWrap boldAndItalic">U.S. Department of Labor</div>
+  <div id="oshaAdminLabel" class="t occupationalSafetyLabel noWrap boldAndItalic">Occupational Safety and Health Administration</div>
+  <div id="formApprovedLabel" class="t formApproval noWrap">Form approved OMB no. 1218-0176</div>
+  <div class="t" style="border: solid #c1c1c1 11px;top: 129px;height:1px;width: 5780px;left: 20px;"/>
+  <!-- end of header -->
+
+  <!-- left column -->
+  <div id="establishments1904" class="t wideTextBlock" style="white-space:normal">
+    <em>All establishments covered by Part 1904 must complete this Summary page, even if no work-related injuries or illnesses occurred during the year. Remember to review the Log to verify that the entries are complete and accurate before completing this summary.<br/>
+      <span style="padding-left:50px"></span>Using the Log, count the individual entries you made for each category. Then write the totals below, making sure you've added the entries from every page of the Log. If you had no cases, write "0."<br/>
+      <span style="padding-left:50px"></span>Employees, former employees, and their representatives have the right to review the OSHA Form 300 in its entirety. They also have limited access to the OSHA Form 301 or its equivalent. See 29 CFR Part 1904.35, in OSHA's recordkeeping rule, for further details on the access provisions for these forms.<br/>
+    </em>
+  </div>
+
+  <div id="numberCasesLabel" class="t formHeader boldAndItalic">
+    <div style="height:30px"/>
+    <span style="padding-left:50px"/>
+    Number of Cases</div>
+  <div id="totalDeceasedLabel" class="t normalFieldLabelFont fieldLabel">Total number of deaths</div>
+  <div id="deceasedField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:400px">{{data.summaryObject.deceased}}</div></div>
+  <div id="gLabel" class="t letteringLabel">(G) </div>
+  <div id="casesDaysWithoutWorkLabel" class="t normalFieldLabelFont fieldLabel">Total number of cases with days away from work</div>
+  <div id="missedWorkField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:400px">{{data.summaryObject.missedWork}}</div></div>
+  <div id="hLabel" class="t letteringLabel">(H) </div>
+  <div id="totalCaseJobTransferLabel" class="t normalFieldLabelFont fieldLabel">Total number of cases with job transfer or restriction</div>
+  <div id="jobTransferField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:520px">{{data.summaryObject.jobTransfers}}</div></div>
+  <div id="iLabel" class="t letteringLabel">(I) </div>
+  <div id="totalOtherCases" class="t normalFieldLabelFont fieldLabel">Total number of other recordable cases</div>
+  <div id="otherCasesField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:400px">{{data.summaryObject.otherCaseTypes}}</div></div>
+  <div id="jLabel" class="t letteringLabel">(J)</div>
+
+  <div id="numberDaysLabel" class="t formHeader boldAndItalic">
+    <div style="height:30px"/>
+    <span style="padding-left:50px"/>
+    Number of Days</div>
+  <div id="daysAwayLabel" class="t normalFieldLabelFont fieldLabel">Total number of days away from work</div>
+  <div id="daysAwayField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:660px">{{data.summaryObject.daysAway}}</div></div>
+  <div id="kLabel" class="t letteringLabel">(K) </div>
+  <div id="restrictedDaysLabel" class="t normalFieldLabelFont fieldLabel">Total number of days of job transfer or restriction</div>
+  <div id="restrictedDaysField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:675px">{{data.summaryObject.daysRestricted}}</div></div>
+  <div id="lLabel" class="t letteringLabel">(L)</div>
+
+  <div id="injuryIllnessTypeLabel" class="t formHeader boldAndItalic">
+    <div style="height:30px"/>
+    <span style="padding-left:50px"/>
+    Injury and Illness Types</div>
+  <div id="totalNumberLabel" class="t normalFieldLabelFont">Total number of . . .</div>
+  <div id="mLabel" class="t letteringLabel">(M)</div>
+  <div id="label1" class="t letteringLabel">(1)</div>
+  <div id="injuriesLabel" class="t normalFieldLabelFont">Injuries</div>
+  <div id="injuriesField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:300px">{{data.summaryObject.injuries}}</div></div>
+  <div id="label2" class="t letteringLabel">(2)</div>
+  <div id="skinDisordersLabel" class="t normalFieldLabelFont">Skin disorders</div>
+  <div id="skinDisordersField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:300px">{{data.summaryObject.skin}}</div></div>
+  <div id="label3" class="t letteringLabel">(3)</div>
+  <div id="respiratoryLabel" class="t normalFieldLabelFont">Respiratory conditions</div>
+  <div id="respiratoryField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:300px">{{data.summaryObject.respiratory}}</div></div>
+  <div id="label4" class="t letteringLabel">(4)</div>
+  <div id="poisonLabel" class="t normalFieldLabelFont">Poisonings</div>
+  <div id="poisonField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:300px">{{data.summaryObject.poison}}</div></div>
+  <div id="label5" class="t letteringLabel">(5)</div>
+  <div id="hearingLabel" class="t normalFieldLabelFont">Hearing loss</div>
+  <div id="hearingField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:300px">{{data.summaryObject.hearing}}</div></div>
+  <div id="label6" class="t letteringLabel">(6)</div>
+  <div id="otherIllnessesLabel" class="t normalFieldLabelFont">All other illnesses</div>
+  <div id="otherIllnessesField" class="t normalFieldLabelFont"><div class="underlined300A" style="width:300px">{{data.summaryObject.otherIllnesses}}</div></div>
+
+  <div id="summaryPageNotice" class="t boldAndItalic">Post this Summary page from February 1 to April 30 of the year following the year covered by the form.</div>
+  <div id="publicReporting1" class="t formApproval">Public reporting burden for this collection of information is estimated to average 58 minutes per response, including time to review the instructions, search and gather the data needed, and</div>
+  <div id="publicReporting2" class="t formApproval">complete and review the collection of information. Persons are not required to respond to the collection of information unless it displays a currently valid OMB control number. If you have any</div>
+  <div id="publicReporting3" class="t formApproval">comments about these estimates or any other aspects of this data collection, contact: US Department of Labor, OSHA Office of Statistical Analysis, Room N-3644, 200 Constitution Avenue, NW,</div>
+  <div id="publicReporting4" class="t formApproval">Washington, DC 20210. Do not send the completed forms to this office.</div>
+  <!-- end left column -->
+
+  <!-- right column -->
+  <div class="t" style="width: 1900px;height: 2800px;border: solid grey 5px;left: 970px;top: 160px;background-color:white;z-index:1"/>
+  <div class="t" style="width: 1900px;height: 2800px;background-color:black;left: 980px;top: 170px;z-index:0"/>
+  <div id="establishmentInfo" class="t boldAndItalic sectionHeader">Establishment information</div>
+  <div id="establishmentName" class="t boldAndItalic s16_2" style="font-size:45px">Your establishment name</div>
+  <div id="establishmentNameField" class="t rightColumnFontSize">__________________________________________</div>
+  <div id="establishmentStreet" class="t rightColumnFontSize">Street</div>
+  <div id="establishmentStreetField" class="t rightColumnFontSize">_____________________________________________________</div>
+  <div id="establishmentCity" class="t rightColumnFontSize">City</div>
+  <div id="establishmentCityField" class="t rightColumnFontSize">____________________________ State ______ ZIP _________</div>
+  <div id="industryDescription" class="t rightColumnFontSize">Industry description (<em>e.g., Manufacture of motor truck trailers</em>)</div>
+  <div id="industryDescriptionField" class="t rightColumnFontSize">_______________________________________________________</div>
+  <div id="sicLabel" class="t rightColumnFontSize">Standard Industrial Classification (SIC), if known (<em>e.g., 3715</em>)</div>
+  <div id="sicField" class="t rightColumnFontSize">____ ____ ____ ____</div>
+  <div id="orLabel" class="t rightColumnFontSize">OR</div>
+  <div id="naicsLabel" class="t rightColumnFontSize">North American Industrial Classification (NAICS), if known (e.g., 336212)</div>
+  <div id="naicsField" class="t rightColumnFontSize">____ ____ ____ ____ ____ ____</div>
+  <div id="employmentInfo" class="t boldAndItalic sectionHeader" style="width:1500px;white-space:normal;text-align:left">Employment information <div style="font-weight:normal;display:inline;font-size: 40px;">(If you don't have these figures, see the Worksheet on the back of this page to estimate.)</div></div>  
+  <div id="averageEmployeesLabel" class="t rightColumnFontSize">Annual average number of employees</div>
+  <div id="averageEmployeesField" class="t rightColumnFontSize">______________</div>
+  <div id="totalHoursWorkedLabel" class="t rightColumnFontSize">Total hours worked by all employees last year</div>
+  <div id="totalHoursWorkedField" class="t rightColumnFontSize">______________</div>
+  <div id="signHereLabel" class="t boldAndItalic sectionHeader">Sign here</div>
+  <div id="falsifyingLabel" class="t"><strong>Knowingly falsifying this document may result in a fine.</strong></div>
+  <div id="certifyLabel" class="t signatureFont" style="white-space: normal;width: 1500px;text-align: left;">I certify that I have examined this document and that to the best of my knowledge the entries are true, accurate, and complete.</div>
+  <div id="signLine1" class="t signatureFont">___________________________________________________________</div>
+  <div id="signLine2" class="t signatureFont">___________________________________________________________</div>
+  <div id="companyExecutiveLabel" class="t signatureLabelFont">Company executive</div>
+  <div id="titleSignLabel" class="t signatureLabelFont">Title</div>
+  <div id="phoneSignLabel" class="t signatureLabelFont">Phone</div>
+  <div id="dateSignLabel" class="t signatureLabelFont">Date</div>
+  <div id="phoneParen1" class="t signatureLabelFont">(</div>
+  <div id="phoneParen2" class="t signatureLabelFont">)</div>
+  <div id="phoneParen3" class="t signatureLabelFont">-</div>
+  <div id="dateSlash1" class="t signatureLabelFont">/</div>
+  <div id="dateSlash2" class="t signatureLabelFont">/</div>
+  <!-- end left column -->
+
+  <div class="t" style="border: solid grey 30px;top: 900px;height:1px;width: 5850px;"/>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_stream">
+    <sys_sg_item_stream action="INSERT_OR_UPDATE">
+        <data_item display_value="CIR - Contributing Factor - Organizational Factors - Added">007c495adb5adc10d4a73533f3961932</data_item>
+        <interleaved_field/>
+        <name>CIR - Selected Factors - Organizational Factors</name>
+        <sys_class_name>sys_sg_item_stream</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-04 15:13:56</sys_created_on>
+        <sys_id>b56a8babdb1a9050d4a73533f39619c8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR - Selected Factors - Organizational Factors</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_item_stream_b56a8babdb1a9050d4a73533f39619c8</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-04 15:13:56</sys_updated_on>
+        <table/>
+    </sys_sg_item_stream>
+</record_update>

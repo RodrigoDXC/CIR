@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_data_item">
+    <sys_sg_data_item action="INSERT_OR_UPDATE">
+        <condition_type>script</condition_type>
+        <description/>
+        <group_by/>
+        <instance_relative_url_qc/>
+        <name>My static SO</name>
+        <query_condition/>
+        <query_condition_script><![CDATA[(function getQueryString(input) {
+    //Type appropriate comment here, and begin script below
+ var queryString = 'guardDYNAMIC90d1921e5f510100a9ad2572f2b477fe^ORDERBYDESCstatic_service.date^ORDERBYDESCplanned_from_time';
+ return queryString; 
+ })(input);]]></query_condition_script>
+        <sys_class_name>sys_sg_data_item</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-29 09:22:39</sys_created_on>
+        <sys_id>1f50c7a5dbd25050bf9ead8ed39619d2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My static SO</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_data_item_1f50c7a5dbd25050bf9ead8ed39619d2</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-29 09:22:39</sys_updated_on>
+        <table>x_fru_cir_static_service_order</table>
+    </sys_sg_data_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=1f50c7a5dbd25050bf9ead8ed39619d2"/>
+</record_update>

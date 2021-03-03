@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtReadFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected script for Database reading for the Assessment functionality. Not extensible.</description>
+        <name>CIRAssmtReadFP</name>
+        <script><![CDATA[var CIRAssmtReadFP = function() {
+    /**
+     * Function to get the Assessment SysID from the Assessment Instance.
+     *
+     * @param {String} assessmentInstanceId - String containing the selected Assessment Instance SysID
+     * @return {String|null} - SysID of the Assessment if found, null otherwise
+     */
+    var getAssessmentIdFromAssessmentInstance = function(assessmentInstanceId) {
+        var grAssessmentInstance = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+        if(assessmentInstanceId && grAssessmentInstance.get(assessmentInstanceId)) {
+            var objAssessmentDefinition =
+                grAssessmentInstance.getElement('assessment_definition').getRefRecord();
+            if(objAssessmentDefinition && Object.keys(objAssessmentDefinition).length > 0) {
+                return objAssessmentDefinition.getValue('category');
+            }
+        }
+        return null;
+    };
+
+    /**
+     * Function to get the Assessment Definitions' SysID, Category and Catalog data.
+     *
+     * @param {String} categoryId - String containing the Category SysID
+     *                              (if existent, otherwise return all Definitions with Category)
+     * @param {Array} arrAssessmentDefinitionIds - Array containing the Assessment Definitions SysIDs
+     * @return {Array[Object]} - Array of JSON Objects with the Assessment Definitions' SysID,
+     *                           Category and Catalog data
+     */
+    var getAssessmentsInfo = function(categoryId, arrAssessmentDefinitionIds) {
+        var arrAssessments = [];
+
+        var grAssessmentDefinition = getAssessmentDefinition(categoryId, arrAssessmentDefinitionIds);
+        while(grAssessmentDefinition.next()) {
+            var objAssessment = grAssessmentDefinition.getElement('category').getRefRecord();
+            var objAssessmentCatalog = grAssessmentDefinition.getElement('catalog').getRefRecord();
+            arrAssessments.push(buildAssessmentsInfoData(
+                grAssessmentDefinition.getValue('sys_id'), objAssessment, objAssessmentCatalog));
+        }
+        return arrAssessments;
+    };
+
+    /**
+     * Function to get the Assessment Definitions' records.
+     *
+     * @param {String} categoryId - String containing the Category SysID
+     *                              (if existent, otherwise return all Definitions with Category)
+     * @param {Array} arrAssessmentDefinitionIds - Array containing the Assessment Definitions SysIDs
+     * @return {Object} - GlideRecord containing the Assessment Definitions records
+     */
+    var getAssessmentDefinition = function(categoryId, arrAssessmentDefinitionIds) {
+        var grAssessmentDefinition = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        grAssessmentDefinition.addActiveQuery();
+        grAssessmentDefinition.addQuery('catalog.active=true^catalogISNOTEMPTY');
+        if(categoryId) {
+            grAssessmentDefinition.addQuery('category', categoryId);
+        } else {
+            grAssessmentDefinition.addQuery('categoryISNOTEMPTY');
+        }
+        if(arrAssessmentDefinitionIds && arrAssessmentDefinitionIds.length > 0) {
+            grAssessmentDefinition.addQuery('sys_idIN' + arrAssessmentDefinitionIds.join());
+        }
+        grAssessmentDefinition.orderBy('category.order');
+        grAssessmentDefinition.orderBy('category.title');
+        grAssessmentDefinition.addQuery('published', 'true');
+        grAssessmentDefinition.query();
+        return grAssessmentDefinition;
+    };
+
+    /**
+     * Function to build the response object.
+     *
+     * @param {String} assessmentDefinitionId - String containing the Assessment Definition SysID
+     * @param {Object} objAssessment - GlideRecord containing the Category data
+     * @param {Object} objAssessmentCatalog - GlideRecord containing the Catalog data
+     * @return {Object} - Object containing the Assessment Definition ID, Category and Catalog data
+     */
+    var buildAssessmentsInfoData = function(assessmentDefinitionId, objAssessment, objAssessmentCatalog) {
+        return {
+            sys_id: assessmentDefinitionId,
+            assessmentCategory: {
+                sys_id: objAssessment.getValue('sys_id'),
+                title: objAssessment.getValue('title'),
+                description: objAssessment.getValue('description')
+            },
+            assessmentCatalog: {
+                sys_id: objAssessmentCatalog.getValue('sys_id'),
+                title: objAssessmentCatalog.getValue('title')
+            }
+        };
+    };
+
+    /**
+     * Function to get the Assessment Definitions SysID, Category and Catalog info for a specific user.
+     *
+     * @param {String} categoryId - String containing the Category SysID
+     *                              (if existent, otherwise return all Definitions with Category)
+     * @return {Array[Object]} - Array of JSON Objects with the Assessment Definitions' SysID,
+     *                           Category and Catalog info
+     */
+    var getAssessmentsInfoForUser = function(categoryId) {
+        var arrAssessmentDefinitionIds = [];
+
+        if(!isUserAdmin()) {
+            var gaAssessmentInstance = new GlideAggregate(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+            gaAssessmentInstance.addQuery('assessment_definition.active', true);
+			gaAssessmentInstance.addQuery('assessment_definition.published', true);
+            gaAssessmentInstance.addQuery('user', gs.getUserID());
+            gaAssessmentInstance.groupBy('assessment_definition');
+            gaAssessmentInstance.query();
+            while(gaAssessmentInstance.next()) {
+                arrAssessmentDefinitionIds.push(gaAssessmentInstance.getValue('assessment_definition'));
+            }
+            if(!arrAssessmentDefinitionIds || arrAssessmentDefinitionIds.length === 0) {
+                return [];
+            }
+        }
+
+        return getAssessmentsInfo(categoryId, arrAssessmentDefinitionIds);
+    };
+
+    /**
+     * Function to get the Assessment Instance data from an existent instance.
+     *
+     * @param {String} assessmentInstanceId - String containing the selected Assessment Instance SysID
+     *                   (if existent, otherwise fallback to first found)
+     * @param {Array[Object]} fieldValues - Array of JSON objects with the fields info
+     * @return {Array[Object]} - Array of JSON objects with the field name and field value
+     */
+    var getAssessmentInstanceSectionData = function(assessmentInstanceId, fieldValues) {
+        var arrCurrentSectionData = [];
+
+        var grAssessmentAnswer = new GlideRecord(CIRConstants.Tables.ASSESSMENT_ANSWER);
+        grAssessmentAnswer.addQuery('assessment_instance_section.assessment_instance', assessmentInstanceId);
+        grAssessmentAnswer.addQuery('assessment_instance_section.assessment_section.active', true);
+        grAssessmentAnswer.query();
+        while(grAssessmentAnswer.next()) {
+            var assessmentInstanceSection =
+                grAssessmentAnswer.getElement('assessment_instance_section').getRefRecord();
+            var assessmentInstance =
+                assessmentInstanceSection.getElement('assessment_instance').getRefRecord();
+            if(!isUserAdmin() && assessmentInstance.getValue('user') !== gs.getUserID()) {
+                return null;
+            }
+            var assessmentField = grAssessmentAnswer.getElement('assessment_field').getRefRecord();
+            var fieldId = assessmentField.getValue('variable');
+            fieldValues.forEach(function(fieldObj) {
+                if(fieldObj.fieldId === fieldId) {
+                    currentField = fieldObj;
+                } else {
+                    return;
+                }
+
+                arrCurrentSectionData.push({
+                    fieldName: currentField.fieldName,
+                    fieldValue: grAssessmentAnswer.getValue('value')
+                });
+            });
+        }
+
+        return arrCurrentSectionData;
+    };
+
+    /**
+     * Function to get all the Users with Assessment Instances.
+     *
+     * @param {String} userId - String containing the SysID of the selected User
+     * @param {String} assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     *                                        (if existent, otherwise fallback to first found)
+     * @param {String} userKeywordSearch - String containing the keyword to search for the username
+     * @return {Object} - JSON Object with an array of users and the user connected to the selected Assessment Instance
+     */
+    var getAssessmentInstanceUsers = function(userId, assessmentInstanceId, userKeywordSearch) {
+        var usersData = {
+            objSelectedUser: {
+                sys_id: gs.getUserID(),
+                name: gs.getUserDisplayName()
+            },
+            arrUsers: [],
+            usersCount: 0
+        };
+        if(!isUserAdmin()) {
+            return usersData;
+        }
+        var user = undefined;
+
+        var grAssessmentInstance = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+        if(assessmentInstanceId && grAssessmentInstance.get(assessmentInstanceId)) {
+            user = grAssessmentInstance.getElement('user').getRefRecord();
+        } else {
+            if(!userId || userId === 'undefined') {
+                grAssessmentInstance.addQuery('user', gs.getUserID());
+            } else if(isUserAdmin()) {
+                grAssessmentInstance.addQuery('user', userId);
+            }
+            grAssessmentInstance.orderByDesc('number');
+            grAssessmentInstance.query();
+            if(grAssessmentInstance.next()) {
+                user = grAssessmentInstance.getElement('user').getRefRecord();
+            }
+        }
+        usersData.objSelectedUser = buildUserData(user);
+
+        usersData.arrUsers = [];
+        if(isUserAdmin()) {
+            var currIndex = 0;
+            var window = 100;
+            var gaAssessmentInstance = new GlideAggregate(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+            gaAssessmentInstance.addQuery('user', '!=', '');
+            if(userKeywordSearch) {
+                gaAssessmentInstance.addQuery('user.name', 'CONTAINS', userKeywordSearch);
+            }
+            gaAssessmentInstance.groupBy('user');
+            gaAssessmentInstance.query();
+            usersData.usersCount = gaAssessmentInstance.getRowCount();
+            while(gaAssessmentInstance.next() && (currIndex++ < window)) {
+                var objUserData = {
+                    sys_id: gaAssessmentInstance.getValue('user') + '',
+                    name: gaAssessmentInstance.user.name + ''
+                };
+                if(Object.keys(usersData.objSelectedUser).length === 0 && usersData.arrUsers.length == 0) {
+                    usersData.objSelectedUser = objUserData;
+                }
+                usersData.arrUsers.push(objUserData);
+            }
+        }
+        return usersData;
+    };
+
+    /**
+     * Function to build the user's data.
+     *
+     * @param {Object} user - GlideRecord object containing the user's data, undefined otherwise
+     * @return {Object} - JSON Object with the User's SysID and Name if existent, empty object otherwise
+     */
+    var buildUserData = function(user) {
+        if(user === undefined) {
+            return {};
+        }
+        return {
+            sys_id: user.getValue('sys_id'),
+            name: user.getValue('name')
+        };
+    };
+
+    /**
+     * Function to get all the Assessment Instances of a User.
+     *
+     * @param {String} assessmentId - String containing the SysID of the current Assessment
+     * @param {String} userId - String containing the SysID of the selected User
+     * @param {String} assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     * @return {Object} - JSON Object with an array of Assessment Instances, a JSON object with 
+     */
+    var getAssessmentInstancesData = function(assessmentId, userId, assessmentInstanceId) {
+        var JOIN_DELIMITER = ', ';
+
+        var arrAssessmentInstances = [];
+        var arrIncompleteSections = [];
+        var objCurrentAssessmentInstance = {};
+
+        try {
+            var grAssessmentInstance = getAssessmentInstances(userId, assessmentId);
+            while(grAssessmentInstance.next()) {
+                var currentInstance = getCurrentInstanceData(grAssessmentInstance, assessmentInstanceId);
+                if(currentInstance.sections.length > 0) {
+                    objCurrentAssessmentInstance = currentInstance;
+                    arrIncompleteSections = currentInstance.sections.filter(function(section) {
+                        return section.scorePercent > 0;
+                    }).map(function(section) {
+                        return section.name;
+                    });
+                }
+                arrAssessmentInstances.push(currentInstance);
+            }
+        } catch (err) {
+            gs.debug(err);
+        }
+
+        return {
+            'assessmentInstances': arrAssessmentInstances,
+            'currentAssessmentInstance': objCurrentAssessmentInstance,
+            'incompleteSections': arrIncompleteSections.join(JOIN_DELIMITER)
+        };
+    };
+
+    /**
+     * Function to get the data need from the current Assessment Instance.
+     *
+     * @param {Object} grAssessmentInstance - GlideRecord of the current Assessment Instance
+     * @param {String} assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     * @return {Object} - JSON Object with the data of the current Assessment Instance
+     */
+    var getCurrentInstanceData = function(grAssessmentInstance, assessmentInstanceId) {
+        return {
+            sys_id: grAssessmentInstance.getValue('sys_id'),
+            number: grAssessmentInstance.getValue('number'),
+            created_on: grAssessmentInstance.getValue('sys_created_on'),
+            state: grAssessmentInstance.getDisplayValue('state'),
+            styleClass: getStateBasedStyle(grAssessmentInstance.getValue('state')),
+            sections: getSectionsForUser(grAssessmentInstance, assessmentInstanceId)
+        };
+    };
+
+    /**
+     * Function to get the style class for the current Assessment Instance.
+     *
+     * @param {String} state - String containing the state of the Assessment Instance
+     * @return {String} - String containing the style class for the current Assessment Instance's state
+     */
+    var getStateBasedStyle = function(state) {
+        var STATE_STYLE = {
+            in_progress: 'stateInProgressColor',
+            complete: 'stateCompleteColor',
+            canceled: 'stateCanceledColor'
+        };
+        return STATE_STYLE[state];
+    };
+
+    /**
+     * Function to get the sections of the current Assessment Instance.
+     *
+     * @param {Object} grAssessmentInstance - GlideRecord of the current Assessment Instance
+     * @param {String} assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     * @return {Object} - Array containing the data of the Assessment Sections for the current Assessment Instance
+     */
+    var getSectionsForUser = function(grAssessmentInstance, assessmentInstanceId) {
+        if(assessmentInstanceId && grAssessmentInstance.getValue('sys_id') !== assessmentInstanceId) {
+            return [];
+        }
+
+        var arrSections = [];
+        var grAssessmentSection = getAssessmentSections(grAssessmentInstance.getValue('assessment_definition'));
+        while(grAssessmentSection.next()) {
+            arrSections.push(buildSectionDataObj(grAssessmentSection,
+                grAssessmentInstance.getValue('sys_id')));
+        }
+        return arrSections;
+    };
+
+    /**
+     * Function to build an object containing the current Assessment Section's data for the 
+     * current Assessment Section.
+     *
+     * @param {Object} grAssessmentSection - GlideRecord of the current Assessment Section
+     * @param {String} assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     * @return {Object} - Object containing the current Assessment Section's data
+     */
+    var buildSectionDataObj = function(grAssessmentSection, assessmentInstanceId) {
+        var SCORE_STATES = {
+            complete: 'scoreComplete',
+            incomplete: 'scoreIncomplete'
+        };
+        var recordProducer = grAssessmentSection.getElement('record_producer').getRefRecord();
+        var scorePercent = 100;
+        var grAssessmentInstanceSection =
+            getAssessmentInstanceSection(assessmentInstanceId, grAssessmentSection.getValue('sys_id'));
+        CIRGlideUtilsFP.ValidateSingleRowReturned(grAssessmentInstanceSection);
+        if(grAssessmentInstanceSection.next()) {
+            var score = grAssessmentInstanceSection.getValue('score');
+            if(score) {
+                scorePercent -= parseInt(score);
+            }
+        }
+        return {
+            sys_id: recordProducer.getValue('sys_id'),
+            name: recordProducer.getValue('name'),
+            picture: recordProducer.getValue('picture'),
+            scorePercent: scorePercent,
+            scoreStatus: scorePercent === 0 ? SCORE_STATES.complete : SCORE_STATES.incomplete
+        };
+    };
+
+    /**
+     * Function to get the Assessment Instances records.
+     *
+     * @param {String} userId - String containing the User SysID
+     * @param {String} assessmentId - String containing the Category SysID
+     * @return {Object} - GlideRecord containing the Assessment Instances records
+     */
+    var getAssessmentInstances = function(userId, assessmentId) {
+        var grAssessmentInstance = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+        if(!isUserAdmin()) {
+            grAssessmentInstance.addQuery('user', gs.getUserID());
+        } else {
+            grAssessmentInstance.addQuery('user', userId);
+        }
+        grAssessmentInstance.addQuery('assessment_definition.category', assessmentId);
+        grAssessmentInstance.orderByDesc('number');
+        grAssessmentInstance.query();
+        return grAssessmentInstance;
+    };
+
+    /**
+     * Function to get the Assessment Sections records.
+     *
+     * @param {String} assessmentDefinitionId - String containing the Assessment Definition SysID
+     * @return {Object} - GlideRecord containing the Assessment Sections records
+     */
+    var getAssessmentSections = function(assessmentDefinitionId) {
+        var grAssessmentSection = new GlideRecord(CIRConstants.Tables.ASSESSMENT_SECTION);
+        grAssessmentSection.addActiveQuery();
+        grAssessmentSection.addQuery('assessment_definition', assessmentDefinitionId);
+        grAssessmentSection.orderBy('order');
+        grAssessmentSection.orderBy('name');
+        grAssessmentSection.query();
+        return grAssessmentSection;
+    };
+
+    /**
+     * Function to get the Assessment Instance Sections records.
+     *
+     * @param {String} assessmentInstanceId - String containing the Assessment Instance SysID
+     * @param {String} assessmentSectionId - String containing the Assessment Section SysID
+     * @return {Object} - GlideRecord containing the Assessment Instance Sections records
+     */
+    var getAssessmentInstanceSection = function(assessmentInstanceId, assessmentSectionId) {
+        var grAssessmentInstanceSection = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE_SECTION);
+        grAssessmentInstanceSection.addQuery('assessment_instance', assessmentInstanceId);
+        grAssessmentInstanceSection.addQuery('assessment_section', assessmentSectionId);
+        grAssessmentInstanceSection.query();
+        return grAssessmentInstanceSection;
+    };
+
+    /**
+     * Function to check if all the mandatory assessment fields where created.
+     *
+     * @param {String} assessmentId - String containing the SysID of the current Assessment
+     * @return {boolean} - True in case all the fields were created, false otherwise
+     */
+    var checkMandatoryFieldsCreation = function(assessmentId) {
+        var grField = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+        grField.addQuery('assessment_section.assessment_definition', assessmentId);
+        grField.addQuery('mandatory', true);
+        grField.addEncodedQuery('variableISEMPTY');
+        grField.query();
+
+        while(grField.next()) {
+            var grCategory = new GlideRecord(CIRConstants.Tables.CATEGORY);
+            if(grCategory.get(grField.assessment_section.assessment_definition.category)) {
+                grCategory.setValue('active', false);
+                grCategory.update();
+            }
+            return false;
+        }
+        return true;
+    };
+
+    /**
+     * Function to check if Assessment Instance State is Canceled or Complete.
+     *
+     * @param {String} assesmentInstanceId - String containing the SysID of the current Assessment Instance
+     * @return {boolean} - True in case state is canceled or complete
+     */
+    var isAssesmentCanceledComplete = function(assesmentInstanceId) {
+        var grAssessmentInstance = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+        if(grAssessmentInstance.get(assesmentInstanceId)) {
+            return grAssessmentInstance.getValue('state') === CIRConstants.AssessmentStates
+                .ASSESSMENT_INSTANCE_CANCELED ||
+                grAssessmentInstance.getValue('state') === CIRConstants.AssessmentStates
+                .ASSESSMENT_INSTANCE_COMPLETE;
+        }
+        return false;
+    };
+
+    /**
+     * Function to get all the incomplete Assessment Section names.
+     *
+     * @param {String} assesmentInstanceId - String containing the SysID of the current Assessment Instance
+     * @return {Array} - Array with all the incomplete Assessment Section names
+     */
+    var getIncompleteAssesmentInstanceSections = function(assesmentInstanceId) {
+        var SCORE_COMPLETE = 100;
+        var arrIncompleteSections = [];
+        var grAssessmentInstanceSection = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE_SECTION);
+        grAssessmentInstanceSection.addQuery('assessment_instance', assesmentInstanceId);
+        grAssessmentInstanceSection.addQuery('score', '<', SCORE_COMPLETE);
+        grAssessmentInstanceSection.query();
+        while(grAssessmentInstanceSection.next()) {
+            var assessmentSection = grAssessmentInstanceSection.getElement('assessment_section').getRefRecord();
+            arrIncompleteSections.push(assessmentSection.getValue('name'));
+        }
+
+        return arrIncompleteSections;
+    };
+
+    var isUserAdmin = function() {
+        return gs.getUser().hasRole('x_fru_cir.assessment_manager'); // || gs.getUser().hasRole('admin');
+    };
+
+    /**
+     * Function to check the existence of Assessment Instances related with an Assessment Definition
+     *
+     * @param {String} assessDefRec - String containing the SysID of the current Assessment Definition
+     * @return {Boolean} - 'true' if Assessment Instances related with the Assessment Definition exist, 'false' if not
+     */
+    var assmtDefHasInstances = function(assessDefRec) {
+        var assessmentInstanceGr = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+        assessmentInstanceGr.addQuery('assessment_definition', assessDefRec);
+		assessmentInstanceGr.setLimit(1);
+        assessmentInstanceGr.query();
+        return assessmentInstanceGr.hasNext();
+    };
+
+    /**
+     * Function to return a boolean on whether Assessment Choices exist for the current Definition.
+     *
+     * @param {String} assessDefRec - String containing the SysID of the current Assessment Definition
+     * @return {Boolean} - 'true' if Assessment Choices related with the Assessment Definition exist, 'false' if not
+     */
+    var assmtDefHasChoices = function(assessDefRec) {
+        var assessmentInstanceGr = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+        assessmentInstanceGr.addQuery('assessment_field.assessment_section.assessment_definition', assessDefRec);
+		assessmentInstanceGr.setLimit(1);
+        assessmentInstanceGr.query();
+        return assessmentInstanceGr.hasNext();
+    };
+
+    /**
+     * Function to confirm if an Assessment Definition exists
+     *
+     * @param {String} assessmentDefId - String containing the SysID of the current Assessment Definition
+     * @return {Boolean} - True if the Assessment Definition exists, false otherwise
+     */
+    var hasAssessmentDefinition = function(assessmentDefId, published) {
+		var grAssessmentDefinition = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+		var fieldCoalesce = published ? 'category' : 'sys_id';
+		grAssessmentDefinition.addQuery(fieldCoalesce, assessmentDefId);
+		grAssessmentDefinition.addQuery('active', true);
+		grAssessmentDefinition.addQuery('published', published);
+		grAssessmentDefinition.setLimit(1);
+		grAssessmentDefinition.query();
+        return grAssessmentDefinition.hasNext();
+    };
+
+    return {
+        GetAssessmentIdFromAssessmentInstance: getAssessmentIdFromAssessmentInstance,
+        GetAssessmentsInfo: getAssessmentsInfo,
+        GetAssessmentsInfoForUser: getAssessmentsInfoForUser,
+        GetAssessmentInstanceSectionData: getAssessmentInstanceSectionData,
+        GetAssessmentInstanceUsers: getAssessmentInstanceUsers,
+        GetAssessmentInstancesData: getAssessmentInstancesData,
+        CheckMandatoryFieldsCreation: checkMandatoryFieldsCreation,
+        IsAssesmentCanceledComplete: isAssesmentCanceledComplete,
+        GetIncompleteAssesmentInstanceSections: getIncompleteAssesmentInstanceSections,
+        AssmtDefHasInstances: assmtDefHasInstances,
+        AssmtDefHasChoices: assmtDefHasChoices,
+		HasAssessmentDefinition: hasAssessmentDefinition
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:08:37</sys_created_on>
+        <sys_id>24429bc9db8e1410d4a73533f3961980</sys_id>
+        <sys_mod_count>43</sys_mod_count>
+        <sys_name>CIRAssmtReadFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_24429bc9db8e1410d4a73533f3961980</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 11:09:35</sys_updated_on>
+    </sys_script_include>
+</record_update>

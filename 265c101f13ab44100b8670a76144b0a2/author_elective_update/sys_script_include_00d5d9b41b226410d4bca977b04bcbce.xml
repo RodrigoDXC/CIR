@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRUtils</name>
+        <script><![CDATA[var CIRUtils = Class.create();
+CIRUtils.prototype = Object.extendsObject(CIRUtilsLocation, {
+    initialize: function() {
+
+        CIRUtilsLocation.prototype.initialize.call(this);
+        this.superClass = CIRUtilsLocation.prototype;
+        this.tables = CIRConstants.Tables;
+    },
+
+    type: 'CIRUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-23 00:09:15</sys_created_on>
+        <sys_id>00d5d9b41b226410d4bca977b04bcbce</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIRUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_00d5d9b41b226410d4bca977b04bcbce</sys_update_name>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-23 03:35:54</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_script_include_00d5d9b41b226410d4bca977b04bcbce</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;x_fru_cir.CIRUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;CIRUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var CIRUtils = Class.create();
+CIRUtils.prototype = Object.extendsObject(CIRUtilsLocation, {
+    initialize: function() {
+
+        CIRUtilsLocation.prototype.initialize.call(this);
+        this.superClass = CIRUtilsLocation.prototype;
+        this.tables = CIRConstants.Tables;
+    },
+
+    type: 'CIRUtils'
+});]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;lopez-aznar@dxc.com&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-02-23 00:09:15&lt;/sys_created_on&gt;&lt;sys_id&gt;00d5d9b41b226410d4bca977b04bcbce&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;CIRUtils&lt;/sys_name&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_00d5d9b41b226410d4bca977b04bcbce&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;lopez-aznar@dxc.com&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-02-23 03:35:54&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>217491702</payload_hash>
+        <record_name>CIRUtils</record_name>
+        <reverted_from/>
+        <source>20f0dcaf1b566010d4bca977b04bcb1a</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-23 03:35:54</sys_created_on>
+        <sys_id>40650e3c1ba26410d4bca977b04bcbf3</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>177ccf526040000001</sys_recorded_at>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:38</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>0c650e3c3ca2641089c52ed381c88250</update_guid>
+        <update_guid_history>0c650e3c3ca2641089c52ed381c88250:217491702,8916ddb4992264109d31f1926cd78605:1465444773</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-26 08:42:38</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>1f983a6a026f472e839923905a193359</sys_id>
+        <sys_metadata>00d5d9b41b226410d4bca977b04bcbce</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIRUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_script_include_00d5d9b41b226410d4bca977b04bcbce</sys_update_name>
+        <sys_update_version display_value="sys_script_include_00d5d9b41b226410d4bca977b04bcbce">40650e3c1ba26410d4bca977b04bcbf3</sys_update_version>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:38</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_link">
+    <sp_instance_link action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph>building-o</glyph>
+        <id/>
+        <kb_article/>
+        <kb_category/>
+        <kb_topic/>
+        <order>1</order>
+        <roles/>
+        <sc_cat_item/>
+        <sc_category/>
+        <short_description>Open the Facility Security dashboard</short_description>
+        <size>md</size>
+        <sp_column display_value="1">197e4a8d1b730850df7e43f4bd4bcb7e</sp_column>
+        <sp_page/>
+        <sp_widget display_value="FSM Icon Link">d9f78047dbb0fb00be406def4b96191e</sp_widget>
+        <sys_class_name>sp_instance_link</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 09:50:15</sys_created_on>
+        <sys_id>197e4a8d1b730850df7e43f4bd4bcb80</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Facility Security</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_instance_link_197e4a8d1b730850df7e43f4bd4bcb80</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 09:50:15</sys_updated_on>
+        <title>Facility Security</title>
+        <type>url</type>
+        <url>nav_to.do?uri=%2F$pa_dashboard.do%3Fsysparm_dashboard%3D6acd1f9213efef00f9ddb9422244b07a</url>
+        <widget_parameters><![CDATA[{
+	"link_template": {
+		"value": "Circle Icon",
+		"displayValue": "Circle Icon"
+	}
+}]]></widget_parameters>
+    </sp_instance_link>
+    <sys_translated_text action="DELETE" query="documentkey=197e4a8d1b730850df7e43f4bd4bcb80"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sp_instance_link_197e4a8d1b730850df7e43f4bd4bcb80</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance_link"&gt;&lt;sp_instance_link action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;glyph&gt;building-o&lt;/glyph&gt;&lt;id/&gt;&lt;kb_article/&gt;&lt;kb_category/&gt;&lt;kb_topic/&gt;&lt;order&gt;1&lt;/order&gt;&lt;roles/&gt;&lt;sc_cat_item/&gt;&lt;sc_category/&gt;&lt;short_description&gt;Open the Facility Security dashboard&lt;/short_description&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="1"&gt;197e4a8d1b730850df7e43f4bd4bcb7e&lt;/sp_column&gt;&lt;sp_page/&gt;&lt;sp_widget display_value="FSM Icon Link"&gt;d9f78047dbb0fb00be406def4b96191e&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_instance_link&lt;/sys_class_name&gt;&lt;sys_created_by&gt;paulo.gomes&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-03-25 09:50:15&lt;/sys_created_on&gt;&lt;sys_id&gt;197e4a8d1b730850df7e43f4bd4bcb80&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Facility Security&lt;/sys_name&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_link_197e4a8d1b730850df7e43f4bd4bcb80&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;paulo.gomes&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-03-25 09:50:15&lt;/sys_updated_on&gt;&lt;title&gt;Facility Security&lt;/title&gt;&lt;type&gt;url&lt;/type&gt;&lt;url&gt;nav_to.do?uri=%2F$pa_dashboard.do%3Fsysparm_dashboard%3D6acd1f9213efef00f9ddb9422244b07a&lt;/url&gt;&lt;widget_parameters&gt;&lt;![CDATA[{
+	"link_template": {
+		"value": "Circle Icon",
+		"displayValue": "Circle Icon"
+	}
+}]]&gt;&lt;/widget_parameters&gt;&lt;/sp_instance_link&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=197e4a8d1b730850df7e43f4bd4bcb80"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1582353911</payload_hash>
+        <record_name>Facility Security</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 09:50:15</sys_created_on>
+        <sys_id>dd7e4a8d1b730850df7e43f4bd4bcb82</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17111197ca80000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 09:50:15</sys_updated_on>
+        <type>Instance with Link</type>
+        <update_guid>d57e4a8d177308503fe7ef41e59b5682</update_guid>
+        <update_guid_history>d57e4a8d177308503fe7ef41e59b5682:-1582353911</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">b740e68d1bf30850df7e43f4bd4bcb7d</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 11:08:15</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance_link">sp_instance_link</sys_db_object>
+        <sys_id>33c956760e8c49a290168915529b7991</sys_id>
+        <sys_metadata>197e4a8d1b730850df7e43f4bd4bcb80</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Facility Security</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_33c956760e8c49a290168915529b7991</sys_update_name>
+        <sys_update_version display_value="sp_instance_link_197e4a8d1b730850df7e43f4bd4bcb80">dd7e4a8d1b730850df7e43f4bd4bcb82</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:02</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="KPI Calculation" max_length="40" name="x_fru_cir_kpi_calculation" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Calculation Type" max_length="32" name="calculation_type" read_only="true" reference="x_fru_cir_kpi_calculation_type" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Location" max_length="32" name="location" read_only="true" reference="cmn_location" type="reference"/>
+        <element label="Name" max_length="100" name="name" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Period" max_length="32" name="period" read_only="true" reference="x_fru_cir_kpi_period" type="reference"/>
+        <element label="Reporting date" max_length="40" name="reporting_date" read_only="true" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Value" max_length="17" name="value" read_only="true" type="decimal"/>
+        <index name="index">
+            <element name="calculation_type"/>
+        </index>
+        <index name="index2">
+            <element name="period"/>
+        </index>
+        <index name="index3">
+            <element name="location"/>
+        </index>
+    </element>
+</database>

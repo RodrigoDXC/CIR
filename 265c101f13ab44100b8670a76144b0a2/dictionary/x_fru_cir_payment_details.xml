@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Payment Details" max_length="40" name="x_fru_cir_payment_details" sizeclass="0" type="collection">
+        <element label="Address" max_length="2500" name="address" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Drive Off" max_length="32" name="drive_off" read_only="true" reference="x_fru_cir_drive_off" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Is it partial payment?" max_length="40" name="is_it_partial_payment" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="No" sequence="20" value="0"/>
+            </choice>
+        </element>
+        <element label="Name" max_length="255" name="name" type="string"/>
+        <element label="Payment Date" max_length="40" name="payment_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Payment Value" max_length="20" name="payment_value" type="currency"/>
+        <element label="Payment Value (in words)" max_length="2500" name="payment_value_in_words" type="string"/>
+        <index name="index">
+            <element name="drive_off"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_action_param_map">
+    <sys_sg_action_param_map action="INSERT_OR_UPDATE">
+        <button display_value="New hazard">2ca7a5dbdbda5050d4a73533f39619b9</button>
+        <item_parameter display_value="cirLocationType">b5ff391edbdadc10d4a73533f3961951</item_parameter>
+        <sys_class_name>sys_sg_action_param_map</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-03 13:32:41</sys_created_on>
+        <sys_id>7a99ed1fdbda5050d4a73533f396192d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>b5ff391edbdadc10d4a73533f3961951</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_action_param_map_7a99ed1fdbda5050d4a73533f396192d</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-03 13:32:41</sys_updated_on>
+        <ui_parameter display_value="Location type">a89829dbdbda5050d4a73533f3961946</ui_parameter>
+    </sys_sg_action_param_map>
+</record_update>

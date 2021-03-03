@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtPortalSelectorFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRAssmtPortalSelectorFP</name>
+        <script><![CDATA[var CIRAssmtPortalSelectorFP = function() {
+    /*
+     * called in the CIR CIRI Assessment Selector Widget
+     * used to get the sys_ids of the assessments that have assessment instances already
+     * @return {Array} - sys_ids of the assessments that have assessment instances already
+     */
+    var getAssessmentFromInstances = function() {
+        var array = [];
+        var usedAssment = '';
+
+        var grAssmentInst = new GlideRecord(CIRConstants.Tables.ASSESSMENT_INSTANCE);
+        grAssmentInst.query();
+
+        while(grAssmentInst.next()) {
+            usedAssment = grAssmentInst.getValue('assessment_definition');
+            if(array.indexOf(usedAssment) === -1) {
+                array.push(usedAssment);
+            }
+        }
+        return array;
+    };
+
+    /*
+     * called in the CIR CIRI Assessment Selector Widget
+     * used to get the records info [fields] for a given table, and query
+     * @param {String} table - table name
+     * @param {String} query - encoded query
+     * @param {Array} fields - fields to return for each record
+     * @param {String} order - order by 
+     * @return {Object} - object containing headers and values for each record that result of the query with all fields
+     */
+    var getData = function(table, query, fields, order, sort) {
+        if(!table || !fields)
+            return;
+
+        var respObj = {};
+        var records = [];
+        var index = 0;
+        var grData = new GlideRecord(table);
+        grData.addEncodedQuery(query);
+        if(sort === 'asc') {
+            grData.orderBy(order);
+        } else {
+            grData.orderByDesc(order);
+        }
+        grData.query();
+
+        while(grData.next()) {
+            var obj = {
+                index: index,
+                sys_id: grData.getUniqueValue(),
+                fields: getFieldsFromGR(grData, fields)
+            };
+            if(table === CIRConstants.Tables.ASSESSMENT_DEFINITION)
+                obj.catalog = grData.getValue('catalog');
+
+            records.push(obj);
+            index++;
+        }
+        respObj = {
+            headers: grData ? getFieldLabels(table, fields) : [],
+            records: records
+        };
+        return respObj;
+    };
+
+    /*
+     * called in the getData function
+     * used to get the fields values from a given record
+     * @param {GlideRecord} gr - gliderecord to get the field values from
+     * @param {Array} fields - fields to return
+     * @return {Array} - array of objects containing label and values for each field
+     */
+    var getFieldsFromGR = function(gr, fields) {
+        if(!gr || !fields)
+            return;
+
+        var obj = {};
+        for(var i = 0; i < fields.length; i++) {
+            obj[gr[fields[i]].getLabel()] = gr.getDisplayValue(fields[i]);
+
+        }
+        return obj;
+    };
+
+    /*
+     * called in the getData function
+     * used to get the fields labels for a lit of fields
+     * @param {GlideRecord} gr - gliderecord to get the field values from
+     * @param {Array} fields - fields to return
+     * @return {Array} - array of objects containing labels for each field
+     */
+    var getFieldLabels = function(table, fields) {
+        if(!table || !fields)
+            return;
+
+        var array = [];
+        var language = gs.getSession().getLanguage();
+        var grFieldLabel = new GlideRecord(CIRConstants.Tables.FIELD_LABEL);
+        grFieldLabel.addQuery('name', table);
+        grFieldLabel.addQuery('element', 'IN', fields);
+        grFieldLabel.addQuery('language', language);
+        grFieldLabel.query();
+
+        while(grFieldLabel.next()) {
+            var obj = {};
+            obj.value = grFieldLabel.getValue('element');
+            obj.filter = '';
+            obj.displayValue = grFieldLabel.getValue('label');
+            array.push(obj);
+        }
+        return array;
+    };
+
+    /*
+     * called in the CIR CIRI Assessment Selector Widget
+     * used to create a copy of a Assessment, inlcuding sections and fields
+     * @param {String} recToCopyId - sys_id of the assessment definition record to copy from
+     * @return {String} - sys_id of the newly created asessment record
+     */
+    var createAssessmentCopy = function(recToCopyId, newName) {
+        if(!recToCopyId)
+            return;
+
+        var newRecord = '';
+        var grAssDef = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        if(grAssDef.get('sys_id', recToCopyId)) {
+            var grNewAssDef = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+            grNewAssDef.initialize();
+
+
+            grNewAssDef.setValue('name', newName);
+            grNewAssDef.setValue('active', true);
+            grNewAssDef.setValue('description', grAssDef.getValue('description'));
+            grNewAssDef.setValue('catalog', grAssDef.getValue('catalog'));
+
+            newRecord = grNewAssDef.insert();
+            copySections(recToCopyId, newRecord); // TRIGGER COPY OF SECTIONS
+        }
+        return newRecord;
+    };
+
+    /*
+     * used to copy fields from a GlideRecord to another GlideRecord
+     * @param {GlideRecord} recToCopy - GlideRecord of the record to copy from
+     * @param {GlideRecord} newRec - GlideRecord of the record to copy to
+     * @param {array} excludeFields - array containing feilds to not copy
+     * @return {void}
+     */
+    var copyRecord = function(recToCopy, newRec, excludeFields) {
+        if(!recToCopy || !newRec)
+            return;
+
+        for(var k in recToCopy) {
+            if(excludeFields.indexOf(k) === -1) {
+                newRec.setValue(k, recToCopy.getValue(k));
+            }
+        }
+    };
+
+    /*
+     * called in the createAssessmentCopy function
+     * used to create copy all Sections from a assessment to a newly created copy of that assessment
+     * @param {String} recToCopyId - sys_id of the assessment definition record to copy the sections from
+     * @param {String} newAssmentId - sys_id of the newly created copy of the assessment to link the sections to
+     * @return {void}
+     */
+    var copySections = function(recToCopyId, newAssmentId) {
+        var grSection = new GlideRecord(CIRConstants.Tables.ASSESSMENT_SECTION);
+        grSection.addQuery('assessment_definition', recToCopyId);
+        grSection.query();
+
+        while(grSection.next()) {
+            var grNewSection = new GlideRecord(CIRConstants.Tables.ASSESSMENT_SECTION);
+            grNewSection.initialize();
+            copyRecord(grSection, grNewSection, ['record_producer']);
+            grNewSection.setValue('assessment_definition',
+                newAssmentId); // OVERRIDE ASSESSMENT WITH NEWLY CREATED ASSESSMENT
+
+            copyFields(grSection.getUniqueValue(), grNewSection.insert());
+        }
+    };
+
+    /*
+     * called in the copySections function
+     * used to create copy all Fields from a section to a newly created copy of that section
+     * @param {String} recToCopyId - sys_id of the section record to copy the sections from
+     * @param {String} newSectionId - sys_id of the newly created copy of the section to link the fields to
+     * @return {void}
+     */
+    var copyFields = function(recToCopyId, newSectionId) {
+        var newFieldId = '';
+        var type = '';
+        var grField = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+        grField.addQuery('assessment_section', recToCopyId);
+        grField.query();
+
+        while(grField.next()) {
+            var grNewField = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+            grNewField.initialize();
+            copyRecord(grField, grNewField, ['variable']);
+            grNewField.setValue('assessment_section',
+            newSectionId); // OVERRIDE SECTION WITH NEWLY CREATED SECTION
+
+            newFieldId = grNewField.insert();
+            type = grField.getValue('type');
+
+            if(type === '5' || type === '3') // VALUES OF TYPE FIELD THAT REQUIRE CHOICES
+                copyChoices(grField.getUniqueValue(), newFieldId);
+        }
+    };
+
+    /*
+     * called in the copyFields function
+     * used to create copy all choices from a field to a newly created copy of that field
+     * @param {String} recToCopyId - sys_id of the field record to copy the choices from
+     * @param {String} newFiledId - sys_id of the newly created copy of the field to link the choices to
+     * @return {void}
+     */
+    var copyChoices = function(recToCopyId, newFiledId) {
+        var grChoice = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+        grChoice.addQuery('assessment_field', recToCopyId);
+        grChoice.query();
+
+        while(grChoice.next()) {
+            var grNewChoice = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+            grNewChoice.initialize();
+            copyRecord(grChoice, grNewChoice, ['choice']);
+            grNewChoice.setValue('assessment_field', newFiledId); // OVERRIDE FIELD WITH NEWLY CREATED FIELD
+
+            grNewChoice.insert();
+        }
+    };
+
+    return {
+        GetAssessmentFromInstances: getAssessmentFromInstances,
+        GetData: getData,
+        CreateAssessmentCopy: createAssessmentCopy
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:13:58</sys_created_on>
+        <sys_id>1273570ddb8e1410d4a73533f3961904</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIRAssmtPortalSelectorFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_1273570ddb8e1410d4a73533f3961904</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 10:00:13</sys_updated_on>
+    </sys_script_include>
+</record_update>

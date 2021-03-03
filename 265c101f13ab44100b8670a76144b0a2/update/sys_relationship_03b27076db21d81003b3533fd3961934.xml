@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>x_fru_cir_situation</basic_apply_to>
+        <basic_query_from>x_fru_cir_log</basic_query_from>
+        <insert_callback/>
+        <name>Security Situation Logs</name>
+        <query_from/>
+        <query_with><![CDATA[current.addEncodedQuery('record=' + parent.getUniqueValue() + '^ORparent_record=' + parent.getUniqueValue());
+current.orderByDesc('timestamp');
+]]></query_with>
+        <reference_field/>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 13:29:43</sys_created_on>
+        <sys_id>03b27076db21d81003b3533fd3961934</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Security Situation Logs</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_relationship_03b27076db21d81003b3533fd3961934</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-25 13:29:43</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=03b27076db21d81003b3533fd3961934"/>
+</record_update>

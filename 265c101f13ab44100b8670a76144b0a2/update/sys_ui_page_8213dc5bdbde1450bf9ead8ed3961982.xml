@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var div = $j("#monthly_report");
+var div_year = $j("#current_year_report");
+
+embedReportById(div, '5fe3dc5bdbde1450bf9ead8ed39619b3');
+embedReportById(div_year, 'e2e4989bdbde1450bf9ead8ed3961961');]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_cir_pers_protection_worked_hours_report.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:requires name="scripts/GlideV2ChartingIncludes.js" includes="true"/>
+	
+	<style>
+		.report_content {
+    pointer-events: none;
+	}
+	</style>
+	
+	<div id="monthly_report" />
+	<div id="current_year_report" />
+</j:jelly>]]></html>
+        <name>cir_pers_protection_worked_hours_report</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-03 07:23:08</sys_created_on>
+        <sys_id>8213dc5bdbde1450bf9ead8ed3961982</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_pers_protection_worked_hours_report</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_8213dc5bdbde1450bf9ead8ed3961982</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-03 07:23:08</sys_updated_on>
+    </sys_ui_page>
+</record_update>

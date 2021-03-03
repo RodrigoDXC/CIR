@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>active</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Restrictions Locations</name>
+        <order/>
+        <script><![CDATA[function onSubmit() {
+    var isValid = true;
+
+    if (g_form.getValue('buildings').length > 32) {
+        g_form.addErrorMessage(getMessage("cir_response_execution_buildings"));
+        isValid = false;
+    } else if (g_form.getValue('location_groups').length > 32) {
+        g_form.addErrorMessage(getMessage("cir_response_execution_location_groups"));
+        isValid = false;
+    } else if (g_form.getValue('virtual_locations').length > 32) {
+        g_form.addErrorMessage(getMessage("cir_response_execution_virtual_locations"));
+        isValid = false;
+    }
+
+    return isValid;
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 11:29:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>6f116d4b1ba1101024c896ce0a4bcb3f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Restrictions Locations</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_6f116d4b1ba1101024c896ce0a4bcb3f</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-26 11:29:52</sys_updated_on>
+        <table>x_fru_cir_response_plan_execution</table>
+        <type>onSubmit</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

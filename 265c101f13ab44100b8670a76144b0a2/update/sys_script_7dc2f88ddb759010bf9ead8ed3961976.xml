@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_fru_cir_security_location</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_fru_cir_security_location">cityVALCHANGES^ORnameVALCHANGES^ORcountryVALCHANGES^ORstateVALCHANGES^ORtypeVALCHANGES^ORparentVALCHANGES^EQ<item endquery="false" field="city" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+            <item endquery="false" field="name" goto="false" newquery="false" operator="VALCHANGES" or="true" value=""/>
+            <item display_value="-- None --" endquery="false" field="country" goto="false" newquery="false" operator="VALCHANGES" or="true" value=""/>
+            <item endquery="false" field="state" goto="false" newquery="false" operator="VALCHANGES" or="true" value=""/>
+            <item display_value="-- None --" endquery="false" field="type" goto="false" newquery="false" operator="VALCHANGES" or="true" value=""/>
+            <item endquery="false" field="parent" goto="false" newquery="false" operator="VALCHANGES" or="true" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>cir_psi_manage_address_values_on_update</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    var language = 'en';//gs.getSession().getLanguage() ? gs.getSession().getLanguage() : 'en';
+    var facilityType = '';
+
+    if (current.country != previous.country) {
+        createUpdtAddrValue('country', current.getDisplayValue('country'), 'en');
+    }
+
+    if (current.state != previous.state) {
+        createUpdtAddrValue('state', current.getDisplayValue('state'), language);
+    }
+
+    if (current.city != previous.city) {
+        createUpdtAddrValue('city', current.getDisplayValue('city'), language);
+    }
+
+    if (current.name != previous.name) {
+        facilityType = current.getDisplayValue('type') ? current.getDisplayValue('type').toLowerCase() : '';
+        createUpdtAddrValue(facilityType, current.getDisplayValue('name'), language);
+    }
+
+    if (current.type != previous.type) {
+        facilityType = current.getDisplayValue('type') ? current.getDisplayValue('type').toLowerCase() : '';
+        createUpdtAddrValue(facilityType, current.getDisplayValue('name'), language);
+        delUpdPrevious(previous.type, current.name);
+    }
+
+    function delUpdPrevious(previousType, name) {
+
+        var grLoc = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+        grLoc.addQuery('type', previousType);
+        grLoc.addQuery('name', name);
+        grLoc.query();
+
+        if (!grLoc.hasNext()) {
+
+            var addrValGr = new GlideRecord(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+            addrValGr.addQuery('type', previousType);
+            addrValGr.addQuery('value', name);
+            addrValGr.query();
+
+            if (addrValGr.next()) {
+                addrValGr.deleteRecord();
+
+            }
+        }
+    }
+
+    function createUpdtAddrValue(type, value, language) {
+
+        if (!value) {
+            return;
+        }
+
+        var addrValGr = new GlideRecord(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+        addrValGr.addQuery('language', language);
+        addrValGr.addQuery('value', value);
+        if (type) {
+            addrValGr.addQuery('type', type);
+        }
+        addrValGr.query();
+
+        if (!addrValGr.hasNext()) {
+            if (type == 'country') {
+                var countryCodes = getCountryCodes(value);
+            }
+
+            var newAddrVal = new GlideRecord(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+            newAddrVal.initialize();
+            newAddrVal.setValue('language', language);
+            newAddrVal.setValue('value', value);
+            if (type) {
+                newAddrVal.setValue('type', type);
+            }
+			if (countryCodes && countryCodes.userCode) {
+                newAddrVal.setValue('user_country_code', countryCodes.userCode);
+            }
+            if (countryCodes && countryCodes.isoLong) {
+                newAddrVal.setValue('country_iso_long', countryCodes.isoLong);
+            }
+            if (countryCodes && countryCodes.isoShort) {
+                newAddrVal.setValue('country_iso_short', countryCodes.isoShort);
+            }
+            newAddrVal.insert();
+        }
+
+    }
+
+    function getCountryCodes(label) {
+        var countryCodes = {};
+
+        var userC = new GlideRecord('sys_choice');
+        userC.addQuery('name', 'sys_user');
+        userC.addQuery('label', label);
+        userC.addQuery('element', 'country');
+        userC.query();
+
+        if (userC.next()) {
+            countryCodes.userCode = userC.getValue('value');
+        }
+
+        var coreC = new GlideRecord('core_country');
+        coreC.addQuery('name', label);
+        coreC.query();
+
+        if (coreC.next()) {
+            countryCodes.isoLong = coreC.getValue('iso3166_3');
+            countryCodes.isoShort = coreC.getValue('iso3166_2');
+        }
+        return countryCodes;
+    }
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-02 13:17:55</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7dc2f88ddb759010bf9ead8ed3961976</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_psi_manage_address_values_on_update</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_7dc2f88ddb759010bf9ead8ed3961976</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-02 13:17:55</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=7dc2f88ddb759010bf9ead8ed3961976"/>
+</record_update>

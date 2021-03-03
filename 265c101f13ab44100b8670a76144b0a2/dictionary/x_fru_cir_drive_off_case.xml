@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_case" label="Drive Off Case" max_length="40" name="x_fru_cir_drive_off_case" sizeclass="0" type="collection"/>
+</database>

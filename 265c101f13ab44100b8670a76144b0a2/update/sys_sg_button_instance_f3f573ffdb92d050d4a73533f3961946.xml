@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_button_instance">
+    <sys_sg_button_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <button display_value="Trigger Email Person Impact">c2fc06d7db5e5050d4a73533f3961998</button>
+        <color_theme>primary</color_theme>
+        <description>Field function to trigger an Email to the Email on the Email field. Using the Tigger Email Person Impact function.</description>
+        <field_name>email</field_name>
+        <icon/>
+        <label>Trigger Email</label>
+        <location>field</location>
+        <name>Trigger Email Person Impact Smart Button</name>
+        <order>20</order>
+        <parent>b159259edb9adc10d4a73533f39619b4</parent>
+        <parent_table>sys_sg_screen</parent_table>
+        <sys_class_name>sys_sg_button_instance</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-05 13:02:52</sys_created_on>
+        <sys_id>f3f573ffdb92d050d4a73533f3961946</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Trigger Email Person Impact Smart Button</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_button_instance_f3f573ffdb92d050d4a73533f3961946</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-05 13:02:52</sys_updated_on>
+        <table>x_fru_cir_person_impact</table>
+    </sys_sg_button_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=f3f573ffdb92d050d4a73533f3961946"/>
+</record_update>

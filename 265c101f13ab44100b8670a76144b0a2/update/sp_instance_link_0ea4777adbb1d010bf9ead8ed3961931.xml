@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_link">
+    <sp_instance_link action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph>shield</glyph>
+        <id/>
+        <kb_article/>
+        <kb_category/>
+        <kb_topic/>
+        <order>1</order>
+        <roles/>
+        <sc_cat_item/>
+        <sc_category/>
+        <short_description>Create a Physical Security Incident</short_description>
+        <size>md</size>
+        <sp_column display_value="3">5484737adbb1d010bf9ead8ed3961963</sp_column>
+        <sp_page display_value="cir_psi_new">78f6076adb399010bf9ead8ed39619f1</sp_page>
+        <sp_widget display_value="CIR Icon Link">1890e28d1bf30850df7e43f4bd4bcb74</sp_widget>
+        <sys_class_name>sp_instance_link</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-08 13:53:35</sys_created_on>
+        <sys_id>0ea4777adbb1d010bf9ead8ed3961931</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Create PSI</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_instance_link_0ea4777adbb1d010bf9ead8ed3961931</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-08 13:56:37</sys_updated_on>
+        <title>Create PSI</title>
+        <type>page</type>
+        <url/>
+        <widget_parameters/>
+    </sp_instance_link>
+    <sys_translated_text action="delete_multiple" query="documentkey=0ea4777adbb1d010bf9ead8ed3961931"/>
+</record_update>

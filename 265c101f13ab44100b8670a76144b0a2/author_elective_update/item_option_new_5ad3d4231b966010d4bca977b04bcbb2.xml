@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="item_option_new">
+    <item_option_new action="DELETE">
+        <active>true</active>
+        <attributes/>
+        <cat_item display_value="Report a Case">6086064edb41501003b3533fd3961977</cat_item>
+        <category/>
+        <choice_direction>down</choice_direction>
+        <choice_field>country</choice_field>
+        <choice_table>cmn_location</choice_table>
+        <create_roles/>
+        <default_html_value/>
+        <default_value>javascript: new CIRUtilsGetCountry().getCountry();</default_value>
+        <delete_roles/>
+        <delivery_plan/>
+        <description/>
+        <display_title>false</display_title>
+        <do_not_select_first>false</do_not_select_first>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <enable_also_request_for>false</enable_also_request_for>
+        <example_text/>
+        <field/>
+        <global>false</global>
+        <help_tag>More information</help_tag>
+        <help_text/>
+        <include_none>false</include_none>
+        <instructions/>
+        <layout>normal</layout>
+        <list_table/>
+        <lookup_label/>
+        <lookup_price/>
+        <lookup_table>cmn_location</lookup_table>
+        <lookup_unique>false</lookup_unique>
+        <lookup_value>country</lookup_value>
+        <macro/>
+        <mandatory>false</mandatory>
+        <map_to_field>false</map_to_field>
+        <mask_use_confirmation>false</mask_use_confirmation>
+        <mask_use_encryption>false</mask_use_encryption>
+        <name>country</name>
+        <order>410</order>
+        <price_if_checked>0</price_if_checked>
+        <pricing_implications>false</pricing_implications>
+        <question_text>Country</question_text>
+        <read_roles/>
+        <rec_lookup_price/>
+        <rec_price_if_checked>0</rec_price_if_checked>
+        <record/>
+        <record_producer_table>x_fru_cir_case</record_producer_table>
+        <reference>core_country</reference>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <rich_text/>
+        <roles_to_use_also_request_for/>
+        <scale_max>5</scale_max>
+        <scale_min>0</scale_min>
+        <show_help>false</show_help>
+        <show_help_on_load>false</show_help_on_load>
+        <sp_widget/>
+        <summary_macro/>
+        <sys_class_name>item_option_new</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-18 22:08:19</sys_created_on>
+        <sys_id>5ad3d4231b966010d4bca977b04bcbb2</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Country</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>item_option_new_5ad3d4231b966010d4bca977b04bcbb2</sys_update_name>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-22 12:18:44</sys_updated_on>
+        <table/>
+        <tooltip/>
+        <type>5</type>
+        <ui_page/>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>advanced</use_reference_qualifier>
+        <validate_regex/>
+        <variable_name/>
+        <variable_set/>
+        <variable_width/>
+        <visibility>1</visibility>
+        <visible_bundle>true</visible_bundle>
+        <visible_guide>true</visible_guide>
+        <visible_standalone>true</visible_standalone>
+        <visible_summary>true</visible_summary>
+        <write_roles/>
+    </item_option_new>
+    <sys_translated_text action="DELETE" query="documentkey=5ad3d4231b966010d4bca977b04bcbb2"/>
+    <fx_price action="DELETE" query="id=5ad3d4231b966010d4bca977b04bcbb2"/>
+    <fx_price action="DELETE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>price_if_checked</field>
+        <id>5ad3d4231b966010d4bca977b04bcbb2</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-18 22:08:19</sys_created_on>
+        <sys_id>ea0494631b966010d4bca977b04bcb6b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-18 22:08:19</sys_updated_on>
+        <table>item_option_new</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="DELETE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>rec_price_if_checked</field>
+        <id>5ad3d4231b966010d4bca977b04bcbb2</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-18 22:08:19</sys_created_on>
+        <sys_id>660494631b966010d4bca977b04bcb6a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-18 22:08:19</sys_updated_on>
+        <table>item_option_new</table>
+        <type>calculated</type>
+    </fx_price>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>item_option_new_5ad3d4231b966010d4bca977b04bcbb2</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="item_option_new"><item_option_new action="INSERT_OR_UPDATE"><active>true</active><attributes/><cat_item display_value="Report a Case">6086064edb41501003b3533fd3961977</cat_item><category/><choice_direction>down</choice_direction><choice_field>country</choice_field><choice_table>cmn_location</choice_table><create_roles/><default_html_value/><default_value>javascript: new CIRUtilsGetCountry().getCountry();</default_value><delete_roles/><delivery_plan/><description/><display_title>false</display_title><do_not_select_first>false</do_not_select_first><dynamic_default_value/><dynamic_ref_qual/><enable_also_request_for>false</enable_also_request_for><example_text/><field/><global>false</global><help_tag>More information</help_tag><help_text/><include_none>false</include_none><instructions/><layout>normal</layout><list_table/><lookup_label/><lookup_price/><lookup_table>cmn_location</lookup_table><lookup_unique>false</lookup_unique><lookup_value>country</lookup_value><macro/><mandatory>false</mandatory><map_to_field>false</map_to_field><mask_use_confirmation>false</mask_use_confirmation><mask_use_encryption>false</mask_use_encryption><name>country</name><order>410</order><price_if_checked>0</price_if_checked><pricing_implications>false</pricing_implications><question_text>Country</question_text><read_roles/><rec_lookup_price/><rec_price_if_checked>0</rec_price_if_checked><record/><record_producer_table>x_fru_cir_case</record_producer_table><reference>core_country</reference><reference_qual/><reference_qual_condition/><rich_text/><roles_to_use_also_request_for/><scale_max>5</scale_max><scale_min>0</scale_min><show_help>false</show_help><show_help_on_load>false</show_help_on_load><sp_widget/><summary_macro/><sys_class_name>item_option_new</sys_class_name><sys_created_by>lopez-aznar@dxc.com</sys_created_by><sys_created_on>2021-02-18 22:08:19</sys_created_on><sys_id>5ad3d4231b966010d4bca977b04bcbb2</sys_id><sys_mod_count>4</sys_mod_count><sys_name>Country</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>item_option_new_5ad3d4231b966010d4bca977b04bcbb2</sys_update_name><sys_updated_by>lopez-aznar@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 12:18:44</sys_updated_on><table/><tooltip/><type>5</type><ui_page/><use_dynamic_default>false</use_dynamic_default><use_reference_qualifier>advanced</use_reference_qualifier><validate_regex/><variable_name/><variable_set/><variable_width/><visibility>1</visibility><visible_bundle>true</visible_bundle><visible_guide>true</visible_guide><visible_standalone>true</visible_standalone><visible_summary>true</visible_summary><write_roles/></item_option_new><sys_translated_text action="delete_multiple" query="documentkey=5ad3d4231b966010d4bca977b04bcbb2"/><fx_price action="delete_multiple" query="id=5ad3d4231b966010d4bca977b04bcbb2"/><fx_price action="INSERT_OR_UPDATE"><amount>0</amount><currency display_value="USD">USD</currency><field>price_if_checked</field><id>5ad3d4231b966010d4bca977b04bcbb2</id><parent/><reference_amount>0</reference_amount><reference_currency display_value="USD">USD</reference_currency><sys_created_by>lopez-aznar@dxc.com</sys_created_by><sys_created_on>2021-02-18 22:08:19</sys_created_on><sys_id>ea0494631b966010d4bca977b04bcb6b</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>lopez-aznar@dxc.com</sys_updated_by><sys_updated_on>2021-02-18 22:08:19</sys_updated_on><table>item_option_new</table><type>calculated</type></fx_price><fx_price action="INSERT_OR_UPDATE"><amount>0</amount><currency display_value="USD">USD</currency><field>rec_price_if_checked</field><id>5ad3d4231b966010d4bca977b04bcbb2</id><parent/><reference_amount>0</reference_amount><reference_currency display_value="USD">USD</reference_currency><sys_created_by>lopez-aznar@dxc.com</sys_created_by><sys_created_on>2021-02-18 22:08:19</sys_created_on><sys_id>660494631b966010d4bca977b04bcb6a</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>lopez-aznar@dxc.com</sys_updated_by><sys_updated_on>2021-02-18 22:08:19</sys_updated_on><table>item_option_new</table><type>calculated</type></fx_price></record_update>]]></payload>
+        <payload_hash>-1096882332</payload_hash>
+        <record_name>Country</record_name>
+        <reverted_from/>
+        <source>20f0dcaf1b566010d4bca977b04bcb1a</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-22 12:18:44</sys_created_on>
+        <sys_id>0573be641b6a2410d4bca977b04bcb40</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>177c9ad78590000001</sys_recorded_at>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:34</sys_updated_on>
+        <type>Variable</type>
+        <update_guid>8973be649b6a2410fe3836ff3765933f</update_guid>
+        <update_guid_history>8973be649b6a2410fe3836ff3765933f:-1096882332,354f7f14be622410321ed29e18b7dc94:1579717866,3cceb714df622410a1f7cd816fde83a6:1651708053,f915d0a3d6966010173dda8f97515627:-158493082,ea04946366966010d1c76c1a987ded71:1282090703</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Country">6d58ee391be26810de011fc11a4bcb30</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-26 08:42:34</sys_created_on>
+        <sys_db_object display_value="" name="item_option_new">item_option_new</sys_db_object>
+        <sys_id>0ae9b588a9b64690891863f51dc3a440</sys_id>
+        <sys_metadata>5ad3d4231b966010d4bca977b04bcbb2</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Country</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Report a Case">6086064edb41501003b3533fd3961977</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>item_option_new_5ad3d4231b966010d4bca977b04bcbb2</sys_update_name>
+        <sys_update_version display_value="item_option_new_5ad3d4231b966010d4bca977b04bcbb2">0573be641b6a2410d4bca977b04bcb40</sys_update_version>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:34</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="PSI Import Table" max_length="40" name="x_fru_cir_psi_import_table" sizeclass="0" type="collection">
+        <element label="Asset type" max_length="40" name="asset_type" type="string"/>
+        <element label="Cost" max_length="40" name="cost" type="string"/>
+        <element label="Currency" max_length="40" name="currency" type="string"/>
+        <element label="Date" max_length="40" name="date" type="string"/>
+        <element label="Description" max_length="40" name="description" type="string"/>
+        <element label="Incident type" max_length="40" name="incident_type" type="string"/>
+        <element label="Location" max_length="40" name="location" type="string"/>
+        <element label="Result" max_length="40" name="result" type="string"/>
+        <element label="State" max_length="40" name="state" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>Printable version of the OSHA 300 form with populated information</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_osha_form_300_page_2.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta charset="utf-8" />
+</head>
+
+<body style="margin: 0;">
+
+<div id="p2" style="overflow: hidden; position: relative; width: 1540px; height: 935px;">
+
+<!-- Begin shared CSS values -->
+<style class="shared-css" type="text/css" >
+.t {
+	-webkit-transform-origin: top left;
+	-moz-transform-origin: top left;
+	-o-transform-origin: top left;
+	-ms-transform-origin: top left;
+	-webkit-transform: scale(0.25);
+	-moz-transform: scale(0.25);
+	-o-transform: scale(0.25);
+	-ms-transform: scale(0.25);
+	z-index: 2;
+	position: absolute;
+	white-space: pre;
+	overflow: visible;
+}
+</style>
+<!-- End shared CSS values -->
+
+
+<!-- Begin inline CSS -->
+<style type="text/css" >
+
+#t1_2{left:1327px;top:82px;}
+#t2_2{left:1274px;top:99px;}
+#t3_2{left:53px;top:34px;letter-spacing:0.1px;word-spacing:-0.1px;}
+#t4_2{left:297px;top:46px;letter-spacing:-0.5px;word-spacing:1px;}
+#t5_2{left:1334px;top:50px;letter-spacing:-0.6px;word-spacing:0.9px;}
+#t6_2{left:59px;top:67px;word-spacing:-0.1px;}
+#t7_2{left:1363px;top:119px;letter-spacing:-0.5px;word-spacing:0.1px;}
+#t8_2{left:53px;top:326px;letter-spacing:-1px;word-spacing:1.6px;}
+#t9_2{left:53px;top:344px;}
+#ta_2{left:53px;top:399px;}
+#tb_2{left:191px;top:325px;letter-spacing:-1px;word-spacing:1.6px;}
+#tc_2{left:191px;top:344px;}
+#td_2{left:191px;top:362px;}
+#te_2{left:191px;top:398px;}
+#tf_2{left:72px;top:290px;}
+#tg_2{left:55px;top:503px;letter-spacing:-0.6px;word-spacing:1.2px;}
+#th_2{left:55px;top:521px;}
+#ti_2{left:55px;top:558px;}
+#tj_2{left:297px;top:503px;letter-spacing:-0.6px;word-spacing:1.1px;}
+#tk_2{left:297px;top:521px;}
+#tl_2{left:297px;top:558px;}
+#tm_2{left:74px;top:465px;}
+#tn_2{left:58px;top:815px;}
+#to_2{left:53px;top:153px;}
+#tp_2{left:53px;top:168px;}
+#tq_2{left:64px;top:187px;}
+#tr_2{left:53px;top:203px;}
+#ts_2{left:64px;top:222px;}
+#tt_2{left:53px;top:237px;}
+#tu_2{left:1003px;top:181px;}
+#tv_2{left:1003px;top:501px;}
+#tw_2{left:1003px;top:218px;letter-spacing:-0.2px;word-spacing:0.5px;}
+#tx_2{left:1132px;top:215px;}
+#ty_2{left:1001px;top:246px;}
+#tz_2{left:1056px;top:246px;}
+#t10_2{left:1337px;top:246px;}
+#t11_2{left:1001px;top:274px;}
+#t12_2{left:1056px;top:274px;word-spacing:6px;}
+#t13_2{left:1001px;top:325px;}
+#t14_2{left:1285px;top:325px;}
+#t15_2{left:1056px;top:346px;}
+#t16_2{left:1001px;top:369px;}
+#t17_2{left:1303px;top:369px;}
+#t18_2{left:1056px;top:390px;word-spacing:12.1px;}
+#t19_2{left:1001px;top:442px;}
+#t1a_2{left:1110px;top:325px;}
+#t1b_2{left:1258px;top:369px;}
+#t1c_2{left:1190px;top:503px;}
+#t1d_2{left:1333px;top:503px;}
+#t1e_2{left:1001px;top:518px;letter-spacing:-0.2px;word-spacing:0.3px;}
+#t1f_2{left:1209px;top:246px;}
+#t1g_2{left:1001px;top:413px;}
+#t1h_2{left:1056px;top:463px;word-spacing:12.1px;}
+#t1i_2{left:1001px;top:549px;}
+#t1j_2{left:1243px;top:549px;}
+#t1k_2{left:1001px;top:581px;letter-spacing:-0.3px;word-spacing:0.7px;}
+#t1l_2{left:1243px;top:581px;}
+#t1m_2{left:1198px;top:503px;}
+#t1n_2{left:1002px;top:626px;letter-spacing:-0.1px;}
+#t1o_2{left:999px;top:652px;}
+#t1p_2{left:999px;top:704px;}
+#t1q_2{left:999px;top:721px;}
+#t1r_2{left:999px;top:757px;}
+#t1s_2{left:999px;top:789px;}
+#t1t_2{left:1002px;top:771px;}
+#t1u_2{left:1332px;top:771px;letter-spacing:-0.6px;}
+#t1v_2{left:1002px;top:804px;}
+#t1w_2{left:1332px;top:804px;}
+#t1x_2{left:1002px;top:793px;}
+#t1y_2{left:1037px;top:793px;}
+#t1z_2{left:1116px;top:793px;}
+#t20_2{left:1334px;top:793px;}
+#t21_2{left:1346px;top:793px;}
+#t22_2{left:54px;top:842px;}
+#t23_2{left:54px;top:853px;}
+#t24_2{left:54px;top:865px;}
+#t25_2{left:54px;top:877px;letter-spacing:-0.1px;word-spacing:0.2px;}
+#t26_2{left:55px;top:658px;letter-spacing:-0.8px;word-spacing:1.1px;}
+#t27_2{left:55px;top:734px;}
+#t28_2{left:234px;top:734px;}
+#t29_2{left:55px;top:758px;}
+#t2a_2{left:234px;top:758px;}
+#t2b_2{left:55px;top:691px;}
+#t2c_2{left:234px;top:691px;}
+#t2d_2{left:75px;top:623px;letter-spacing:-0.2px;word-spacing:-0.1px;}
+#t2e_2{left:378px;top:691px;letter-spacing:-0.3px;}
+#t2f_2{left:557px;top:691px;}
+#t2g_2{left:378px;top:715px;}
+#t2h_2{left:378px;top:740px;}
+#t2i_2{left:557px;top:740px;}
+#t2j_2{left:557px;top:715px;}
+#t2k_2{left:82px;top:416px;}
+#t2l_2{left:226px;top:416px;}
+#t2m_2{left:379px;top:416px;}
+#t2n_2{left:543px;top:416px;}
+#t2o_2{left:87px;top:582px;}
+#t2p_2{left:334px;top:582px;}
+#t2q_2{left:89px;top:675px;}
+#t2r_2{left:35px;top:693px;}
+#t2s_2{left:35px;top:737px;}
+#t2t_2{left:35px;top:759px;}
+#t2u_2{left:359px;top:694px;}
+#t2v_2{left:359px;top:717px;}
+#t2w_2{left:359px;top:741px;}
+#t2x_2{left:332px;top:327px;letter-spacing:-1px;word-spacing:1.6px;}
+#t2y_2{left:332px;top:345px;}
+#t2z_2{left:332px;top:364px;}
+#t30_2{left:332px;top:400px;}
+#t31_2{left:499px;top:327px;letter-spacing:-1px;word-spacing:1.6px;}
+#t32_2{left:499px;top:345px;}
+#t33_2{left:499px;top:364px;}
+#t34_2{left:499px;top:400px;}
+
+.s1_2{
+	FONT-SIZE: 55.8px;
+	FONT-FAMILY: Helvetica-Black_13;
+	color: rgb(35,31,32);
+}
+
+.s2_2{
+	FONT-SIZE: 38.2px;
+	FONT-FAMILY: Helvetica-Black_13;
+	color: rgb(35,31,32);
+}
+
+.s3_2{
+	FONT-SIZE: 110px;
+	FONT-FAMILY: Swis721LtBT-NormalItalic_-;
+	color: rgb(35,31,32);
+}
+
+.s4_2{
+	FONT-SIZE: 61.1px;
+	FONT-FAMILY: Swis721LtBT_z;
+	color: rgb(35,31,32);
+}
+
+.s5_2{
+	FONT-SIZE: 85.6px;
+	FONT-FAMILY: Swis721LtBT-NormalItalic_-;
+	color: rgb(35,31,32);
+}
+
+.s6_2{
+	FONT-SIZE: 149px;
+	FONT-FAMILY: Helvetica-Black_13;
+	color: rgb(35,31,32);
+}
+
+.s7_2{
+	FONT-SIZE: 39.7px;
+	FONT-FAMILY: BaskervilleBE-Regular_11;
+	color: rgb(35,31,32);
+}
+
+.s8_2{
+	FONT-SIZE: 61.1px;
+	FONT-FAMILY: Aldine401BT__;
+	color: rgb(35,31,32);
+}
+
+.s9_2{
+	FONT-SIZE: 36.7px;
+	FONT-FAMILY: Aldine401BT__;
+	color: rgb(35,31,32);
+}
+
+.s10_2{
+	FONT-SIZE: 62.1px;
+	FONT-FAMILY: Helvetica-Black_13;
+	color: rgb(255,255,255);
+}
+
+.s11_2{
+	FONT-SIZE: 49.6px;
+	FONT-FAMILY: Helvetica-Black_13;
+	color: rgb(35,31,32);
+}
+
+.s12_2{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: Swis721LtBT-NormalItalic_-;
+	color: rgb(35,31,32);
+}
+
+.s13_2{
+	FONT-SIZE: 37.2px;
+	FONT-FAMILY: Helvetica-Black_13;
+	color: rgb(35,31,32);
+}
+
+.s14_2{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: Aldine401BT__;
+	color: rgb(35,31,32);
+}
+
+.s15_2{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: Aldine401BT-NormalItalic_y;
+	color: rgb(35,31,32);
+}
+
+.s16_2{
+	FONT-SIZE: 55px;
+	FONT-FAMILY: Aldine401BT-Bold_10;
+	color: rgb(35,31,32);
+}
+
+.s17_2{
+	FONT-SIZE: 55px;
+	FONT-FAMILY: Aldine401BT__;
+	color: rgb(35,31,32);
+}
+
+.s18_2{
+	FONT-SIZE: 48.9px;
+	FONT-FAMILY: Helvetica_12;
+	color: rgb(35,31,32);
+}
+
+.t.m1_2{
+	-webkit-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+	-ms-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+	-moz-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+	-o-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+}
+
+.t.m2_2{
+	-webkit-transform: matrix(1.05,0,0,1,0, 0) scale(0.25);
+	-ms-transform: matrix(1.05,0,0,1,0, 0) scale(0.25);
+	-moz-transform: matrix(1.05,0,0,1,0, 0) scale(0.25);
+	-o-transform: matrix(1.05,0,0,1,0, 0) scale(0.25);
+}
+
+.t.m3_2{
+	-webkit-transform: matrix(1,0,-0.18,0.98,0, 0) scale(0.25);
+	-ms-transform: matrix(1,0,-0.18,0.98,0, 0) scale(0.25);
+	-moz-transform: matrix(1,0,-0.18,0.98,0, 0) scale(0.25);
+	-o-transform: matrix(1,0,-0.18,0.98,0, 0) scale(0.25);
+}
+
+.t.m4_2{
+	-webkit-transform: matrix(1.01,0,0,1,0, 0) scale(0.25);
+	-ms-transform: matrix(1.01,0,0,1,0, 0) scale(0.25);
+	-moz-transform: matrix(1.01,0,0,1,0, 0) scale(0.25);
+	-o-transform: matrix(1.01,0,0,1,0, 0) scale(0.25);
+}
+
+</style>
+<!-- End inline CSS -->
+
+<!-- Begin embedded font definitions -->
+<style id="fonts2" type="text/css" >
+
+@font-face {
+	font-family: Swis721LtBT_z;
+	src: url("fonts/Swis721LtBT_z.woff") format("woff");
+}
+
+@font-face {
+	font-family: BaskervilleBE-Regular_11;
+	src: url("fonts/BaskervilleBE-Regular_11.woff") format("woff");
+}
+
+@font-face {
+	font-family: Helvetica_12;
+	src: url("fonts/Helvetica_12.woff") format("woff");
+}
+
+@font-face {
+	font-family: Aldine401BT-NormalItalic_y;
+	src: url("fonts/Aldine401BT-NormalItalic_y.woff") format("woff");
+}
+
+@font-face {
+	font-family: Helvetica-Black_13;
+	src: url("fonts/Helvetica-Black_13.woff") format("woff");
+}
+
+@font-face {
+	font-family: Swis721LtBT-NormalItalic_-;
+	src: url("fonts/Swis721LtBT-NormalItalic_-.woff") format("woff");
+}
+
+@font-face {
+	font-family: Aldine401BT__;
+	src: url("fonts/Aldine401BT__.woff") format("woff");
+}
+
+@font-face {
+	font-family: Aldine401BT-Bold_10;
+	src: url("fonts/Aldine401BT-Bold_10.woff") format("woff");
+}
+
+</style>
+<!-- End embedded font definitions -->
+
+<!-- Begin page background -->
+<div id="pg2Overlay" style="width:100%; height:100%; position:absolute; z-index:1; background-color:rgba(0,0,0,0); -webkit-user-select: none;"></div>
+<div id="pg2" style="-webkit-user-select: none;"><object width="1540" height="935" data="2/2.svg" type="image/svg+xml" id="pdf2" style="width:1540px; height:935px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
+<!-- End page background -->
+
+
+<!-- Begin text definitions (Positioned/styled in CSS) -->
+<div id="t1_2" class="t m1_2 s1_2">U.S. Department of Labor</div>
+<div id="t2_2" class="t m1_2 s2_2">Occupational Safety and Health Administration</div>
+<div id="t3_2" class="t m2_2 s3_2">OSHA's Form 300A</div>
+<div id="t4_2" class="t m2_2 s4_2">(Rev. 01/2004)</div>
+<div id="t5_2" class="t m2_2 s5_2">Year 20__ __</div>
+<div id="t6_2" class="t m3_2 s6_2">Summary of Work-Related Injuries and Illnesses</div>
+<div id="t7_2" class="t s7_2">Form approved OMB no. 1218-0176</div>
+<div id="t8_2" class="t s8_2">Total number of</div>
+<div id="t9_2" class="t s8_2">deaths</div>
+<div id="ta_2" class="t s9_2">__________________</div>
+<div id="tb_2" class="t s8_2">Total number of</div>
+<div id="tc_2" class="t s8_2">cases with days</div>
+<div id="td_2" class="t s8_2">away from work</div>
+<div id="te_2" class="t s9_2">__________________</div>
+<div id="tf_2" class="t m1_2 s10_2">Number of Cases</div>
+<div id="tg_2" class="t s8_2">Total number of days away</div>
+<div id="th_2" class="t s8_2">from work</div>
+<div id="ti_2" class="t s8_2">___________</div>
+<div id="tj_2" class="t s8_2">Total number of days of job</div>
+<div id="tk_2" class="t s8_2">transfer or restriction</div>
+<div id="tl_2" class="t s8_2">___________</div>
+<div id="tm_2" class="t m1_2 s10_2">Number of Days</div>
+<div id="tn_2" class="t m1_2 s11_2">Post this Summary page from February 1 to April 30 of the year following the year covered by the form.</div>
+<div id="to_2" class="t s12_2">All establishments covered by Part 1904 must complete this Summary page, even if no work-related injuries or illnesses occurred during the year. Remember to review the Log</div>
+<div id="tp_2" class="t s12_2">to verify that the entries are complete and accurate before completing this summary.</div>
+<div id="tq_2" class="t s12_2">Using the Log, count the individual entries you made for each category. Then write the totals below, making sure you've added the entries from every page of the Log. If you</div>
+<div id="tr_2" class="t s12_2">had no cases, write "0."</div>
+<div id="ts_2" class="t s12_2">Employees, former employees, and their representatives have the right to review the OSHA Form 300 in its entirety. They also have limited access to the OSHA Form 301 or</div>
+<div id="tt_2" class="t s12_2">its equivalent. See 29 CFR Part 1904.35, in OSHA's recordkeeping rule, for further details on the access provisions for these forms.</div>
+<div id="tu_2" class="t m1_2 s1_2">Establishment information</div>
+<div id="tv_2" class="t m1_2 s1_2">Employment information</div>
+<div id="tw_2" class="t m1_2 s13_2">Your establishment name</div>
+<div id="tx_2" class="t s14_2">__________________________________________</div>
+<div id="ty_2" class="t s14_2">Street</div>
+<div id="tz_2" class="t s14_2">_________________________</div>
+<div id="t10_2" class="t s14_2">_______</div>
+<div id="t11_2" class="t s14_2">City</div>
+<div id="t12_2" class="t s14_2">____________________________ State ______ ZIP _________</div>
+<div id="t13_2" class="t s14_2">Industry description (</div>
+<div id="t14_2" class="t s14_2">)</div>
+<div id="t15_2" class="t s14_2">_______________________________________________________</div>
+<div id="t16_2" class="t s14_2">Standard Industrial Classification (SIC), if known (</div>
+<div id="t17_2" class="t s14_2">)</div>
+<div id="t18_2" class="t s14_2">____ ____ ____ ____</div>
+<div id="t19_2" class="t s14_2">North American Industrial Classification (NAICS), if known (e.g., 336212)</div>
+<div id="t1a_2" class="t s15_2">e.g., Manufacture of motor truck trailers</div>
+<div id="t1b_2" class="t s15_2">e.g., 3715</div>
+<div id="t1c_2" class="t s15_2">(I</div>
+<div id="t1d_2" class="t s15_2">ee the</div>
+<div id="t1e_2" class="t s15_2">Worksheet on the back of this page to estimate.)</div>
+<div id="t1f_2" class="t s14_2">_____________________</div>
+<div id="t1g_2" class="t s14_2">OR</div>
+<div id="t1h_2" class="t s14_2">____ ____ ____ ____ ____ ____</div>
+<div id="t1i_2" class="t s14_2">Annual average number of employees</div>
+<div id="t1j_2" class="t s14_2">______________</div>
+<div id="t1k_2" class="t s14_2">Total hours worked by all employees last year</div>
+<div id="t1l_2" class="t s14_2">______________</div>
+<div id="t1m_2" class="t s15_2">f you don't have these figures, s</div>
+<div id="t1n_2" class="t m1_2 s1_2">Sign here</div>
+<div id="t1o_2" class="t s16_2">Knowingly falsifying this document may result in a fine.</div>
+<div id="t1p_2" class="t s17_2">I certify that I have examined this document and that to the best of my</div>
+<div id="t1q_2" class="t s17_2">knowledge the entries are true, accurate, and complete.</div>
+<div id="t1r_2" class="t s17_2">___________________________________________________________</div>
+<div id="t1s_2" class="t s17_2">___________________________________________________________</div>
+<div id="t1t_2" class="t s9_2">Company executive</div>
+<div id="t1u_2" class="t s9_2">Title</div>
+<div id="t1v_2" class="t s9_2">Phone</div>
+<div id="t1w_2" class="t s9_2">Date</div>
+<div id="t1x_2" class="t s9_2">(</div>
+<div id="t1y_2" class="t s9_2">)</div>
+<div id="t1z_2" class="t s9_2">-</div>
+<div id="t20_2" class="t s9_2">/</div>
+<div id="t21_2" class="t s9_2">/</div>
+<div id="t22_2" class="t s7_2">Public reporting burden for this collection of information is estimated to average 58 minutes per response, including time to review the instructions, search and gather the data needed, and</div>
+<div id="t23_2" class="t s7_2">complete and review the collection of information. Persons are not required to respond to the collection of information unless it displays a currently valid OMB control number. If you have any</div>
+<div id="t24_2" class="t s7_2">comments about these estimates or any other aspects of this data collection, contact: US Department of Labor, OSHA Office of Statistical Analysis, Room N-3644, 200 Constitution Avenue, NW,</div>
+<div id="t25_2" class="t s7_2">Washington, DC 20210. Do not send the completed forms to this office.</div>
+<div id="t26_2" class="t s8_2">Total number of . . .</div>
+<div id="t27_2" class="t s8_2">Skin disorders</div>
+<div id="t28_2" class="t s8_2">______</div>
+<div id="t29_2" class="t s8_2">Respiratory conditions</div>
+<div id="t2a_2" class="t s8_2">______</div>
+<div id="t2b_2" class="t s8_2">Injuries</div>
+<div id="t2c_2" class="t s8_2">______</div>
+<div id="t2d_2" class="t m1_2 s10_2">Injury and Illness Types</div>
+<div id="t2e_2" class="t s8_2">Poisonings</div>
+<div id="t2f_2" class="t s8_2">______</div>
+<div id="t2g_2" class="t s8_2">Hearing loss</div>
+<div id="t2h_2" class="t s8_2">All other illnesses</div>
+<div id="t2i_2" class="t s8_2">______</div>
+<div id="t2j_2" class="t s8_2">______</div>
+<div id="t2k_2" class="t s18_2">(G) </div>
+<div id="t2l_2" class="t s18_2">(H) </div>
+<div id="t2m_2" class="t s18_2">(I) </div>
+<div id="t2n_2" class="t s18_2">(J)</div>
+<div id="t2o_2" class="t s18_2">(K) </div>
+<div id="t2p_2" class="t s18_2">(L)</div>
+<div id="t2q_2" class="t s18_2">(M)</div>
+<div id="t2r_2" class="t m4_2 s18_2">(1)</div>
+<div id="t2s_2" class="t m4_2 s18_2">(2)</div>
+<div id="t2t_2" class="t m4_2 s18_2">(3)</div>
+<div id="t2u_2" class="t m4_2 s18_2">(4)</div>
+<div id="t2v_2" class="t m4_2 s18_2">(5)</div>
+<div id="t2w_2" class="t m4_2 s18_2">(6)</div>
+<div id="t2x_2" class="t s8_2">Total number of</div>
+<div id="t2y_2" class="t s8_2">cases with job</div>
+<div id="t2z_2" class="t s8_2">transfer or restriction</div>
+<div id="t30_2" class="t s9_2">__________________</div>
+<div id="t31_2" class="t s8_2">Total number of</div>
+<div id="t32_2" class="t s8_2">other recordable</div>
+<div id="t33_2" class="t s8_2">cases</div>
+<div id="t34_2" class="t s9_2">__________________</div>
+
+</div>
+</body>
+</html>
+
+
+</j:jelly>]]></html>
+        <name>osha_form_300_page_2</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-05 12:09:30</sys_created_on>
+        <sys_id>dfc06198dbd5541003b3533fd396194b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>osha_form_300_page_2</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_dfc06198dbd5541003b3533fd396194b</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-05 12:09:30</sys_updated_on>
+    </sys_ui_page>
+</record_update>

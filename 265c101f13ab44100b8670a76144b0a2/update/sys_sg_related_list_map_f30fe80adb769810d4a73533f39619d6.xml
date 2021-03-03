@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_related_list_map">
+    <sys_sg_related_list_map action="INSERT_OR_UPDATE">
+        <context_field/>
+        <destination_screen display_value="Injury/Illness">fc9d600adb769810d4a73533f3961937</destination_screen>
+        <related_list_screen display_value="Related List">22baec46db769810d4a73533f3961960</related_list_screen>
+        <relationship>x_fru_cir_injury_illness.impacted_person</relationship>
+        <sys_class_name>sys_sg_related_list_map</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-24 08:35:43</sys_created_on>
+        <sys_id>f30fe80adb769810d4a73533f39619d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>fc9d600adb769810d4a73533f3961937</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_related_list_map_f30fe80adb769810d4a73533f39619d6</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-24 08:35:43</sys_updated_on>
+    </sys_sg_related_list_map>
+</record_update>

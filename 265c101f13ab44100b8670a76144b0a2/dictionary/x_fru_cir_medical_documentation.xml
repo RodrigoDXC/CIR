@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" label="Medical Documentation" max_length="40" name="x_fru_cir_medical_documentation" sizeclass="0" type="collection">
+        <element label="Coordinator" max_length="100" name="coordinator" type="string"/>
+        <element label="Coordinator agreement" max_length="40" name="coordinator_agreement" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Current work capacity" max_length="40" name="current_work_capacity" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Total Incapacity" sequence="10" value="total_incapacity"/>
+                <element inactive_on_update="false" label="Suitable Duties" sequence="20" value="suitable_duties"/>
+                <element inactive_on_update="false" label="Pre-Injury Duties (PID)" sequence="30" value="pre_injury_duties"/>
+            </choice>
+        </element>
+        <element display="true" label="Display name" max_length="100" name="display_name" type="string"/>
+        <element label="Documentation" max_length="40" name="documentation" type="string"/>
+        <element label="Fit to work on" max_length="40" name="fit_to_work_on" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Impacted person" max_length="32" name="impacted_person" read_only="true" reference="x_fru_cir_person_impact" type="reference"/>
+        <element label="Issued by" max_length="100" name="issued_by" type="string"/>
+        <element label="Issue date" mandatory="true" max_length="40" name="issue_date" type="glide_date"/>
+        <element label="Medical restrictions" max_length="4000" name="medical_restrictions" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Permitted weekly hours" max_length="40" name="permitted_weekly_hours" type="float"/>
+        <element label="Practitioner" max_length="100" name="practitioner" type="string"/>
+        <element label="Practitioner agreement" max_length="40" name="practitioner_agreement" type="glide_date"/>
+        <element label="Provider email" max_length="100" name="provider_email" type="string"/>
+        <element label="Provider name" max_length="100" name="provider_name" type="string"/>
+        <element label="Provider phone" max_length="100" name="provider_phone" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Restricted work for" max_length="40" name="restricted_work_for" type="glide_duration"/>
+        <element label="Return to work tasks" max_length="4000" name="return_to_work_tasks" type="string"/>
+        <element label="Suitable duties" max_length="4000" name="suitable_duties" type="string"/>
+        <element label="Supervisor" max_length="100" name="supervisor" type="string"/>
+        <element label="Supervisor agreement" max_length="40" name="supervisor_agreement" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Unfit to work for" max_length="40" name="unfit_to_work_for" type="glide_duration"/>
+        <element label="Worker agreement" max_length="40" name="worker_agreement" type="glide_date"/>
+        <element label="Workplace support" max_length="4000" name="workplace_support" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Work objective" max_length="40" name="work_objective" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Same Employer, Same Employment" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="Same Employer, Different Employment" sequence="20" value="2"/>
+                <element inactive_on_update="false" label="Different Employer, Same Employment" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="Different Employer, Different Employment" sequence="40" value="4"/>
+            </choice>
+        </element>
+        <element label="Work tasks to avoid" max_length="4000" name="work_tasks_to_avoid" type="string"/>
+        <index name="index">
+            <element name="impacted_person"/>
+        </index>
+    </element>
+</database>

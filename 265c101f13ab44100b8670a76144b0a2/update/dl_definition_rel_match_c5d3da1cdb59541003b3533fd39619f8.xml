@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="dl_definition_rel_match">
+    <dl_definition_rel_match action="INSERT_OR_UPDATE">
+        <dl_definition display_value="CIR Severity Incident Lookup">b0b3de1cdb59541003b3533fd396198e</dl_definition>
+        <exact_match>true</exact_match>
+        <matcher_table>x_fru_cir_severity_lookup</matcher_table>
+        <matcher_table_field>future_likelihood</matcher_table_field>
+        <source_table>x_fru_cir_incident</source_table>
+        <source_table_field>likelihood</source_table_field>
+        <sys_class_name>dl_definition_rel_match</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-05 15:52:38</sys_created_on>
+        <sys_id>c5d3da1cdb59541003b3533fd39619f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>likelihood</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>dl_definition_rel_match_c5d3da1cdb59541003b3533fd39619f8</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-05 15:52:38</sys_updated_on>
+    </dl_definition_rel_match>
+</record_update>

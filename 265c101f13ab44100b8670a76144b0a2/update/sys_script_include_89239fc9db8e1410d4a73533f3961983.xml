@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtImportValidationFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRAssmtImportValidationFP</name>
+        <script><![CDATA[var CIRAssmtImportValidationFP = function() {
+    var JOIN_DELIMITER = ', ';
+
+    /**
+     * Validate if the Template file is being used.
+     *
+     * @param {Object} parser - Parser element of Excel
+     * @return {void}
+     */
+    var isUsingTemplateFile = function(parser) {
+        var arrHeadersNotAllowed = [];
+        var allowedExcelHeaders = CIRConstants.AssessmentValidations.ALLOWED_EXCEL_HEADERS;
+        var arrAllowedHeaders = Object.keys(allowedExcelHeaders).map(function(key) {
+            return allowedExcelHeaders[key];
+        });
+        var headers = parser.getColumnHeaders();
+        for(var i = 0; i < headers.length; i++) {
+            if(arrAllowedHeaders.indexOf(headers[i]) === -1) {
+                arrHeadersNotAllowed.push(headers[i]);
+            }
+        }
+        if(arrHeadersNotAllowed.length > 0) {
+            throw new Error(gs.getMessage('cir_assmt_excel_headers_invalid',
+                [arrHeadersNotAllowed.join(JOIN_DELIMITER)]));
+        }
+    };
+
+    /**
+     * Validate all data in the Excel file.
+     *
+     * @param {Array} arrayAllRows - Array containing all the rows in the file
+     * @return {Array} - Array containing all errors if there are any, empty array otherwise 
+     */
+    var validateExcelData = function(arrayAllRows) {
+        var toReturn = [];
+
+        var errorLinesMandatory = [];
+        errorLinesMandatory = ckeckErrorLinesMandatory(arrayAllRows);
+        var errorLinesDuplicate = [];
+        errorLinesDuplicate = checkErrorLinesDuplicate(arrayAllRows);
+        var errorLinesTypeField = [];
+        errorLinesTypeField = checkErrorLinesTypeField(arrayAllRows);
+        var errorLinesChoiceWrongTypeField = [];
+        errorLinesChoiceWrongTypeField = checkChoiceWithType(arrayAllRows);
+        var errorLinesInvalidFieldName = [];
+        errorLinesInvalidFieldName = checkFieldNames(arrayAllRows);
+        var errorLinesMandatoryFieldNoChoices = [];
+        errorLinesMandatoryFieldNoChoices = checkFieldChoices(arrayAllRows);
+        if(errorLinesMandatory.length > 0) {
+            toReturn.push(gs.getMessage('cir_assmt_assesment_import_mandatory',
+                [errorLinesMandatory.join(JOIN_DELIMITER)]));
+        }
+        if(errorLinesDuplicate.length > 0) {
+            toReturn.push(gs.getMessage('cir_assmt_import_assesment_duplicate',
+                [errorLinesDuplicate.join(JOIN_DELIMITER)]));
+        }
+        if(errorLinesTypeField.length > 0) {
+            toReturn.push(gs.getMessage('cir_assmt_type_not_allowed',
+                [errorLinesTypeField.join(JOIN_DELIMITER)]));
+        }
+        if(errorLinesChoiceWrongTypeField.length > 0) {
+            toReturn.push(gs.getMessage('cir_assmt_choices_not_allowed_for_field_type',
+                [errorLinesChoiceWrongTypeField.join(JOIN_DELIMITER)]));
+        }
+        if(errorLinesInvalidFieldName.length > 0) {
+            toReturn.push(gs.getMessage('cir_assmt_field_name_invalid',
+                [errorLinesInvalidFieldName.join(JOIN_DELIMITER)]));
+        }
+        if(errorLinesMandatoryFieldNoChoices.length > 0) {
+            toReturn.push(gs.getMessage('cir_assmt_ass_default_value_missing',
+                [errorLinesMandatoryFieldNoChoices.join(JOIN_DELIMITER)]));
+        }
+        return toReturn;
+    };
+
+    /**
+     * Check if the array of object have all mandatory fields filled 
+     * Used in the 'Process Excel' function before start creating records
+     *
+     * @param {array} array - Array containing all objects
+     * @return {array} - With errors in line, empty case no mandatory fields empty
+     */
+    var ckeckErrorLinesMandatory = function(array) {
+        var errorLinesMandatory = [];
+        for(var i = 0; i < array.length; i++) {
+            errorLinesMandatory = errorLinesMandatory.concat(validateMandatoryFields(array, i));
+        }
+        return errorLinesMandatory;
+    };
+
+    /**
+     * Validate the Mandatory fields and return the error messages if any exist.
+     *
+     * @param {array} array - Array containing all objects
+     * @param {int} index - Current index of the array
+     * @return {array} - With errors in line, empty case no mandatory fields empty
+     */
+    var validateMandatoryFields = function(array, index) {
+        var arrMandatoryValidation = CIRConstants.AssessmentValidations.MANDATORY_FIELDS;
+        var errorLinesMandatory = [];
+        arrMandatoryValidation.forEach(function(el) {
+            var errorMessage = getMandatoryFieldErrors(array, el, index);
+            if(errorMessage) {
+                errorLinesMandatory.push(errorMessage);
+            }
+        });
+        return errorLinesMandatory;
+    };
+
+    /**
+     * Get the Mandatory fields error messages if any exist.
+     *
+     * @param {array} array - Array containing all objects
+     * @param {array} el - Object with field name path and error message name
+     * @param {int} index - Current index of the array
+     * @return {String|null} - String with the error message, null if there is no error
+     */
+    var getMandatoryFieldErrors = function(array, el, index) {
+        var SPLIT_DELIMITER = '.';
+        var properties = el.field.split(SPLIT_DELIMITER);
+        var parentField = properties[0];
+        var field = properties[1];
+        if(!array[index][parentField] || (array[index][parentField] && !array[index][parentField][field])) {
+            return gs.getMessage(el.message, [array[index].rowNumber + '']);
+        }
+        return null;
+    };
+
+    /**
+     * Check if the object has fields duplicated, duplicated values in choices or duplicated name fields in Fields
+     * Used in the 'Process Excel' function before start creating records
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With errors in line, empty case all objects can be imported
+     */
+    var checkErrorLinesDuplicate = function(array) {
+        var errorLinesDuplicate = [];
+
+        //Duplicate value in Choice values
+        errorLinesDuplicate = errorLinesDuplicate.concat(validateChoiceDuplicates(array));
+
+        //Duplicate Name Fields in the same section
+        errorLinesDuplicate = errorLinesDuplicate.concat(validateFieldNameDuplicates(array));
+
+        return errorLinesDuplicate;
+    };
+
+    /**
+     * Validate the Choice values and return error messages if any exists.
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With errors in line, empty case all objects can be imported
+     */
+    var validateChoiceDuplicates = function(array) {
+        var SPLIT_DELIMITER = ',';
+        var errorLinesDuplicate = [];
+        for(var i = 0; i < array.length; i++) {
+            if(array[i].choice.labels) {
+                var choicesValuesSplitted = array[i].choice.values.split(SPLIT_DELIMITER);
+                if(!verifyDuplicates(choicesValuesSplitted)) {
+                    errorLinesDuplicate.push(gs.getMessage('cir_assmt_choice_values', [array[i].rowNumber + '']));
+                }
+            }
+        }
+        return errorLinesDuplicate;
+    };
+
+    /**
+     * Validate the Field names and return error messages if any exists.
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With errors in line, empty case all objects can be imported
+     */
+    var validateFieldNameDuplicates = function(array) {
+        var sectionNames = getDistincSectionNames(array);
+        var errorLinesDuplicate = [];
+        for(u = 0; u < sectionNames.length; u++) {
+            var duplicatedRows = verifyDuplicateNameFields(array, sectionNames[u]);
+            if(duplicatedRows.length > 0) {
+                errorLinesDuplicate.push(gs.getMessage('cir_assmt_name_field_dup',
+                    [duplicatedRows.join(JOIN_DELIMITER)]));
+            }
+        }
+        return errorLinesDuplicate;
+    };
+
+    /**
+     * Get all section names of array of objects
+     * Used in the 'checkErrorLinesDuplicate' function before start creating records
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With all section names
+     */
+    var getDistincSectionNames = function(array) {
+        var unique = [];
+        for(var i = 0; i < array.length; i++) {
+            if(unique.indexOf(array[i].section.name) === -1) {
+                unique.push(array[i].section.name);
+            }
+        }
+        return unique;
+    };
+
+    /**
+     * Verify if the array have some duplicated value 
+     * Used in the 'rowIsOk' function.  
+     *
+     * @param {Array} array - Array of choices
+     * @return {boolean} - True in case all choices are unique, false otherwise
+     */
+    var verifyDuplicates = function(array) {
+        var unique = [];
+        for(var i = 0; i < array.length; i++) {
+            if(unique.indexOf(array[i]) !== -1) {
+                return false;
+            } else {
+                unique.push(array[i]);
+            }
+        }
+        return true;
+    };
+
+    /**
+     * Check if the object has field names duplicated
+     * Used in the 'checkErrorLinesDuplicate' function before start creating records
+     *
+     * @param {array} array - array with all objects of same section
+     * @return {array} - With errors lines, empty case all objects can be imported
+     */
+    var verifyDuplicateNameFields = function(array, sectionName) {
+        var duplicatedRows = [];
+        var arraySectionName = array.filter(function(el) {
+            return el.section.name === sectionName;
+        });
+        for(var i = 0; i < arraySectionName.length; i++) {
+            var row = arraySectionName.filter(filterForFieldsWithSameNameInRow);
+            if(row.length <= 1) {
+                continue;
+            }
+
+            var found = new CIRGenericUtils().Find(duplicatedRows, findDuplicatedFieldNames);
+            if(!found) {
+                duplicatedRows = duplicatedRows.concat(row);
+            }
+        }
+        return extractRowNumbersAndSort();
+
+        function filterForFieldsWithSameNameInRow(el) {
+            return el.field.name === arraySectionName[i].field.name;
+        }
+
+        function findDuplicatedFieldNames(duplicatedEl) {
+            return duplicatedEl.field.name === arraySectionName[i].field.name;
+        }
+
+        function extractRowNumbersAndSort() {
+            return duplicatedRows.map(function(duplicatedEl) {
+                return duplicatedEl.rowNumber;
+            }).sort(function(a, b) {
+                return a - b;
+            });
+        }
+    };
+
+    /**
+     * Verify if the type of field is allowed to import
+     * Used in the 'processExcel' function before start creating records
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With all error lines
+     */
+    var checkErrorLinesTypeField = function(array) {
+        var errorLines = [];
+        var allowedFieldTypes = CIRConstants.AssessmentValidations.ALLOWED_FIELD_TYPES;
+        var arrTypesAllowed = Object.keys(allowedFieldTypes).map(function(key) {
+            return allowedFieldTypes[key];
+        });
+        for(var i = 0; i < array.length; i++) {
+            if(arrTypesAllowed.indexOf(array[i].field.type) === -1) {
+                errorLines.push(array[i].rowNumber);
+            }
+        }
+        return errorLines;
+    };
+
+    /**
+     * Check if the object has field type that allows choices
+     * Check if the object has an acceptable name field
+     * Used in the 'Process Excel' function before start creating records
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With errors in line, empty case all objects with choices allow it
+     */
+    var checkChoiceWithType = function(array) {
+        var invalidRows = [];
+        var allowedTypesWithChoices = CIRConstants.AssessmentValidations.ALLOWED_FIELD_TYPES_W_CHOICES;
+        var arrAllowedTypeForChoices = Object.keys(allowedTypesWithChoices).map(function(key) {
+            return allowedTypesWithChoices[key];
+        });
+        for(var i = 0; i < array.length; i++) {
+            if(array[i].choice.labels && arrAllowedTypeForChoices.indexOf(array[i].field.type) === -1) {
+                invalidRows.push(gs.getMessage('cir_assmt_assessment_import_value_in_row',
+                    [array[i].field.type, array[i].rowNumber + '']));
+            }
+        }
+        return invalidRows;
+    };
+
+    /**
+     * Check if the object has a valid name field
+     * Used in the 'Process Excel' function before start creating records
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With if there are errors, empty otherwise
+     */
+    var checkFieldNames = function(array) {
+        var invalidRows = [];
+        var fieldNameRegex = CIRConstants.AssessmentValidations.ALLOWED_FIELD_NAME_REGEX;
+        for(var i = 0; i < array.length; i++) {
+            if(array[i].field.name && !array[i].field.name.match(fieldNameRegex)) {
+                invalidRows.push(gs.getMessage('cir_assmt_assessment_import_value_in_row',
+                    [array[i].field.name, array[i].rowNumber + '']));
+            }
+        }
+        return invalidRows;
+    };
+
+    /**
+     * Verify if the type of field is mandatory and requires choices
+     * Used in the 'processExcel' function before start creating records
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With all error lines
+     */
+    var checkFieldChoices = function(array) {
+        var errorLines = [];
+        var mandatoryFieldTypesWithChoices = CIRConstants.AssessmentValidations.MANDATORY_FIELD_TYPES_W_CHOICES;
+        var arrTypesMandatoryWithChoices = Object.keys(mandatoryFieldTypesWithChoices).map(function(key) {
+            return mandatoryFieldTypesWithChoices[key];
+        });
+        for(var i = 0; i < array.length; i++) {
+            if(array[i].field.mandatory.toLowerCase() === 'true' &&
+                arrTypesMandatoryWithChoices.indexOf(array[i].field.type) > -1 &&
+                ((array[i].field.default_value && !isDefaultValueExistent(array[i], array[i].field.default_value) ||
+                !array[i].field.default_value))) {
+                errorLines.push(array[i].rowNumber);
+            }
+        }
+        return errorLines;
+    };
+
+    /**
+     * Validate the Value exists in the Choices.
+     * Used in the 'Process Excel' function before start creating records
+     *
+     * @param {Object} row - array with all objects
+     * @param {String} defaultValue - value
+     * @return {Boolean} - True if it exists, false otherwise
+     */
+    var isDefaultValueExistent = function(row, defaultValue) {
+        if(row.choice.values.indexOf(defaultValue) > -1) {
+            return true;
+        }
+        return false;
+    };
+
+    return {
+        IsUsingTemplateFile: isUsingTemplateFile,
+        ValidateExcelData: validateExcelData
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:12:00</sys_created_on>
+        <sys_id>89239fc9db8e1410d4a73533f3961983</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>CIRAssmtImportValidationFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_89239fc9db8e1410d4a73533f3961983</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-28 10:53:59</sys_updated_on>
+    </sys_script_include>
+</record_update>

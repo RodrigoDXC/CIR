@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRStaticProtectionClientUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>CIRStaticProtectionClientUtils</name>
+        <script><![CDATA[var CIRStaticProtectionClientUtils = Class.create();
+CIRStaticProtectionClientUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	getParentBuilding: function() {
+		var spaceId = this.getParameter('sysparm_spaceId');
+		
+		var building = new CIRStaticProtectionUtils().GetSpaceParentBuilding(spaceId);
+		return JSON.stringify(building);
+	},
+	
+	// checks if every space in the list has his parent building on the building list. if not, erases it
+	filterSpaces: function() {
+		var spaces = this.getParameter('sysparm_spaceIds');
+		var buildings = this.getParameter('sysparm_buildingIds');
+		
+		var filteredSpaces = new CIRStaticProtectionUtils().FltrSpacesFrmBuildings(buildings,spaces);
+		return JSON.stringify(filteredSpaces);
+		
+	},
+
+    type: 'CIRStaticProtectionClientUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-28 07:41:37</sys_created_on>
+        <sys_id>c63d1dd9dbd65c10d4a73533f39619ea</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIRStaticProtectionClientUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_c63d1dd9dbd65c10d4a73533f39619ea</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-28 07:41:37</sys_updated_on>
+    </sys_script_include>
+</record_update>

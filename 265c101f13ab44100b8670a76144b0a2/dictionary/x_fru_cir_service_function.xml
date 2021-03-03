@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Service Function" max_length="40" name="x_fru_cir_service_function" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Attributes" max_length="4000" name="attributes" reference="x_fru_cir_service_attribute" type="glide_list"/>
+        <element label="Service description" max_length="4000" name="service_description" type="string"/>
+        <element display="true" label="Service name" mandatory="true" max_length="40" name="service_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service role" max_length="32" name="service_role" reference="x_fru_cir_service_role" type="reference"/>
+        <index name="index">
+            <element name="service_role"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="action_taken" table="x_fru_cir_security_impact" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>action_taken</element>
+            <name>x_fru_cir_security_impact</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:44:11</sys_created_on>
+            <sys_id>5fb633b4138a50500b8670a76144b031</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>action_taken</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_security_impact_action_taken</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:44:11</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>action_taken</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Area Secured</label>
+            <language>en</language>
+            <name>x_fru_cir_security_impact</name>
+            <sequence>10</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:44:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a9cc9aa9db15101003b3533fd3961918</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:44:23</sys_updated_on>
+            <value>area_secured</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>action_taken</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Authorities Notified</label>
+            <language>en</language>
+            <name>x_fru_cir_security_impact</name>
+            <sequence>20</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:44:28</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>11dc52e9db15101003b3533fd39619ad</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:44:39</sys_updated_on>
+            <value>authorities_notified</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>action_taken</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Area Evacuated</label>
+            <language>en</language>
+            <name>x_fru_cir_security_impact</name>
+            <sequence>30</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:44:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a9ec9ae9db15101003b3533fd3961950</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:44:55</sys_updated_on>
+            <value>area_evacuated</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>action_taken</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Offenders Retained</label>
+            <language>en</language>
+            <name>x_fru_cir_security_impact</name>
+            <sequence>40</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:45:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2afcdae9db15101003b3533fd39619c3</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:45:08</sys_updated_on>
+            <value>offenders_retained</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>action_taken</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other (See Description)</label>
+            <language>en</language>
+            <name>x_fru_cir_security_impact</name>
+            <sequence>50</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:45:13</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a10d16e9db15101003b3533fd39619f9</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:45:21</sys_updated_on>
+            <value>other</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

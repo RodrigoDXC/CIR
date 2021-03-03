@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Expense" max_length="40" name="x_fru_cir_expense" sizeclass="3" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Bodyguard" max_length="32" name="bodyguard" reference="x_fru_cir_protection_profile" reference_qual="role=1^EQ" reference_qual_condition="role=1^EQ" type="reference"/>
+        <element label="Date" max_length="40" name="date" type="glide_date"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element default="javascript:getNextObjNumberPadded();" dynamic_default_value="fdcb83a85f220100a9ad2572f2b4773c" label="Number" max_length="40" name="number" read_only="true" type="string" use_dynamic_default="true"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service order" max_length="32" name="service" reference="x_fru_cir_protection_service_order" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="1" label="State" max_length="40" name="status" read_only="true" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="New" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Draft" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Submitted" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="Approved" sequence="3" value="3"/>
+                <element inactive_on_update="false" label="Rejected" sequence="4" value="4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true,serializer=com.glide.script.PriceXMLSerializer" label="Total tax" max_length="20" name="total_tax" type="price"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true,serializer=com.glide.script.PriceXMLSerializer" default="0.00" label="Total value" max_length="20" name="total_value" type="price"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true,serializer=com.glide.script.PriceXMLSerializer" label="Total exc tax" max_length="20" name="total_value_exc_tax" type="price"/>
+        <index name="index">
+            <element name="bodyguard"/>
+        </index>
+        <index name="index2">
+            <element name="service"/>
+        </index>
+    </element>
+</database>

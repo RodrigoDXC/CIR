@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_wizard_answer action="DELETE">
+<active>true</active>
+<answer>Situation Message</answer>
+<button_label/>
+<dependent_value/>
+<element/>
+<name>Situation Message</name>
+<next_question display_value=""/>
+<order>100</order>
+<payload_name/>
+<question display_value="Type of Step" name="Type of Step">d2325a051bb30850df7e43f4bd4bcbef</question>
+<roles/>
+<script/>
+<sys_class_name>sys_wizard_answer</sys_class_name>
+<sys_created_by>rnowell4@csc.com</sys_created_by>
+<sys_created_on>2020-03-30 14:35:17</sys_created_on>
+<sys_customer_update>false</sys_customer_update>
+<sys_id>29afb0fa133740500b8670a76144b03a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_name>Situation Message</sys_name>
+<sys_package display_value="Health, Safety, and Environmental" source="x_fru_hse">7594c93613adb6001f8c7b1a6144b033</sys_package>
+<sys_policy/>
+<sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+<sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+<sys_update_name>sys_wizard_answer_29afb0fa133740500b8670a76144b03a</sys_update_name>
+<sys_updated_by>rnowell4@csc.com</sys_updated_by>
+<sys_updated_on>2020-03-30 14:35:17</sys_updated_on>
+<table/>
+<target_url>x_fru_cir_situation_message.do</target_url>
+<type>1</type>
+</sys_wizard_answer>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_wizard_answer_29afb0fa133740500b8670a76144b03a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_wizard_answer action="INSERT_OR_UPDATE">
+<active>true</active>
+<answer>Situation Message</answer>
+<button_label/>
+<dependent_value/>
+<element/>
+<name>Situation Message</name>
+<next_question display_value=""/>
+<order>100</order>
+<payload_name/>
+<question display_value="Type of Step" name="Type of Step">d2325a051bb30850df7e43f4bd4bcbef</question>
+<roles/>
+<script/>
+<sys_class_name>sys_wizard_answer</sys_class_name>
+<sys_created_by>rnowell4@csc.com</sys_created_by>
+<sys_created_on>2020-03-30 14:35:17</sys_created_on>
+<sys_customer_update>false</sys_customer_update>
+<sys_id>29afb0fa133740500b8670a76144b03a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_name>Situation Message</sys_name>
+<sys_package display_value="Health, Safety, and Environmental" source="x_fru_hse">7594c93613adb6001f8c7b1a6144b033</sys_package>
+<sys_policy/>
+<sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+<sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+<sys_update_name>sys_wizard_answer_29afb0fa133740500b8670a76144b03a</sys_update_name>
+<sys_updated_by>rnowell4@csc.com</sys_updated_by>
+<sys_updated_on>2020-03-30 14:35:17</sys_updated_on>
+<table/>
+<target_url>x_fru_cir_situation_message.do</target_url>
+<type>1</type>
+</sys_wizard_answer></record_update>]]></payload>
+        <payload_hash>2069251968</payload_hash>
+        <record_name>Situation Message</record_name>
+        <reverted_from/>
+        <source>851d78ba1b3bcc50df7e43f4bd4bcbe1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-31 17:00:32</sys_created_on>
+        <sys_id>be7aa2471b734090df7e43f4bd4bcbad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>171318993e60000001</sys_recorded_at>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-31 17:00:32</sys_updated_on>
+        <type>Answer</type>
+        <update_guid>b67aa24751734090c1fc86e64a7ce8ad</update_guid>
+        <update_guid_history>b67aa24751734090c1fc86e64a7ce8ad:2069251968</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-31 17:00:59</sys_created_on>
+        <sys_db_object display_value="" name="sys_wizard_answer">sys_wizard_answer</sys_db_object>
+        <sys_id>106d13e4f8b445e4aa0d902d4e659e01</sys_id>
+        <sys_metadata>29afb0fa133740500b8670a76144b03a</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Situation Message</sys_name>
+        <sys_package display_value="Health, Safety, and Environmental" source="x_fru_hse">7594c93613adb6001f8c7b1a6144b033</sys_package>
+        <sys_parent display_value="Type of Step">d2325a051bb30850df7e43f4bd4bcbef</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_106d13e4f8b445e4aa0d902d4e659e01</sys_update_name>
+        <sys_update_version display_value="sys_wizard_answer_29afb0fa133740500b8670a76144b03a">be7aa2471b734090df7e43f4bd4bcbad</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

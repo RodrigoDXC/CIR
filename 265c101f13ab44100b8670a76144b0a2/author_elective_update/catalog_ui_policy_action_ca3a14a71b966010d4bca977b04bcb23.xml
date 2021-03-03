@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
+    <catalog_ui_policy_action action="DELETE">
+        <catalog_item display_value="Report a Case">6086064edb41501003b3533fd3961977</catalog_item>
+        <catalog_variable>IO:e92614631b966010d4bca977b04bcb70</catalog_variable>
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field/>
+        <mandatory>ignore</mandatory>
+        <order>100</order>
+        <sys_class_name>catalog_ui_policy_action</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-18 22:35:38</sys_created_on>
+        <sys_id>ca3a14a71b966010d4bca977b04bcb23</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>department</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>catalog_ui_policy_action_ca3a14a71b966010d4bca977b04bcb23</sys_update_name>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-18 22:35:38</sys_updated_on>
+        <table/>
+        <ui_policy display_value="On Site fields visibility">12d99c671b966010d4bca977b04bcb35</ui_policy>
+        <variable>department</variable>
+        <variable_set/>
+        <visible>true</visible>
+    </catalog_ui_policy_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>catalog_ui_policy_action_ca3a14a71b966010d4bca977b04bcb23</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action"><catalog_ui_policy_action action="INSERT_OR_UPDATE"><catalog_item display_value="Report a Case">6086064edb41501003b3533fd3961977</catalog_item><catalog_variable>IO:e92614631b966010d4bca977b04bcb70</catalog_variable><cleared>false</cleared><disabled>ignore</disabled><field/><mandatory>ignore</mandatory><order>100</order><sys_class_name>catalog_ui_policy_action</sys_class_name><sys_created_by>lopez-aznar@dxc.com</sys_created_by><sys_created_on>2021-02-18 22:35:38</sys_created_on><sys_id>ca3a14a71b966010d4bca977b04bcb23</sys_id><sys_mod_count>0</sys_mod_count><sys_name>department</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>catalog_ui_policy_action_ca3a14a71b966010d4bca977b04bcb23</sys_update_name><sys_updated_by>lopez-aznar@dxc.com</sys_updated_by><sys_updated_on>2021-02-18 22:35:38</sys_updated_on><table/><ui_policy display_value="On Site fields visibility">12d99c671b966010d4bca977b04bcb35</ui_policy><variable>department</variable><variable_set/><visible>true</visible></catalog_ui_policy_action></record_update>]]></payload>
+        <payload_hash>-1582925592</payload_hash>
+        <record_name>department</record_name>
+        <reverted_from/>
+        <source>20f0dcaf1b566010d4bca977b04bcb1a</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-18 22:35:39</sys_created_on>
+        <sys_id>764a14a71b966010d4bca977b04bcbea</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>177b748d2880000001</sys_recorded_at>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:33</sys_updated_on>
+        <type>Catalog UI Policy Action</type>
+        <update_guid>7e4a14a7119660108a13bf63f3a2f4e9</update_guid>
+        <update_guid_history>7e4a14a7119660108a13bf63f3a2f4e9:-1582925592</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="department">4958ae391be26810de011fc11a4bcb6f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-26 08:42:33</sys_created_on>
+        <sys_db_object display_value="" name="catalog_ui_policy_action">catalog_ui_policy_action</sys_db_object>
+        <sys_id>07454cc08b3c4e5e884557d942e0c259</sys_id>
+        <sys_metadata>ca3a14a71b966010d4bca977b04bcb23</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>department</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>catalog_ui_policy_action_ca3a14a71b966010d4bca977b04bcb23</sys_update_name>
+        <sys_update_version display_value="catalog_ui_policy_action_ca3a14a71b966010d4bca977b04bcb23">764a14a71b966010d4bca977b04bcbea</sys_update_version>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:33</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

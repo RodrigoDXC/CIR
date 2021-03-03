@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>0c04a529db4e5410d4a73533f396199b</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_group_has_role">
+    <sys_group_has_role action="INSERT_OR_UPDATE">
+        <granted_by/>
+        <group display_value="Situation - Cyber Security" name="Situation - Cyber Security">3b53a529db4e5410d4a73533f39619cf</group>
+        <inherits>true</inherits>
+        <role display_value="x_fru_cir.situation_user" name="x_fru_cir.situation_user">9a1ecca31ba34050df7e43f4bd4bcb3d</role>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 16:22:59</sys_created_on>
+        <sys_id>0c04a529db4e5410d4a73533f396199b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 16:22:59</sys_updated_on>
+    </sys_group_has_role>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 09:35:54</sys_created_on>
+        <sys_id>2e60ddf5db469410d4a73533f3961965</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Created 2020-07-16 17:22:59</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_2e60ddf5db469410d4a73533f3961965</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 09:35:54</sys_updated_on>
+        <tablename>sys_group_has_role</tablename>
+    </sys_metadata_link>
+</record_update>

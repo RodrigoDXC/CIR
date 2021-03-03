@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($scope, spUtil, $timeout, $location, $window, amb, spModal, $rootScope, $uibModal) {
+	/* widget controller */
+	var c = this;
+
+	if (c.data.canReadRecord == false) {
+		$location.search("id=cir_404");
+	}
+
+	c.affectedPpl = parseInt(c.data.pplAffectedNbr);
+	
+	spUtil.recordWatch($scope, c.data.table, "sys_id=" + c.data.sys_id, function (name, data) {
+		c.server.update();
+		$timeout(function () {
+		}, 500);
+	});
+
+	c.getElapsedTime = function () {
+		$timeout(function () {
+			c.server.update();
+		}, 60000);
+	};
+
+	c.chgPplAffected = function () {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'updateAffectedPpl',
+			scope: $scope
+		});
+	};
+
+	c.closePopup = function () {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'closeResponsePlan',
+			scope: $scope
+		});
+	};
+
+	c.closeModal = function () {
+		c.modalInstance.close();
+	};
+
+	c.updatePplAffected = function (affectedNumber) {
+		c.closeModal();
+		c.data.updateAffectedPpl = true;
+		c.data.affectedPplNbr = affectedNumber;
+
+		c.server.update().then(function () {
+			spUtil.update($scope);
+		});
+	};
+
+	c.closeResponsePlan = function () {
+		c.closeModal();
+		var obj = {};
+		obj.close_resp_plan = true;
+		c.server.get(obj).then(function(){
+		});
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.btn-form-menu {
+	vertical-align: inherit;
+  padding: inherit;
+}
+
+.header-title{
+ 	vertical-align: -webkit-baseline-middle;
+    font-family: SourceSansPro;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.06;
+    letter-spacing: normal;
+  	color: #4a4a4a;
+  	
+}
+
+.image {
+	max-height: 45px;
+    max-width: 45px;
+  	vertical-align: top;
+}
+
+.panel {
+	//height: 154px;
+}
+
+.key-row {
+  	height: 20px;
+  	text-align: center;
+	color: #666666;
+  	padding-top: 4px;
+    border-bottom: 0px;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+ 	border-bottom: 0px;
+  	border-left: solid 1px #dee5e7;
+  
+}
+
+.value-row {
+    height: 59px;
+  	max-height: 59px;
+  	width: 16.66%;
+    max-width: 16.66%;
+		font-weight: normal;
+  	font-style: normal;
+  	font-stretch: normal;
+  	line-height: normal;
+  	//font-size: 20px;
+  	text-align: center;
+ 		color: #2e2e2e;
+    vertical-align: middle;
+		border-top: 0px;
+  	border-bottom: 0px;
+  	text-align: center;
+    border-left: solid 1px #dee5e7;
+  	overflow: auto;
+}
+.value-record {
+  	height: 59px;
+  	max-height: 59px;
+  	width: 16.66%;
+    max-width: 16.66%;
+}
+
+.key-row:first-child {
+    border-left: none 0px;
+}
+.value-row:first-child {
+    border-left: none 0px;
+  	padding-top: 0px;
+}
+
+
+.panel-title {
+  word-wrap: break-word;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.06;
+  letter-spacing: normal;
+  color: #2e2e2e;
+  overflow: hidden;
+}
+.ng-binding{
+vertical-align: baseline;
+}
+.panel-heading {
+  color: #3a3f51;
+    background-color: #f5f5f5;
+    border-color:#dee5e7;
+  	padding-bottom: 11px;
+    padding-top: 11px;
+    padding-right: 10px;
+    height: 54px;
+  	overflow: hidden;
+  .dropdown-menu {
+    a {
+      white-space: normal;
+    }
+  }
+
+}
+
+.sc-field-error-label {
+  margin-right: .5em;
+  display: inline-block;
+  background-color: $sc-field-error-color;
+}
+
+.comment {
+	font-weight: bold;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.mce-panel, .mce-btn {
+	background-image: none;
+	background-color: #f0f3f4;
+}
+
+.action-btn {
+  margin-right: 5px;
+  margin-bottom: 10px;
+  color: #2e2e2e;
+  background-color: #ffffff;
+  border-color: #cccccc;
+  display: block;
+}
+
+.timeline-container {
+   max-height: 50vh;
+   height: 100%;
+   overflow-y: auto;
+}
+
+.text-info-alt {
+	background-color: $state-info-text;
+}
+
+.table {
+    padding: 7px;
+	margin:0;
+}
+
+.crisis-link{
+   color: #ec0000;
+   text-align: center;
+   text-decoration: underline;
+   font-size: 14px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Shows relevant information about a response plan record</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-situation-response-plan-overview</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Response Plan Overview</name>
+        <option_schema>[{"name":"fields","section":"Data","default_value":"parent_situation,situation_location,category,sys_created_on,people_affected,state","label":"Fields","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.situation_user</roles>
+        <script><![CDATA[(function () {
+	data.table = $sp.getParameter('table');
+	data.sys_id = $sp.getParameter("sys_id") || -1;
+	data.fields = [];
+	data.labels = [];
+	var utils = new CIRSituationUtils();
+	data.tables = CIRConstants.Tables;
+	var record = utils.GetRecord(data.table, data.sys_id);
+	data.canReadRecord = record.valid;
+	if (!data.canReadRecord) {
+		return;
+	}
+	data.record = record.glide_record;
+	data.canClose = data.record.state.canWrite();
+	data.updateAffectedPpl = input ? input.updateAffectedPpl : false;
+	data.affectedPplNbr = input ? input.affectedPplNbr : false;
+	data.pplAffectedNbr = data.record.people_affected_manual + '';
+
+	//messages
+	data.messages = {};
+	data.messages.adjust_people_affected = gs.getMessage('cir_sit_update_ppl_affected');
+	data.messages.affected_people = gs.getMessage('cir_sit_affected_people');
+	data.messages.affected_people_message = gs.getMessage('cir_sit_affected_people_message');
+	data.messages.at = gs.getMessage('cir_sit_at');
+
+	if (data.updateAffectedPpl && data.affectedPplNbr) {
+		updateAffectedPpl(data.affectedPplNbr);
+	}
+
+	if (!data.table || !data.sys_id || !data.fields) {
+		return;
+	}
+	if (input && input.close_resp_plan) {
+		data.record.state = '3';
+		data.record.update();
+	}
+
+	if (data.record) {
+		data.title = data.record.number.toString() + ': ' + data.record.getDisplayValue('response_plan_template') +
+			' ' + data.messages.at + ' ' + data.record.getDisplayValue('situation_location');
+		data.fields = options.fields.split(',');
+		data.editPeople = data.record.people_affected_manual.canWrite();
+
+		for (var i = 0; i < data.fields.length; i++) {
+			var field = $sp.getField(data.record, data.fields[i].toString());
+
+			switch (data.fields[i].toString()) {
+				case 'sys_created_on':
+					if (data.record.sys_created_on) {
+						var elapsedTime = getElapsedTime(field.value.toString());
+
+						var createdValue = field.display_value.toString().slice(0, 16);
+						data.labels.push({
+							"key": field.label,
+							"value": createdValue,
+							"tooltipContent": elapsedTime,
+							"tooltip": 'true',
+							"created_on": 'true'
+						});	
+					} else {
+						data.labels.push({"key": field.label});
+					}
+					break;
+
+				case 'people_affected':
+					if (data.record.people_affected_manual == "") {
+						data.record.people_affected_manual = "0";
+					}
+					if (data.record.people_affected == "") {
+						field.display_value = "0";
+					}
+					if (data.record) {
+						data.labels.push({
+							"key": data.messages.affected_people,
+							"value": data.editPeople ? 
+									field.display_value + "<br>" + "<u>" + data.record.getDisplayValue('people_affected_manual') + "</u>" :
+									field.display_value + "<br>" + data.record.getDisplayValue('people_affected_manual'),
+							"people_affected": 'true',
+							"tooltipContent": data.messages.affected_people_message,
+							"tooltip": 'true'
+						});
+					}
+					break;
+				case 'parent_situation':
+					var parentSit = data.record.parent_situation.getRefRecord();
+					if (parentSit.canRead()) {
+						data.labels.push({
+							"key": field.label,
+							"value": data.record.parent_situation.number.toString() + ': ' + data.record.parent_situation.category.getDisplayValue(),
+							"link": 'cir?id=cir_situation_room&table=' + data.tables.SITUATION + '&sys_id=' + data.record.getValue('parent_situation'),
+							"tooltipContent": data.record.parent_situation.name.toString(),
+							"tooltip": 'true'
+						});
+					}
+					break;
+
+				default:
+					data.labels.push({
+						"key": field.label,
+						"value": field.display_value
+					});
+					break;
+			}
+
+		}
+	}
+
+	function getElapsedTime(start) {
+		var currentTime = new GlideDateTime();
+		var startTime = new GlideDateTime();
+		startTime.setValue(start);
+		var diff = GlideDuration.subtract(startTime, currentTime);
+
+		return diff.getDisplayValue();
+	}
+
+	function updateAffectedPpl(affectedNumber) {
+		if (data.record) {
+			data.record.people_affected_manual = parseInt(affectedNumber);
+			data.record.update();
+		}
+		data.updateAffectedPpl = false;
+		data.affectedPplNbr = '';
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 11:53:24</sys_created_on>
+        <sys_id>51aa6ec91b370850df7e43f4bd4bcbd1</sys_id>
+        <sys_mod_count>56</sys_mod_count>
+        <sys_name>CIR Response Plan Overview</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_51aa6ec91b370850df7e43f4bd4bcbd1</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-13 15:43:40</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+
+    <div class="panel-heading clearfix"><span class="header-title">{{data.title}}</span>
+      	
+      	<button ng-click="c.closePopup()" ng-disabled="c.submitting || !data.canClose"
+                ng-if="data.record_state != '3'" class="btn btn-primary action-btn pull-right" ng-class="::getButtonClass(action)">
+            ${cir_sit_close_response_plan}
+        </button>
+
+    </div>
+
+    <table class="table overview-widget table-{{::c.options.color}}">
+
+        <thead>
+        <tr>
+            <td class="key-row" ng-repeat="label in c.data.labels">
+                {{ label.key }}
+            </td>
+
+        </tr>
+        <tr class="value-row">
+            <th class="value-row" ng-repeat="label in c.data.labels">
+                <img class="image" ng-if="label.picture" ng-src="{{::label.picture}}?t=small"/>
+                <div ng-if="!label.created_on && !label.link  && !label.people_affected"
+                     tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+                     tooltip-placement="top" tooltip-append-to-body="true">{{ label.value }}
+                </div>
+                <div ng-if="label.created_on == 'true'" ng-mouseover='c.getElapsedTime()'
+                     tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+                     tooltip-placement="top" tooltip-append-to-body="true">{{ label.value }}
+                </div>
+              	<div ng-if="label.people_affected == 'true' 
+                            && c.data.editPeople" ng-click="c.chgPplAffected()"
+                        tooltip-enable="label.tooltip == 'true' " uib-tooltip="{{::label.tooltipContent}}"
+                        tooltip-placement="top" tooltip-append-to-body="true" ng-bind-html="label.value"></div>
+              	<div ng-if="label.people_affected == 'true' && !c.data.editPeople" 
+                        tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+                        tooltip-placement="top" tooltip-append-to-body="true" ng-bind-html="label.value"></div>
+                <a ng-if="label.link" ng-href="{{label.link}}" class="crisis-link"
+                   tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+                   tooltip-placement="top" tooltip-append-to-body="true">{{label.value}}</a>
+            </th>
+        </tr>
+        </thead>
+
+    </table>
+</div>
+
+<script type="text/ng-template" id="updateAffectedPpl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${cir_sit_update_ppl_affected}</h4>
+        </div>
+        <div class="panel-body wrapper-xl">
+            <div style="margin-bottom:30px">
+                <span class="required">${cir_sit_select_nr_ppl_affected}</span>
+                <input type="number" min="0" ng-model="c.affectedPpl" style="margin-bottom:30px" type="text" name=""><span
+                    style="margin-left: 5px;"></span></input>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_close}</button>
+            <button class="btn btn-primary" ng-click="c.updatePplAffected(c.affectedPpl)">${cir_sit_update}</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="closeResponsePlan">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${Close response plan}</h4>
+        </div>
+        <div class="panel-body wrapper-xl">
+             <span class="required">${cir_sit_confirm_action} ${Close response plan}?</span>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_cancel}</button>
+            <button class="btn btn-primary" ng-click="c.closeResponsePlan()">${Ok}</button>
+        </div>
+    </div>
+</script>]]></template>
+    </sp_widget>
+</record_update>

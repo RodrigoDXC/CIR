@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_form_screen">
+    <sys_sg_form_screen action="INSERT_OR_UPDATE">
+        <available_offline>false</available_offline>
+        <data_item/>
+        <description/>
+        <dynamic_prefetch_count/>
+        <fetch_type>not_required</fetch_type>
+        <filter/>
+        <hide_filters>false</hide_filters>
+        <hide_screen_name>false</hide_screen_name>
+        <icon display_value="My Situations records Icon">44aed60ddbb3085049959a82ca9619cc</icon>
+        <item_view display_value="My Situations records Header Item View">08aed60ddbb3085049959a82ca9619ce</item_view>
+        <name>Situation Room</name>
+        <roles_override>x_fru_cir.situation_user</roles_override>
+        <sys_class_name>sys_sg_form_screen</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 11:00:54</sys_created_on>
+        <sys_id>d8aed60ddbb3085049959a82ca9619d0</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Situation Room</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_form_screen_d8aed60ddbb3085049959a82ca9619d0</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-04-04 07:50:04</sys_updated_on>
+        <table>x_fru_cir_situation</table>
+    </sys_sg_form_screen>
+    <sys_translated_text action="delete_multiple" query="documentkey=d8aed60ddbb3085049959a82ca9619d0"/>
+</record_update>

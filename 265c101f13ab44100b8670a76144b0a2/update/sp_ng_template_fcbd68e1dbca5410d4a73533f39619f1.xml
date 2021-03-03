@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>cir_ciri_back_warning</id>
+        <sp_widget display_value="CIR CIRI Assessment List Manager">413da4e1dbca5410d4a73533f396195e</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:25:54</sys_created_on>
+        <sys_id>fcbd68e1dbca5410d4a73533f39619f1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_ciri_back_warning</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_ng_template_fcbd68e1dbca5410d4a73533f39619f1</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 12:25:54</sys_updated_on>
+        <template><![CDATA[<div class="modal-header">
+	<button class="close" ng-click="closeModal()">x</button>
+</div>
+<div class="modal-body wrapper-xs">
+  <div style="margin-bottom:30px" >
+    <span class="required">{{ c.msgs.warningBackMsg }}</span>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="discardChanges()">{{ c.msgs.discardBackMsg }}</button>
+  <button class="btn btn-primary" ng-click="saveChanges()">{{ c.msgs.saveBackMsg }}</button>
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

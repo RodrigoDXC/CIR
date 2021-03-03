@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Message" max_length="40" name="x_fru_cir_message" sizeclass="2" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Body" max_length="8000" name="body" type="html"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Category" mandatory="true" max_length="40" name="category" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Situation" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Protection" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Round" sequence="2" value="2"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Language" max_length="32" name="language" reference="notify_language" type="reference"/>
+        <element label="Name" mandatory="true" max_length="40" name="name" type="string"/>
+        <element hint="Message asking if the user is NOT OK" label="Negative message" max_length="4000" name="negative_message" type="string"/>
+        <element hint="Message that will be said to the user in a negative scenario" label="Negative response" max_length="4000" name="negative_response" type="string"/>
+        <element label="Primary message" max_length="4000" name="plain_text" type="string"/>
+        <element hint="Message asking if the user is OK" label="Positive message" max_length="4000" name="positive_message" type="string"/>
+        <element hint="Message that will be said to the user in a positive scenario" label="Positive response" max_length="4000" name="positive_response" type="string"/>
+        <element label="Subject" max_length="255" name="subject" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="message_type" choice_table="x_fru_cir_response_plan_template_step_message" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="SMS" sequence="1" value="sms"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="language"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtUIActionsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRAssmtUIActionsFP</name>
+        <script><![CDATA[var CIRAssmtUIActionsFP = (function() {
+    var CIRAssmtUIActionsFP = Class.create();
+    var initialize = function() {};
+	
+	var assmtReadFP = new CIRAssmtReadFP();
+
+    /**
+     * Function to check if the Generate Category Objects UI Action can be shown.
+     *
+     * @param {Object} current - Object containing the data from the Assessment Definition
+     * @return {Boolean} - True if the condition is verified, false otherwise
+     */
+    var canGenerateCategoryObjects = function(current) {
+        return current.catalog &&  !gs.nil(current.catalog)&& ((!current.published) || !assmtReadFP.AssmtDefHasInstances(current.getUniqueValue()));
+		
+
+    };
+
+    /**
+     * Function to check if the Generate Assessment From Excel UI Action can be shown.
+     *
+     * @param {Object} current - Object containing the data from the Assessment Definition
+     * @return {Boolean} - True if the condition is verified, false otherwise
+     */
+    var canGenerateAssessmentFromExcel = function(current) {
+        var EXCEL_CONTENT_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        var grAttachment = new GlideRecord(CIRConstants.Tables.ATTACHMENT);
+        grAttachment.addQuery('table_name', CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        grAttachment.addQuery('table_sys_id', current.sys_id + '');
+        grAttachment.addQuery('content_type', EXCEL_CONTENT_TYPE);
+        grAttachment.addQuery('sys_id', 'NOT IN', current.processed_files);
+        grAttachment.query();
+        return grAttachment.hasNext() && (!current.category || !assmtReadFP.AssmtDefHasInstances(current.getUniqueValue()));
+    };
+
+    /**
+     * Function to check if the Assessment Instances can be canceled.
+     *
+     * @param {Object} current - GlideRecord of assessment instance
+     * @return {Boolean} - True if the state is WIP, False otherwise
+     */
+    var canCancelAssessmentInstance = function(current) {
+        var CIR_ADMIN_ROLE = 'x_fru_cir.admin';
+        var SYS_ADMIN_ROLE = 'admin';
+        return ((current.getValue('state') === CIRConstants.AssessmentStates.ASSESSMENT_INSTANCE_WIP) &&
+            ((gs.hasRole(SYS_ADMIN_ROLE)) || (gs.hasRole(CIR_ADMIN_ROLE))));
+    };
+
+    CIRAssmtUIActionsFP.prototype = {
+        initialize: initialize,
+        CanGenerateCategoryObjects: canGenerateCategoryObjects,
+        CanGenerateAssessmentFromExcel: canGenerateAssessmentFromExcel,
+        CanCancelAssessmentInstance: canCancelAssessmentInstance
+    };
+
+    return CIRAssmtUIActionsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:18:18</sys_created_on>
+        <sys_id>8d94534ddb8e1410d4a73533f39619fe</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>CIRAssmtUIActionsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_8d94534ddb8e1410d4a73533f39619fe</sys_update_name>
+        <sys_updated_by>sgambeerrao@dxc.com</sys_updated_by>
+        <sys_updated_on>2020-10-13 10:44:42</sys_updated_on>
+    </sys_script_include>
+</record_update>

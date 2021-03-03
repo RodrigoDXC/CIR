@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>3e6c39e7db795010d4a73533f3961975</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_fru_cir_kpi_period"&gt;
+    &lt;x_fru_cir_kpi_period action="INSERT_OR_UPDATE"&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;name&gt;12M&lt;/name&gt;
+        &lt;start_date_calculation&gt;&lt;![CDATA[(function scriptFieldFunction(startDate) {
+    startDate.addMonthsUTC(-11);
+	startDate.setDayOfMonthUTC(1);
+    return startDate;
+})(startDate);]]&gt;&lt;/start_date_calculation&gt;
+        &lt;sys_created_by&gt;Jorge.Diogo@fruitionpartners.pt&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2020-07-10 13:02:04&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;3e6c39e7db795010d4a73533f3961975&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;Jorge.Diogo@fruitionpartners.pt&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2020-07-10 13:02:04&lt;/sys_updated_on&gt;
+    &lt;/x_fru_cir_kpi_period&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 13:02:34</sys_created_on>
+        <sys_id>719cf9e7db795010d4a73533f3961986</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>12M</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_719cf9e7db795010d4a73533f3961986</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:02:34</sys_updated_on>
+        <tablename>x_fru_cir_kpi_period</tablename>
+    </sys_metadata_link>
+</record_update>

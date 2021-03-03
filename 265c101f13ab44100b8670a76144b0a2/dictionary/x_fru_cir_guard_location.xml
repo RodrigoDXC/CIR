@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Guard Location" max_length="40" name="x_fru_cir_guard_location" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Building" max_length="4000" name="building" reference="x_fru_cir_security_location" reference_qual="javascript: new CIRStaticProtectionUtils().GetBuildingsWithChild();" type="glide_list" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Guard" mandatory="true" max_length="32" name="guard" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Space" mandatory="true" max_length="4000" name="space" reference="x_fru_cir_security_location" reference_qual="javascript: new CIRStaticProtectionUtils().GetSpacesByBuilding(current.building);" type="glide_list" use_reference_qualifier="advanced"/>
+        <index name="index">
+            <element name="guard"/>
+        </index>
+    </element>
+</database>

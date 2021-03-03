@@ -1,0 +1,1076 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil, $timeout, $location, $window, amb, spModal, $rootScope, $uibModal) {
+	/* widget controller */
+	var c = this;
+
+	// if the user does not have access to the record, it will be redirected to the 404 page
+	if (c.data.canReadRecord == false) {
+		$location.search("id=cir_404");
+	}
+	c.currentLocations = c.data.currentCountries;
+	c.countryID = "";
+	c.affectedPpl = parseInt(c.data.pplAffectedManual);
+	
+	spUtil.recordWatch($scope, c.data.table, "sys_id=" + c.data.sys_id, function (name, data) {
+		c.server.update();
+		$timeout(function () {
+		}, 500);
+	});
+
+	spUtil.recordWatch($scope, c.data.tables.RESP_PLAN_EXEC, "parent_situation=" + c.data.sys_id, function(name, data) {
+		c.server.update();
+	});
+
+	c.getElapsedTime = function() {
+		$timeout(function() {
+			c.server.update();
+		}, 60000);
+	};
+
+	c.addLocation = function() {
+		c.currentLocations = c.data.currentCountries;
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'addLocation',
+			scope: $scope
+		});
+	};
+
+	c.chgPplAffected = function() {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'updateAffectedPpl',
+			scope: $scope
+		});
+	};
+
+	c.closeModal = function() {
+		c.modalInstance.close();
+	};
+
+	c.closeCountryModal = function () {
+		c.modalInstance.close();
+
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'addLocation',
+			scope: $scope
+		});
+	};
+
+	c.updateLocations = function (locationId, field) {
+		c.closeModal();
+
+		var obj = {};
+		obj.update_new_locations = true;
+		obj.field = field;
+		obj.new_location = locationId;
+
+		c.server.get(obj).then(function () {
+			spUtil.update($scope);
+		});
+
+	};
+
+	c.removeCountryPopUp = function () {
+		c.closeModal();
+
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'removeCountry',
+			scope: $scope
+		});
+	};
+
+	c.deleteLocation = function (locationId, field) {
+
+		if (field == "country") {
+			c.removeCountryPopUp();
+			c.countryID = locationId;
+		} else {
+			var obj = {};
+			obj.delete_location = true;
+			obj.field = field;
+			obj.location = locationId;
+
+			c.server.get(obj).then(function (response) {
+				spUtil.update($scope);
+				c.currentLocations = response.data.currentLocations;
+			});
+		}
+
+	};
+
+	c.deleteCountry = function (locationId) {
+		c.closeCountryModal();
+
+		var obj = {};
+		obj.delete_location = true;
+		obj.field = "country";
+		obj.location = locationId;
+
+		c.server.get(obj).then(function (response) {
+			spUtil.update($scope);
+			c.currentLocations = response.data.currentLocations;
+		});
+
+	};
+
+	c.updatePplAffected = function (affectedNumber) {
+        c.closeModal();
+        c.data.updateAffectedPpl = true;
+        c.data.affectedPplNbr = affectedNumber;
+
+        c.server.update().then(function () {
+           spUtil.update($scope);
+        });
+    };
+
+	c.confirmCloseCrisis = function() {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'confirmCloseCrisis',
+			scope: $scope
+		});
+	};
+
+	c.closeCrisis = function() {
+		c.closeModal();
+		c.data.closeCrisis = true;
+		c.server.update().then(function() {
+			spUtil.addInfoMessage(c.data.messages.crisisClosed);
+			c.data.closeCrisis = false;
+		});
+	};
+
+	c.escalate = function() {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'escalate',
+			scope: $scope
+		});
+	};
+
+	c.escalateToLevel = function() {
+		c.closeModal();
+		c.data.escalateCrisis = true;
+		var obj = {};
+		obj.action = c.data.escalateAction;
+		c.server.get(obj).then(function() {
+			spUtil.addTrivialMessage(c.data.upd_message);
+		});
+	};
+	
+	c.openTab = function (evt, tabName) {
+        var i, tablinks;
+
+        switch (tabName) {
+            case 'country':
+                c.currentLocations = c.data.currentCountries;
+                break;
+            case 'location_groups':
+                c.currentLocations = c.data.currentGroups;
+                break;
+            case 'buildings':
+                c.currentLocations = c.data.currentBuildings;
+                break;
+            case 'virtual_locations':
+                c.currentLocations = c.data.currentVirtual;
+                break;
+        }
+
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById("location").style.display = "block";
+        evt.currentTarget.className += " active";
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.btn-form-menu {&#13;
+	vertical-align: inherit;&#13;
+  padding: inherit;&#13;
+  background: none;&#13;
+}&#13;
+&#13;
+&#13;
+.header-title{&#13;
+    vertical-align: middle !important;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+		line-height: 1.70;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+}&#13;
+&#13;
+.image {&#13;
+	max-height: 45px;&#13;
+    max-width: 45px;&#13;
+  	vertical-align: top;&#13;
+}&#13;
+&#13;
+.key-row {&#13;
+  overflow: hidden;&#13;
+  	height: 20px;&#13;
+  	text-align: center;&#13;
+	color: #666666;&#13;
+  	padding-top: 4px;&#13;
+    border-bottom: 0px;&#13;
+    font-size: 14px;&#13;
+    font-weight: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.43;&#13;
+ 	border-bottom: 0px;&#13;
+  	border-left: solid 1px #dee5e7;&#13;
+  &#13;
+}&#13;
+&#13;
+.value-row {&#13;
+    height: 59px;&#13;
+    max-height: 59px;&#13;
+    width: 16.66%;&#13;
+    max-width: 16.66%;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: normal;&#13;
+    text-align: center;&#13;
+    color: #2e2e2e;&#13;
+    vertical-align: middle;&#13;
+    border-top: 0px;&#13;
+    border-bottom: 0px;&#13;
+    text-align: center;&#13;
+    border-left: solid 1px #dee5e7;&#13;
+}&#13;
+&#13;
+.key-row:first-child {&#13;
+    border-left: none 0px;&#13;
+}&#13;
+.value-row:first-child {&#13;
+    border-left: none 0px;&#13;
+  	padding-top: 0px;&#13;
+}&#13;
+&#13;
+&#13;
+.panel-title {&#13;
+  word-wrap: break-word;&#13;
+  font-size: 25px;&#13;
+  font-weight: normal;&#13;
+  font-style: normal;&#13;
+  font-stretch: normal;&#13;
+  line-height: 1.06;&#13;
+  letter-spacing: normal;&#13;
+  color: #2e2e2e;&#13;
+}&#13;
+.ng-binding{&#13;
+vertical-align: top;&#13;
+}&#13;
+.panel-heading {&#13;
+  color: #3a3f51;&#13;
+    background-color: #f5f5f5;&#13;
+    border-color:#dee5e7;&#13;
+  	padding-bottom: 11px;&#13;
+    padding-top: 11px;&#13;
+    padding-right: 10px;&#13;
+    height: 54px;&#13;
+  	overflow: hidden;&#13;
+  	&#13;
+  .dropdown-menu {&#13;
+    a {&#13;
+      white-space: normal;&#13;
+    }&#13;
+  }&#13;
+&#13;
+}&#13;
+&#13;
+.sc-field-error-label {&#13;
+  margin-right: .5em;&#13;
+  display: inline-block;&#13;
+  background-color: $sc-field-error-color;&#13;
+}&#13;
+&#13;
+.comment {&#13;
+	font-weight: bold;&#13;
+	margin-top: 2px;&#13;
+	margin-bottom: 2px;&#13;
+}&#13;
+.mce-panel, .mce-btn {&#13;
+	background-image: none;&#13;
+	background-color: #f0f3f4;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+  margin-right: 5px;&#13;
+  margin-bottom: 10px;&#13;
+  color: #2e2e2e;&#13;
+  background-color: #ffffff;&#13;
+  border-color: #cccccc;&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.timeline-container {&#13;
+   max-height: 50vh;&#13;
+   height: 100%;&#13;
+   overflow-y: auto;&#13;
+}&#13;
+&#13;
+.text-info-alt {&#13;
+	background-color: $state-info-text;&#13;
+}&#13;
+&#13;
+.table {&#13;
+    padding: 7px;&#13;
+	margin:0;&#13;
+}&#13;
+&#13;
+.tab {&#13;
+	padding: 0px !important;&#13;
+}&#13;
+&#13;
+.tab button:hover {&#13;
+  color: #ec0000 !important;&#13;
+}&#13;
+&#13;
+.tab button.active {&#13;
+  color: #ec0000 !important;&#13;
+  border-bottom: 3px solid #ec0000 !important;&#13;
+}&#13;
+&#13;
+.tab button {&#13;
+  background-color: inherit !important;&#13;
+  float: left !important;&#13;
+  border: none !important;&#13;
+  outline: none !important;&#13;
+  cursor: pointer !important;&#13;
+  padding: 16px 16px !important;&#13;
+  transition: 0.3s !important;&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 600px) {&#13;
+  .tablinks {&#13;
+    font-size: 12px;&#13;
+  }&#13;
+}&#13;
+&#13;
+.button-trash{&#13;
+  margin-left: 5px !important;&#13;
+  border: white !important;&#13;
+}&#13;
+&#13;
+.button-trash :hover {&#13;
+  border:4px red !important;&#13;
+  color:red !important;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Shows relevant information about a Situation record</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-situation-room-overview</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Situation Room Overview</name>
+        <option_schema>[{"name":"fields","section":"Data","default_value":"category,locations,sys_created_on,people_affected,escalation_level,state","label":"Fields","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.situation_user</roles>
+        <script><![CDATA[(function() {
+	// URL PARAMS
+	data.table = $sp.getParameter('table');
+	data.sys_id = $sp.getParameter("sys_id") || -1;
+
+	// UTILITIES
+	var utils = new CIRSituationUtils();
+	var record = utils.GetRecord(data.table, data.sys_id);
+	data.canReadRecord = record.valid;
+	if (!data.canReadRecord) {
+		return;
+	}
+
+	// DATA OBJECT
+	data.fields = [];
+	data.labels = [];
+	data.tables = CIRConstants.Tables;
+	data.crisisRecord = record.glide_record;
+
+	// ACCESS SETTINGS
+	data.canCloseCrisisRoom = false;
+	data.canWriteCountry = data.crisisRecord.country.canWrite();
+	data.canWriteEscalate = data.crisisRecord.escalation_level.canWrite();
+	data.canWriteClose = data.crisisRecord.state.canWrite();
+	data.recordState = data.crisisRecord.getValue('state');
+	data.canWritePPL = data.crisisRecord.people_affected_manual.canWrite();
+	data.pplAffectedManual= data.crisisRecord.people_affected_manual + '';
+
+	data.nextEscalLevel = getNextEsclLevel();
+	data.locationQuery = new CIRSituationUtils().FilterByCountry(data.crisisRecord);
+	data.country = data.crisisRecord.getValue('country');
+
+	data.countryQuery = utils.GetCrisisCountries(data.crisisRecord.country);
+	//data.defAffPpl = data.crisisRecord.getValue('people_affected');
+	data.buildingsQuery = utils.GetBuildingsByCountries(data.crisisRecord.buildings, data.crisisRecord.country);
+	data.locationGroupQuery = utils.GetLocationsListField("countries", data.crisisRecord.location_groups, data.crisisRecord.country);
+	data.virtualLocationQuery = utils.GetLocationsListField("country", data.crisisRecord.virtual_locations, data.crisisRecord.country);
+
+	data.currentCountries = getFieldLocations("country");
+	data.currentBuildings = getFieldLocations("buildings");
+	data.currentGroups = getFieldLocations("location_groups");
+	data.currentVirtual = getFieldLocations("virtual_locations");
+	data.currentLocations = "";
+
+	data.updateAffectedPpl = input ? input.updateAffectedPpl : false;
+	data.affectedPplNbr = input ? input.affectedPplNbr : false;
+	data.closeCrisis = input ? input.closeCrisis : false;
+	data.escalateAction = 'excalateCrisis';
+
+	//messages
+	data.messages = {};
+	data.messages.add_location = gs.getMessage('cir_sit_add_location');
+	data.messages.affected_people = gs.getMessage('cir_sit_affected_people'); // NEEDS TO BE CHANEGD
+	data.messages.affected_people_message = gs.getMessage('cir_sit_affected_people_message'); // NEEDS TO BE CHANEGD
+	data.messages.update_people_affected = gs.getMessage('cir_sit_update_ppl_affected');
+	data.messages.closeCrisis = gs.getMessage('cir_sit_close_situation');
+	data.messages.escalateTo = data.nextEscalLevel ? gs.getMessage('cir_sit_escalate_to') + ' ' + data.nextEscalLevel.name : '';
+	data.messages.escalateTooltip = data.nextEscalLevel ? data.nextEscalLevel.tooltip : '';
+	data.messages.escalateToLevel = data.nextEscalLevel ? gs.getMessage('Are you sure you want to escalate to') + ': ' + data.nextEscalLevel.tooltip + '?' : '';	
+	data.messages.closeCrisisTooltip = '';
+	data.upd_message = gs.getMessage('cir_sit_succefull_escalation') + ' ' + data.nextEscalLevel.name;
+	data.messages.crisisClosed = gs.getMessage('cir_sit_situation_room_closed');
+	//data.empty_mandatory_fields = gs.getMessage('cir_sit_fill_mandatory_fields');
+
+
+	if (input && input.update_new_locations == true) {
+		updateNewLocation(input.new_location, input.field);
+	}
+
+	if (input && input.delete_location == true) {
+		deleteLocation(input.location, input.field);
+		data.currentLocations = getFieldLocations(input.field);
+	}
+
+	if (input && input.update_locations == true) {
+		updateLocation(input.new_location);
+	}
+
+	if (data.updateAffectedPpl && data.affectedPplNbr) {
+		updateAffectedPpl(data.affectedPplNbr);
+	}
+
+	if (data.closeCrisis) {
+		closeCrisis();
+	}
+
+	if (input && input.action == data.escalateAction) {
+		escalateCrisis();
+	}
+
+	if (!data.table || !data.sys_id || !data.fields) {
+		return;
+	}
+
+
+	if (data.crisisRecord) {
+		data.title = data.crisisRecord.number.toString() + ': ' + data.crisisRecord.getDisplayValue('category');
+		data.fields = options.fields.split(',');
+
+		for (var i = 0; i < data.fields.length; i++) {
+			var field = $sp.getField(data.crisisRecord, data.fields[i].toString());
+
+			switch (data.fields[i].toString()) {
+				case 'category':
+					if (data.crisisRecord.category) {
+						var picture = getPicture(field.value.toString());
+						data.labels.push({
+							"key": field.label,
+							"picture": picture
+						});
+					} else {
+						data.labels.push({ "key": field.label });
+					}
+					break;
+
+				case 'country':
+					if (data.crisisRecord.country) {
+
+						var allLocations = getAllCrisisLocations();
+						var locationsLabel = gs.getMessage('Locations');
+						if (allLocations.length > 1) {
+							var amount = allLocations;
+							var locationsMsg = amount.length < 2 ? gs.getMessage('Location') : gs.getMessage('Locations');
+							var locValue = amount.length < 2 ?
+									amount.length + ' ' + gs.getMessage('Location') :
+							amount.length + ' ' + gs.getMessage('Locations');
+
+
+							data.labels.push({
+								"key": locationsLabel,
+								"value": locValue,
+								"tooltipContent": allLocations.join(', '),
+								"tooltip": 'true'
+							});
+						} else if (allLocations.length == 1) {
+							data.labels.push({
+								"key": locationsLabel,
+								"value": allLocations[0]
+							});
+						} else {
+
+							data.labels.push({
+								"key": locationsLabel
+							});
+						}
+					}
+					break;
+
+				case 'sys_created_on':
+					if (data.crisisRecord.sys_created_on) {
+						var elapsedTime = getElapsedTime(field.value.toString());
+						var createdValue = field.display_value.toString().slice(0, 16);
+
+						data.labels.push({
+							"key": field.label,
+							"value": createdValue,
+							"tooltipContent": elapsedTime,
+							"tooltip": 'true',
+							"created_on": 'true'
+						});
+					} else {
+						data.labels.push({ "key": field.label });
+					}
+					break;
+
+				case 'escalation_level':
+					var escalations = data.crisisRecord.getValue('escalation_level');
+					if (escalations) {
+						var esclObj = getCurrentEsclLevels(escalations);
+						data.labels.push({
+							"key": field.label,
+							"value": esclObj.name,
+							"tooltipContent": esclObj.tooltip,
+							"tooltip": 'true'
+						});
+					} else {
+						data.labels.push({
+							"key": field.label,
+							"value": 'None',
+							"tooltipContent": gs.getMessage('cir_sit_escalation_not_assigned'),
+							"tooltip": 'true'
+						});
+					}
+
+					break;
+
+				case 'people_affected':
+					if (data.crisisRecord.people_affected_manual == "") {
+						data.crisisRecord.people_affected_manual = "0";
+					}
+					if (data.crisisRecord.people_affected == "") {
+						field.display_value = "0";
+					}
+					if (data.crisisRecord) {
+						data.labels.push({
+							"key": data.messages.affected_people,
+							"value": field.display_value + "<br>" + "<u>" + data.crisisRecord.getDisplayValue('people_affected_manual') + "</u>",
+							"people_affected": 'true',
+							"tooltipContent": data.messages.affected_people_message,
+							"tooltip": 'true'
+						});
+					}
+
+					break;
+
+				default:
+					data.labels.push({
+						"key": field.label,
+						"value": field.display_value
+					});
+					break;
+			}
+
+		}
+		if (data.canWriteClose) {
+			data.canCloseCrisisRoom = areAllRespPlansClosed(data.crisisRecord.getUniqueValue());
+			data.messages.closeCrisisTooltip = data.canCloseCrisisRoom ? '' : gs.getMessage('cir_sit_cannot_close_situation');
+		}
+	}
+
+	function updateLocation(locationId) {
+		if (data.crisisRecord && locationId != undefined) {
+			var locations = data.crisisRecord.getValue('locations') ? data.crisisRecord.getValue('locations') + ',' + locationId.toString() : locationId.toString();
+			data.crisisRecord.setValue('locations', locations);
+			data.crisisRecord.update();
+		}
+	}
+
+	function updateNewLocation(locationId, field) {
+		if (data.crisisRecord && locationId != undefined) {
+			var locations = data.crisisRecord.getValue(field) ? data.crisisRecord.getValue(field) + ',' + locationId.toString() : locationId.toString();
+			data.crisisRecord.setValue(field, locations);
+			data.crisisRecord.update();
+
+			updateAllLocations();
+		}
+	}
+
+	function deleteLocation(locationId, field){
+		if (data.crisisRecord && locationId != undefined) {
+			var fieldArray = data.crisisRecord.getValue(field).split(",");
+			fieldArray.splice(fieldArray.indexOf(locationId), 1);
+			data.crisisRecord.setValue(field, fieldArray.join(","));
+			data.crisisRecord.update();
+
+			updateAllLocations();
+		}
+	}
+
+	function updateAllLocations() {
+		data.currentCountries = getFieldLocations("country");
+		data.currentBuildings = getFieldLocations("buildings");
+		data.currentGroups = getFieldLocations("location_groups");
+		data.currentVirtual = getFieldLocations("virtual_locations");
+	}
+
+	function updateAffectedPpl(affectedNumber) {
+		if (data.crisisRecord) {
+			data.crisisRecord.people_affected_manual = parseInt(affectedNumber).toString();
+			if (isNaN(data.crisisRecord.people_affected_manual)) {
+				data.crisisRecord.people_affected_manual = "0";
+			}
+			data.crisisRecord.update();
+		}
+		data.updateAffectedPpl = false;
+		data.affectedPplNbr = '';
+	}
+
+	function getElapsedTime(start) {
+		var currentTime = new GlideDateTime();
+		var startTime = new GlideDateTime();
+		startTime.setValue(start);
+
+		var diff = new GlideDuration.subtract(startTime, currentTime);
+		var elapsedTime = diff.getDisplayValue();
+
+		return elapsedTime;
+	}
+
+	function getLocationInfo(locIds, table, columnName) {
+		if (locIds == null || locIds == undefined) {
+			return "";
+		}
+
+		var ids = locIds.split(',');
+		var locations = [];
+
+		for (var i = 0; i < ids.length; i++) {
+			var grLoc = new GlideRecord(table);
+			grLoc.addQuery('sys_id', ids[i].toString());
+			grLoc.query();
+
+			if (grLoc.next()) {
+				var obj = {
+					name: grLoc.getValue(columnName).toString(),
+					id: ids[i]
+				};
+				locations.push(obj);
+			}
+		}
+		return locations;
+	}
+
+	function getFieldLocations(field) {
+
+		var obj = {
+			locations: [],
+			message: "", 
+			field: ""
+		}
+
+		switch (field) {
+			case 'country':
+				obj.locations = getLocationInfo(data.crisisRecord.getValue(field), data.tables.SECURITY_ADDRESS_VALUE, "value");
+				obj.message = gs.getMessage("cir_sit_no_countries");
+				obj.field = "country";
+				break;
+			case 'location_groups':
+				obj.locations = getLocationInfo(data.crisisRecord.getValue(field), data.tables.LOCATION_GROUP, "name");
+				obj.message =  gs.getMessage("cir_sit_no_location_groups");
+				obj.field = "location_groups";
+				break;
+			case 'buildings':
+				obj.locations = getLocationInfo(data.crisisRecord.getValue(field), data.tables.SECURITY_LOCATION, "name");
+				obj.message =  gs.getMessage("cir_sit_no_buildings"); 
+				obj.field = "buildings";
+				break;
+			case 'virtual_locations':
+				obj.locations = getLocationInfo(data.crisisRecord.getValue(field), data.tables.SECURITY_VIRTUAL_LOCATION, "name");
+				obj.message =  gs.getMessage("cir_sit_crisis_no_virtual_locations");
+				obj.field = "virtual_locations";
+				break;
+		}
+		return obj;
+	}
+
+	function getAllCrisisLocations() {
+		var locations = [];
+		var labels = [];
+
+		if (data.currentBuildings.locations.length > 0) {
+			labels = data.currentBuildings.locations.map( function (location){ return location.name;});
+			locations = locations.concat(labels);
+
+		}
+		if (data.currentGroups.locations.length > 0) {
+			labels = data.currentGroups.locations.map( function (location){ return location.name;});
+			locations = locations.concat(labels);
+
+		}
+		if (data.currentVirtual.locations.length > 0) {
+			labels = data.currentVirtual.locations.map( function (location){ return location.name;});
+			locations = locations.concat(labels);
+		}
+
+		return locations;
+	}
+
+	function getPicture(catId) {
+		var grCatg = new GlideRecord(data.tables.SITUATION_CATEGORY);
+		grCatg.addQuery('sys_id', catId.toString());
+		grCatg.query();
+
+		if (grCatg.next()) {
+			return grCatg.icon + '.iix';
+		}
+		return;
+	}
+
+	function closeCrisis() {
+		data.crisisRecord.setValue('state', '1');
+		data.crisisRecord.update();
+	}
+
+	function escalateCrisis() {
+		data.crisisRecord.setValue('escalation_level', data.nextEscalLevel.id + '');
+		data.crisisRecord.update();
+	}
+
+	/**
+	 * returns the information of the current escalation levels
+	 * 
+	 * @param {string} escalations - sys_ids of the esclation levels
+	 * @param {string} order - order of the next escalation levels (it needs to be subtracted to get the current order of the current escalation levels)
+	 * 
+	 * @returns {Object} - returns an object with the tooltip and the name
+	 */
+	function getCurrentEsclLevels(escalations) {
+		var esclObj = {};
+		var grEscl = new GlideRecord(data.tables.SITUATION_ESCALATION_LEVEL);
+		grEscl.addEncodedQuery('sys_idIN' + escalations);
+		grEscl.query();
+		while (grEscl.next()) {
+			esclObj.name = 'Level ' + grEscl.getValue('order');
+			if (esclObj.tooltip) {
+				esclObj.tooltip += ', ' + grEscl.getValue('level_name');
+			} else {
+				esclObj.tooltip = grEscl.getValue('level_name');
+			}
+		}
+		return esclObj;
+	}
+
+	function getNextEsclLevel() {
+		var nextEsclLevel = {};
+		var crisisGR = data.crisisRecord;
+		var crisisGREscl = crisisGR.getValue('escalation_level');
+		var newLevel = '';
+		if (crisisGREscl) {
+			crisisGREscl = crisisGREscl.split(',');
+			var grEscl = new GlideRecord(data.tables.SITUATION_ESCALATION_LEVEL);
+			if (grEscl.get(crisisGREscl[0])) {
+				newLevel = grEscl.order + 1;
+			}
+		} else {
+			return false;
+		}
+
+		var countries = crisisGR.getDisplayValue('country');
+		if (countries) {
+			countries = countries.split(',');
+			for (var i in countries) {
+				var grSysChoice = new GlideRecord('sys_choice');
+				grSysChoice.addEncodedQuery('elementSTARTSWITHcountry^name=cmn_location^label='+ countries[i].trim());
+				grSysChoice.setLimit(1);
+				grSysChoice.query();
+				if (grSysChoice.next()) {
+					countries[i] = grSysChoice.getValue('value');
+				}
+			}
+		}
+		var grEscalation = new GlideRecord(data.tables.SITUATION_ESCALATION_LEVEL);
+		grEscalation.addQuery('country', 'IN', countries);
+		grEscalation.addQuery('dimension', crisisGR.getValue('dimension'));
+		grEscalation.addQuery('order', newLevel);
+		grEscalation.addEncodedQuery('default=true^ORparametrizationIN' + crisisGR.getValue('parametrization'));
+		grEscalation.orderByDesc('default');
+		grEscalation.query();
+		if (grEscalation.hasNext()) {
+			nextEsclLevel.id = [];
+			nextEsclLevel.name = 'Level ' + newLevel;
+			nextEsclLevel.order = newLevel;
+			nextEsclLevel.tooltip = '';
+			var escalationTeams = [];
+
+			// add all the sys_ids to the array
+			while (grEscalation.next()) {
+				var objAux = {
+					'sys_id': grEscalation.getUniqueValue(),
+					'name': grEscalation.getValue('level_name'),
+					'contact_list': grEscalation.getValue('contact_list')
+				};
+
+				// it will return the object which contains the same name and contact list
+				var escalationFiltered = escalationTeams.filter(function (el) {
+					return el.name == objAux.name && el.contact_list == objAux.contact_list;
+				});
+
+				// if there's no object with the same name and contact list, the object is pushed into the array
+				if (escalationFiltered.length == 0) {
+					escalationTeams.push(objAux);
+				}
+			}
+			if (escalationTeams.length != 0) {
+				nextEsclLevel.id = escalationTeams.map(function (el) {
+					return el.sys_id;
+				});
+				nextEsclLevel.tooltip = escalationTeams.map(function (el) {
+					return el.name;
+				}).join(', ');
+			}
+			return nextEsclLevel;
+		}
+		return false;
+	}
+
+	/**
+	* returns if all response plans for the given crisis are in a close state
+	* @param {string} situationRoomId sys_id
+	* @return {boolean}
+	*/
+	function areAllRespPlansClosed(situationRoomId) {
+		var gr = new GlideRecord(data.tables.RESP_PLAN_EXEC);
+		gr.addQuery('parent_situation', situationRoomId);
+		gr.addQuery('state', 'NOT IN', '3,4,7');
+		gr.query();
+		return !gr.hasNext();
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 15:15:38</sys_created_on>
+        <sys_id>73e85f451b7b0850df7e43f4bd4bcbd5</sys_id>
+        <sys_mod_count>150</sys_mod_count>
+        <sys_name>CIR Situation Room Overview</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_73e85f451b7b0850df7e43f4bd4bcbd5</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-15 16:00:17</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">  
+  <div class="panel-heading clearfix"><span class="header-title">{{data.title}}</span>
+    <div uib-tooltip="{{data.messages.closeCrisisTooltip}}" tooltip-append-to-body="true" class="pull-right">
+      <button ng-click="c.confirmCloseCrisis()" ng-disabled="!c.data.canCloseCrisisRoom" class="btn btn-primary action-btn pull-right" ng-class="::getButtonClass(action)">
+        {{data.messages.closeCrisis}}
+      </button>
+    </div>
+    <button ng-hide="!data.nextEscalLevel" ng-click="c.escalate()" uib-tooltip="{{data.messages.escalateTooltip}}" tooltip-append-to-body="true" ng-disabled="!c.data.canWriteEscalate" class="btn btn-primary action-btn pull-right" ng-class="::getButtonClass(action)">{{data.messages.escalateTo}}</button>
+
+    <button ng-click="c.addLocation()" ng-disabled="!c.data.canWriteCountry" class="btn btn-primary action-btn pull-right" ng-class="::getButtonClass(action)">{{data.messages.add_location}}</button>      
+
+    <!--<button ng-click="c.chgPplAffected()" ng-disabled="c.data.recordState == 1" class="btn btn-primary action-btn pull-right" ng-class="::getButtonClass(action)">{{data.messages.update_people_affected}}</button> -->
+  </div>
+
+  <table class="table overview-widget table-{{::c.options.color}}">
+    <thead>
+      <tr>
+        <td class="key-row" ng-repeat="label in c.data.labels">
+          {{ label.key }}
+        </td>
+      </tr>
+      <th class="value-row" ng-repeat="label in c.data.labels">
+
+        <img class="image" ng-if="label.picture" ng-src="{{::label.picture}}?t=small" />
+
+        <div ng-if="!label.created_on && !label.people_affected" tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}" tooltip-placement="top" tooltip-append-to-body="true">
+          {{ label.value }}</div>
+
+        <div ng-if="label.people_affected == 'true' && c.data.canWritePPL" ng-click="c.chgPplAffected()"
+             tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+             tooltip-placement="top" tooltip-append-to-body="true" ng-bind-html="label.value"></div>
+
+        <div ng-if="label.people_affected == 'true' && !c.data.canWritePPL"
+             tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+             tooltip-placement="top" tooltip-append-to-body="true" ng-bind-html="label.value"></div>
+
+        <div ng-if="label.created_on == 'true'" ng-mouseover='c.getElapsedTime()'
+             tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+             tooltip-placement="top" tooltip-append-to-body="true">{{ label.value }}</div>
+
+      </th>
+      <tr>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+<script type="text/ng-template" id="addLocation">
+	<div style="width: 125%" class="panel panel-default">
+    	<div class="panel-heading">
+        	<h4 class="panel-title">${cir_sit_add_location}</h4>
+  		</div>
+
+		<div class="panel-body wrapper-xl">
+        	<div style="margin-bottom:30px" >
+            	<span class="required">${cir_sit_select_country}</span>
+                <div style="display:flex">
+                	<sn-record-picker name="country" default-query="c.data.countryQuery" field="country" style="margin-top:5px" table="'x_fru_cir_security_address_value'" display-field="'value'" value-field="'sys_id'" search-fields="'value'" page-size="80" ></sn-record-picker>
+                    <button style="margin-top: 1%; margin-left:1%;" class="btn btn-primary" ng-click="c.updateLocations(country.value, 'country')">${Add}</button>
+  				</div>
+  			</div>
+            
+            <div style="margin-bottom:30px" >
+            	<span class="required">${cir_sit_select_building}</span>
+                <div style="display:flex">
+                	<sn-record-picker name="building" default-query=" c.data.buildingsQuery" field="building" style="margin-top:5px" table="'x_fru_cir_security_location'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="80" ></sn-record-picker>
+                    <button style="margin-top: 1%; margin-left:1%;"class="btn btn-primary" ng-click="c.updateLocations(building.value, 'buildings')">${Add}</button>
+  				</div>
+  			</div>
+            
+            <div style="margin-bottom:30px" >
+            	<span class="required">${cir_sit_select_location_group}</span>
+                <div style="display:flex">
+                	<sn-record-picker name="group" default-query="c.data.locationGroupQuery" field="group" style="margin-top:5px" table="'x_fru_cir_location_group'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="80" ></sn-record-picker>
+                    <button style="margin-top: 1%; margin-left:1%;" class="btn btn-primary" ng-click="c.updateLocations(group.value, 'location_groups')">${Add}</button>
+  				</div>
+  			</div>
+            
+            <div style="margin-bottom:30px">
+            	<span class="required">${cir_sit_select_virtual_location}</span>
+                <div style="display:flex">
+                	<sn-record-picker name="virtual" default-query="c.data.virtualLocationQuery" field="virtual" style="margin-top:5px" table="'x_fru_cir_security_virtual_location'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="80" ></sn-record-picker>
+                    <button style="margin-top: 1%; margin-left:1%;" class="btn btn-primary" ng-click="c.updateLocations(virtual.value, 'virtual_locations')">${Add}</button>
+  				</div>
+  			</div>
+
+			<div>
+            	<div>
+                	<div class="tab" style="font-weight: bolder; font-size: 16px;">
+                    	<button class="tablinks active" ng-click="c.openTab($event, 'country')">${cir_sit_countries} ${ ({{c.data.currentCountries.locations.length}})}</button>
+                        <button class="tablinks" ng-click="c.openTab($event, 'buildings')">${cir_sit_buildings} ${ ({{c.data.currentBuildings.locations.length}})}</button>
+                        <button class="tablinks" ng-click="c.openTab($event, 'location_groups')">${cir_sit_location_groups} ${ ({{c.data.currentGroups.locations.length}})}</button>
+                        <button class="tablinks" ng-click="c.openTab($event, 'virtual_locations')">${cir_sit_virtual_locations} ${ ({{c.data.currentVirtual.locations.length}})}</button>
+  					</div>
+  				</div> 
+
+
+				<div id="location" style="display:block">
+                	<div >
+                    	<table style="width:90%; padding:5px">
+                        	<tr ng-if="c.currentLocations.locations.length == 0">
+                            	<td>
+                                	<div style="font-weight: bolder; font-size: 14px;  height:30px"> ${{{c.currentLocations.message}}} </div>
+  								</td>
+ 							</tr> 
+                            <tr ng-repeat="location in c.currentLocations.locations" style="height:30px">
+                            	<td>
+                                	<div>{{location.name}}<button class="button button-trash" ng-click="c.deleteLocation(location.id, c.currentLocations.field)"> <i class="icon-trash" style="color: black"></i> </button></div>
+  								</td>
+  							</tr>
+  						</table>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+
+		<div class="panel-footer text-right">
+        	<button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_close}</button>
+  		</div>
+  	</div>
+</script>
+
+
+
+<script type="text/ng-template" id="updateAffectedPpl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${cir_sit_update_ppl_affected}</h4>
+  </div>
+        <div class="panel-body wrapper-xl">
+            <div style="margin-bottom:30px">
+            		<span class="required">${cir_sit_select_nr_ppl_affected}</span>
+                <input type="number" min="0" ng-model="c.affectedPpl" style="margin-bottom:30px" type="text" name=""><span style="margin-left: 5px;"></span></input>
+  </div>
+  </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_close}</button>
+            <button class="btn btn-primary" ng-click="c.updatePplAffected(c.affectedPpl)">${cir_sit_update}</button>
+  </div>
+  </div>
+</script>
+<script type="text/ng-template" id="removeCountry">
+	<div class="panel panel-default" style="width: 120%">
+    	<div class="panel-heading">
+        	<h4 class="panel-title">${cir_situation_remove_country_title}</h4>
+  		</div>
+        <div class="panel-body wrapper-xl">
+        	<div>
+            	<h4>${cir_situation_remove_country_text}</h4>
+  			</div>
+  		</div>
+        <div class="panel-footer text-right"  style="align:right;">
+        	<button class="btn btn-success" ng-click="c.deleteCountry(c.countryID)">${Yes}</button>
+            <button class="btn btn-danger" ng-click="c.closeCountryModal()">${No}</button>
+  		</div>
+  </div>
+</script>
+
+
+<script type="text/ng-template" id="escalate">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${cir_sit_escalate}</h4>
+  </div>
+        <div class="panel-body wrapper-xl">
+            <div style="margin-bottom:30px">
+                <span class="required">{{data.messages.escalateToLevel}}</span>
+  </div>
+  </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_close}</button>
+            <button class="btn btn-primary" ng-click="c.escalateToLevel()">${cir_sit_escalate}</button>
+  </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="confirmCloseCrisis">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${cir_sit_confirm_close_situation}</h4>
+  </div>
+        <div class="panel-body wrapper-xl">           
+                <span>${cir_sit_confirm_close_situation_main}</span>
+  </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_cancel}</button>
+            <button class="btn btn-primary" ng-click="c.closeCrisis()">${cir_sit_ok}</button>
+  </div>
+  </div>
+</script>]]></template>
+    </sp_widget>
+</record_update>

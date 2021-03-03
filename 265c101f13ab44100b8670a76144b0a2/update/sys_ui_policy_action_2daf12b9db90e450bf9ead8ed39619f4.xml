@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="INSERT_OR_UPDATE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>notifications_sent</field>
+        <mandatory>ignore</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-11-06 11:43:28</sys_created_on>
+        <sys_id>2daf12b9db90e450bf9ead8ed39619f4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>notifications_sent</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_policy_action_2daf12b9db90e450bf9ead8ed39619f4</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-11-06 11:43:28</sys_updated_on>
+        <table>x_fru_cir_situation_task_execution</table>
+        <ui_policy display_value="Hide fields">f59fde79db90e450bf9ead8ed39619da</ui_policy>
+        <visible>false</visible>
+    </sys_ui_policy_action>
+</record_update>

@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, spUtil, $location, spAriaFocusManager, spSCNavStateManager, $timeout, nowAttachmentHandler, spModal, spAriaUtil) {
+    var c = this;
+    c.mandatory = [];
+    c.copyMandatory = [];
+    c.msgs = c.data.msgs;
+    c.performingOperation = false;
+    var g_form;
+    var mandatoryFieldCounter = 0;
+    var selectedSectionId = '';
+    var isExitingForm = false;
+    var isSubmittingAssessment = false;
+    var needsSaving = false;
+
+    $scope.$on('spModel.gForm.initialized', function(e, gFormInstance) {
+        if(gFormInstance.getSysId() != -1 && gFormInstance.getSysId() != getItemId())
+            return;
+        g_form = gFormInstance;
+        spSCNavStateManager.register(g_form);
+        $timeout(function() {
+            $rootScope.$emit('spModel.gForm.rendered', g_form);
+            setReadOnly(g_form);
+        }, 175);
+
+        if(c.data.receivedAssessmentInstanceId && c.data.currentSectionData.length > 0) {
+            populateForm();
+        }
+
+        // This runs after all onSubmit scripts have executed
+        g_form.$private.events.on('submitted', function() {
+            performOperation();
+
+            c.mandatory = c.copyMandatory.slice(0);
+            // Add all mandatory fields again
+            setFieldsMandatory(true);
+            c.performingOperation = false;
+        });
+    });
+
+    $scope.$on('dialog.upload_too_large.show', function(e) {
+        $log.error(c.msgs.largeAttachmentMsg);
+        spUtil.addErrorMessage(c.msgs.largeAttachmentMsg);
+    });
+
+    $scope.getFocus = function(field) {
+        var focusVar = (field.type == "reference") ? "sp_formfield_reference_" : "sp_formfield_";
+        focusVar += (field.name.startsWith("IO:") ? field._children[0] : field.name);
+        document.getElementById(focusVar).focus();
+    };
+
+    $scope.disable = function(item) {
+        return (Object.keys(item).length == 0);
+    };
+
+    $scope.disableSubmit = function(item) {
+        return (Object.keys(item).length == 0 && ($scope.hasMandatory() || c.data.assesmentIsCanceledComplete));
+    };
+
+    $scope.redirect = function() {
+		if(!c.data.isPreview){
+			isExitingForm = true;
+		}
+        
+        countMandatory();
+    };
+
+    $scope.hasMandatory = function() {
+        return c.mandatory && c.mandatory.length > 0;
+    };
+
+    $scope.showAttachments = function() {
+        return !$scope.submitted &&
+            !c.data.currentSection.no_attachments &&
+            c.data.currentSection.sys_class_name !== "std_change_record_producer" &&
+			!c.data.isPreview;
+    };
+
+    $scope.confirmDeleteAttachment = function(attachment) {
+        spModal.confirm(c.msgs.delete_attachment).then(function() {
+            $scope.attachmentHandler.deleteAttachment(attachment);
+        });
+    };
+
+    $scope.changeSection = function(section, checkSubmit) {
+		if(c.data.isPreview){
+			checkSubmit=false;
+		}
+        if(checkSubmit && Object.keys(c.data.nextSection).length == 0) {
+            isSubmittingAssessment = checkSubmit;
+            $scope.redirect();
+        } else {
+            selectedSectionId = section.sys_id;
+            countMandatory();
+        }
+    };
+
+    var formatRedirectUrl = function(urlTemplate) {
+        var url;
+        var paramObj = {
+            assessment: c.data.assessmentId,
+            assessment_instance: c.data.assessmentInstanceId
+        };
+
+        url = spUtil.format(urlTemplate, paramObj);
+        return url;
+    };
+
+    var getItemId = function() {
+        return c.data.currentSection ? c.data.currentSection.sys_id : -1;
+    };
+
+    var setFieldsMandatory = function(isMandatory) {
+        c.mandatory.forEach(function(field) {
+            g_form.setMandatory(field.name, isMandatory);
+        });
+    };
+
+    var performOperation = function() {
+        var objFieldValues = {
+            selectedSection: selectedSectionId,
+            sectionToSave: c.data.sectionId,
+            assessmentInstanceId: c.data.assessmentInstanceId,
+            fieldValues: [],
+            fieldIds: [],
+            scoreCalculated: 0,
+            currentSectionName: c.data.currentSection.name,
+            isExitingForm: isExitingForm,
+            isSubmittingAssessment: isSubmittingAssessment,
+            needsSaving: needsSaving,
+			assessmentId :  c.data.assessmentId,
+			isPreview : c.data.isPreview,
+        };
+
+        c.data.currentSection.currentSectionFields.forEach(function(field) {
+            objFieldValues.fieldValues.push({
+                fieldId: field.fieldId,
+                fieldName: field.fieldName,
+                fieldValue: g_form.getValue(field.fieldName),
+                fieldDisplayValue: g_form.getDisplayValue(field.fieldName) ?
+                    g_form.getDisplayValue(field.fieldName) : g_form.getValue(field.fieldName)
+            });
+            objFieldValues.fieldIds.push(field.fieldId);
+        });
+        objFieldValues.scoreCalculated = (c.mandatory.length / mandatoryFieldCounter) * 100;
+        mandatoryFieldCounter = 0;
+
+        c.server.get(objFieldValues).then(function(response) {
+            c.data.incompleteSections = response.data.incompleteSections;
+            var canExitForm = response.options.operationSuccessful && isExitingForm;
+            if(c.data.incompleteSections.length > 0 && isExitingForm && isSubmittingAssessment) {
+                spModal.open({
+                    title: c.msgs.assessmentIncompleteTitleMsg,
+                    headerStyle: {
+                        border: 'none',
+                        'padding-bottom': 0
+                    },
+                    footerStyle: {
+                        border: 'none',
+                        'padding-top': 0
+                    },
+                    message: c.msgs.assessmentIncompleteMsg + c.data.incompleteSections.join(', '),
+                    buttons: [{
+                        label: "Ok",
+                        value: "ok"
+                    }]
+                });
+                isExitingForm = false;
+                isSubmittingAssessment = false;
+                canExitForm = false;
+            }
+
+            if(canExitForm) {
+                var url = formatRedirectUrl(c.options.urlAssessmentBoard);
+                var newURL = $location.search(url);
+                spAriaFocusManager.navigateToLink(newURL.url());
+                isExitingForm = false;
+            } else if(response.options.operationSuccessful && !isExitingForm) {
+                c.data = response.data;
+                c.options.urlAssessmentBoard = response.options.urlAssessmentBoard;
+            } else if(!response.options.operationSuccessful && isUserModified) {
+                g_form.addErrorMessage(response.data.msgs.failedSaveMsg);
+            }
+
+            c.msgs.nextMsg = response.data.msgs.nextMsg;
+            c.msgs.pages = response.data.msgs.pages;
+        });
+    };
+
+    var populateForm = function() {
+        c.data.currentSectionData.forEach(function(field) {
+            g_form.setValue(field.fieldName, field.fieldValue);
+        });
+    };
+
+    var countMandatory = function() {
+        needsSaving = g_form.isUserModified() || !$scope.hasMandatory();
+
+        g_form.getFieldNames().forEach(function(fieldName) {
+            if(fieldName.indexOf('IO:') != 0 && g_form.isMandatory(fieldName)) {
+                mandatoryFieldCounter++;
+            }
+        });
+        // If there are mandatory fields and this function was called then it means the User resquested a Save,
+        // so all mandatory fields must be removed
+        if($scope.hasMandatory()) {
+            c.copyMandatory = c.mandatory.slice(0);
+            setFieldsMandatory(false);
+        } else {
+            c.copyMandatory = [];
+        }
+
+        g_form.submit();
+        g_form.$private.userState.clearModifiedFields();
+    };
+
+    var appendError = function(error) {
+        spUtil.addErrorMessage(error.msg + error.fileName);
+    };
+    var setAttachments = function(attachments, action) {
+        $scope.attachments = attachments;
+        if(action === "added" && $scope.attachments.length > 0) {
+            $scope.data.currentSection.attachment_submitted = true;
+        }
+        if(action === "renamed") {
+            spAriaUtil.sendLiveMessage(c.msgs.renameSuccessMsg);
+        }
+        if(action === "deleted") {
+            spAriaUtil.sendLiveMessage(c.msgs.deleteSuccessMsg);
+            if($scope.attachments.length == 0)
+                $scope.data.currentSection.attachment_submitted = false;
+        }
+        spUtil.get($scope, {
+            action: "from_attachment"
+        });
+    };
+
+    var setReadOnly = function(g_form) {
+        if(c.data.assesmentIsCanceledComplete) {
+            setFieldsMandatory(false);
+            c.data.currentSection.currentSectionFields.forEach(function(field) {
+                g_form.setReadOnly(field.fieldName, true);
+            });
+        }
+    };
+
+    $scope.attachmentHandler = new nowAttachmentHandler(setAttachments, appendError);
+    $scope.attachmentHandler.setParams(
+        c.data.attachmentTableName, c.data.assessmentInstanceId, c.data.attachmentMaxSize);
+    $scope.attachmentHandler.getAttachmentList();
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.assessment-image {&#13;
+    max-height: 240px;&#13;
+    padding: 5px;&#13;
+    display: inline;&#13;
+}&#13;
+.withMax  {&#13;
+ max-height : 400px;&#13;
+}&#13;
+&#13;
+.file-list-wrap {&#13;
+    margin-bottom: 10px;&#13;
+}&#13;
+&#13;
+.assessment-description {&#13;
+    overflow: auto;&#13;
+}&#13;
+&#13;
+.step_active {&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.step_inactive {&#13;
+    color: black;&#13;
+}&#13;
+&#13;
+.section_button {&#13;
+    padding: 10px;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.step_circle {&#13;
+    position: relative;&#13;
+    float: left;&#13;
+    width: 20px;&#13;
+    height: 20px;&#13;
+    padding: 0px;&#13;
+    border-radius: 15px;&#13;
+    text-align: center;&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.step_text {&#13;
+    padding-left: 5px;&#13;
+}&#13;
+&#13;
+.step_active .step_circle {&#13;
+    background-color: #428bca;&#13;
+}&#13;
+&#13;
+.step_active .step_text {&#13;
+    color: $primary;&#13;
+}&#13;
+&#13;
+.step_inactive .step_circle {&#13;
+    background-color: gray;&#13;
+}&#13;
+&#13;
+.step_inactive .step_text {&#13;
+    color: gray;&#13;
+}&#13;
+&#13;
+.form_body {&#13;
+    padding: 0;&#13;
+}&#13;
+&#13;
+.row.display-flex {&#13;
+    display: flex;&#13;
+    flex-wrap: wrap;&#13;
+}&#13;
+&#13;
+.row.display-flex&gt;[class*='col-'] {&#13;
+    flex-grow: 1;&#13;
+}&#13;
+&#13;
+.item-menu {&#13;
+    text-align: center;&#13;
+}&#13;
+&#13;
+.btn-small {&#13;
+    min-width: 100px;&#13;
+}&#13;
+&#13;
+.btn-previous {&#13;
+    /*border-top-left-radius: 100%;&#13;
+  border-bottom-left-radius: 100%;&#13;
+  border-top-right-radius: 0;&#13;
+  border-bottom-right-radius: 0;*/&#13;
+    float: left;&#13;
+}&#13;
+&#13;
+.btn-next {&#13;
+    /*border-top-left-radius: 0;&#13;
+  border-bottom-left-radius: 0;&#13;
+  border-top-right-radius: 100%;&#13;
+  border-bottom-right-radius: 100%;*/&#13;
+    float: right;&#13;
+}&#13;
+&#13;
+.category-tabs {&#13;
+    border-radius: 0;&#13;
+}&#13;
+&#13;
+.panel-button {&#13;
+    float: none;&#13;
+}&#13;
+&#13;
+.sp-attachment-add {&#13;
+    padding: 5px;&#13;
+}&#13;
+&#13;
+.attachment_label {&#13;
+    float: right;&#13;
+    font-weight: normal;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.attachment_mandatory {&#13;
+    vertical-align: super;&#13;
+}&#13;
+&#13;
+.mandatory_missing {&#13;
+    margin-right: .5em;&#13;
+    display: inline-block;&#13;
+    cursor: pointer;&#13;
+    text-overflow: ellipsis;&#13;
+    overflow: hidden;&#13;
+    white-space: nowrap;&#13;
+}&#13;
+&#13;
+.error {&#13;
+	margin-top: 15px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Widget with the form for the Assessments.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-assessment-form</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Assessment Form</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() { 
+    initMessages();
+    data.assessmentId = (input && input.assessmentId) ? input.assessmentId : $sp.getParameter('assessment');
+	data.isPreview = (input && input.isPreview) ? input.isPreview : false;
+    if(!data.assessmentId || 
+        (!data.isPreview && !new CIRAssmtModel().HasAssessmentDefinition(data.assessmentId, true))) {
+        data.error = true;
+        return;
+    }
+
+    data.sectionId =
+        input && input.selectedSection ? input.selectedSection :
+        ($sp.getParameter('section') ? $sp.getParameter('section') + '' : '');
+
+    data.assessmentInstanceId =
+        input && input.assessmentInstanceId ? input.assessmentInstanceId :
+        ($sp.getParameter('assessment_instance') ? $sp.getParameter('assessment_instance') + '' : '');
+    data.receivedAssessmentInstanceId = data.assessmentInstanceId != '';
+    if(!data.receivedAssessmentInstanceId) {
+        // Needed for setting the record id on the attachment
+        data.assessmentInstanceId = gs.generateGUID();
+    }
+    data.assesmentIsCanceledComplete = new CIRAssmtModel().IsAssesmentCanceledComplete(data.assessmentInstanceId);
+
+    options.operationSuccessful = true;
+    if(input && !input.isPreview) {
+        if(input.fieldValues && input.needsSaving && !data.assesmentIsCanceledComplete) {
+            var fieldValues = input.fieldValues;
+            var fieldIds = input.fieldIds;
+            var scoreCalculated = input && input.scoreCalculated ? input.scoreCalculated : 0;
+            var objOperationData = {
+                assessmentId: data.assessmentId,
+                assessmentInstanceId: data.assessmentInstanceId,
+                sectionToSave: input.sectionToSave,
+                fieldIds: fieldIds,
+                fieldValues: fieldValues,
+                scoreCalculated: scoreCalculated
+            };
+            options.operationSuccessful = new CIRAssmtModel().PerformOperationOnAssessment(objOperationData);
+            if(!options.operationSuccessful) {
+                return;
+            }
+            if(input.isSubmittingAssessment && options.operationSuccessful) {
+                options.isAssessmentInstanceComplete =
+                    new CIRAssmtModel().CompleteAssessmentSectionInstance(data.assessmentInstanceId);
+            }
+        }
+    }
+
+    if(!setAssessmentSectionsData(data.assessmentId, data.sectionId, data.assessmentInstanceId)) {
+        data.error = true;
+        return;
+    }
+
+    var assessmentBoardPage = CIRConstants.AssessmentPortalConstants.ASSESSMENT_BOARD_PAGE;
+    var assessmentInstanceIdParameter = '';
+    if(data.receivedAssessmentInstanceId) {
+        assessmentInstanceIdParameter = '&assessment_instance=' + data.assessmentInstanceId;
+    }
+    options.urlAssessmentBoard =
+        'id=' + assessmentBoardPage + '&assessment={assessment}' + assessmentInstanceIdParameter;
+
+    data.attachmentTableName = CIRConstants.Tables.ASSESSMENT_INSTANCE;
+    data.attachmentMaxSize = 1024 * 1024 * parseInt(gs.getProperty('com.glide.attachment.max_size', 1024));
+
+    setPostDataRetrievalMessages();
+
+    function setAssessmentSectionsData(assessmentId, sectionId, assessmentInstanceId) {
+        var assessmentCatalogId = $sp.getCatalogs().value;
+        var arrSections = [];
+        var objCurrentSection = {};
+        var objPreviousSection = {};
+        var objNextSection = {};
+        var arrCurrentSectionData = {};
+        var scAssessmentCategories =
+            new sn_sc.CatalogSearch().search(assessmentCatalogId, assessmentId, '', false, false);
+        scAssessmentCategories.addQuery('sys_class_name', 'NOT IN', 'currentSection_wizard');
+        scAssessmentCategories.addQuery('active', true);
+        scAssessmentCategories.addQuery('category', assessmentId);
+        scAssessmentCategories.orderBy('order');
+        scAssessmentCategories.orderBy('name');
+        scAssessmentCategories.query();
+        while(scAssessmentCategories.next()) {
+            var assessmentsSectionDetails = new sn_sc.CatItem(scAssessmentCategories.getUniqueValue());        
+            var sectionItemDetails = assessmentsSectionDetails.getItemSummary();
+            var item = {};
+            item.name = sectionItemDetails.name;
+            item.sys_id = sectionItemDetails.sys_id + '';
+            item.assessmentId = assessmentId;
+            item.order = sectionItemDetails.order;
+            item.index = arrSections.length + 1;
+            var foundParameter = sectionItemDetails.sys_id + '' === sectionId;
+            if(foundParameter) {
+                arrSections.forEach(function(section) {
+                    section.current = false;
+                });
+            }
+            item.current = foundParameter || (!sectionId && arrSections.length === 0) || arrSections.length === 0;
+            
+            if(item.current) {
+                data.sectionId = item.sys_id;
+                // Fetch Current Section info
+                objCurrentSection = $sp.getCatalogItem(item.sys_id);
+                objCurrentSection.currentSectionFields = [];
+                Object.keys(objCurrentSection._fields).forEach(function(field) {
+                    objCurrentSection.currentSectionFields.push({
+                        fieldId: objCurrentSection._fields[field].sys_id,
+                        fieldName: objCurrentSection._fields[field].name
+                    });
+                });
+                objCurrentSection.currentSectionIndex = item.index;
+
+                // Fetch Current Section's Assessment Instance data
+                arrCurrentSectionData = new CIRAssmtModel().GetAssessmentInstanceSectionData(
+                    assessmentInstanceId, objCurrentSection.currentSectionFields);
+            }
+            if(item.current && arrSections.length > 0) {
+                objPreviousSection = arrSections[arrSections.length - 1];
+            } else if(arrSections.length > 0 && arrSections[arrSections.length - 1].current) {
+                objNextSection = item;
+            }
+
+            arrSections.push(item);
+        }
+        if(arrSections && arrSections.length === 0) {
+            return false;
+        }
+
+        data.sections = arrSections && arrSections.length > 0 ? arrSections : [];
+        data.currentSection =
+            typeof objCurrentSection === 'object' && Object.keys(objCurrentSection).length > 0 ?
+            objCurrentSection : {};
+        data.previousSection =
+            typeof objPreviousSection === 'object' && Object.keys(objPreviousSection).length > 0 ?
+            objPreviousSection : {};
+        data.nextSection =
+            typeof objNextSection === 'object' && Object.keys(objNextSection).length > 0 ?
+            objNextSection : {};
+        data.currentSectionData =
+            arrCurrentSectionData && arrCurrentSectionData.length > 0 ? arrCurrentSectionData : [];
+            
+        var arrIncompleteSections =
+            new CIRAssmtModel().GetIncompleteAssesmentInstanceSections(assessmentInstanceId);
+        data.incompleteSections = arrIncompleteSections || [];
+
+        return (data.sections.length > 0 && Object.keys(data.currentSection).length > 0 &&
+            arrCurrentSectionData !== null);
+    }
+
+    function initMessages() {
+        data.msgs = {};
+        if(input) {
+            data.msgs.failedSaveMsg = gs.getMessage('cir_assmt_section_fail_save', [input.currentSectionName]);
+        }
+        data.msgs.prevMsg = gs.getMessage('cir_assmt_previous');
+        data.msgs.nextMsg = gs.getMessage('cir_assmt_manager_next_btn');
+        data.msgs.assessmentIncompleteTitleMsg = gs.getMessage('cir_assmt_incomplete_sections_title');
+        data.msgs.assessmentIncompleteMsg = gs.getMessage('cir_assmt_submit_incomplete_sections');
+        data.msgs.backToAssessmentBoardMsg = gs.getMessage('cir_assmt_back_assessment_board');
+        data.msgs.addAttachmentMsg = gs.getMessage('cir_assmt_add_attachments');
+        data.msgs.delete_attachment = gs.getMessage('cir_assmt_delete_attachment');
+        data.msgs.renameSuccessMsg = gs.getMessage('cir_assmt_attachment_renamed');
+        data.msgs.deleteSuccessMsg = gs.getMessage('cir_assmt_attachment_deleted');
+        if(isNaN(data.attachmentMaxSize))
+            data.attachmentMaxSize = 24;
+    }
+
+    function setPostDataRetrievalMessages() {
+        data.msgs.pages = gs.getMessage(
+            'cir_assmt_section_page', [data.currentSection.currentSectionIndex + '', data.sections.length + '']);
+        data.msgs.largeAttachmentMsg = gs.getMessage(
+            'cir_assmt_attachment_size', [data.attachmentMaxSize + 'MB']);
+        if(Object.keys(data.nextSection).length == 0) {
+            data.msgs.nextMsg = gs.getMessage('cir_assmt_submit');
+        }
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:23:23</sys_created_on>
+        <sys_id>62cce061dbca5410d4a73533f3961970</sys_id>
+        <sys_mod_count>51</sys_mod_count>
+        <sys_name>CIR CIRI Assessment Form</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_62cce061dbca5410d4a73533f3961970</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 12:09:03</sys_updated_on>
+        <template><![CDATA[<div ng-if="!data.error" class="panel panel-default">
+  <div class="container">
+    <div class="row">
+      <!-- TITLE AND DESCRIPTION -->
+      <div class="col-sm-12 b-b">
+        <div ng-if="data.receivedAssessmentInstanceId" class="row" ng-if='!data.isPreview'>
+          <a ng-click="redirect()" class="section_button">{{c.msgs.backToAssessmentBoardMsg}}</a>
+        </div>
+        <div class="row wrapper-md break-word">
+          <h1 class="h2 m-n font-thin" ng-if="data.currentSection.name">{{data.currentSection.name}}</h1>
+          <div class="text-muted hidden-xs hidden-sm" ng-if="data.currentSection.short_description">{{data.currentSection.short_description}}</div>
+        </div>
+        <div class="row">
+          <div ng-if="data.currentSection.picture" class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <img class="img-responsive catalog-item-image assessment-image" ng-src="{{data.currentSection.picture}}?t=medium" />
+          </div>
+          <div ng-if="data.currentSection.description" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 break-word">
+            <div class="col-md-9 col-lg-9 visible-md visible-lg" ng-class="{false : 'visible-xs visible-sm', true : 'hidden-xs hidden-sm'}[options.show_less_orderguide === 'true']">
+              <div class="m-t assessment-description withMax" ng-bind-html="data.currentSection.description"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row display-flex">
+      <!-- SECTIONS -->
+      <div class="col-sm-2">
+        <div ng-repeat="section in data.sections" class="section_button" ng-class="section.current ? 'step_active' : 'step_inactive'" ng-click="changeSection(section)">
+          <div class="step_circle">{{section.index}}</div>
+          <span class="step_text">{{section.name}}</span>
+        </div>
+      </div>
+      <!-- FORM -->
+      <div class="col-sm-10 form_body b-l">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 wrapper-md">
+              <sp-cat-item item="data.currentSection"></sp-cat-item>
+              <form>
+                <!-- display view and model -->
+                <sp-model form-model="data.currentSection" mandatory="c.mandatory" ></sp-model>
+              </form>
+            </div>
+          </div>
+          <div class="row b-b">
+            <div ng-if="showAttachments()" class="col-sm-12">
+              <now-attachments-list template="sp_attachment_single_line"></now-attachments-list>
+              <label ng-if="!c.performingOperation" class="attachment_label">
+                <sp-attachment-button></sp-attachment-button>
+                <span ng-if="data.sc_cat_item.mandatory_attachment" class="fa fa-asterisk mandatory attachment_mandatory"></span>
+                <span>{{c.msgs.addAttachmentMsg}}</span>
+              </label>
+            </div>
+          </div>
+          <div ng-if="hasMandatory(c.mandatory)" class="row b-b">
+            <div class="col-sm-12 wrapper-md">
+              <div>${Required information} </div>
+              <label ng-repeat="f in c.mandatory" class="mandatory mandatory_missing" ng-click="getFocus(f)">{{::f.label}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 wrapper-md">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-12 item-menu">
+                    <button ng-click="changeSection(data.previousSection)" ng-disabled="disable(data.previousSection)" class="btn btn-small btn-primary btn-previous">{{c.msgs.prevMsg}}</button>
+                    <span>{{c.msgs.pages}}</span>
+                    <!-- <button ng-click="changeSection(data.nextSection)" ng-disabled="disable(data.nextSection)" class="btn btn-small btn-primary btn-next">{{c.msgs.nextMsg}}</button> -->
+                    <button ng-click="changeSection(data.nextSection, true)" ng-disabled="disableSubmit(data.nextSection)" class="btn btn-small btn-primary btn-next">{{c.msgs.nextMsg}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="error" ng-if="data.error">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">${Item not found}</h4>
+    </div>
+    <div class="panel-body wrapper">
+      <p>${This item is not found or currently not available}</p>
+      <p>${Suggestions}:</p>
+      <ul>
+        <li>${Try searching for the item}</li>
+        <li>${Go to the Service Catalog homepage}</li>
+      </ul>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

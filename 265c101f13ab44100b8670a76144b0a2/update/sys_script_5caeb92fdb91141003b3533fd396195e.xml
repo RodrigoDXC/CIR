@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_fru_cir_response_plan_execution</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_fru_cir_response_plan_execution">stateCHANGESTO4^ORstateCHANGESTO3^EQ<item display_value="Closed Incomplete" endquery="false" field="state" goto="false" newquery="false" operator="CHANGESTO" or="false" value="4"/>
+            <item display_value="Closed" endquery="false" field="state" goto="false" newquery="false" operator="CHANGESTO" or="true" value="3"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>cir_download_pdf_on_closure</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	var utils = new CIRSituationUtils();
+	var settings = {
+		table: current.getTableName(),
+		sys_id: current.getUniqueValue(),
+		view: 'pdf_export_view',
+		user_files: [
+			{
+				auth_profile: gs.getProperty('x_fru_cir.customer.pdf.authprofile.en'),
+				filename: current.number.toString() + '_situation_en.pdf'
+			}
+		]
+	};
+
+	// will generate a pdf document with the crisis record data and attach it to the crisis record
+	utils.GenAttachment(settings);
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-15 16:48:10</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5caeb92fdb91141003b3533fd396195e</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>cir_download_pdf_on_closure</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_5caeb92fdb91141003b3533fd396195e</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-10 13:56:55</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=5caeb92fdb91141003b3533fd396195e"/>
+</record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-27 10:47:15</sys_created_on>
+        <sys_id>6da0c9c5db1edc10bf9ead8ed396199b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_fru_cir_static_service_report.x_fru_cir.personal_protection_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_security_acl display_value="x_fru_cir_static_service_report">ada0c9c5db1edc10bf9ead8ed3961998</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_6da0c9c5db1edc10bf9ead8ed396199b</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-28 09:33:30</sys_updated_on>
+        <sys_user_role display_value="x_fru_cir.personal_protection_manager" name="x_fru_cir.personal_protection_manager">a6ffcd19db561050bf9ead8ed39619a9</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

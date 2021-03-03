@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>true</advanced>
+        <condition/>
+        <description>Allow read for records in x_fru_cir_investigation, for users with role x_fru_cir.approver, and if the ACL script returns true.</description>
+        <name>x_fru_cir_investigation</name>
+        <operation display_value="read">read</operation>
+        <script><![CDATA[answer = new CIRRiskManagementUtils().CanApproverReadRecord(current.sys_id + '');]]></script>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-14 13:03:23</sys_created_on>
+        <sys_id>136c8a72db621410d4a73533f39619e0</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>x_fru_cir_investigation</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_security_acl_136c8a72db621410d4a73533f39619e0</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-14 13:28:03</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+</record_update>

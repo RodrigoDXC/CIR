@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysevent_register">
+    <sysevent_register action="INSERT_OR_UPDATE">
+        <caller_access/>
+        <description>Updates the services and service orders  that are related with the current service master record</description>
+        <event_name>x_fru_cir.update.services</event_name>
+        <fired_by/>
+        <queue/>
+        <suffix>update.services</suffix>
+        <sys_class_name>sysevent_register</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-28 10:15:12</sys_created_on>
+        <sys_id>bbc2c2d5db5a5c10d4a73533f39619e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.update.services</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sysevent_register_bbc2c2d5db5a5c10d4a73533f39619e6</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-28 10:15:12</sys_updated_on>
+        <table>x_fru_cir_static_service_master</table>
+    </sysevent_register>
+</record_update>

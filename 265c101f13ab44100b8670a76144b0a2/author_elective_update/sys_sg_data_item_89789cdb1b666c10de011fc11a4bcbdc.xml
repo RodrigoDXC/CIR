@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_data_item">
+    <sys_sg_data_item action="DELETE">
+        <condition_type>declarative</condition_type>
+        <description/>
+        <group_by/>
+        <instance_relative_url_qc/>
+        <name>CIR Situation Categories Data Item</name>
+        <query_condition table="x_fru_cir_situation_category">active=true<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
+        </query_condition>
+        <query_condition_script/>
+        <sys_class_name>sys_sg_data_item</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-03-02 14:04:49</sys_created_on>
+        <sys_id>89789cdb1b666c10de011fc11a4bcbdc</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR Situation Categories Data Item</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_data_item_89789cdb1b666c10de011fc11a4bcbdc</sys_update_name>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-03-02 14:06:25</sys_updated_on>
+        <table>x_fru_cir_situation_category</table>
+    </sys_sg_data_item>
+    <sys_translated_text action="DELETE" query="documentkey=89789cdb1b666c10de011fc11a4bcbdc"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_sg_data_item_89789cdb1b666c10de011fc11a4bcbdc</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_data_item"><sys_sg_data_item action="INSERT_OR_UPDATE"><condition_type>declarative</condition_type><description/><group_by/><instance_relative_url_qc/><name>CIR Situation Categories Data Item</name><query_condition table="x_fru_cir_situation_category">active=true<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/></query_condition><query_condition_script/><sys_class_name>sys_sg_data_item</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-03-02 14:04:49</sys_created_on><sys_id>89789cdb1b666c10de011fc11a4bcbdc</sys_id><sys_mod_count>1</sys_mod_count><sys_name>CIR Situation Categories Data Item</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_sg_data_item_89789cdb1b666c10de011fc11a4bcbdc</sys_update_name><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-03-02 14:06:25</sys_updated_on><table>x_fru_cir_situation_category</table></sys_sg_data_item><sys_translated_text action="delete_multiple" query="documentkey=89789cdb1b666c10de011fc11a4bcbdc"/></record_update>]]></payload>
+        <payload_hash>-1507740376</payload_hash>
+        <record_name>CIR Situation Categories Data Item</record_name>
+        <reverted_from/>
+        <source>344557c31ba26c10de011fc11a4bcb5f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-03-02 14:06:26</sys_created_on>
+        <sys_id>a4d8d01f1b666c10de011fc11a4bcb14</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>177f342eefa0000001</sys_recorded_at>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-03-02 14:06:26</sys_updated_on>
+        <type>Data Item</type>
+        <update_guid>e8d8d01fdf666c10649a0938834a5013</update_guid>
+        <update_guid_history>e8d8d01fdf666c10649a0938834a5013:-1507740376,0d789cdb84666c109ae90a2e55caf7df:1872663696</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-03-03 08:16:52</sys_created_on>
+        <sys_db_object display_value="" name="sys_sg_data_item">sys_sg_data_item</sys_db_object>
+        <sys_id>058f6e3e142b400c8ed3608ce2a34104</sys_id>
+        <sys_metadata>89789cdb1b666c10de011fc11a4bcbdc</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR Situation Categories Data Item</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_sg_data_item_89789cdb1b666c10de011fc11a4bcbdc</sys_update_name>
+        <sys_update_version display_value="sys_sg_data_item_89789cdb1b666c10de011fc11a4bcbdc">a4d8d01f1b666c10de011fc11a4bcb14</sys_update_version>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-03-03 08:16:52</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

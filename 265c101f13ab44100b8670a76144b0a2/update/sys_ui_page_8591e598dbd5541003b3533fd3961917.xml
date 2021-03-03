@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[jQuery(document).ready(function(){
+	var cases = jQuery('#caseLocations').val();
+	if(cases){
+		var caseArr = JSON.parse(cases);
+		for(var i = 0; i < caseArr.length; i++){
+			if(caseArr[i].x > 0){
+				var caseObject = '<i class="fa fa-circle case" style="position:absolute;left:' + caseArr[i].x + 'px;top:' + caseArr[i].y + 'px;width:' + caseArr[i].width + 'px;height:' + caseArr[i].width + 'px;font-size:' + caseArr[i].font_size + ';z-index:25;color: '+ caseArr[i].color + '" title="' + caseArr[i].label + '"></i>';
+				jQuery("#caseContainer").append(caseObject);
+			}
+		}
+	}
+});
+
+jQuery('#imageContainer').click(function(event){
+	var locked = jQuery('#locked').val();
+	if(locked == 'false'){
+		jQuery(".modal-dialog, .modal-md").each(function(){
+			if(jQuery(this).find('#imageContainer')){
+				var offset = jQuery(this).offset();
+				var color = 'red';
+				var table = jQuery('#recordType').val();
+				if(table == 'x_fru_cir_hazard')
+					color = 'purple';
+				else if(table == 'x_fru_cir_near_miss')
+					color = 'goldenrod';
+				var positionX = event.pageX - offset.left - 7;
+				var positionY = event.pageY - offset.top - 50;
+				jQuery('.case').remove();
+				jQuery('#coordinates').val(positionX + ',' + positionY);
+				jQuery("#caseContainer").append('<i class="fa fa-circle case" style="left:' + positionX + 'px;top:' + positionY + 'px;z-index:25;color:' + color + '"></i>');
+			}
+		});
+	}
+});
+
+function addCase(){  
+	var coordinates = jQuery('#coordinates').val();
+	g_form.setValue('coordinates', coordinates);
+	g_form.save();
+	GlideDialogWindow.get().destroy();
+}]]></client_script>
+        <description>UI page to allow a user to mark the location where a case occurred on the location's map</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_case_location_map.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet"></link>
+	<style>
+		.case{
+		color: red;
+		position: absolute;
+		width: 10px;
+		}
+	</style>
+	<g:evaluate>
+		var locked = RP.getWindowProperties().locked;
+		var recordSys = RP.getWindowProperties().recordSys;
+		var recordType = RP.getWindowProperties().recordType;
+		var locationSys = RP.getWindowProperties().locationSys;
+		var cirCaseManagementUtils = new CIRCaseManagementUtils();
+		var caseLocations = cirCaseManagementUtils.GetCaseLocations(recordSys, locationSys);
+		var locationMap = cirCaseManagementUtils.GetLocationMap(locationSys);
+	</g:evaluate>
+	<input type="hidden" id="coordinates" value=""/>
+	<input type="hidden" id="locked" value="${locked}"/>
+	<input type="hidden" id="recordType" value="${recordType}"/>
+	<input type="hidden" id="caseLocations" value="${caseLocations}"/>
+	<div id="imageContainer" style="z-index:50;background: transparent">
+		<img id="locationImage" src="${locationMap}" style="z-index:1;"/>
+		<div id="caseContainer" style="text-align:center"></div>
+	</div>
+	<j:if test="${locked == 'false'}">
+		<button type="button" class="btn btn-primary" style="float:right;margin-top:20px" onclick="addCase()">${gs.getMessage('cir_case_management_add_location')}</button>
+	</j:if>
+</j:jelly>]]></html>
+        <name>case_location_map</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-05 12:12:53</sys_created_on>
+        <sys_id>8591e598dbd5541003b3533fd3961917</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>case_location_map</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_8591e598dbd5541003b3533fd3961917</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-08 15:44:33</sys_updated_on>
+    </sys_ui_page>
+</record_update>

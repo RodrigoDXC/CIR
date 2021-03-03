@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_fru_cir_response_plan_step" label="Response Plan Template Step Condition" max_length="40" name="x_fru_cir_response_plan_template_step_condition" sizeclass="1" type="collection"/>
+</database>

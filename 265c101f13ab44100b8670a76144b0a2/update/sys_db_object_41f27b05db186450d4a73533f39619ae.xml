@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_object">
+    <sys_db_object action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <actions_access>false</actions_access>
+        <alter_access>false</alter_access>
+        <caller_access/>
+        <client_scripts_access>false</client_scripts_access>
+        <configuration_access>false</configuration_access>
+        <create_access>false</create_access>
+        <create_access_controls>true</create_access_controls>
+        <delete_access>false</delete_access>
+        <extension_model/>
+        <is_extendable>true</is_extendable>
+        <label>Component</label>
+        <live_feed_enabled>false</live_feed_enabled>
+        <name>x_fru_cir_component</name>
+        <number_ref display_value="COM">7e13fb05db186450d4a73533f3961994</number_ref>
+        <provider_class/>
+        <read_access>true</read_access>
+        <scriptable_table>false</scriptable_table>
+        <super_class display_value="Equipment" name="x_fru_cir_equipment">d5f8a74ddbd46450d4a73533f39619ff</super_class>
+        <sys_class_code>!!</sys_class_code>
+        <sys_class_name>sys_db_object</sys_class_name>
+        <sys_class_path>/!!/$*/!!</sys_class_path>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-04 09:52:30</sys_created_on>
+        <sys_id>41f27b05db186450d4a73533f39619ae</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Component</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_db_object_41f27b05db186450d4a73533f39619ae</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-04 09:52:32</sys_updated_on>
+        <update_access>false</update_access>
+        <user_role display_value="x_fru_cir.risk_manager" name="x_fru_cir.risk_manager">1df23d21dbd1101003b3533fd3961940</user_role>
+        <ws_access>true</ws_access>
+    </sys_db_object>
+</record_update>

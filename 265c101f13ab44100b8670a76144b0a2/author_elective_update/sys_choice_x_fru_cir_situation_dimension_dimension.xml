@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="dimension" table="x_fru_cir_situation_dimension" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>dimension</element>
+            <name>x_fru_cir_situation_dimension</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-06-15 08:22:36</sys_created_on>
+            <sys_id>4818d30f134694500b8670a76144b003</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>dimension</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_situation_dimension_dimension</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-06-15 08:22:36</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dimension</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cyber security</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_dimension</name>
+            <sequence>0</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-06-15 08:22:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c8acc0efdbd11410bf9ead8ed3961911</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-06-15 08:22:36</sys_updated_on>
+            <value>Cyber security</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dimension</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Physical security</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_dimension</name>
+            <sequence>1</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-06-15 08:22:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1acc0cafdbd11410bf9ead8ed39619d2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-06-15 08:22:53</sys_updated_on>
+            <value>Physical security</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dimension</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Public relations</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_dimension</name>
+            <sequence>2</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-06-15 08:23:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>02dcc8afdbd11410bf9ead8ed39619ca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-06-15 08:23:03</sys_updated_on>
+            <value>Public relations</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

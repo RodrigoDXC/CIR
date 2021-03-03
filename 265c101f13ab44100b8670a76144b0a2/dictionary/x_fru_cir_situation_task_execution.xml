@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="task" label="Situation Task Execution" max_length="40" name="x_fru_cir_situation_task_execution" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Body" max_length="4000" name="body" type="html"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false,readonly_clickthrough=false" label="Contact list" max_length="32" name="contact_list" reference="x_fru_cir_contact_list" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Use template?" max_length="40" name="custom_message" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" type="reference"/>
+        <element label="Message" max_length="400" name="message" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Message template" max_length="32" name="message_template" reference="x_fru_cir_message" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" choice_field="message_type" choice_table="x_fru_cir_response_plan_template_step_message" label="Message type" max_length="40" name="message_type" type="choice">
+            <choice/>
+        </element>
+        <element label="Subject" max_length="40" name="msg_subject" type="string"/>
+        <element attributes="edge_encryption_enabled=true,serializer=com.glide.script.TranslatedTextXMLSerializer" label="Name" max_length="40" name="name" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true" label="Notifications sent" max_length="40" name="notifications_sent" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Situation" max_length="32" name="situation" reference="x_fru_cir_situation" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Task type" mandatory="true" max_length="40" name="task_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Action" sequence="0" value="action"/>
+                <element inactive_on_update="false" label="Message" sequence="1" value="message"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false,readonly_clickthrough=false" label="Template name" max_length="32" name="template_name" reference="x_fru_cir_situation_task_template" reference_qual="javascript:&quot;category=&quot;+current.situation.category+&quot;^type=&quot;+current.task_type;" type="reference" use_reference_qualifier="advanced"/>
+    </element>
+</database>

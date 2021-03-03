@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRStaticProtectionAccessManager</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRStaticProtectionAccessManager</name>
+        <script><![CDATA[var CIRStaticProtectionAccessManager = Class.create();
+CIRStaticProtectionAccessManager.prototype = Object.extendsObject(CIRStaticProtectionAccessManagerFP,{
+    initialize: function() {
+		
+		CIRStaticProtectionAccessManagerFP.prototype.initialize.call(this);
+    },
+
+    type: 'CIRStaticProtectionUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-28 07:11:23</sys_created_on>
+        <sys_id>a5b8919ddb561050bf9ead8ed3961911</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIRStaticProtectionAccessManager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_a5b8919ddb561050bf9ead8ed3961911</sys_update_name>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-09-16 14:39:08</sys_updated_on>
+    </sys_script_include>
+</record_update>

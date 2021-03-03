@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_fru_cir_physical_security_incident" label="External Physical Security Incident" max_length="40" name="x_fru_cir_external_physical_security_incident" sizeclass="4" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Amount recovered" max_length="20" name="amount_recovered" type="decimal"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="type" choice_table="x_fru_cir_security_location" label="Building type" max_length="40" name="building_type" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Cost center" max_length="32" name="costcenter" reference="cmn_cost_center" reference_qual="javascript:'sys_idIN' + new CIRPSIUtils().GetCostcentersSysidFromLocation(current.inc_location).join(',');" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Department" max_length="32" name="department" reference="cmn_department" reference_qual="javascript: current.facility_type ? 'sys_idIN' + CIRPSIGetFMAData().GetDepartments(current.facility_type) : ''" type="reference" use_reference_qualifier="advanced"/>
+        <element default="javascript: var gdt = new GlideDateTime(); var date = gdt.getDate(); var gdt2 = new GlideDateTime(); gdt2.setDisplayValue(date + ' 12:00:00'); gdt2.getDisplayValue();" label="End date" max_length="40" name="end_date" type="glide_date_time"/>
+        <element label="Loss amount" max_length="40" name="loss_amount" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Maximum amount" max_length="20" name="maximum_amount" type="decimal"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Means of escape" max_length="4000" name="means_of_escape" reference="x_fru_cir_psi_tool" reference_qual="active=true^type=escape_type^EQ" reference_qual_condition="active=true^type=escape_type^EQ" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Methods used" mandatory="true" max_length="4000" name="methods_used" reference="x_fru_cir_psi_tool" reference_qual="type=method^active=true^EQ" reference_qual_condition="type=method^active=true^EQ" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Office risk level" mandatory="true" max_length="40" name="office_risk_level" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="1" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="2" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="3" sequence="3" value="3"/>
+                <element inactive_on_update="false" label="4" sequence="4" value="4"/>
+                <element inactive_on_update="false" label="5" sequence="5" value="5"/>
+            </choice>
+        </element>
+        <element label="Procedural violations" max_length="4000" name="procedural_violations" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Tools used" max_length="4000" name="tools_used" reference="x_fru_cir_psi_tool" reference_qual="type=tool^active=true^EQ" reference_qual_condition="type=tool^active=true^EQ" type="glide_list"/>
+    </element>
+</database>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="state" table="x_fru_cir_static_service_order" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>state</element>
+            <name>x_fru_cir_static_service_order</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-28 09:02:01</sys_created_on>
+            <sys_id>a95522a8132290900b8670a76144b044</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>state</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_static_service_order_state</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-28 09:02:01</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>state</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>New</label>
+            <language>en</language>
+            <name>x_fru_cir_static_service_order</name>
+            <sequence>1</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-28 09:02:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>12423199db1a5c10d4a73533f396195a</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-28 09:02:53</sys_updated_on>
+            <value>0</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>state</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Assigned</label>
+            <language>en</language>
+            <name>x_fru_cir_static_service_order</name>
+            <sequence>2</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-28 09:02:37</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f2323199db1a5c10d4a73533f39619cf</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-28 09:02:44</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>state</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Confirmed</label>
+            <language>en</language>
+            <name>x_fru_cir_static_service_order</name>
+            <sequence>3</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-28 09:02:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>44323d59db1a5c10d4a73533f39619dc</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-29 10:21:13</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>state</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Closed</label>
+            <language>en</language>
+            <name>x_fru_cir_static_service_order</name>
+            <sequence>4</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-28 09:02:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>75223d59db1a5c10d4a73533f39619da</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-28 09:02:17</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>state</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Canceled</label>
+            <language>en</language>
+            <name>x_fru_cir_static_service_order</name>
+            <sequence>5</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-28 09:02:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d7123d59db1a5c10d4a73533f39619d9</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-28 09:02:07</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

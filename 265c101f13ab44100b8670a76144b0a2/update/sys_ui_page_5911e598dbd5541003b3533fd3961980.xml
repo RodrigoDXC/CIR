@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>Printable version of the OSHA 300 form with populated information</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_osha_form_300_page_3.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+	<html lang="en">
+		<head>
+			<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+			<meta charset="utf-8" />
+		</head>
+
+		<body style="margin: 0;">
+
+			<div id="p3" style="overflow: hidden; position: relative; width: 1540px; height: 935px;">
+
+				<!-- Begin shared CSS values -->
+				<style class="shared-css" type="text/css" >
+					.t {
+					-webkit-transform-origin: top left;
+					-moz-transform-origin: top left;
+					-o-transform-origin: top left;
+					-ms-transform-origin: top left;
+					-webkit-transform: scale(0.25);
+					-moz-transform: scale(0.25);
+					-o-transform: scale(0.25);
+					-ms-transform: scale(0.25);
+					z-index: 2;
+					position: absolute;
+					white-space: pre;
+					overflow: visible;
+					}
+				</style>
+				<!-- End shared CSS values -->
+
+
+				<!-- Begin inline CSS -->
+				<style type="text/css" >
+
+					#t1_3{left:466px;top:160px;word-spacing:-0.1px;}
+					#t2_3{left:466px;top:441px;}
+					#t3_3{left:466px;top:459px;letter-spacing:-0.1px;}
+					#t4_3{left:464px;top:199px;letter-spacing:-0.5px;word-spacing:0.8px;}
+					#t5_3{left:464px;top:235px;}
+					#t6_3{left:464px;top:270px;}
+					#t7_3{left:693px;top:270px;}
+					#t8_3{left:771px;top:270px;}
+					#t9_3{left:464px;top:306px;}
+					#ta_3{left:464px;top:327px;}
+					#tb_3{left:490px;top:354px;}
+					#tc_3{left:490px;top:372px;letter-spacing:-0.6px;}
+					#td_3{left:464px;top:498px;}
+					#te_3{left:464px;top:557px;}
+					#tf_3{left:464px;top:587px;letter-spacing:-0.4px;}
+					#tg_3{left:464px;top:623px;}
+					#th_3{left:464px;top:658px;}
+					#ti_3{left:693px;top:658px;}
+					#tj_3{left:771px;top:658px;}
+					#tk_3{left:464px;top:688px;letter-spacing:-0.2px;word-spacing:0.4px;}
+					#tl_3{left:490px;top:708px;letter-spacing:-3.5px;}
+					#tm_3{left:490px;top:726px;}
+					#tn_3{left:464px;top:757px;letter-spacing:-0.1px;word-spacing:0.3px;}
+					#to_3{left:490px;top:776px;letter-spacing:-3.5px;}
+					#tp_3{left:490px;top:795px;}
+					#tq_3{left:518px;top:199px;}
+					#tr_3{left:498px;top:235px;}
+					#ts_3{left:487px;top:270px;}
+					#tt_3{left:720px;top:270px;}
+					#tu_3{left:792px;top:270px;}
+					#tv_3{left:529px;top:306px;}
+					#tw_3{left:525px;top:327px;}
+					#tx_3{left:727px;top:498px;}
+					#ty_3{left:464px;top:528px;}
+					#tz_3{left:503px;top:587px;}
+					#t10_3{left:512px;top:623px;}
+					#t11_3{left:487px;top:658px;}
+					#t12_3{left:720px;top:658px;}
+					#t13_3{left:792px;top:658px;}
+					#t14_3{left:464px;top:346px;}
+					#t15_3{left:464px;top:365px;}
+					#t16_3{left:464px;top:700px;}
+					#t17_3{left:464px;top:718px;}
+					#t18_3{left:464px;top:769px;}
+					#t19_3{left:464px;top:787px;}
+					#t1a_3{left:1303px;top:92px;letter-spacing:0.1px;}
+					#t1b_3{left:1268px;top:111px;}
+					#t1c_3{left:40px;top:38px;letter-spacing:0.2px;word-spacing:-0.1px;}
+					#t1d_3{left:47px;top:75px;letter-spacing:0.2px;word-spacing:-0.3px;}
+					#t1e_3{left:1344px;top:137px;letter-spacing:-0.1px;word-spacing:0.2px;}
+					#t1f_3{left:38px;top:182px;}
+					#t1g_3{left:273px;top:182px;}
+					#t1h_3{left:38px;top:202px;}
+					#t1i_3{left:38px;top:222px;letter-spacing:-0.1px;}
+					#t1j_3{left:38px;top:241px;}
+					#t1k_3{left:314px;top:241px;}
+					#t1l_3{left:38px;top:261px;}
+					#t1m_3{left:198px;top:261px;}
+					#t1n_3{left:38px;top:281px;}
+					#t1o_3{left:38px;top:301px;}
+					#t1p_3{left:66px;top:322px;}
+					#t1q_3{left:38px;top:342px;}
+					#t1r_3{left:38px;top:362px;}
+					#t1s_3{left:38px;top:382px;}
+					#t1t_3{left:38px;top:402px;}
+					#t1u_3{left:38px;top:422px;letter-spacing:-0.2px;word-spacing:0.3px;}
+					#t1v_3{left:38px;top:442px;}
+					#t1w_3{left:38px;top:462px;letter-spacing:-0.1px;word-spacing:0.1px;}
+					#t1x_3{left:66px;top:483px;letter-spacing:0.1px;}
+					#t1y_3{left:38px;top:503px;letter-spacing:-0.2px;word-spacing:0.2px;}
+					#t1z_3{left:38px;top:523px;}
+					#t20_3{left:38px;top:543px;}
+					#t21_3{left:66px;top:564px;}
+					#t22_3{left:38px;top:584px;}
+					#t23_3{left:71px;top:182px;}
+					#t24_3{left:63px;top:242px;word-spacing:-0.2px;}
+					#t25_3{left:136px;top:261px;letter-spacing:-0.3px;}
+					#t26_3{left:931px;top:161px;word-spacing:-0.1px;}
+					#t27_3{left:928px;top:200px;}
+					#t28_3{left:928px;top:223px;}
+					#t29_3{left:928px;top:246px;letter-spacing:-0.1px;word-spacing:0.1px;}
+					#t2a_3{left:928px;top:275px;letter-spacing:-0.1px;word-spacing:0.2px;}
+					#t2b_3{left:1259px;top:275px;}
+					#t2c_3{left:1191px;top:800px;}
+					#t2d_3{left:1040px;top:200px;letter-spacing:0.7px;}
+					#t2e_3{left:1070px;top:200px;letter-spacing:-0.1px;word-spacing:0.1px;}
+					#t2f_3{left:1070px;top:223px;}
+					#t2g_3{left:1069px;top:246px;}
+					#t2h_3{left:1068px;top:275px;}
+					#t2i_3{left:1267px;top:800px;}
+					#t2j_3{left:1184px;top:246px;}
+					#t2k_3{left:1183px;top:275px;}
+					#t2l_3{left:1244px;top:270px;padding-right:10px}
+					#t2m_3{left:930px;top:309px;}
+					#t2n_3{left:930px;top:431px;}
+					#t2o_3{left:930px;top:552px;}
+					#t2p_3{left:930px;top:674px;}
+					#t2q_3{left:930px;top:800px;}
+					#t2r_3{left:1309px;top:308px;letter-spacing:-0.2px;word-spacing:0.1px;}
+					#t2s_3{left:928px;top:324px;}
+					#t2t_3{left:1358px;top:324px;}
+					#t2u_3{left:928px;top:340px;}
+					#t2v_3{left:1028px;top:429px;letter-spacing:-0.4px;word-spacing:1.1px;}
+					#t2w_3{left:1268px;top:429px;letter-spacing:-0.2px;}
+					#t2x_3{left:928px;top:446px;letter-spacing:-0.2px;word-spacing:0.1px;}
+					#t2y_3{left:928px;top:462px;}
+					#t2z_3{left:1111px;top:551px;letter-spacing:-0.2px;word-spacing:0.6px;}
+					#t30_3{left:928px;top:567px;}
+					#t31_3{left:1234px;top:567px;}
+					#t32_3{left:928px;top:583px;}
+					#t33_3{left:1323px;top:672px;letter-spacing:0.1px;}
+					#t34_3{left:928px;top:688px;letter-spacing:-0.2px;}
+					#t35_3{left:1301px;top:324px;}
+					#t36_3{left:1211px;top:429px;}
+					#t37_3{left:1177px;top:567px;}
+					#t38_3{left:1266px;top:672px;}
+					#t39_3{left:1029px;top:688px;}
+					#t3a_3{left:32px;top:714px;}
+					#t3b_3{left:32px;top:755px;letter-spacing:-0.3px;}
+					#t3c_3{left:32px;top:795px;}
+					#t3d_3{left:267px;top:795px;}
+					#t3e_3{left:113px;top:716px;}
+					#t3f_3{left:62px;top:756px;}
+					#t3g_3{left:71px;top:797px;}
+					#t3h_3{left:307px;top:797px;}
+					#t3i_3{left:345px;top:797px;}
+					#t3j_3{left:25px;top:874px;}
+					#t3k_3{left:25px;top:887px;}
+					#t3l_3{left:25px;top:900px;letter-spacing:-0.1px;word-spacing:0.1px;}
+					#t3m_3{left:906px;top:199px;}
+					#t3n_3{left:906px;top:222px;}
+					#t3o_3{left:906px;top:245px;}
+					#t3p_3{left:906px;top:274px;}
+					#t3q_3{left:906px;top:307px;}
+					#t3r_3{left:906px;top:430px;}
+					#t3s_3{left:906px;top:550px;}
+					#t3t_3{left:906px;top:673px;}
+					#t3u_3{left:906px;top:799px;}
+					#t3v_3{left:449px;top:198px;}
+					#t3w_3{left:449px;top:234px;}
+					#t3x_3{left:449px;top:305px;}
+					#t3y_3{left:449px;top:352px;}
+					#t3z_3{left:449px;top:492px;}
+					#t40_3{left:449px;top:552px;}
+					#t41_3{left:449px;top:682px;}
+					#t42_3{left:449px;top:750px;}
+					#t43_3{left:449px;top:326px;}
+					#t44_3{left:857px;top:32px;letter-spacing:-0.2px;}
+					#t45_3{left:944px;top:32px;letter-spacing:-0.1px;word-spacing:0.1px;}
+					#t46_3{left:857px;top:50px;letter-spacing:-0.1px;word-spacing:0.1px;}
+					#t47_3{left:857px;top:67px;letter-spacing:-0.1px;word-spacing:0.1px;}
+					#t48_3{left:857px;top:84px;letter-spacing:-0.1px;word-spacing:0.1px;}
+					#t49_3{left:857px;top:102px;letter-spacing:-0.1px;word-spacing:0.1px;}
+
+					div{
+						text-align: center;
+					}
+					
+					span{
+						text-alight: center;
+					}
+					
+					.underlined{
+						border-bottom: solid 2px;
+						display: inline-block;
+					}
+					
+					.s1_3{
+					FONT-SIZE: 55.8px;
+					FONT-FAMILY: Helvetica-Black_29;
+					color: rgb(35,31,32);
+					}
+
+					.s2_3{
+					FONT-SIZE: 42.8px;
+					FONT-FAMILY: BaskervilleWin95BT-Bold_2m;
+					color: rgb(35,31,32);
+					}
+
+					.s3_3{
+					FONT-SIZE: 42.8px;
+					FONT-FAMILY: BaskervilleWin95BT_2f;
+					color: rgb(35,31,32);
+					}
+
+					.s4_3{
+					FONT-SIZE: 73.3px;
+					FONT-FAMILY: MonotypeSorts_16;
+					color: rgb(35,31,32);
+					}
+
+					.s5_3{
+					FONT-SIZE: 61.2px;
+					FONT-FAMILY: Helvetica-Black_29;
+					color: rgb(35,31,32);
+					}
+
+					.s6_3{
+					FONT-SIZE: 38.2px;
+					FONT-FAMILY: Helvetica-Black_29;
+					color: rgb(35,31,32);
+					}
+
+					.s7_3{
+					FONT-SIZE: 146.7px;
+					FONT-FAMILY: Swiss721BT-LightItalic_2b;
+					color: rgb(35,31,32);
+					}
+
+					.s8_3{
+					FONT-SIZE: 161.3px;
+					FONT-FAMILY: Helvetica-Black_29;
+					color: rgb(35,31,32);
+					}
+
+					.s9_3{
+					FONT-SIZE: 39.7px;
+					FONT-FAMILY: BaskervilleWin95BT_2f;
+					color: rgb(35,31,32);
+					}
+
+					.s10_3{
+					FONT-SIZE: 58.1px;
+					FONT-FAMILY: BaskervilleWin95BT_2f;
+					color: rgb(35,31,32);
+					}
+
+					.s11_3{
+					FONT-SIZE: 58.1px;
+					FONT-FAMILY: BaskervilleWin95BT-NormalIt_2o;
+					color: rgb(35,31,32);
+					}
+
+					.s12_3{
+					FONT-SIZE: 42.8px;
+					FONT-FAMILY: BaskervilleWin95BT-BoldItal_15;
+					color: rgb(35,31,32);
+					}
+
+					.s13_3{
+					FONT-SIZE: 42.8px;
+					FONT-FAMILY: BaskervilleWin95BT-NormalIt_2o;
+					color: rgb(35,31,32);
+					}
+
+					.s14_3{
+					FONT-SIZE: 73.8px;
+					FONT-FAMILY: CommonBullets_14;
+					color: rgb(35,31,32);
+					}
+
+					.s15_3{
+					FONT-SIZE: 43.4px;
+					FONT-FAMILY: Helvetica-Black_29;
+					color: rgb(35,31,32);
+					}
+
+					.s16_3{
+					FONT-SIZE: 48.9px;
+					FONT-FAMILY: BaskervilleWin95BT-Bold_2m;
+					color: rgb(35,31,32);
+					}
+
+					.s17_3{
+					FONT-SIZE: 48.9px;
+					FONT-FAMILY: BaskervilleWin95BT-BoldItal_15;
+					color: rgb(35,31,32);
+					}
+
+					.s18_3{
+					FONT-SIZE: 61.1px;
+					FONT-FAMILY: Helvetica-Black_29;
+					color: rgb(35,31,32);
+					}
+
+					.s19_3{
+					FONT-SIZE: 61.1px;
+					FONT-FAMILY: Swiss721BT-Light_2d;
+					color: rgb(35,31,32);
+					}
+
+					.t.m1_3{
+					-webkit-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+					-ms-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+					-moz-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+					-o-transform: matrix(0.98,0,-0.17,0.98,0, 0) scale(0.25);
+					}
+
+				</style>
+				<!-- End inline CSS -->
+
+				<!-- Begin embedded font definitions -->
+				<style id="fonts3" type="text/css" >
+
+					@font-face {
+					font-family: BaskervilleWin95BT-NormalIt_2o;
+					src: url("fonts/BaskervilleWin95BT-NormalIt_2o.woff") format("woff");
+					}
+
+					@font-face {
+					font-family: MonotypeSorts_16;
+					src: url("fonts/MonotypeSorts_16.woff") format("woff");
+					}
+
+					@font-face {
+					font-family: Swiss721BT-Light_2d;
+					src: url("fonts/Swiss721BT-Light_2d.woff") format("woff");
+					}
+
+					@font-face {
+					font-family: BaskervilleWin95BT_2f;
+					src: url("fonts/BaskervilleWin95BT_2f.woff") format("woff");
+					}
+
+					@font-face {
+					font-family: CommonBullets_14;
+					src: url("fonts/CommonBullets_14.woff") format("woff");
+					}
+
+					@font-face {
+					font-family: Helvetica-Black_29;
+					src: url("fonts/Helvetica-Black_29.woff") format("woff");
+					}
+
+					@font-face {
+					font-family: Swiss721BT-LightItalic_2b;
+					src: url("fonts/Swiss721BT-LightItalic_2b.woff") format("woff");
+					}
+
+					@font-face {
+					font-family: BaskervilleWin95BT-BoldItal_15;
+					src: url("fonts/BaskervilleWin95BT-BoldItal_15.woff") format("woff");
+					}
+
+					@font-face {
+					font-family: BaskervilleWin95BT-Bold_2m;
+					src: url("fonts/BaskervilleWin95BT-Bold_2m.woff") format("woff");
+					}
+
+				</style>
+				<!-- End embedded font definitions -->
+
+				<g:evaluate>
+					var personSys = RP.getWindowProperties().personSys;
+					var personImpact = new GlideRecordSecure('x_fru_cir_person_impact');
+					if (personImpact.get(personSys)) {
+						var caseDate = new GlideDateTime(personImpact.cir_case.occurred_on);
+						var caseTime = caseDate.getLocalTime();
+						var workStart = new GlideDateTime(personImpact.shift_start);
+						workStart = workStart.getLocalTime();
+						var personObject = {
+							name: personImpact.first_name + ' ' + personImpact.last_name,
+							dob: personImpact.date_of_birth.getDisplayValue().split('-'),
+							startDate: personImpact.date_started_at_company.getDisplayValue().split('-'),
+							gender: personImpact.gender,
+							caseNumber: personImpact.cir_case.getDisplayValue(),
+							caseDate: caseDate.getLocalDate().toString().split('-'),
+							caseTime: caseTime.getByFormat('hh:mm:ss'),
+							workStart: workStart.getByFormat('hh:mm:ss')
+						};
+					}
+				</g:evaluate>
+
+				<!-- Begin page background -->
+				<div id="pg3Overlay" style="width:100%; height:100%; position:absolute; z-index:1; background-color:rgba(0,0,0,0); -webkit-user-select: none;"></div>
+				<div id="pg3" style="-webkit-user-select: none;"><object width="1540" height="935" data="3/3.svg" type="image/svg+xml" id="pdf3" style="width:1540px; height:935px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
+				<!-- End page background -->
+
+
+				<!-- Begin text definitions (Positioned/styled in CSS) -->
+				<div id="t1_3" class="t m1_3 s1_3">Information about the employee</div>
+				<div id="t2_3" class="t m1_3 s1_3">Information about the physician or other health care</div>
+				<div id="t3_3" class="t m1_3 s1_3">professional</div>
+				<div id="t4_3" class="t s2_3">Full name</div>
+				<div id="t5_3" class="t s2_3">Street</div>
+				<div id="t6_3" class="t s2_3">City</div>
+				<div id="t7_3" class="t s2_3">State</div>
+				<div id="t8_3" class="t s2_3">ZIP</div>
+				<div id="t9_3" class="t s2_3">Date of birth</div>
+				<div id="ta_3" class="t s2_3">Date hired</div>
+				<div id="tb_3" class="t s2_3">Male</div>
+				<div id="tc_3" class="t s2_3">Female</div>
+				<div id="td_3" class="t s2_3">Name of physician or other health care professional</div>
+				<div id="te_3" class="t s2_3">If treatment was given away from the worksite, where was it given?</div>
+				<div id="tf_3" class="t s2_3">Facility</div>
+				<div id="tg_3" class="t s2_3">Street</div>
+				<div id="th_3" class="t s2_3">City</div>
+				<div id="ti_3" class="t s2_3">State</div>
+				<div id="tj_3" class="t s2_3">ZIP</div>
+				<div id="tk_3" class="t s2_3">Was employee treated in an emergency room?</div>
+				<div id="tl_3" class="t s2_3">Yes</div>
+				<div id="tm_3" class="t s2_3">No</div>
+				<div id="tn_3" class="t s2_3">Was employee hospitalized overnight as an in-patient?</div>
+				<div id="to_3" class="t s2_3">Yes</div>
+				<div id="tp_3" class="t s2_3">No</div>
+				<div id="tq_3" class="t s3_3"><div class="underlined" style="width:1300px">${personObject.name}</div></div>
+				<div id="tr_3" class="t s3_3">________________________________________________________________</div>
+				<div id="ts_3" class="t s3_3">______________________________________</div>
+				<div id="tt_3" class="t s3_3">_________</div>
+				<div id="tu_3" class="t s3_3">___________</div>
+				<div id="tv_3" class="t s3_3" width="700px">
+					<div class="underlined" style="width:150px">${personObject.dob[0]}</div>
+					<span style="padding: 0px 10px">$[SP]/$[SP]</span>
+					<div class="underlined" style="width:150px">${personObject.dob[1]}</div>
+					<span style="padding: 0px 10px">$[SP]/$[SP]</span>
+					<div class="underlined" style="width:150px">${personObject.dob[2]}</div>
+				</div>
+				<div id="tw_3" class="t s3_3">
+					<div class="underlined" style="width:150px">${personObject.startDate[0]}</div>
+					<span style="padding: 0px 10px">$[SP]/$[SP]</span>
+					<div class="underlined" style="width:150px">${personObject.startDate[1]}</div>
+					<span style="padding: 0px 10px">$[SP]/$[SP]</span>
+					<div class="underlined" style="width:150px">${personObject.startDate[2]}</div>
+				</div>
+				<div id="tx_3" class="t s3_3">__________________________</div>
+				<div id="ty_3" class="t s3_3">________________________________________________________________________</div>
+				<div id="tz_3" class="t s3_3">_________________________________________________________________</div>
+				<div id="t10_3" class="t s3_3">_______________________________________________________________</div>
+				<div id="t11_3" class="t s3_3">______________________________________</div>
+				<div id="t12_3" class="t s3_3">_________</div>
+				<div id="t13_3" class="t s3_3">___________</div>
+				<div id="t14_3" class="t s4_3">
+					<j:if test="${personObject.gender != 'male'}">
+						<i class="fa fa-square-o" aria-hidden="true"></i>
+					</j:if>
+					<j:if test="${personObject.gender == 'male'}">
+						<i class="fa fa-check-square-o" aria-hidden="true"></i>
+					</j:if>
+				</div>
+				<div id="t15_3" class="t s4_3">
+					<j:if test="${personObject.gender != 'female'}">
+						<i class="fa fa-square-o" aria-hidden="true"></i>
+					</j:if>
+					<j:if test="${personObject.gender == 'female'}">
+						<i class="fa fa-check-square-o" aria-hidden="true"></i>
+					</j:if></div>
+				<div id="t16_3" class="t s4_3"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+				<div id="t17_3" class="t s4_3"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+				<div id="t18_3" class="t s4_3"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+				<div id="t19_3" class="t s4_3"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+				<div id="t1a_3" class="t m1_3 s5_3">U.S. Department of Labor</div>
+				<div id="t1b_3" class="t m1_3 s6_3">Occupational Safety and Health Administration</div>
+				<div id="t1c_3" class="t s7_3">OSHA's Form 301</div>
+				<div id="t1d_3" class="t m1_3 s8_3">Injury and Illness Incident Report</div>
+				<div id="t1e_3" class="t s9_3">Form approved OMB no. 1218-0176</div>
+				<div id="t1f_3" class="t s10_3">This</div>
+				<div id="t1g_3" class="t s10_3">is one of the</div>
+				<div id="t1h_3" class="t s10_3">first forms you must fill out when a recordable work-</div>
+				<div id="t1i_3" class="t s10_3">related injury or illness has occurred. Together with</div>
+				<div id="t1j_3" class="t s10_3">the</div>
+				<div id="t1k_3" class="t s10_3">and the</div>
+				<div id="t1l_3" class="t s10_3">accompanying</div>
+				<div id="t1m_3" class="t s10_3">these forms help the</div>
+				<div id="t1n_3" class="t s10_3">employer and OSHA develop a picture of the extent</div>
+				<div id="t1o_3" class="t s10_3">and severity of work-related incidents.</div>
+				<div id="t1p_3" class="t s10_3">Within 7 calendar days after you receive</div>
+				<div id="t1q_3" class="t s10_3">information that a recordable work-related injury or</div>
+				<div id="t1r_3" class="t s10_3">illness has occurred, you must fill out this form or an</div>
+				<div id="t1s_3" class="t s10_3">equivalent. Some state workers' compensation,</div>
+				<div id="t1t_3" class="t s10_3">insurance, or other reports may be acceptable</div>
+				<div id="t1u_3" class="t s10_3">substitutes. To be considered an equivalent form,</div>
+				<div id="t1v_3" class="t s10_3">any substitute must contain all the information</div>
+				<div id="t1w_3" class="t s10_3">asked for on this form.</div>
+				<div id="t1x_3" class="t s10_3">According to Public Law 91-596 and 29 CFR</div>
+				<div id="t1y_3" class="t s10_3">1904, OSHA's recordkeeping rule, you must keep</div>
+				<div id="t1z_3" class="t s10_3">this form on file for 5 years following the year to</div>
+				<div id="t20_3" class="t s10_3">which it pertains.</div>
+				<div id="t21_3" class="t s10_3">If you need additional copies of this form, you</div>
+				<div id="t22_3" class="t s10_3">may photocopy and use as many as you need.</div>
+				<div id="t23_3" class="t s11_3">Injury and Illness Incident Report</div>
+				<div id="t24_3" class="t s11_3">Log of Work-Related Injuries and Illnesses</div>
+				<div id="t25_3" class="t s11_3">Summary,</div>
+				<div id="t26_3" class="t m1_3 s1_3">Information about the case</div>
+				<div id="t27_3" class="t s2_3">Case number from the Log</div>
+				<div id="t28_3" class="t s2_3">Date of injury or illness</div>
+				<div id="t29_3" class="t s2_3">Time employee began work</div>
+				<div id="t2a_3" class="t s2_3">Time of event</div>
+				<div id="t2b_3" class="t s2_3" style="padding-left:20px">Check if time cannot be determined</div>
+				<div id="t2c_3" class="t s2_3">Date of death</div>
+				<div id="t2e_3" class="t s13_3">
+					<div class="underlined" style="width:430px">${personObject.caseNumber}</div>
+					<span style="padding-left:30px">(Transfer the case number from the Log after you record the case.)</span>
+				</div>
+				<div id="t2f_3" class="t s3_3">
+					<div class="underlined" style="width:150px">${personObject.caseDate[0]}</div>
+					<span style="padding: 0px 10px">$[SP]/$[SP]</span>
+					<div class="underlined" style="width:150px">${personObject.caseDate[1]}</div>
+					<span style="padding: 0px 10px">$[SP]/$[SP]</span>
+					<div class="underlined" style="width:150px">${personObject.caseDate[2]}</div>
+				</div>
+				<div id="t2g_3" class="t s3_3"><div class="underlined" style="width:430px">${personObject.workStart}</div></div>
+				<div id="t2h_3" class="t s3_3"><div class="underlined" style="width:430px">${personObject.caseTime}</div></div>
+				<div id="t2i_3" class="t s3_3">______ / _____ / ______</div>
+				<!--<div id="t2j_3" class="t s2_3">AM / PM</div>
+				<div id="t2k_3" class="t s2_3">AM / PM</div>-->
+				<div id="t2l_3" class="t s14_3"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+				<div id="t2m_3" class="t m1_3 s15_3">What was the employee doing just before the incident occurred?</div>
+				<div id="t2n_3" class="t m1_3 s15_3">What happened?</div>
+				<div id="t2o_3" class="t m1_3 s15_3">What was the injury or illness?</div>
+				<div id="t2p_3" class="t m1_3 s15_3">What object or substance directly harmed the employee?</div>
+				<div id="t2q_3" class="t m1_3 s15_3">If the employee died, when did death occur?</div>
+				<div id="t2r_3" class="t s16_3">Describe the activity, as well as the</div>
+				<div id="t2s_3" class="t s16_3">tools, equipment, or material the employee was using. Be specific.</div>
+				<div id="t2t_3" class="t s16_3">"climbing a ladder while</div>
+				<div id="t2u_3" class="t s16_3">carrying roofing materials"; "spraying chlorine from hand sprayer"; "daily computer key-entry."</div>
+				<div id="t2v_3" class="t s16_3">Tell us how the injury occurred.</div>
+				<div id="t2w_3" class="t s16_3">"When ladder slipped on wet floor, worker</div>
+				<div id="t2x_3" class="t s16_3">fell 20 feet"; "Worker was sprayed with chlorine when gasket broke during replacement"; "Worker</div>
+				<div id="t2y_3" class="t s16_3">developed soreness in wrist over time."</div>
+				<div id="t2z_3" class="t s16_3">Tell us the part of the body that was affected and how it was affected; be</div>
+				<div id="t30_3" class="t s16_3">more specific than "hurt," "pain," or sore."</div>
+				<div id="t31_3" class="t s16_3">"strained back"; "chemical burn, hand"; "carpal</div>
+				<div id="t32_3" class="t s16_3">tunnel syndrome."</div>
+				<div id="t33_3" class="t s16_3">"concrete floor"; "chlorine";</div>
+				<div id="t34_3" class="t s16_3">"radial arm saw."</div>
+				<div id="t35_3" class="t s17_3">Examples:</div>
+				<div id="t36_3" class="t s17_3">Examples:</div>
+				<div id="t37_3" class="t s17_3">Examples:</div>
+				<div id="t38_3" class="t s17_3">Examples:</div>
+				<div id="t39_3" class="t s17_3">If this question does not apply to the incident, leave it blank.</div>
+				<div id="t3a_3" class="t s16_3">Completed by</div>
+				<div id="t3b_3" class="t s16_3">Title</div>
+				<div id="t3c_3" class="t s16_3">Phone</div>
+				<div id="t3d_3" class="t s16_3">Date</div>
+				<div id="t3e_3" class="t s3_3">_______________________________________________________</div>
+				<div id="t3f_3" class="t s3_3">_________________________________________________________________</div>
+				<div id="t3g_3" class="t s3_3">(________)_________--_____________</div>
+				<div id="t3h_3" class="t s3_3">_____/</div>
+				<div id="t3i_3" class="t s3_3">_____ / _____</div>
+				<div id="t3j_3" class="t s9_3">Public reporting burden for this collection of information is estimated to average 22 minutes per response, including time for reviewing instructions, searching existing data sources, gathering and maintaining the data needed, and completing and reviewing the collection of information. Persons are not required to respond to the</div>
+				<div id="t3k_3" class="t s9_3">collection of information unless it displays a current valid OMB control number. If you have any comments about this estimate or any other aspects of this data collection, including suggestions for reducing this burden, contact: US Department of Labor, OSHA Office of Statistical Analysis, Room N-3644, 200 Constitution Avenue, NW,</div>
+				<div id="t3l_3" class="t s9_3">Washington, DC 20210. Do not send the completed forms to this office.</div>
+				<div id="t3m_3" class="t s2_3">10)</div>
+				<div id="t3n_3" class="t s2_3">11)</div>
+				<div id="t3o_3" class="t s2_3">12)</div>
+				<div id="t3p_3" class="t s2_3">13)</div>
+				<div id="t3q_3" class="t s2_3">14)</div>
+				<div id="t3r_3" class="t s2_3">15)</div>
+				<div id="t3s_3" class="t s2_3">16)</div>
+				<div id="t3t_3" class="t s2_3">17)</div>
+				<div id="t3u_3" class="t s2_3">18)</div>
+				<div id="t3v_3" class="t s2_3">1)</div>
+				<div id="t3w_3" class="t s2_3">2)</div>
+				<div id="t3x_3" class="t s2_3">3)</div>
+				<div id="t3y_3" class="t s2_3">5)</div>
+				<div id="t3z_3" class="t s2_3">6)</div>
+				<div id="t40_3" class="t s2_3">7)</div>
+				<div id="t41_3" class="t s2_3">8)</div>
+				<div id="t42_3" class="t s2_3">9)</div>
+				<div id="t43_3" class="t s2_3">4)</div>
+				<div id="t44_3" class="t s18_3" style="border: solid 1px">Attention: This form contains information relating to employee health and must be used in a manner that protects the confidentiality of employees to the extent possible while the information is being used for occupational safety and health purposes.</div>
+				<div id="t45_3" class="t s19_3"></div>
+				<div id="t46_3" class="t s19_3"></div>
+				<div id="t47_3" class="t s19_3"></div>
+				<div id="t48_3" class="t s19_3"></div>
+				<div id="t49_3" class="t s19_3"></div>
+			</div>
+		</body>
+	</html>
+
+</j:jelly>]]></html>
+        <name>osha_form_300_page_3</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-05 12:10:44</sys_created_on>
+        <sys_id>5911e598dbd5541003b3533fd3961980</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>osha_form_300_page_3</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_5911e598dbd5541003b3533fd3961980</sys_update_name>
+        <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+        <sys_updated_on>2020-07-31 13:18:36</sys_updated_on>
+    </sys_ui_page>
+</record_update>

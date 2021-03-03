@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $location, $rootScope, i18n, spUtil, $interpolate, $uibModal) {
+  /* widget controller */
+  var c = this;
+	
+	function handleMessage(event){
+		if (event.isTrusted) {
+			var data = JSON.parse(event.data);
+			c.data.gather_info = true
+			c.data.step_id = data.id;
+			
+			c.server.update().then(function(resp){
+				c.data = resp;
+			});
+			
+			c.openModal();
+		}
+	}
+	
+	
+	window.addEventListener('message', handleMessage, false);
+	
+	c.openModal = function () {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'seeStepDetails',
+            scope: $scope
+        });
+    };
+	
+	spUtil.recordWatch($scope, c.data.tables.RESP_PLAN_EXEC, "sys_id=" + c.data.sys_id, function (name, data) {
+        c.server.update();        
+    });
+	
+	
+	c.openConfirmation = function(action) {
+		c.action = action;
+		i18n.getMessage(action, function (msg){
+			c.action_message = msg;
+		});
+		c.modalInstance = $uibModal.open({
+            templateUrl: 'openConfirmation',
+            scope: $scope
+        });
+	}
+	
+	c.closeModal = function () {
+        c.modalInstance.close();
+    };
+	
+	c.confirmAction = function() {
+		c.modalInstance.close();
+		var obj = {};
+		obj.action = c.action;
+		c.server.get(obj).then( function (resp) {
+			if (obj.action == 'cir_sit_send_message' && resp.data.info_message) {
+				spUtil.addInfoMessage(resp.data.info_message);				
+			} else {
+				spUtil.addInfoMessage(c.data.updated_message);
+			}
+			c.data.close_step = false;
+			spUtil.update($scope);
+			$('#flow_frame').attr('src', $('#flow_frame').attr('src'));
+		});
+	};
+	
+	c.openStep = function(record) {
+		if (record == '') {return}
+
+		c.data.gather_info = true;
+		c.data.step_id = record.execution;
+		c.data.openListStep = true;
+
+		c.server.update().then(function(resp){
+				c.data = resp;
+			});
+		
+		c.openModal();
+	};
+	
+	//TAB RENDERING
+	$scope.openTab = function (evt, tabName) {
+		var i, tabcontent, tablinks;
+	
+		// Get all elements with class="tabcontent" and hide them
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+
+		// Get all elements with class="tablinks" and remove the class "active"
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+
+		// Show the current tab, and add an "active" class to the button that opened the tab
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.className += " active";
+		
+		spUtil.refresh($scope);	
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>iframe{&#13;
+	border:0;&#13;
+  overflow: scroll;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+    margin-right: 5px;&#13;
+    margin-bottom: 10px;&#13;
+    color: #2e2e2e;&#13;
+    background-color: #ffffff;&#13;
+    border-color: #cccccc;&#13;
+    display: block;&#13;
+}&#13;
+&#13;
+#subtitle_container {&#13;
+width: fit-content;&#13;
+position: sticky;&#13;
+top: 0;&#13;
+z-index: 100;&#13;
+position: -webkit-sticky;&#13;
+margin: 10px;&#13;
+}&#13;
+&#13;
+.square {&#13;
+  height: 20px;&#13;
+  width: 20px;&#13;
+}&#13;
+&#13;
+.current {&#13;
+  background-color: #428bca;&#13;
+}&#13;
+&#13;
+.completed {&#13;
+  background-color: #009900;&#13;
+}&#13;
+&#13;
+.not_created {&#13;
+  background-color: #ddd;&#13;
+}&#13;
+&#13;
+.sub_line { &#13;
+ height: 1px;&#13;
+ border: 0; &#13;
+margin: 1em 0; padding: 0; &#13;
+width: 30px;&#13;
+color: #009900;&#13;
+display: inline-block;&#13;
+  vertical-align: bottom;&#13;
+}&#13;
+&#13;
+.green_line {&#13;
+   border-top: 2px solid #009900;&#13;
+}&#13;
+&#13;
+.red_line {&#13;
+  border-top: 2px solid #ff0000;&#13;
+}&#13;
+&#13;
+.default_line {&#13;
+  border-top: 2px solid  #808080;&#13;
+}&#13;
+h5 {&#13;
+   font-weight: bold;&#13;
+}&#13;
+body.modal-open {&#13;
+    position: fixed;&#13;
+}&#13;
+.tab {&#13;
+	padding: 0px;&#13;
+}&#13;
+&#13;
+.tab button:hover {&#13;
+  color: #ec0000;&#13;
+}&#13;
+&#13;
+.tab button.active {&#13;
+  color: #ec0000;&#13;
+  border-bottom: 3px solid #ec0000;&#13;
+}&#13;
+&#13;
+.tab button {&#13;
+  background-color: inherit;&#13;
+  float: left;&#13;
+  border: none;&#13;
+  outline: none;&#13;
+  cursor: pointer;&#13;
+  padding: 16px 16px;&#13;
+  transition: 0.3s;&#13;
+}&#13;
+&#13;
+.tabcontent {&#13;
+  overflow-y:auto;&#13;
+  height:593px;&#13;
+  display: none;&#13;
+  //height: 100%;&#13;
+  border-top: none;&#13;
+}&#13;
+&#13;
+.grayStep {&#13;
+	color: #bbbbbb;&#13;
+}&#13;
+&#13;
+.panel-title {&#13;
+  display: inline;&#13;
+}&#13;
+&#13;
+.header-title{&#13;
+ 	vertical-align: -webkit-baseline-middle;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.06;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+  	width: 125px;&#13;
+}&#13;
+&#13;
+.panel-title-container {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+}&#13;
+&#13;
+.header-title{&#13;
+ 	vertical-align: -webkit-baseline-middle;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.06;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+}&#13;
+&#13;
+.panel-body{&#13;
+	padding:0;&#13;
+  overflow-y:auto;&#13;
+  height:593px;&#13;
+  background-color: #ffffff;&#13;
+}&#13;
+&#13;
+.resp-plan-heading {&#13;
+height:55px;&#13;
+  padding-right: 8px;&#13;
+  padding-top: 0px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Shows a list of response plans that are linked to a situation room</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-situation-response-plans</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Situation Response Plan</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.situation_user</roles>
+        <script><![CDATA[(function() {
+	data.tables = CIRConstants.Tables;
+	data.table = data.tables.RESP_PLAN_EXEC;
+	data.sys_id = $sp.getParameter("sys_id");	
+	options.url = 'cir/'+ CIRConstants.Ui_pages.RESPONSE_PLAN_FLOW +'.do?table=' + data.table + '&sys_id=' + data.sys_id +'&portal=true/.panel-primary';
+	var utils = new CIRSituationUtils();
+
+	var record = utils.GetRecord(data.table+'', data.sys_id+'');
+
+	if (!record.valid) {
+		return;
+	}
+	data.record = record.glide_record;
+
+	data.color_codes = gs.getMessage('cir_sit_color_codes');
+	data.result_yes = gs.getMessage('cir_sit_result_yes')+'';
+	data.result_no = gs.getMessage('cir_sit_result_no') +' ';
+	data.normal = gs.getMessage('cir_sit_normal_transition') +' ';
+	data.step_completed = gs.getMessage('cir_sit_step_completed') +'  ';
+	data.not_created = gs.getMessage('cir_sit_not_created') +'  ';
+	data.current_step = gs.getMessage('cir_sit_current_step') +'  ';
+	data.gather_info = input ? input.gather_info : false;
+	//data.step_id = input && input.step_id ? input.step_id.replace('panel', '') : '';
+	data.current_step_rcrd = fetchCurrentStep();
+	data.step_class = data.current_step_rcrd ? data.current_step_rcrd.sys_class_name.toString() : '';
+	data.send_message = input && input.send_message ? input.send_message : false;
+	data.current_step_state = data.current_step_rcrd ? data.current_step_rcrd.state.toString() : '3';
+	data.close_step = input && input.close_step ? input.close_step : false;
+	data.updated_message = gs.getMessage('cir_sit_resp_plan_updated'); 
+	data.response_plan_state = fetchResponsePlan().state.toString();
+	data.canWrite = data.record.state.canWrite();
+	data.openListStep = input ? input.openListStep : false;
+	data.openStep = 'open_step';
+
+
+	if (input && input.action) {
+		if (input.action + '' === 'cir_sit_send_message') {
+			var crisisUtils = new CIRSituationUtils();
+			var nots = crisisUtils.SendMessage(data.current_step_rcrd, true);
+			data.current_step_rcrd = fetchSpecificExecData(data.current_step_rcrd);
+			data.current_step_rcrd.state = '2';
+			data.current_step_rcrd.notifications_sent = data.current_step_rcrd.response_plan_step.message.type +'' === 'email' ? nots.length-1:  nots.length;
+
+			if (nots.length) {
+				nots = utils.GetUsersName(nots);
+				data.info_message = gs.getMessage('cir_message_set_sent_task', [data.current_step_rcrd.response_plan_step.message_type, nots.join(', ')]);
+			}
+		} else if(input.action + '' === 'cir_sit_close_step') {		
+			data.current_step_rcrd.state = '3';
+
+		} else if(input.action + '' === 'cir_sit_set_result_to_yes') {
+			data.current_step_rcrd.result = 'yes';
+			data.current_step_rcrd.state = '3';
+
+		} else if(input.action + '' === 'cir_sit_set_result_to_no') {
+			data.current_step_rcrd.result = 'no';
+			data.current_step_rcrd.state = '3';
+		}
+		data.current_step_rcrd.update();
+	}
+	if (input) {
+		fetchListData(input);
+	}
+
+
+	function fetchListData(dataSource) {
+		if (dataSource.table !== '') {
+			data.records = [];
+			data.crisis_id = $sp.getParameter("sys_id");
+
+			var gr = new GlideRecord(data.tables.RESP_PLAN_STEP);
+			gr.addQuery("response_plan_template", data.record.response_plan_template);
+			gr.addQuery("active", true);
+
+			// to show the number os records in the source table
+			data.p = dataSource.p || $sp.getValue('p') || 1;
+			data.p = parseInt(data.p);
+			data.window_size = options.limit || 50;
+			data.page_index = data.p - 1;
+			data.window_start = data.page_index * data.window_size;
+			data.window_end = (data.page_index + 1) * data.window_size;
+
+			gr.chooseWindow(data.window_start, data.window_end);
+
+			//Sort the table
+			gr.orderBy('order');
+
+			gr.query();
+			// row count from the glide record data source
+			data.row_count = countRecords(dataSource);
+			data.num_pages = Math.ceil(data.row_count / data.window_size);
+
+			//data.row_count = 0;
+			while (gr.next()) {
+				if (gr.canRead()) {
+					var o = {};
+					//use $sp utility methods rather than manually creating record objects
+					$sp.getRecordDisplayValues(o, gr, options.fields);
+					$sp.getRecordValues(o, gr, 'sys_id');
+					o.state = '-';
+					// cheks if the stpe is already executed. if  yes, sets the execution id
+					o.execution = setExecution(gr.sys_id.toString());
+					o.sys_id = gr.getUniqueValue();
+
+					// if it has an execution sets its value to closed
+					if (o.execution) {
+						o.state = gs.getMessage('closed');
+					}
+
+					// checks if it the current execution so it can highlight it on the form
+					if (o.execution === data.record.current_step.toString() && data.record.state+'' !== '3') {
+						o.current = true;
+						o.state = gs.getMessage('open');
+					}
+					data.records.push(o);
+				}
+			}
+
+			data.canCreate = gr.canCreate();
+			data.tooltip = gs.getMessage(options.button_tooltip);
+			data.ListLabels = [];
+			var labels = $sp.getFieldsObject(gr, options.fields);
+
+			for (var label in labels) {
+				data.ListLabels.push({
+					"key": label,
+					"type": labels[label].type,
+					"value": labels[label].label
+				});
+			}
+
+			data.ListLabels.push({
+				"key": 'state',
+				"value": gs.getMessage('cir_sit_state'),
+				"type": 'state'
+			});
+		}
+	}
+	if (!input) {
+		data.records = [];
+		data.hidePanel = false;
+		data.table = options.table || $sp.getParameter('table');
+		data.groupBy = $sp.getParameter('groupBy') || options.aggregate_field || '';
+		data.fields = $sp.getParameter('fields') || options.field_list || '';
+		data.filter = $sp.getParameter('filter') || options.filter || '';
+		data.parent = options.parent;
+
+		var myTableMessage = gs.getMessage(options.title).toLowerCase();
+		data.noItemMessage = gs.getMessage('cir_sit_no_records');
+
+		if (options.reference_table) {
+			if ($sp.getParameter('table') === options.reference_table) {
+				data.relatedList = true;
+				data.relatedTable = options.reference_table;
+				data.relatedField = options.reference_field;
+				data.parentId = $sp.getParameter('sys_id');
+
+				fetchListData(data);
+			} else {
+				data.hidePanel = true;
+			}
+		} else {
+			fetchListData(data);
+		}
+
+		if (options.hide_on_empty == 'true') {
+			if (data.records.length == 0) {
+				data.hidePanel = true;
+			}
+		}
+	}
+
+	function setExecution(template) {
+		var grStep = new GlideRecord(data.tables.RESP_PLAN_EXEC_STEP);
+		grStep.addQuery('response_plan', data.sys_id);
+		grStep.addQuery('response_plan_step', template);
+		grStep.query();
+
+		if (grStep.next()) {
+			return grStep.getUniqueValue();
+		}
+		return '';
+	}	
+
+	function getCurrenStepTemplates(currentSteps) {
+		var templates = [];
+
+		var grStep = new GlideRecord(data.tables.RESP_PLAN_EXEC_STEP);
+		grStep.addEncodedQuery('sys_idIN' + currentSteps);
+		grStep.query();
+
+		while(grStep.next()) {
+			templates.push(grStep.response_plan_step);
+		}
+		return templates.toString();
+	}
+
+	function countRecords(dataSource) {
+		var amountRecords = 0;
+		var grA = new GlideAggregate(data.tables.RESP_PLAN_STEP);
+		grA.addQuery("response_plan_template", data.record.response_plan_template);
+
+		if (dataSource.relatedList && dataSource.parentId !== '' && dataSource.relatedField) {
+			grA.addQuery(dataSource.relatedField, dataSource.parentId);
+		}
+
+		grA.addAggregate('COUNT');
+		grA.query();
+		if (grA.next()) {
+			amountRecords = grA.getAggregate('COUNT');
+		}
+		return amountRecords;
+	}
+
+	//                 Open step data                    //
+	///////////////////////////////////////////////////////
+
+	if (input && data.gather_info) {
+		// if selected step comes from list tab
+		if (input.openListStep || data.openListStep) {
+			data.step_id = getTemplateId(input.step_id);
+
+			// if selected step comes from flow tab
+		} else if (input.step_id.includes('panel')) {
+			data.step_id = input.step_id.replace('panel', '');
+		}
+
+		var grStep = new GlideRecord(data.tables.RESP_PLAN_STEP);
+		if (grStep.get(data.step_id + '')) {
+			data.step_name = grStep.name + '';
+			data.description = grStep.description ? grStep.description + '' : "-";
+			data.is_message = grStep.sys_class_name + '' === data.tables.RESP_PLAN_STEP_MSG ? true: false;
+			data.is_condition = grStep.sys_class_name + '' === data.tables.RESP_PLAN_STEP_COND ? true: false;
+			data.is_action = grStep.sys_class_name + '' === data.tables.RESP_PLAN_STEP_ACTN ? true: false;
+			fetchFlowData(grStep.sys_class_name);
+		}
+
+		if (data.is_message)  {
+			data.distributionList = [];
+			data.labels = [];
+			if (!getExecutionInfo(grStep).sys_id || getExecutionInfo(grStep).state + '' === '1') {
+				data.distributionList = getDistribuitionList(fetchFlowData(grStep.sys_class_name + ''));
+				data.labels.push(gs.getMessage('cir_sit_name'));
+				data.labels.push(gs.getMessage('cir_sit_email'));
+				data.labels.push(gs.getMessage('cir_sit_phone_nr'));
+				
+
+			} else {
+				var obj = getMessageRecipients(getExecutionInfo(grStep));
+				data.distributionList = obj.records;
+				data.labels = obj.labels;
+			}
+		}
+	}
+
+	function fetchFlowData(table) {
+		var crisisUtils = new CIRSituationUtils();
+		var gr = new GlideRecord(table.toString());
+		if (gr.get(data.step_id)) {
+			var grExec = getExecutionInfo(gr);
+			data.message_type = gr.message_type ? gr.message_type.getDisplayValue() : '';
+			data.contact_list = gr.contact_list ? gr.contact_list.getDisplayValue() : '';
+			data.feedback = gr.feedback != undefined ? gr.feedback.toString() : '';
+			data.timer = gr.feedback == true ? gr.timer.toString() + ' min' : 'n/a';
+			data.action_required = gr.short_description.toString();
+
+			if (gr.message_type) {
+				data.message_type = gr.message_type.toString();
+				data.message = crisisUtils.BuildMessageBody(grExec);
+			}
+		}
+		return gr;
+	}
+
+	function getExecutionInfo(gr) {
+		var grExStep = new GlideRecord(data.tables.RESP_PLAN_EXEC_STEP);
+		grExStep.addQuery('response_plan_step', gr.getUniqueValue());
+		grExStep.addQuery('response_plan', data.sys_id);
+		grExStep.setLimit(1);
+		grExStep.query();
+
+		if(grExStep.next()) {
+			data.step_state = grExStep.state.getDisplayValue();
+			data.step_number = grExStep.number.toString();
+			data.result = grExStep.result.getDisplayValue();
+			fetchSpecificExecData(grExStep);
+		} else{
+			data.step_state = 'n/a';
+			data.step_number = 'n/a';
+			data.result = 'n/a';
+		}
+
+		return grExStep;
+	}
+
+	function fetchSpecificExecData(gr) {
+		var grSpecStep = new GlideRecord(gr.sys_class_name.toString());
+
+		if (grSpecStep.get(gr.getUniqueValue())) {
+			data.notif_sent = grSpecStep.notifications_sent + '';
+			data.notif_rec = grSpecStep.feedback_received + '';
+			return grSpecStep;
+		}
+	}	
+
+	function getMessageRecipients(gr) {
+		var array = [];
+		var finalObj = {};
+
+		var grMsgRec = new GlideRecord(data.tables.MSG_EXEC_RECIPIENT);
+		grMsgRec.addQuery('step_message_execution', gr.getUniqueValue());
+		grMsgRec.query();
+
+		while (grMsgRec.next()) {
+			var obj = [];
+			obj.push(grMsgRec.user ? grMsgRec.user.getDisplayValue() : '-');
+			obj.push(grMsgRec.contact.getDisplayValue());
+			obj.push(grMsgRec.state.getDisplayValue());
+			obj.push(grMsgRec.feedback.getDisplayValue());
+			array.push(obj);
+		}
+
+		var fieldsAux = $sp.getFields(grMsgRec, ['user', 'contact', 'state', 'feedback']);
+		var labels = [];
+
+		for (var j = 0; j < 4; j++) {
+			labels.push(fieldsAux[j].label);
+		}
+
+		finalObj.records = array;
+		finalObj.labels = labels;
+
+		return finalObj;
+	}
+
+	function getDistribuitionList(gr) {
+		if (!gr.contact_list) {
+			return;
+		}
+
+		var crisisUtils = new CIRSituationUtils();
+		var recipients = crisisUtils.GetUnverifiedContacts(gr.contact_list);
+		var recipientsInfo = [];
+		recipients = crisisUtils.GetSingleContacts(recipients);
+
+		for (var i=0; i<recipients.length; i++){
+			var tempRecipInfo = crisisUtils.GetUserInfo(recipients[i]);
+
+			if (tempRecipInfo.name || tempRecipInfo.email){
+				recipientsInfo.push(tempRecipInfo);
+			}
+		}
+
+		var array = [];
+		for (var j = 0; j < recipientsInfo.length; j++) {
+			var aux = [];
+			aux.push(recipientsInfo[j].name ? recipientsInfo[j].name : '-');
+			aux.push(recipientsInfo[j].email ? recipientsInfo[j].email : '-');
+			aux.push(recipientsInfo[j].phone_number ? recipientsInfo[j].phone_number : '-');
+
+			array.push(aux);
+		}
+		return array;
+	}
+
+	function fetchCurrentStep() {
+		var gr = new GlideRecord(data.table);
+		if (gr.get(data.sys_id)) {
+			var grStep = new GlideRecord(data.tables.RESP_PLAN_EXEC_STEP);
+			if (grStep.get(gr.getValue('current_step'))) {
+				return grStep;
+			}	
+		}
+	}
+
+	function fetchResponsePlan() {
+		var gr = new GlideRecord(data.table);
+		if (gr.get(data.sys_id)) {
+			return gr;
+		}
+	}
+
+	function getTemplateId(stepId) {
+		var gr = new GlideRecord(data.tables.RESP_PLAN_EXEC_STEP);
+		if (gr.get(stepId)) {
+			return gr.response_plan_step;
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 12:09:35</sys_created_on>
+        <sys_id>d25eaacd1b370850df7e43f4bd4bcb75</sys_id>
+        <sys_mod_count>128</sys_mod_count>
+        <sys_name>CIR Situation Response Plan</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_d25eaacd1b370850df7e43f4bd4bcb75</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-24 09:03:18</sys_updated_on>
+        <template><![CDATA[<div id="flow_panel" class="panel panel-{{options.color}} b ticket_conversation" style="height: 650px; margin-bottom:0">
+  <div style="height:55px;" class="panel-heading clearfix resp-plan-heading">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          <span class="header-title">${cir_sit_response_plan}</span>
+        </td>
+        <td>
+          <div class='tab'>
+            <button class="tablinks active" ng-click="openTab($event, 'flow')">${cir_sit_flow}</button>
+            <button class="tablinks" ng-click="openTab($event, 'list')">${cir_sit_list}</button>
+          </div>
+        </td>
+        <td width="70%" text-align="right" style="padding-top: 11px">
+          <div ng-if="data.response_plan_state != '3'">
+            <button ng-if="data.step_class!=data.tables.RESP_PLAN_EXEC_STEP_COND && data.canWrite" ng-click="c.openConfirmation('cir_sit_close_step')" class="btn btn-primary action-btn pull-right">${cir_sit_close_step}
+            </button>
+            <button ng-if="data.step_class==data.tables.RESP_PLAN_EXEC_STEP_MSG && data.canWrite && data.current_step_state == '1'" ng-click="c.openConfirmation('cir_sit_send_message')" class="btn btn-primary action-btn pull-right">${cir_sit_send_message}
+            </button>
+            <button ng-if="data.step_class==data.tables.RESP_PLAN_EXEC_STEP_COND && data.canWrite" ng-click="c.openConfirmation('cir_sit_set_result_to_no')" class="btn btn-primary action-btn pull-right">${cir_sit_no}
+            </button> 
+            <button ng-if="data.step_class==data.tables.RESP_PLAN_EXEC_STEP_COND && data.canWrite" ng-click="c.openConfirmation('cir_sit_set_result_to_yes')" class="btn btn-primary action-btn pull-right">${cir_sit_yes}
+            </button>
+          </div>  
+        </td>
+      </tr>
+    </table> 
+    
+    <!-- LIST VIEW CONTENT -->
+
+        <div id="list" class="tabcontent">
+
+            <table class="table overview-widget table-{{::c.options.color}}" ng-if="c.data.records.length > 0">
+                <thead>
+                    <tr>
+                        <th ng-repeat="label in c.data.ListLabels" ng-click="c.changeSortCol(label.key)">
+                            {{ label.value }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="record in c.data.records " ng-click="c.openStep(record)">
+
+                        <td ng-if="record.current" ng-repeat="label in c.data.ListLabels">
+                            {{record[label.key]}}
+                        </td>
+                        <td ng-if="!record.current" ng-repeat="label in c.data.ListLabels" class="grayStep">
+                            {{record[label.key]}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+     <!-- FLOW CHART CONTENT -->
+    <div id="flow" class="tabcontent" style="display:block">
+        <div id="flow_body" class="panel_body" style="overflow-y: hidden; overflow-x: auto; height:532px">
+            <div style="position: absolute; display: inline-block">
+                <div id="subtitle_container" style="display:inline-block; position absolute">
+
+          <h5 id="subtitle_title">{{data.color_codes}}</h5>
+          <table>
+            <tr>
+              <div>
+                <td><p id="sucecss" class="subtitle color:" style="display:inline-block">{{data.result_yes}}</p><hr class="sub_line green_line" style="display:inline-block"/></td>
+
+              </div>
+            </tr>
+            <tr>
+              <div>
+                <td><p id="not_sucecss" class="subtitle color:" style="display:inline-block">{{data.result_no}}</p><hr class="sub_line red_line" style="display:inline-block"/></td>
+
+              </div>
+            </tr>
+
+            <tr>
+              <div>
+                <td><p id="normal" class="subtitle color:" style="display:inline-block">{{data.normal}}</p><hr class="sub_line default_line" style="display:inline-block"/></td>
+
+              </div>
+            </tr>
+
+            <tr>
+              <td><p id="completed" class="subtitle color:" style="display:inline-block;">{{data.step_completed}}</p><div class="square completed" style="display:inline-block"></div></td>
+            </tr>
+
+            <tr>
+              <td><p id="current" class="subtitle color:" style="display:inline-block;">{{data.current_step}}</p><div class="square current" style="display:inline-block"></div></td>
+            </tr>
+
+            <tr>
+              <td><p id="not_completed" class="subtitle color:" style="display:inline-block;">{{data.not_created}}</p><div class="square not_created" style="display:inline-block"></div></td>
+            </tr>
+          </table>
+        </div>	
+      </div>  
+      <div style="display:inline-block; position:relative; max-width: 1496px; height:100%; width:100%">
+        <iframe id="flow_frame" src="{{::c.options.url}}"  style="height: 100%; width:100%;
+                                                            position: absolute;" onLoad="scroll()"></iframe>
+      </div>
+    </div> 
+
+    <script type="text/ng-template" id="seeStepDetails">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">{{c.data.step_name}}</h4>
+      </div>
+        <div class="panel-body wrapper-xl">
+        <table style="width: 100%;">
+        	<tr>
+
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_name}</h5>
+            	<h6 style="font-size:13px;">{{c.data.step_name}}</h6>
+      </td>
+
+            <td style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_description}</h5>
+            	<h6 style="font-size:13px;">{{c.data.description}}</h6>
+      </td>
+
+      </tr>
+
+          <tr>
+          	<td>
+          		<h5 style="font-weight: bold;">${cir_sit_state}</h5>
+            	<h6 style="font-size:13px;">{{c.data.step_state}}</h6>
+      </td>
+
+          	<td  style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_number}</h5>
+            	<h6 style="font-size:13px;">{{c.data.step_number}}</h6>
+      </td>
+
+      </tr>
+
+           <tr ng-if="data.is_message">
+
+         		<td>
+          		<h5 style="font-weight: bold;">${cir_sit_message_type}</h5>
+            	<h6 style="font-size:13px;">{{c.data.message_type}}</h6>
+
+
+       			<td style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_contact_list}</h5>
+            	<h6 style="font-size:13px;">{{c.data.contact_list}}</h6>
+      </td>
+
+      </tr>
+
+          <tr ng-if="data.is_message">
+
+						<td>
+          		<h5 style="font-weight: bold;">${cir_sit_feedback}</h5>
+            	<h6 style="font-size:13px;">{{c.data.feedback}}</h6>
+      </td>
+
+       			<td style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_timer}</h5>
+            	<h6 style="font-size:13px;">{{c.data.timer}}</h6>
+      </td>
+
+      </tr>
+
+            <tr ng-if="data.is_message">
+
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_notifications_sent}</h5>
+            	<h6 style="font-size:13px;">{{c.data.notif_sent}}</h6>
+      </td>
+
+            <td style="padding-left:15px">
+          		<h5 style="font-weight: bold;">${cir_sit_feedback_received}</h5>
+            	<h6 style="font-size:13px;">{{c.data.notif_rec}}</h6>
+      </td>
+
+      </tr>
+
+           <tr ng-if="data.is_message">
+
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_message}</h5>
+              <div ng-if="data.message_type == 'email'" ng-bind-html="data.message" style="word-wrap: break-word;
+   max-width: 300px;"></div>
+            	<h6 ng-if="data.message_type != 'email'" style="font-size:13px;">{{c.data.message}}</h6>
+      </td>
+
+      </tr>
+
+           <tr ng-if="data.is_condition">
+
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_result}</h5>
+            	<h6 style="font-size:13px;">{{c.data.result}}</h6>
+      </td>
+      </tr>
+
+           <tr ng-if="data.is_action">
+
+            <td>
+          		<h5 style="font-weight: bold;">${cir_sit_action_required}</h5>
+            	<h6 style="font-size:13px;">{{c.data.action_required}}</h6>
+      </td>
+      </tr>
+
+      </table>
+
+         <div ng-if="data.is_message">
+					<hr></hr>         
+         		<h4 style="font-weight: bold;">${cir_sit_distribution_list}</h5>
+
+            <table style="width: 100%">
+            	<tr style="border-bottom: solid 1px #dee5e7;">
+            		<th ng-repeat="label in c.data.labels">{{label}}</th>
+
+      </tr>
+
+              <tr style="padding:8px; border-bottom: solid 1px #dee5e7;" ng-repeat="record in c.data.distributionList">
+              	<td ng-repeat="value in record track by $index">
+                	 {{value}}
+      </td>	
+      </tr>
+
+      </table>
+
+      </div>
+
+      </div>    
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_close}</button>
+      </div>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="openConfirmation">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">{{c.action_message}}</h4>
+      </div>
+        <div class="panel-body wrapper-xl">           
+                <span>${cir_sit_confirm_action} {{c.action_message}}?</span>
+      </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_cancel}</button>
+            <button class="btn btn-primary" ng-click="c.confirmAction()">${cir_sit_ok}</button>
+      </div>
+      </div>
+    </script>]]></template>
+    </sp_widget>
+</record_update>

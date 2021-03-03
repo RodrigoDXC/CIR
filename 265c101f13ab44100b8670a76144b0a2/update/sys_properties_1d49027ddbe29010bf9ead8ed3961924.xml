@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>REST Authprofile for Situation audit PDF gen (sys_id) for spanish speaking users</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_fru_cir.customer.pdf.authprofile.es</name>
+        <read_roles>admin</read_roles>
+        <suffix>customer.pdf.authprofile.es</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-11 10:15:41</sys_created_on>
+        <sys_id>1d49027ddbe29010bf9ead8ed3961924</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.customer.pdf.authprofile.es</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_properties_1d49027ddbe29010bf9ead8ed3961924</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-11 10:15:41</sys_updated_on>
+        <type>string</type>
+        <value>c9d9a009db5e1c10d4a73533f39619ea</value>
+        <write_roles>admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=1d49027ddbe29010bf9ead8ed3961924"/>
+</record_update>

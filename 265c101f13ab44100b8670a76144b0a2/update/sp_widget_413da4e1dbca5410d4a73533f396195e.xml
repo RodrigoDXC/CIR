@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $scope, spModal, $uibModal, spUtil, spAriaFocusManager, $location) {
+    var c = this;
+    var refFieldId = c.data.refFieldId;
+    var moveLeap = 100;
+    var g_form;
+    var objForEdition = {};
+	var recordProducer = '';
+	
+    c.selectedRow = null;
+    c.data.isParentSelected = false;
+    c.msgs = c.data.msgs;
+    c.data.canAddUpdate = false;
+
+    spUtil.recordWatch($scope, c.data.table, "", function() {
+        $scope.server.update();
+    });
+
+    if(c.data.editMode) {
+        $rootScope.$on('spModel.gForm.rendered', function(e, gFormInstance) {
+            g_form = gFormInstance;
+            g_form.onUserChangeValue(function(fieldName, originalValue, newValue) {
+                if(c.data.table === c.msgs.table_fields &&
+                    fieldName === 'label' && g_form.getValue(fieldName) && !g_form.getValue('name')) {
+                    var generatedName = createName(g_form.getValue(fieldName));
+                    g_form.setValue('name', generatedName);
+                    if(validateNameCreated(generatedName)) {
+                        g_form.showErrorBox('name', c.msgs.duplicated, false);
+                    }
+                }
+            });
+        });
+    }
+
+    if(c.data.editMode && c.data.hasParent) {
+        $rootScope.$on("assessment.list.manager", function(evt, response) {
+
+            sectionName = response[1];
+            refFieldId = response[0].sys_id;
+			
+			recordProducer = response[0].recordProducer;
+			
+            var dataToSend = {
+                refFieldId: refFieldId
+            };
+            $scope.server.get(dataToSend).then(function(responseServer) {
+                c.data = responseServer.data;
+                c.data.isParentSelected = true;
+            });
+        });
+    }
+
+    $rootScope.$on('assessment.form.manager.mandatory.fields', function(e, hasMandatory) {
+        c.data.canAddUpdate = !hasMandatory;
+    });
+
+    $scope.disable = function() {
+        return !c.data.canAddUpdate;
+    };
+
+    $scope.disableNext = function() {
+        if(c.data.isDisableNextWhenEmpty) {
+            return c.data.tableContent.length === 0;
+        }
+        return false;
+    };
+
+    $scope.disableNew = function() {
+        if(!c.data.hasParent) {
+            return false;
+        }
+        return !(c.data.hasParent && c.data.isParentSelected);
+    };
+
+    $scope.addObject = function() {
+        modalWithWidget();
+    };
+
+    $scope.editRow = function(rowContent) {
+        modalWithWidget(rowContent);
+    };
+
+    $scope.removeRow = function(rowContent) {
+        spModal.open({
+            title: c.msgs.titleDeleteMsg,
+            message: c.msgs.confirmDeleteMessage,
+            buttons: [{
+                label: c.msgs.cancelModalBtnMsg,
+                cancel: true
+            }, {
+                label: c.msgs.deleteModalBtnMsg,
+                primary: true
+            }]
+        }).then(function() {
+            rowContent.recordToDelete = true;
+            rowContent.tableName = c.data.table;
+            $scope.server.get(rowContent).then(function() {});
+        });
+    };
+
+    $scope.selectRow = function(rowContent) {
+        if(c.data.editMode) {
+            c.data.tableContent.forEach(function(element) {
+                element.isRowSelected = false;
+            });
+            rowContent.isRowSelected = true;
+            c.selectedRow = rowContent;
+        } else {
+            c.data.tableContent.forEach(function(element) {
+                element.isRowSelected = false;
+            });
+            rowContent.isRowSelected = true;
+            c.selectedRow = rowContent;
+            var selectedName = rowContent.name ? rowContent.name.value : '';
+            $rootScope.$broadcast("assessment.list.manager", [rowContent, selectedName]);
+        }
+    };
+
+    $scope.moveRow = function(moveUp) {
+        var tableContentCopy = c.data.tableContent.slice();
+        var currentOrder = 0;
+        var arrEditedObjects = {
+            array: []
+        };
+
+        tableContentCopy.sort(function(elementA, elementB) {
+            return elementA.order - elementB.order;
+        });
+        tableContentCopy = tableContentCopy.map(function(element) {
+            element.order = currentOrder += moveLeap;
+            return element;
+        });
+        tableContentCopy.sort(function(elementA, elementB) {
+            return moveUp ? elementB.order - elementA.order : elementA.order - elementB.order;
+        });
+        var foundElement = tableContentCopy.find(function(element) {
+            return moveUp ? element.order < c.selectedRow.order : element.order > c.selectedRow.order;
+        });
+        if(foundElement) {
+            var orderToSwap = foundElement.order;
+            foundElement.order = c.selectedRow.order;
+            c.selectedRow.order = orderToSwap;
+
+            arrEditedObjects = {
+                array: [buildObjectToSave(foundElement), buildObjectToSave(c.selectedRow)],
+                tableContent: c.data.tableContent
+            };
+
+            var el = document.getElementById(c.data.table + '_' + c.selectedRow.localIndex);
+            el.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+            $scope.server.get(arrEditedObjects).then(function() {});
+        }
+    };
+
+    $scope.back = function() {
+        if(c.data.table === c.msgs.table_choices) {
+            checkedDefaultField(false);
+        } else {
+            validateBack();
+        }
+    };
+
+    $scope.closeModal = function() {
+        $scope.modalInstance.close();
+    };
+
+    $scope.discardChanges = function() {
+        $scope.modalInstance.close();
+        var redirectData = {
+            redirectPage: c.data.backPage,
+            redirectTable: c.data.backTable,
+            redirectView: c.data.backView
+        };
+        exitPage(redirectData);
+    };
+
+    $scope.next = function() {
+        if(c.data.table === c.msgs.table_choices) {
+            checkedDefaultField(true);
+        } else {
+            var redirectData = {
+                redirectPage: c.data.nextPage,
+                redirectTable: c.data.nextTable,
+                redirectView: c.data.nextView
+            };
+            exitPage(redirectData);
+        }
+    };
+
+    var modalWithWidget = function(rowContent) {
+        var isRowContentEmpty = rowContent ? false : true;
+        rowContent = rowContent ? rowContent : {};
+        objForEdition.rowContent = rowContent;
+        objForEdition.isRowContentEmpty = isRowContentEmpty;
+
+        var obj = {};
+        Object.keys(rowContent).forEach(function(fieldName) {
+            if(rowContent[fieldName].value || (!rowContent[fieldName].value && typeof rowContent[
+                    fieldName] === "object")) {
+                obj[fieldName] = rowContent[fieldName].value;
+            } else
+                obj[fieldName] = rowContent[fieldName];
+        });
+        if(obj.picture) {
+            obj.picture = obj.picture + '.iix?t=medium';
+        }
+
+        var inputData = {
+            objectToEdit: obj,
+            table: c.data.table,
+            view: c.data.formView,
+            isModal: true
+        };
+        c.msgs.formModalBtnMsg = isRowContentEmpty ? c.msgs.addModalBtnMsg : c.msgs.updateModalBtnMsg;
+
+        spUtil.get(c.data.widgetForm, inputData).then(function(response) {
+            $scope.data.widgetFormTemplate = response;
+            $scope.modalInstance = $uibModal.open({
+                templateUrl: c.data.templateManagerForm,
+                scope: $scope,
+                size: 'lg'
+            });
+        });
+    };
+
+    $scope.addUpdate = function() {
+        for(var i = 0; i < c.data.listColumns.length; i++) {
+            var columnName = c.data.listColumns[i];
+            if(g_form.isMandatory(columnName) && !g_form.getValue(columnName)) {
+                return;
+            }
+        }
+        validateData();
+    };
+
+    var validateData = function() {
+        var rowContent = objForEdition.rowContent;
+
+        var objectToEdit = Object.assign({}, rowContent);
+        for(var i = 0; i < c.data.listColumns.length; i++) {
+            var columnName = c.data.listColumns[i];
+            var technicalValue = g_form.getValue(columnName);
+
+            var displayValue = g_form.getDisplayValue(columnName);
+
+            if(c.data.table === 'x_fru_cir_assessment_section' && columnName === 'description') {
+                displayValue = displayValue.replace(/<[^>]*>/g, '');
+                displayValue = displayValue.replace(/(&amp;)/g, '&');
+                displayValue = displayValue.replace(/(&nbsp;)/g, ' ');
+            }
+            if(c.data.fieldsObject[columnName].type === 'boolean' &&
+                (technicalValue === '1' || technicalValue === '0')) {
+
+                technicalValue = technicalValue === '1' ? 'true' : 'false';
+                displayValue = technicalValue;
+            }
+            objectToEdit[columnName] = {
+                value: technicalValue,
+                displayValue: displayValue
+            };
+        }
+        if(!objectToEdit.sys_id) {
+            var maxOrder = c.data.tableContent.length === 0 ? 0 :
+                Math.max.apply(Math, c.data.tableContent.map(function(el) {
+                    return el.order;
+                }));
+            var highestOrder = moveLeap + maxOrder;
+            objectToEdit.order = highestOrder;
+        }
+
+        var arrObjToSave = {
+            tableContent: c.data.tableContent,
+            array: [buildObjectToSave(objectToEdit)]
+        };
+
+        $scope.server.get(arrObjToSave).then(function(response) {
+            if(response.data.duplicatesFound.value) {
+                alert(response.data.duplicatesFound.field + ' ' + c.msgs.duplicateDataMsg);
+            } else if(!response.data.onlyOneDefault) {
+                alert(c.msgs.only_one_default);
+            } else {
+                g_form.$private.userState.clearModifiedFields();
+                $scope.closeModal();
+            }
+        });
+    };
+
+    var buildObjectToSave = function(fields) {
+        return {
+            checkDuplicate: true,
+            isDataToSave: true,
+            tableName: c.data.table,
+            refFieldId: refFieldId,
+            fields: fields,
+        };
+    };
+
+    var exitPage = function(redirectData) {
+        var urlObj = {
+            pageName: redirectData.redirectPage,
+            table: redirectData.redirectTable,
+            assessment: c.data.assessment,
+            view: redirectData.redirectView,
+        };
+        editUrlTemplate(['table', 'assessment', 'view']);
+        var url = spUtil.format(c.data.urlRedirectionTemplate, urlObj);
+        var newUrl = $location.search(url);
+        spAriaFocusManager.navigateToLink(newUrl.url());
+    };
+
+    var editUrlTemplate = function(paramArr) {
+        for(var i = 0; i < paramArr.length; i++) {
+            $scope.data.urlRedirectionTemplate += '&' + paramArr[i] + '={' + paramArr[i] + '}';
+        }
+    };
+
+    /** SPECIFIC FOR ASSESSMENT FIEDLS **/
+    //related with the functionality to create the name from the field label
+    var createName = function(label) {
+        var FIRST_LETER_NAME_REGEX = /[a-zA-Z]/;
+        var DEFAULT_VALUE = 'default_Value';
+        if(!label.match(FIRST_LETER_NAME_REGEX)) {
+            label = DEFAULT_VALUE;
+        }
+        var firstLetter = (label.match(FIRST_LETER_NAME_REGEX) || []).pop();
+        var substring = label.substring(label.indexOf(firstLetter));
+        return transform(substring);
+    };
+
+    var transform = function(label) {
+        var SPACE_REGEX = / /g;
+        var SPECIAL_CHARS_REGEX = /\W/g;
+        var SPACE_REPLACE = "_";
+        var EMPTY_STRING = '';
+        return label.replace(SPACE_REGEX, SPACE_REPLACE).replace(SPECIAL_CHARS_REGEX, EMPTY_STRING).toLowerCase();
+    };
+
+    var validateNameCreated = function(nameCreated) {
+        var nameFound = c.data.tableContent.find(function(elementContent) {
+            return elementContent.name.value === nameCreated;
+        });
+        return nameFound;
+    };
+
+    var checkedDefaultField = function(isNext) {
+        var objToCheck = {
+            checkDefault: true
+        };
+        $scope.server.get(objToCheck).then(function(response) {
+            if(!response.data.isDefaultAccepted) {
+                spModal.open({
+                    title: c.msgs.default_value,
+                    message: c.msgs.multiple_choice_mandatory,
+                    buttons: [{
+                        label: c.msgs.okModalBtnMsg,
+                        primary: true
+                    }],
+                });
+            } else if(isNext) {
+                var redirectData = {
+                    redirectPage: c.data.nextPage,
+                    redirectTable: c.data.nextTable,
+                    redirectView: c.data.nextView
+                };
+                exitPage(redirectData);
+            } else {
+                validateBack();
+            }
+        });
+    };
+
+    var validateBack = function() {
+        var redirectData = {
+            redirectPage: c.data.backPage,
+            redirectTable: c.data.backTable,
+            redirectView: c.data.backView
+        };
+        exitPage(redirectData);
+    };
+
+    $scope.preview = function() {
+		
+        var objectToPreview = {
+            assessmentId: c.data.catalogCategory,
+            isPreview: true,
+			selectedSection: recordProducer ? recordProducer : ''
+        };
+		
+        spModal.open({
+            buttons: [{
+                label: c.msgs.backBtnMsg,
+                cancel: true
+            }],
+            widget: c.data.widgetPreview,
+            widgetInput: objectToPreview,
+            size: 'lg'
+        });
+
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>tbody tr:hover {&#13;
+    background-color: $list-hover-color;&#13;
+}&#13;
+&#13;
+tbody tr:nth-child(odd) {&#13;
+    background-color: #f9f9f9;&#13;
+}&#13;
+&#13;
+&#13;
+.table&gt;thead&gt;tr&gt;th {&#13;
+    vertical-align: bottom;&#13;
+    border-bottom: 2px solid #ddd;&#13;
+    color: $brand-primary;&#13;
+}&#13;
+&#13;
+&#13;
+.icons-edit-remove {&#13;
+    cursor: pointer;&#13;
+    font-size: 1.5em;&#13;
+}&#13;
+&#13;
+.icons-up-down {&#13;
+    cursor: pointer;&#13;
+    font-size: 4em;&#13;
+}&#13;
+&#13;
+.new-button {&#13;
+    border: 1px solid #717171;&#13;
+}&#13;
+&#13;
+.margin-top-1em {&#13;
+    margin-top: 1em;&#13;
+}&#13;
+&#13;
+.margin-bottom-1em {&#13;
+    margin-bottom: 1em;&#13;
+}&#13;
+&#13;
+.margin-left-1em {&#13;
+    margin-left: 1em;&#13;
+}&#13;
+&#13;
+.back-button {&#13;
+    border: 1px solid #717171;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+    margin-right: 5px;&#13;
+}&#13;
+&#13;
+.buttons-footer {&#13;
+    padding-bottom: 20px;&#13;
+    float: right;&#13;
+}&#13;
+&#13;
+.align-middle-flex {&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+}&#13;
+&#13;
+.align-middle-grid {&#13;
+    display: grid;&#13;
+    align-items: center;&#13;
+&#13;
+}&#13;
+&#13;
+.inherit-height {&#13;
+    height: inherit;&#13;
+}&#13;
+&#13;
+.selectedRow {&#13;
+    color: #fff;&#13;
+    background-color: #717171;&#13;
+    border-color: 1px solid #fff;&#13;
+}&#13;
+&#13;
+.edit-remove-column-size {&#13;
+    width: 5%;&#13;
+}&#13;
+&#13;
+.edit-remove-container {&#13;
+    display: flex;&#13;
+}&#13;
+&#13;
+.container-in-table-top {&#13;
+    height: 85%;&#13;
+    overflow: auto;&#13;
+}&#13;
+&#13;
+.right-side {&#13;
+    height: 85%;&#13;
+    float: right;&#13;
+    padding-left: 3%;&#13;
+}&#13;
+&#13;
+.error {&#13;
+	margin-top: 15px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Assessment List Manager</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-assessment-list-manager</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Assessment List Manager</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.assessment_manager</roles>
+        <script><![CDATA[(function() {
+    data.error = false;
+    data.assessment = $sp.getParameter('assessment');
+    if(!new CIRAssmtModel().HasAssessmentDefinition(data.assessment, false)) {
+        data.error = true;
+        return;
+    }
+    data.listView = options.view || $sp.getParameter('view');
+
+    if(input) {
+        if(input.checkDefault) {
+            data.isDefaultAccepted = new CIRAssmtModel().CheckAllDefaultSetted(data.assessment);
+        }
+
+        if(input.recordToDelete) {
+            var objToDelete = {
+                sysId: input.sys_id,
+                tableName: input.tableName
+            };
+            new CIRAssmtModel().ManipulateData(objToDelete, 'remove');
+        }
+
+        if(input.array) {
+            var arrDataToSave = input.array;
+            arrDataToSave.forEach(function(object) {
+                var dataToDB = {
+                    tableName: object.tableName,
+                    refFieldId: object.refFieldId,
+                    fields: object.fields
+                };
+                if(object.checkDuplicate) {
+                    data.duplicatesFound = new CIRAssmtModel().ValidateDuplicates(dataToDB);
+                }
+                data.onlyOneDefault = new CIRAssmtModel().CheckOnlyOneDefault(
+                    dataToDB.tableName, input.tableContent, dataToDB.fields);
+                if(object.isDataToSave && !data.duplicatesFound.value && data.onlyOneDefault) {
+                    new CIRAssmtModel().ManipulateData(dataToDB, 'save');
+                }
+            });
+        }
+    }
+
+    data.hasParent = options.hasParent || false;
+    data.refFieldId = options.assessment || $sp.getParameter('assessment');
+    data.catalogCategory = new CIRAssmtModel().GetCatalogCategoryFromAssessment(data.refFieldId);
+    data.table = options.table || $sp.getParameter('table');
+    data.editMode = options.edit_mode !== false;
+    if(input && input.refFieldId) {
+        data.refFieldId = input.refFieldId;
+    }
+    var listManagerDefinitions =
+        new CIRAssmtModel().GetListManagerDefinitions(data.table, data.editMode, data.assessment);
+    initMessages(listManagerDefinitions);
+
+    data.isDataValid = data.table && data.listView &&
+        new CIRAssmtModel().ValidateAssessmentDefinitionId(data.assessment);
+    if(!data.isDataValid) {
+        return;
+    }
+
+    data.listColumns = options.requiredFields.map(function(column) {
+        return column.name;
+    });
+    var listColumnsForHeaders = options.requiredFields.filter(function(column) {
+        return column.display === true;
+    }).map(function(column) {
+        return column.name;
+    });
+
+    data.fieldsObject = $sp.getFieldsObject(new GlideRecord(data.table), data.listColumns);
+    var tableData =
+        new CIRAssmtModel().GetTableData(data.table, data.refFieldId, data.fieldsObject, data.editMode);
+    data.tableHeaders = [];
+    listColumnsForHeaders.forEach(function(columnName) {
+        if(listColumnsForHeaders.indexOf(columnName) < 0) {
+            return;
+        }
+        data.tableHeaders.push({
+            value: columnName,
+            display_value: data.fieldsObject[columnName] ? data.fieldsObject[columnName].label : ''
+        });
+    });
+    data.tableContent = tableData.tableContent;
+    data.canAddUpdate = false;
+    data.localIndexCount = tableData.tableContent.length;
+
+    data.formView = 'cir_portal_view';
+    data.widgetForm = 'cir-ciri-assessment-manager-form';
+    data.widgetPreview = 'cir-ciri-assessment-form';
+    data.templateManagerForm = 'cir_ciri_manager_form';
+    data.templateBackWarning = 'cir_ciri_back_warning';
+    data.listButtonsColumn = 'edit_remove_buttons';
+
+    data.canPreview = listManagerDefinitions.canPreview;
+    data.hasParent = listManagerDefinitions.hasParent;
+
+    data.isDisableNextWhenEmpty = listManagerDefinitions.isDisableNextWhenEmpty;
+    if(data.hasParent) {
+        data.isDisableNextWhenEmpty = !(new CIRAssmtModel().ValidateAssessmentParentData(data.assessment, data
+            .table));
+    }
+    data.urlRedirectionTemplate = 'id={pageName}';
+    data.backPage = listManagerDefinitions.backPage;
+    data.backTable = listManagerDefinitions.backTable;
+    data.backView = listManagerDefinitions.backView;
+    data.nextPage = listManagerDefinitions.nextPage;
+    data.nextTable = listManagerDefinitions.nextTable;
+    data.nextView = listManagerDefinitions.nextView;
+
+    function initMessages(listManagerDefinitions) {
+
+        var assessmentObjName = listManagerDefinitions.assessmentObjName;
+        // var assessmentObjField = listManagerDefinitions.assessmentObjField;
+        data.msgs = {};
+        data.msgs.titleMsg = listManagerDefinitions.title;
+        data.msgs.newBtnMsg = gs.getMessage('cir_assmt_list_manager_new_btn');
+        data.msgs.nextBtnMsg = gs.getMessage('cir_assmt_manager_next_btn');
+        data.msgs.backBtnMsg = gs.getMessage('cir_assmt_manager_back_btn');
+        data.msgs.editBtnMsg = gs.getMessage('cir_assmt_list_manager_edit_btn');
+        data.msgs.removeBtnMsg = gs.getMessage('cir_assmt_list_manager_remove_btn');
+        data.msgs.cancelModalBtnMsg = gs.getMessage('cir_assmt_list_manager_cancel_modal_btn');
+        data.msgs.addModalBtnMsg = gs.getMessage('cir_assmt_list_manager_add_modal_btn');
+        data.msgs.updateModalBtnMsg = gs.getMessage('cir_assmt_list_manager_update_modal_btn');
+        data.msgs.deleteModalBtnMsg = gs.getMessage('cir_assmt_list_manager_delete_modal_btn');
+        data.msgs.okModalBtnMsg = gs.getMessage('cir_assmt_list_manager_ok_modal_btn');
+        data.msgs.titleDeleteMsg = gs.getMessage('cir_assmt_list_manager_confirm_delete_title');
+        data.msgs.confirmDeleteMsg = gs.getMessage('cir_assmt_list_manager_confirm_delete');
+        data.msgs.titleSaveDataMsg = gs.getMessage('cir_assmt_list_manager_confirm_save_title');
+        data.msgs.confirmSaveDataMsg = gs.getMessage('cir_assmt_list_manager_confirm_save_data', [
+            assessmentObjName
+        ]);
+        data.msgs.duplicateDataMsg = gs.getMessage('cir_assmt_list_manager_duplicate_data');
+        data.msgs.duplicatesFoundMsg = gs.getMessage('cir_assmt_list_manager_duplicates_found');
+        data.msgs.warningBackMsg = gs.getMessage('cir_assmt_list_manager_warning_back');
+        data.msgs.saveBackMsg = gs.getMessage('cir_assmt_list_manager_warning_back_save');
+        data.msgs.discardBackMsg = gs.getMessage('cir_assmt_list_manager_warning_back_discard');
+        data.msgs.mandatoryMsg = gs.getMessage('cir_assmt_list_manager_warning_mandatory_fields');
+        data.msgs.previewBtn = gs.getMessage('cir_assmt_list_manager_preview_section_button');
+        data.msgs.duplicated = gs.getMessage('cir_assmt_list_manager_duplicated_error_message');
+        data.msgs.invalidAssessmentMsg = gs.getMessage('cir_assmt_list_manager_invalid_assessment');
+        data.msgs.no_sections = gs.getMessage('cir_assmt_list_manager_no_sections');
+        data.msgs.default_value = gs.getMessage('cir_assmt_list_manager_default_value');
+        data.msgs.multiple_choice_mandatory = gs.getMessage('cir_assmt_list_manager_multiple_choice_mandatory');
+        data.msgs.only_one_default = gs.getMessage('cir_assmt_list_manager_only_one_default');
+        //tables
+        data.msgs.table_choices = CIRConstants.Tables.ASSESSMENT_CHOICE;
+        data.msgs.table_fields = CIRConstants.Tables.ASSESSMENT_FIELD;
+
+        data.msgs.confirmDeleteMessage = listManagerDefinitions.confirmDeleteMessage;
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:24:47</sys_created_on>
+        <sys_id>413da4e1dbca5410d4a73533f396195e</sys_id>
+        <sys_mod_count>169</sys_mod_count>
+        <sys_name>CIR CIRI Assessment List Manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_413da4e1dbca5410d4a73533f396195e</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 12:08:32</sys_updated_on>
+        <template><![CDATA[<div ng-if="!data.error">
+  <div ng-if="data.isDataValid">
+    <div ng-if="data.tableContent.length === 0 && !data.editMode" class='wrapper'>
+      <h1>{{ c.msgs.no_sections }}</h1>
+    </div>
+    <div ng-if="(data.tableContent.length > 0 && !data.editMode) || data.editMode " class='container-out-table-top'>
+      <div class="row margin-top-1em margin-bottom-1em align-middle-flex">
+        <div class="header pull-left">{{ c.msgs.titleMsg }}</div>
+        <div ng-if="data.editMode" class="pull-left margin-left-1em">
+          <button ng-click="addObject()" ng-disabled="disableNew()"
+              class="btn new-button pull-left">{{ c.msgs.newBtnMsg }}</button>
+        </div>
+      </div>
+      <div class="inherit-height row">
+        <div class='container-in-table-top col-xs-11'>
+            <table class="table overview-widget">
+                <thead>
+                    <tr class="header">
+                        <th ng-repeat="header in c.data.tableHeaders">
+                            <span ng-if="header.value !== c.data.listButtonsColumn">
+                                {{ header.display_value }}
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="rowContent in c.data.tableContent | orderBy: 'order'">
+                        <td id="{{ c.data.table + '_' + rowContent.localIndex }}"
+                            ng-repeat="header in c.data.tableHeaders"
+                            ng-class="{selectedRow: rowContent.isRowSelected}" ng-click="selectRow(rowContent)">
+                            {{ rowContent[header.value].displayValue }}
+                        </td>
+                        <td ng-if="data.editMode" class="edit-remove-column-size">
+                            <div class="row edit-remove-container">
+                                <div class="col-xs-6">
+                                    <i class="fa fa-edit icons-edit-remove" title="{{c.msgs.editBtnMsg}}"
+                                        ng-click="editRow(rowContent)"></i>
+                                </div>
+                                <div class="col-xs-6">
+                                    <i class="fa fa-trash icons-edit-remove" title="{{c.msgs.removeBtnMsg}}"
+                                        ng-click="removeRow(rowContent)"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="data.editMode && c.selectedRow" class="col-xs-1 align-middle-grid right-side">
+            <div class="fa fa-arrow-up icons-up-down" ng-click="moveRow(true)"></div>
+            <div class="fa fa-arrow-down icons-up-down" ng-click="moveRow(false)"></div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="data.editMode" class="buttons-footer">
+      <button ng-click="next()" class="btn btn-primary action-btn pull-right next-button"
+          ng-disabled="disableNext()">{{ c.msgs.nextBtnMsg }}</button>
+      <button ng-if="data.canPreview" ng-click="preview()"
+          class="btn btn-primary action-btn pull-right next-button">{{ c.msgs.previewBtn }}</button>
+      <button ng-click="back()" class="btn action-btn pull-right back-button">{{ c.msgs.backBtnMsg }}</button>
+    </div>
+  </div>
+  <div ng-if="!data.isDataValid && !c.data.hasParent" class='container-out-table-top wrapper'>
+    <h2>{{ c.msgs.invalidAssessmentMsg }}</h2>
+  </div>
+</div>
+<div class="error" ng-if="data.error">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${Item not found}</h4>
+        </div>
+        <div class="panel-body wrapper">
+            <p>${This item is not found or currently not available}</p>
+        </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

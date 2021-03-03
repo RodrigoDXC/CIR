@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="INSERT_OR_UPDATE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>type_notes</field>
+        <mandatory>true</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-30 09:36:40</sys_created_on>
+        <sys_id>fc8d21d81b3d101024c896ce0a4bcbd4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>type_notes</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_policy_action_fc8d21d81b3d101024c896ce0a4bcbd4</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-30 09:36:40</sys_updated_on>
+        <table>x_fru_cir_security_impact</table>
+        <ui_policy display_value="Show type notes when type is other">fc5da9981b3d101024c896ce0a4bcb76</ui_policy>
+        <visible>true</visible>
+    </sys_ui_policy_action>
+</record_update>

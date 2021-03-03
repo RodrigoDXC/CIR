@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="potential_consequence" table="x_fru_cir_risk" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>potential_consequence</element>
+            <name>x_fru_cir_risk</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_id>5847b3f4138a50500b8670a76144b02e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>potential_consequence</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_risk_potential_consequence</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>potential_consequence</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Negligible</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>0</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bd3ca5a9db91101003b3533fd39619d3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>5</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>potential_consequence</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Minor</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>1</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bd3ca5a9db91101003b3533fd39619d5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>potential_consequence</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Noticeable</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>2</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f93ca5a9db91101003b3533fd39619d7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>potential_consequence</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Significant</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>3</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>393ca5a9db91101003b3533fd39619d9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>potential_consequence</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Major</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>4</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>753ca5a9db91101003b3533fd39619db</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

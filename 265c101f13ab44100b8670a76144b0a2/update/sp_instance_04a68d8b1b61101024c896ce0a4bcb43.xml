@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>2</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="2">fd760d8b1b61101024c896ce0a4bcbd4</sp_column>
+        <sp_widget display_value="CIR CIRI Case Fields">c0b3014b1b61101024c896ce0a4bcbbc</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 09:34:07</sys_created_on>
+        <sys_id>04a68d8b1b61101024c896ce0a4bcb43</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR CIRI Case Fields</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_instance_04a68d8b1b61101024c896ce0a4bcb43</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-26 09:36:42</sys_updated_on>
+        <title>CIR CIRI Case Fields</title>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"pickup_msg": {
+		"value": "Tickets are picked up within <br/> 4 hours (M-F 9-5)",
+		"displayValue": "Tickets are picked up within <br/> 4 hours (M-F 9-5)"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=04a68d8b1b61101024c896ce0a4bcb43"/>
+</record_update>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_applet_launcher_m2m_section">
+    <sys_sg_applet_launcher_m2m_section action="DELETE">
+        <applet_launcher display_value="Situation Management">ad689641dbb3085049959a82ca961957</applet_launcher>
+        <order>40</order>
+        <section display_value="Create Situation Room">90aa9c5f1b666c10de011fc11a4bcb1f</section>
+        <sys_class_name>sys_sg_applet_launcher_m2m_section</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-03-02 14:14:19</sys_created_on>
+        <sys_id>d8aa9c5f1b666c10de011fc11a4bcb21</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_applet_launcher_m2m_section_d8aa9c5f1b666c10de011fc11a4bcb21</sys_update_name>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-03-02 14:14:19</sys_updated_on>
+    </sys_sg_applet_launcher_m2m_section>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_sg_applet_launcher_m2m_section_d8aa9c5f1b666c10de011fc11a4bcb21</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_applet_launcher_m2m_section"><sys_sg_applet_launcher_m2m_section action="INSERT_OR_UPDATE"><applet_launcher display_value="Situation Management">ad689641dbb3085049959a82ca961957</applet_launcher><order>40</order><section display_value="Create Situation Room">90aa9c5f1b666c10de011fc11a4bcb1f</section><sys_class_name>sys_sg_applet_launcher_m2m_section</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-03-02 14:14:19</sys_created_on><sys_id>d8aa9c5f1b666c10de011fc11a4bcb21</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_sg_applet_launcher_m2m_section_d8aa9c5f1b666c10de011fc11a4bcb21</sys_update_name><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-03-02 14:14:19</sys_updated_on></sys_sg_applet_launcher_m2m_section></record_update>]]></payload>
+        <payload_hash>-1080303255</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>344557c31ba26c10de011fc11a4bcb5f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-03-02 14:14:19</sys_created_on>
+        <sys_id>18aa9c5f1b666c10de011fc11a4bcb23</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>177f34a2a130000001</sys_recorded_at>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-03-02 14:14:19</sys_updated_on>
+        <type>Applet Launcher Sections</type>
+        <update_guid>10aa9c5f32666c105799734976494323</update_guid>
+        <update_guid_history>10aa9c5f32666c105799734976494323:-1080303255</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-03-03 08:31:25</sys_created_on>
+        <sys_db_object display_value="" name="sys_sg_applet_launcher_m2m_section">sys_sg_applet_launcher_m2m_section</sys_db_object>
+        <sys_id>09451fada2a0443890bed5afcbddf990</sys_id>
+        <sys_metadata>d8aa9c5f1b666c10de011fc11a4bcb21</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_sg_applet_launcher_m2m_section_d8aa9c5f1b666c10de011fc11a4bcb21</sys_update_name>
+        <sys_update_version display_value="sys_sg_applet_launcher_m2m_section_d8aa9c5f1b666c10de011fc11a4bcb21">18aa9c5f1b666c10de011fc11a4bcb23</sys_update_version>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-03-03 08:31:25</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

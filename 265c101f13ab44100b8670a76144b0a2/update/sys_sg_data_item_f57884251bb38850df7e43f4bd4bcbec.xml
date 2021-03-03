@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_data_item">
+    <sys_sg_data_item action="INSERT_OR_UPDATE">
+        <condition_type>script</condition_type>
+        <description/>
+        <group_by/>
+        <instance_relative_url_qc/>
+        <name>CIR Emergency Numbers</name>
+        <query_condition/>
+        <query_condition_script><![CDATA[(function getQueryString(input) {
+	var queryString = 'country.iso3166_2=';
+	var user = gs.getUserID();
+    var gr = new GlideRecord('sys_user');
+    gr.get(user);
+    queryString += gr.country;
+    queryString += '^ORcountry.iso3166_3=';
+    queryString += gr.country;  
+	return queryString; 
+ })(input);]]></query_condition_script>
+        <sys_class_name>sys_sg_data_item</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-26 13:21:47</sys_created_on>
+        <sys_id>f57884251bb38850df7e43f4bd4bcbec</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>CIR Emergency Numbers</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_data_item_f57884251bb38850df7e43f4bd4bcbec</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-04-28 15:14:18</sys_updated_on>
+        <table>x_fru_cir_emergency_number</table>
+    </sys_sg_data_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=f57884251bb38850df7e43f4bd4bcbec"/>
+</record_update>

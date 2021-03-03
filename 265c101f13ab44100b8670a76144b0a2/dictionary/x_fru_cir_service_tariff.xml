@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Service Tariff" max_length="40" name="x_fru_cir_service_tariff" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Building" mandatory="true" max_length="32" name="building" reference="x_fru_cir_security_location" reference_qual="protection_required=true^type=1^EQ" reference_qual_condition="protection_required=true^type=1^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Company" max_length="32" name="company" reference="core_company" type="reference"/>
+        <element label="From date" max_length="40" name="from_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true,serializer=com.glide.script.PriceXMLSerializer" label="Hour cost" max_length="20" name="hour_cost" type="price"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Schedule" max_length="32" name="schedule" reference="cmn_schedule" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service" max_length="32" name="service" reference="x_fru_cir_service_function" type="reference"/>
+        <element label="To date" max_length="40" name="to_date" type="glide_date"/>
+        <index name="index">
+            <element name="schedule"/>
+        </index>
+        <index name="index2">
+            <element name="service"/>
+        </index>
+        <index name="index3">
+            <element name="company"/>
+        </index>
+        <index name="index4">
+            <element name="building"/>
+        </index>
+    </element>
+</database>

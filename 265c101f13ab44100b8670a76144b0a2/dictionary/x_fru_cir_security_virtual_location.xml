@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Security Virtual Location" max_length="40" name="x_fru_cir_security_virtual_location" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Amount of users" max_length="80" name="amount_of_users" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" dependent="country" dependent_on_field="country" label="Country" max_length="4000" name="country" reference="x_fru_cir_security_address_value" reference_qual="type=country^language=en^EQ" reference_qual_condition="type=country^language=en^EQ" type="glide_list" use_dependent_field="true"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="reference"/>
+        <element label="Name" max_length="80" name="name" type="string"/>
+        <index name="index">
+            <element name="dimension"/>
+        </index>
+    </element>
+</database>

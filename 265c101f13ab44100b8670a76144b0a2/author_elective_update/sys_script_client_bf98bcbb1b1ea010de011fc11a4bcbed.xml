@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>type</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Message Attachmet Mandatory</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (isLoading || newValue === '') {
+      return;
+   }
+
+   //Type appropriate comment here, and begin script below
+   if (newValue == 'non_register_user'){
+		g_form.showFieldMsg("type","It is needed to attach a evidence of the consent of the user to be registered in the system","error");
+		return false;
+   }
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-19 19:38:13</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>bf98bcbb1b1ea010de011fc11a4bcbed</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Message Attachmet Mandatory</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_bf98bcbb1b1ea010de011fc11a4bcbed</sys_update_name>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-19 19:39:05</sys_updated_on>
+        <table>x_fru_cir_witness</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_script_client_bf98bcbb1b1ea010de011fc11a4bcbed</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field&gt;type&lt;/field&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;Message Attachmet Mandatory&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (isLoading || newValue === '') {
+      return;
+   }
+
+   //Type appropriate comment here, and begin script below
+   if (newValue == 'non_register_user'){
+		g_form.showFieldMsg("type","It is needed to attach a evidence of the consent of the user to be registered in the system","error");
+		return false;
+   }
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;rodrigo.ortega@dxc.com&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-02-19 19:38:13&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;bf98bcbb1b1ea010de011fc11a4bcbed&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;Message Attachmet Mandatory&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_bf98bcbb1b1ea010de011fc11a4bcbed&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;rodrigo.ortega@dxc.com&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-02-19 19:39:05&lt;/sys_updated_on&gt;&lt;table&gt;x_fru_cir_witness&lt;/table&gt;&lt;type&gt;onChange&lt;/type&gt;&lt;ui_type&gt;10&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1975894652</payload_hash>
+        <record_name>Message Attachmet Mandatory</record_name>
+        <reverted_from/>
+        <source>032374771b1ea010de011fc11a4bcbbf</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-19 19:39:05</sys_created_on>
+        <sys_id>167b707f1b1ea010de011fc11a4bcb6a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>177bbcd8b0c0000001</sys_recorded_at>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-25 16:23:47</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>5a7b707f201ea0100a2874ce64faaa69</update_guid>
+        <update_guid_history>5a7b707f201ea0100a2874ce64faaa69:1975894652,d94b7c3f751ea01054e70020d5fec109:-90863236</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-25 16:23:47</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>027845491da24b73af4ac3d8e70f98c9</sys_id>
+        <sys_metadata>bf98bcbb1b1ea010de011fc11a4bcbed</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Message Attachmet Mandatory</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Witness">5b1f249ddb55d41003b3533fd396194f</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_script_client_bf98bcbb1b1ea010de011fc11a4bcbed</sys_update_name>
+        <sys_update_version display_value="sys_script_client_bf98bcbb1b1ea010de011fc11a4bcbed">167b707f1b1ea010de011fc11a4bcb6a</sys_update_version>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-25 16:23:47</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

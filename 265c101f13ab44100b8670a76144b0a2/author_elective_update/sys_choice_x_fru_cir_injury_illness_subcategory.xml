@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="subcategory" table="x_fru_cir_injury_illness" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>subcategory</element>
+            <name>x_fru_cir_injury_illness</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:10:33</sys_created_on>
+            <sys_id>c3b6ff74138a50500b8670a76144b0bd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>subcategory</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_injury_illness_subcategory</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:10:33</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>infections_and_parasitic</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Bacterial Diseases</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>10</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:10:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>effcc16fdb11141003b3533fd39619b7</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:13:40</sys_updated_on>
+            <value>bacterial_diseases</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>neoplasms_tumors_cancers</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Benign Neoplasms and Tumors</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>20</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:13:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c23fcdafdb11141003b3533fd396192b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:13:35</sys_updated_on>
+            <value>benign_neoplasms_tumors</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>diseases_and_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Blood Diseases &amp; Disorders</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>30</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:13:45</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b45f81efdb11141003b3533fd3961984</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:13:57</sys_updated_on>
+            <value>blood_diseases_disorders</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>traumatic_injuries</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Bones, Nerves, and Spinal Cord</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>40</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:14:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>066f81efdb11141003b3533fd3961985</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:14:22</sys_updated_on>
+            <value>bones_nerves_spinal_cord</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>traumatic_injuries</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Burns and Corrosions</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>50</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:14:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>999f01efdb11141003b3533fd3961958</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:15:01</sys_updated_on>
+            <value>burns_corrosions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>diseases_and_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Circulatory System</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>60</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:11:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>97ae4d6fdb11141003b3533fd3961900</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:11:35</sys_updated_on>
+            <value>circulatory_system</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>diseases_and_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Digestive System</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>70</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:11:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>73ee4dafdb11141003b3533fd396192e</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:12:09</sys_updated_on>
+            <value>digestive_system</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>diseases_and_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Genitourinary System</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>80</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:11:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dbde0dafdb11141003b3533fd39619d4</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:11:53</sys_updated_on>
+            <value>genitourinary_system</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>traumatic_injuries</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Intracranial</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>90</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:15:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4eaf45efdb11141003b3533fd39619ab</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:15:30</sys_updated_on>
+            <value>intracranial</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>neoplasms_tumors_cancers</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Malignant Neoplasms and Tumors</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>100</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:15:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>45cf01efdb11141003b3533fd396195b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:15:50</sys_updated_on>
+            <value>malignant_neoplasms_tumors</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>other_diseases_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Mental Disorders &amp; Syndromes</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>110</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:15:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c1df05efdb11141003b3533fd39619c1</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:16:05</sys_updated_on>
+            <value>mental_disorders_syndromes</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>traumatic_injuries</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Muscles, Tendons, Ligameents, and Joints</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>120</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:16:12</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>06efc5efdb11141003b3533fd39619e4</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:16:25</sys_updated_on>
+            <value>muscles_tendons_ligameents_joints</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>diseases_and_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Musculoskeletal System</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>130</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:16:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>42ff45efdb11141003b3533fd39619b0</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:16:42</sys_updated_on>
+            <value>musculoskeletal_system</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>diseases_and_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Nervous System &amp; Sense Organs</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>140</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:12:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>400f4dafdb11141003b3533fd3961929</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:13:03</sys_updated_on>
+            <value>nervous_system_sense_organs</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>traumatic_injuries</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Open Wounds</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>150</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:16:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e600d5efdb11141003b3533fd39619bf</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:16:56</sys_updated_on>
+            <value>open_wounds</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>diseases_and_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Respiratory System</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>160</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:17:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2610d9efdb11141003b3533fd3961977</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:17:11</sys_updated_on>
+            <value>respiratory_system</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>diseases_and_disorders</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Skin &amp; Subcutaneous Tissue</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>170</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:17:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>712059efdb11141003b3533fd3961987</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:17:28</sys_updated_on>
+            <value>skin_subcutaneous_tissue</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>traumatic_injuries</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Surface Wounds and Bruises</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>180</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:17:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>06305defdb11141003b3533fd3961940</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:17:43</sys_updated_on>
+            <value>surface_wounds_bruises</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>infections_and_parasitic</dependent_value>
+            <element>subcategory</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Viral Diseases</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>190</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:17:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b1405defdb11141003b3533fd396198f</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 13:17:58</sys_updated_on>
+            <value>viral_diseases</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

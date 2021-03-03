@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $timeout) {
+	/* widget controller */
+	var c = this;
+	c.mandatory = [];
+
+	//Add '*' to checkbox type fields when field is mandatory 
+	$scope.$on('spModel.gForm.initialized', function() {
+		$timeout(function() {
+			c.data.checkBoxFields.forEach(function(fieldName) {				
+				if (!document.getElementsByName(fieldName)[0].parentElement.innerHTML.includes("<span class=\"fa fa-asterisk mandatory\"></span>")) {
+					var spanCheckboxMandatory = document.createElement('span');
+					spanCheckboxMandatory.className = 'fa fa-asterisk mandatory';
+					var blankSpace = document.createElement('span');
+					blankSpace.innerHTML = ' ';
+					var parentElement = document.getElementsByName(fieldName)[0].parentElement;
+					parentElement.insertBefore(blankSpace, parentElement.firstChild);
+					parentElement.insertBefore(spanCheckboxMandatory, parentElement.firstChild);
+				}
+			});
+		}, 175);
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.panel-header {&#13;
+  font-size: 18px;&#13;
+  text-align: center;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-assess-preview-section</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Assessment Preview Section</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.assessment_manager</roles>
+        <script><![CDATA[(function() {
+	var fieldsTable = {
+		1: {
+			type: 'choice',
+			choices: [{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]
+		},
+		2: { type: 'textarea' },
+		3: {
+			type: 'multiple_choice',
+			choices: [{ label: 'Option 1', value: 'option1' }, { label: 'Option 2', value: 'option2' }]
+		},
+		4: {
+			type: 'numericscale',
+			choices: [{ label: '1', value: '1' }, { label: '2', value: '2' }, { label: '3', value: '3' }, { label: '4', value: '4' }, { label: '5', value: '5' }]
+		},
+		5: {
+			type: 'choice',
+			choices: [{ label: 'Option 1', value: 'option1'}, { label: 'Option 2', value: 'option2' }]
+		},
+		6: { type: 'string' },
+		7: { type: 'boolean' },
+		9: { type: 'glide_date' },
+		10: { type: 'glide_date_time' },
+		11: { type: 'label' },
+		12: { type: 'break', name: 'formatter' },
+		14: { type: 'widget' },
+		15: { type: 'string' },
+		16: { type: 'string' },
+		17: { type: 'widget' },
+		23: { type: 'html' },
+		25: { type: 'masked' },
+		26: { type: 'email' },
+		27: { type: 'url' },
+		28: { type: 'string' },
+		29: { type: 'glide_duration' }
+	};
+
+	data.sections = [];
+	data.noDataFound = false;
+	data.checkBoxFields = [];
+	data.sectionPreview = false;
+
+	if (!input) {
+		data.noDataFound = true;
+		data.noDataFoundMsg = gs.getMessage('cir_assmt_no_data');
+	}
+	
+	var idCounter = 0;
+
+	if (input) {
+		data.sectionPreview = input.sectionPreview;
+		var sections = input.sections;
+		sections.sort(function(elementA, elementB) {
+			return elementA.order - elementB.order;
+		});
+		sections.forEach(function(section) {
+			var previewObj = createObjectToDraw(section.fields);
+			data.sections.push({
+				name: section.name,
+				preview: drawAllFields(previewObj)
+			});
+		});
+	}
+
+	function drawAllFields(fields) {
+		var specialTypes = {
+			'break': 'break',
+			'label': 'label'
+		};
+		var columnFields = [];
+		var viewFields = [];
+
+		Object.keys(fields).forEach(function(key) {
+			columnFields.push({
+				'name': fields[key].name,
+				'type': specialTypes[fields[key].type] ? fields[key].type : 'field'
+			});
+
+			viewFields.push({
+				'name': fields[key].name,
+				'type': specialTypes[fields[key].type] ? fields[key].type : 'field'
+			});
+		});
+
+		return {
+			'_sections': [{
+				'columns': [{
+					'fields': columnFields
+				}]
+			}],
+			'_fields': fields,
+			'_view': viewFields
+		};
+	}
+
+	function createObjectToDraw(fields) {
+		var fieldsDefinition = {};
+
+		fields.sort(function(elementA, elementB) {
+			return elementA.order - elementB.order;
+		});
+
+		for (var i = 0; i < fields.length; i++) {
+			var name = fields[i].name.value + '_' + idCounter;
+			var type = fields[i].type.value;
+			var fieldChoices = fields[i].choices ? fields[i].choices.slice() : [];
+			idCounter++;
+
+			fieldChoices.sort(function(elementA, elementB) {
+				return elementA.order - elementB.order;
+			});
+
+			fieldsDefinition[name] = {
+				label: fields[i].label.value,
+				mandatory: JSON.parse(fields[i].mandatory.value),
+				visible: true,
+				name: name,
+				type: getFieldType(type)
+			};
+
+			if (isCheckboxMandatory(fieldsDefinition[name].type, fieldsDefinition[name].mandatory)) {
+				data.checkBoxFields.push(name);
+			}
+			
+			if (!typeHasChoices(type)) {
+				continue;
+			}
+
+			//Get the choices from type, if the field from the input is a choice field but doesn't have choices
+			fieldsDefinition[name].choices = fieldChoices.length > 0 ? getChoicesFromInputObejct(fieldChoices) : getChoicesFromType(type);
+
+			if (fields[i].include_none.displayValue === "true") {
+				var noneField = {
+					label: '-- None --', 
+					value: ''
+				};
+				fieldsDefinition[name].choices.unshift(noneField);
+				fieldsDefinition[name].displayValue = noneField.label;
+			}			
+
+			if (fields[i].default_value && !fields[i].default_value.value || !fields[i].default_value) {
+				fieldsDefinition[name].displayValue = fieldsDefinition[name].choices[0].label;
+				fieldsDefinition[name].value = fieldsDefinition[name].choices[0].value;
+				continue;
+			}
+
+			fieldsDefinition[name].value = fields[i].default_value.value;
+		}
+		return fieldsDefinition;
+	}
+
+	function getFieldType(typeValue) {
+		return fieldsTable[typeValue].type;
+	}
+
+	function typeHasChoices(typeValue) {
+		return fieldsTable[typeValue].choices !== undefined;
+	}
+
+	function getChoicesFromType(typeValue) {
+		var typeChoices = [];
+		typeChoices = typeChoices.concat(fieldsTable[typeValue].choices);	
+		return typeChoices;
+	}
+
+	function getChoicesFromInputObejct(fieldChoices) {
+		var choices = [];
+		fieldChoices.forEach(function(choice) {
+			choices.push({
+				label: choice.label.value,
+				value: choice.value.value
+			});
+		});
+		return choices;
+	}
+
+	function isCheckboxMandatory(type, mandatory) {
+		return type === 'boolean' && mandatory;
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:30:32</sys_created_on>
+        <sys_id>d68eece1dbca5410d4a73533f39619cb</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR CIRI Assessment Preview Section</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_d68eece1dbca5410d4a73533f39619cb</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-27 09:03:53</sys_updated_on>
+        <template><![CDATA[<div ng-if="data.noDataFound">
+    {{ data.noDataFoundMsg }}
+</div>
+
+<div ng-if="!data.sectionPreview" ng-repeat="section in data.sections">
+    <div class="panel-header">{{ section.name }}</div>
+    <div class="panel-body">
+        <form>
+            <sp-model form-model="section.preview" mandatory="c.mandatory"></sp-model>
+        </form>
+    </div>
+</div>
+
+<div ng-if="data.sectionPreview" ng-repeat="section in data.sections">
+    <div class="panel-header">{{ section.name }} ${Field Preview}</div>
+    <div class="panel-body">
+        <form>
+            <sp-model form-model="section.preview" mandatory="c.mandatory"></sp-model>
+        </form>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

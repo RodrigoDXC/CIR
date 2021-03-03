@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="second_type_of_fuel" label="Second Type Of Fuel" language="en" table="x_fru_cir_owner_loss">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>second_type_of_fuel</element>
+            <help/>
+            <hint/>
+            <label>Second Type Of Fuel</label>
+            <language>en</language>
+            <name>x_fru_cir_owner_loss</name>
+            <plural>Second Type Of Fuels</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-20 07:52:48</sys_created_on>
+            <sys_id>00eef36cdb361810bf9ead8ed3961916</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Second Type Of Fuel</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_owner_loss_second_type_of_fuel_en</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-20 07:52:48</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

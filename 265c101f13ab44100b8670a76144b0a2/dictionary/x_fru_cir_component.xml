@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_fru_cir_equipment" label="Component" max_length="40" name="x_fru_cir_component" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Equipment" mandatory="true" max_length="32" name="equipment" reference="x_fru_cir_equipment" reference_qual="type=machinery^EQ" reference_qual_condition="type=machinery^EQ" type="reference"/>
+    </element>
+</database>

@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtModelFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected script to run actions for the Assessment functionality.</description>
+        <name>CIRAssmtModelFP</name>
+        <script><![CDATA[var CIRAssmtModelFP = (function() {
+    var CIRAssmtModelFP = Class.create();
+    var initialize = function() {};
+
+    /**
+     * Function to set published field true when assessment is published
+     *
+     * @param {String} assessmentDefinitionId - String containing the SysID of the Assessment Definition     
+     */
+    var publishAssessmentDefinition = function(assessmentDefinitionId) {
+        return CIRAssmtPublishFP().PublishAssessmentDefinition(assessmentDefinitionId);
+    };
+
+    /**
+     * Function to check whether all Catalog objects exist for the current Assessment objects
+     *
+     * @param {String} assessmentDefinitionId - String containing the SysID of the Assessment Definition     
+     */
+    var checkCatalogObject = function(assessmentDefinitionId) {
+        return CIRAssmtPublishFP().CheckCatalogObject(assessmentDefinitionId);
+    };
+
+    /**
+     * Function to check choices are created for the Assessment Field, in case it is a Multiple Choice or Select Box
+     *
+     * @param {String} assessmentDefinitionId - String containing the SysID of the Assessment Definition     
+     */
+    var checkChoices = function(assessmentDefinitionId) {
+        return CIRAssmtPublishFP().CheckChoices(assessmentDefinitionId);
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Definition record (create or update records).
+     *
+     * @param {String} assessmentDefinitionId - String containing the SysID of the Assessment Definition
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentDefinition = function(assessmentDefinitionId, isCreate, isActive) {
+        return CIRAssmtPublishFP().ActOnAssessmentDefinition(assessmentDefinitionId, isCreate, isActive);
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Section record (create or update records).
+     *
+     * @param {String} assessmentSectionId - String containing the SysID of the Assessment Section
+     * @param {String} categoryId - String containing the SysID of the Category
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentSection = function(assessmentSectionId, categoryId, isCreate, isActive) {
+        return CIRAssmtPublishFP().ActOnAssessmentSection(assessmentSectionId, categoryId, isCreate, isActive);
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Field record (create or update records).
+     *
+     * @param {String} assessmentFieldId - String containing the SysID of the Assessment Field
+     * @param {String} recordProducerId - String containing the SysID of the Record Producer
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentField = function(assessmentFieldId, recordProducerId, isCreate, isActive) {
+        return CIRAssmtPublishFP().ActOnAssessmentField(assessmentFieldId, recordProducerId, isCreate, isActive);
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Choice record (create or update records).
+     *
+     * @param {String} assessmentChoiceId - String containing the SysID of the Assessment Choice
+     * @param {String} variableId - String containing the SysID of the Variable
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentChoice = function(assessmentChoiceId, variableId, isCreate) {
+        return CIRAssmtPublishFP().ActOnAssessmentChoice(assessmentChoiceId, variableId, isCreate);
+    };
+
+    /**
+     * Function to trigger the creation or update the Assessment Instance,
+     * its Assessment Instance Sections and Assessment Answers.
+     *
+     * @param {Object} objOperationData - Object containing:
+     * categoryId - String containing the SysID of the Category
+     * assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     * sectionId - String containing the SysID of the Record Producer
+     * fieldIds - Array containing all the variables SysIDs
+     * fieldValues - Array of JSON objects with the fields info
+     * scoreCalculated - Float containing the value of the score calculated
+     * @return {Boolean} - True in case the creation was successful, false if something failed
+     */
+    var performOperationOnAssessment = function(objOperationData) {
+        return CIRAssmtInstanceManipulationFP().PerformOperationOnAssessment(objOperationData);
+    };
+
+    /**
+     * Function to complete the Assessment Instance.
+     *
+     * @param {String} assessmentInstanceId - String contaning the SysID of the Assessment Instance
+     * @return {String} - String containing the Assessment Instance SysID
+     */
+    var completeAssessmentSectionInstance = function(assessmentInstanceId) {
+        return CIRAssmtInstanceManipulationFP().CompleteAssessmentSectionInstance(assessmentInstanceId);
+    };
+
+    /**
+     * Function to get the Assessment SysID from the Assessment Instance.
+     *
+     * @param {String} assessmentInstanceId - String containing the selected Assessment Instance SysID
+     * @return {String|null} - SysID of the Assessment if found, null otherwise
+     */
+    var getAssessmentIdFromAssessmentInstance = function(assessmentInstanceId) {
+        return CIRAssmtReadFP().GetAssessmentIdFromAssessmentInstance(assessmentInstanceId);
+    };
+
+    /**
+     * Function to get the Assessment Definitions' SysID, Category and Catalog info.
+     *
+     * @param {String} categoryId - String containing the Category SysID
+     *                              (if existent, otherwise return all Definitions with Category)
+     * @return {Array[Object]} - Array of JSON Objects with the Assessment Definitions' SysID,
+     *                           Category and Catalog info
+     */
+    var getAssessmentsInfo = function(categoryId) {
+        return CIRAssmtReadFP().GetAssessmentsInfo(categoryId);
+    };
+
+    /**
+     * Function to get the Assessment Definitions' SysID, Category and Catalog info for a specific user.
+     *
+     * @param {String} categoryId - String containing the Category SysID
+     *                              (if existent, otherwise return all Definitions with Category)
+     * @return {Array[Object]} - Array of JSON Objects with the Assessment Definitions' SysID,
+     *                           Category and Catalog info
+     */
+    var getAssessmentsInfoForUser = function(categoryId) {
+        return CIRAssmtReadFP().GetAssessmentsInfoForUser(categoryId);
+    };
+
+    /**
+     * Function to get the Assessment Instance data from an existent instance.
+     *
+     * @param {String} assessmentInstanceId - String containing the selected Assessment Instance SysID
+     *                   (if existent, otherwise fallback to first found)
+     * @param {Array[Object]} fieldValues - Array of JSON objects with the fields info
+     * @return {Array[Object]} - Array of JSON objects with the field name and field value
+     */
+    var getAssessmentInstanceSectionData = function(assessmentInstanceId, fieldValues) {
+        return CIRAssmtReadFP().GetAssessmentInstanceSectionData(assessmentInstanceId, fieldValues);
+    };
+
+    /**
+     * Function to get all the Users with Assessment Instances.
+     *
+     * @param {String} userId - String containing the SysID of the selected user
+     * @param {String} assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     *                                        (if existent, otherwise fallback to first found)
+     * @param {String} userKeywordSearch - String containing the keyword to search for the username
+     * @return {Object} - JSON Object with an array of users and the user connected to the selected Assessment Instance
+     */
+    var getAssessmentInstanceUsers = function(userId, assessmentInstanceId, userKeywordSearch) {
+        return CIRAssmtReadFP().GetAssessmentInstanceUsers(userId, assessmentInstanceId, userKeywordSearch);
+    };
+
+    /**
+     * Function to get all the Assessment Instances of a User.
+     *
+     * @param {String} assessmentId - String containing the SysID of the current Assessment
+     * @param {String} userId - String containing the SysID of the selected User
+     * @param {String} assessmentInstanceId - String containing the SysID of the selected Assessment Instance
+     * @return {Object} - JSON Object with an array of Assessment Instances, a JSON object with 
+     */
+    var getAssessmentInstancesData = function(assessmentId, userId, assessmentInstanceId) {
+        return CIRAssmtReadFP().GetAssessmentInstancesData(assessmentId, userId,
+            assessmentInstanceId);
+    };
+
+    /**
+     * Get the attached file in the Assesment Definition and process it row by row creating the necessary records
+     * Used in the 'Import Excel' UI Action for the 'Assesment Definition' table.
+     *
+     * @param {GlideRecord} definitionGR - GlideRecord of the Current record.
+     * @return {Array} - With elements if there were any issues, empty otherwise
+     */
+    var processExcel = function(definitionGR, parser) {
+        return CIRAssmtImportUtilsFP().ProcessExcel(definitionGR, parser);
+    };
+
+    /**
+     * Function to check if all the mandatory assessment fields where created.
+     *
+     * @param {String} assessmentId - String containing the SysID of the current Assessment
+     * @return {boolean} - True in case all the fields were created, false otherwise
+//      */
+    var checkMandatoryFieldsCreation = function(assessmentId) {
+        return CIRAssmtReadFP().CheckMandatoryFieldsCreation(assessmentId);
+    };
+
+    /**
+     * Function to check if Assessment Instance State is Canceled or Complete.
+     *
+     * @param {String} assesmentInstanceId - String containing the SysID of the current Assessment Instance
+     * @return {boolean} - True in case state is canceled or complete
+     */
+    var isAssesmentCanceledComplete = function(assessmentInstanceId) {
+        return CIRAssmtReadFP().IsAssesmentCanceledComplete(assessmentInstanceId);
+    };
+
+    /**
+     * Function to get all the incomplete Assessment Section names.
+     *
+     * @param {String} assesmentInstanceId - String containing the SysID of the current Assessment Instance
+     * @return {Object} - Obect with key-value: Record Producer SysID - Score
+     */
+    var getIncompleteAssesmentInstanceSections = function(assessmentInstanceId) {
+        return CIRAssmtReadFP().GetIncompleteAssesmentInstanceSections(assessmentInstanceId);
+    };
+
+    /**
+     * function that will check if the Global Helper script is installed, enabled and up to date.
+     * called in the Generate Category Objects UI Action
+     * @return {Object} - JSON Object containing an error message and a boolean that states if the script is ok or not.
+     */
+    var checkGlobalScript = function() {
+        return CIRGlobalScriptUtilsFP().CheckGlobalScript();
+    };
+
+    /**
+     * Function to trigger the creation of records related with Assessment Definitions through the portal. Called on widget CIR CIRI Definition Manager.
+     *
+     * @param {Object} dataObj - JSON object containing the table name,
+     *                           a boolean indicating if the operation is 'Create',
+     *                           the SysID of the record to update if applicable and
+     *                           a JSON object with key-values (field-field value)
+     * @return {String|null} - Returns the SysID of the record if the operation was succesful and null otherwise
+     */
+    var saveDataAssessment = function(dataObj) {
+        return new CIRGenericUtils().CreateUpdateRecord(dataObj);
+    };
+
+    /**
+     * Get the instance of the GlideRecord class to be used and all the table data for a specific reference field.
+     *
+     * @param {String} table - String containing the table name
+     * @param {String} refFieldId - String containing the referencefield SysID
+     * @param {Array} listViewColumns - Array containing the column names of a specific list view
+     * @param {Boolean} editionMode -True if allow edition of elements 
+     * @return {Object} - Object containing the instance of the GlideRecord class and the data content
+     */
+    var getTableData = function(table, refFieldId, listViewColumns, editionMode) {
+        return CIRAssmtPortalListManagerFP().GetTableData(table, refFieldId, listViewColumns,
+            editionMode);
+    };
+
+    /**
+     * Store and remove data (if applicable).
+     *
+     * @param {Object} dataToManipulate - Object containing:
+     *                                    The table name
+     *                                    The reference field SysID
+     *                                    The array with all the data
+     *                                    The array with all the SysIDs to delete
+     * @return {void}
+     */
+    var manipulateData = function(dataToManipulate, action) {
+        return CIRAssmtPortalListManagerFP().ManipulateData(dataToManipulate, action);
+    };
+
+    /**
+     * Check for duplicates in the data stored in the memory and the database.
+     *
+     * @param {Object} dataToCheck - Object containing:
+     *                               The table name
+     *                               The reference field SysID
+     *                               The array with all the data
+     *                               The array with all the objects to be checked
+     * @return {Boolean} - True if duplicates exist, false otherwise
+     */
+    var validateDuplicates = function(dataToCheck) {
+        return CIRAssmtPortalListManagerFP().ValidateDuplicates(dataToCheck);
+    };
+
+
+    /**
+     * Object containing all the options required for a specific table.
+     *@param {String} assessmentId - Sys id of the assessment 
+     * @param {String} tableName - Name of the table being managed in the CIR CIRI Assessment List Manager widget
+     * @param {Boolean} isEditable - True if the Table will be editable
+     * @return {Object} - Object containing all the options required for the specific table
+     */
+    var getListManagerDefinitions = function(tableName, isEditable, assessmentId) {
+        return CIRAssmtPortalListManagerFP().GetListManagerDefinitions(tableName, isEditable,
+            assessmentId);
+    };
+
+    /**
+     * Validate the Assessment Definition ID.
+     *
+     * @param {String} assessmentDefinitionId - SysID of the Assessment Definition
+     * @return {boolean} - True in case the Assessment Definition exists, false otherwise
+     */
+    var validateAssessmentDefinitionId = function(assessmentDefinitionId) {
+        return CIRAssmtPortalListManagerFP().ValidateAssessmentDefinitionId(assessmentDefinitionId);
+    };
+
+    /**
+     * Validate if the parent table have data.
+     *
+     * @param {String} assessmentDefinitionId - SysID of the Assessment Definition
+     * @param {String} tableInput - name of table being used
+     * @return {boolean} - True in case the parent has records, false otherwise
+     */
+    var validateAssessmentParentData = function(assessmentDefinitionId, tableInput) {
+        return CIRAssmtPortalListManagerFP().ValidateAssessmentParentData(assessmentDefinitionId,
+            tableInput);
+    };
+    /**
+     * Validate if all assessment fields of type '3' and mandatory 'true' have one default choice chosen.
+     * @param {String} assessment - SysID of the Assessment Definition
+     * Example of arrayContentsEdited - [{"idsToDelete":[],"refFieldId":"7f951175db091010bf9ead8ed396197c","content":[{"default":{"displayValue":"true","value":"true"},"label":{"displayValue":"q","value":"q"},"localIndex":0,"value":{"displayValue":"q","value":"q"},"order":0}]}]
+     * @return {boolean} - True in case the field have default_value setted or in case of eddited, one choice is selected as default
+     */
+
+    var checkAllDefaultSetted = function(assessment) {
+        return CIRAssmtPortalListManagerFP().CheckAllDefaultSetted(assessment);
+    };
+    /**
+     * Validate if a already exists one choice marked as default when objToCheck is marked as default
+     * @param {String} tableName - table being processed
+	 * @param {Array} tableContent - Field to be checked
+	 Example of tableContent [{"default":{"displayValue":"false","value":"false"},"label":{"displayValue":"q","value":"q"},"localIndex":0,"value":{"displayValue":"q","value":"q"},"order":0},{"default":{"displayValue":"false","value":"false"},"label":{"displayValue":"a","value":"a"},"localIndex":1,"value":{"displayValue":"a","value":"a"},"order":0}]
+	 * @param {Array} objToCheck - object to check inside array
+     * @return {boolean} - True when the default value is setted
+     */
+    var checkOnlyOneDefault = function(tableName, tableContent, objToCheck) {
+        return CIRAssmtPortalListManagerFP().CheckOnlyOneDefault(tableName, tableContent, objToCheck);
+    };
+
+    /**
+     * Function to get the message to display to the user when removing an Assessment Object.
+     *
+     * @param {String} tableName - name of the current table
+     * @param {String} currentObjId - SysID of the current record
+     * @return {String} - Text with the message to show to the user
+     */
+    var getRemoveAssessmentMessage = function(tableName, currentObjId) {
+        return CIRAssmtRemoveAssessmentFP().GetRemoveAssessmentMessage(tableName, currentObjId);
+    };
+
+    /**
+     * Get the Category field of an assessment
+     * @param {String} assessment - assessment sys_id 
+     * @return {String} - Category sys_id
+     */
+    var getCatalogCategoryFromAssessment = function(assessment) {
+        return CIRAssmtPortalListManagerFP().GetCatalogCategoryFromAssessment(assessment);
+    };
+
+    /**
+     * Function to remove all the associated Assessment objects.
+     *
+     * @param {String} tableName - name of the current table
+     * @param {String} currentObjId - SysID of the current record
+     * @return {String} - Message to display to the user
+     */
+    var removeAssessmentObjects = function(tableName, currentObjId) {
+        return CIRAssmtRemoveAssessmentFP().RemoveAssessmentObjects(tableName, currentObjId);
+    };
+
+    /**
+     * Function used to remove the records from the Catalog objects.
+     *
+     * @param {Object} grCurrent - GlideRecord of the current Assessment object
+     * @return {Boolean} - True if all records were removed, false otherwise
+     */
+    var removeCatalogObjects = function(grCurrent) {
+        return CIRAssmtRemoveAssessmentFP().RemoveCatalogObjects(grCurrent);
+    };
+
+    /**
+     * Function to return a boolean on whether Assessment Choices exist for the current Definition.
+     *
+     * @param {String} assessDefRec - String containing the SysID of the current Assessment Definition
+     * @return {Boolean} - 'true' if Assessment Choices related with the Assessment Definition exist, 'false' if not
+     */
+    var assmtDefHasChoices = function(assessDefRec) {
+        return CIRAssmtReadFP().AssmtDefHasChoices(assessDefRec);
+    };
+
+    /**
+     * Function to return a boolean on whether Assessment Definitions was published and has instances.
+     *
+     * @param {String} assessmentId - String containing the SysID of the current Assessment Definition
+     * @param {Boolean} published - true if assessment was published, false if not 
+     * @return {Boolean} - 'true' if Assessment Choices related with the Assessment Definition exist, 'false' if not
+     */
+    var lockAssessment = function(assessmentId, published) {
+        var hasInstances = new CIRAssmtReadFP().AssmtDefHasInstances(assessmentId);
+        return published && hasInstances;
+    };
+
+    /**
+     * Function to activate or deactivate an Assessment object and it 's connected Catalog objects.
+     *
+     * @param {String} tableName - Current table name
+     * @param {String} currentId - SysID of the current record
+     * @param {Boolean} activate - True to activate the Assessment object, false to deactivate it
+     * @param {Boolean} published - True if it is an Assessment Definition and is published, false otherwise
+     * @return {void}
+     */
+    var activateAssessmentObject = function(tableName, currentId, activate, published) {
+        CIRAssmtActivationFP().ActivateAssessmentObject(tableName, currentId, activate, published);
+    };
+
+    /**
+     * Function to get the message for the popup
+     *
+     * @param {String} tableName - Current table name
+     * @param {Boolean} published - True if it is an Assessment Definition and is published, false otherwise
+     * @param {Boolean} activate - True if the user is activating the assessment objects, false otherwise
+     * @return {String} - String with the message to show to the user in the popup
+     */
+    var getActivateDeactivateAssessmentMessage = function(tableName, published, activate) {
+        return CIRAssmtActivationFP().GetActivateDeactivateAssessmentMessage(tableName, published, activate);
+    };
+	/**
+     * Function to deactivate by cascade the subset of records related
+     *
+     * @param {String} tableName - Current table name
+     * @param {String} currentId - Id of the deactivate object
+     * @param {String} field - Field to coalesce
+     * @return {void}
+     */
+	var deactivateAssessmentChild = function(tableName, currentId, field){
+		return CIRAssmtActivationFP().DeactivateChildRecords(tableName, currentId, field);
+	};
+
+    /**
+     * Function to confirm if an Assessment Definition exists
+     *
+     * @param {String} assessmentDefId - String containing the SysID of the current Assessment Definition
+     * @return {Boolean} - True if the Assessment Definition exists, false otherwise
+     */
+    var hasAssessmentDefinition = function(assessmentDefId, published) {
+		return CIRAssmtReadFP().HasAssessmentDefinition(assessmentDefId, published);
+    };
+
+    CIRAssmtModelFP.prototype = {
+        initialize: initialize,
+        CheckCatalogObject: checkCatalogObject,
+        CheckChoices: checkChoices,
+        PublishAssessmentDefinition: publishAssessmentDefinition,
+        ActOnAssessmentDefinition: actOnAssessmentDefinition,
+        ActOnAssessmentSection: actOnAssessmentSection,
+        ActOnAssessmentField: actOnAssessmentField,
+        ActOnAssessmentChoice: actOnAssessmentChoice,
+        PerformOperationOnAssessment: performOperationOnAssessment,
+        CompleteAssessmentSectionInstance: completeAssessmentSectionInstance,
+        GetAssessmentIdFromAssessmentInstance: getAssessmentIdFromAssessmentInstance,
+        GetAssessmentsInfo: getAssessmentsInfo,
+        GetAssessmentsInfoForUser: getAssessmentsInfoForUser,
+        GetAssessmentInstanceSectionData: getAssessmentInstanceSectionData,
+        GetAssessmentInstanceUsers: getAssessmentInstanceUsers,
+        GetAssessmentInstancesData: getAssessmentInstancesData,
+        ProcessExcel: processExcel,
+        CheckMandatoryFieldsCreation: checkMandatoryFieldsCreation,
+        IsAssesmentCanceledComplete: isAssesmentCanceledComplete,
+        GetIncompleteAssesmentInstanceSections: getIncompleteAssesmentInstanceSections,
+        CheckGlobalScript: checkGlobalScript,
+        SaveDataAssessment: saveDataAssessment,
+        GetTableData: getTableData,
+        ManipulateData: manipulateData,
+        ValidateDuplicates: validateDuplicates,
+        GetListManagerDefinitions: getListManagerDefinitions,
+        ValidateAssessmentDefinitionId: validateAssessmentDefinitionId,
+        ValidateAssessmentParentData: validateAssessmentParentData,
+        CheckAllDefaultSetted: checkAllDefaultSetted,
+        CheckOnlyOneDefault: checkOnlyOneDefault,
+        GetRemoveAssessmentMessage: getRemoveAssessmentMessage,
+        RemoveAssessmentObjects: removeAssessmentObjects,
+        GetCatalogCategoryFromAssessment: getCatalogCategoryFromAssessment,
+        RemoveCatalogObjects: removeCatalogObjects,
+        AssmtDefHasChoices: assmtDefHasChoices,
+        LockAssessment: lockAssessment,
+        ActivateAssessmentObject: activateAssessmentObject,
+        GetActivateDeactivateAssessmentMessage: getActivateDeactivateAssessmentMessage,
+		DeactivateAssessmentChild : deactivateAssessmentChild,
+		HasAssessmentDefinition: hasAssessmentDefinition
+    };
+    return CIRAssmtModelFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:04:31</sys_created_on>
+        <sys_id>3a311f89db8e1410d4a73533f396192d</sys_id>
+        <sys_mod_count>59</sys_mod_count>
+        <sys_name>CIRAssmtModelFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_3a311f89db8e1410d4a73533f396192d</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 13:53:34</sys_updated_on>
+    </sys_script_include>
+</record_update>

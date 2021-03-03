@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>CIR Portal SysID</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_fru_cir.cir.portal</name>
+        <read_roles>x_fru_cir.admin</read_roles>
+        <suffix>cir.portal</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-01 13:23:18</sys_created_on>
+        <sys_id>020b054fdb8d901003b3533fd39619da</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_fru_cir.cir.portal</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_properties_020b054fdb8d901003b3533fd39619da</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-15 13:09:15</sys_updated_on>
+        <type>string</type>
+        <value>52acfc7edb21d81003b3533fd3961965</value>
+        <write_roles>x_fru_cir.admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=020b054fdb8d901003b3533fd39619da"/>
+</record_update>

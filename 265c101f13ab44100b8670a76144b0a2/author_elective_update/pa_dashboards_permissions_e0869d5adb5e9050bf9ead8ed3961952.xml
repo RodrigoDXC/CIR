@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="pa_dashboards_permissions">
+    <pa_dashboards_permissions action="DELETE">
+        <dashboard display_value="Static Protection Daily Report">f78f92eddb525050bf9ead8ed3961957</dashboard>
+        <delete>false</delete>
+        <group/>
+        <identity>x_fru_cir.static_protection_coordinator</identity>
+        <read>true</read>
+        <role display_value="x_fru_cir.static_protection_coordinator" name="x_fru_cir.static_protection_coordinator">4d9a890ddb9e1c10d4a73533f396191b</role>
+        <sys_class_name>pa_dashboards_permissions</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-31 09:35:10</sys_created_on>
+        <sys_id>e0869d5adb5e9050bf9ead8ed3961952</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.static_protection_coordinator</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>pa_dashboards_permissions_e0869d5adb5e9050bf9ead8ed3961952</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-31 09:35:10</sys_updated_on>
+        <type>1</type>
+        <user/>
+        <write>false</write>
+    </pa_dashboards_permissions>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>cfb305280a0a3d2301801c2592067c19</instance_id>
+        <instance_name>dev01084</instance_name>
+        <name>pa_dashboards_permissions_e0869d5adb5e9050bf9ead8ed3961952</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="pa_dashboards_permissions"><pa_dashboards_permissions action="INSERT_OR_UPDATE"><dashboard display_value="Static Protection Daily Report">f78f92eddb525050bf9ead8ed3961957</dashboard><delete>false</delete><group/><identity>x_fru_cir.static_protection_coordinator</identity><read>true</read><role display_value="x_fru_cir.static_protection_coordinator" name="x_fru_cir.static_protection_coordinator">4d9a890ddb9e1c10d4a73533f396191b</role><sys_class_name>pa_dashboards_permissions</sys_class_name><sys_created_by>hugo.reis</sys_created_by><sys_created_on>2020-07-31 09:35:10</sys_created_on><sys_id>e0869d5adb5e9050bf9ead8ed3961952</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_fru_cir.static_protection_coordinator</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>pa_dashboards_permissions_e0869d5adb5e9050bf9ead8ed3961952</sys_update_name><sys_updated_by>hugo.reis</sys_updated_by><sys_updated_on>2020-07-31 09:35:10</sys_updated_on><type>1</type><user/><write>false</write></pa_dashboards_permissions></record_update>]]></payload>
+        <payload_hash>2001570427</payload_hash>
+        <record_name>x_fru_cir.static_protection_coordinator</record_name>
+        <reverted_from/>
+        <source>20ac1ee5db929c10d4a73533f3961957</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-31 09:35:10</sys_created_on>
+        <sys_id>ec869d5adb5e9050bf9ead8ed3961954</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173a439aee40000001</sys_recorded_at>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-31 09:35:10</sys_updated_on>
+        <type>Dashboard Permissions</type>
+        <update_guid>e4869d5af65e9050ccae34fac5883354</update_guid>
+        <update_guid_history>e4869d5af65e9050ccae34fac5883354:2001570427</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">162a4dbedbaed010d4a73533f39619e9</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-14 08:13:53</sys_created_on>
+        <sys_db_object display_value="" name="pa_dashboards_permissions">pa_dashboards_permissions</sys_db_object>
+        <sys_id>040627e2e8a94bb7816766efa1937f59</sys_id>
+        <sys_metadata>e0869d5adb5e9050bf9ead8ed3961952</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.static_protection_coordinator</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>pa_dashboards_permissions_e0869d5adb5e9050bf9ead8ed3961952</sys_update_name>
+        <sys_update_version display_value="pa_dashboards_permissions_e0869d5adb5e9050bf9ead8ed3961952">ec869d5adb5e9050bf9ead8ed3961954</sys_update_version>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-14 08:13:53</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

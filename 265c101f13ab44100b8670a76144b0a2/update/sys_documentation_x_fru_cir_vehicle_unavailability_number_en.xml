@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="number" label="Number" language="en" table="x_fru_cir_vehicle_unavailability">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>number</element>
+            <help/>
+            <hint/>
+            <label>Number</label>
+            <language>en</language>
+            <name>x_fru_cir_vehicle_unavailability</name>
+            <plural>Numbers</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-05 09:33:27</sys_created_on>
+            <sys_id>401643bfdb12d050d4a73533f396196e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Number</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_vehicle_unavailability_number_en</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-05 09:33:27</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

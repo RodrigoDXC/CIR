@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" label="Witness" max_length="40" name="x_fru_cir_witness" sizeclass="10" type="collection">
+        <element label="Address" max_length="4000" name="address" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Case" max_length="32" name="cir_case" read_only="true" reference="x_fru_cir_case" type="reference"/>
+        <element label="Company" max_length="100" name="company" type="string"/>
+        <element label="Email" max_length="100" name="email" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Individual" max_length="32" name="employee" reference="sys_user" type="reference"/>
+        <element label="First name" mandatory="true" max_length="40" name="first_name" type="string"/>
+        <element label="Individual not found" max_length="40" name="individual_not_found" type="boolean"/>
+        <element choice="1" label="Individual type" mandatory="true" max_length="40" name="individual_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Employee (Full time/Part time)" sequence="100" value="employee"/>
+                <element inactive_on_update="false" label="Employee (Temp/Other)" sequence="200" value="employee_other"/>
+                <element inactive_on_update="false" label="Contractor" sequence="300" value="contractor"/>
+                <element inactive_on_update="false" label="Vendor" sequence="400" value="vendor"/>
+                <element inactive_on_update="false" label="Visitor" sequence="500" value="visitor"/>
+            </choice>
+        </element>
+        <element label="Last name" mandatory="true" max_length="40" name="last_name" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element label="Phone" mandatory="true" max_length="40" name="phone" type="string"/>
+        <element label="Statement" mandatory="true" max_length="4000" name="statement" type="string"/>
+        <element label="Statement Date/Time" mandatory="true" max_length="40" name="statement_date_time" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Employee" sequence="10" value="employee"/>
+                <element inactive_on_update="false" label="Contractor/Temp" sequence="20" value="contractor_temp"/>
+                <element inactive_on_update="false" label="Vendor" sequence="30" value="vendor"/>
+                <element inactive_on_update="false" label="Visitor" sequence="40" value="visitor"/>
+                <element inactive_on_update="false" label="Bystander" sequence="50" value="bystander"/>
+            </choice>
+        </element>
+        <element label="Work notes" max_length="4000" name="work_notes" type="journal_input"/>
+        <index name="index">
+            <element name="cir_case"/>
+        </index>
+        <index name="index2">
+            <element name="employee"/>
+        </index>
+    </element>
+</database>

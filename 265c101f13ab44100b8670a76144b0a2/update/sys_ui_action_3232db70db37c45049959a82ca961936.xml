@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name/>
+        <active>true</active>
+        <client>true</client>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments/>
+        <condition>gs.hasRole('x_fru_cir.situation_user')</condition>
+        <form_action>true</form_action>
+        <form_button>false</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>true</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <hint/>
+        <isolate_script>true</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Send Email to Active Group</name>
+        <onclick>sendEmail()</onclick>
+        <order>100</order>
+        <script><![CDATA[function sendEmail(){
+	var execId = g_form.getUniqueValue();
+
+	var gaActiveTeam = new GlideAjax('x_fru_cir.CIRSituationUtilsClient');
+	gaActiveTeam .addParam('sysparm_name', 'getActiveTeam');
+	gaActiveTeam .addParam('sysparm_recId', execId);
+
+	gaActiveTeam.getXML(createDialog);
+
+
+	function createDialog(response){
+		var answer = response.responseXML.documentElement.getAttribute("answer");
+		var activeUsers = JSON.parse(answer);
+
+		var dialogMessage = new GlideModal('x_fru_cir_send_email_active_group', false, 700, 450);
+		dialogMessage.setTitle(getMessage('Send Email to Active Group'));
+		dialogMessage.setPreference("recId", execId);
+		dialogMessage.setPreference("activeUsers", activeUsers);
+
+		dialogMessage.render();
+	}
+
+}
+]]></script>
+        <show_insert>true</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-24 20:12:00</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>3232db70db37c45049959a82ca961936</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Send Email to Active Group</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_action_3232db70db37c45049959a82ca961936</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-04-03 14:18:12</sys_updated_on>
+        <table>x_fru_cir_response_plan_execution_step_message</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

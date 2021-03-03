@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Message Set" max_length="40" name="x_fru_cir_message_set" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,extended_operators=VALCHANGES;CHANGESFROM;CHANGESTO" dependent="table" dependent_on_field="table" label="Condition" max_length="4000" name="condition" type="conditions" use_dependent_field="true"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Countries" max_length="4000" name="countries" reference="x_fru_cir_security_address_value" reference_qual="type=country^language=en^EQ" reference_qual_condition="type=country^language=en^EQ" type="glide_list"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" type="reference"/>
+        <element active="false" attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Locations" max_length="4000" name="locations" reference="x_fru_cir_security_location" type="glide_list"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" dynamic_default_value="fdcb83a85f220100a9ad2572f2b4773c" label="Number" max_length="40" name="number" read_only="true" type="string" use_dynamic_default="true"/>
+        <element attributes="edge_encryption_enabled=true" label="On insert" max_length="40" name="on_insert" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="On update" max_length="40" name="on_update" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Parametrization" max_length="40" name="parametrization" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Response plans" max_length="4000" name="response_plans" reference="x_fru_cir_response_plan_template" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Response plan categories" max_length="4000" name="response_plan_categories" reference="x_fru_cir_response_plan_category" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Situation category" max_length="4000" name="situation_category" reference="x_fru_cir_situation_category" reference_qual="javascript: &quot;dimension=&quot; + current.dimension + '';" type="glide_list" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Situation parametrization" max_length="32" name="situation_parametrization" reference="x_fru_cir_situation_parametrization" type="reference"/>
+        <element attributes="base_start=true,edge_encryption_enabled=true,tableChoicesScript=CIRSituationFilterTables" label="Table" mandatory="true" max_length="80" name="table" type="table_name"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Template" max_length="32" name="template" reference="x_fru_cir_message_set" type="reference"/>
+        <index name="index">
+            <element name="situation_parametrization"/>
+        </index>
+        <index name="index2">
+            <element name="dimension"/>
+        </index>
+        <index name="index3">
+            <element name="template"/>
+        </index>
+    </element>
+</database>

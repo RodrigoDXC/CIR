@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_push_notif_msg_content">
+    <sys_push_notif_msg_content action="INSERT_OR_UPDATE">
+        <name>CIR Situation Task Push Content</name>
+        <push_app display_value="ServiceNow Mobile Application">05ed2fb177002300258da2e2c81061c2</push_app>
+        <script><![CDATA[(function buildJSON(/*GlideRecord*/ current, /*String*/ message, /*Object*/ attributes) {
+
+	var number = '';
+	var description = '';
+	var msgSysId = '';
+	
+	var docId = 'd8aed60ddbb3085049959a82ca9619d0';
+	/*var msgRecipients = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);
+	msgRecipients.addQuery("situation_task_execution", current.sys_id);
+	msgRecipients.query();
+
+	if (msgRecipients.next()) {		
+		msgSysId = msgRecipients.getUniqueValue();*/
+
+		var layoutFieldGenerator = new global.NotificationLayoutFieldGenerator();
+		//number = layoutFieldGenerator.layoutField(msgRecipients.getTableName(), msgRecipients.sys_id, "situation_task_execution.msg_subject");
+		//description = layoutFieldGenerator.layoutField(msgRecipients.getTableName(), msgRecipients.sys_id, "situation_task_execution.message");
+	//}
+	var deepLinkGenerator = new global.MobileDeepLinkGenerator("Agent");
+	var link = deepLinkGenerator.getFormScreenLink(docId, CIRConstants.Tables.SITUATION , current.getValue("situation"));
+	gs.info('HR ' +  current.getValue("situation"));
+	var json = {};
+	
+	json = {
+		"aps" : {
+			"sound" : "default"
+		},
+		"Link": link,
+		"Layout" : {
+			"Identifier" : number,
+			"Description" : description
+		}
+	};
+	
+	gs.info('HR ' + JSON.stringify(json));
+	return json;
+	
+	
+})(current, message, attributes);]]></script>
+        <sys_class_name>sys_push_notif_msg_content</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-06-29 10:51:50</sys_created_on>
+        <sys_id>4dc4b0c0dbb11010bf9ead8ed3961911</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>CIR Situation Task Push Content</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_push_notif_msg_content_4dc4b0c0dbb11010bf9ead8ed3961911</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-30 09:28:15</sys_updated_on>
+    </sys_push_notif_msg_content>
+</record_update>

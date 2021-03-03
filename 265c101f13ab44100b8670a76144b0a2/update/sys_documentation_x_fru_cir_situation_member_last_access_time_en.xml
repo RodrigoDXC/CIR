@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="last_access_time" label="Last access time" language="en" table="x_fru_cir_situation_member">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>last_access_time</element>
+            <help/>
+            <hint/>
+            <label>Last access time</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_member</name>
+            <plural>Last access times</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-03-23 11:25:48</sys_created_on>
+            <sys_id>c2d7761b1bc114107a7d624d6e4bcb89</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>Last access time</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_situation_member_last_access_time_en</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-15 15:06:01</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

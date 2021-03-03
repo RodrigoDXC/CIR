@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var cal = [];
+var instanceLang = g_lang;
+var parm = getParmVal('type') + '';
+
+getFiltersChoices();
+getCurrentDay();
+
+switch (parm) {
+	case 'unavailable': 
+		document.getElementById('date_').style.display = 'none';
+		document.getElementById('date').style.display = 'none';
+
+		getAllUnavailableVehicles();
+		break;
+	case 'available':
+		getAllAvailableVehicles();
+		break;
+}
+
+
+window.addEventListener("click", function(e) {
+	var date = document.getElementById('date').value;
+
+	if (e.target.getAttribute('id') === 'filter') {
+		getVehicles(date);
+	}
+});
+
+
+// used to hide the buttons on the header of the calendar, when the calendar shows the available cars
+function makeListViewDefault() {
+	var calendarHeader = document.getElementsByClassName('fc-toolbar fc-header-toolbar')[0];
+	var calendarElemRight = calendarHeader.getElementsByClassName('fc-right')[0].childNodes[0].childNodes;
+	var calendarElemLeft = calendarHeader.getElementsByClassName('fc-left')[0].childNodes[0].childNodes;
+
+	for (i = 0; i < calendarElemRight.length; i++) {
+		calendarElemRight[i].style.display = 'none';
+	}
+
+	for (i = 0; i < calendarElemLeft.length; i++) {
+		calendarElemLeft[i].style.display = 'none';
+	}
+}
+
+
+// set the current day on the date field
+function getCurrentDay() {
+	var currentDate = new Date();
+	currentDate = formatDate(currentDate, 'yyyy-MM-dd');
+
+	document.getElementById('date').value = currentDate;
+}
+
+
+//fill the choice lists with values
+function getFiltersChoices() {
+	var ga = new GlideAjax('CIRPersonalProtectionClientUtils');
+	ga.addParam('sysparm_name', 'getChoiceLists');
+	ga.getXML(updateFilters);	
+}
+
+
+function updateFilters(response) {
+	var answer = response.responseXML.documentElement.getAttribute("answer");
+	var filters = JSON.parse(answer);
+
+	for (var i = 0; i < filters.length; i++) {
+		var sel = null;
+		var opt = null;
+
+		switch (filters[i].choice) {
+			case 'type':
+				sel = document.getElementById('vehicle_type');
+				break;
+			case 'engine':
+				sel = document.getElementById('engine');
+		}
+
+		opt = document.createElement('option');
+		opt.value = filters[i].value;
+		opt.text = filters[i].text;
+		sel.appendChild(opt);
+	}
+}
+
+
+function getAllUnavailableVehicles() {
+	var ga = new GlideAjax('CIRPersonalProtectionClientUtils');
+	ga.addParam('sysparm_name', 'getAllUnavailableVehicles');
+	ga.getXML(GetCalendarAnswer);	
+}
+
+
+function getAllAvailableVehicles() {
+	var ga = new GlideAjax('CIRPersonalProtectionClientUtils');
+	ga.addParam('sysparm_name', 'getAllAvailableVehiclesAjax');
+	ga.getXML(GetCalendarAnswer);
+}
+
+
+function getVehicles(date) {
+	var myNode = document.getElementById('calendar');
+
+	//delete the childs of the 'calendar' element
+	//without this, everytime 'search' is clicked one more calendar appears on the page
+	while (myNode.firstChild) {
+		myNode.removeChild(myNode.firstChild);
+	}
+
+	var vehicleType = gel('vehicle_type').value;
+	var engine = gel('engine').value;
+
+	var ga = new GlideAjax('CIRPersonalProtectionClientUtils');
+	ga.addParam('sysparm_name', 'getVehicles');
+	ga.addParam('sysparm_vehicleType', vehicleType);
+	ga.addParam('sysparm_vehicleEngine', engine);
+	ga.addParam('sysparm_availability', parm);
+	ga.addParam('sysparm_date', date);
+	ga.getXML(GetCalendarAnswer);
+}
+
+
+function GetCalendarAnswer(response) {
+	var answer = response.responseXML.documentElement.getAttribute("answer");
+	cal = JSON.parse(answer);
+
+	if(cal[0] && cal[0].date) {
+		var date = cal.splice(0,1);
+		date = date[0].date;
+	}
+
+	drawCalendar(date, cal);
+}
+
+
+//function used to create the calendar
+//is here that the properties specific to the calendar API should be added or removed
+function drawCalendar(date, vehicles) {
+	var calendarEl = document.getElementById('calendar');
+
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		lang: instanceLang,
+		locale: instanceLang,
+		timeZone: 'local',
+
+		plugins: ['dayGrid', 'timeGrid',  'list', 'interaction'],
+		defaultView: 'dayGridMonth',
+
+		allDaySlot: false,
+		minTime: '00:00',
+		maxTime: '24:00',
+
+		weekNumbers: true,
+		weekNumbersWithinDays: true,
+		fixedWeekCount: false,
+		navLinks: true,
+
+		header: {
+			left: 'prev,next',
+			center: 'title',
+			right: 'dayGridMonth,timeGridWeek,timeGridDay,list',
+		},
+
+		eventLimit: true,
+		events: vehicles,
+		displayEventTime: false,
+		defaultDate: date
+	});
+
+	calendar.render();
+
+	if (parm === 'available') {
+		makeListViewDefault();
+		calendar.changeView('list');
+	} 
+}
+
+
+function getParmVal(name) {
+	var url = document.URL.parseQuery();
+	if (url[name]) {
+		return decodeURI(url[name]);
+	}
+	else{
+		return;
+	}
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_cir_vehiclesUnavailability_schedule.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<style>
+		html, body {
+		margin: 0;
+		padding: 0;
+		font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+		font-size: 14px;
+		}
+
+		.dropdown {
+		margin: 20px;
+		}
+
+		table {
+		border-collapse: separate;
+		border-spacing: 10px;
+		}
+
+		#calendar {
+		max-width: 900px;
+		margin: 40px auto;
+		}
+
+		.fc-list-heading-main {
+		pointer-events: none;
+		}
+	</style>	
+
+	<head>
+		<script src="x_fru_cir.cir_bg_schedule_core.jsdbx"></script>
+		<script src="x_fru_cir.cir_bg_schedule_daygrid.jsdbx"></script>
+		<script src="x_fru_cir.cir_bg_schedule_timegrid.jsdbx"></script>
+		<script src="x_fru_cir.cir_bg_schedule_moment.jsdbx"></script>
+		<script src="x_fru_cir.cir_bg_schedule_interaction.jsdbx"></script>
+		<script src="x_fru_cir.cir_bg_schedule_list.jsdbx"></script>
+		<script src="x_fru_cir.cir_bg_schedule_localesall.jsdbx"></script>
+
+
+		<link href="27c95c5fdbde1450bf9ead8ed396195b.cssdbx?" rel="stylesheet" type="text/css" />
+		<link href="c3f9d85fdbde1450bf9ead8ed39619e6.cssdbx?" rel="stylesheet" type="text/css" />
+		<link href="051ad41fdbde1450bf9ead8ed39619c6.cssdbx?" rel="stylesheet" type="text/css" />
+		<link href="ff2a9c5fdbde1450bf9ead8ed39619f8.cssdbx?" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body>
+		<div class="dropdown">
+			<table style="width:30%">
+				<tr>
+					<th width="100px">${gs.getMessage('cir_vehicles_schedule_type')}</th>
+					<th>
+						<select id="vehicle_type" style="width:200px">
+							<option>${gs.getMessage('cir_vehicles_schedule_all')}</option>
+						</select>
+					</th>
+					<th width="50px"></th>
+					<th width="100px">${gs.getMessage('cir_vehicles_schedule_engine')}</th>
+					<th>
+						<select id="engine" style="width:200px">
+							<option>${gs.getMessage('cir_vehicles_schedule_all')}</option>
+						</select>
+					</th>
+					<th width="50px"></th>
+					<th id="date_" width="100px">Date</th>
+					<th>
+						<input type="date" id="date"></input>
+					</th>
+					<th width="50px"></th>
+					<th>
+						<button id="filter">${gs.getMessage('cir_vehicles_schedule_search')}</button>
+					</th>
+				</tr>
+			</table>
+		</div>
+
+		<div id="calendar"></div>
+	</body>
+</j:jelly>]]></html>
+        <name>cir_vehiclesUnavailability_schedule</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-06 08:33:50</sys_created_on>
+        <sys_id>41fe3b48dbead050d4a73533f39619b9</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>cir_vehiclesUnavailability_schedule</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_41fe3b48dbead050d4a73533f39619b9</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-10 08:20:48</sys_updated_on>
+    </sys_ui_page>
+</record_update>

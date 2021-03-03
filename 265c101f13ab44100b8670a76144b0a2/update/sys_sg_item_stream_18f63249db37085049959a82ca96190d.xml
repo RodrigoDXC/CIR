@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_stream">
+    <sys_sg_item_stream action="INSERT_OR_UPDATE">
+        <data_item display_value="CIR Situation Messages">60d53ac1db37085049959a82ca9619a7</data_item>
+        <interleaved_field/>
+        <name>Situation Messages Item Stream</name>
+        <sys_class_name>sys_sg_item_stream</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 12:47:07</sys_created_on>
+        <sys_id>18f63249db37085049959a82ca96190d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Situation Messages Item Stream</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_item_stream_18f63249db37085049959a82ca96190d</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 12:47:07</sys_updated_on>
+        <table>x_fru_cir_message_execution_recipient</table>
+    </sys_sg_item_stream>
+</record_update>

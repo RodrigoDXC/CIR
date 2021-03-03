@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_related sys_domain="global" table="x_fru_cir_response_plan_template" version="2" view="parametrization">
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Response Plan Template - Parametrization" name="x_fru_cir_response_plan_template" related_list="NULL" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">2ed6cb92dbe1981003b3533fd39619d9</list_id>
+            <order_by/>
+            <position>0</position>
+            <related_list>x_fru_cir_response_plan_step.response_plan_template</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-24 10:58:55</sys_created_on>
+            <sys_id>aad6cb92dbe1981003b3533fd39619da</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-24 10:58:55</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Response Plan Template - Parametrization" name="x_fru_cir_response_plan_template" related_list="NULL" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">2ed6cb92dbe1981003b3533fd39619d9</list_id>
+            <order_by/>
+            <position>1</position>
+            <related_list>x_fru_cir_response_plan_template.template</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-24 10:58:55</sys_created_on>
+            <sys_id>22d6cb92dbe1981003b3533fd39619db</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-24 10:58:55</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list action="INSERT_OR_UPDATE">
+            <calculated_name>Response Plan Template - Parametrization</calculated_name>
+            <filter/>
+            <name>x_fru_cir_response_plan_template</name>
+            <order_by/>
+            <position/>
+            <related_list/>
+            <sys_class_name>sys_ui_related_list</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-24 10:58:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2ed6cb92dbe1981003b3533fd39619d9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Response Plan Template - Parametrization</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_related_x_fru_cir_response_plan_template_parametrization</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-24 10:58:55</sys_updated_on>
+            <sys_user/>
+            <view display_value="Parametrization" name="parametrization">ffff802cdb21941003b3533fd3961949</view>
+            <view_name/>
+        </sys_ui_related_list>
+    </sys_ui_related>
+</record_update>

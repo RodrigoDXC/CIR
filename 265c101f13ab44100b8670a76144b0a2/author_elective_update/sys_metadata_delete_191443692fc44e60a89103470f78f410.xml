@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="DELETE">
+        <category>custom</category>
+        <css>.containerPadding {&#13;
+padding-top: 10px;&#13;
+&#13;
+}&#13;
+.panel-body{&#13;
+background-color:#FFF;&#13;
+}&#13;
+.panel-heading, .panel-footer {&#13;
+background-color: #e1edf1;&#13;
+}&#13;
+main{padding-top:0;}&#13;
+&#13;
+.list-group-item &gt; a {&#13;
+  color: #6F7779;&#13;
+  display: inline-block;&#13;
+  font-size: $text-font-size;&#13;
+}&#13;
+.carousel-inner .container {&#13;
+  width:100%; &#13;
+  padding:0;&#13;
+  max-height:410px;&#13;
+}&#13;
+&#13;
+&#13;
+.iconlink .fa-inverse{&#13;
+	color: #ce0000;&#13;
+}&#13;
+.iconlink .text-default{&#13;
+	color: #FFFFFF;&#13;
+}&#13;
+.iconlink .text-default:hover{&#13;
+	color: #53b0ba;&#13;
+}&#13;
+.iconlink h2 {&#13;
+	color: #53b0ba;&#13;
+}</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>cir_home</id>
+        <internal>false</internal>
+        <public>false</public>
+        <roles>x_fru_cir.cir_base</roles>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 09:44:28</sys_created_on>
+        <sys_id>882c8e491b730850df7e43f4bd4bcb43</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_home</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_page_882c8e491b730850df7e43f4bd4bcb43</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 09:44:28</sys_updated_on>
+        <title>CIR Homepage</title>
+    </sp_page>
+    <sys_translated_text action="DELETE" query="documentkey=882c8e491b730850df7e43f4bd4bcb43"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sp_page_882c8e491b730850df7e43f4bd4bcb43</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page"><sp_page action="INSERT_OR_UPDATE"><category>custom</category><css>.containerPadding {&#13;
+padding-top: 10px;&#13;
+&#13;
+}&#13;
+.panel-body{&#13;
+background-color:#FFF;&#13;
+}&#13;
+.panel-heading, .panel-footer {&#13;
+background-color: #e1edf1;&#13;
+}&#13;
+main{padding-top:0;}&#13;
+&#13;
+.list-group-item &gt; a {&#13;
+  color: #6F7779;&#13;
+  display: inline-block;&#13;
+  font-size: $text-font-size;&#13;
+}&#13;
+.carousel-inner .container {&#13;
+  width:100%; &#13;
+  padding:0;&#13;
+  max-height:410px;&#13;
+}&#13;
+&#13;
+&#13;
+.iconlink .fa-inverse{&#13;
+	color: #ce0000;&#13;
+}&#13;
+.iconlink .text-default{&#13;
+	color: #FFFFFF;&#13;
+}&#13;
+.iconlink .text-default:hover{&#13;
+	color: #53b0ba;&#13;
+}&#13;
+.iconlink h2 {&#13;
+	color: #53b0ba;&#13;
+}</css><draft>false</draft><dynamic_title_structure/><id>cir_home</id><internal>false</internal><public>false</public><roles>x_fru_cir.cir_base</roles><short_description/><sys_class_name>sp_page</sys_class_name><sys_created_by>paulo.gomes</sys_created_by><sys_created_on>2020-03-25 09:44:28</sys_created_on><sys_id>882c8e491b730850df7e43f4bd4bcb43</sys_id><sys_mod_count>0</sys_mod_count><sys_name>cir_home</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sp_page_882c8e491b730850df7e43f4bd4bcb43</sys_update_name><sys_updated_by>paulo.gomes</sys_updated_by><sys_updated_on>2020-03-25 09:44:28</sys_updated_on><title>CIR Homepage</title></sp_page><sys_translated_text action="delete_multiple" query="documentkey=882c8e491b730850df7e43f4bd4bcb43"/></record_update>]]></payload>
+        <payload_hash>-210401736</payload_hash>
+        <record_name>cir_home</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 09:44:28</sys_created_on>
+        <sys_id>302d4ac51b730850df7e43f4bd4bcbf0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>171111433dc0000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 09:44:28</sys_updated_on>
+        <type>Page</type>
+        <update_guid>382d4ac520730850627a9778b8bf1bef</update_guid>
+        <update_guid_history>382d4ac520730850627a9778b8bf1bef:-210401736</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">143f0acd1b730850df7e43f4bd4bcbfa</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 09:53:28</sys_created_on>
+        <sys_db_object display_value="" name="sp_page">sp_page</sys_db_object>
+        <sys_id>191443692fc44e60a89103470f78f410</sys_id>
+        <sys_metadata>882c8e491b730850df7e43f4bd4bcb43</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>cir_home</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_191443692fc44e60a89103470f78f410</sys_update_name>
+        <sys_update_version display_value="sp_page_882c8e491b730850df7e43f4bd4bcb43">302d4ac51b730850df7e43f4bd4bcbf0</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:04</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

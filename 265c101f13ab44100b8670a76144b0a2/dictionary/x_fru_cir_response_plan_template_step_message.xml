@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_fru_cir_response_plan_step" label="Response Plan Template Step Message" max_length="40" name="x_fru_cir_response_plan_template_step_message" sizeclass="1" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Contact list" mandatory="true" max_length="32" name="contact_list" reference="x_fru_cir_contact_list" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Feedback" max_length="40" name="feedback" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Message" mandatory="true" max_length="32" name="message" reference="x_fru_cir_message" reference_qual="javascript: 'type=' + current.getValue('message_type');" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Message type" mandatory="true" max_length="40" name="message_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Email" value="email"/>
+                <element inactive_on_update="false" label="Push" value="push"/>
+                <element inactive_on_update="false" label="SMS" value="sms"/>
+                <element inactive_on_update="false" label="Voice" value="voice"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" hint="Only for Response and Escalation team messages" label="Timer (min)" max_length="40" name="timer" type="integer"/>
+        <index name="index">
+            <element name="contact_list"/>
+        </index>
+        <index name="index2">
+            <element name="message"/>
+        </index>
+    </element>
+</database>

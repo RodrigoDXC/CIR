@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="cmn_location" version="2" view="cir">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>name</element>
+            <list_id display_value="cmn_location" element="NULL" name="cmn_location" parent="NULL" relationship="NULL" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">b64e1c83db4d901003b3533fd396197f</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:06:31</sys_created_on>
+            <sys_id>724e1c83db4d901003b3533fd3961980</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:06:31</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>contact</element>
+            <list_id display_value="cmn_location" element="NULL" name="cmn_location" parent="NULL" relationship="NULL" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">b64e1c83db4d901003b3533fd396197f</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:06:31</sys_created_on>
+            <sys_id>f24e1c83db4d901003b3533fd3961980</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:06:31</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>phone</element>
+            <list_id display_value="cmn_location" element="NULL" name="cmn_location" parent="NULL" relationship="NULL" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">b64e1c83db4d901003b3533fd396197f</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:06:31</sys_created_on>
+            <sys_id>764e1c83db4d901003b3533fd3961980</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:06:31</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>city</element>
+            <list_id display_value="cmn_location" element="NULL" name="cmn_location" parent="NULL" relationship="NULL" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">b64e1c83db4d901003b3533fd396197f</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:06:31</sys_created_on>
+            <sys_id>f64e1c83db4d901003b3533fd3961980</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:06:31</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>latitude</element>
+            <list_id display_value="cmn_location" element="NULL" name="cmn_location" parent="NULL" relationship="NULL" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">b64e1c83db4d901003b3533fd396197f</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:06:31</sys_created_on>
+            <sys_id>7a4e1c83db4d901003b3533fd3961980</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:06:31</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>longitude</element>
+            <list_id display_value="cmn_location" element="NULL" name="cmn_location" parent="NULL" relationship="NULL" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">b64e1c83db4d901003b3533fd396197f</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:06:31</sys_created_on>
+            <sys_id>fa4e1c83db4d901003b3533fd3961980</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:06:31</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_updated_on</element>
+            <list_id display_value="cmn_location" element="NULL" name="cmn_location" parent="NULL" relationship="NULL" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">b64e1c83db4d901003b3533fd396197f</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:06:31</sys_created_on>
+            <sys_id>7e4e1c83db4d901003b3533fd3961980</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:06:31</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>cmn_location</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:06:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b64e1c83db4d901003b3533fd396197f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>cmn_location</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_list_cmn_location_cir</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:06:31</sys_updated_on>
+            <sys_user/>
+            <view display_value="CIR" name="cir">513e5083db4d901003b3533fd39619f3</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

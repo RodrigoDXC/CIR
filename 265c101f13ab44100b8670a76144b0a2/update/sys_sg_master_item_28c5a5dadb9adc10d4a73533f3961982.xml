@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_master_item">
+    <sys_sg_master_item action="INSERT_OR_UPDATE">
+        <condition_order>-1</condition_order>
+        <datasource_table>x_fru_cir_witness</datasource_table>
+        <datasource_table_condition/>
+        <embedded_screen display_value="Witness">e4c5a5dadb9adc10d4a73533f3961955</embedded_screen>
+        <item_view display_value="Witness Item View">20c525dadb9adc10d4a73533f396190e</item_view>
+        <name>Witness Master Item</name>
+        <sys_class_name>sys_sg_master_item</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-31 10:41:48</sys_created_on>
+        <sys_id>28c5a5dadb9adc10d4a73533f3961982</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Witness Master Item</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_master_item_28c5a5dadb9adc10d4a73533f3961982</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-31 10:44:13</sys_updated_on>
+    </sys_sg_master_item>
+</record_update>

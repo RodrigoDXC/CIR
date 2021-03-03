@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>fc69b3eedb6d981003b3533fd3961955</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_body_location">
+    <x_fru_cir_body_location action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <center>369,97</center>
+        <height>15</height>
+        <name>Neck (Back)</name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 09:18:12</sys_created_on>
+        <sys_id>fc69b3eedb6d981003b3533fd3961955</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-25 09:18:12</sys_updated_on>
+        <width>40</width>
+        <x_coordinate>354</x_coordinate>
+        <y_coordinate>95</y_coordinate>
+    </x_fru_cir_body_location>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 09:20:43</sys_created_on>
+        <sys_id>75f93beedb6d981003b3533fd39619eb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Neck (Back)</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_75f93beedb6d981003b3533fd39619eb</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-25 09:20:43</sys_updated_on>
+        <tablename>x_fru_cir_body_location</tablename>
+    </sys_metadata_link>
+</record_update>

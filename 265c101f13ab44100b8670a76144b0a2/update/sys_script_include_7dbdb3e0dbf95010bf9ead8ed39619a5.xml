@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRPSIAjaxUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>CIRPSIAjaxUtils</name>
+        <script><![CDATA[var CIRPSIAjaxUtils = Class.create();
+CIRPSIAjaxUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+	getUserInfo: function() {
+		var userParm = this.getParameter('sysparm_user');
+		var user = {};
+
+		var userRecord = new GlideRecord('sys_user');
+		if (userRecord.get(userParm)) {
+			user.name = userRecord.getValue('name');
+			user.email = userRecord.getValue('email');
+			user.companydv = userRecord.getValue('company');
+			user.costcenterdv = userRecord.getDisplayValue('cost_center');
+			user.title = userRecord.getValue('title');
+			user.user_name = userRecord.getValue('user_name');
+
+			if (userRecord.getValue('phone')) {
+				user.phone = userRecord.getValue('phone');
+			} else {
+				user.phone = "";
+			}
+		}
+		return JSON.stringify(user);
+	},
+	
+	getVehicleInfo: function() {
+		var vehicleParm = this.getParameter('sysparm_vehicle');
+		var vehicle = {};
+
+		var vehicleRecord = new GlideRecord('x_fru_cir_vehicle');
+		if (vehicleRecord.get(vehicleParm)) {
+			vehicle.driver = vehicleRecord.getValue('driver');
+			vehicle.make = vehicleRecord.getValue('brand');
+			vehicle.model = vehicleRecord.getValue('model');
+			vehicle.year = vehicleRecord.getValue('year');
+			vehicle.current_mileage = vehicleRecord.getValue('kilometers');
+			vehicle.plate_number = vehicleRecord.getValue('registration_plate');
+		}
+		return JSON.stringify(vehicle);
+	},
+
+	getFsmLocSpace: function() {
+		var spaceData = {};
+		spaceData.spaceId = this.getParameter('sysparm_spaceId');
+		spaceData.building = this.getParameter('sysparm_building');
+		spaceData.floor = this.getParameter('sysparm_floor');
+		var isFromRP = this.getParameter('sysparm_fromRp');
+
+		return new CIRPSIUtils().GetFsmLocationSpace(spaceData,isFromRP);
+	},
+
+	getBuildingData: function() {
+		var buildingData = {};
+		buildingData.name = this.getParameter('sysparm_building_name');
+		buildingData.country = this.getParameter('sysparm_country') ? this.getParameter('sysparm_country') : '';
+		var obj = new CIRPSIUtils().GetBuildingFilterData(buildingData);
+
+		return JSON.stringify(obj);
+	},
+
+	getNowDateTime: function() {
+		var now = new GlideDateTime().getDisplayValue(); //Now Date/Time
+		return now;
+	},
+
+	getUserCountryValue: function() {
+		var grUser = new GlideRecord('sys_user');
+		if(grUser.get(gs.getUserID())){
+			return country =  new CIRPSIUtils().GetChoiceForCountry(grUser.getDisplayValue('country'));
+		}
+	},
+
+	getAddressRecs: function() {
+		var obj = new CIRPSIUtils().GetAddressValueIds(this.getParameter('sysparm_locationId'));
+		return JSON.stringify(obj);
+	},
+
+	calculateCost: function() {
+		var value = this.getParameter('sysparm_value');
+		var currency = this.getParameter('sysparm_currency');
+
+		return new CIRPSIImportHelper().ConvertCost(currency, value);
+	},
+
+	getCategoryId: function () {
+		var value = this.getParameter('sysparm_value');
+		var type = this.getParameter('sysparm_type');	
+		return new CIRPSIUtils().GetCategoryId(type,value);
+	},
+
+	getFieldsFromUserTable :  function() {
+		var id = this.getParameter('sysparm_id');
+		var obj = new CIRPSIUtils().GetFieldsFromUserTable(id);
+		return JSON.stringify(obj);
+	},
+
+	getFields: function() {
+		var tableName = this.getParameter('sysparm_table_name');
+		return new CIRPSIUtils().GetFields(tableName);
+	},
+
+	type: 'CIRPSIAjaxUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-01 14:46:29</sys_created_on>
+        <sys_id>7dbdb3e0dbf95010bf9ead8ed39619a5</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>CIRPSIAjaxUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_7dbdb3e0dbf95010bf9ead8ed39619a5</sys_update_name>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 12:59:02</sys_updated_on>
+    </sys_script_include>
+</record_update>

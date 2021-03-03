@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description>Action Item to remove the selected event timeline of an Investigation.</description>
+        <execution_script/>
+        <name>CIR -Remove Timeline Event</name>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-31 15:16:06</sys_created_on>
+        <sys_id>6e84eed2db5edc10d4a73533f39619f0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR -Remove Timeline Event</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_6e84eed2db5edc10d4a73533f39619f0</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-31 15:16:06</sys_updated_on>
+        <table>x_fru_cir_event_timeline</table>
+        <template/>
+        <type>delete</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=6e84eed2db5edc10d4a73533f39619f0"/>
+</record_update>

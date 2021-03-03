@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-phone-homepage</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Phone Homepage</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    data.investigator = gs.hasRole('x_fru_cir.investigator');
+    data.investigatorFilter = new CIRRiskManagementUtils().GetInvestigationsQuery();
+    data.caseFilter = new CIRCaseManagementUtils().getMyCasesQuery();
+    data.actionsFilter = new CIRRiskManagementUtils().GetMyActionsQuery();
+
+    var actionCount = new GlideAggregate(CIRConstants.Tables.ACTION);
+    actionCount.addAggregate('COUNT');
+    actionCount.addEncodedQuery(data.actionsFilter);
+    actionCount.query();
+    if(actionCount.next()) {
+        data.actionCount = actionCount.getAggregate('COUNT');
+    }
+
+    var caseCount = new GlideAggregate(CIRConstants.Tables.CASE);
+    caseCount.addAggregate('COUNT');
+    caseCount.addEncodedQuery(data.caseFilter);
+    caseCount.query();
+    if(caseCount.next()) {
+        data.caseCount = caseCount.getAggregate('COUNT');
+    }
+
+    var investigationCount = new GlideAggregate(CIRConstants.Tables.INVESTIGATION);
+    investigationCount.addAggregate('COUNT');
+    investigationCount.addEncodedQuery(data.investigatorFilter);
+    investigationCount.query();
+    if(investigationCount.next()) {
+        data.investigationCount = investigationCount.getAggregate('COUNT');
+    }
+
+
+    data.reportACaseSysId = gs.getProperty('x_fru_cir.sc_cat_item.report_a_case');
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 13:21:34</sys_created_on>
+        <sys_id>31987dc71be1101024c896ce0a4bcba5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR CIRI Phone Homepage</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_31987dc71be1101024c896ce0a4bcba5</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-26 13:31:36</sys_updated_on>
+        <template><![CDATA[<div class="col-xs-12 visible-xs-block" style="padding-top:20px">
+  <a href="?id=sc_cat_item&sys_id={{data.reportACaseSysId}}" style="width:100%;">
+    <button class="btn btn-primary" style="width:100%;margin-bottom:20px">${open_a_case}</button>
+  </a>
+  <a href="?id=cir_ciri_list&table=x_fru_cir_case&filter={{data.caseFilter}}" style="width:100%">
+    <button class="btn" style="width:100%;margin-bottom:20px">${my_cases} <span class="label label-as-badge label-primary sp-navbar-badge-count" style="margin-left:5px">{{data.caseCount}}</span></button>
+  </a>
+  <a href="?id=cir_ciri_list&table=x_fru_cir_action&filter={{data.actionsFilter}}" style="width:100%">
+    <button class="btn" style="width:100%;margin-bottom:20px">${my_actions} <span class="label label-as-badge label-primary sp-navbar-badge-count" style="margin-left:5px">{{data.actionCount}}</span></button>
+  </a>
+  <a ng-if="data.investigator" href="?id=cir_ciri_list&table=x_fru_cir_investigation&filter={{data.investigatorFilter}}" style="width:100%">
+    <button class="btn" style="width:100%;margin-bottom:20px">${my_investigations} <span class="label label-as-badge label-primary sp-navbar-badge-count" style="margin-left:5px">{{data.investigationCount}}</span></button>
+  </a>
+</div>]]></template>
+    </sp_widget>
+</record_update>

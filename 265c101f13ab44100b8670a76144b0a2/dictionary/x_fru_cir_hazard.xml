@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="email_client=true" audit="true" extends="x_fru_cir_case" label="Hazard" max_length="40" name="x_fru_cir_hazard" sizeclass="4" type="collection">
+        <element choice="1" label="Classification" mandatory="true" max_length="40" name="classification" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Biological Hazard" sequence="10" value="biological_hazard"/>
+                <element inactive_on_update="false" label="Chemical Hazard" sequence="20" value="chemical_hazard"/>
+                <element inactive_on_update="false" label="Ergonomic Hazard" sequence="30" value="ergonomic_hazard"/>
+                <element inactive_on_update="false" label="Physical Hazard" sequence="40" value="physical_hazard"/>
+                <element inactive_on_update="false" label="Safety Hazard" sequence="50" value="safety_hazard"/>
+                <element inactive_on_update="false" label="Work Organization Hazard" sequence="60" value="work_organization_hazard"/>
+            </choice>
+        </element>
+    </element>
+</database>

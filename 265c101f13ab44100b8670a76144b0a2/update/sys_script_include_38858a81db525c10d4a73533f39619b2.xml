@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRStaticProtectionUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRStaticProtectionUtils</name>
+        <script><![CDATA[var CIRStaticProtectionUtils = Class.create();
+CIRStaticProtectionUtils.prototype = Object.extendsObject(CIRStaticProtectionUtilsFP,{
+    initialize: function() {
+		
+		CIRStaticProtectionUtilsFP.prototype.initialize.call(this);
+    },
+
+    type: 'CIRStaticProtectionUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-27 15:50:17</sys_created_on>
+        <sys_id>38858a81db525c10d4a73533f39619b2</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIRStaticProtectionUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_38858a81db525c10d4a73533f39619b2</sys_update_name>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-09-16 14:38:56</sys_updated_on>
+    </sys_script_include>
+</record_update>

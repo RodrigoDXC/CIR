@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="pa_m2m_dashboard_tabs">
+    <pa_m2m_dashboard_tabs action="DELETE">
+        <dashboard display_value="Static Protection Daily Report">f78f92eddb525050bf9ead8ed3961957</dashboard>
+        <home>false</home>
+        <homepage/>
+        <order>1</order>
+        <sys_class_name>pa_m2m_dashboard_tabs</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-29 06:59:11</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d8afd2eddb525050bf9ead8ed396193e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>f78f92eddb525050bf9ead8ed3961957</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>pa_m2m_dashboard_tabs_d8afd2eddb525050bf9ead8ed396193e</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-29 06:59:11</sys_updated_on>
+        <tab display_value="Static Protection Da - New Tab">dcafd2eddb525050bf9ead8ed396193b</tab>
+    </pa_m2m_dashboard_tabs>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>cfb305280a0a3d2301801c2592067c19</instance_id>
+        <instance_name>dev01084</instance_name>
+        <name>pa_m2m_dashboard_tabs_d8afd2eddb525050bf9ead8ed396193e</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="pa_m2m_dashboard_tabs"><pa_m2m_dashboard_tabs action="INSERT_OR_UPDATE"><dashboard display_value="Static Protection Daily Report">f78f92eddb525050bf9ead8ed3961957</dashboard><home>false</home><homepage/><order>1</order><sys_class_name>pa_m2m_dashboard_tabs</sys_class_name><sys_created_by>hugo.reis</sys_created_by><sys_created_on>2020-07-29 06:59:11</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>d8afd2eddb525050bf9ead8ed396193e</sys_id><sys_mod_count>0</sys_mod_count><sys_name>f78f92eddb525050bf9ead8ed3961957</sys_name><sys_overrides/><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>pa_m2m_dashboard_tabs_d8afd2eddb525050bf9ead8ed396193e</sys_update_name><sys_updated_by>hugo.reis</sys_updated_by><sys_updated_on>2020-07-29 06:59:11</sys_updated_on><tab display_value="Static Protection Da - New Tab">dcafd2eddb525050bf9ead8ed396193b</tab></pa_m2m_dashboard_tabs></record_update>]]></payload>
+        <payload_hash>1344834362</payload_hash>
+        <record_name>f78f92eddb525050bf9ead8ed3961957</record_name>
+        <reverted_from/>
+        <source>20ac1ee5db929c10d4a73533f3961957</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-29 06:59:11</sys_created_on>
+        <sys_id>dcafd2eddb525050bf9ead8ed3961940</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173995e29d30000001</sys_recorded_at>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-29 06:59:11</sys_updated_on>
+        <type>Dashboard Tab</type>
+        <update_guid>d4afd2ed4d525050d197b5fcf9717a40</update_guid>
+        <update_guid_history>d4afd2ed4d525050d197b5fcf9717a40:1344834362</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">6e2a45fedbaed010d4a73533f396194c</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-14 08:13:53</sys_created_on>
+        <sys_db_object display_value="" name="pa_m2m_dashboard_tabs">pa_m2m_dashboard_tabs</sys_db_object>
+        <sys_id>00d85c291fc34b04800294b3ca73f384</sys_id>
+        <sys_metadata>d8afd2eddb525050bf9ead8ed396193e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>f78f92eddb525050bf9ead8ed3961957</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>pa_m2m_dashboard_tabs_d8afd2eddb525050bf9ead8ed396193e</sys_update_name>
+        <sys_update_version display_value="pa_m2m_dashboard_tabs_d8afd2eddb525050bf9ead8ed396193e">dcafd2eddb525050bf9ead8ed3961940</sys_update_version>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-14 08:13:53</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

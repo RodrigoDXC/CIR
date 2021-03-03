@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtPublishFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected script for publishing and Assessment. Not extensible.</description>
+        <name>CIRAssmtPublishFP</name>
+        <script><![CDATA[var CIRAssmtPublishFP = function() {
+
+    /**
+     * Function to set published field true when assessment is published
+     *
+     * @param {String} assessmentDefinitionId - String containing the SysID of the Assessment Definition     
+     */
+    var publishAssessmentDefinition = function(assessmentDefinitionId) {
+        var grAssessmentDefinition = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        grAssessmentDefinition.addActiveQuery();
+        grAssessmentDefinition.addQuery('sys_id', assessmentDefinitionId);
+        grAssessmentDefinition.query();
+        if(grAssessmentDefinition.next()) {
+            grAssessmentDefinition.setValue('published', 'true');
+            return !(!grAssessmentDefinition.update());
+        }
+        return false;
+    };
+
+    /**
+     * Function to check whether all Catalog objects exist for the current Assessment objects
+     *
+     * @param {String} assessmentDefinitionId - String containing the SysID of the Assessment Definition     
+     */
+    var checkCatalogObject = function(assessmentId) {
+        var grAssessmentDefinition = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        grAssessmentDefinition.addQuery('sys_id', assessmentId);
+        grAssessmentDefinition.addEncodedQuery('categoryISEMPTY');
+        grAssessmentDefinition.setLimit(1);
+        grAssessmentDefinition.query();
+        if(grAssessmentDefinition.hasNext()) {
+            return false;
+        }
+
+        var grAssessmentSection = new GlideRecord(CIRConstants.Tables.ASSESSMENT_SECTION);
+        grAssessmentSection.addQuery('assessment_definition', assessmentId);
+        grAssessmentSection.addEncodedQuery('record_producerISEMPTY');
+        grAssessmentSection.setLimit(1);
+        grAssessmentSection.query();
+        if(grAssessmentSection.hasNext()) {
+            return false;
+        }
+
+        var fieldQuery =
+            'assessment_section.assessment_definition=' + assessmentId +
+            '^mandatory_conditionISNOTEMPTY^mandatory_cat_ui_policyISEMPTY' +
+            '^NQassessment_section.assessment_definition=' + assessmentId +
+            '^read_only_conditionISNOTEMPTY^read_only_cat_ui_policyISEMPTY' +
+            '^NQassessment_section.assessment_definition=' + assessmentId +
+            '^visible_conditionISNOTEMPTY^visible_cat_ui_policyISEMPTY' +
+            '^NQassessment_section.assessment_definition=' + assessmentId +
+            '^field_message_conditionISNOTEMPTY^field_mess_cat_ui_policyISEMPTY' +
+            '^NQassessment_section.assessment_definition=' + assessmentId + '^variableISEMPTY';
+        var grAssessmentField = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+        grAssessmentField.addEncodedQuery(fieldQuery);
+        grAssessmentField.setLimit(1);
+        grAssessmentField.query();
+        if(grAssessmentField.hasNext()) {
+            return false;
+        }
+
+        var grAssessmentChoice = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+        grAssessmentChoice.addQuery('assessment_field.assessment_section.assessment_definition', assessmentId);
+        grAssessmentChoice.addEncodedQuery('choiceISEMPTY');
+        grAssessmentChoice.setLimit(1);
+        grAssessmentChoice.query();
+        if(grAssessmentChoice.hasNext()) {
+            return false;
+        }
+
+        return true;
+    };
+
+    /**
+     * Function to check choices are created for the Assessment Field, in case it is a Multiple Choice or Select Box
+     *
+     * @param {String} assessmentDefinitionId - String containing the SysID of the Assessment Definition     
+     */
+    var checkChoices = function(assessmentId) {
+        var grAssessmentField = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+        grAssessmentField.addQuery('assessment_section.assessment_definition', assessmentId);
+        grAssessmentField.addQuery('typeIN3,5');
+        grAssessmentField.query();
+        while(grAssessmentField.next()) {
+            var grAssessmentChoice = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+            grAssessmentChoice.addQuery('assessment_field', grAssessmentField.getUniqueValue());
+            grAssessmentChoice.setLimit(1);
+            grAssessmentChoice.query();
+            if(!grAssessmentChoice.hasNext()) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Definition record (create or update records).
+     *
+     * @param {String} assessmentDefinitionId - String containing the SysID of the Assessment Definition
+     * @param {Object} logObj - JSON object containing the log messages
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentDefinition = function(assessmentDefinitionId, isCreate, isActive) {
+        var logObj = {};
+        var logMsg = '';
+	
+		
+        // Fetch the Assessment Definition records
+        var grAssessmentDefinition = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        grAssessmentDefinition.addQuery('sys_id', assessmentDefinitionId);
+        grAssessmentDefinition.query();
+        if(!grAssessmentDefinition.next()) {
+            throw gs.getMessage('cir_assmt_generate_metadata_definition_must_be_active');
+        }
+		
+		//Validate if is Deactivation
+		if(isActive === '0'){
+			
+			new CIRAssmtModel().DeactivateAssessmentChild(CIRConstants.Tables.ASSESSMENT_SECTION, grAssessmentDefinition.getUniqueValue(), 'assessment_definition'); 
+		}
+        // Create or Update the Category Record
+        var category = !isCreate ? grAssessmentDefinition.getValue('category') : '';
+        var createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps(
+            'category', grAssessmentDefinition, category);
+        var categoryId = new global.CIRGlobalHelperFP().CreateUpdateRecord(createUpdateProps);
+        if(!categoryId) {
+            logMsg = gs.getMessage('cir_assmt_category_log', [grAssessmentDefinition.getValue('name')]);
+            logObj = new CIRGenericUtils().LogStack(logObj, false, logMsg);
+            return logObj;
+        }
+        grAssessmentDefinition.setValue('category', categoryId);
+
+
+        logMsg = gs.getMessage('cir_assmt_assessment_definition_log', [grAssessmentDefinition.getValue(
+        'name')]);
+        // Update the Assessment Definition record
+        if(!grAssessmentDefinition.update()) {
+            logObj = new CIRGenericUtils().LogStack(logObj, false, logMsg);
+            return logObj;
+        }
+        return new CIRGenericUtils().LogStack(logObj, true, logMsg);
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Section record (create or update records).
+     *
+     * @param {String} assessmentSectionId - String containing the SysID of the Assessment Section
+     * @param {String} categoryId - String containing the SysID of the Category
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentSection = function(assessmentSectionId, categoryId, isCreate, isActive) {
+        var logMsg = '';
+        var logObj = {};
+        // Fetch the Assessment Section records
+        var queryProps = CIRAssmtUtilsFP().GetQueryProps('assessmentSection');
+        var assessmentSection = new CIRGenericUtils().QueryTable(queryProps, assessmentSectionId);
+
+        assessmentSection.assessment_definition.category = categoryId;
+        // Create or Update the Record Producer Record
+        assessmentSection.record_producer = !isCreate ? assessmentSection.record_producer : '';
+		//Validate if is one Deactivation
+		if(isActive === '0'){
+			
+			new CIRAssmtModel().DeactivateAssessmentChild(CIRConstants.Tables.ASSESSMENT_FIELD, assessmentSectionId , 'assessment_section'); 
+		}
+        //Remove all the images related to the Record Producer, the image will be added again afterwards
+        if(assessmentSection.record_producer) {
+            var attachmentTableName = 'ZZ_YY' + CIRConstants.Tables.CAT_ITEM_PRODUCER;
+            var grAttachments = new GlideSysAttachment().getAttachments(
+                attachmentTableName, assessmentSection.record_producer);
+            while(grAttachments.next()) {
+                new GlideSysAttachment().deleteAttachment(grAttachments.getUniqueValue());
+            }
+        }
+        var createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps('recordProducer', assessmentSection,
+            assessmentSection.record_producer);
+        assessmentSection.record_producer = new global.CIRGlobalHelperFP().CreateUpdateRecord(
+        createUpdateProps);
+        if(!assessmentSection.record_producer) {
+            logMsg = gs.getMessage('cir_assmt_catalog_item_producer_log', [assessmentSection.name]);
+            logObj = new CIRGenericUtils().LogStack(logObj, false, logMsg);
+            return;
+        }
+        //Copy the attachment picture from the Assessment Section to the Record Producer
+        GlideSysAttachment.copy(CIRConstants.Tables.ASSESSMENT_SECTION, assessmentSection.sys_id, CIRConstants
+            .Tables.CAT_ITEM_PRODUCER, assessmentSection.record_producer);
+
+        // Update the Assessment Section record
+        createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps('assessmentSection', assessmentSection,
+            assessmentSection.sys_id);
+        logMsg = gs.getMessage('cir_assmt_assessment_section_log', [assessmentSection.name]);
+        if(!new CIRGenericUtils().CreateUpdateRecord(createUpdateProps)) {
+            logObj = new CIRGenericUtils().LogStack(logObj, false, logMsg);
+            return;
+        }
+        return new CIRGenericUtils().LogStack(logObj, true, logMsg);
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Field record (create or update records).
+     *
+     * @param {String} assessmentFieldId - String containing the SysID of the Assessment Field
+     * @param {String} recordProducerId - String containing the SysID of the Record Producer
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentField = function(assessmentFieldId, recordProducerId, isCreate, isActive) {
+        var queryProps = CIRAssmtUtilsFP().GetQueryProps('assessmentField');
+        var assessmentField = new CIRGenericUtils().QueryTable(queryProps, assessmentFieldId);
+        assessmentField.logObj = {};
+
+		if(isActive === '0'){
+			new CIRAssmtModel().DeactivateAssessmentChild(CIRConstants.Tables.ASSESSMENT_CHOICE, assessmentFieldId , 'assessment_field'); 
+		}
+        processAssessmentFields(assessmentField, isCreate);
+
+        if(recordProducerId) {
+            assessmentField.logObj = actOnCatalogUiPolicy(assessmentField, recordProducerId, assessmentField
+                .logObj);
+        }
+
+        return assessmentField.logObj;
+    };
+
+    /**
+     * Function to perform operations based on the Assessment Field record (create or update records).
+     *
+     * @param {Object} assessmentField - JSON object containing the Assessment Field data
+     * @return {void}
+     */
+    var processAssessmentFields = function(assessmentField, isCreate) {
+        var logMsg = '';
+        assessmentField._arrConditions = [];
+
+        if(assessmentField.mandatory && assessmentField.type === '3') {
+            assessmentField.default_value = validateFieldDefaultValue(assessmentField);
+        }
+
+        // Create or Update the Variable Record
+        var variable = !isCreate ? assessmentField.variable : '';
+        assessmentField.mandatory_cat_ui_policy = !isCreate ? assessmentField.mandatory_cat_ui_policy : '';
+        assessmentField.read_only_cat_ui_policy = !isCreate ? assessmentField.read_only_cat_ui_policy : '';
+        assessmentField.visible_cat_ui_policy = !isCreate ? assessmentField.visible_cat_ui_policy : '';
+        assessmentField.field_mess_cat_ui_policy = !isCreate ? assessmentField.field_mess_cat_ui_policy : '';
+
+        var createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps('variable', assessmentField, variable);
+        assessmentField.variable = new global.CIRGlobalHelperFP().CreateUpdateRecord(createUpdateProps);
+        if(!assessmentField.variable) {
+            logMsg = gs.getMessage('cir_assmt_variable_log', [assessmentField.name]);
+            assessmentField.logObj = new CIRGenericUtils().LogStack(assessmentField.logObj, false, logMsg);
+            return;
+        }
+
+        if(assessmentField.mandatory_condition) {
+            assessmentField._arrConditions.push({
+                fieldName: 'mandatory_cat_ui_policy',
+                strCondition: assessmentField.mandatory_condition
+            });
+        }
+        if(assessmentField.read_only_condition) {
+            assessmentField._arrConditions.push({
+                fieldName: 'read_only_cat_ui_policy',
+                strCondition: assessmentField.read_only_condition
+            });
+        }
+        if(assessmentField.visible_condition) {
+            assessmentField._arrConditions.push({
+                fieldName: 'visible_cat_ui_policy',
+                strCondition: assessmentField.visible_condition
+            });
+        }
+        if(assessmentField.field_message_condition) {
+            assessmentField._arrConditions.push({
+                fieldName: 'field_mess_cat_ui_policy',
+                strCondition: assessmentField.field_message_condition
+            });
+        }
+
+        // Update the Assessment Field record
+        createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps(
+            'assessmentField', assessmentField, assessmentField.sys_id);
+        logMsg = gs.getMessage('cir_assmt_assessment_field_log', [assessmentField.name]);
+        if(!new CIRGenericUtils().CreateUpdateRecord(createUpdateProps)) {
+            assessmentField.logObj = new CIRGenericUtils().LogStack(assessmentField.logObj, false, logMsg);
+            return;
+        }
+        assessmentField.logObj = new CIRGenericUtils().LogStack(assessmentField.logObj, true, logMsg);
+    };
+
+    /**
+     * Function to validate the Default Value in the Assessment Field.
+     *
+     * @param {Object} assessmentField - JSON object containing the Assessment Field data
+     * @return {String} - Same value if default value exists or first choice value otherwise
+     */
+    var validateFieldDefaultValue = function(assessmentField) {
+        var currValue = '';
+        var grChoice = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+        grChoice.addQuery('assessment_field', assessmentField.sys_id);
+        grChoice.orderByDesc('order');
+        grChoice.query();
+        while(grChoice.next()) {
+            currValue = grChoice.getValue('value');
+            if(currValue === assessmentField.default_value || grChoice.getValue('default') === '1') {
+                return currValue;
+            }
+        }
+        return currValue;
+    };
+
+    /**
+     * Function to perform operations on the Catalog UI Policies of a Record Producer.
+     *
+     * @param {Array} arrAssessmentFields - Array of objects with data about Assessment Fields
+     * @param {String} recordProducerId - String containing the SysID of the Record Producer
+     * @param {Object} logObj - JSON object containing the log messages
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnCatalogUiPolicy = function(assessmentField, recordProducerId, logObj) {
+        prepareVariableId(assessmentField);
+        // Iterate through all of the conditional objects
+        if(assessmentField._arrConditions.length === 0) {
+            return logObj;
+        }
+
+        var objConditionsData = {
+            arrConditions: assessmentField._arrConditions,
+            assessmentField: assessmentField,
+            recordProducerId: recordProducerId
+        };
+        return createConditions(objConditionsData, logObj);
+    };
+
+    /**
+     * Function to Replace all the variable names with the corresponding variable id preceded by 'IO:'
+     * on the conditions for correct match
+     *
+     * @param {Array} arrAssessmentFields - Array of objects with data about Assessment Fields
+     * @return {Array} - Array of objects with data about Assessment Fields
+     */
+    var prepareVariableId = function(assessmentField) {
+        var ID_PREFIX = 'IO:';
+
+        if(assessmentField._arrConditions.length === 0) {
+            return;
+        }
+        assessmentField._arrConditions.forEach(function(condition) {
+            if(condition.strCondition) {
+                condition.strCondition = condition.strCondition.split(assessmentField.name).join([
+                    ID_PREFIX, assessmentField.variable
+                ].join(''));
+            }
+        });
+    };
+
+    /**
+     * Function to create the Catalog UI Policy Action.
+     *
+     * @param {String} objConditionsData - Object containing:
+     * arrConditions - Array containing the conditions and field names
+     * assessmentField - Object containing the Assessment Field data
+     * recordProducerId - String containing the SysID of the Record Producer
+     * @param {Object} logObj - JSON object containing the log messages
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var createConditions = function(objConditionsData, logObj) {
+        var logMsg = '';
+
+        var assessmentField = objConditionsData.assessmentField;
+        var currentVariableName = assessmentField.name;
+
+        assessmentField._arrConditions.forEach(processCatalog, {
+            recordProducerId: objConditionsData.recordProducerId,
+            logObj: logObj,
+            assessmentField: assessmentField,
+            currentVariableName: currentVariableName
+        });
+
+        // Update the Assessment Field record
+        createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps(
+            'assessmentField', assessmentField, assessmentField.sys_id);
+        logMsg = gs.getMessage('cir_assmt_assessment_field_log', [assessmentField.name]);
+        if(!new CIRGenericUtils().CreateUpdateRecord(createUpdateProps)) {
+            logObj = new CIRGenericUtils().LogStack(logObj, false, logMsg);
+            return;
+        }
+        return new CIRGenericUtils().LogStack(logObj, true, logMsg);
+    };
+
+    var processCatalog = function(condition) {
+        var WHITE_SPACE_REGEX = /\s/g;
+        var ENCODED_CONDITION_SUFFIX = '^EQ';
+        var logMsg = '';
+        if(condition.strCondition.replace(WHITE_SPACE_REGEX, '') === '') {
+            this.assessmentField[condition.fieldName] = '';
+            return;
+        }
+        var isNewPolicy = !this.assessmentField[condition.fieldName];
+        var catalogUiPolicyProps = {
+            'recordProducerId': this.recordProducerId,
+            'conditions': condition.strCondition + ENCODED_CONDITION_SUFFIX,
+            'variableName': this.currentVariableName,
+            'fieldMessage': this.assessmentField.field_message
+        };
+        var propName = 'uiPolicy';
+        if(condition.fieldName === 'field_mess_cat_ui_policy') {
+            propName = 'uiPolicyFieldMessage';
+        }
+
+        // Create the Catalog UI Policy for the current condition
+        var createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps(
+            propName, catalogUiPolicyProps, this.assessmentField[condition.fieldName]);
+        this.assessmentField[condition.fieldName] =
+            new global.CIRGlobalHelperFP().CreateUpdateRecord(createUpdateProps);
+        if(!this.assessmentField[condition.fieldName]) {
+            logMsg = gs.getMessage('cir_assmt_catalog_ui_policy_log', [this.currentVariableName, condition
+                .fieldName, this.currentVariableName
+            ]);
+            this.logObj = new CIRGenericUtils().LogStack(this.logObj, false, logMsg);
+            return;
+        }
+
+        if(isNewPolicy && condition.fieldName !== 'field_mess_cat_ui_policy') {
+            var objCatUiPolicyAction = {
+                catPolicyId: this.assessmentField[condition.fieldName],
+                currentVariableId: this.assessmentField.variable,
+                fieldName: condition.fieldName,
+                currentVariableName: this.currentVariableName
+            };
+            this.logObj = actOnCatalogUiPolicyAction(objCatUiPolicyAction, this.logObj);
+        }
+        logMsg = gs.getMessage('cir_assmt_catalog_ui_policy_log', [this.currentVariableName, condition
+            .fieldName, this.currentVariableName
+        ]);
+        this.logObj = new CIRGenericUtils().LogStack(this.logObj, true, logMsg);
+    };
+
+    /**
+     * Function to perform operations on the Catalog UI Policy Actions of a Catalog UI Policy.
+     *
+     * @param {String} objCatUiPolicyAction - Object containing:
+     * catPolicyId - String containing the SysID of the Catalog UI Policy
+     * currentVariableId - String containing the SysID of the Variable
+     * fieldName - String containing the current field name
+     * currentVariableName - String containing the current variable name
+     * @param {Object} logObj - JSON object containing the log messages
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnCatalogUiPolicyAction = function(objCatUiPolicyAction, logObj) {
+        var ID_PREFIX = 'IO:';
+        var logMsg = '';
+        var fieldName = objCatUiPolicyAction.fieldName;
+
+        var uiPolicyActionProps = {
+            'catalogUIPolicyId': objCatUiPolicyAction.catPolicyId,
+            'variableId': [ID_PREFIX, objCatUiPolicyAction.currentVariableId].join('')
+        };
+        switch (fieldName) {
+            case 'mandatory_cat_ui_policy':
+                uiPolicyActionProps.fieldName = 'mandatory';
+                break;
+            case 'read_only_cat_ui_policy':
+                uiPolicyActionProps.fieldName = 'disabled';
+                break;
+            case 'visible_cat_ui_policy':
+                uiPolicyActionProps.fieldName = 'visible';
+                break;
+        }
+
+        // Create the Catalog UI Policy Action for the current Catalog UI Policy
+        var createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps(
+            'uiPolicyAction', uiPolicyActionProps);
+        if(!new global.CIRGlobalHelperFP().CreateUpdateRecord(createUpdateProps)) {
+            logMsg =
+                gs.getMessage('cir_assmt_catalog_ui_policy_action_log', [objCatUiPolicyAction
+                    .currentVariableName, fieldName
+                ]);
+            logObj = new CIRGenericUtils().LogStack(logObj, false, logMsg);
+            return;
+        }
+
+        return logObj;
+    };
+
+
+    /**
+     * Function to perform operations based on the Assessment Choice record (create or update records).
+     *
+     * @param {String} assessmentChoiceId - String containing the SysID of the Assessment Choice
+     * @param {String} variableId - String containing the SysID of the Variable
+     * @return {Object} - JSON object with information about the creation
+     *                    (status and objects created, successful or unsuccessful)
+     */
+    var actOnAssessmentChoice = function(assessmentChoiceId, variableId, isCreate) {
+        var logMsg = '';
+        var logObj = {};
+        var queryProps = CIRAssmtUtilsFP().GetQueryProps('assessmentChoice');
+        var assessmentChoice = new CIRGenericUtils().QueryTable(queryProps, assessmentChoiceId);
+
+        /*if(assessmentChoice.assessment_field.sys_id !== assessmentField.sys_id) {
+        		return;
+        	}
+        	assessmentChoice.assessment_field.variable = assessmentField.variable;*/
+
+        // Create or Update the Choice Record
+        var choice = !isCreate ? assessmentChoice.choice : '';
+        var createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps('choice', assessmentChoice, choice);
+        assessmentChoice.choice = new global.CIRGlobalHelperFP().CreateUpdateRecord(createUpdateProps);
+        if(!assessmentChoice.choice) {
+            logMsg = gs.getMessage('cir_assmt_question_choice_log', [assessmentChoice.label]);
+            logObj = new CIRGenericUtils().LogStack(logObj, false, logMsg);
+            return;
+        }
+
+        // Update the Assessment Choice record
+        createUpdateProps = CIRAssmtUtilsFP().GetCreateUpdateProps('assessmentChoice', assessmentChoice,
+            assessmentChoice.sys_id);
+        logMsg = gs.getMessage('cir_assmt_assessment_choice_log', [assessmentChoice.label]);
+        if(!new CIRGenericUtils().CreateUpdateRecord(createUpdateProps)) {
+            logObj = new CIRGenericUtils().LogStack(logObj, false, logMsg);
+            return;
+        }
+        return new CIRGenericUtils().LogStack(logObj, true, logMsg);
+    };
+
+    return {
+        PublishAssessmentDefinition: publishAssessmentDefinition,
+        CheckCatalogObject: checkCatalogObject,
+        CheckChoices: checkChoices,
+        ActOnAssessmentDefinition: actOnAssessmentDefinition,
+        ActOnAssessmentSection: actOnAssessmentSection,
+        ActOnAssessmentField: actOnAssessmentField,
+        ActOnAssessmentChoice: actOnAssessmentChoice
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:06:02</sys_created_on>
+        <sys_id>5f81d3c9db8e1410d4a73533f39619ae</sys_id>
+        <sys_mod_count>149</sys_mod_count>
+        <sys_name>CIRAssmtPublishFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_5f81d3c9db8e1410d4a73533f39619ae</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 08:48:46</sys_updated_on>
+    </sys_script_include>
+</record_update>

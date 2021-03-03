@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_form_segment">
+    <sys_sg_form_segment action="DELETE">
+        <embedded_screen display_value="Related List">80e02e8ddbb3085049959a82ca9619a9</embedded_screen>
+        <form display_value="Situation Rooms">d8aed60ddbb3085049959a82ca9619d0</form>
+        <order>30</order>
+        <sys_class_name>sys_sg_form_segment</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 11:10:43</sys_created_on>
+        <sys_id>00e02e8ddbb3085049959a82ca9619ac</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_form_segment_00e02e8ddbb3085049959a82ca9619ac</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 11:10:43</sys_updated_on>
+    </sys_sg_form_segment>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_sg_form_segment_00e02e8ddbb3085049959a82ca9619ac</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_form_segment"><sys_sg_form_segment action="INSERT_OR_UPDATE"><embedded_screen display_value="Related List">80e02e8ddbb3085049959a82ca9619a9</embedded_screen><form display_value="Situation Rooms">d8aed60ddbb3085049959a82ca9619d0</form><order>30</order><sys_class_name>sys_sg_form_segment</sys_class_name><sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by><sys_created_on>2020-03-25 11:10:43</sys_created_on><sys_id>00e02e8ddbb3085049959a82ca9619ac</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_sg_form_segment_00e02e8ddbb3085049959a82ca9619ac</sys_update_name><sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by><sys_updated_on>2020-03-25 11:10:43</sys_updated_on></sys_sg_form_segment></record_update>]]></payload>
+        <payload_hash>-1137664088</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 11:10:43</sys_created_on>
+        <sys_id>00e02e8ddbb3085049959a82ca9619ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1711163293d0000001</sys_recorded_at>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 11:10:43</sys_updated_on>
+        <type>Form Screen Segment</type>
+        <update_guid>08e02e8dc8b3085058862b92474680ad</update_guid>
+        <update_guid_history>08e02e8dc8b3085058862b92474680ad:-1137664088</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 11:12:58</sys_created_on>
+        <sys_db_object display_value="" name="sys_sg_form_segment">sys_sg_form_segment</sys_db_object>
+        <sys_id>7a14c0a2fb004f5990166d87fdd044d9</sys_id>
+        <sys_metadata>00e02e8ddbb3085049959a82ca9619ac</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_7a14c0a2fb004f5990166d87fdd044d9</sys_update_name>
+        <sys_update_version display_value="sys_sg_form_segment_00e02e8ddbb3085049959a82ca9619ac">00e02e8ddbb3085049959a82ca9619ae</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:01</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

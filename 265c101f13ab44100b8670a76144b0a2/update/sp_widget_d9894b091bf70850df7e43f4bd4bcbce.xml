@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope,spUtil,$timeout) {
+	var c = this;
+	c.updating = false;
+	c.message = '';
+
+	c.sendMessage = function() {
+		c.data.can_send = true;
+		c.data.new_message = c.message;
+		c.server.update().then(function(){
+			c.data.message ='';
+			c.can_send = false;
+			spUtil.addTrivialMessage(c.data.message_sent);
+			spUtil.update($scope);
+		});
+	};
+
+	spUtil.recordWatch($scope, c.data.parent_table, "sys_id=" + c.data.parent_id, function (name, data) {
+		c.server.update();
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.action-btn {&#13;
+    color: #2e2e2e;&#13;
+    display: block;&#13;
+  	border-radius: 3px;&#13;
+  	border: solid 1px #cccccc;&#13;
+  	background-color: #ffffff;&#13;
+}&#13;
+&#13;
+.timeline-body {&#13;
+	margin-bottom: 10px;&#13;
+}&#13;
+&#13;
+.message-list{&#13;
+	overflow: auto!important;&#13;
+    max-height: 230px;&#13;
+}&#13;
+&#13;
+.timeline-panel-inner {&#13;
+  margin-left: 5%;&#13;
+  margin-top:6%;&#13;
+}&#13;
+&#13;
+.timeline-panel {&#13;
+  	&#13;
+  	height: auto;&#13;
+  	margin-left: 3%;&#13;
+  	margin-bottom: 10px;&#13;
+    width: 94%;&#13;
+    border: 1px solid #dee5e7;&#13;
+    border-radius: 4px;&#13;
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, .1);&#13;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .1);&#13;
+}&#13;
+&#13;
+.form-control{&#13;
+ resize: vertical;&#13;
+}&#13;
+.input-group {&#13;
+    resize: vertical;&#13;
+  	max-width: 94%;&#13;
+  	max-height: 36px;&#13;
+  	margin-left: 3%;&#13;
+  	margin-right: 3%;&#13;
+ 	margin-top: 10px;&#13;
+  	margin-bottom: 10px;&#13;
+  &#13;
+ &#13;
+}&#13;
+.header-title{&#13;
+ 	vertical-align: -webkit-baseline-middle;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.06;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+}&#13;
+&#13;
+.panel {&#13;
+	height: 342px;&#13;
+}&#13;
+.panel-group{&#13;
+  overflow: auto!important;&#13;
+  max-height: 290px;&#13;
+}&#13;
+.journal-field-indicator {&#13;
+  width: 5px;&#13;
+  position: absolute;&#13;
+  left: 5px;&#13;
+  top: 5px;&#13;
+  bottom: 5px;&#13;
+  z-index: 3;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Shows all messages send via the common channel of communication within the response team and gives the possibility to send a new message</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-send-message-to-response-team</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Send Message to Response Team</name>
+        <option_schema>[{"name":"table","section":"Data","default_value":"x_fru_cir_response_room_message","label":"Table","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.situation_user</roles>
+        <script><![CDATA[(function() {
+	data.tables = CIRConstants.Tables;
+	data.table = options.table ? options.table : '';
+	data.parent_table = $sp.getParameter('table');
+	data.parent_id = $sp.getParameter('sys_id');
+	data.new_message = input ? input.new_message : '';
+	data.can_send = input ? input.can_send : '';
+	data.messageType = getMessageType() ? getMessageType() : '';
+	data.messages = getMessages();
+	
+	var grPlan = new GlideRecordSecure(data.parent_table);
+	if (grPlan.get(data.parent_id)){
+		data.canWrite = grPlan.state.canWrite(); // state is one of the fields that the user can write
+	}
+	
+	// translations
+	data.title = getTitle(data.messageType); //gs.getMessage('Send')+' '+data.messageType.toLowerCase()+' '+gs.getMessage('to the response team');
+	data.message_sent = gs.getMessage('cir_sit_message_sent');
+	data.placeholder = gs.getMessage("cir_sit_type_msg_here");
+	data.btnLabel = gs.getMessage('cir_sit_send') + ' ' + data.messageType.toLowerCase();
+	
+	if (data.can_send) {
+		createMessage();
+		data.new_message = '';
+	}
+})();
+
+function createMessage() {
+	if (data.new_message != '') {
+		var grMessage = new GlideRecord(data.tables.RESPONSE_ROOM_MESSAGE);
+		grMessage.initialize();
+		grMessage.setValue('response_execution_id', data.parent_id.toString());
+		grMessage.setValue('message_content', data.new_message.toString());
+		grMessage.setValue('message_type', data.messageType);
+		grMessage.setValue('user', gs.getUser().getID().toString());
+	
+		grMessage.insert();
+	}
+}
+
+function getMessageType() {
+	var grParent = new GlideRecord(data.tables.RESP_PLAN_EXEC);
+	grParent.addQuery('sys_id', data.parent_id.toString());
+	grParent.query();
+	
+	if(grParent.next()){
+		return grParent.response_plan_template.message_type;
+	}	
+}
+
+function getMessages() {
+	var messages = [];
+
+	var grMessages = new GlideRecord(data.tables.RESPONSE_ROOM_MESSAGE);
+	grMessages.addQuery('response_execution_id',data.parent_id.toString());
+	grMessages.orderByDesc("sys_created_on");
+	grMessages.query();
+	
+	while(grMessages.next()) {
+		messages.push({
+				"sender": grMessages.getDisplayValue('user'),
+				"created": grMessages.getDisplayValue('sys_created_on'),
+				"body": grMessages.getDisplayValue('message_content')
+				});
+	}
+	return messages;
+}
+
+function getTitle(messageType) {
+	var title = '';
+	
+	switch (messageType.toLowerCase()) {
+		case 'sms':
+			title = gs.getMessage('cir_sit_rt_send_text_message');
+			break;
+			
+		case 'voice':
+			title = gs.getMessage('cir_sit_rt_send_voice_message');
+			break;
+			
+		case 'push':
+			title = gs.getMessage('cir_sit_rt_send_push_message');
+			break;
+			
+		case 'email':
+			title = gs.getMessage('cir_sit_rt_send_email');
+			break;
+		
+		default:
+			title = gs.getMessage('cir_sit_send') + ' ' + messageType.toLowerCase();
+	}
+	
+	return title;
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 14:08:18</sys_created_on>
+        <sys_id>d9894b091bf70850df7e43f4bd4bcbce</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>CIR Send Message to Response Team</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_d9894b091bf70850df7e43f4bd4bcbce</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 15:24:15</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+    <div class="panel-heading clearfix"><span class="header-title">{{::data.title}}</span></div>
+
+    <div class="panel-group" style="max-height: 290px">
+  
+    <div class="input-group">
+       <textarea ng-model="c.message" ng-disabled="!c.data.canWrite" ng-change="c.checkMessageText()"class="form-control" sn-resize-height="trim" rows="1" id="post-input" ng-attr-placeholder="{{::data.placeholder}}"/>
+          <span class="input-group-btn" style="vertical-align: top">
+            <input type="submit" ng-disabled="!c.message || !c.data.canWrite" ng-click="c.sendMessage()"class="btn btn-primary" value="{{::data.btnLabel}}"/>
+           </span>
+    </div>
+    <div class="message-list" >
+    <div class="timeline-panel" ng-repeat="message in c.data.messages">
+      
+      <div class="timeline-panel-inner" >
+        <div class="timeline-heading">
+          <div class="timeline-title h4">{{message.sender}}</div>
+            <p class = "time-text"><small class = "text-muted journal-type">{{message.created}}</small></p>  
+            <div class="timeline-body"><p>{{message.body}}</p></div>
+      	</div>
+      </div>
+      
+ 	</div>
+
+    </div>
+  
+ 	</div>
+
+
+</div>
+    
+  ]]></template>
+    </sp_widget>
+</record_update>

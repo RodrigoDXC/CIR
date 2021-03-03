@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="task" label="Action" max_length="40" name="x_fru_cir_action" sizeclass="8" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Control" max_length="32" name="control" reference="x_fru_cir_control" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Number of products" mandatory="true" max_length="40" name="number_of_products" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Product at site" mandatory="true" max_length="40" name="product_at_site" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="No" sequence="20" value="0"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Product disposition" mandatory="true" max_length="40" name="product_disposition" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Quarantined and Labeled" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="Thrown away" sequence="20" value="2"/>
+                <element inactive_on_update="false" label="Returned" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="Other" sequence="40" value="4"/>
+            </choice>
+        </element>
+        <element label="Product disposition description" max_length="2500" name="product_disposition_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Product Recall" max_length="32" name="product_recall" reference="x_fru_cir_product_recall" type="reference"/>
+        <element attributes="base_start=true,edge_encryption_enabled=true" label="Related table" max_length="80" name="related_table" type="table_name"/>
+        <element attributes="edge_encryption_enabled=true" label="Related to" max_length="32" name="related_to" type="document_id"/>
+        <element label="Relationship type" max_length="100" name="relationship_type" type="string"/>
+        <element label="Responsible for disposition" mandatory="true" max_length="100" name="responsible_for_disposition" type="string"/>
+    </element>
+</database>

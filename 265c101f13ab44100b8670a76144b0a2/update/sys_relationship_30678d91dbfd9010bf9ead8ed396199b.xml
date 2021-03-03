@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>x_fru_cir_internal_physical_security_incident</basic_apply_to>
+        <basic_query_from>x_fru_cir_notification_log</basic_query_from>
+        <insert_callback/>
+        <name>Notification Log</name>
+        <query_from/>
+        <query_with><![CDATA[(function refineQuery(current, parent) {
+
+	current.addQuery("psi_id", parent.sys_id);
+
+})(current, parent);]]></query_with>
+        <reference_field/>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-03 09:25:18</sys_created_on>
+        <sys_id>30678d91dbfd9010bf9ead8ed396199b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Notification Log</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_relationship_30678d91dbfd9010bf9ead8ed396199b</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-03 09:25:18</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=30678d91dbfd9010bf9ead8ed396199b"/>
+</record_update>

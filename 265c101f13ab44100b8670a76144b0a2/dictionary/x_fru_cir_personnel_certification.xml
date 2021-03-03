@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Personnel Certification" max_length="40" name="x_fru_cir_personnel_certification" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" display="true" label="Certification" mandatory="true" max_length="32" name="certification" reference="x_fru_cir_certification" type="reference"/>
+        <element label="Effective date" mandatory="true" max_length="40" name="effective_date" type="glide_date"/>
+        <element label="End date" max_length="40" name="end_date" type="glide_date"/>
+        <element label="Original date" max_length="40" name="original_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" default="javascript:gs.getUserID();" dynamic_default_value="2fd8e97bef3221002841f7f775c0fbc1" label="Person" max_length="32" name="person" reference="sys_user" type="reference" use_dynamic_default="true"/>
+        <element attributes="edge_encryption_enabled=true" default="0" label="Total extensions" max_length="40" name="total_extensions" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Valid for" mandatory="true" max_length="40" name="valid_for" type="glide_duration"/>
+        <index name="index">
+            <element name="person"/>
+        </index>
+        <index name="index2">
+            <element name="certification"/>
+        </index>
+    </element>
+</database>

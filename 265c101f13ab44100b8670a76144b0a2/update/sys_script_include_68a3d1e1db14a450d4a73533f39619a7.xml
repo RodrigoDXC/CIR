@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRRiskManagementAjaxUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>CIRRiskManagementAjaxUtils</name>
+        <script><![CDATA[var CIRRiskManagementAjaxUtils = Class.create();
+CIRRiskManagementAjaxUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	/**
+     * Get the sys_id of the contact person on the Equipment record
+	 *
+     * @param {String} componentId - sys_id of Contributing Factor
+     * @return {String} - sys_id of the contact person
+     */
+	getContactPerson: function() {
+		var componentId = this.getParameter('sysparm_componentId');
+		return new CIRRiskManagementUtils().GetContactPerson(componentId);
+	},
+
+    type: 'CIRRiskManagementAjaxUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-05 11:42:40</sys_created_on>
+        <sys_id>68a3d1e1db14a450d4a73533f39619a7</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>CIRRiskManagementAjaxUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_68a3d1e1db14a450d4a73533f39619a7</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-05 12:31:53</sys_updated_on>
+    </sys_script_include>
+</record_update>

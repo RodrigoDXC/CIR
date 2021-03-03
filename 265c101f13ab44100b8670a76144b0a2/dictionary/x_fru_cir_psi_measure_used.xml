@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="PSI Measure Used" max_length="40" name="x_fru_cir_psi_measure_used" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Was the system effective?" max_length="40" name="effective" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Incident" max_length="32" name="incident" read_only="true" reference="x_fru_cir_external_physical_security_incident" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Was the system working?" max_length="40" name="operational" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Security measure" max_length="32" name="security_measure" reference="x_fru_cir_security_asset" type="reference"/>
+        <index name="index">
+            <element name="security_measure"/>
+        </index>
+        <index name="index2">
+            <element name="incident"/>
+        </index>
+    </element>
+</database>

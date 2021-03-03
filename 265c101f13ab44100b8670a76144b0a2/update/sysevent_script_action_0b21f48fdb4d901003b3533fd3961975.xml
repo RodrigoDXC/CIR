@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_script_action">
+    <sysevent_script_action action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition_script/>
+        <description/>
+        <event_name>x_fru_cir.anonymous.case.submitted</event_name>
+        <name>Create Anonymous Case</name>
+        <order>100</order>
+        <script><![CDATA[new CIRCaseManagementUtils().CreateAnonymousCase(event.parm1);]]></script>
+        <synchronous>false</synchronous>
+        <sys_class_name>sysevent_script_action</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-01 11:30:04</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>0b21f48fdb4d901003b3533fd3961975</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Create Anonymous Case</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sysevent_script_action_0b21f48fdb4d901003b3533fd3961975</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-29 13:28:47</sys_updated_on>
+    </sysevent_script_action>
+</record_update>

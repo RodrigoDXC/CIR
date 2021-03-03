@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="property_type" table="x_fru_cir_physical_impact" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>property_type</element>
+            <name>x_fru_cir_physical_impact</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 14:18:36</sys_created_on>
+            <sys_id>9bb633b4138a50500b8670a76144b024</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>property_type</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_physical_impact_property_type</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 14:18:36</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>property_type</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>Product</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>10</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 14:18:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2d63e6eddb15101003b3533fd3961999</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 17:42:43</sys_updated_on>
+            <value>product</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>property_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Equipment</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>20</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 14:18:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5db4e6eddb15101003b3533fd39619f8</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 14:18:53</sys_updated_on>
+            <value>equipment</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>property_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Vehicle</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>30</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 14:19:27</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8ad4a6eddb15101003b3533fd39619de</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 17:45:55</sys_updated_on>
+            <value>vehicle</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>property_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>3rd Party Property</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>40</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 14:19:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>66c4e6eddb15101003b3533fd39619cc</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 14:19:21</sys_updated_on>
+            <value>third_party_property</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>property_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>3rd Party Vehicle</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>50</sequence>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-19 17:45:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f751e4b71bdaa010de011fc11a4bcb2b</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 12:46:02</sys_updated_on>
+            <value>third_party_vehicle</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>property_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>60</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 14:19:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cee46aeddb15101003b3533fd3961996</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 17:46:26</sys_updated_on>
+            <value>other</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>property_type</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>Structure</label>
+            <language>en</language>
+            <name>x_fru_cir_physical_impact</name>
+            <sequence>70</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 14:18:57</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d4c42aeddb15101003b3533fd39619a3</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-19 17:46:19</sys_updated_on>
+            <value>structure</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

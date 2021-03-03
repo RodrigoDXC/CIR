@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="INSERT_OR_UPDATE">
+        <cleared>false</cleared>
+        <disabled>true</disabled>
+        <field>actual_guard</field>
+        <mandatory>ignore</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-29 06:40:27</sys_created_on>
+        <sys_id>da2b1ee9db525050bf9ead8ed396190e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>actual_guard</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_policy_action_da2b1ee9db525050bf9ead8ed396190e</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-29 06:40:27</sys_updated_on>
+        <table>x_fru_cir_static_service_order</table>
+        <ui_policy display_value="Guard read-only">001b9ae9db525050bf9ead8ed3961993</ui_policy>
+        <visible>ignore</visible>
+    </sys_ui_policy_action>
+</record_update>

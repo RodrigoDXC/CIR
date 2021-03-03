@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="activity_during_impact" table="x_fru_cir_person_impact" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>activity_during_impact</element>
+            <name>x_fru_cir_person_impact</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:01:31</sys_created_on>
+            <sys_id>d3b6ff74138a50500b8670a76144b0ed</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>activity_during_impact</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_person_impact_activity_during_impact</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:01:31</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>activity_during_impact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Performing Job Tasks</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>10</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:01:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d47ee2e1db55101003b3533fd3961916</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:01:39</sys_updated_on>
+            <value>job_tasks</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>activity_during_impact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Non-Job Related Task</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>20</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:01:45</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d68e22a5db55101003b3533fd3961965</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:01:53</sys_updated_on>
+            <value>non_job_related</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>activity_during_impact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Social Activity</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>30</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:01:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>299eae65db55101003b3533fd3961991</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:02:05</sys_updated_on>
+            <value>social_activity</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>activity_during_impact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>On Break</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>40</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:02:09</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b0ae22a5db55101003b3533fd396199c</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:02:15</sys_updated_on>
+            <value>on_break</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

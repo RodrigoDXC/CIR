@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_category">
+    <sc_cat_item_category action="DELETE">
+        <sc_cat_item display_value="test">27aa7ba613cca0100b8670a76144b0c2</sc_cat_item>
+        <sc_category display_value="Test CIR Assessment Manager">7cd93b6613cca0100b8670a76144b088</sc_category>
+        <sys_class_name>sc_cat_item_category</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-10-27 16:00:48</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>abaabba613cca0100b8670a76144b084</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test CIR Assessment Manager.test</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sc_cat_item_category_abaabba613cca0100b8670a76144b084</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-27 16:00:48</sys_updated_on>
+    </sc_cat_item_category>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>832241aa6f5ebd80ffcca9cc5d3ee4d0</instance_id>
+        <instance_name>ven01084</instance_name>
+        <name>sc_cat_item_category_abaabba613cca0100b8670a76144b084</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_category"><sc_cat_item_category action="INSERT_OR_UPDATE"><sc_cat_item display_value="test">27aa7ba613cca0100b8670a76144b0c2</sc_cat_item><sc_category display_value="Test CIR Assessment Manager">7cd93b6613cca0100b8670a76144b088</sc_category><sys_class_name>sc_cat_item_category</sys_class_name><sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by><sys_created_on>2020-10-27 16:00:48</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>abaabba613cca0100b8670a76144b084</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Test CIR Assessment Manager.test</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sc_cat_item_category_abaabba613cca0100b8670a76144b084</sys_update_name><sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by><sys_updated_on>2020-10-27 16:00:48</sys_updated_on></sc_cat_item_category></record_update>]]></payload>
+        <payload_hash>327688634</payload_hash>
+        <record_name>Test CIR Assessment Manager.test</record_name>
+        <reverted_from/>
+        <source>38ce37da13fbd4100b8670a76144b04e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-10-27 16:00:48</sys_created_on>
+        <sys_id>a3aabba613cca0100b8670a76144b087</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1756aca5de30000001</sys_recorded_at>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-27 16:00:48</sys_updated_on>
+        <type>Catalog Item Category</type>
+        <update_guid>abaabba6f1cca010ad39b4d7b5a4eb86</update_guid>
+        <update_guid_history>abaabba6f1cca010ad39b4d7b5a4eb86:327688634</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">4eda7fa613cca0100b8670a76144b0f6</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>cir.assessment_manager</sys_created_by>
+        <sys_created_on>2020-10-27 16:01:31</sys_created_on>
+        <sys_db_object display_value="" name="sc_cat_item_category">sc_cat_item_category</sys_db_object>
+        <sys_id>4ad67c8a8cd641b2a0b4a70b7b2ac5a4</sys_id>
+        <sys_metadata>abaabba613cca0100b8670a76144b084</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test CIR Assessment Manager.test</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="">27aa7ba613cca0100b8670a76144b0c2</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sc_cat_item_category_abaabba613cca0100b8670a76144b084</sys_update_name>
+        <sys_update_version display_value="sc_cat_item_category_abaabba613cca0100b8670a76144b084">a3aabba613cca0100b8670a76144b087</sys_update_version>
+        <sys_updated_by>cir.assessment_manager</sys_updated_by>
+        <sys_updated_on>2020-10-27 16:01:31</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_applet_launcher_tab">
+    <sys_sg_applet_launcher_tab action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applet_launcher display_value="Protection Security Agent">8886ce53db5e5050d4a73533f396190d</applet_launcher>
+        <icon display_value="Group-nav">3f4adde7db1e5450bf9ead8ed3961964</icon>
+        <label>Protection Security Agent</label>
+        <roles/>
+        <sys_class_name>sys_sg_applet_launcher_tab</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-04 07:04:43</sys_created_on>
+        <sys_id>3e1ad5e7db1e5450bf9ead8ed39619cc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Protection Security Agent</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_applet_launcher_tab_3e1ad5e7db1e5450bf9ead8ed39619cc</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-04 07:04:43</sys_updated_on>
+    </sys_sg_applet_launcher_tab>
+</record_update>

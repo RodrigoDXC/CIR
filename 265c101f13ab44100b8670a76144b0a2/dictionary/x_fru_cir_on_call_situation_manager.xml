@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="On Call Situation Manager" max_length="40" name="x_fru_cir_on_call_situation_manager" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="On call" max_length="40" name="on_call" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User" mandatory="true" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="dimension"/>
+        </index>
+        <index name="index2">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

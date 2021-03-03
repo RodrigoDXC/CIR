@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRSituationFilterTables</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRSituationFilterTables</name>
+        <script><![CDATA[var CIRSituationFilterTables = Class.create();
+CIRSituationFilterTables.prototype = {
+	initialize: function() {
+	},
+
+	/*
+     *
+     * Used to filter out the possible tables to select on message sets
+     */
+	process: function(){
+
+		var tablesConst = CIRConstants.Tables;
+		var tables = [tablesConst.SITUATION, tablesConst.RESP_PLAN_EXEC, tablesConst.TASK_EXECUTION, tablesConst.SITUATION_MEMBER, tablesConst.RESPONSE_TEAM];
+		return tables;
+
+	},
+
+	type: 'filterTables'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-06-16 10:36:06</sys_created_on>
+        <sys_id>6c2471bbdb115410bf9ead8ed39619bb</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIRSituationFilterTables</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_6c2471bbdb115410bf9ead8ed39619bb</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 10:35:32</sys_updated_on>
+    </sys_script_include>
+</record_update>

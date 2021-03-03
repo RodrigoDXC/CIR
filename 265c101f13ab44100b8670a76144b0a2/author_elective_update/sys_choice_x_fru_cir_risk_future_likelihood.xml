@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="future_likelihood" table="x_fru_cir_risk" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>future_likelihood</element>
+            <name>x_fru_cir_risk</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_id>d847b3f4138a50500b8670a76144b022</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>future_likelihood</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_risk_future_likelihood</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>future_likelihood</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Certain to Occur</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>0</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fd3ca5a9db91101003b3533fd39619df</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>future_likelihood</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Very Likely</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>1</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fd3ca5a9db91101003b3533fd39619e1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>future_likelihood</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Possible</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>2</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3d3ca5a9db91101003b3533fd39619e3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>future_likelihood</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Unlikely</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>3</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>793ca5a9db91101003b3533fd39619e5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>future_likelihood</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Rare</label>
+            <language>en</language>
+            <name>x_fru_cir_risk</name>
+            <sequence>4</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 10:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b53ca5a9db91101003b3533fd39619e7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 10:11:47</sys_updated_on>
+            <value>5</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

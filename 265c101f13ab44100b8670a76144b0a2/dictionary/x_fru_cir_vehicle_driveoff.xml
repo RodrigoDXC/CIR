@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Vehicle DriveOff" max_length="40" name="x_fru_cir_vehicle_driveoff" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Age" max_length="40" name="age" type="integer"/>
+        <element label="Car Colour" max_length="250" name="car_colour" type="string"/>
+        <element label="Car Manufacturer" max_length="250" name="car_manufacturer" type="string"/>
+        <element label="Car Model" max_length="250" name="car_model" type="string"/>
+        <element label="Description of Driver" max_length="2500" name="description_of_driver" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Drive Off" mandatory="true" max_length="32" name="drive_off" read_only="true" reference="x_fru_cir_drive_off" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Gender" max_length="40" name="gender" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Male" sequence="10" value="male"/>
+                <element inactive_on_update="false" label="Female" sequence="20" value="female"/>
+                <element inactive_on_update="false" label="Other" sequence="30" value="other"/>
+            </choice>
+        </element>
+        <element hint="i.e. 1.50m , 150 cm , 5'5'' , 60 inches , 5 ft 5 in" label="Height" max_length="255" name="height" type="string"/>
+        <element label="Other car details" max_length="2500" name="other_car_details" type="string"/>
+        <element label="Outfit" max_length="2500" name="outfit" type="string"/>
+        <element label="Registration Number" max_length="255" name="registration_number" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Was person identified?" max_length="40" name="was_person_identified" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="No" sequence="20" value="0"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="drive_off"/>
+        </index>
+    </element>
+</database>

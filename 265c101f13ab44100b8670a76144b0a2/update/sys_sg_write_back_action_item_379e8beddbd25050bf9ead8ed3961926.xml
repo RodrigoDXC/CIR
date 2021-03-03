@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description/>
+        <execution_script><![CDATA[(function WriteBackAction(input) {
+    //Type appropriate comment here, and begin script below
+ 
+	var grStaticReports = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_REPORT);
+	grStaticReports.addQuery('sys_id', input.sys_id);
+	grStaticReports.query();
+	
+	if (grStaticReports.next()) {
+		
+		var actualFromTime =  input.actual_from_time.split(' ')[1];
+		var actualToTime = input.actual_to_time.split(' ')[1];
+		
+		var grServiceOrders = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER);
+		grServiceOrders.get(grStaticReports.service_order);
+		
+		grServiceOrders.actual_from_time = actualFromTime;
+		grServiceOrders.actual_to_time = actualToTime;
+		grServiceOrders.update();
+		
+		grStaticReports.from_time = actualFromTime;
+		grStaticReports.to_time = actualToTime;
+		grStaticReports.incidents = input.incidents;
+		grStaticReports.access_control_issues = input.access_control_issues;
+		grStaticReports.system_issues = input.system_issues;
+		grStaticReports.state = '2';
+		grStaticReports.update();
+	}
+	
+})(input);]]></execution_script>
+        <name>Submit Static Report</name>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-29 10:25:34</sys_created_on>
+        <sys_id>379e8beddbd25050bf9ead8ed3961926</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Submit Static Report</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_379e8beddbd25050bf9ead8ed3961926</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-29 10:25:34</sys_updated_on>
+        <table/>
+        <template/>
+        <type>script</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=379e8beddbd25050bf9ead8ed3961926"/>
+</record_update>

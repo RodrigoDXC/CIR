@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="task" label="Response Plan Execution Step" max_length="40" name="x_fru_cir_response_plan_execution_step" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Response plan" max_length="32" name="response_plan" read_only="true" reference="x_fru_cir_response_plan_execution" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Response plan step" max_length="32" name="response_plan_step" read_only="true" reference="x_fru_cir_response_plan_step" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Result" max_length="40" name="result" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="No" value="no"/>
+                <element inactive_on_update="false" label="Yes" value="yes"/>
+            </choice>
+        </element>
+    </element>
+</database>

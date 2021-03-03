@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Vehicle Equipment" max_length="40" name="x_fru_cir_vehicle_equipment" sizeclass="1" type="collection">
+        <element label="Brand" max_length="40" name="brand" type="string"/>
+        <element label="Description" max_length="40" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" display="true" label="Equipment name" mandatory="true" max_length="40" name="equipment" type="translated_text"/>
+        <element label="Model" max_length="40" name="model" type="string"/>
+        <element label="Serie No." max_length="40" name="serie_no" type="string"/>
+    </element>
+</database>

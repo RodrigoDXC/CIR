@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_css">
+    <content_css action="INSERT_OR_UPDATE">
+        <name>cir_flow_designer</name>
+        <style>.panel {&#13;
+	width: 269px;&#13;
+    margin-left: 33%;&#13;
+	margin-bottom:80px;&#13;
+	margin-left: auto;&#13;
+    margin-right: auto;&#13;
+}&#13;
+&#13;
+#svgContainer {&#13;
+	z-index: -10;&#13;
+	position: absolute;&#13;
+	opacity: 0.5;&#13;
+	overflow: visible&#13;
+}&#13;
+.arrow {&#13;
+	font-size: 30px;&#13;
+	color: cadetblue;&#13;
+}	&#13;
+&#13;
+.conditional{&#13;
+	width: 60%;&#13;
+	//margin-left:auto;&#13;
+}&#13;
+.conditional4{&#13;
+	width: 100%;&#13;
+	//margin-left:0;&#13;
+}	&#13;
+	&#13;
+.column {&#13;
+	min-width:280px;&#13;
+}	&#13;
+&#13;
+.arrow {&#13;
+	marker-end: url(#triangle);&#13;
+}&#13;
+&#13;
+#title {&#13;
+     margin: auto;&#13;
+    margin-top: 35px;&#13;
+    width: fit-content;&#13;
+}	&#13;
+&#13;
+#description  {&#13;
+    font-style: italic;&#13;
+    text-align: center;&#13;
+}&#13;
+&#13;
+hr{&#13;
+	border-top: 1px solid #8c8b8b;&#13;
+}	&#13;
+&#13;
+a {&#13;
+	color: black;		&#13;
+}	&#13;
+&#13;
+a:hover {&#13;
+	color: black;	&#13;
+}	&#13;
+&#13;
+a:focus {&#13;
+	color: black;	&#13;
+}&#13;
+&#13;
+p {&#13;
+	 font-style: italic;&#13;
+}	&#13;
+&#13;
+.panel-success &gt; .panel-heading {&#13;
+    color: #24b02e;&#13;
+    background-color: #00802b;&#13;
+    border-color: #f0fcf1;&#13;
+}	&#13;
+.panel-success {&#13;
+	border-color: #00802b;&#13;
+}&#13;
+&#13;
+.sub_line { &#13;
+ height: 1px;&#13;
+ border: 0; &#13;
+margin: 1em 0; padding: 0; &#13;
+width: 30px;&#13;
+color: #009900;&#13;
+display: inline-block;&#13;
+  vertical-align: bottom;&#13;
+}&#13;
+&#13;
+.green_line {&#13;
+   border-top: 2px solid #009900;&#13;
+}&#13;
+&#13;
+.red_line {&#13;
+  border-top: 2px solid #ff0000;&#13;
+}&#13;
+&#13;
+.default_line {&#13;
+  border-top: 2px solid  #808080;&#13;
+&#13;
+}&#13;
+&#13;
+#subtitle_container {&#13;
+width: fit-content;&#13;
+position: sticky;&#13;
+top: 0;&#13;
+z-index: 100;&#13;
+position: -webkit-sticky;&#13;
+display:inline-block;&#13;
+ vertical-align:top;&#13;
+}&#13;
+&#13;
+.square {&#13;
+  height: 20px;&#13;
+  width: 20px;&#13;
+}&#13;
+&#13;
+.current {&#13;
+  background-color: #428bca;&#13;
+}&#13;
+&#13;
+.completed {&#13;
+  background-color: #009900;&#13;
+}&#13;
+&#13;
+.not_created {&#13;
+  background-color: #ddd;&#13;
+}</style>
+        <sys_class_name>content_css</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 10:57:36</sys_created_on>
+        <sys_id>7bddde891bf30850df7e43f4bd4bcb0a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>cir_flow_designer</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>content_css_7bddde891bf30850df7e43f4bd4bcb0a</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-25 10:57:40</sys_updated_on>
+        <type>local</type>
+        <url/>
+    </content_css>
+</record_update>

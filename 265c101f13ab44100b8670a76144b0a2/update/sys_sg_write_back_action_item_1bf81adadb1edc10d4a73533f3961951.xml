@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description>Action item to remove records from the m2m table between contributing factors and investigation</description>
+        <execution_script><![CDATA[(function WriteBackAction(input) {
+    var script = new x_fru_cir.CIRMobileUtils();
+    if (script.VerifyExists(input.cirInvestigationSysId, input.cirContributingFactor)) {
+        script.RemoveFromM2M(input.cirInvestigationSysId, input.cirContributingFactor);
+        gs.addInfoMessage(gs.getMessage("Contributing factor has been removed from the investigation. Refresh to see the updated list"));
+    } else {
+        gs.addErrorMessage(gs.getMessage("The record does not exists"));
+    }
+})(input);]]></execution_script>
+        <name>CIR - RemoveFromM2M</name>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-31 14:25:38</sys_created_on>
+        <sys_id>1bf81adadb1edc10d4a73533f3961951</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIR - RemoveFromM2M</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_1bf81adadb1edc10d4a73533f3961951</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-05 09:06:56</sys_updated_on>
+        <table/>
+        <template/>
+        <type>script</type>
+        <use_current_record_as_condition>false</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=1bf81adadb1edc10d4a73533f3961951"/>
+</record_update>

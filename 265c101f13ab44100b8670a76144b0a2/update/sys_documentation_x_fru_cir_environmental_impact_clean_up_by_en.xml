@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="clean_up_by" label="Clean up by" language="en" table="x_fru_cir_environmental_impact">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>clean_up_by</element>
+            <help/>
+            <hint/>
+            <label>Clean up by</label>
+            <language>en</language>
+            <name>x_fru_cir_environmental_impact</name>
+            <plural>Clean up by</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:28:02</sys_created_on>
+            <sys_id>78299269db15101003b3533fd39619c8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Clean up by</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_environmental_impact_clean_up_by_en</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:28:02</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

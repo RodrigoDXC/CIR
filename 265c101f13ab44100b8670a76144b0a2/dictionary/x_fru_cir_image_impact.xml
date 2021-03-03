@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_impact" label="Image Impact" max_length="40" name="x_fru_cir_image_impact" sizeclass="2" type="collection">
+        <element label="Complaint notes" max_length="40" name="complaint_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Complaint raised by" mandatory="true" max_length="40" name="complaint_raised_by" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Employee" sequence="10" value="employee"/>
+                <element inactive_on_update="false" label="Contractor" sequence="20" value="contractor"/>
+                <element inactive_on_update="false" label="Community Group" sequence="30" value="community_group"/>
+                <element inactive_on_update="false" label="Community Member" sequence="40" value="community_member"/>
+                <element inactive_on_update="false" label="Customer" sequence="50" value="customer"/>
+                <element inactive_on_update="false" label="Vendor" sequence="60" value="vendor"/>
+                <element inactive_on_update="false" label="Other" sequence="70" value="other"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Media coverage" mandatory="true" max_length="40" name="media_coverage" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Local" sequence="10" value="local"/>
+                <element inactive_on_update="false" label="Regional" sequence="20" value="regional"/>
+                <element inactive_on_update="false" label="State" sequence="30" value="state"/>
+                <element inactive_on_update="false" label="National" sequence="40" value="national"/>
+                <element inactive_on_update="false" label="International" sequence="50" value="international"/>
+            </choice>
+        </element>
+        <element label="Media coverage details" mandatory="true" max_length="4000" name="media_coverage_details" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Media coverage type" mandatory="true" max_length="40" name="media_coverage_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Print" sequence="10" value="print"/>
+                <element inactive_on_update="false" label="Radio" sequence="20" value="radio"/>
+                <element inactive_on_update="false" label="Television" sequence="30" value="television"/>
+                <element inactive_on_update="false" label="Social Media" sequence="40" value="social_media"/>
+                <element inactive_on_update="false" label="Word of Mouth" sequence="50" value="word_of_mouth"/>
+                <element inactive_on_update="false" label="News site/Blog" sequence="60" value="news_site_blog"/>
+            </choice>
+        </element>
+        <element label="Stakeholders" max_length="1000" name="stakeholders" type="string"/>
+    </element>
+</database>

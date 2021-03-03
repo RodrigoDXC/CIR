@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRSituationUtilsClient</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description>Script include used for client side logic in the Situation process</description>
+        <name>CIRSituationUtilsClient</name>
+        <script><![CDATA[var CIRSituationUtilsClient = Class.create();
+CIRSituationUtilsClient.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+	getSteps: function() {
+		var sys_id = this.getParameter('sysparm_sys_id');
+		var table = this.getParameter('sysparm_table');
+		var obj = new CIRSituationUtils().GetFlowSteps(sys_id, table);
+
+		return JSON.stringify(obj);
+	},
+
+	getRecipList: function() {
+		var execStep = this.getParameter('sysparm_execStep');
+		var recipList = new CIRSituationUtils().GetRecipientInfo(execStep);
+
+		return JSON.stringify(recipList);
+
+	},
+
+	getActiveTeam: function() {
+		var recId = this.getParameter('sysparm_recId');
+		var activeUsers = new CIRSituationUtils().GetActiveTeam(recId);
+
+		return JSON.stringify(activeUsers);
+	},
+
+	manageEmail: function() {
+		var recId = this.getParameter('sysparm_recId');
+		var activeUsers = this.getParameter('sysparm_activeUsers');
+		var subject = this.getParameter('sysparm_subject');
+		var body = this.getParameter('sysparm_body');
+		var wnInfo = this.getParameter('sysparm_wnInfo');
+
+		new CIRSituationUtils().EmailActiveTeam(recId, activeUsers, subject, body, wnInfo);
+
+	},
+
+	getFields: function() {
+		var tableName = this.getParameter('sysparm_table_name');
+		return new CIRSituationUtils().GetFields(tableName);
+	},
+
+	getEmergencyNumber: function() {
+		//return gs.getProperty('x_lsmcb_fsm.company_emergency_number');
+		return '';
+	},
+
+	getFile: function() {
+		var attach = this.getParameter('sysparm_file');
+		return new CIRSituationUtils().CreateRespTempExcel(attach);
+	},
+	
+	getAttachment: function(){
+		return new CIRSituationUtils().GetAttachmentID();
+	},
+	
+	getTaskTemplate: function() {
+		var templateId = this.getParameter('sysparm_task_template');
+		
+		return new CIRSituationUtils().GetTaskTemplateInfo(templateId);
+	},
+	
+	getMessageTemplate: function() {
+		var templateId = this.getParameter('sysparm_message_template');
+		
+		return new CIRSituationUtils().GetMessageTemplateInfo(templateId);
+    },
+    
+    getCountry: function() {
+        return new CIRSituationUtils().GetCountryID();
+    },
+	
+	getResponsePlans: function(){
+		var dimension = this.getParameter('sysparm_dimension');
+		var templateList = new CIRSituationUtils().GetResponsePlanTemplates(dimension);
+		
+		return JSON.stringify(templateList);
+	},
+	
+	createResponsePlanParam: function(){
+		var id = this.getParameter('sysparm_parent');
+		var parametrization = this.getParameter('sysparm_parametrization');
+		
+		return new CIRSituationUtils().CreateResponsePlanParam(id, parametrization); 
+	},
+	
+	
+	getMessageSets: function(){
+		var dimension = this.getParameter('sysparm_dimension');
+		var templateList = new CIRSituationUtils().GetMessageSetTemplates(dimension);
+		
+		return JSON.stringify(templateList);
+	},
+	
+	createMessageSet: function() {
+		var id = this.getParameter('sysparm_parent');
+		var parametrization = this.getParameter('sysparm_parametrization');
+		
+		return new CIRSituationUtils().CreateMessageSetParam(id, parametrization); 
+	},
+	
+	getTemplates: function(){
+		var dimension = this.getParameter('sysparm_dimension');
+		var templates = new CIRSituationUtils().GetResponsePlanTemplates(dimension);
+		
+		return JSON.stringify(templates);
+	},
+	
+	createResponsePlan: function(){
+		var id = this.getParameter('sysparm_parent');
+		var parametrization = this.getParameter('sysparm_parametrization');
+		
+		return new CIRSituationUtils().CreateResponsePlanParam(id, parametrization); 
+	},
+	
+	changeSituationMemberState: function() {
+		var situation_sys_id = this.getParameter('sysparm_situation_sys_id');
+		new CIRSituationUtils().ChangeUserState(situation_sys_id, 'offline');
+		return true;
+	},
+
+	type: 'CIRSituationUtilsClient'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-24 08:54:55</sys_created_on>
+        <sys_id>6918f8781bf78450df7e43f4bd4bcb79</sys_id>
+        <sys_mod_count>29</sys_mod_count>
+        <sys_name>CIRSituationUtilsClient</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_6918f8781bf78450df7e43f4bd4bcb79</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-10 15:05:47</sys_updated_on>
+    </sys_script_include>
+</record_update>

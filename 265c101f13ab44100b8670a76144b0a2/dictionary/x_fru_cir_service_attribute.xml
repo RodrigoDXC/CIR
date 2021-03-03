@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Service Attribute" max_length="40" name="x_fru_cir_service_attribute" sizeclass="0" type="collection">
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element label="Name" mandatory="true" max_length="40" name="name" type="string"/>
+    </element>
+</database>

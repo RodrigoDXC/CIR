@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_css">
+    <content_css action="INSERT_OR_UPDATE">
+        <name>cir_bg_schedule_daygrid</name>
+        <style>/*!&#13;
+FullCalendar Day Grid Plugin v4.1.0&#13;
+Docs &amp; License: https://fullcalendar.io/&#13;
+(c) 2019 Adam Shaw&#13;
+*/&#13;
+/* DayGridView&#13;
+--------------------------------------------------------------------------------------------------*/&#13;
+/* day row structure */&#13;
+.fc-dayGridWeek-view .fc-content-skeleton,&#13;
+.fc-dayGridDay-view .fc-content-skeleton {&#13;
+  /* there may be week numbers in these views, so no padding-top */&#13;
+  padding-bottom: 1em;&#13;
+  /* ensure a space at bottom of cell for user selecting/clicking */ }&#13;
+&#13;
+.fc-dayGrid-view .fc-body .fc-row {&#13;
+  min-height: 4em;&#13;
+  /* ensure that all rows are at least this tall */ }&#13;
+&#13;
+/* a "rigid" row will take up a constant amount of height because content-skeleton is absolute */&#13;
+.fc-row.fc-rigid {&#13;
+  overflow: hidden; }&#13;
+&#13;
+.fc-row.fc-rigid .fc-content-skeleton {&#13;
+  position: absolute;&#13;
+  top: 0;&#13;
+  left: 0;&#13;
+  right: 0; }&#13;
+&#13;
+/* week and day number styling */&#13;
+.fc-day-top.fc-other-month {&#13;
+  opacity: 0.3; }&#13;
+&#13;
+.fc-dayGrid-view .fc-week-number,&#13;
+.fc-dayGrid-view .fc-day-number {&#13;
+  padding: 2px; }&#13;
+&#13;
+.fc-dayGrid-view th.fc-week-number,&#13;
+.fc-dayGrid-view th.fc-day-number {&#13;
+  padding: 0 2px;&#13;
+  /* column headers can't have as much v space */ }&#13;
+&#13;
+.fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {&#13;
+  float: right; }&#13;
+&#13;
+.fc-rtl .fc-dayGrid-view .fc-day-top .fc-day-number {&#13;
+  float: left; }&#13;
+&#13;
+.fc-ltr .fc-dayGrid-view .fc-day-top .fc-week-number {&#13;
+  float: left;&#13;
+  border-radius: 0 0 3px 0; }&#13;
+&#13;
+.fc-rtl .fc-dayGrid-view .fc-day-top .fc-week-number {&#13;
+  float: right;&#13;
+  border-radius: 0 0 0 3px; }&#13;
+&#13;
+.fc-dayGrid-view .fc-day-top .fc-week-number {&#13;
+  min-width: 1.5em;&#13;
+  text-align: center;&#13;
+  background-color: #f2f2f2;&#13;
+  color: #808080; }&#13;
+&#13;
+/* when week/day number have own column */&#13;
+.fc-dayGrid-view td.fc-week-number {&#13;
+  text-align: center; }&#13;
+&#13;
+.fc-dayGrid-view td.fc-week-number &gt; * {&#13;
+  /* work around the way we do column resizing and ensure a minimum width */&#13;
+  display: inline-block;&#13;
+  min-width: 1.25em; }</style>
+        <sys_class_name>content_css</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-03 07:44:11</sys_created_on>
+        <sys_id>27c95c5fdbde1450bf9ead8ed396195b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_bg_schedule_daygrid</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>content_css_27c95c5fdbde1450bf9ead8ed396195b</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-03 07:44:11</sys_updated_on>
+        <type>local</type>
+        <url/>
+    </content_css>
+</record_update>

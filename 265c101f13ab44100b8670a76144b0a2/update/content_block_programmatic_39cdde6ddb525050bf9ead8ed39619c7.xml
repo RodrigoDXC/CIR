@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_block_programmatic">
+    <content_block_programmatic action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <condition/>
+        <conditional>false</conditional>
+        <frame/>
+        <logged_on>false</logged_on>
+        <name>Date Report  Filter</name>
+        <programmatic_content><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+	<style>
+		.time-field {
+            display: initial;
+            width: auto;
+            line-height: initial !important;
+        }
+	</style>
+	
+	<div style="margin-left: 9px">
+		<h4>${gs.getMessage('cir_select_date_report_filter')}</h4>
+		<input type="date" id="start_date" class="form-control time-field" onChange="filterByDate();" />
+	</div>
+	
+	<script type="text/javascript">
+		$j(".date-picker").datepicker({
+			dateFormat: 'dd/mm/yy'
+		});
+		var today = $j.datepicker.formatDate('yy-mm-dd', new Date());
+		$j("#start_date").val(today);
+	</script>
+	
+	<script>
+		$j(document).ready(function(){ 
+			filterByDate();
+		});
+		
+		function filterByDate() {
+			var dahsHandler = new DashboardMessageHandler('report_date_report_filter');
+			var formatedDate = $j("#start_date").val();
+			var serviceOrderQuery = "";
+		
+			if (formatedDate) {		
+		 		serviceOrderQuery = "static_service.dateON"+ formatedDate +"@javascript:gs.dateGenerate(\'"+formatedDate+"\',\'start\')@javascript:gs.dateGenerate(\'"+formatedDate+"\',\'end\')";
+				var vendorReportQuery = "vendor_report.report_dateON"+ formatedDate +"@javascript:gs.dateGenerate(\'"+formatedDate+"\',\'start\')@javascript:gs.dateGenerate(\'"+formatedDate+"\',\'end\')";
+		
+				var filter1 = dahsHandler.getFilterMessage("x_fru_cir_static_service_order", serviceOrderQuery);
+				var filter2 = dahsHandler.getFilterMessage("x_fru_cir_vendor_report_details", vendorReportQuery);
+				var finalFilter = [filter1, filter2];
+		
+				SNC.canvas.interactiveFilters.setDefaultValue({
+					id: dahsHandler.report_date_report_filter,
+					filters: finalFilter,
+					}, false);
+				dahsHandler.publishMessage(finalFilter);
+			}
+		
+			if (!formatedDate) {
+				serviceOrderQuery = "exception_control=true^ORDERBYstatic_service.date";
+				dahsHandler.publishFilter("x_fru_cir_static_service_order", serviceOrderQuery);
+			}
+		};
+	</script>
+	<body>
+	</body>	
+</j:jelly>]]></programmatic_content>
+        <sys_class_name>content_block_programmatic</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-29 06:56:49</sys_created_on>
+        <sys_id>39cdde6ddb525050bf9ead8ed39619c7</sys_id>
+        <sys_mod_count>66</sys_mod_count>
+        <sys_name>Date Report  Filter</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>content_block_programmatic_39cdde6ddb525050bf9ead8ed39619c7</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-13 15:26:32</sys_updated_on>
+        <two_phase>false</two_phase>
+    </content_block_programmatic>
+</record_update>

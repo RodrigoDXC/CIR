@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>a423933adb8a1810d4a73533f3961912</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="x_fru_cir_situation">
+    <x_fru_cir_situation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <activity_due/>
+        <additional_assignee_list/>
+        <approval>not requested</approval>
+        <approval_history/>
+        <approval_set/>
+        <assigned_to/>
+        <assignment_group/>
+        <buildings>ccdca4bddbc29410d4a73533f396197a,6cb7bc69dbca5410d4a73533f39619be</buildings>
+        <business_duration/>
+        <business_service/>
+        <calendar_duration/>
+        <category display_value="Security breach">3456593ddb469410d4a73533f3961955</category>
+        <close_notes/>
+        <closed_at/>
+        <closed_by/>
+        <cmdb_ci/>
+        <comments/>
+        <comments_and_work_notes/>
+        <company/>
+        <contact_type/>
+        <correlation_display/>
+        <correlation_id/>
+        <country>bb39a84fdbadd810bf9ead8ed3961932</country>
+        <delivery_plan/>
+        <delivery_task/>
+        <description/>
+        <dimension display_value="Cyber security">c97383c8db65541003b3533fd3961934</dimension>
+        <due_date/>
+        <escalation>0</escalation>
+        <escalation_level>21b295fedb61d81003b3533fd3961953</escalation_level>
+        <expected_start/>
+        <follow_up/>
+        <group_list/>
+        <impact>3</impact>
+        <knowledge>false</knowledge>
+        <location/>
+        <location_groups/>
+        <locations>27, Boulevard Vitton, Paris, Champs-Elysee</locations>
+        <made_sla>true</made_sla>
+        <mobile_location/>
+        <name>Security breach at 27, Boulevard Vitton, Paris, Champs-Elysee</name>
+        <number>SIT0001347</number>
+        <opened_at>2020-07-20 21:40:56</opened_at>
+        <opened_by display_value="Paulo Gomes">4c5e39b4dbd74810b4d92a9b8a96198a</opened_by>
+        <order/>
+        <parametrization>63a2933adb8a1810d4a73533f3961974</parametrization>
+        <parent/>
+        <people_affected>81</people_affected>
+        <people_affected_manual/>
+        <priority>4</priority>
+        <reassignment_count>0</reassignment_count>
+        <rejection_goto/>
+        <service_offering/>
+        <short_description/>
+        <sla_due/>
+        <state>0</state>
+        <sys_class_name>x_fru_cir_situation</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-20 21:41:15</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a423933adb8a1810d4a73533f3961912</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-20 21:41:15</sys_updated_on>
+        <time_worked/>
+        <upon_approval>proceed</upon_approval>
+        <upon_reject>cancel</upon_reject>
+        <urgency>3</urgency>
+        <user_input/>
+        <variables/>
+        <virtual_locations/>
+        <watch_list/>
+        <wf_activity/>
+        <work_end/>
+        <work_notes/>
+        <work_notes_list/>
+        <work_start/>
+    </x_fru_cir_situation>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-20 21:41:49</sys_created_on>
+        <sys_id>9d535b3adb8a1810d4a73533f3961974</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>SIT0001347</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_9d535b3adb8a1810d4a73533f3961974</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-20 21:41:49</sys_updated_on>
+        <tablename>x_fru_cir_situation</tablename>
+    </sys_metadata_link>
+</record_update>

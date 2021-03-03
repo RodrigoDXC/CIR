@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update node_type="sys_portal_page" unload_date="2021-03-03 17:59:47">
+    <sys_portal_page action="INSERT_OR_UPDATE">
+        <layout/>
+        <order>300000</order>
+        <read_roles>x_fru_cir.static_protection_coordinator,x_fru_cir.static_protection_manager</read_roles>
+        <roles/>
+        <selectable>false</selectable>
+        <sys_class_name>sys_portal_page</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-13 15:23:13</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>add2a12edbe6d010d4a73533f3961931</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>PA Static Dashboard - New Tab</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_portal_page_add2a12edbe6d010d4a73533f3961931</sys_update_name>
+        <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+        <sys_updated_on>2020-08-19 20:12:18</sys_updated_on>
+        <title>PA Static Dashboard - New Tab</title>
+        <user/>
+        <view>pa_static_dash_-_new_tab</view>
+        <related_items_node>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Static Dashboard - New Tab">add2a12edbe6d010d4a73533f3961931</page>
+                <summary>Vendor Reports</summary>
+                <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-08-13 15:26:52</sys_created_on>
+                <sys_id>03a36d2edbe6d010d4a73533f3961990</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-08-13 15:26:52</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:26:52</sys_created_on>
+                        <sys_id>07a36d2edbe6d010d4a73533f3961990</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:26:52</sys_updated_on>
+                        <value>5a4d966ddb525050bf9ead8ed39619ce</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:26:52</sys_created_on>
+                        <sys_id>0fa36d2edbe6d010d4a73533f3961990</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:26:52</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:26:52</sys_created_on>
+                        <sys_id>47a36d2edbe6d010d4a73533f3961991</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:26:52</sys_updated_on>
+                        <value>Vendor Reports</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:26:52</sys_created_on>
+                        <sys_id>4ba36d2edbe6d010d4a73533f3961990</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:26:52</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>filter_indicator</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:20</sys_created_on>
+                        <sys_id>71c3216edbe6d010d4a73533f3961974</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:20</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>real_time</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:20</sys_created_on>
+                        <sys_id>75c3216edbe6d010d4a73533f3961974</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:20</sys_updated_on>
+                        <value>false</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:26:52</sys_created_on>
+                        <sys_id>83a36d2edbe6d010d4a73533f3961991</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:26:52</sys_updated_on>
+                        <value>list</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:26:52</sys_created_on>
+                        <sys_id>cfa36d2edbe6d010d4a73533f3961990</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:26:52</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>show_header</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:20</sys_created_on>
+                        <sys_id>f1c36d2edbe6d010d4a73533f396190c</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:20</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>subscriber_widget</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:20</sys_created_on>
+                        <sys_id>f1c36d2edbe6d010d4a73533f396190d</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:20</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title_align</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:20</sys_created_on>
+                        <sys_id>f5c36d2edbe6d010d4a73533f396190c</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:20</sys_updated_on>
+                        <value>left</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>show_border</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:20</sys_created_on>
+                        <sys_id>f9c36d2edbe6d010d4a73533f396190c</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:20</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>show_title</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:20</sys_created_on>
+                        <sys_id>fdc36d2edbe6d010d4a73533f396190b</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:20</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>publisher_widget</name>
+                        <portal_section display_value="Created 2020-08-13 17:26:52">03a36d2edbe6d010d4a73533f3961990</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:20</sys_created_on>
+                        <sys_id>fdc36d2edbe6d010d4a73533f396190c</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:20</sys_updated_on>
+                        <value>false</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Static Dashboard - New Tab">add2a12edbe6d010d4a73533f3961931</page>
+                <summary>Exceptional Service Orders</summary>
+                <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-08-13 15:27:03</sys_created_on>
+                <sys_id>79b3e92edbe6d010d4a73533f3961986</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-08-13 15:27:03</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:03</sys_created_on>
+                        <sys_id>39b3e92edbe6d010d4a73533f3961987</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:03</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:03</sys_created_on>
+                        <sys_id>75b3e92edbe6d010d4a73533f3961987</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:03</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:03</sys_created_on>
+                        <sys_id>7db3e92edbe6d010d4a73533f3961986</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:03</sys_updated_on>
+                        <value>629d966ddb525050bf9ead8ed39619c6</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>show_border</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:16</sys_created_on>
+                        <sys_id>b0c3216edbe6d010d4a73533f3961936</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:16</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>real_time</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:16</sys_created_on>
+                        <sys_id>b0c3216edbe6d010d4a73533f3961937</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:16</sys_updated_on>
+                        <value>false</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:03</sys_created_on>
+                        <sys_id>b1b3e92edbe6d010d4a73533f3961987</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:03</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>publisher_widget</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:16</sys_created_on>
+                        <sys_id>b4c3216edbe6d010d4a73533f3961936</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:16</sys_updated_on>
+                        <value>false</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>show_title</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:16</sys_created_on>
+                        <sys_id>b4c3e92edbe6d010d4a73533f396198b</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:16</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>subscriber_widget</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:16</sys_created_on>
+                        <sys_id>b8c3216edbe6d010d4a73533f3961936</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:16</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>show_header</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:16</sys_created_on>
+                        <sys_id>b8c3e92edbe6d010d4a73533f396198b</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:16</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title_align</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:16</sys_created_on>
+                        <sys_id>bcc3216edbe6d010d4a73533f3961935</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:16</sys_updated_on>
+                        <value>left</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>filter_indicator</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:16</sys_created_on>
+                        <sys_id>bcc3216edbe6d010d4a73533f3961936</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:16</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:03</sys_created_on>
+                        <sys_id>bdb3e92edbe6d010d4a73533f3961987</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:03</sys_updated_on>
+                        <value>Exceptional Service Orders</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-08-13 17:27:03">79b3e92edbe6d010d4a73533f3961986</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:27:03</sys_created_on>
+                        <sys_id>f9b3e92edbe6d010d4a73533f3961987</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:27:03</sys_updated_on>
+                        <value>list</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Static Dashboard - New Tab">add2a12edbe6d010d4a73533f3961931</page>
+                <summary>Date Report  Filter</summary>
+                <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-08-13 15:25:40</sys_created_on>
+                <sys_id>b163692edbe6d010d4a73533f396195e</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-08-13 15:25:41</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>type</name>
+                        <portal_section display_value="Created 2020-08-13 17:25:40">b163692edbe6d010d4a73533f396195e</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:25:41</sys_created_on>
+                        <sys_id>7563692edbe6d010d4a73533f396195f</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:25:41</sys_updated_on>
+                        <value>content_block_programmatic</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-08-13 17:25:40">b163692edbe6d010d4a73533f396195e</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:25:40</sys_created_on>
+                        <sys_id>b563692edbe6d010d4a73533f396195e</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:25:40</sys_updated_on>
+                        <value>39cdde6ddb525050bf9ead8ed39619c7</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-08-13 17:25:40">b163692edbe6d010d4a73533f396195e</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:25:40</sys_created_on>
+                        <sys_id>bd63692edbe6d010d4a73533f396195e</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:25:40</sys_updated_on>
+                        <value>Date Report  Filter</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-08-13 17:25:40">b163692edbe6d010d4a73533f396195e</portal_section>
+                        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-08-13 15:25:40</sys_created_on>
+                        <sys_id>f963692edbe6d010d4a73533f396195e</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-08-13 15:25:40</sys_updated_on>
+                        <value>com.glide.cms.RenderBlock</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+        </related_items_node>
+    </sys_portal_page>
+</record_update>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_header_footer">
+    <sp_header_footer action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($rootScope, $scope, snRecordWatcher, spUtil, $location, $uibModal, cabrillo, $timeout) {
+	$scope.userID = $scope.user.sys_id;
+	if (cabrillo.isNative()) {
+		$scope.isViewNative = true;
+	}
+	$scope.openPopUp = function() {
+		var url = "$chat_support.do?queueID=" + $scope.data.connect_support_queue_id;
+		var popup = window.open (url, "popup", "width=900, height=600"); 
+	};
+
+	$scope.openLogin = function () {
+		$scope.modalInstance = $uibModal.open({
+			templateUrl: 'retailLoginModal',
+			scope: $scope
+		});
+	};
+
+	$rootScope.$on('sp.avatar_changed', function() {
+		$scope.userID = "";
+		$timeout(function(){
+			$scope.userID = $scope.user.sys_id;
+		});
+	});
+
+	$scope.isHomepage = function() {
+		if (!$scope.page.id)
+			return true;
+
+		if ($scope.page.id == $scope.portal.homepage_dv)
+			return true;
+
+		return false;
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.navbar {&#13;
+  transition: 250ms opacity ease-in-out; &#13;
+  -webkit-transition: 250ms opacity ease-in-out; &#13;
+  border: 0;&#13;
+  border-bottom: 4px solid $sp-navbar-divider-color;&#13;
+}&#13;
+&#13;
+.navbar-fade {&#13;
+  opacity: 0.4;&#13;
+}&#13;
+&#13;
+.navbar-inverse .navbar-toggle {&#13;
+  border-color: rgba(255, 255, 255, 0.25);&#13;
+}&#13;
+&#13;
+.nav &gt; li &gt; a {&#13;
+  max-height: 50px;&#13;
+}&#13;
+&#13;
+.navbar-brand {&#13;
+  height: 50px;&#13;
+  padding: 0;&#13;
+}&#13;
+&#13;
+.navbar-brand img, .navbar-brand span {&#13;
+  margin-left: $sp-logo-margin-x;&#13;
+  margin-right: $sp-logo-margin-x;&#13;
+  margin-top: $sp-logo-margin-y;&#13;
+  margin-bottom: $sp-logo-margin-y;&#13;
+  display: block;&#13;
+  max-height: $sp-logo-max-height;&#13;
+  max-width: $sp-logo-max-width;&#13;
+  position: relative;&#13;
+  top: 50%;&#13;
+  -webkit-transform: translateY(-50%);&#13;
+  -ms-transform: translateY(-50%);&#13;
+  transform: translateY(-50%);&#13;
+}&#13;
+.breadcrumb-container {&#13;
+  background-color: $panel-bg;&#13;
+}&#13;
+&#13;
+/* for mobile app */&#13;
+.navbar-inverse.is-native {&#13;
+  background-color: #405060;&#13;
+}&#13;
+&#13;
+nav{&#13;
+  margin-bottom: 0px;&#13;
+  border-radius: 0px; &#13;
+}&#13;
+&#13;
+.navbar-collapse{&#13;
+  padding-right: 0px;&#13;
+}&#13;
+&#13;
+.navbar-nav {&#13;
+  margin: 0px;&#13;
+}&#13;
+&#13;
+.headerPadding{&#13;
+  float:left;&#13;
+  padding-top:45px;&#13;
+}&#13;
+&#13;
+@media (max-width: 767px) {&#13;
+  .headerPadding{&#13;
+    float:left;&#13;
+    padding-top:0px;&#13;
+    width:100%;&#13;
+  }&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-header</id>
+        <internal>false</internal>
+        <link><![CDATA[function(scope, element) {	
+	$(element).on('click.nav','.navbar-collapse.in',function(e) {	
+		var target = $(e.target);
+		if (target.is('a')) {
+			// collapse mobile nav if clicked an anchor
+			$(this).removeClass('in').addClass('collapse');
+			return;
+		}
+		
+		// if neither target nor parent is an anchor, do nothing
+		if (!target.parent().is('a'))
+			return;
+		
+		// collapse mobile nav if target is part of a submenu
+		if (target.parents("ul.dropdown-menu").length > 0)
+			$(this).removeClass('in').addClass('collapse');
+	});
+}]]></link>
+        <name>CIR CIRI Header</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[// Defines the support queue ID that will be linked to by the Live Chat link in header
+var locationID = $sp.getParameter('location_id');
+if(locationID){
+	var locationRecord = new GlideRecord('cmn_location');
+	if(locationRecord.get(locationID)){
+		var location = new CIRCaseManagementUtils().GetLocationRecord(locationRecord.sys_id.toString());
+		data.location = {
+			name: location.name.toString(),
+			address: location.address,
+			url: 'id=cir_ciri_location_overview&location_id=' + location
+		};
+	}
+}
+
+data.connect_support_queue_id = $sp.getValue('sp_chat_queue');
+data.login_page = $sp.getValue('login_page');
+var menu = $sp.getValue("sp_rectangle_menu");
+data.menu = $sp.getWidgetFromInstance(menu);
+if (data.menu && data.menu.data) {
+	data.menu.data.replace = true;
+	// Hide login if menu already has link to login
+	data.hasLogin = false;
+	if (data.menu.data.menu.items) {
+		for(var i in data.menu.data.menu.items) {
+			var item = data.menu.data.menu.items[i];
+			if (item.type == 'page' && item.sp_page == data.login_page)
+				data.hasLogin = true;
+		}
+	}
+}
+
+data.loginWidget = $sp.getWidgetFromInstance('login-modal');
+data.typeahead = $sp.getWidgetFromInstance('typeahead-search');
+data.locationMenu = $sp.getWidget('cir-ciri-location-menu', {locationID: locationID});]]></script>
+        <servicenow>false</servicenow>
+        <static>false</static>
+        <sys_class_name>sp_header_footer</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 15:30:14</sys_created_on>
+        <sys_id>151ecdbadb61d81003b3533fd396196b</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIR CIRI Header</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_header_footer_151ecdbadb61d81003b3533fd396196b</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-28 08:47:20</sys_updated_on>
+        <template><![CDATA[<div>
+  <nav class="navbar-inverse" ng-class="::{'navbar':!isViewNative, 'is-native': isViewNative}"
+       role="navigation">
+    <div ng-show="::!isViewNative" class="navbar-header">
+      <a class="navbar-brand" ng-if="::!portal.logo" href="?id={{::portal.homepage_dv}}"><span>{{::portal.title}}</span></a>
+      <a class="navbar-brand navbar-brand-logo" ng-if="::portal.logo" href="?id={{::portal.homepage_dv}}" style="height:75px;max-height:75px;padding-top:10px";>
+        <img style="height:75px;max-height:75px;" ng-src="{{::portal.logo}}" />
+      </a>
+
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sp-nav-bar">
+        <span class="sr-only">${toggle_navigation}</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <h1 class="locationHeader" ng-if="data.location">
+      <a href="{{data.location.url}}">{{data.location.name}}</a>
+      <span class="locationAddress hidden-xs">{{data.location.address}}</span>
+    </h1>
+
+    <div sp-navbar-toggle="" class="collapse navbar-collapse" id="sp-nav-bar">
+      <div class="headerPadding">
+        <sp-widget widget="data.menu"></sp-widget>
+        <div class="visible-xs-block">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="navpage.do">${switch_to_ITIL_view}</a>
+            </li>
+            <li>
+              <a href="{{::portal.logoutUrl}}">${logout}</a>
+            </li>
+          </ul>
+          <hr/>
+          <sp-widget widget="data.locationMenu"></sp-widget>
+        </div>
+      </div>
+      <ul ng-if="::(!user.logged_in && page.id != portal.login_page_dv && !data.hasLogin)" class="nav navbar-nav">
+        <li><a href ng-click="openLogin()">${Login}</a></li>
+      </ul>
+      <ul ng-if="::user.logged_in" class="nav navbar-nav" style="float:right">
+        <!-- chat, avatar, and logout -->
+        <li ng-if="::data.connect_support_queue_id"><a href ng-click="openPopUp()">${live_chat}</a></li>
+        <li class="dropdown hidden-xs">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="navbar-avatar"><sn-avatar class="avatar-small-medium" primary="userID" /></span>
+            <span class="visible-lg-inline">{{::user.name}}</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a ng-href="?id=user_profile&sys_id={{::user.sys_id}}">${profile}</a></li>
+            <li><a href="navpage.do">${cir_switch_to_full_view}</a></li>
+            <li><a href="{{::portal.logoutUrl}}">${logout}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>  
+</div>
+<div class="hidden-xs">
+  <sp-widget widget="data.locationMenu"></sp-widget>
+</div>]]></template>
+    </sp_header_footer>
+</record_update>

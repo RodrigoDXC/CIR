@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRKpiDbManipulationFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRKpiDbManipulationFP</name>
+        <script><![CDATA[var CIRKpiDbManipulationFP = function() {
+    /**
+     * Generate the KPI Calculation name from the Calculation Type name, Location name and Period name.
+     *
+     * @param {Array} nameArray - KPI Calculation name from the Calculation Type name, Location name and Period name
+     * @return {String} - String with the array concatenated with a delimiter
+     */
+    var generateKpiNameFromArray = function(nameArray) {
+        var DELIMITER = '_';
+        return nameArray.join(DELIMITER);
+    };
+
+    /**
+     * Funtion to start the KPI Calculation
+     *
+     * @return {void}
+     */
+    var startKpiCalculation = function() {
+        var arrLocations = CIRKpiLocationFP().GetLocations();
+        var arrPeriods = CIRKpiPeriodFP().GetPeriods();
+        var calculation = new CIRKpiCalculationFP(new CIRKpiCalculationHelperFP());
+        var arrCalculationTypes = calculation.GetCalculationTypes();
+        var objCalculator = calculation.KpiCalculator;
+        arrLocations.forEach(function(location) {
+            iteratePeriods(location, arrPeriods, arrCalculationTypes, objCalculator);
+        });
+    };
+
+    /**
+     * Function to iterate through the periods
+     *
+     * @param {Object} location - JSON object with the location data
+     * @param {Array} arrPeriods - Array with all the periods
+     * @param {Array} arrCalculationTypes - Array with all the calculation types
+     * @param {Object} objCalculator - JSON object with the functions to help calculate the KPIs
+     * @return {void}
+     */
+    var iteratePeriods = function(location, arrPeriods, arrCalculationTypes, objCalculator) {
+        arrPeriods.forEach(function(p) {
+            processPeriod(p, location, arrCalculationTypes, objCalculator);
+        });
+    };
+
+    /**
+     * Function to process each period.
+     *
+     * @param {Object} location - JSON object with the location data
+     * @param {Object} period - JSON object with the period data
+     * @param {Array} arrCalculationTypes - Array with all the calculation types
+     * @param {Object} objCalculator - JSON object with the functions to help calculate the KPIs
+     * @return {void}
+     */
+    var processPeriod = function(period, location, arrCalculationTypes, objCalculator) {
+        var currentDate = new GlideDate();
+        CIRKpiDbUtilsFP().RemoveKpiCalculations(location.locationSysId, period.periodSysId);
+        period.endDate = new GlideDate();
+        period.endDate.setGlideDateTime(period.startDate);
+        while(period.endDate <= currentDate) {
+            period.reportingDate = new GlideDate();
+            period.reportingDate.setGlideDateTime(period.endDate);
+            period.endDate.addMonthsUTC(1);
+
+            period.workingHoursForPeriod = CIRKpiPeriodFP().GetWorkingHoursForPeriod(period.startDate, period
+                .endDate, location.locationSysId);
+
+            if(period.workingHoursForPeriod === 0) {
+                continue;
+            }
+            calculateKpi(location, period, arrCalculationTypes, objCalculator);
+        }
+    };
+
+    /**
+     * Function to calculate and create the KPI Calculation record
+     *
+     * @param {Object} location - JSON object with the location data
+     * @param {Object} period - JSON object with the period data
+     * @param {Array} arrCalculationTypes - Array with all the calculation types
+     * @param {Object} objCalculator - JSON object with the functions to help calculate the KPIs
+     * @return {void}
+     */
+    var calculateKpi = function(location, period, arrCalculationTypes, objCalculator) {
+        arrCalculationTypes.forEach(function(calculationType) {
+            var calculationTypeName = calculationType.calculationTypeName;
+            var objKpi = {
+                name: generateKpiNameFromArray([calculationTypeName, location.locationName, period
+                    .periodName
+                ]),
+                locationSysId: location.locationSysId,
+                periodSysId: period.periodSysId,
+                calculationTypeSysId: calculationType.calculationTypeSysId,
+                calculationTypeName: calculationTypeName,
+                workingHoursValue: period.workingHoursForPeriod
+            };
+            objKpi.kpiValue = objCalculator[calculationTypeName](objKpi, period.startDate, period
+                .endDate);
+
+            if(!CIRKpiDbUtilsFP().CreateKpiCalculation(objKpi, period.reportingDate)) {
+                gs.warn(objKpi.name + ': ' + objKpi.kpiValue + ' for ' + period.reportingDate +
+                    ' was not created on KPI Calculation table');
+            }
+        });
+    };
+
+    return {
+        StartKpiCalculation: startKpiCalculation
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 12:04:24</sys_created_on>
+        <sys_id>a72fe1efdb395010d4a73533f396198c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIRKpiDbManipulationFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_a72fe1efdb395010d4a73533f396198c</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:12:49</sys_updated_on>
+    </sys_script_include>
+</record_update>

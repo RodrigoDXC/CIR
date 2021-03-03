@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function (snRecordWatcher, $scope, spUtil, $rootScope, $timeout) {
+	$scope.loadingIndicator = $rootScope.loadingIndicator;
+	$scope.cartItemCount = 0;
+	$scope.itemAddedTooltipOpen = false;
+
+	$scope.$on("$sp.service_catalog.cart.count", function($evt, count) {
+		$scope.cartItemCount = count;
+	});
+
+	var cancelTooltipPromise;
+	$scope.$on("$sp.service_catalog.cart.add_item", function() {
+		$timeout.cancel(cancelTooltipPromise);
+
+		$scope.itemAddedTooltipOpen = true;
+		cancelTooltipPromise = $timeout(function() {
+			$scope.itemAddedTooltipOpen = false;
+		}, 3000);
+	});
+
+	$scope.$on('sp_loading_indicator', function(e, value) {
+		$scope.loadingIndicator = value;
+	});
+
+	// Get list of record watchers
+	var record_watchers = [];
+	if ($scope.data.menu.items) {
+		for(var i in $scope.data.menu.items) {
+			var item = $scope.data.menu.items[i];
+			if (item.type == 'scripted') {
+				if (item.scriptedItems.record_watchers)
+					record_watchers = record_watchers.concat(item.scriptedItems.record_watchers);
+			}
+			if (item.type == 'filtered') {
+				record_watchers.push({'table':item.table,'filter':item.filter});
+			}
+		}
+	}
+
+	// Init record watchers
+	for (var y in record_watchers){
+		var watcher = record_watchers[y];
+		//console.info('Record Watcher: '+watcher.table+' : '+watcher.filter);
+		snRecordWatcher.initList(watcher.table, watcher.filter);
+	}
+
+	$scope.$on("record.updated", function(evt) {
+		spUtil.update($scope);
+	});
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.header-load {&#13;
+  float: right; &#13;
+  width: 24px;&#13;
+  position: relative;&#13;
+  top: 24px;&#13;
+}&#13;
+&#13;
+ul {&#13;
+  max-height: 300px;&#13;
+  overflow: auto;&#13;
+}&#13;
+&#13;
+.subtotal {&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.item-image {&#13;
+  padding: 0;&#13;
+  margin: 0;&#13;
+  text-align: center;&#13;
+  max-width:100%;&#13;
+  height:auto;&#13;
+}&#13;
+label, p {&#13;
+  padding: 0;&#13;
+  margin: 0;&#13;
+}&#13;
+.media {&#13;
+  padding: 0;&#13;
+  margin: 0;&#13;
+}&#13;
+.media-left &gt; a {&#13;
+  display: block;&#13;
+  width: 48px;&#13;
+  max-width: 48px;&#13;
+}&#13;
+.media-body {&#13;
+  label {&#13;
+    font-weight: bold;&#13;
+  }&#13;
+}&#13;
+li.media {&#13;
+  border-top: 1px solid #cccccc;&#13;
+  padding: 1rem;&#13;
+}&#13;
+.panel {&#13;
+  margin: 0;&#13;
+}&#13;
+.panel .panel-body {&#13;
+  padding: 0;&#13;
+}&#13;
+.btn-clear {&#13;
+  color: #333;&#13;
+  background-color: #fff;&#13;
+}&#13;
+p.quantity-price {&#13;
+  padding-top: 0.5rem;&#13;
+  span {&#13;
+    color: #777;&#13;
+    padding-right: 0.5rem;&#13;
+  }&#13;
+}&#13;
+.align-right {&#13;
+  text-align: right;&#13;
+}&#13;
+}&#13;
+&#13;
+.item-added-tooltip {&#13;
+  width: 184px;&#13;
+  font-size: 14px;&#13;
+}&#13;
+hr.separator{&#13;
+  border-top: 2px solid #bbb;&#13;
+  margin-left: 10px;&#13;
+  margin-right: 10px;&#13;
+  border-radius: 10px;&#13;
+  margin-top: 5px;&#13;
+  margin-bottom: 5px;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance_menu</data_table>
+        <demo_data/>
+        <description>Widget containing the menu within the header for the CIR Portal Case, Investigation, Risk and Impact Management</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-header-menu</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Header Menu</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    // build menus
+    var menu_id = $sp.getValue('sys_id'); // instance sys_id
+    var gr = new GlideRecord('sp_instance_menu');
+    if (gr.get(menu_id)) {
+        data.menu = {};
+        data.menu.name = gr.title.getDisplayValue();
+        data.menu.items = $sp.getMenuItems(menu_id);
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 14:27:06</sys_created_on>
+        <sys_id>3f8f7432db61d81003b3533fd3961932</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR CIRI Header Menu</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_3f8f7432db61d81003b3533fd3961932</sys_update_name>
+        <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+        <sys_updated_on>2020-07-31 13:23:14</sys_updated_on>
+        <template><![CDATA[<ul class="nav navbar-nav"> 
+  <li ng-repeat="item in data.menu.items" ng-class="{dropdown: item.items.length > 0}" ng-include="'cirMenuTemplate'"></li>
+   <div class="header-load" ng-show="loadingIndicator">
+    <div class="hidden-xs sp-loading-indicator la-sm">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</ul>]]></template>
+    </sp_widget>
+</record_update>

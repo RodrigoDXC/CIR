@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="was_person_identified" table="x_fru_cir_vehicle_driveoff" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>was_person_identified</element>
+            <name>x_fru_cir_vehicle_driveoff</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-19 11:16:13</sys_created_on>
+            <sys_id>3154f847138b90100b8670a76144b092</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>was_person_identified</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_vehicle_driveoff_was_person_identified</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-19 11:16:13</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>was_person_identified</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Yes</label>
+            <language>en</language>
+            <name>x_fru_cir_vehicle_driveoff</name>
+            <sequence>10</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-19 11:16:13</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>28d3afd4dbfad410bf9ead8ed39619e6</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-19 11:16:17</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>was_person_identified</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>No</label>
+            <language>en</language>
+            <name>x_fru_cir_vehicle_driveoff</name>
+            <sequence>20</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-08-19 11:16:19</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>86d3abd4dbfad410bf9ead8ed3961988</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-08-19 11:16:23</sys_updated_on>
+            <value>0</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_action_param_map">
+    <sys_sg_action_param_map action="INSERT_OR_UPDATE">
+        <button display_value="New risk (case)">ef34f517db1e5050d4a73533f3961918</button>
+        <item_parameter display_value="cirDescription">c4a7da9adb1edc10d4a73533f3961921</item_parameter>
+        <sys_class_name>sys_sg_action_param_map</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-03 14:23:50</sys_created_on>
+        <sys_id>cc557557db1e5050d4a73533f39619ea</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>c4a7da9adb1edc10d4a73533f3961921</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_action_param_map_cc557557db1e5050d4a73533f39619ea</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-03 14:23:50</sys_updated_on>
+        <ui_parameter display_value="Description">b9c43157db1e5050d4a73533f3961936</ui_parameter>
+    </sys_sg_action_param_map>
+</record_update>

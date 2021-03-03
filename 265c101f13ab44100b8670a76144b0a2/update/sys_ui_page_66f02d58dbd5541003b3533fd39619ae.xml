@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>UI Page to provide access to DXC Support for CIR</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_contact_dxc_support.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:evaluate>
+		function encode(urlComponent) {
+			return gs.urlEncode(urlComponent).replace(/\+/g, '%20');
+		}
+
+		var applicationName = 'Corporate Incident Response';
+
+		var scopeName = gs.getCurrentScopeName();
+		var application = new GlideRecord('sys_scope');
+		if (application.get('scope', scopeName)) {
+			applicationName = application.name.toString() + ' ' + application.version.toString();
+		}
+
+		var subject = applicationName + ' - ';
+		var body = 'Product: ' + applicationName +	'\n\nDescription of Issue:\n\n\n\nActions to Reproduce:\n\n\n\nExpected Behavior:\n\n\n\nActual Behavior:\n\n\n';
+	</g:evaluate>
+	<div class="navbar navbar-default" role="toolbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<h1 class="navbar-title">
+					<span class="caption">Contact DXC Support</span>
+				</h1>
+			</div>
+			<div class="nav navbar-right">
+				<h2 class="navbar-title" style="padding-right:20px">
+					<span class="caption">${applicationName}</span>
+				</h2>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<span>Please email us at &#160;<a href="mailto:dxcfruitionsupport@dxc.com?subject=${encode(subject)}&amp;body=${encode(body)}">dxcfruitionsupport@dxc.com</a>.</span>
+	</div>
+</j:jelly>]]></html>
+        <name>contact_dxc_support</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-05 12:10:16</sys_created_on>
+        <sys_id>66f02d58dbd5541003b3533fd39619ae</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>contact_dxc_support</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_66f02d58dbd5541003b3533fd39619ae</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-18 15:26:26</sys_updated_on>
+    </sys_ui_page>
+</record_update>

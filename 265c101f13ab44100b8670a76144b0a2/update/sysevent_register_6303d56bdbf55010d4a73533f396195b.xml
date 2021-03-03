@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysevent_register">
+    <sysevent_register action="INSERT_OR_UPDATE">
+        <caller_access/>
+        <description>Notifies users with expiring certifications</description>
+        <event_name>x_fru_cir.certification.expiring</event_name>
+        <fired_by>Scheduled job</fired_by>
+        <queue/>
+        <suffix>certification.expiring</suffix>
+        <sys_class_name>sysevent_register</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 10:01:37</sys_created_on>
+        <sys_id>6303d56bdbf55010d4a73533f396195b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_fru_cir.certification.expiring</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sysevent_register_6303d56bdbf55010d4a73533f396195b</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 11:04:43</sys_updated_on>
+        <table>x_fru_cir_personnel_certification</table>
+    </sysevent_register>
+</record_update>

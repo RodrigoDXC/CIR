@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="DELETE" field="ownership" table="x_fru_cir_location" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>ownership</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Property</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>0</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:07:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>eb0729631b6b4050df7e43f4bd4bcbd0</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:07:51</sys_updated_on>
+            <value>property</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>ownership</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Rent</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>1</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:08:30</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4a4725a31b6b4050df7e43f4bd4bcbba</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:08:30</sys_updated_on>
+            <value>rent</value>
+        </sys_choice>
+        <sys_choice_set action="DELETE">
+            <element>ownership</element>
+            <name>x_fru_cir_location</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:07:33</sys_created_on>
+            <sys_id>d427ad631b6b4050df7e43f4bd4bcb14</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>ownership</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_location_ownership</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:07:33</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>832241aa6f5ebd80ffcca9cc5d3ee4d0</instance_id>
+        <instance_name>ven01084</instance_name>
+        <name>sys_choice_x_fru_cir_location_ownership</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="ownership" table="x_fru_cir_location" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>ownership</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Property</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>0</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:07:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>eb0729631b6b4050df7e43f4bd4bcbd0</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:07:51</sys_updated_on>
+            <value>property</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>ownership</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Rent</label>
+            <language>en</language>
+            <name>x_fru_cir_location</name>
+            <sequence>1</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:08:30</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4a4725a31b6b4050df7e43f4bd4bcbba</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:08:30</sys_updated_on>
+            <value>rent</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>ownership</element>
+            <name>x_fru_cir_location</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-20 15:07:33</sys_created_on>
+            <sys_id>d427ad631b6b4050df7e43f4bd4bcb14</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>ownership</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_location_ownership</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-20 15:07:33</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>]]></payload>
+        <payload_hash>-1081905170</payload_hash>
+        <record_name>Location.Ownership</record_name>
+        <reverted_from/>
+        <source>3649581913f30c100b8670a76144b073</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>current</state>
+        <sys_created_by>rnowell4@csc.com</sys_created_by>
+        <sys_created_on>2020-03-25 19:56:52</sys_created_on>
+        <sys_id>e349981913f30c100b8670a76144b0c4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1711344df270000001</sys_recorded_at>
+        <sys_updated_by>rnowell4@csc.com</sys_updated_by>
+        <sys_updated_on>2020-03-25 19:56:52</sys_updated_on>
+        <type>Choice list</type>
+        <update_guid>2349981921f30c10871cb6572adb62c4</update_guid>
+        <update_guid_history>2349981921f30c10871cb6572adb62c4:0,ef49981927f30c10b9278e77126e5ebe:1159599394</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-30 14:35:29</sys_created_on>
+        <sys_db_object display_value="" name="sys_choice_set">sys_choice_set</sys_db_object>
+        <sys_id>e349981913f30c100b8670a76144b0c2</sys_id>
+        <sys_metadata>e349981913f30c100b8670a76144b0c2</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ownership</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_e349981913f30c100b8670a76144b0c2</sys_update_name>
+        <sys_update_version display_value="sys_choice_x_fru_cir_location_ownership">e349981913f30c100b8670a76144b0c4</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:05</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

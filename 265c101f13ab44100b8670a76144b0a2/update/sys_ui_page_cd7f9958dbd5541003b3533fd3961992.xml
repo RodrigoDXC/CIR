@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[jQuery(document).ready(function(){
+	var injuries = jQuery('#injuries').val();
+	if(injuries){
+		var injuryArr = JSON.parse(injuries);
+		for(var i = 0; i < injuryArr.length; i++){
+			if(injuryArr[i].x > 0){
+				var injuryObject = '<i class="fa fa-circle injury" style="position:absolute;left:' + injuryArr[i].x + 'px;top:' + injuryArr[i].y + 'px;width:' + injuryArr[i].width + 'px;height:' + injuryArr[i].width + 'px;font-size:' + injuryArr[i].font_size + ';z-index:25;" title="' + injuryArr[i].label + '"></i>';
+				jQuery("#injuryContainer").append(injuryObject);
+			}
+		}
+	}
+});
+
+jQuery('.region').click(function(event){
+	var recordType = jQuery('#recordType').val();
+	if(recordType == 'x_fru_cir_injury_illness'){
+		jQuery('.region').each(function(){
+			jQuery(this).removeClass('selected');
+		});
+		var region = jQuery(this);
+		region.addClass('selected');
+		jQuery(".modal-dialog, .modal-md").each(function(){
+			if(jQuery(this).find('#imageContainer')){
+				var offset = jQuery(this).offset();
+				var positionX = event.pageX - offset.left - 7;
+				var positionY = event.pageY - offset.top - 50;
+				jQuery('.injury').remove();
+				jQuery('#coordinates').val(positionX + ',' + positionY);
+				jQuery("#injuryContainer").append('<i class="fa fa-circle injury" style="left:' + positionX + 'px;top:' + positionY + 'px;z-index:25;"></i>');
+			}
+		});
+	}
+});
+
+function addInjury(){  
+	var selectedRegion = jQuery('.selected').attr('id');
+	var coordinates = jQuery('#coordinates').val();
+	g_form.setValue('body_location', selectedRegion);
+	g_form.setValue('injury_coordinates', coordinates);
+	g_form.save();
+	GlideDialogWindow.get().destroy();
+}]]></client_script>
+        <description>UI page to allow a user to mark the location where they were injured</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_body_location_map.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"/>
+	<style>
+		.selected{
+		border: 2px solid #ff0000;
+		}
+		.region:hover{
+		border: 2px solid grey;
+		}
+		.selected:hover{
+		border: 2px solid #ff0000 !important;
+		}
+		.injury{
+		color: red;
+		position: absolute;
+		width: 10px;
+		}
+	</style>
+	<g:evaluate>
+		var recordType = RP.getWindowProperties().recordType;
+		var recordSys = RP.getWindowProperties().recordSys;
+		var filter = RP.getWindowProperties().filter;
+		var cirImpactUtils = new CIRImpactUtils();
+		var injuries = '';
+		if(filter){
+			injuries = cirImpactUtils.GetInjuries('', '', filter);
+		}
+		else{
+			injuries = cirImpactUtils.GetInjuries(recordType, recordSys);
+		}
+		var injuryMessage = gs.getMessage('add_injury');
+		var bodyLocations = cirImpactUtils.GetBodyLocations();
+		var offset = recordSys ? '0' : '18';
+	</g:evaluate>
+	<input type="hidden" id="coordinates" value=""/>
+	<input type="hidden" id="injuries" value="${injuries}"/>
+	<input type="hidden" id="recordType" value="${recordType}"/>
+	<div id="imageContainer" style="width:479;height:510;padding-left:${offset}px">
+		<img id="bodyImage" src="cir_body_img.png" width="479" height="510"/>
+		<j:forEach items="${bodyLocations}" var="jvar_location">
+			<g:evaluate jelly="true">  
+				var locationName = jelly.jvar_location.name;
+				var locationSys = jelly.jvar_location.sys_id;   
+				var locationX = jelly.jvar_location.x;
+				var locationY = jelly.jvar_location.y;
+				var locationHeight = jelly.jvar_location.height;
+				var locationWidth = jelly.jvar_location.width;
+			</g:evaluate>
+			<div class="region" title="${locationName}" id="${locationSys}" style="position: absolute;width: ${locationWidth}px;height: ${locationHeight}px;top: ${locationY}px;left: ${locationX}px;z-index:50;background:transparent;"/>
+		</j:forEach>
+		<div id="injuryContainer" style="text-align:center"></div>
+	</div>
+	<j:if test="${recordType == 'x_fru_cir_injury_illness'}">
+		<button type="button" class="btn btn-primary" style="float:right;margin-top:20px" onclick="addInjury()">${gs.getMessage('cir_add_injury')}</button>
+	</j:if>
+</j:jelly>]]></html>
+        <name>body_location_map</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-05 12:03:37</sys_created_on>
+        <sys_id>cd7f9958dbd5541003b3533fd3961992</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>body_location_map</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_cd7f9958dbd5541003b3533fd3961992</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-24 09:51:59</sys_updated_on>
+    </sys_ui_page>
+</record_update>

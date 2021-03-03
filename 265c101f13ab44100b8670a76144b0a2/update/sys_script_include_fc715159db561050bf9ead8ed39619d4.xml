@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRStaticProtectionAccessManagerFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script Include used in ACLs for the Static Protection Process</description>
+        <name>CIRStaticProtectionAccessManagerFP</name>
+        <script><![CDATA[var CIRStaticProtectionAccessManagerFP = (function() {
+	var CIRStaticProtectionAccessManagerFP = Class.create();
+
+	var initialize = function() {
+		var table =  current.getTableName();
+		this.accessMatrix = {};
+
+		switch (table) {
+			case CIRConstants.Tables.SERVICE_TARIFF:
+				this.accessMatrix = {
+					'read' : checkSecurityManagedAccess(current.building.security_managed),
+					'write' : true,
+					'delete' : true,
+					'create' : true
+				};
+				break;
+
+			case CIRConstants.Tables.STATIC_SERVICE_MASTER:
+				this.accessMatrix = {
+					'read' : checkSecurityManagedAccess(current.building ? current.building.security_managed : '') && checkSecurityManagedAccess(current.space ? current.space.security_managed : ''),
+					'write' : true,
+					'delete' : checkForExistentServices(),
+					'create' : true
+				};
+				break;
+
+			case CIRConstants.Tables.STATIC_SERVICE_ORDER:
+				this.accessMatrix = {
+					'read' : checkServiceOrderReadAccess(),
+					'write' : true,
+					'delete' : checkForExistentServices(),
+					'create' : true
+				};
+				break;
+
+			case CIRConstants.Tables.SECURITY_LOCATION:
+				this.accessMatrix = {
+					'read' : checkLocationReadAccess(),
+					'write' : true,
+					'delete' : true,
+					'create' : true,
+					'write.building_code' : current.source == 'global'
+				};
+				break;	
+		}
+	};
+
+	/**
+	 * Function called in ACLs for tables realted to the Static Protection process
+	 * @param {String} access - access level to check
+	 * @return {boolean} - true if the user has access false if it doesn't
+	 */ 
+	var checkAccess = function (access) {
+		return this.accessMatrix[access];
+	};
+
+	/**
+	 * Function called in accessMatrix
+	 * will check for access to records that are liked to locations where Security Manged  = true
+	 * @param {String} condition - condition in the record to check for security manged
+	 * @return {boolean} - true if the user has access false if it doesn't
+	 */ 
+	var checkSecurityManagedAccess = function (condition) {
+		var answer = true;
+
+		if(condition == true) {
+			answer = gs.hasRole('x_fru_cir.personal_protection_manager');
+		}
+		return answer;
+	};
+
+	/**
+	 * Function called in accessMatrix
+	 * will check if there's any existent Service already created for the current service master for delete access pruposes
+	 * @return {boolean} - true if there's no services, false if there is
+	 */ 
+	var checkForExistentServices = function () {
+		var grService = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		grService.addQuery('service_master', current.sys_id);
+		grService.query();
+
+		return !grService.hasNext();
+	};
+
+	/**
+	 * Function called in accessMatrix
+	 * will check the read access for a Static Service Order
+	 * @return {boolean} - true if the user has access false if it doesn't
+	 */ 
+	var checkServiceOrderReadAccess = function () {
+		answer = false;
+		if (gs.hasRole('x_fru_cir.static_protection_coordinator')) {
+			answer = true;
+		} else if (current.guard == gs.getUserID()) {
+			answer =  true;
+		} else {
+			answer = current.static_service.service_master.getRefRecord().canRead();
+		}
+
+		return answer;
+	};
+
+	/**
+	 * Function called in accessMatrix
+	 * will check the read access for a Security Location Table
+	 * @return {boolean} - true if the user has access false if it doesn't
+	 */ 
+	var checkLocationReadAccess = function () {
+		var answer = false;
+		if(guardAllocated()) {
+			answer = true;
+		} else {
+			answer = checkSecurityManagedAccess(current.security_managed) && checkSecurityManagedAccess(current.parent.security_managed);
+		}
+		
+		return answer;
+	};
+
+	/**
+	 * Function called in checkLocationReadAccess
+	 * will check there's any service order allocated to the logged in user for the current location
+	 * @return {boolean} - true if there is, false if there isn't
+	 */ 
+	var guardAllocated = function () {
+		var grServOrder = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER);
+		grServOrder.addQuery('static_service.service_master.space', current.sys_id.toString()).
+		addOrCondition('static_service.service_master.building', current.sys_id.toString());
+		grServOrder.addQuery('guard', gs.getUserID());
+		grServOrder.query();
+
+		return grServOrder.hasNext();
+	};
+
+	CIRStaticProtectionAccessManagerFP.prototype = {
+		initialize: initialize,
+		CheckAccess : checkAccess,
+	};
+
+	return CIRStaticProtectionAccessManagerFP;
+
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-28 07:08:47</sys_created_on>
+        <sys_id>fc715159db561050bf9ead8ed39619d4</sys_id>
+        <sys_mod_count>38</sys_mod_count>
+        <sys_name>CIRStaticProtectionAccessManagerFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_fc715159db561050bf9ead8ed39619d4</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-14 07:47:00</sys_updated_on>
+    </sys_script_include>
+</record_update>

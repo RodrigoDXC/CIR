@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>category-listing</id>
+        <sp_widget display_value="CIR PSI Category Picker">1c97b3c3dbf9d010bf9ead8ed396192b</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-09 08:49:23</sys_created_on>
+        <sys_id>1409bfc3dbf9d010bf9ead8ed3961971</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>category-listing</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_ng_template_1409bfc3dbf9d010bf9ead8ed3961971</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-09-16 14:49:23</sys_updated_on>
+        <template><![CDATA[<i ng-show="!category.children" class="fa fa-circle"></i> 
+
+<i id="icon_{{category.sysID}}" 
+   ng-show="category.children"
+   ng-click="hideShowChild2(category.sysID)" 
+   role="button" 
+   class="fas"
+   ng-class="{'fa-caret-down': c.expandedArray.indexOf(category.sysID) != -1, 'fa-caret-right': c.expandedArray.indexOf(category.sysID) == -1}"
+   />
+
+
+
+<div id="div_{{category.sysID}}" ng-click="selectCategory($event,category);" role="button"
+        ng-class="{'selected': c.selectedCat == category.sysID}"
+>
+     
+     {{category.name}} 
+{{JSON.stringify(category).indexOf(c.selectedCat)}}
+    </div>
+<ol ng-if="category.children" ng-show="c.expandedArray.indexOf(category.sysID) != -1" >
+  
+   <li ng-repeat="category in category.children" id="{{category.sysID}}" class="category-item" ng-include="'category-listing'"></li>
+</ol>]]></template>
+    </sp_ng_template>
+</record_update>

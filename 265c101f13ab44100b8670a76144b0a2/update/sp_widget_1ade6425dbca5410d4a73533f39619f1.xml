@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, spUtil, $location, spAriaFocusManager) {
+    var c = this;
+    c.msgs = c.data.msgs;
+    var initIndex = 0;
+    var window = 10;
+    var arrUsersCurrent = [];
+    var currIndexUsers = initIndex + window;
+    var currUsersSize = c.data.users ? c.data.users.length : 0;
+    var arrAssessmentInstancesCurrent = [];
+    var currIndexAssessmentInstances = initIndex + window;
+
+    $scope.loadedUsers = function() {
+        document.getElementById('usersList').addEventListener("scroll", function(e) {
+            if(currIndexUsers === arrUsersCurrent.length) {
+                return;
+            }
+            if(Math.round(e.srcElement.scrollHeight) - Math.round(e.srcElement.scrollTop) == Math.round(e.srcElement.clientHeight)) {
+                initDropdowns({
+                    dropdown: 'users',
+                    continueCurrentIndex: true,
+                    forceRefresh: true
+                });
+            }
+        });
+
+        $scope.$watch('c.arrUsers', function() {
+            var spanNode = document.getElementById('loading_users_span');
+            if(spanNode) {
+                spanNode.parentNode.removeChild(spanNode); 
+            }
+            if(arrUsersCurrent.length > 0 &&
+                currUsersSize === currIndexUsers && currUsersSize < c.data.usersRowCount) {
+                spanNode = document.createElement('span');
+                spanNode.setAttribute('id', 'loading_users_span');
+                spanNode.innerHTML = c.msgs.refineUserFilterMsg;
+                document.getElementById('usersList').appendChild(spanNode);
+            }
+        });
+    };
+
+    $scope.loadedAssessments = function() {
+        document.getElementById('assessmentsList').addEventListener("scroll", function(e) {
+            if(currIndexAssessmentInstances === arrAssessmentInstancesCurrent.length) {
+                return;
+            }
+            if(Math.round(e.srcElement.scrollHeight) - Math.round(e.srcElement.scrollTop) == Math.round(e.srcElement.clientHeight)) {
+                initDropdowns({
+                    dropdown: 'assessments',
+                    continueCurrentIndex: true,
+                    forceRefresh: true
+                });
+            }
+        });
+    };
+
+    $scope.redirect = function(item) {
+        var url = formatRedirectUrl(item, c.data.urlAssessmentForm);
+
+        var newURL = $location.search(url);
+        spAriaFocusManager.navigateToLink(newURL.url());
+    };
+
+    $scope.toggleDropDown = function(ddType) {
+        var inputId, divId;
+        if(ddType == 'user') {
+            inputId = 'userAssessmentInstance';
+            divId = 'usersList';
+        } else if(ddType == 'assessmentInstance') {
+            inputId = 'assessmentInstance';
+            divId = 'assessmentsList';
+        }
+        document.getElementById(divId).classList.toggle("show");
+        document.getElementById(inputId).classList.toggle("dropDownOpen");
+    };
+
+    $scope.filterDropDown = function(ddType) {
+        var input, filter, inputId;
+        if(ddType == 'user') {
+            inputId = 'userAssessmentInstance';
+        } else if(ddType == 'assessmentInstance') {
+            inputId = 'assessmentInstance';
+        }
+        input = document.getElementById(inputId);
+        filter = input.value.toUpperCase();
+        if(ddType == 'user') {
+            if(!filter) {
+                initDropdowns({
+                    dropdown: 'users',
+                    initCurrentArrays: true,
+                    initCurrentIndex: true
+                });
+            } else {
+                var assessmentInstanceUpdate = {
+                    searchKeyword: filter
+                };
+                c.server.get(assessmentInstanceUpdate).then(function(response) {
+                    arrUsersCurrent = response.data.users;
+                    initDropdowns({
+                        dropdown: 'users',
+                        initCurrentIndex: true
+                    });
+                });
+            }
+        } else if(ddType == 'assessmentInstance') {
+            var initCurrentArrays = false;
+            if(!filter) {
+                initCurrentArrays = true;
+            } else {
+                arrAssessmentInstancesCurrent = c.data.assessmentInstances.filter(function(assessmentInstance) {
+                    return assessmentInstance.number.toUpperCase().indexOf(filter) > -1;
+                });
+            }
+            initDropdowns({
+                dropdown: 'assessments',
+                initCurrentArrays: initCurrentArrays,
+                initCurrentIndex: true
+            });
+        }
+    };
+
+    $scope.selectUserAssessmentInstance = function(user) {
+        $scope.toggleDropDown('user');
+        var assessmentInstanceUpdate = {
+            selectedAssessment: c.data.assessmentId,
+            selectedUser: user.sys_id,
+            selectedAssessmentInstance: ''
+        };
+        c.server.get(assessmentInstanceUpdate).then(function(response) {
+            c.data = response.data;
+            initDropdowns({
+                dropdown: 'all',
+                initCurrentArrays: true,
+                initCurrentIndex: true
+            });
+        });
+    };
+
+    $scope.selectAssessmentInstance = function(assessmentInstance) {
+        $scope.toggleDropDown('assessmentInstance');
+        var assessmentInstanceUpdate = {
+            selectedAssessment: c.data.assessmentId,
+            selectedAssessmentInstance: assessmentInstance.sys_id
+        };
+        c.server.get(assessmentInstanceUpdate).then(function(response) {
+            c.data = response.data;
+        });
+    };
+
+    $scope.changeAssessment = function(assessment) {
+        var assessmentUpdate = {
+            selectedAssessment: assessment.sys_id,
+            selectedAssessmentInstance: ''
+        };
+        c.server.get(assessmentUpdate).then(function(response) {
+            c.data = response.data;
+            initDropdowns({
+                dropdown: 'all',
+                initCurrentArrays: true,
+                initCurrentIndex: true
+            });
+        });
+    }
+
+    var formatRedirectUrl = function(item, urlTemplate) {
+        var url;
+        var paramObj = {
+            assessment: c.data.assessmentId,
+            assessmentInstance: c.data.currentAssessmentInstance.sys_id,
+            section: item.sys_id
+        };
+
+        url = spUtil.format(urlTemplate, paramObj);
+        return url;
+    };
+
+    var initDropdowns = function(options) {
+        if(options.dropdown === 'users' || options.dropdown === 'all') {
+            if(options.initCurrentArrays) {
+                arrUsersCurrent = c.data.users ? c.data.users : [];
+            }
+            if(options.initCurrentIndex) {
+                currIndexUsers = initIndex + window;
+            }
+            if(options.continueCurrentIndex) {
+                currIndexUsers = currIndexUsers + window;
+            }
+            currIndexUsers = arrUsersCurrent.length < currIndexUsers ? arrUsersCurrent.length : currIndexUsers;
+            c.arrUsers = arrUsersCurrent.slice(initIndex, currIndexUsers);
+        }
+        if(options.dropdown === 'assessments' || options.dropdown === 'all') {
+            if(options.initCurrentArrays) {
+                arrAssessmentInstancesCurrent = c.data.assessmentInstances ? c.data.assessmentInstances : [];
+            }
+            if(options.initCurrentIndex) {
+                currIndexAssessmentInstances = initIndex + window;
+            }
+            if(options.continueCurrentIndex) {
+                currIndexAssessmentInstances = currIndexAssessmentInstances + window;
+            }
+            currIndexAssessmentInstances = arrAssessmentInstancesCurrent.length < currIndexAssessmentInstances ?
+                arrAssessmentInstancesCurrent.length : currIndexAssessmentInstances;
+            c.arrAssessmentInstances = arrAssessmentInstancesCurrent.slice(initIndex, currIndexAssessmentInstances);
+        }
+
+        if(options.forceRefresh) {
+            $scope.$apply();
+        }
+    };
+    initDropdowns({
+        dropdown: 'all',
+        initCurrentArrays: true,
+        initCurrentIndex: true
+    });
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.assessment_button {&#13;
+    padding: 10px;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.assessment_active {&#13;
+    color: $primary;&#13;
+}&#13;
+&#13;
+.assessment_inactive {&#13;
+    color: gray;&#13;
+}&#13;
+&#13;
+.section_box {&#13;
+    position: relative;&#13;
+    cursor: pointer;&#13;
+    float: left;&#13;
+    margin: 10px;&#13;
+    height: 170px;&#13;
+    width: 200px;&#13;
+}&#13;
+&#13;
+.panel-footer {&#13;
+    position: absolute;&#13;
+    bottom: 0;&#13;
+    width: 100%;&#13;
+}&#13;
+&#13;
+.row.display-flex {&#13;
+    display: flex;&#13;
+    flex-wrap: wrap;&#13;
+}&#13;
+&#13;
+.row.display-flex&gt;[class*='col-'] {&#13;
+    flex-grow: 1;&#13;
+}&#13;
+&#13;
+.section-image {&#13;
+    height: 8em;&#13;
+    padding: 5px;&#13;
+    display: inline;&#13;
+}&#13;
+&#13;
+.assessmentDropDownFilter {&#13;
+    width: 100%;&#13;
+    height: auto !important;&#13;
+    min-height: 26px;&#13;
+    padding: 4px 20px 4px 5px;&#13;
+    margin: 0;&#13;
+    outline: 0;&#13;
+    border: 1px solid #bdc0c4;&#13;
+    box-shadow: none;&#13;
+    border-radius: 3px;&#13;
+    background: white url(/styles/thirdparty/select2/select2.png) no-repeat 100% -22px;&#13;
+    box-sizing: border-box;&#13;
+    font-family: sans-serif;&#13;
+    font-size: 1em;&#13;
+}&#13;
+&#13;
+.assessmentDropDownFilters:focus {&#13;
+    border: 1px solid #3e95f4;&#13;
+}&#13;
+&#13;
+.dropDownOpen {&#13;
+    border-bottom-color: white !important;&#13;
+    border-bottom-right-radius: 0 !important;&#13;
+    border-bottom-left-radius: 0 !important;&#13;
+}&#13;
+&#13;
+.assessmentDropDown {&#13;
+    position: relative;&#13;
+    width: 100%;&#13;
+    min-height: 26px;&#13;
+    margin: 0 0 10px 0;&#13;
+    padding-left: 4px;&#13;
+    padding-right: 4px;&#13;
+    white-space: nowrap;&#13;
+    box-sizing: border-box;&#13;
+    color: #000;&#13;
+    font-family: sans-serif;&#13;
+    font-size: 1em;&#13;
+}&#13;
+&#13;
+.assessmentDropDown span:hover {&#13;
+    background: #3e95f4;&#13;
+    color: #fff;&#13;
+}&#13;
+&#13;
+.assessmentDropDownContent {&#13;
+    display: none;&#13;
+    width: 100%;&#13;
+    max-height: 200px;&#13;
+    padding: 4px;&#13;
+    position: absolute;&#13;
+    overflow-x: hidden;&#13;
+    overflow-y: auto;&#13;
+    border: 1px solid #cbcbcb;&#13;
+    border-top: 0;&#13;
+    border-radius: 0 0 4px 4px;&#13;
+    z-index: 100101;&#13;
+    background-color: white;&#13;
+}&#13;
+&#13;
+.assessmentDropDownContent span {&#13;
+    color: black;&#13;
+    text-decoration: none;&#13;
+    list-style: none;&#13;
+    display: list-item;&#13;
+    background-image: none;&#13;
+    padding: 3px 7px 4px;&#13;
+    margin: 0;&#13;
+    cursor: pointer;&#13;
+    min-height: 1em;&#13;
+}&#13;
+&#13;
+.stateInProgressColor {&#13;
+    color: rgb(0, 0, 150);&#13;
+}&#13;
+&#13;
+.stateCompleteColor {&#13;
+    color: rgb(0, 150, 0);&#13;
+}&#13;
+&#13;
+.stateCanceledColor {&#13;
+    color: rgb(150, 0, 0);&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Widget for the Assessment board page, it will show a visual status of the assessments.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-assessment-section-space</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Assessment Section Space</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    initMessages();
+    // If input exists, it takes preference over the parameter
+    data.assessmentId =
+        input && input.selectedAssessment ? input.selectedAssessment :
+        ($sp.getParameter('assessment') ? $sp.getParameter('assessment') + '' : '');
+    var instanceId = '';
+    if(input && input.selectedAssessmentInstance === '') {
+        instanceId = '';
+    } else if(input && input.selectedAssessmentInstance) {
+        instanceId = input.selectedAssessmentInstance;
+    } else if($sp.getParameter('assessment_instance')) {
+        instanceId = $sp.getParameter('assessment_instance');
+    } else if($sp.getParameter('sys_id')) {
+        instanceId = $sp.getParameter('sys_id');
+    }
+
+    data.assessmentInstanceId = instanceId;
+
+    var userId = input && input.selectedUser ? input.selectedUser : '';
+	var userKeywordSearch = input && input.searchKeyword ? input.searchKeyword : '';
+
+    if(!data.assessmentId && data.assessmentInstanceId) {
+        data.assessmentId = new CIRAssmtModel().GetAssessmentIdFromAssessmentInstance(data.assessmentInstanceId);
+    }
+
+    if(!setCatalogAssessmentsData(data.assessmentId)) {
+        return;
+    }
+
+    if(!setUsersData(userId, data.assessmentInstanceId, userKeywordSearch)) {
+        return;
+    }
+
+    if(!setAssessmentInstancesData(data.selectedUser.sys_id, data.assessmentId, data.assessmentInstanceId)) {
+        return;
+    }
+
+    data.scoreColors = {
+        scoreComplete: 'rgba(0, 150, 0, 0.4)',
+        scoreIncomplete: 'rgba(66, 139, 202, 0.4)'
+    };
+
+    var assessmentFormPage = CIRConstants.AssessmentPortalConstants.ASSESSMENT_PAGE;
+    data.urlAssessmentForm = 'id=' + assessmentFormPage +
+        '&assessment={assessment}&section={section}&assessment_instance={assessmentInstance}';
+
+    function setCatalogAssessmentsData(assessmentId) {
+        var arrAssessments = [];
+        var currentAssessmentId = '';
+        var receivedAssessmentId = assessmentId != '';
+        var arrAssessmentObjects = new CIRAssmtModel().GetAssessmentsInfoForUser();
+        if(arrAssessmentObjects.length > 0) {
+            arrAssessmentObjects.forEach(function(assessment) {
+                var assessmentsCategoryDetails = new sn_sc.CatCategory(assessment.assessmentCategory.sys_id);
+                if(!assessmentsCategoryDetails.canView()) {
+                    return;}
+
+                var item = {};
+                item.sys_id = assessment.assessmentCategory.sys_id;
+                item.name = assessmentsCategoryDetails.getTitle();
+                item.current =
+                    assessment.assessmentCategory.sys_id == assessmentId ||
+                    (!receivedAssessmentId && arrAssessments.length == 0);
+                currentAssessmentId = item.current ? item.sys_id : currentAssessmentId;
+                arrAssessments.push(item);
+            });
+        }
+
+        data.assessments = arrAssessments && arrAssessments.length > 0 ? arrAssessments : [];
+        data.assessmentId = data.assessmentId === '' ? currentAssessmentId : data.assessmentId;
+
+        return (data.assessments.length > 0 && data.assessmentId !== '');
+    }
+
+    function setUsersData(userId, assessmentInstanceId, userKeywordSearch) {
+        var objAssessmentInstanceUsers =
+            new CIRAssmtModel().GetAssessmentInstanceUsers(userId, assessmentInstanceId, userKeywordSearch);
+
+        data.users =
+            typeof objAssessmentInstanceUsers.arrUsers === 'object' &&
+            objAssessmentInstanceUsers.arrUsers &&
+            objAssessmentInstanceUsers.arrUsers.length > 0 ?
+            objAssessmentInstanceUsers.arrUsers : [];
+        data.selectedUser =
+            typeof objAssessmentInstanceUsers.objSelectedUser === 'object' &&
+            objAssessmentInstanceUsers.objSelectedUser &&
+            Object.keys(objAssessmentInstanceUsers.objSelectedUser).length > 0 ?
+            objAssessmentInstanceUsers.objSelectedUser : {};
+		data.usersRowCount = typeof objAssessmentInstanceUsers.objSelectedUser === 'object' &&
+            objAssessmentInstanceUsers.objSelectedUser &&
+            Object.keys(objAssessmentInstanceUsers.objSelectedUser).length > 0 ?
+            objAssessmentInstanceUsers.usersCount : 0;
+
+        return (Object.keys(data.selectedUser).length > 0);
+    }
+
+    function setAssessmentInstancesData(userId, assessmentId, assessmentInstanceId) {
+        var objAssessmentInstances =
+            new CIRAssmtModel().GetAssessmentInstancesData(assessmentId, userId, assessmentInstanceId);
+
+        data.assessmentInstances =
+            typeof objAssessmentInstances === 'object' &&
+            objAssessmentInstances.assessmentInstances &&
+            objAssessmentInstances.assessmentInstances.length > 0 ?
+            objAssessmentInstances.assessmentInstances : [];
+        data.currentAssessmentInstance =
+            typeof objAssessmentInstances === 'object' &&
+            objAssessmentInstances.currentAssessmentInstance &&
+            Object.keys(objAssessmentInstances.currentAssessmentInstance).length > 0 ?
+            objAssessmentInstances.currentAssessmentInstance : {};
+        data.incompleteSections =
+            typeof objAssessmentInstances === 'object' &&
+            objAssessmentInstances.incompleteSections &&
+            objAssessmentInstances.incompleteSections.length > 0 ?
+            objAssessmentInstances.incompleteSections : '';
+
+        return (data.assessmentInstances.length > 0 && Object.keys(data.currentAssessmentInstance).length > 0);
+    }
+
+    function initMessages() {
+        data.msgs = {};
+        data.msgs.stateMsg = gs.getMessage('cir_assmt_state');
+        data.msgs.assessmentsTitleMsg = gs.getMessage('cir_assmt_assessments_title');
+        data.msgs.incompleteSectionsMsg = gs.getMessage('cir_assmt_incomplete_sections');
+        // Error messages
+        data.msgs.errorNoAssessmentsFoundMsg = gs.getMessage('cir_assmt_no_assessment_found');
+        data.msgs.errorNoAssessmentsInDataBaseMsg =
+            gs.getMessage('cir_assmt_no_assessment_database');
+        data.msgs.errorNoSectionForAssessmentMsg = gs.getMessage('cir_assmt_no_section_for_assessment');
+        data.msgs.assessmentInstanceMsg = gs.getMessage('cir_assmt_assessment_instance');
+		data.msgs.refineUserFilterMsg = gs.getMessage('cir_assmt_refine_user_filter');
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:31:36</sys_created_on>
+        <sys_id>1ade6425dbca5410d4a73533f39619f1</sys_id>
+        <sys_mod_count>85</sys_mod_count>
+        <sys_name>CIR CIRI Assessment Section Space</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_1ade6425dbca5410d4a73533f39619f1</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 11:55:38</sys_updated_on>
+        <template><![CDATA[<div>
+  <div ng-if="data.assessments && data.assessments.length > 0" class="panel panel-default">
+    <div class="container">
+      <div class="row display-flex">
+        <div class="col-sm-2 display-flex b-r">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 text-center b-b">
+                <h3>{{c.msgs.assessmentsTitleMsg}}</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div ng-repeat="assessment in data.assessments" class="assessment_button assessment_active h4" ng-class="assessment.current ? 'assessment_active' : 'assessment_inactive'" ng-click="changeAssessment(assessment)">
+                  <span class="assessment_text">{{assessment.name}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-10 b-l">
+          <div class="container wrapper-md">
+            <div class="row">
+              <div class="col-sm-12 b-b">
+                <div class="container">
+                  <div class="row">
+                    <div ng-if="data.users.length > 0" class="col-sm-6">
+                      <div class="assessmentDropDown" >
+                        <input type="text" placeholder="User..." id="userAssessmentInstance" ng-model="data.selectedUser.name" ng-keyup="filterDropDown('user')" ng-click="toggleDropDown('user')" class="assessmentDropDownFilter">
+                        <div id="usersList" class="assessmentDropDownContent" ng-init="loadedUsers()">
+                          <span ng-repeat="user in c.arrUsers | orderBy: 'name'" ng-click="selectUserAssessmentInstance(user)">{{user.name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div ng-if="data.assessmentInstances.length > 0" class="col-sm-6">
+                      <div class="assessmentDropDown">
+                        <input type="text" placeholder="Assessment Instance..." id="assessmentInstance" ng-model="data.currentAssessmentInstance.number" ng-keyup="filterDropDown('assessmentInstance')" ng-click="toggleDropDown('assessmentInstance')" class="assessmentDropDownFilter">
+                        <div id="assessmentsList" class="assessmentDropDownContent" ng-init="loadedAssessments()">
+                          <span ng-repeat="assessmentInstance in c.arrAssessmentInstances | orderBy: '-number'" ng-click="selectAssessmentInstance(assessmentInstance)">{{assessmentInstance.number}} | {{assessmentInstance.created_on}} | {{assessmentInstance.state}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div ng-if="data.currentAssessmentInstance.sections && data.currentAssessmentInstance.sections.length > 0" class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <h1 class="h4 m-t-none break-word">{{c.msgs.assessmentInstanceMsg}}{{data.currentAssessmentInstance.number}}</h1>
+              </div>
+              <div class="col-sm-6">
+                <h4 style="float: right;">{{c.msgs.stateMsg}}<span class="{{data.currentAssessmentInstance.styleClass}}">{{data.currentAssessmentInstance.state}}</span></h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <h2 class="h5 m-t-none break-word" ng-if="data.incompleteSections.length > 0">{{c.msgs.incompleteSectionsMsg}}{{data.incompleteSections}}</h2>
+                <!-- <h2 class="h5 m-t-none break-word" ng-if="data.currentAssessmentInstance.sections.length > 0 && data.missingItems">${Incomplete: }{{data.missingItems}}</h2> -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div ng-repeat="section in data.currentAssessmentInstance.sections" class="panel panel-default section_box" ng-click="redirect(section)">
+                  <div class="panel-body">
+                    <img ng-if="section.picture" class="img-responsive section-image" ng-src="{{section.picture}}.iix?t=medium" />
+                  </div>
+                  <!-- <div class="panel-footer text-center" style="background: linear-gradient(to bottom, #f5f5f5 51%, rgba(66,139,202,0.4) 0%)"> -->
+                  <div class="panel-footer text-center" style="background: linear-gradient(to bottom, #f5f5f5 {{section.scorePercent}}%, {{data.scoreColors[section.scoreStatus]}} 0%)">
+                    <span class="h4">{{section.name}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div ng-if="!data.currentAssessmentInstance.sections || (data.currentAssessmentInstance.sections && data.currentAssessmentInstance.sections.length <= 0)" class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <h4>{{c.msgs.errorNoSectionForAssessmentMsg}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="!data.assessments || (data.assessments && data.assessments.length <= 0)" class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">{{c.msgs.errorNoAssessmentsFoundMsg}}</h4>
+    </div>
+    <div class="panel-body wrapper">
+      <p>{{c.msgs.errorNoAssessmentsInDataBaseMsg}}</p>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

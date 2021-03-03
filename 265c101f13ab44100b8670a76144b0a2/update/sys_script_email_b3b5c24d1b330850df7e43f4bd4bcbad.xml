@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>cir_gen_msg_body</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript( /* GlideRecord */ current, /* TemplatePrinter */ template,
+    /* Optional EmailOutbound */
+    email, /* Optional GlideRecord */ email_action,
+    /* Optional GlideRecord */
+    event) {
+
+
+    //this script will check if the feedback field, in the scenario step message, is checked
+    //if so, it will send two buttons on the email body, so the user can give feedback easily
+    manageBcc(event.parm1.toString());
+    email.addAddress("to", event.parm2.toString());
+
+    if (current.response_plan_step.feedback == true) {
+        template.print(CIRSituationUtils().RenderMailtoButton('Ok') + ' ');
+        template.print(CIRSituationUtils().RenderMailtoButton('Not Ok'));
+    }
+
+    function manageBcc(recipientIDs) {
+
+        var grUser = new GlideRecord("sys_user");
+        grUser.addEncodedQuery("sys_idIN" + recipientIDs);
+        grUser.addQuery("email", "!=", "");
+        grUser.query();
+
+        while (grUser.next()) {
+            email.addAddress("bcc", grUser.email.toString());
+        }
+    }
+
+
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 09:13:49</sys_created_on>
+        <sys_id>b3b5c24d1b330850df7e43f4bd4bcbad</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>cir_gen_msg_body</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_email_b3b5c24d1b330850df7e43f4bd4bcbad</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-04-15 10:40:29</sys_updated_on>
+    </sys_script_email>
+</record_update>

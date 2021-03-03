@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRMobileUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected script to run actions for the Mobile functionality.</description>
+        <name>CIRMobileUtilsFP</name>
+        <script><![CDATA[var CIRMobileUtilsFP = (function() {
+	var CIRMobileUtilsFP = Class.create();
+	var initialize = function() {};
+
+	/**
+     *
+     * - return true if the record exists in the m2m table
+     * - called in the 'Add to m2m' mobile Action item 
+     * @param {string} investigationSysId - sys_id of the investigation where the contributing factor will be associated
+     * @param {string} contFactorSysId - sys_id of the contributing factor to be associated
+     * @return {boolean} - true if the record already exists in the m2m table
+     *
+     **/
+	var verifyExists = function(investigationSysId, contFactorSysId) {
+		var gr = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		gr.addEncodedQuery('contributing_factor=' + contFactorSysId + '^investigation=' + investigationSysId);
+		gr.query();
+		if(gr.next()) {
+			return true;
+		}
+		return false;
+	};
+
+
+	/**
+     *
+     * - function to add a record in the m2m table
+     * - called in the 'Add to m2m' mobile Action item 
+     * @param {string} investigationSysId - sys_id of the investigation where the contributing factor will be associated
+     * @param {string} contFactorSysId - sys_id of the contributing factor to be associated
+     * 
+     *
+     **/
+	var addInM2M = function(investigationSysId, contFactorSysId) {
+		var grm2m = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		grm2m.initialize();
+		grm2m.contributing_factor = contFactorSysId;
+		grm2m.investigation = investigationSysId;
+		grm2m.update();
+	};
+
+	/**
+     *
+     * -Delete the record in the m2m table
+     * - called in the 'Remove from m2m' mobile Action item 
+     * @param {string} investigationSysId - sys_id of the investigation where the contributing factor will be associated
+     * @param {string} contFactorSysId - sys_id of the contributing factor to be associated
+     * 
+     *
+     **/
+	var removeFromM2M = function(investigationSysId, contFactorSysId) {
+		//gs.info("I call the Remove function " + investigationSysId + '    --' + contFactorSysId);
+		var gr2 = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+		gr2.addEncodedQuery('contributing_factor=' + contFactorSysId + '^investigation=' + investigationSysId);
+		gr2.query();
+		if(gr2.next()) {
+			gr2.deleteRecord();
+		}
+	};
+
+
+	/**
+     *
+     * Add injury in Injury/Illness tbale
+     * - called in the 'body_location_map_mobile' UI Page
+     * @param {string} injuryIllnessRec - sys_id of the injury/illness record
+     * @param {string} bodyLocation - location of the body where the injury/illness occurred
+	 * @param {string} coordinates - coordinates where the injury/illness was marked
+     * 
+     *
+     **/
+	var addInjury = function(injuryIllnessRec, bodyLocation, coordinates) {
+		var grInjuryIllness = new GlideRecord(CIRConstants.Tables.INJURY_ILLNESS);
+		if (grInjuryIllness.get(injuryIllnessRec)) {
+			grInjuryIllness.setValue('body_location', bodyLocation);
+			grInjuryIllness.setValue('injury_coordinates', coordinates);
+			grInjuryIllness.update();
+		}
+	};
+
+
+	/**
+     * Gets all body locations defined in body location table for body image
+     * USED IN - UI Page: body_location_map_mobile
+     *
+     * @return {array} of {object} - returns an array of body location objects
+     */
+	var getBodyLocations = function(bodySide) {
+		var bodyHTMLArr = [];
+		var bodyLocations = new GlideRecord(CIRConstants.Tables.BODY_LOCATION);
+		bodyLocations.addQuery('active', true);
+		bodyLocations.orderBy('y_coordinate');
+		try {
+			switch (bodySide) {
+				case 'back':
+					bodyLocations.addEncodedQuery('^nameLIKEback');
+					break;
+				case 'front':
+					bodyLocations.addEncodedQuery('^nameNOT LIKEback');
+					break;
+				default:
+					throw new Error(gs.getMessage('cir_mobile_body_error')); 
+			}
+		} catch (ex) {
+			gs.debug(ex.message);
+			return '';
+		}
+
+		bodyLocations.query();
+		while (bodyLocations.next()) {
+			bodyHTMLArr.push({
+				name: bodyLocations.name.toString(),
+				sys_id: bodyLocations.sys_id.toString(),
+				x: bodyLocations.x_coordinate.toString(),
+				y: bodyLocations.y_coordinate.toString(),
+				height: bodyLocations.height.toString(),
+				width: bodyLocations.width.toString()
+			});
+		}
+		gs.debug(gs.getMessage('cir_mobile_debug_body_location', bodyHTMLArr.length, bodyLocations.getEncodedQuery()));
+		return bodyHTMLArr;
+	};
+
+
+	/**
+     * Checks if the user is offline and if so continues with a case creation
+	 * If online, it will check if user filled all the mandatory fields, and if not he will be prompted with the missing fields
+     * USED IN - Actions located on Quick Actions "CIR Incident Management" applet launcher
+     *
+     * @param {array} mandatoryFields - array of objects with the mandatory fields for each one of the case types
+	 * @param {string} tableName - the name of the table where the case will be created
+	 * @param {object} inputObj - object with the data that the user filled on the mobile form
+     */
+	var createCase = function(mandatoryFields, tableName, inputObj) {
+		var fieldsMissing = mandatoryFieldsMissing(mandatoryFields, inputObj);
+		if (!inputObj.offline && fieldsMissing.length > 0) {
+			gs.addErrorMessage(gs.getMessage('cir_mobile_empty_fields'));
+			for (var i = 0; i < fieldsMissing.length; i++) {
+				gs.addErrorMessage(fieldsMissing[i]);
+			}
+			return;
+		}
+		delete inputObj.offline;
+		delete inputObj.createdOn;
+
+		var grCase = new GlideRecord(tableName);
+		grCase.initialize();
+		for (var k in inputObj) {
+			grCase.setValue(k, inputObj[k]);
+		}
+		grCase.setValue('reported_by', gs.getUserID());
+		grCase.insert();
+
+		if (fieldsMissing.length > 0) { 
+			// 89 - corresponds to the Draft state
+			grCase.setValue('state', 89);
+			grCase.update();
+			createAction(grCase);
+		}
+	};
+
+	var mandatoryFieldsMissing = function(mandatoryFields, inputObj) {
+		var array = [];
+		for (var i= 0; i < mandatoryFields.length; i++) {
+			if (inputObj[mandatoryFields[i].value] == '') {
+				array.push(mandatoryFields[i].name);
+			}
+		}
+		return array;
+	};
+
+	var createAction = function(grCreated) {
+		var recCreatedNumber = grCreated.getValue('number');
+		var gdt = new GlideDateTime();
+		gdt.addDaysUTC(4);
+
+		var grAction  = new GlideRecord(CIRConstants.Tables.ACTION);
+		grAction.initialize();
+		grAction.setValue('assigned_to', gs.getUserID());
+		grAction.setValue('due_date', gdt);
+		grAction.setValue('short_description', gs.getMessage('cir_mobile_action_short_description', recCreatedNumber));
+		grAction.setValue('description', gs.getMessage('cir_mobile_action_description', recCreatedNumber));
+		grAction.setValue('parent', grCreated.getUniqueValue());
+		grAction.setValue('state', 1);
+		grAction.insert();
+	};
+
+
+	CIRMobileUtilsFP.prototype = {
+		initialize: initialize,
+		VerifyExists: verifyExists,
+		AddInM2M: addInM2M,
+		RemoveFromM2M: removeFromM2M,
+		AddInjury: addInjury,
+		GetBodyLocations: getBodyLocations,
+		CreateCase: createCase
+	};
+	return CIRMobileUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-05 08:24:45</sys_created_on>
+        <sys_id>50167af3db12d050d4a73533f396193f</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>CIRMobileUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_50167af3db12d050d4a73533f396193f</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-09-23 15:21:13</sys_updated_on>
+    </sys_script_include>
+</record_update>

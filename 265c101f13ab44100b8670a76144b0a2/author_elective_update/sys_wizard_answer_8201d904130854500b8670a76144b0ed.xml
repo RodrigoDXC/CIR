@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_wizard_answer">
+    <sys_wizard_answer action="DELETE">
+        <active>true</active>
+        <answer>Response Plan Template Step Message</answer>
+        <button_label/>
+        <dependent_value/>
+        <element/>
+        <name>Response Plan Template Step Message</name>
+        <next_question/>
+        <order>100</order>
+        <payload_name/>
+        <question display_value="Type of Step" name="Type of Step">d2325a051bb30850df7e43f4bd4bcbef</question>
+        <roles/>
+        <script/>
+        <sys_class_name>sys_wizard_answer</sys_class_name>
+        <sys_created_by>Hugo.Reis</sys_created_by>
+        <sys_created_on>2020-04-03 13:03:38</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>8201d904130854500b8670a76144b0ed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Response Plan Template Step Message</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_wizard_answer_8201d904130854500b8670a76144b0ed</sys_update_name>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-04-03 13:03:38</sys_updated_on>
+        <table/>
+        <target_url>x_fru_cir_response_plan_template_step_message.do</target_url>
+        <type>1</type>
+    </sys_wizard_answer>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>832241aa6f5ebd80ffcca9cc5d3ee4d0</instance_id>
+        <instance_name>ven01084</instance_name>
+        <name>sys_wizard_answer_8201d904130854500b8670a76144b0ed</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_wizard_answer"><sys_wizard_answer action="INSERT_OR_UPDATE"><active>true</active><answer>Response Plan Template Step Message</answer><button_label/><dependent_value/><element/><name>Response Plan Template Step Message</name><next_question/><order>100</order><payload_name/><question display_value="Type of Step" name="Type of Step">d2325a051bb30850df7e43f4bd4bcbef</question><roles/><script/><sys_class_name>sys_wizard_answer</sys_class_name><sys_created_by>Hugo.Reis</sys_created_by><sys_created_on>2020-04-03 13:03:38</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>8201d904130854500b8670a76144b0ed</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Response Plan Template Step Message</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_wizard_answer_8201d904130854500b8670a76144b0ed</sys_update_name><sys_updated_by>Hugo.Reis</sys_updated_by><sys_updated_on>2020-04-03 13:03:38</sys_updated_on><table/><target_url>x_fru_cir_response_plan_template_step_message.do</target_url><type>1</type></sys_wizard_answer></record_update>]]></payload>
+        <payload_hash>1433888909</payload_hash>
+        <record_name>Response Plan Template Step Message</record_name>
+        <reverted_from display_value="">b8107d14130410100b8670a76144b02e</reverted_from>
+        <source>70089010db001010ae689418db96197a</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>Hugo.Reis</sys_created_by>
+        <sys_created_on>2020-04-04 10:59:08</sys_created_on>
+        <sys_id>7f1ebd90134410100b8670a76144b003</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17144d825fe0000001</sys_recorded_at>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-04-04 10:59:08</sys_updated_on>
+        <type>Answer</type>
+        <update_guid>7b1ebd90d34410100214a4edcd3c1301</update_guid>
+        <update_guid_history>7b1ebd90d34410100214a4edcd3c1301:1433888909,4d107d14c0041010e88e970d8df3dc33:515605441,78107d14ff0410109b55dea7f7c59e2e:1433888909</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Hugo.Reis</sys_created_by>
+        <sys_created_on>2020-04-04 11:02:35</sys_created_on>
+        <sys_db_object display_value="" name="sys_wizard_answer">sys_wizard_answer</sys_db_object>
+        <sys_id>afb5fe588b97465897c7d97ca72265b1</sys_id>
+        <sys_metadata>8201d904130854500b8670a76144b0ed</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Response Plan Template Step Message</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Type of Step">d2325a051bb30850df7e43f4bd4bcbef</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_wizard_answer_8201d904130854500b8670a76144b0ed</sys_update_name>
+        <sys_update_version display_value="sys_wizard_answer_8201d904130854500b8670a76144b0ed">7f1ebd90134410100b8670a76144b003</sys_update_version>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-04-04 11:02:35</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

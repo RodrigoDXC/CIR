@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 12:39:59</sys_created_on>
+        <sys_id>f0c077ffdb9a9450bf9ead8ed396190e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>.x_fru_cir.workshop_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_security_acl display_value="x_fru_cir_maintenance_unavailability">7cc077ffdb9a9450bf9ead8ed396190d</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_f0c077ffdb9a9450bf9ead8ed396190e</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 12:39:59</sys_updated_on>
+        <sys_user_role display_value="x_fru_cir.workshop_manager" name="x_fru_cir.workshop_manager">76becb7bdb5a9450bf9ead8ed396199f</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

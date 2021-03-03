@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_form_screen">
+    <sys_sg_form_screen action="DELETE">
+        <available_offline>false</available_offline>
+        <data_item/>
+        <description/>
+        <dynamic_prefetch_count/>
+        <fetch_type>not_required</fetch_type>
+        <hide_filters>false</hide_filters>
+        <icon display_value="Response plans RL Icon">c3442ac1dbf3085049959a82ca961967</icon>
+        <item_view display_value="Response plans RL Header Item View">87442ac1dbf3085049959a82ca961969</item_view>
+        <name>Response plans RL</name>
+        <roles_override/>
+        <sys_class_name>sys_sg_form_screen</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 11:25:40</sys_created_on>
+        <sys_id>4b442ac1dbf3085049959a82ca96196b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Response plans RL</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_form_screen_4b442ac1dbf3085049959a82ca96196b</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 11:25:40</sys_updated_on>
+        <table>x_fru_cir_response_plan_execution</table>
+    </sys_sg_form_screen>
+    <sys_translated_text action="DELETE" query="documentkey=4b442ac1dbf3085049959a82ca96196b"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_sg_form_screen_4b442ac1dbf3085049959a82ca96196b</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_form_screen"><sys_sg_form_screen action="INSERT_OR_UPDATE"><available_offline>false</available_offline><data_item/><description/><dynamic_prefetch_count/><fetch_type>not_required</fetch_type><hide_filters>false</hide_filters><icon display_value="Response plans RL Icon">c3442ac1dbf3085049959a82ca961967</icon><item_view display_value="Response plans RL Header Item View">87442ac1dbf3085049959a82ca961969</item_view><name>Response plans RL</name><roles_override/><sys_class_name>sys_sg_form_screen</sys_class_name><sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by><sys_created_on>2020-03-25 11:25:40</sys_created_on><sys_id>4b442ac1dbf3085049959a82ca96196b</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Response plans RL</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_sg_form_screen_4b442ac1dbf3085049959a82ca96196b</sys_update_name><sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by><sys_updated_on>2020-03-25 11:25:40</sys_updated_on><table>x_fru_cir_response_plan_execution</table></sys_sg_form_screen><sys_translated_text action="delete_multiple" query="documentkey=4b442ac1dbf3085049959a82ca96196b"/></record_update>]]></payload>
+        <payload_hash>-1500247138</payload_hash>
+        <record_name>Response plans RL</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 11:25:40</sys_created_on>
+        <sys_id>0f442ac1dbf3085049959a82ca96196d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1711170d84b0000001</sys_recorded_at>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 11:25:40</sys_updated_on>
+        <type>Form Screen</type>
+        <update_guid>07442ac1baf30850f582af37002cba6d</update_guid>
+        <update_guid_history>07442ac1baf30850f582af37002cba6d:-1500247138</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 12:22:00</sys_created_on>
+        <sys_db_object display_value="" name="sys_sg_form_screen">sys_sg_form_screen</sys_db_object>
+        <sys_id>845103e225284ac093ba07608363a400</sys_id>
+        <sys_metadata>4b442ac1dbf3085049959a82ca96196b</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Response plans RL</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_845103e225284ac093ba07608363a400</sys_update_name>
+        <sys_update_version display_value="sys_sg_form_screen_4b442ac1dbf3085049959a82ca96196b">0f442ac1dbf3085049959a82ca96196d</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

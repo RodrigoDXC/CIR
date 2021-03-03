@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_fru_cir_physical_security_incident" label="Internal Physical Security Incident" max_length="40" name="x_fru_cir_internal_physical_security_incident" sizeclass="3" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Building" mandatory="true" max_length="32" name="building_name" reference="x_fru_cir_security_location" reference_qual="javascript:  var query = new CIRPSIUtils().FilterBuildingForPSI(current); query" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Floor" max_length="32" name="floor" reference="x_fru_cir_security_location" reference_qual="javascript: var query =  new CIRPSIUtils().FilterFloorForPSI(current); query" type="reference" use_reference_qualifier="advanced"/>
+        <element label="Location remarks" max_length="4000" name="location_remarks" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Space" max_length="32" name="space" reference="x_fru_cir_security_location" reference_qual="javascript: var query = new CIRPSIUtils().PsiSpaceFilter(current); query" type="reference" use_reference_qualifier="advanced"/>
+    </element>
+</database>

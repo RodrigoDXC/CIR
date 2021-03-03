@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>cirMenuTemplate</id>
+        <sp_widget display_value="CIR CIRI Header Menu">3f8f7432db61d81003b3533fd3961932</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 14:29:03</sys_created_on>
+        <sys_id>ff500d32db61d81003b3533fd3961943</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cirMenuTemplate</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_ng_template_ff500d32db61d81003b3533fd3961943</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-25 14:29:03</sys_updated_on>
+        <template><![CDATA[<a ng-if="item.items.length == 0 && !item.scriptedItems" ng-href="{{item.href}}" target="{{item.url_target}}">{{ item.label }}</a>
+<a ng-if="item.items.length > 0" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ item.label }} <span class="caret"></span></a>
+<ul ng-if="item.items.length > 0" class="dropdown-menu" role="menu">
+    <li ng-repeat="item in item.items" ng-include="'cirMenuTemplate'" />
+</ul>
+<a ng-if="item.scriptedItems" href="javascript:void(0)" class="xs-menu-button-div" data-toggle="dropdown" title="{{item.hint}}">
+    <span ng-bind-html="item.label"></span>
+    <span ng-if="!item.scriptedItems.omitBadge" class="label label-as-badge label-primary sp-navbar-badge-count">{{item.scriptedItems.count}}</span>
+</a>
+<cir-menu-tree ng-if="item.scriptedItems" items="item.scriptedItems.items" />]]></template>
+    </sp_ng_template>
+</record_update>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>79669d3ddb469410d4a73533f39619bf</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_situation_category">
+    <x_fru_cir_situation_category action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description>Suspicious package received or left behind in one of the offices.</description>
+        <dimension display_value="Physical security">836b21d5db065410d4a73533f396191c</dimension>
+        <icon>86865d3ddb469410d4a73533f3961903</icon>
+        <name> Suspicious package</name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:02:31</sys_created_on>
+        <sys_id>79669d3ddb469410d4a73533f39619bf</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:02:37</sys_updated_on>
+    </x_fru_cir_situation_category>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color>#bfac71</average_image_color>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/jpeg</content_type>
+        <file_name>icon</file_name>
+        <hash>8d0a2839f42e8aeca6be41655eede2a41137a2ad58dc1f38dfb347f02ec88f73</hash>
+        <image_height>148</image_height>
+        <image_width>150</image_width>
+        <size_bytes>3114</size_bytes>
+        <size_compressed>2957</size_compressed>
+        <state>available</state>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:02:37</sys_created_on>
+        <sys_id>86865d3ddb469410d4a73533f3961903</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:02:37</sys_updated_on>
+        <table_name>ZZ_YYx_fru_cir_situation_category</table_name>
+        <table_sys_id>79669d3ddb469410d4a73533f39619bf</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="icon" sys_id="86865d3ddb469410d4a73533f3961903">86865d3ddb469410d4a73533f3961903</sys_attachment>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:02:37</sys_created_on>
+        <sys_id>c6865d3ddb469410d4a73533f3961903</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>3932</length>
+        <position>1</position>
+        <sys_attachment display_value="icon" sys_id="86865d3ddb469410d4a73533f3961903">86865d3ddb469410d4a73533f3961903</sys_attachment>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:02:37</sys_created_on>
+        <sys_id>4a865d3ddb469410d4a73533f3961903</sys_id>
+    </sys_attachment_doc>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:06:25</sys_created_on>
+        <sys_id>3d675d7ddb469410d4a73533f3961982</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name> Suspicious package</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_3d675d7ddb469410d4a73533f3961982</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:06:25</sys_updated_on>
+        <tablename>x_fru_cir_situation_category</tablename>
+    </sys_metadata_link>
+</record_update>

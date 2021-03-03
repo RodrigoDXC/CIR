@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="User Profile" max_length="40" name="x_fru_cir_user_profile" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Job title" mandatory="true" max_length="1024" name="job_title" reference="x_fru_cir_job_title" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Primary backup" max_length="32" name="primary_backup" reference="sys_user" reference_qual="javascript: var query = CIRSituationUtils().FilterUserByJobTitle(current.job_title, current.user); query" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Secondary backup" max_length="32" name="secondary_backup" reference="sys_user" reference_qual="javascript: var query = new CIRSituationUtils().FilterUserByJobTitle(current.job_title, current.user); query" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User" mandatory="true" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="primary_backup"/>
+        </index>
+        <index name="index2">
+            <element name="job_title"/>
+        </index>
+        <index name="index3">
+            <element name="user"/>
+        </index>
+        <index name="index4">
+            <element name="secondary_backup"/>
+        </index>
+    </element>
+</database>

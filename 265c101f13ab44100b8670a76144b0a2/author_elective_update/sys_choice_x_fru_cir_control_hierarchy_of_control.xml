@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="hierarchy_of_control" table="x_fru_cir_control" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>hierarchy_of_control</element>
+            <name>x_fru_cir_control</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 16:01:16</sys_created_on>
+            <sys_id>d6edbbb0dbd06450bf9ead8ed39619cf</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>hierarchy_of_control</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_control_hierarchy_of_control</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 16:01:16</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>hierarchy_of_control</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Elimination</label>
+            <language>en</language>
+            <name>x_fru_cir_control</name>
+            <sequence>1</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 16:01:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9cedf7f0dbd06450bf9ead8ed3961931</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 16:01:16</sys_updated_on>
+            <value>elimination</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>hierarchy_of_control</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Substitution</label>
+            <language>en</language>
+            <name>x_fru_cir_control</name>
+            <sequence>2</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 16:01:27</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c5fdf7f0dbd06450bf9ead8ed396193f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 16:01:27</sys_updated_on>
+            <value>substitution</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>hierarchy_of_control</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Engineering Controls</label>
+            <language>en</language>
+            <name>x_fru_cir_control</name>
+            <sequence>3</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 16:01:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e00ef7f0dbd06450bf9ead8ed3961905</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 16:01:41</sys_updated_on>
+            <value>engineering_controls</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>hierarchy_of_control</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Administrative Controls</label>
+            <language>en</language>
+            <name>x_fru_cir_control</name>
+            <sequence>4</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 16:01:57</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>901e73f0dbd06450bf9ead8ed3961934</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 16:01:57</sys_updated_on>
+            <value>administrative_controls</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>hierarchy_of_control</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Personal protective equipment</label>
+            <language>en</language>
+            <name>x_fru_cir_control</name>
+            <sequence>5</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 16:02:12</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>002e37f0dbd06450bf9ead8ed396195b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 16:02:12</sys_updated_on>
+            <value>Personal_protective_equipment</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

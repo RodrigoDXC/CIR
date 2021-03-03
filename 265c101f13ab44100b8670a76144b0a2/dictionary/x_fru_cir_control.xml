@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="task" label="Control" max_length="40" name="x_fru_cir_control" sizeclass="1" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Classification" max_length="40" name="classification" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Preventative" sequence="10" value="preventative"/>
+                <element inactive_on_update="false" label="Corrective" sequence="20" value="corrective"/>
+                <element inactive_on_update="false" label="Detective" sequence="30" value="detective"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Enforcement" max_length="40" name="enforcement" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Mandatory" sequence="10" value="mandatory"/>
+                <element inactive_on_update="false" label="Voluntary" sequence="20" value="voluntary"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Frequency" max_length="40" name="frequency" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="One Time Event" sequence="10" value="one_time_event"/>
+                <element inactive_on_update="false" label="On Demand" sequence="20" value="on_demand"/>
+                <element inactive_on_update="false" label="Daily" sequence="30" value="daily"/>
+                <element inactive_on_update="false" label="Weekly" sequence="40" value="weekly"/>
+                <element inactive_on_update="false" label="Monthly" sequence="50" value="monthly"/>
+                <element inactive_on_update="false" label="Quarterly" sequence="60" value="quarterly"/>
+                <element inactive_on_update="false" label="Semi-Annually" sequence="70" value="semi_annually"/>
+                <element inactive_on_update="false" label="Annually" sequence="80" value="annually"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Hazard" max_length="32" name="hazard" read_only="true" reference="x_fru_cir_risk_hazard" reference_floats="true" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Hierarchy of control" max_length="40" name="hierarchy_of_control" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Elimination" sequence="1" value="elimination"/>
+                <element inactive_on_update="false" label="Substitution" sequence="2" value="substitution"/>
+                <element inactive_on_update="false" label="Engineering Controls" sequence="3" value="engineering_controls"/>
+                <element inactive_on_update="false" label="Administrative Controls" sequence="4" value="administrative_controls"/>
+                <element inactive_on_update="false" label="Personal protective equipment" sequence="5" value="Personal_protective_equipment"/>
+            </choice>
+        </element>
+        <element label="Last review" max_length="40" name="last_review" type="glide_date"/>
+        <element label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <element label="Next review" mandatory="true" max_length="40" name="next_review" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Risk" max_length="32" name="risk" read_only="true" reference="x_fru_cir_risk" reference_floats="true" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Hazard" sequence="1" value="hazard"/>
+                <element inactive_on_update="false" label="Risk" sequence="2" value="risk"/>
+            </choice>
+        </element>
+    </element>
+</database>

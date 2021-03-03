@@ -1,0 +1,1311 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil, $timeout, $uibModal) {
+    /* widget controller */
+    var c = this;
+
+    c.query_locations = c.data.locationQuery;
+
+    $scope.incidata = {};
+    $scope.incidata.changed = false;
+	
+    /* empty string is a filter. For example 'active=true' would only trigger
+    the callback function when changes are made to active records */
+    spUtil.recordWatch($scope, c.data.table, "sys_id=" + c.data.sys_id, function(name, data) {
+        $scope.incidata.changedRecord = name.data; // name.data has the updated or inserted record info
+        c.server.update();
+
+        $timeout(function() {
+            //$scope.changeBg();
+        }, 500);
+    });
+
+    //TEST IF ITS GETTING THE NAME OF THE TABLE
+    spUtil.recordWatch($scope, c.data.table.respPlanExec, "parent_crisis=" + c.data.sys_id, function(name, data) {
+        c.server.update();
+    });
+
+    c.getElapsedTime = function() {
+        $timeout(function() {
+            c.server.update();
+        }, 60000);
+    };
+
+    c.addLocation = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'addLocation',
+            scope: $scope
+        });
+    };
+
+    c.chgPplAffected = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'updateAffectedPpl',
+            scope: $scope
+        });
+    };
+
+
+    c.closeModal = function() {
+        c.modalInstance.close();
+    };
+
+    c.updateLocations = function(locationId) {
+        c.closeModal();
+
+        var obj = {};
+        obj.update_locations = true;
+        obj.new_location = locationId;
+
+        c.server.get(obj).then(function() {
+            spUtil.update($scope);
+        });
+
+    };
+
+    c.updateQuery = function() {
+        return c.data.locationQuery;
+    };
+
+    c.updatePplAffected = function(affectedNumber) {
+        c.closeModal();
+        c.data.updateAffectedPpl = true;
+        c.data.affectedPplNbr = affectedNumber;
+
+        c.server.update().then(function() {
+            spUtil.update($scope);
+        });
+    };
+
+    c.confirmCloseSituation = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'confirmCloseSituation',
+            scope: $scope
+        });
+    };
+	
+    c.closeSituation = function() {
+        c.closeModal();
+        c.data.closeSituation = true;
+        c.server.update().then(function() {
+            spUtil.addInfoMessage(c.data.messages.situationClosed);
+            c.data.closeSituation = false;
+        });
+    };
+    
+    c.escalate = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'escalate',
+            scope: $scope
+        });
+    };
+
+    c.escalateToLevel = function() {
+        c.closeModal();
+        c.data.escalateSituation = true;
+
+        var obj = {};
+        obj.action = c.data.escalateAction;
+        c.server.get(obj).then(function() {
+
+        }).then(function() {
+            spUtil.addTrivialMessage(c.data.upd_message);
+        });
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.btn-form-menu {&#13;
+	vertical-align: inherit;&#13;
+  padding: inherit;&#13;
+  background: none;&#13;
+}&#13;
+&#13;
+.header-title{&#13;
+ 	vertical-align: -webkit-baseline-middle;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.06;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+  &#13;
+}&#13;
+&#13;
+.image {&#13;
+	max-height: 45px;&#13;
+    max-width: 45px;&#13;
+  	vertical-align: top;&#13;
+}&#13;
+&#13;
+.panel {&#13;
+	height: 154px;&#13;
+}&#13;
+&#13;
+.key-row {&#13;
+  overflow: hidden;&#13;
+  	height: 20px;&#13;
+  	text-align: center;&#13;
+	color: #666666;&#13;
+  	padding-top: 4px;&#13;
+    border-bottom: 0px;&#13;
+    font-size: 14px;&#13;
+    font-weight: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.43;&#13;
+ 	border-bottom: 0px;&#13;
+  	border-left: solid 1px #dee5e7;&#13;
+  &#13;
+}&#13;
+&#13;
+.value-row {&#13;
+    height: 59px;&#13;
+  	max-height: 59px;&#13;
+  	width: 16.66%;&#13;
+    max-width: 16.66%;&#13;
+	font-weight: normal;&#13;
+  	font-style: normal;&#13;
+  	font-stretch: normal;&#13;
+  	line-height: normal;&#13;
+  	font-size: 20px;&#13;
+  	text-align: center;&#13;
+ 	color: #2e2e2e;&#13;
+  	vertical-align: top;&#13;
+	border-top: 0px;&#13;
+  	border-bottom: 0px;&#13;
+  	text-align: center;&#13;
+    border-left: solid 1px #dee5e7;&#13;
+&#13;
+}&#13;
+&#13;
+.key-row:first-child {&#13;
+    border-left: none 0px;&#13;
+}&#13;
+.value-row:first-child {&#13;
+    border-left: none 0px;&#13;
+  	padding-top: 0px;&#13;
+}&#13;
+&#13;
+&#13;
+.panel-title {&#13;
+  word-wrap: break-word;&#13;
+  font-size: 16px;&#13;
+  font-weight: normal;&#13;
+  font-style: normal;&#13;
+  font-stretch: normal;&#13;
+  line-height: 1.06;&#13;
+  letter-spacing: normal;&#13;
+  color: #2e2e2e;&#13;
+}&#13;
+.ng-binding{&#13;
+vertical-align: top;&#13;
+}&#13;
+.panel-heading {&#13;
+  color: #3a3f51;&#13;
+    background-color: #f5f5f5;&#13;
+    border-color:#dee5e7;&#13;
+  	padding-bottom: 11px;&#13;
+    padding-top: 11px;&#13;
+    padding-right: 10px;&#13;
+    height: 54px;&#13;
+  	overflow: hidden;&#13;
+  	&#13;
+  .dropdown-menu {&#13;
+    a {&#13;
+      white-space: normal;&#13;
+    }&#13;
+  }&#13;
+&#13;
+}&#13;
+&#13;
+.sc-field-error-label {&#13;
+  margin-right: .5em;&#13;
+  display: inline-block;&#13;
+  background-color: $sc-field-error-color;&#13;
+}&#13;
+&#13;
+.comment {&#13;
+	font-weight: bold;&#13;
+	margin-top: 2px;&#13;
+	margin-bottom: 2px;&#13;
+}&#13;
+.mce-panel, .mce-btn {&#13;
+	background-image: none;&#13;
+	background-color: #f0f3f4;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+  margin-right: 5px;&#13;
+  margin-bottom: 10px;&#13;
+  color: #2e2e2e;&#13;
+  background-color: #ffffff;&#13;
+  border-color: #cccccc;&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.timeline-container {&#13;
+   max-height: 50vh;&#13;
+   height: 100%;&#13;
+   overflow-y: auto;&#13;
+}&#13;
+&#13;
+.text-info-alt {&#13;
+	background-color: $state-info-text;&#13;
+}&#13;
+&#13;
+.table {&#13;
+    padding: 7px;&#13;
+	margin:0;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Situation Room Overview</name>
+        <option_schema>[{"name":"fields","section":"Data","default_value":"category,locations,sys_created_on,people_affected,escalation_level,state","label":"Fields","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.cir_base</roles>
+        <script><![CDATA[(function() {
+    data.table = $sp.getParameter('table');
+    data.sys_id = $sp.getParameter("sys_id") || -1;
+    data.fields = [];
+    data.labels = [];
+
+    data.canCloseSituationRoom = false;
+    data.situationRecord = getSituationRecord();
+    data.nextEscalLevel = getNextEsclLevel();
+    data.locationQuery = new CIRSituationUtils().filterByCountry(data.situationRecord);
+    data.country = data.situationRecord.getValue('country');
+
+    data.table.location = CIRConstants.Tables.LOCATION;
+    data.table.situationCategory = CIRConstants.Tables.SITUATION_CATEGORY;
+    data.table.situationEscalation = CIRConstants.Tables.SITUATION_ESCALATION_LEVEL;
+    data.table.respPlanExec = CIRConstants.Tables.RESP_PLAN_EXEC;
+
+    data.updateAffectedPpl = input ? input.updateAffectedPpl : false;
+    data.affectedPplNbr = input ? input.affectedPplNbr : false;
+    data.closeSituation = input ? input.closeSituation : false;
+    data.escalateAction = 'escalateSituation';
+
+    //messages
+    data.messages = {};
+    data.messages.add_location = gs.getMessage('cir_situation_add_location');
+    data.messages.adjust_people_affected = gs.getMessage('cir_situation_adjust_affected_people');
+    data.messages.closeSituation = gs.getMessage('cir_situation_close_situation');
+    data.messages.escalateTo = data.nextEscalLevel ? gs.getMessage('cir_situation_escalation') + ' ' + data.nextEscalLevel.name : '';
+    data.messages.escalateToLevel = data.nextEscalLevel ? gs.getMessage('cir_situation_escalation_question') + ': ' + data.nextEscalLevel.name + '?' : '';
+    data.messages.closeSituationTooltip = '';
+    data.upd_message = gs.getMessage('cir_situation_escalation_succesfull') + ' ' + data.nextEscalLevel.name;
+    data.messages.situationClosed = gs.getMessage('cir_situation_room_closed');
+
+
+    if (input && input.update_locations == true) {
+        updateLocation(input.new_location);
+    }
+
+    if (data.updateAffectedPpl && data.affectedPplNbr) {
+        updateAffectedPpl(data.affectedPplNbr);
+    }
+
+    if (data.closeSituation) {
+        closeSituation();
+    }
+
+    if (input && input.action == data.escalateAction) {
+        escalateSituation();
+    }
+
+    if (!data.table || !data.sys_id || !data.fields) {
+        return;
+    }
+
+
+    if (data.situationRecord) {
+        data.title = data.situationRecord.number.toString() + ': ' + data.situationRecord.getDisplayValue('category');
+        data.fields = options.fields.split(',');
+
+
+        for (var i = 0; i < data.fields.length; i++) {
+            var field = $sp.getField(data.situationRecord, data.fields[i].toString());
+            switch (data.fields[i].toString()) {
+
+                case 'category':
+                    if (data.situationRecord.category) {
+                        var picture = getPicture(field.value.toString());
+                        data.labels.push({
+                            "key": field.label,
+                            "picture": picture
+                        });
+                    } else {
+                        data.labels.push({ "key": field.label });
+                    }
+                    break;
+
+                case 'locations':
+                    if (data.situationRecord.locations) {
+
+                        if (field.display_value.toString().length > 20) {
+                            var amount = field.value.toString().split(',');
+                            var locationsMsg = amount.length < 2 ? gs.getMessage('Location') : gs.getMessage('Locations');
+                            var locValue = amount.length < 2 ?
+                                amount.length + ' ' + gs.getMessage('Location') :
+                                amount.length + ' ' + gs.getMessage('Locations');
+
+                            var locContent = getLocNameById(field.value);
+
+                            data.labels.push({
+                                "key": field.label,
+                                "value": locValue,
+                                "tooltipContent": locContent.join(', '),
+                                "tooltip": 'true'
+                            });
+                        } else {
+                            data.labels.push({
+                                "key": field.label,
+                                "value": field.display_value
+                            });
+                        }
+                    } else {
+                        data.labels.push({ "key": field.label });
+                    }
+                    break;
+
+                case 'sys_created_on':
+                    if (data.situationRecord.sys_created_on) {
+                        var elapsedTime = getElapsedTime(field.value.toString());
+
+                        var createdValue = field.display_value.toString().slice(0, 16);
+
+                        data.labels.push({
+                            "key": field.label,
+                            "value": createdValue,
+                            "tooltipContent": elapsedTime,
+                            "tooltip": 'true',
+                            "created_on": 'true'
+                        });
+                    } else {
+                        data.labels.push({ "key": field.label });
+                    }
+                    break;
+
+                case 'escalation_level':
+                    if (data.situationRecord.escalation_level) {
+                        data.labels.push({
+                            "key": field.label,
+                            "value": field.display_value
+                        });
+                    }
+                    break;
+
+                default:
+                    data.labels.push({
+                        "key": field.label,
+                        "value": field.display_value
+                    });
+                    break;
+            }
+
+        }
+        data.canCloseSituationRoom = data.situationRecord.getValue('state') != '1' && areAllRespPlansClosed(data.situationRecord.getUniqueValue());
+        data.messages.closeSituationTooltip = data.canCloseSituationRoom ? '' : gs.getMessage('cir_situation_cannot_close_situation');
+    }
+
+    function updateLocation(locationId) {
+        if (data.situationRecord) {
+            var locations = data.situationRecord.getValue('locations') ? data.situationRecord.getValue('locations') + ',' + locationId.toString() : locationId.toString();
+            data.situationRecord.setValue('locations', locations);
+            data.situationRecord.update();
+        }
+    }
+
+    function updateAffectedPpl(affectedNumber) {
+        if (data.situationRecord) {
+            data.situationRecord.people_affected = parseInt(affectedNumber);
+            data.situationRecord.update();
+        }
+        data.updateAffectedPpl = false;
+        data.affectedPplNbr = '';
+    }
+
+    function getElapsedTime(start) {
+        var currentTime = new GlideDateTime();
+        var startTime = new GlideDateTime();
+        startTime.setValue(start);
+
+        var diff = new GlideDuration.subtract(startTime, currentTime);
+
+        var elapsedTime = diff.getDisplayValue();
+
+        return elapsedTime;
+    }
+
+    function getLocNameById(locIds) {
+        var ids = locIds.split(',');
+        var names = [];
+
+        for (var i = 0; i < ids.length; i++) {
+
+            var grLoc = new GlideRecord(data.table.location);
+            grLoc.addQuery('sys_id', ids[i].toString());
+            grLoc.query();
+
+            if (grLoc.next()) {
+                names.push(grLoc.name.toString());
+            }
+        }
+        return names;
+    }
+
+    function getPicture(catId) {
+        var grCatg = new GlideRecord(data.table.situationCategory);
+        grCatg.addQuery('sys_id', catId.toString());
+        grCatg.query();
+
+        if (grCatg.next()) {
+            return grCatg.icon + '.iix';
+        }
+        return;
+    }
+
+    function getSituationRecord() {
+        var gr = new GlideRecordSecure(data.table);
+        if (gr.get(data.sys_id)) {
+            return gr;
+        }
+    }
+
+    function closeSituation() {
+        data.situationRecord.setValue('state', '1');
+        data.situationRecord.update();
+    }
+
+    function escalateSituation() {
+        data.situationRecord.setValue('escalation_level', data.nextEscalLevel.id);
+        data.situationRecord.update();
+
+    }
+
+    function getNextEsclLevel() {
+        var nextEsclLevel = {};
+        var newLevel = data.situationRecord.escalation_level.order + 1;
+
+        var grEscalation = new GlideRecord(data.table.situationEscalation);
+        grEscalation.addQuery('order', newLevel);
+        grEscalation.query();
+
+        if (grEscalation.next()) {
+            nextEsclLevel.id = grEscalation.getUniqueValue();
+            nextEsclLevel.name = grEscalation.getDisplayValue('level_name');
+            nextEsclLevel.order = newLevel;
+            return nextEsclLevel;
+        }
+        return false;
+    }
+
+    /**
+     * returns if all response plans for the given situation are in a close state
+     * @param {string} situationRoomId sys_id
+     * @return {boolean}
+     */
+    function areAllRespPlansClosed(situationRoomId) {
+        var gr = new GlideRecord(data.table.respPlanExec);
+        gr.addQuery('parent_situation', situationRoomId);
+        gr.addQuery('state', 'NOT IN', '3,4,7');
+        gr.query();
+
+        return !gr.hasNext();
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 11:53:39</sys_created_on>
+        <sys_id>74baa60d1b370850df7e43f4bd4bcb94</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIR Situation Room Overview</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_74baa60d1b370850df7e43f4bd4bcb94</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 14:14:37</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+    <div class="panel-heading clearfix"><span class="header-title">{{data.title}}</span>
+        <div uib-tooltip="{{data.messages.closeSituationTooltip}}" tooltip-append-to-body="true" class="pull-right">
+            <button ng-click="c.confirmCloseSituation()" ng-disabled="!c.data.canCloseSituationRoom"
+                class="btn btn-primary action-btn pull-right" ng-class="::getButtonClass(action)">
+                {{data.messages.closeSituation}}
+            </button>
+        </div>
+        <button ng-hide="!data.nextEscalLevel" ng-click="c.escalate()" ng-disabled="c.submitting"
+            class="btn btn-primary action-btn pull-right"
+            ng-class="::getButtonClass(action)">{{data.messages.escalateTo}}</button>
+
+        <button ng-click="c.addLocation()" ng-disabled="c.submitting" class="btn btn-primary action-btn pull-right"
+            ng-class="::getButtonClass(action)">{{data.messages.add_location}}</button>
+
+        <button ng-click="c.chgPplAffected()" ng-disabled="c.submitting" class="btn btn-primary action-btn pull-right"
+            ng-class="::getButtonClass(action)">{{data.messages.adjust_people_affected}}</button>
+    </div>
+
+    <table class="table overview-widget table-{{::c.options.color}}">
+        <thead>
+            <tr>
+                <td class="key-row" ng-repeat="label in c.data.labels">
+                    {{ label.key }}
+                </td>
+            </tr>
+            <th class="value-row" ng-repeat="label in c.data.labels">
+                <img class="image" ng-if="label.picture" ng-src="{{::label.picture}}?t=small" />
+                <div ng-if="!label.created_on" tooltip-enable="label.tooltip == 'true'"
+                    uib-tooltip="{{::label.tooltipContent}}" tooltip-placement="top" tooltip-append-to-body="true">
+                    {{ label.value }}</div>
+                <div ng-if="label.created_on == 'true'" ng-mouseover='c.getElapsedTime()'
+                    tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+                    tooltip-placement="top" tooltip-append-to-body="true">{{ label.value }}</div>
+            </th>
+            <tr>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script type="text/ng-template" id="addLocation">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${Add location}</h4>
+        </div>
+        <div class="panel-body wrapper-xl">
+            <div style="margin-bottom:30px" >
+                <span class="required">${Select location}</span>
+                <sn-record-picker name="location" default-query="c.updateQuery()" field="location" style="margin-top:5px" table="{{data.table.location}}" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+            <button class="btn btn-primary" ng-click="c.updateLocations(location.value)">${Add Location}</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="updateAffectedPpl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${Update people affected}</h4>
+        </div>
+        <div class="panel-body wrapper-xl">
+            <div style="margin-bottom:30px" >
+                <span class="required">${Select number of people affected}</span>
+                <input ng-model="affectedPpl" style="margin-bottom:30px" type="text" name=""><span style="margin-left: 5px;"></span></input>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+            <button class="btn btn-primary" ng-click="c.updatePplAffected(affectedPpl)">${Update}</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="escalate">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${Escalate}</h4>
+        </div>
+        <div class="panel-body wrapper-xl">
+            <div style="margin-bottom:30px" >
+                <span class="required">{{c.data.messages.escalateToLevel}}</span>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+            <button class="btn btn-primary" ng-click="c.escalateToLevel()">${Escalate}</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="confirmCloseSituation">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${cir_situation_confirm_close_situation}</h4>
+        </div>
+        <div class="panel-body wrapper-xl">           
+                <span>${cir_situation_confirm_close_main}</span>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+            <button class="btn btn-primary" ng-click="c.closeSituation()">${Ok}</button>
+        </div>
+    </div>
+</script>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sp_widget_74baa60d1b370850df7e43f4bd4bcb94</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope, spUtil, $timeout, $uibModal) {
+    /* widget controller */
+    var c = this;
+
+    c.query_locations = c.data.locationQuery;
+
+    $scope.incidata = {};
+    $scope.incidata.changed = false;
+	
+    /* empty string is a filter. For example 'active=true' would only trigger
+    the callback function when changes are made to active records */
+    spUtil.recordWatch($scope, c.data.table, "sys_id=" + c.data.sys_id, function(name, data) {
+        $scope.incidata.changedRecord = name.data; // name.data has the updated or inserted record info
+        c.server.update();
+
+        $timeout(function() {
+            //$scope.changeBg();
+        }, 500);
+    });
+
+    //TEST IF ITS GETTING THE NAME OF THE TABLE
+    spUtil.recordWatch($scope, c.data.table.respPlanExec, "parent_crisis=" + c.data.sys_id, function(name, data) {
+        c.server.update();
+    });
+
+    c.getElapsedTime = function() {
+        $timeout(function() {
+            c.server.update();
+        }, 60000);
+    };
+
+    c.addLocation = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'addLocation',
+            scope: $scope
+        });
+    };
+
+    c.chgPplAffected = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'updateAffectedPpl',
+            scope: $scope
+        });
+    };
+
+
+    c.closeModal = function() {
+        c.modalInstance.close();
+    };
+
+    c.updateLocations = function(locationId) {
+        c.closeModal();
+
+        var obj = {};
+        obj.update_locations = true;
+        obj.new_location = locationId;
+
+        c.server.get(obj).then(function() {
+            spUtil.update($scope);
+        });
+
+    };
+
+    c.updateQuery = function() {
+        return c.data.locationQuery;
+    };
+
+    c.updatePplAffected = function(affectedNumber) {
+        c.closeModal();
+        c.data.updateAffectedPpl = true;
+        c.data.affectedPplNbr = affectedNumber;
+
+        c.server.update().then(function() {
+            spUtil.update($scope);
+        });
+    };
+
+    c.confirmCloseSituation = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'confirmCloseSituation',
+            scope: $scope
+        });
+    };
+	
+    c.closeSituation = function() {
+        c.closeModal();
+        c.data.closeSituation = true;
+        c.server.update().then(function() {
+            spUtil.addInfoMessage(c.data.messages.situationClosed);
+            c.data.closeSituation = false;
+        });
+    };
+    
+    c.escalate = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'escalate',
+            scope: $scope
+        });
+    };
+
+    c.escalateToLevel = function() {
+        c.closeModal();
+        c.data.escalateSituation = true;
+
+        var obj = {};
+        obj.action = c.data.escalateAction;
+        c.server.get(obj).then(function() {
+
+        }).then(function() {
+            spUtil.addTrivialMessage(c.data.upd_message);
+        });
+    };
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.btn-form-menu {&amp;#13;
+	vertical-align: inherit;&amp;#13;
+  padding: inherit;&amp;#13;
+  background: none;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.header-title{&amp;#13;
+ 	vertical-align: -webkit-baseline-middle;&amp;#13;
+    font-family: SourceSansPro;&amp;#13;
+    font-size: 16px;&amp;#13;
+    font-weight: normal;&amp;#13;
+    font-style: normal;&amp;#13;
+    font-stretch: normal;&amp;#13;
+    line-height: 1.06;&amp;#13;
+    letter-spacing: normal;&amp;#13;
+  	color: #4a4a4a;&amp;#13;
+  &amp;#13;
+}&amp;#13;
+&amp;#13;
+.image {&amp;#13;
+	max-height: 45px;&amp;#13;
+    max-width: 45px;&amp;#13;
+  	vertical-align: top;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.panel {&amp;#13;
+	height: 154px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.key-row {&amp;#13;
+  overflow: hidden;&amp;#13;
+  	height: 20px;&amp;#13;
+  	text-align: center;&amp;#13;
+	color: #666666;&amp;#13;
+  	padding-top: 4px;&amp;#13;
+    border-bottom: 0px;&amp;#13;
+    font-size: 14px;&amp;#13;
+    font-weight: normal;&amp;#13;
+    font-stretch: normal;&amp;#13;
+    line-height: 1.43;&amp;#13;
+ 	border-bottom: 0px;&amp;#13;
+  	border-left: solid 1px #dee5e7;&amp;#13;
+  &amp;#13;
+}&amp;#13;
+&amp;#13;
+.value-row {&amp;#13;
+    height: 59px;&amp;#13;
+  	max-height: 59px;&amp;#13;
+  	width: 16.66%;&amp;#13;
+    max-width: 16.66%;&amp;#13;
+	font-weight: normal;&amp;#13;
+  	font-style: normal;&amp;#13;
+  	font-stretch: normal;&amp;#13;
+  	line-height: normal;&amp;#13;
+  	font-size: 20px;&amp;#13;
+  	text-align: center;&amp;#13;
+ 	color: #2e2e2e;&amp;#13;
+  	vertical-align: top;&amp;#13;
+	border-top: 0px;&amp;#13;
+  	border-bottom: 0px;&amp;#13;
+  	text-align: center;&amp;#13;
+    border-left: solid 1px #dee5e7;&amp;#13;
+&amp;#13;
+}&amp;#13;
+&amp;#13;
+.key-row:first-child {&amp;#13;
+    border-left: none 0px;&amp;#13;
+}&amp;#13;
+.value-row:first-child {&amp;#13;
+    border-left: none 0px;&amp;#13;
+  	padding-top: 0px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+&amp;#13;
+.panel-title {&amp;#13;
+  word-wrap: break-word;&amp;#13;
+  font-size: 16px;&amp;#13;
+  font-weight: normal;&amp;#13;
+  font-style: normal;&amp;#13;
+  font-stretch: normal;&amp;#13;
+  line-height: 1.06;&amp;#13;
+  letter-spacing: normal;&amp;#13;
+  color: #2e2e2e;&amp;#13;
+}&amp;#13;
+.ng-binding{&amp;#13;
+vertical-align: top;&amp;#13;
+}&amp;#13;
+.panel-heading {&amp;#13;
+  color: #3a3f51;&amp;#13;
+    background-color: #f5f5f5;&amp;#13;
+    border-color:#dee5e7;&amp;#13;
+  	padding-bottom: 11px;&amp;#13;
+    padding-top: 11px;&amp;#13;
+    padding-right: 10px;&amp;#13;
+    height: 54px;&amp;#13;
+  	overflow: hidden;&amp;#13;
+  	&amp;#13;
+  .dropdown-menu {&amp;#13;
+    a {&amp;#13;
+      white-space: normal;&amp;#13;
+    }&amp;#13;
+  }&amp;#13;
+&amp;#13;
+}&amp;#13;
+&amp;#13;
+.sc-field-error-label {&amp;#13;
+  margin-right: .5em;&amp;#13;
+  display: inline-block;&amp;#13;
+  background-color: $sc-field-error-color;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.comment {&amp;#13;
+	font-weight: bold;&amp;#13;
+	margin-top: 2px;&amp;#13;
+	margin-bottom: 2px;&amp;#13;
+}&amp;#13;
+.mce-panel, .mce-btn {&amp;#13;
+	background-image: none;&amp;#13;
+	background-color: #f0f3f4;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.action-btn {&amp;#13;
+  margin-right: 5px;&amp;#13;
+  margin-bottom: 10px;&amp;#13;
+  color: #2e2e2e;&amp;#13;
+  background-color: #ffffff;&amp;#13;
+  border-color: #cccccc;&amp;#13;
+  display: block;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.timeline-container {&amp;#13;
+   max-height: 50vh;&amp;#13;
+   height: 100%;&amp;#13;
+   overflow-y: auto;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.text-info-alt {&amp;#13;
+	background-color: $state-info-text;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.table {&amp;#13;
+    padding: 7px;&amp;#13;
+	margin:0;&amp;#13;
+}&amp;#13;
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id/&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]&gt;&lt;/link&gt;&lt;name&gt;CIR Situation Room Overview&lt;/name&gt;&lt;option_schema&gt;[{"name":"fields","section":"Data","default_value":"category,locations,sys_created_on,people_affected,escalation_level,state","label":"Fields","type":"string"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles&gt;x_fru_cir.cir_base&lt;/roles&gt;&lt;script&gt;&lt;![CDATA[(function() {
+    data.table = $sp.getParameter('table');
+    data.sys_id = $sp.getParameter("sys_id") || -1;
+    data.fields = [];
+    data.labels = [];
+
+    data.canCloseSituationRoom = false;
+    data.situationRecord = getSituationRecord();
+    data.nextEscalLevel = getNextEsclLevel();
+    data.locationQuery = new CIRSituationUtils().filterByCountry(data.situationRecord);
+    data.country = data.situationRecord.getValue('country');
+
+    data.table.location = CIRConstants.Tables.LOCATION;
+    data.table.situationCategory = CIRConstants.Tables.SITUATION_CATEGORY;
+    data.table.situationEscalation = CIRConstants.Tables.SITUATION_ESCALATION_LEVEL;
+    data.table.respPlanExec = CIRConstants.Tables.RESP_PLAN_EXEC;
+
+    data.updateAffectedPpl = input ? input.updateAffectedPpl : false;
+    data.affectedPplNbr = input ? input.affectedPplNbr : false;
+    data.closeSituation = input ? input.closeSituation : false;
+    data.escalateAction = 'escalateSituation';
+
+    //messages
+    data.messages = {};
+    data.messages.add_location = gs.getMessage('cir_situation_add_location');
+    data.messages.adjust_people_affected = gs.getMessage('cir_situation_adjust_affected_people');
+    data.messages.closeSituation = gs.getMessage('cir_situation_close_situation');
+    data.messages.escalateTo = data.nextEscalLevel ? gs.getMessage('cir_situation_escalation') + ' ' + data.nextEscalLevel.name : '';
+    data.messages.escalateToLevel = data.nextEscalLevel ? gs.getMessage('cir_situation_escalation_question') + ': ' + data.nextEscalLevel.name + '?' : '';
+    data.messages.closeSituationTooltip = '';
+    data.upd_message = gs.getMessage('cir_situation_escalation_succesfull') + ' ' + data.nextEscalLevel.name;
+    data.messages.situationClosed = gs.getMessage('cir_situation_room_closed');
+
+
+    if (input &amp;&amp; input.update_locations == true) {
+        updateLocation(input.new_location);
+    }
+
+    if (data.updateAffectedPpl &amp;&amp; data.affectedPplNbr) {
+        updateAffectedPpl(data.affectedPplNbr);
+    }
+
+    if (data.closeSituation) {
+        closeSituation();
+    }
+
+    if (input &amp;&amp; input.action == data.escalateAction) {
+        escalateSituation();
+    }
+
+    if (!data.table || !data.sys_id || !data.fields) {
+        return;
+    }
+
+
+    if (data.situationRecord) {
+        data.title = data.situationRecord.number.toString() + ': ' + data.situationRecord.getDisplayValue('category');
+        data.fields = options.fields.split(',');
+
+
+        for (var i = 0; i &lt; data.fields.length; i++) {
+            var field = $sp.getField(data.situationRecord, data.fields[i].toString());
+            switch (data.fields[i].toString()) {
+
+                case 'category':
+                    if (data.situationRecord.category) {
+                        var picture = getPicture(field.value.toString());
+                        data.labels.push({
+                            "key": field.label,
+                            "picture": picture
+                        });
+                    } else {
+                        data.labels.push({ "key": field.label });
+                    }
+                    break;
+
+                case 'locations':
+                    if (data.situationRecord.locations) {
+
+                        if (field.display_value.toString().length &gt; 20) {
+                            var amount = field.value.toString().split(',');
+                            var locationsMsg = amount.length &lt; 2 ? gs.getMessage('Location') : gs.getMessage('Locations');
+                            var locValue = amount.length &lt; 2 ?
+                                amount.length + ' ' + gs.getMessage('Location') :
+                                amount.length + ' ' + gs.getMessage('Locations');
+
+                            var locContent = getLocNameById(field.value);
+
+                            data.labels.push({
+                                "key": field.label,
+                                "value": locValue,
+                                "tooltipContent": locContent.join(', '),
+                                "tooltip": 'true'
+                            });
+                        } else {
+                            data.labels.push({
+                                "key": field.label,
+                                "value": field.display_value
+                            });
+                        }
+                    } else {
+                        data.labels.push({ "key": field.label });
+                    }
+                    break;
+
+                case 'sys_created_on':
+                    if (data.situationRecord.sys_created_on) {
+                        var elapsedTime = getElapsedTime(field.value.toString());
+
+                        var createdValue = field.display_value.toString().slice(0, 16);
+
+                        data.labels.push({
+                            "key": field.label,
+                            "value": createdValue,
+                            "tooltipContent": elapsedTime,
+                            "tooltip": 'true',
+                            "created_on": 'true'
+                        });
+                    } else {
+                        data.labels.push({ "key": field.label });
+                    }
+                    break;
+
+                case 'escalation_level':
+                    if (data.situationRecord.escalation_level) {
+                        data.labels.push({
+                            "key": field.label,
+                            "value": field.display_value
+                        });
+                    }
+                    break;
+
+                default:
+                    data.labels.push({
+                        "key": field.label,
+                        "value": field.display_value
+                    });
+                    break;
+            }
+
+        }
+        data.canCloseSituationRoom = data.situationRecord.getValue('state') != '1' &amp;&amp; areAllRespPlansClosed(data.situationRecord.getUniqueValue());
+        data.messages.closeSituationTooltip = data.canCloseSituationRoom ? '' : gs.getMessage('cir_situation_cannot_close_situation');
+    }
+
+    function updateLocation(locationId) {
+        if (data.situationRecord) {
+            var locations = data.situationRecord.getValue('locations') ? data.situationRecord.getValue('locations') + ',' + locationId.toString() : locationId.toString();
+            data.situationRecord.setValue('locations', locations);
+            data.situationRecord.update();
+        }
+    }
+
+    function updateAffectedPpl(affectedNumber) {
+        if (data.situationRecord) {
+            data.situationRecord.people_affected = parseInt(affectedNumber);
+            data.situationRecord.update();
+        }
+        data.updateAffectedPpl = false;
+        data.affectedPplNbr = '';
+    }
+
+    function getElapsedTime(start) {
+        var currentTime = new GlideDateTime();
+        var startTime = new GlideDateTime();
+        startTime.setValue(start);
+
+        var diff = new GlideDuration.subtract(startTime, currentTime);
+
+        var elapsedTime = diff.getDisplayValue();
+
+        return elapsedTime;
+    }
+
+    function getLocNameById(locIds) {
+        var ids = locIds.split(',');
+        var names = [];
+
+        for (var i = 0; i &lt; ids.length; i++) {
+
+            var grLoc = new GlideRecord(data.table.location);
+            grLoc.addQuery('sys_id', ids[i].toString());
+            grLoc.query();
+
+            if (grLoc.next()) {
+                names.push(grLoc.name.toString());
+            }
+        }
+        return names;
+    }
+
+    function getPicture(catId) {
+        var grCatg = new GlideRecord(data.table.situationCategory);
+        grCatg.addQuery('sys_id', catId.toString());
+        grCatg.query();
+
+        if (grCatg.next()) {
+            return grCatg.icon + '.iix';
+        }
+        return;
+    }
+
+    function getSituationRecord() {
+        var gr = new GlideRecordSecure(data.table);
+        if (gr.get(data.sys_id)) {
+            return gr;
+        }
+    }
+
+    function closeSituation() {
+        data.situationRecord.setValue('state', '1');
+        data.situationRecord.update();
+    }
+
+    function escalateSituation() {
+        data.situationRecord.setValue('escalation_level', data.nextEscalLevel.id);
+        data.situationRecord.update();
+
+    }
+
+    function getNextEsclLevel() {
+        var nextEsclLevel = {};
+        var newLevel = data.situationRecord.escalation_level.order + 1;
+
+        var grEscalation = new GlideRecord(data.table.situationEscalation);
+        grEscalation.addQuery('order', newLevel);
+        grEscalation.query();
+
+        if (grEscalation.next()) {
+            nextEsclLevel.id = grEscalation.getUniqueValue();
+            nextEsclLevel.name = grEscalation.getDisplayValue('level_name');
+            nextEsclLevel.order = newLevel;
+            return nextEsclLevel;
+        }
+        return false;
+    }
+
+    /**
+     * returns if all response plans for the given situation are in a close state
+     * @param {string} situationRoomId sys_id
+     * @return {boolean}
+     */
+    function areAllRespPlansClosed(situationRoomId) {
+        var gr = new GlideRecord(data.table.respPlanExec);
+        gr.addQuery('parent_situation', situationRoomId);
+        gr.addQuery('state', 'NOT IN', '3,4,7');
+        gr.query();
+
+        return !gr.hasNext();
+    }
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;paulo.gomes&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-03-25 11:53:39&lt;/sys_created_on&gt;&lt;sys_id&gt;74baa60d1b370850df7e43f4bd4bcb94&lt;/sys_id&gt;&lt;sys_mod_count&gt;4&lt;/sys_mod_count&gt;&lt;sys_name&gt;CIR Situation Room Overview&lt;/sys_name&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_74baa60d1b370850df7e43f4bd4bcb94&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;paulo.gomes&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-03-25 14:14:37&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-heading clearfix"&gt;&lt;span class="header-title"&gt;{{data.title}}&lt;/span&gt;
+        &lt;div uib-tooltip="{{data.messages.closeSituationTooltip}}" tooltip-append-to-body="true" class="pull-right"&gt;
+            &lt;button ng-click="c.confirmCloseSituation()" ng-disabled="!c.data.canCloseSituationRoom"
+                class="btn btn-primary action-btn pull-right" ng-class="::getButtonClass(action)"&gt;
+                {{data.messages.closeSituation}}
+            &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;button ng-hide="!data.nextEscalLevel" ng-click="c.escalate()" ng-disabled="c.submitting"
+            class="btn btn-primary action-btn pull-right"
+            ng-class="::getButtonClass(action)"&gt;{{data.messages.escalateTo}}&lt;/button&gt;
+
+        &lt;button ng-click="c.addLocation()" ng-disabled="c.submitting" class="btn btn-primary action-btn pull-right"
+            ng-class="::getButtonClass(action)"&gt;{{data.messages.add_location}}&lt;/button&gt;
+
+        &lt;button ng-click="c.chgPplAffected()" ng-disabled="c.submitting" class="btn btn-primary action-btn pull-right"
+            ng-class="::getButtonClass(action)"&gt;{{data.messages.adjust_people_affected}}&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;table class="table overview-widget table-{{::c.options.color}}"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;td class="key-row" ng-repeat="label in c.data.labels"&gt;
+                    {{ label.key }}
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;th class="value-row" ng-repeat="label in c.data.labels"&gt;
+                &lt;img class="image" ng-if="label.picture" ng-src="{{::label.picture}}?t=small" /&gt;
+                &lt;div ng-if="!label.created_on" tooltip-enable="label.tooltip == 'true'"
+                    uib-tooltip="{{::label.tooltipContent}}" tooltip-placement="top" tooltip-append-to-body="true"&gt;
+                    {{ label.value }}&lt;/div&gt;
+                &lt;div ng-if="label.created_on == 'true'" ng-mouseover='c.getElapsedTime()'
+                    tooltip-enable="label.tooltip == 'true'" uib-tooltip="{{::label.tooltipContent}}"
+                    tooltip-placement="top" tooltip-append-to-body="true"&gt;{{ label.value }}&lt;/div&gt;
+            &lt;/th&gt;
+            &lt;tr&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;script type="text/ng-template" id="addLocation"&gt;
+    &lt;div class="panel panel-default"&gt;
+        &lt;div class="panel-heading"&gt;
+            &lt;h4 class="panel-title"&gt;${Add location}&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class="panel-body wrapper-xl"&gt;
+            &lt;div style="margin-bottom:30px" &gt;
+                &lt;span class="required"&gt;${Select location}&lt;/span&gt;
+                &lt;sn-record-picker name="location" default-query="c.updateQuery()" field="location" style="margin-top:5px" table="{{data.table.location}}" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" &gt;&lt;/sn-record-picker&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="panel-footer text-right"&gt;
+            &lt;button class="btn btn-default" ng-click="c.closeModal()"&gt;${Close}&lt;/button&gt;
+            &lt;button class="btn btn-primary" ng-click="c.updateLocations(location.value)"&gt;${Add Location}&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/script&gt;
+
+&lt;script type="text/ng-template" id="updateAffectedPpl"&gt;
+    &lt;div class="panel panel-default"&gt;
+        &lt;div class="panel-heading"&gt;
+            &lt;h4 class="panel-title"&gt;${Update people affected}&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class="panel-body wrapper-xl"&gt;
+            &lt;div style="margin-bottom:30px" &gt;
+                &lt;span class="required"&gt;${Select number of people affected}&lt;/span&gt;
+                &lt;input ng-model="affectedPpl" style="margin-bottom:30px" type="text" name=""&gt;&lt;span style="margin-left: 5px;"&gt;&lt;/span&gt;&lt;/input&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="panel-footer text-right"&gt;
+            &lt;button class="btn btn-default" ng-click="c.closeModal()"&gt;${Close}&lt;/button&gt;
+            &lt;button class="btn btn-primary" ng-click="c.updatePplAffected(affectedPpl)"&gt;${Update}&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/script&gt;
+
+&lt;script type="text/ng-template" id="escalate"&gt;
+    &lt;div class="panel panel-default"&gt;
+        &lt;div class="panel-heading"&gt;
+            &lt;h4 class="panel-title"&gt;${Escalate}&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class="panel-body wrapper-xl"&gt;
+            &lt;div style="margin-bottom:30px" &gt;
+                &lt;span class="required"&gt;{{c.data.messages.escalateToLevel}}&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="panel-footer text-right"&gt;
+            &lt;button class="btn btn-default" ng-click="c.closeModal()"&gt;${Close}&lt;/button&gt;
+            &lt;button class="btn btn-primary" ng-click="c.escalateToLevel()"&gt;${Escalate}&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/script&gt;
+
+&lt;script type="text/ng-template" id="confirmCloseSituation"&gt;
+        &lt;div class="panel panel-default"&gt;
+        &lt;div class="panel-heading"&gt;
+            &lt;h4 class="panel-title"&gt;${cir_situation_confirm_close_situation}&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class="panel-body wrapper-xl"&gt;           
+                &lt;span&gt;${cir_situation_confirm_close_main}&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="panel-footer text-right"&gt;
+            &lt;button class="btn btn-default" ng-click="c.closeModal()"&gt;${Close}&lt;/button&gt;
+            &lt;button class="btn btn-primary" ng-click="c.closeSituation()"&gt;${Ok}&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/script&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1154001557</payload_hash>
+        <record_name>CIR Situation Room Overview</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 14:14:37</sys_created_on>
+        <sys_id>bdfa030d1bf70850df7e43f4bd4bcba2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>171120b86da0000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 14:14:37</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>75fa030d79f708506f94776c540894a2</update_guid>
+        <update_guid_history>75fa030d79f708506f94776c540894a2:-1154001557,1996cf0571f70850f404134b891ce900:-1275424889,7c4547c1e9f70850a4de3b080d959708:1382174619,fd23430117f70850d36947d982f7d72a:-1186359722,bcbaa60dd5370850a7245ee452963095:-599068812</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">c1ced7cd1b7b0850df7e43f4bd4bcbdb</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 15:41:07</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>1eda0b6e95da45949454365106dc8ee4</sys_id>
+        <sys_metadata>74baa60d1b370850df7e43f4bd4bcb94</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR Situation Room Overview</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_1eda0b6e95da45949454365106dc8ee4</sys_update_name>
+        <sys_update_version display_value="sp_widget_74baa60d1b370850df7e43f4bd4bcb94">bdfa030d1bf70850df7e43f4bd4bcba2</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:04</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

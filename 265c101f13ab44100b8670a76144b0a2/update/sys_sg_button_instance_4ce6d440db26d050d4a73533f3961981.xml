@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_button_instance">
+    <sys_sg_button_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <button display_value="End investigation">c713e11bdbda5050d4a73533f39619fd</button>
+        <color_theme>primary</color_theme>
+        <description>Function on the footer of the investigation applet</description>
+        <field_name/>
+        <icon/>
+        <label>End investigation</label>
+        <location>footer</location>
+        <name>CIR End investigation</name>
+        <order/>
+        <parent>38c6a11edb9adc10d4a73533f396192e</parent>
+        <parent_table>sys_sg_screen</parent_table>
+        <sys_class_name>sys_sg_button_instance</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-05 15:26:31</sys_created_on>
+        <sys_id>4ce6d440db26d050d4a73533f3961981</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR End investigation</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_button_instance_4ce6d440db26d050d4a73533f3961981</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-05 15:26:31</sys_updated_on>
+        <table/>
+    </sys_sg_button_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=4ce6d440db26d050d4a73533f3961981"/>
+</record_update>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Near Miss - Product Recall" max_length="40" name="x_fru_cir_near_miss_product_recall" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Near Miss" max_length="32" name="near_miss" reference="x_fru_cir_near_miss" reference_qual="categoryINinjury_illness,food_safety^has_product=false^EQ" reference_qual_condition="categoryINinjury_illness,food_safety^has_product=false^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Product Recall" max_length="32" name="product_recall" reference="x_fru_cir_product_recall" type="reference"/>
+        <index name="index">
+            <element name="near_miss"/>
+        </index>
+        <index name="index2">
+            <element name="product_recall"/>
+        </index>
+    </element>
+</database>

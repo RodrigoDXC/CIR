@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRCaseManagementAjaxFP</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description>Protected Script include for AJAX code for the CIR Case Management functionality.</description>
+        <name>CIRCaseManagementAjaxFP</name>
+        <script><![CDATA[var CIRCaseManagementAjaxFP = Class.create();
+CIRCaseManagementAjaxFP.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+    /**
+     * Client method to call the getUserInformation from the server side script include 
+     * USED IN - Client Script: Fill Fields from Employee, Fill Fields from Individual
+     * 
+     * @return {Object} - returns user object from server side code
+     */
+    getUserInformation: function() {
+        var userSys = this.getParameter('sysparm_user');
+        return CIRCaseRiskImpGenericUtilsFP().GetUserInformation(userSys);
+    },
+
+    /**
+     * Get the age group of a user from the date on a person impact
+     * USED IN - Client Script: Calculate age group from DOB
+     * 
+     * @return {String} - returns the choice value for the age group
+     */
+    getUserAgeGroup: function() {
+        var dob = this.getParameter('sysparm_dob');
+        return CIRCaseRiskImpGenericUtilsFP().GetUserAgeGroup(dob);
+    },
+
+    /**
+     * Get the default group of selected location
+     * USED IN - Client Script: Populate AG based on location
+     * 
+     * @return {String} - returns the sys_id of the default group based on the location.
+     */
+    getDefaultAssignmentGroup: function() {
+        var selectedLocation = this.getParameter('sysparm_location');
+        return CIRCaseRiskImpGenericUtilsFP().GetDefaultAssignmentGroup(selectedLocation);
+    },
+
+    /*
+     * Get the value of Anonymous user property
+     * USED IN - Catalog Client Script: Hide anonymous option
+     * 
+     * @return {String} - returns the value of the Anonymous user property (x_fru_cir.anonymous.user).
+     */
+    getAnonymousUserProperty: function() {
+        return gs.getProperty('x_fru_cir.anonymous.user');
+    },
+
+    /*
+     * Confirm the user is using a CIR role
+     * USED IN - Client Script: User Role only Rule
+     * 
+     * @return {Object} - Object containing the information about the user
+     */
+    isCirRoleOnly: function() {
+        var returnObject = {
+            isCirRoleOnly: CIRCaseRiskImpGenericUtilsFP().IsCirRoleOnly(),
+            currentUserId: gs.getUserID(),
+            currentUserDisplayName: gs.getUserDisplayName()
+        };
+        return JSON.stringify(returnObject);
+    },
+
+    /*
+     * Get the CIR Service Portal prefix
+     * USED IN - UI Page: CIR_Switch_to_Portal
+     *           UI Action: Print OSHA Forms
+     * 
+     * @return {String} - String containing the CIR Service Portal prefix
+     */
+    getCirPortalName: function() {
+        return CIRCaseRiskImpGenericUtilsFP().GetCirPortalName();
+    },
+
+    /*
+     * Get the CIR Service Portal prefix
+     * USED IN - UI Page: CIR_Switch_to_Portal
+     *           UI Action: Print OSHA Forms
+     * 
+     * @return {String} - String containing the CIR Service Portal prefix
+     */
+    getRoleAllowedRelatedLists: function() {
+        return JSON.stringify(CIRCaseRiskImpGenericUtilsFP().GetRoleAllowedRelatedLists());
+    },
+
+    /**
+     * Get the Potential Severity based on the future Likelihood and Potential Consequence received
+     * @param  {String} Value of Future Likelihodd
+     * @param  {String} Value of Potential Consequence
+     *
+     * Used In Client Script - Case:  Make potential consequence - consequence
+     * Used In Client Script - Case: Make potential consequence - likelohood
+     * Used In Client Script - Risk: Make potential consequence - consequence
+     * Used In Client Script - Risk: Make potential consequence - likelohood
+     * Used In Client Script - Impact: Make potential consequence - consequence
+     * Used In Client Script - Impact: Make potential consequence - likelohood
+     *
+     * @return {String} -Value of Potential Severity that matches, false if not foud match
+     */
+    getPotentialSeverity: function() {
+        var futureLikelihood = this.getParameter('sysparm_futureLikelihood');
+        var potentialConsequence = this.getParameter('sysparm_potentialConsequence');
+        return new CIRCaseManagementUtils().GetPotentialSeverity(futureLikelihood, potentialConsequence);
+
+    },
+
+    type: 'CIRCaseManagementAjaxFP'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-01 09:41:35</sys_created_on>
+        <sys_id>7c681c8fdb0d901003b3533fd396190f</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>CIRCaseManagementAjaxFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_7c681c8fdb0d901003b3533fd396190f</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-27 08:31:13</sys_updated_on>
+    </sys_script_include>
+</record_update>

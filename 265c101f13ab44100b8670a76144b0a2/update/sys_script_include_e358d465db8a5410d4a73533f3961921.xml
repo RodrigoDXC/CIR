@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRSecurityLocationsUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRSecurityLocationsUtilsFP</name>
+        <script><![CDATA[var CIRSecurityLocationsUtilsFP = (function() {
+	var CIRSecurityLocationsUtilsFP = Class.create();
+	var initialize = function() {
+		var masterTemplatesIds = '';
+	};
+
+	/**
+	 *  Called on fsm_update_locations BR. Will update/insert a new FSM Location record based on the
+	 *  Location record updated.
+	 *  @param {GlideRecord} currentLoc - current GlideRecordF of the Location record.
+	 *  @param {GlideRecord} previousLoc - previous GlideRecord of the Location record
+	 **/
+	var actOnLocation = function (currentLoc, previousLoc) {
+		var copyEnabled = gs.getProperty('x_fru_cir.locations.copied');
+
+		var location;
+
+		if (copyEnabled === 'true') {
+			var fsmLoc = getFSMLocation(currentLoc.sys_id + '');
+			if (!fsmLoc) {
+				location = createFSMLocation(currentLoc);
+			} else {
+				location = updateFields(fsmLoc, currentLoc, previousLoc);
+			}
+		}
+		return location;
+	};
+
+
+	/**
+     *  Called on actOnLocation and deleteLocation functions. It will return the
+     FSM Location GlideRecord object based on the
+     *  Location record sys_id.
+     *  @param {String} location_id - Location record sys_id.
+     *  @return {GlideRecord} - FSM Location GlideRecord object
+     **/
+	var getFSMLocation = function (location_id) {
+		if (location_id) {
+			var grFsmLoc = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+			grFsmLoc.addQuery('location', location_id);
+			grFsmLoc.setLimit(1);
+			grFsmLoc.query();
+
+			if (grFsmLoc.next()) {
+				return grFsmLoc;
+			}
+		}
+		return;
+	};
+
+
+	/**
+	 *  Called on actOnLocation function. It will create a FSM Location record based on the
+	 *  Location record.
+	 *  @param {GlideRecord} location - Location GlideRecord.
+	 **/
+	var createFSMLocation = function (location) {
+		var grFsmLoc = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		var parent = getFSMLocation(location.parent + '');
+
+		grFsmLoc.initialize();
+		grFsmLoc.setValue('name', location.name + '');
+		grFsmLoc.setValue('street', location.street + '');
+		grFsmLoc.setValue('state', location.state + '');
+		grFsmLoc.setValue('zip', location.zip + '');
+		grFsmLoc.setValue('city', location.city + '');
+		grFsmLoc.setValue('country', location.country + '');
+		grFsmLoc.setValue('contact', location.contact + '');
+		grFsmLoc.setValue('parent', parent ? parent.sys_id + '' : '');
+		grFsmLoc.setValue('location', location.sys_id + '');
+		grFsmLoc.setValue('source', 'global');
+		grFsmLoc.insert();
+
+		checkIfParent(grFsmLoc);
+
+		/*
+		if (this.fmIsEnabled()) {
+			this.fetchFMData(location, grFsmLoc);
+
+		}
+		*/
+		return grFsmLoc;
+	};
+
+
+	/**
+	 *  Called on actOnLocation function. It will update the fields of the
+	 FSM Location record based on the
+	 *  Location record updated.
+	 *  @param {GlideRecord} fsmLoc - GlideRecord of the FSM Location record that will be updated.
+	 *  @param {GlideRecord} currentLoc - current GlideRecord of the Location record.
+	 *  @param {GlideRecord} previousLoc - previous GlideRecord of the Location record
+	 **/
+	var updateFields = function (fsmLoc, currentLoc, previousLoc) {
+		var fields = ['name', 'street', 'city', 'state', 'zip', 'country', 'contact', 'parent'];
+
+		for (var i = 0; i < fields.length; i++) {
+			if (fsmLoc[fields[i]].getDisplayValue() == previousLoc[fields[i]].getDisplayValue()) {
+
+				if (fields[i] != 'parent') {
+					fsmLoc[fields[i]] = currentLoc.getValue([fields[i]]);
+
+				} else {
+					if (currentLoc.getValue(fields[i])) {
+						var parent = getFSMLocation(currentLoc.getValue(fields[i]) + '');
+						fsmLoc[fields[i]] = parent ? parent.sys_id + '' : '';
+
+					} else {
+						fsmLoc[fields[i]] = '';
+					}
+				}
+			}
+		}
+
+		fsmLoc.update();
+
+		/*if (this.fmIsEnabled()) {
+			this.fetchFMData(currentLoc, fsmLoc);
+
+		}*/
+		return fsmLoc;
+	};
+
+	var checkIfParent = function (grFsmLoc) {
+		var grLoc = new GlideRecord('cmn_location');
+		grLoc.addQuery('parent', grFsmLoc.location + '');
+		grLoc.query();
+
+		while (grLoc.next()) {
+			var grFSM = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+			grFSM.addQuery('location', grLoc.sys_id + '');
+			grFSM.setLimit(1);
+			grFSM.query();
+
+			if (grFSM.next()) {
+				grFSM.parent = grFsmLoc.sys_id + '';
+				grFSM.update();
+			}
+		}
+	};
+
+
+	var getLocs = function(fields, sysLanguage, fsmLoc) {
+		var facilityType = '';
+		var grLoc = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		if (grLoc.get(fsmLoc)) {
+			for (var i = 0; i < fields.length; i++) {
+				if (fields[i] !== 'name') {
+					createAddrValue(fields[i], grLoc.getDisplayValue(fields[i]), sysLanguage);
+				} else if (grLoc.getDisplayValue('type')) {
+					facilityType = grLoc.getDisplayValue('type').toLowerCase();
+					createAddrValue(facilityType, grLoc.getDisplayValue(fields[i]), sysLanguage);
+				}
+			}
+		}
+	};
+
+	
+	var createAddrValue = function(type, value, language) {
+		if (!value) {
+			return;
+		}
+
+		var addrValGr = new GlideRecord(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+		addrValGr.addQuery('language', 'en');
+		addrValGr.addQuery('value', value);
+		addrValGr.addQuery('type', type);
+		addrValGr.query();
+
+		if (!addrValGr.hasNext()) {
+			var newAddrVal = new GlideRecord(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+			newAddrVal.initialize();
+			newAddrVal.setValue('language', 'en');
+			newAddrVal.setValue('value', value);
+			newAddrVal.setValue('type', type);
+			var newRecord = newAddrVal.insert();
+		}
+	};
+	
+	
+	/**
+	 *  Called on fsm_delete_location BR. It will delete a FSM Location record based on the
+	 *  Location record deleted.
+	 *  @param {GlideRecord} location - Location GlideRecord.
+	 **/
+	var deleteLocation = function (location) {
+		var copyEnabled = gs.getProperty('x_fru_cir.locations.copied');
+
+		if (copyEnabled === 'true') {
+			getFSMLocation(location.sys_id + '').deleteRecord();
+		}
+	};
+
+
+	CIRSecurityLocationsUtilsFP.prototype = {
+		initialize: initialize,
+		ActOnLocation: actOnLocation,
+		GetLocs: getLocs,
+		DeleteLocation: deleteLocation
+	};
+
+	return CIRSecurityLocationsUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 10:57:22</sys_created_on>
+        <sys_id>e358d465db8a5410d4a73533f3961921</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIRSecurityLocationsUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_e358d465db8a5410d4a73533f3961921</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 11:26:03</sys_updated_on>
+    </sys_script_include>
+</record_update>

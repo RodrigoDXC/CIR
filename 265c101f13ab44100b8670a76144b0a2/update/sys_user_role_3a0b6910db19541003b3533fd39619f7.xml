@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+    <sys_user_role action="INSERT_OR_UPDATE">
+        <assignable_by display_value="x_fru_cir.admin" name="x_fru_cir.admin">8d8a2510db19541003b3533fd39619c2</assignable_by>
+        <can_delegate>true</can_delegate>
+        <description>Grants expert access to use the CIR application</description>
+        <elevated_privilege>false</elevated_privilege>
+        <grantable>true</grantable>
+        <includes_roles/>
+        <name>x_fru_cir.expert</name>
+        <requires_subscription>-1</requires_subscription>
+        <scoped_admin>false</scoped_admin>
+        <suffix>expert</suffix>
+        <sys_class_name>sys_user_role</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-05 12:55:03</sys_created_on>
+        <sys_id>3a0b6910db19541003b3533fd39619f7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.expert</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_user_role_3a0b6910db19541003b3533fd39619f7</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-05 12:55:03</sys_updated_on>
+    </sys_user_role>
+</record_update>

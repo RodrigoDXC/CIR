@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="injury_illness_caused_by" table="x_fru_cir_injury_illness" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>injury_illness_caused_by</element>
+            <name>x_fru_cir_injury_illness</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:01:49</sys_created_on>
+            <sys_id>bab6bf74138a50500b8670a76144b0de</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>injury_illness_caused_by</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_injury_illness_injury_illness_caused_by</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:01:49</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Biological agencies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>10</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:01:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>39eebc27db11141003b3533fd396193b</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:01:55</sys_updated_on>
+            <value>biological_agencies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Chemicals</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>20</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:02:02</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>50fe7c27db11141003b3533fd39619b2</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:02:08</sys_updated_on>
+            <value>chemicals</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Human agencies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>30</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:02:13</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>27fe7067db11141003b3533fd3961900</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:02:20</sys_updated_on>
+            <value>human_agencies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Indoor environment</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>40</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:02:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5e0fbc27db11141003b3533fd39619dc</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:02:33</sys_updated_on>
+            <value>indoor_environment</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Live animals</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>50</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:02:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>511f3067db11141003b3533fd39619c1</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:02:45</sys_updated_on>
+            <value>live_animals</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Machinery and fixed plant</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>60</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:02:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5c2ff067db11141003b3533fd396190e</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:02:55</sys_updated_on>
+            <value>fixed_plant</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Mobile plant</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>70</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:03:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>db2fb067db11141003b3533fd39619d7</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:03:06</sys_updated_on>
+            <value>mobile_plant</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Non-living animals</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>80</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:03:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>753fb067db11141003b3533fd3961914</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:03:16</sys_updated_on>
+            <value>non_living_animals</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Non-metallic substances</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>90</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:03:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dc4fb067db11141003b3533fd39619a0</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:03:27</sys_updated_on>
+            <value>non_metallic_substance</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Non-physical agencies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>100</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:03:34</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>724f7067db11141003b3533fd39619dc</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:03:41</sys_updated_on>
+            <value>non_physical_agencies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Non-powered equipment</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>110</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:03:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b15fbc27db11141003b3533fd3961995</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:03:55</sys_updated_on>
+            <value>non_power_equipment</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Non-powered hand tools</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>120</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:04:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2d6fb067db11141003b3533fd39619db</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:04:07</sys_updated_on>
+            <value>hand_tools</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other agencies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>130</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:04:12</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>607fb067db11141003b3533fd39619aa</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:04:18</sys_updated_on>
+            <value>other_agencies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other materials, substances or objects</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>140</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:04:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>937f7467db11141003b3533fd396199b</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:04:31</sys_updated_on>
+            <value>other_materials</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other transport</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>150</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:04:37</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0a8f3c27db11141003b3533fd39619c6</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:04:43</sys_updated_on>
+            <value>other_transport</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Outdoor environment</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>160</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:04:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5d9ff467db11141003b3533fd3961948</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:04:54</sys_updated_on>
+            <value>outdoor_environment</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Powered equipment, tools and appliances</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>170</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:04:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>04afb467db11141003b3533fd3961999</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:05:05</sys_updated_on>
+            <value>power_tools</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Road transport</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>180</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:05:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>faaff467db11141003b3533fd396193a</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:05:16</sys_updated_on>
+            <value>road_transport</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Underground environment</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>190</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:05:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>25bff467db11141003b3533fd3961951</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:05:28</sys_updated_on>
+            <value>underground_environment</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>injury_illness_caused_by</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Unspecified agencies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>200</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:05:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8ccf3867db11141003b3533fd3961933</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:05:39</sys_updated_on>
+            <value>unspecified_agencies</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

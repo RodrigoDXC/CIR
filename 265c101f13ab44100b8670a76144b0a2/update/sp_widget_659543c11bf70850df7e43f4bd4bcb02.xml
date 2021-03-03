@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($uibModal, $scope, spUtil) {
+	var c = this;
+	var g_form = $scope.page.g_form;
+
+	c.addMembers = function() {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'addMembers',
+			scope: $scope
+		});
+	};
+
+	c.addCoordinator = function() {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'addCoordinator',
+			scope: $scope
+		});
+	};
+
+	c.closeModal = function() {
+		c.modalInstance.close();
+	};
+
+	c.addUser = function(userId) {
+		if (!userId) {
+			return;
+		}
+		
+		var obj = {}
+		obj.action = c.data.add_member;
+		obj.userId = userId;
+
+		c.closeModal();
+		c.server.get(obj).then(function() {
+			spUtil.update($scope);
+		});
+	};
+
+	c.assignCoordinator = function(userId, userName) {
+		if (!userId && !userName) {
+			return;
+		}
+
+		c.closeModal();
+
+		var obj = {};
+		obj.action = c.data.assign_coordinator
+		obj.userId = userId;
+		obj.userName = userName;
+
+		c.closeModal();
+		c.server.get(obj).then(function() {
+			spUtil.update($scope);
+		});
+		c.server.update();
+	};
+
+
+	c.updateQuery = function() {
+		return 'sys_idIN' + c.data.filteredUsers;
+	};
+
+	c.updatedFromServer = false;
+
+	spUtil.recordWatch($scope, c.data.response_team_table, 'response_execution_id='+c.data.sys_id+'', function(updateObj){
+		if (updateObj.data.changes.indexOf('backed_up_by') != -1) {
+			spUtil.addInfoMessage(updateObj.data.record.backed_up_by.display_value + ' ' + c.data.backupNotificationMsg + ' ' + updateObj.data.display_value);
+		}
+		spUtil.update($scope);
+		c.updatedFromServer = true;
+	});
+
+	spUtil.recordWatch($scope, c.data.table, "sys_id=" + c.data.sys_id, function (name, data) {
+		c.server.update();
+		c.updatedFromServer = true;
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.action-btn {&#13;
+  color: #2e2e2e;&#13;
+  display: block;&#13;
+  border-radius: 3px;&#13;
+  border: solid 1px #cccccc;&#13;
+  background-color: #ffffff;&#13;
+}&#13;
+&#13;
+.header-title{&#13;
+  vertical-align: -webkit-baseline-middle;&#13;
+  font-family: SourceSansPro;&#13;
+  font-size: 16px;&#13;
+  font-weight: normal;&#13;
+  font-style: normal;&#13;
+  font-stretch: normal;&#13;
+  line-height: 1.06;&#13;
+  letter-spacing: normal;&#13;
+  color: #4a4a4a;&#13;
+}&#13;
+&#13;
+.panel-body{&#13;
+  height: 220px !important;&#13;
+  padding: 0px;&#13;
+  overflow-y: auto !important;&#13;
+}&#13;
+&#13;
+table {&#13;
+  border-collapse: collapse;&#13;
+  width: 100%;&#13;
+}&#13;
+&#13;
+th, td {&#13;
+  text-align: left;&#13;
+  padding: 8px;&#13;
+}&#13;
+&#13;
+th {&#13;
+  border: 1px solid #ddd;&#13;
+  color: $brand-primary;&#13;
+  border-top: 0;&#13;
+  position: sticky;&#13;
+  top: 0;&#13;
+  background: white;&#13;
+  border-collapse: collapse;&#13;
+}&#13;
+&#13;
+table {&#13;
+  border: 0;&#13;
+}&#13;
+&#13;
+tr {&#13;
+  border-bottom: solid 1px #dee5e7;&#13;
+}&#13;
+&#13;
+td {&#13;
+  height: 36px;&#13;
+&#13;
+}&#13;
+th:first-child {&#13;
+  border-left: 0;&#13;
+}&#13;
+&#13;
+th:last-child {&#13;
+  border-right: 0;&#13;
+}&#13;
+&#13;
+&#13;
+tr:first-child {&#13;
+  border: 0;&#13;
+}&#13;
+&#13;
+tr:hover {&#13;
+  background-color: $list-hover-color !important;;&#13;
+}&#13;
+&#13;
+tr:last-child {&#13;
+  border-collapse: collapse;&#13;
+}&#13;
+&#13;
+tr:nth-child(even) {background-color: #f9f9f9;}&#13;
+&#13;
+.required {&#13;
+  color: red;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Shows a list of people that are added to the response team of a response plan</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir_response_team</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Situation Response Team</name>
+        <option_schema>[{"name":"fields","section":"Data","default_value":"user,job_title,type,response_status","label":"Fields","type":"string"},{"name":"child_table","section":"Data","default_value":"x_fru_cir_response_team","label":"child_table","type":"string"},{"name":"child_field","section":"Data","default_value":"response_execution_id","label":"parent_field","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.situation_user</roles>
+        <script><![CDATA[(function() {
+	data.tables = CIRConstants.Tables;
+	data.table = $sp.getParameter('table');
+	data.sys_id = $sp.getParameter('sys_id');
+	data.filter = $sp.getParameter('filter') || options.filter || '';
+	data.response_team_table = options.child_table ? options.child_table : '';
+	data.response_team_parent_field = options.child_field ? options.child_field : '';
+	data.fields = options.fields.split(',');
+
+	data.records = [];
+	data.labels = [];
+	data.membersIds = [];
+	data.tooltipContent = '';
+	data.add_member = 'add_member';
+	data.assign_coordinator = 'assign_coordinator';
+	data.utils = new CIRSituationUtils();
+
+	// messages
+	data.multiple = gs.getMessage('cir_sit_multiple');
+	data.no_records = gs.getMessage('cir_sit_no_users_found');
+	data.coordinatorMsg = gs.getMessage('cir_sit_coordinator');
+	data.selectCoordinatorMsg = gs.getMessage('cir_sit_select_coordinator');
+	data.assignCoordinatorMsg = gs.getMessage('cir_sit_assign_coordinator');
+	data.backupNotificationMsg = gs.getMessage('cir_sit_backup_notified');
+
+	var grPlan = new GlideRecordSecure(data.table);
+	if (grPlan.get(data.sys_id)) {
+		data.canWrite = grPlan.description.canWrite();
+		data.canWriteCoordinator = grPlan.assigned_to.canWrite();
+	}
+
+	data.coordinators_query = getCoordinators(); 
+	var coordinatorName = getCoordinator(data.sys_id);
+	data.coordinatorName = coordinatorName ? coordinatorName : !coordinatorName && data.canWriteCoordinator? gs.getMessage('cir_sit_add') : '';
+
+	var gr = new GlideRecordSecure(data.tables.RESPONSE_TEAM);
+	data.canCreate = gr.canCreate();
+	// getting records that the user has access to
+	var queryRecords = data.utils.GetQueryForPortal(data.tables.RESPONSE_TEAM);
+	gr.addEncodedQuery(queryRecords);
+	gr.addQuery(data.response_team_parent_field, data.sys_id.toString());
+	gr.orderByDesc('sys_created_on');
+	gr.query();
+
+	while (gr.next()) {
+		var obj = [];
+
+		for (var i = 0; i < data.fields.length; i++) {
+			if (data.fields[i] != 'job_title') {
+				obj.push({
+					value: gr[data.fields[i]].getDisplayValue()
+				});
+			} else if (gr[data.fields[i]].getDisplayValue().indexOf(',') != -1) {
+				obj.push({
+					value: data.multiple,
+					info: gr[data.fields[i]].getDisplayValue()
+				});
+				data.tooltipContent = gr[data.fields[i]].getDisplayValue();
+			} else {
+				obj.push({
+					value: gr[data.fields[i]].getDisplayValue()
+				});
+			}
+		}
+
+		data.membersIds.push(gr.user.sys_id.toString());
+		data.records.push(obj);
+	}
+
+	var labels = $sp.getFieldsObject(gr, data.fields);
+	for (var label in labels) {
+		data.labels.push(labels[label].label);
+	}
+
+	if (input && input.action === data.add_member) {
+		createRespTeamMember(input.userId, data.sys_id);
+	}
+
+	if (input && input.action == data.assign_coordinator) {
+		data.coordinatorName = input.userName;
+		setCoordinator(input.userId, data.sys_id);
+	}
+
+	data.filteredUsers = filterMembersOut();
+})();
+
+function createRespTeamMember(userId, execId) {
+	manageOrphanRoles(userId, execId);
+
+	if (data.membersIds.indexOf(userId) === -1) {
+		var grRTMember = new GlideRecord(data.tables.RESPONSE_TEAM);
+		grRTMember.initialize();
+		grRTMember.setValue('user', userId);
+		grRTMember.setValue('response_execution_id', execId);
+		grRTMember.setValue('type', '0'); // sets type to primary
+		grRTMember.setValue('active', true);
+		grRTMember.insert();
+	}
+}
+// will check if response team records exists without a user
+// and if the new user has the correspondent role.
+// if yes it will replace the user field with the new user
+
+function manageOrphanRoles(userId, execId) {
+	var userRoles = data.utils.GetFsmRoles(userId);
+
+	if (!userRoles) {
+		return;
+	}
+
+	var grRTMember = new GlideRecord(data.tables.RESPONSE_TEAM);
+	grRTMember.addQuery('response_execution_id', execId.toString());
+	grRTMember.addQuery('user', '');
+	grRTMember.query();
+
+	while (grRTMember.next()) {
+		if (userRoles.indexOf(grRTMember.job_title + '') != -1) {
+			if (data.membersIds.indexOf(userId) === -1) {
+				grRTMember.setValue('user', userId);
+				grRTMember.setValue('response_execution_id', execId);
+				grRTMember.setValue('type', '0'); // sets type to primary
+				grRTMember.setValue('active', true);
+				grRTMember.update();
+			} else {
+				grRTMember.setValue('active', false);
+				grRTMember.update();
+			}
+			data.membersIds.push(userId);
+		}
+	}
+}
+
+function getCoordinators () {
+		var users = [];
+		var grUser = new GlideRecord('sys_user');
+		grUser.addEncodedQuery('roles=x_fru_cir.situation_operator^active=true');
+		grUser.query();
+		
+		while(grUser.next()) {
+				users.push(grUser.getUniqueValue());
+		}
+		
+		return 'sys_idIN' + users;
+	}
+
+function getTeamUserIds(execId) {
+	var userIds = [];
+
+	var grRTMember = new GlideRecord(data.tables.RESPONSE_TEAM);
+	grRTMember.addQuery('response_execution_id', execId.toString());
+	grRTMember.query();
+
+	while (grRTMember.next()) {
+		userIds.push(grRTMember.user + '');
+	}
+	return userIds.toString();
+}
+
+function getCoordinator(rpId) {
+	var grRespPlan = new GlideRecord(data.tables.RESP_PLAN_EXEC);
+	if (grRespPlan.get(rpId)) {
+		return grRespPlan.getDisplayValue('assigned_to');
+	}
+	return;
+}
+
+function setCoordinator(userId, execId) {
+	var grRespPlan = new GlideRecord(data.tables.RESP_PLAN_EXEC);
+	if (grRespPlan.get(execId)) {
+		grRespPlan.setValue('assigned_to', userId);
+		grRespPlan.update();
+	}
+}
+
+function filterMembersOut() {
+	var roles = ['x_fru_cir.situation_administrator', 'x_fru_cir.senior_situation_manager', 'x_fru_cir.situation_user', 'x_fru_cir.situation_operator', 'x_fru_cir.situation_manager', 'x_fru_cir.situation_initiator'];
+	var array = [];
+
+	var idArrays = data.membersIds.map(function(e) {
+		return e;
+	});
+
+	var responsePlan = new GlideRecord(data.table);
+	if (responsePlan.get(data.sys_id)) {
+		var dimensionGroup = new GlideRecord(data.tables.DIMENSION);
+		if (dimensionGroup.get(responsePlan.dimension)) {
+			var groups = dimensionGroup.groups.split(",");
+
+			var users = new GlideRecord('sys_user_grmember');
+			var queryString = '';
+			for (var i = 0; i < groups.length; i++) {
+				if (i == 0) {
+					queryString += 'group.sys_id=' + groups[i];
+				} else {
+					queryString += '^ORgroup.sys_id=' + groups[i];
+				}
+			}
+
+			users.addEncodedQuery(queryString);
+			users.addQuery('user.active', true);
+			users.query();
+
+			while (users.next()) {
+				var userRoles = new GlideRecord('sys_user_has_role');
+				userRoles.addQuery('user', users.user);
+				userRoles.addQuery('role.name', 'IN', roles.join());
+				userRoles.query();
+
+				if (userRoles.next() && idArrays.indexOf(users.user + '') == -1) {
+					array.push(users.user + '');
+				}
+			}
+			return array;
+		}
+	}
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 13:51:06</sys_created_on>
+        <sys_id>659543c11bf70850df7e43f4bd4bcb02</sys_id>
+        <sys_mod_count>42</sys_mod_count>
+        <sys_name>CIR Situation Response Team</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_659543c11bf70850df7e43f4bd4bcb02</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-27 16:22:26</sys_updated_on>
+        <template><![CDATA[<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <span ng-if="data.canWriteCoordinator" ng-click="c.addCoordinator()" class="header-title">{{::data.coordinatorMsg}}: <u>{{data.coordinatorName}} </u></span>
+      <span ng-if="!data.canWriteCoordinator" class="header-title">{{::data.coordinatorMsg}}: {{data.coordinatorName}}</span> 
+      <button ng-click="c.addMembers()"ng-disabled="!(c.data.canCreate && c.data.canWrite) " class="btn btn-primary action-btn pull-right">${cir_sit_add_people}</button>
+    </div>
+    <div class="panel-body">
+      <table ng-if="data.records.length > 0">
+        <tr>
+          <th ng-repeat="label in c.data.labels">
+            {{label}}
+          </th>
+        </tr> 
+        <tr ng-repeat="record in c.data.records">
+         <!-- <td ng-repeat="value in record track by $index" tooltip-enable="value == '{{::data.multiple}}'" uib-tooltip="{{::data.tooltipContent}}" -->
+          <td ng-repeat="value in record track by $index" tooltip-enable="value.value == '{{::data.multiple}}'" uib-tooltip="{{value.info}}"     
+         	 tooltip-placement="top" tooltip-append-to-body="true">
+            {{value.value}}
+          </td>  
+      
+      </table>
+      <div style="margin:20px" ng-if="data.records.length == 0">
+        <span style="font-weight: 500;">{{data.no_records}}</span>
+      </div>  
+    </div>
+  </div>
+</div> 
+
+<script type="text/ng-template" id="addCoordinator">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">{{data.coordinatorMsg}}</h4>
+  </div>
+		<div class="panel-body wrapper-xl">
+  			
+        <div style="margin-bottom:30px" > 
+          <div >
+          <span style="color:red" class="required">* </span>{{data.selectCoordinatorMsg}}
+  </div>
+  			<sn-record-picker name="user_name" default-query="c.data.coordinators_query" field="user_name" style="margin-top:5px" table="'sys_user'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+  </div> 	
+				
+  </div>
+		<div class="panel-footer text-right">
+    		<button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+			<button class="btn btn-primary" ng-click="c.assignCoordinator(user_name.value, user_name.name)">{{data.assignCoordinatorMsg}}</button>
+  </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="addMembers">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">${cir_sit_add_members}</h4>
+  </div>
+		<div class="panel-body wrapper-xl">
+  			
+        <div style="margin-bottom:30px" > 
+          <div >
+          <span style="color:red" class="required">* </span>${cir_sit_select_user}
+  </div>
+        	<sn-record-picker name="user_name" default-query="c.updateQuery()"  field="user_name" style="margin-top:5px" table="'sys_user'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+  </div> 	
+				
+  </div>
+		<div class="panel-footer text-right">
+    		<button class="btn btn-default" ng-click="c.closeModal()">${cir_sit_close}</button>
+			<button class="btn btn-primary" ng-click="c.addUser(user_name.value)">${cir_sit_add}</button>
+  </div>
+  </div>
+</script>
+]]></template>
+    </sp_widget>
+</record_update>

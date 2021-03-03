@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="x_fru_cir_external_physical_security_incident" version="2" view="portal_view">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>number</element>
+            <list_id display_value="x_fru_cir_external_physical_security_incident" element="NULL" name="x_fru_cir_external_physical_security_incident" parent="NULL" relationship="NULL" sys_domain="global" view="f3910a0c1b6c2010af11caae6e4bcbe2">561b6dc3dbce1810d4a73533f3961947</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-21 08:44:53</sys_created_on>
+            <sys_id>9e1b6dc3dbce1810d4a73533f3961947</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-21 08:44:53</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>country</element>
+            <list_id display_value="x_fru_cir_external_physical_security_incident" element="NULL" name="x_fru_cir_external_physical_security_incident" parent="NULL" relationship="NULL" sys_domain="global" view="f3910a0c1b6c2010af11caae6e4bcbe2">561b6dc3dbce1810d4a73533f3961947</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-21 08:44:53</sys_created_on>
+            <sys_id>121b6dc3dbce1810d4a73533f3961948</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-21 08:44:53</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>category</element>
+            <list_id display_value="x_fru_cir_external_physical_security_incident" element="NULL" name="x_fru_cir_external_physical_security_incident" parent="NULL" relationship="NULL" sys_domain="global" view="f3910a0c1b6c2010af11caae6e4bcbe2">561b6dc3dbce1810d4a73533f3961947</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-21 08:44:53</sys_created_on>
+            <sys_id>921b6dc3dbce1810d4a73533f3961948</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-21 08:44:53</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>asset_type</element>
+            <list_id display_value="x_fru_cir_external_physical_security_incident" element="NULL" name="x_fru_cir_external_physical_security_incident" parent="NULL" relationship="NULL" sys_domain="global" view="f3910a0c1b6c2010af11caae6e4bcbe2">561b6dc3dbce1810d4a73533f3961947</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-21 08:44:53</sys_created_on>
+            <sys_id>161b6dc3dbce1810d4a73533f3961948</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-21 08:44:53</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>date_occurred</element>
+            <list_id display_value="x_fru_cir_external_physical_security_incident" element="NULL" name="x_fru_cir_external_physical_security_incident" parent="NULL" relationship="NULL" sys_domain="global" view="f3910a0c1b6c2010af11caae6e4bcbe2">561b6dc3dbce1810d4a73533f3961947</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-21 08:44:53</sys_created_on>
+            <sys_id>961b6dc3dbce1810d4a73533f3961948</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-21 08:44:53</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_created_on</element>
+            <list_id display_value="x_fru_cir_external_physical_security_incident" element="NULL" name="x_fru_cir_external_physical_security_incident" parent="NULL" relationship="NULL" sys_domain="global" view="f3910a0c1b6c2010af11caae6e4bcbe2">561b6dc3dbce1810d4a73533f3961947</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-21 08:44:53</sys_created_on>
+            <sys_id>1a1b6dc3dbce1810d4a73533f3961948</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-21 08:44:53</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_fru_cir_external_physical_security_incident</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-21 08:44:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>561b6dc3dbce1810d4a73533f3961947</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_external_physical_security_incident</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_list_x_fru_cir_external_physical_security_incident_portal_view</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-21 08:44:53</sys_updated_on>
+            <sys_user/>
+            <view display_value="portal_view" name="portal_view">f3910a0c1b6c2010af11caae6e4bcbe2</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

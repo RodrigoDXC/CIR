@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="age_group" table="x_fru_cir_person_impact" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>age_group</element>
+            <name>x_fru_cir_person_impact</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:02:38</sys_created_on>
+            <sys_id>1fb6ff74138a50500b8670a76144b0f2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>age_group</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_person_impact_age_group</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:02:38</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>age_group</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>0-14</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>10</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:02:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b47e2e65db55101003b3533fd3961943</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:02:45</sys_updated_on>
+            <value>0_14</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>age_group</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>15-24</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>20</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:02:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>aece2e65db55101003b3533fd3961955</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:02:56</sys_updated_on>
+            <value>15_24</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>age_group</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>25-34</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>30</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:03:04</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d5dee2a5db55101003b3533fd39619b1</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:03:12</sys_updated_on>
+            <value>25_34</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>age_group</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>35-44</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>40</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:03:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b4ee62a5db55101003b3533fd39619a8</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:03:32</sys_updated_on>
+            <value>35_44</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>age_group</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>45-54</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>50</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:03:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>25feae65db55101003b3533fd39619df</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:03:45</sys_updated_on>
+            <value>45_54</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>age_group</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>55-64</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>60</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:03:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>010f22a5db55101003b3533fd396194f</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:04:00</sys_updated_on>
+            <value>55_64</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>age_group</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>65-74</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>70</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:04:06</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a81f26a5db55101003b3533fd39619ff</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:04:58</sys_updated_on>
+            <value>65_74</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>age_group</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>75+</label>
+            <language>en</language>
+            <name>x_fru_cir_person_impact</name>
+            <sequence>80</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 15:05:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>082f2e65db55101003b3533fd3961949</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 15:05:53</sys_updated_on>
+            <value>75_plus</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

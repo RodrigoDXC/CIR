@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Allow write for records in x_fru_cir_response_plan_execution, for users with role x_fru_cir.situation_operator.</description>
+        <name>x_fru_cir_response_plan_execution</name>
+        <operation display_value="write">write</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-23 11:45:03</sys_created_on>
+        <sys_id>36559ca4db37445049959a82ca96197e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_fru_cir_response_plan_execution</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_security_acl_36559ca4db37445049959a82ca96197e</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-23 16:48:20</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_security_acl_36559ca4db37445049959a82ca96197e</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><condition/><description>Allow write for records in x_fru_cir_response_plan_execution, for users with role x_fru_cir.situation_operator.</description><name>x_fru_cir_response_plan_execution</name><operation display_value="write">write</operation><script/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by><sys_created_on>2020-03-23 11:45:03</sys_created_on><sys_id>36559ca4db37445049959a82ca96197e</sys_id><sys_mod_count>2</sys_mod_count><sys_name>x_fru_cir_response_plan_execution</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy>read</sys_policy><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_security_acl_36559ca4db37445049959a82ca96197e</sys_update_name><sys_updated_by>hugo.reis</sys_updated_by><sys_updated_on>2020-03-23 16:48:20</sys_updated_on><type display_value="record">record</type></sys_security_acl></record_update>]]></payload>
+        <payload_hash>-615500535</payload_hash>
+        <record_name>x_fru_cir_response_plan_execution</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-23 16:48:20</sys_created_on>
+        <sys_id>02fad1a01b3b4450df7e43f4bd4bcbdc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>171084b88b60000001</sys_recorded_at>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-23 16:48:20</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>c6fad1a0613b4450629be1bb5962f4db</update_guid>
+        <update_guid_history>c6fad1a0613b4450629be1bb5962f4db:-615500535,4287d4685c3744500c0c0207836082a6:-1356103995,d38590e46f37445011bc15e10a1eea95:-854493939</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-24 16:05:33</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>19ddf92096ce4f759a38cde25918a229</sys_id>
+        <sys_metadata>36559ca4db37445049959a82ca96197e</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_fru_cir_response_plan_execution</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="">65d774ab1b674050df7e43f4bd4bcbc7</sys_parent>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_19ddf92096ce4f759a38cde25918a229</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_36559ca4db37445049959a82ca96197e">02fad1a01b3b4450df7e43f4bd4bcbdc</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

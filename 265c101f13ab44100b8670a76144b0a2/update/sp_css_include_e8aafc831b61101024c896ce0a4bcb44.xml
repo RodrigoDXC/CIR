@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include">
+    <sp_css_include action="INSERT_OR_UPDATE">
+        <name>osha.css</name>
+        <source>local</source>
+        <sp_css display_value="osha.css">fcba70c31b61101024c896ce0a4bcb13</sp_css>
+        <sys_class_name>sp_css_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 08:42:33</sys_created_on>
+        <sys_id>e8aafc831b61101024c896ce0a4bcb44</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>osha.css</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_css_include_e8aafc831b61101024c896ce0a4bcb44</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-26 08:42:33</sys_updated_on>
+        <url/>
+    </sp_css_include>
+</record_update>

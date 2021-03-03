@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_fru_cir_vehicle_unavailability" label="Maintenance Unavailability" max_length="40" name="x_fru_cir_maintenance_unavailability" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Assigned mechanic" max_length="32" name="assigned_mechanic" reference="sys_user" reference_qual="javascript: new CIRFleetUtils().GetMechanics();" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true" label="Maintenance complete" max_length="40" name="maintenance_complete" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true,scale=2,serializer=com.glide.script.PriceXMLSerializer" label="Maintenance cost" max_length="20" name="maintenance_cost" type="price"/>
+        <element label="Maintenance description" max_length="4000" name="maintenance_description" type="string"/>
+        <element label="Parts used in maintenance" max_length="4000" name="parts_used" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type of maintenance" mandatory="true" max_length="40" name="type_of_maintenance" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Service" sequence="0" value="service"/>
+                <element inactive_on_update="false" label="ITV" sequence="1" value="itv"/>
+                <element inactive_on_update="false" label="Damage" sequence="2" value="damage"/>
+                <element inactive_on_update="false" label="Breakdown" sequence="3" value="breakdown"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="assigned_mechanic"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Location Group" max_length="40" name="x_fru_cir_location_group" sizeclass="1" type="collection">
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Buildings" max_length="4000" name="buildings" reference="x_fru_cir_security_location" reference_qual="type=1^active=true^EQ" reference_qual_condition="type=1^active=true^EQ" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true,text_index_translations=true" label="Countries" max_length="4000" name="countries" reference="x_fru_cir_security_address_value" reference_qual="type=country^language=en^EQ" reference_qual_condition="type=country^language=en^EQ" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="0" label="Group type" mandatory="true" max_length="40" name="group_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Building" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Virtual" sequence="1" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Name" mandatory="true" max_length="40" name="name" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="System locations" max_length="4000" name="system_locations" reference="x_fru_cir_security_virtual_location" type="glide_list"/>
+        <index name="index">
+            <element name="dimension"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="dynamic_contact" table="x_fru_cir_situation_message" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>dynamic_contact</element>
+            <name>x_fru_cir_situation_message</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-24 11:30:17</sys_created_on>
+            <sys_id>0018f69b1bc114107a7d624d6e4bcb8c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>dynamic_contact</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_situation_message_dynamic_contact</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-03-24 11:30:17</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dynamic_contact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Assignee of situation task</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_message</name>
+            <sequence/>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-26 10:46:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>df2759c31ba1101024c896ce0a4bcbaa</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-26 10:47:06</sys_updated_on>
+            <value>assignee_of_situation_task</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dynamic_contact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Escalation team</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_message</name>
+            <sequence/>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-24 11:31:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5bdbd5781bbb8450df7e43f4bd4bcbfe</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-26 10:47:22</sys_updated_on>
+            <value>escalation_team</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dynamic_contact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Member added</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_message</name>
+            <sequence/>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-24 11:30:43</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7ccb95781bbb8450df7e43f4bd4bcbb4</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-26 10:47:20</sys_updated_on>
+            <value>member_added</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dynamic_contact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>To on-call contact</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_message</name>
+            <sequence/>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-24 11:31:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8dfb9d381bbb8450df7e43f4bd4bcb25</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-10 10:41:25</sys_updated_on>
+            <value>on_call_contact</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dynamic_contact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Response plan coordinator</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_message</name>
+            <sequence/>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-26 10:45:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8f5695431ba1101024c896ce0a4bcb96</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-26 10:46:10</sys_updated_on>
+            <value>response_plan_coordinator</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dynamic_contact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Response plan team</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_message</name>
+            <sequence/>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-03-24 11:30:17</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>37bb19781bbb8450df7e43f4bd4bcb08</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-26 10:47:17</sys_updated_on>
+            <value>response_plan_team</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dynamic_contact</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Situation members</label>
+            <language>en</language>
+            <name>x_fru_cir_situation_message</name>
+            <sequence/>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-26 10:46:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>401711c31ba1101024c896ce0a4bcb7a</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-26 10:46:32</sys_updated_on>
+            <value>situation_members</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

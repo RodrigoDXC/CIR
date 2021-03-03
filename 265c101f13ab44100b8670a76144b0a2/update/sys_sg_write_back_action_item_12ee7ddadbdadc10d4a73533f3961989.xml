@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description>Action item to put ourself as the lead investigatr.</description>
+        <execution_script/>
+        <name>CIR - Assign lead investigator to me</name>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-31 12:31:42</sys_created_on>
+        <sys_id>12ee7ddadbdadc10d4a73533f3961989</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR - Assign lead investigator to me</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_12ee7ddadbdadc10d4a73533f3961989</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-31 12:32:42</sys_updated_on>
+        <table>x_fru_cir_investigation</table>
+        <template>assigned_to={{cirUserLoggedIn}}^EQ</template>
+        <type>update</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=12ee7ddadbdadc10d4a73533f3961989"/>
+</record_update>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="4d2caffddbde5050bf9ead8ed3961994" sys_domain="global" table="x_fru_cir_protection_agent_report" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>0</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>594d7894dba6d450bf9ead8ed3961980</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>service_order</element>
+            <position>1</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>d14d7894dba6d450bf9ead8ed3961981</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>service</element>
+            <position>2</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>594d7894dba6d450bf9ead8ed3961981</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bodyguard</element>
+            <position>3</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>dd4d7894dba6d450bf9ead8ed3961981</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>driver_report</element>
+            <position>4</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>554d7894dba6d450bf9ead8ed3961982</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>5</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>d94d7894dba6d450bf9ead8ed3961982</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>state</element>
+            <position>6</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>514d7894dba6d450bf9ead8ed3961983</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>service_date</element>
+            <position>7</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>d54d7894dba6d450bf9ead8ed3961983</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>start_time</element>
+            <position>8</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>5d4d7894dba6d450bf9ead8ed3961983</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>end_time</element>
+            <position>9</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>d14d7894dba6d450bf9ead8ed3961984</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>hours_worked</element>
+            <position>10</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>594d7894dba6d450bf9ead8ed3961984</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>11</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>dd4d7894dba6d450bf9ead8ed3961984</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>service_updates</element>
+            <position>12</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>554d7894dba6d450bf9ead8ed3961985</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>guard_inspection</element>
+            <position>13</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>d94d7894dba6d450bf9ead8ed3961985</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>training_conducted</element>
+            <position>14</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-06 12:52:44</sys_created_on>
+            <sys_id>514d7894dba6d450bf9ead8ed3961986</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_protection_agent_report" sys_domain="global" view="Default view">4d2caffddbde5050bf9ead8ed3961994</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-06 12:52:44</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_fru_cir_protection_agent_report</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-07-30 07:11:57</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4d2caffddbde5050bf9ead8ed3961994</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_protection_agent_report</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_section_4d2caffddbde5050bf9ead8ed3961994</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-07-30 07:11:57</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

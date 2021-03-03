@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Response Team" max_length="40" name="x_fru_cir_response_team" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Backed up by" max_length="32" name="backed_up_by" read_only="true" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Role" max_length="4000" name="job_title" reference="x_fru_cir_job_title" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Response execution ID" max_length="32" name="response_execution_id" read_only="true" reference="x_fru_cir_response_plan_execution" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Response" max_length="40" name="response_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Positive" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Negative" sequence="1" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Backup" value="1"/>
+                <element inactive_on_update="false" label="Primary" value="0"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Name" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="backed_up_by"/>
+        </index>
+        <index name="index2">
+            <element name="response_execution_id"/>
+        </index>
+        <index name="index3">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

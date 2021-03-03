@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Risk - Risk Hazard" max_length="40" name="x_fru_cir_m2m_risks_risk_hazards" sizeclass="1" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Risk" max_length="32" name="risk" reference="x_fru_cir_risk" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Risk Hazard" max_length="32" name="risk_hazard" reference="x_fru_cir_risk_hazard" type="reference"/>
+        <index name="index">
+            <element name="risk_hazard"/>
+        </index>
+        <index name="index2">
+            <element name="risk"/>
+        </index>
+    </element>
+</database>

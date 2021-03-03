@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="u_type" table="x_fru_cir_security_asset" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>u_type</element>
+            <name>x_fru_cir_security_asset</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-07-01 10:55:22</sys_created_on>
+            <sys_id>c418930f134694500b8670a76144b0c6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>u_type</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_security_asset_u_type</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-07-01 10:55:22</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Family</label>
+            <language>en</language>
+            <name>x_fru_cir_security_asset</name>
+            <sequence>1</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-07-01 10:55:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bb190b28db795010bf9ead8ed39619de</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-07-01 10:55:22</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Installation</label>
+            <language>en</language>
+            <name>x_fru_cir_security_asset</name>
+            <sequence>2</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-07-01 10:55:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5539c728db795010bf9ead8ed39619b7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-07-01 10:55:33</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Subinstallation</label>
+            <language>en</language>
+            <name>x_fru_cir_security_asset</name>
+            <sequence>3</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-07-01 10:55:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0249c328db795010bf9ead8ed39619ca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-07-01 10:55:52</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Type of Asset</label>
+            <language>en</language>
+            <name>x_fru_cir_security_asset</name>
+            <sequence>4</sequence>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-07-01 10:56:02</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2c590fe4db795010bf9ead8ed39619c6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-07-01 10:56:02</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

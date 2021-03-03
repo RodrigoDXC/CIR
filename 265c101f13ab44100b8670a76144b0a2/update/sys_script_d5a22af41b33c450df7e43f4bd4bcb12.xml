@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_fru_cir_situation</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_fru_cir_situation">locationsVALCHANGES^EQ<item endquery="false" field="locations" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>cir_get_people_affected</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    var utils = new CIRSituationUtils();
+    var peopleAffected = 0;
+    var peopleAffectedBuildings = 0;
+    var peopleAffectedVirtualLocations = 0;
+    var buildComp = [];
+    var virtComp = [];
+
+    // if it is not empty, it will convert the value into an array and it will concat with the main arrain
+    if (current.getValue('buildings')) {
+        buildComp = buildComp.concat(current.getValue('buildings').split(','));
+    }
+
+    // if it is not empty, it will convert the value into an array and it will concat with the main arrain
+    if (current.getValue('virtual_locations')) {
+        virtComp = virtComp.concat(current.getValue('virtual_locations').split(','));
+    }
+
+    if (current.getValue('location_groups')) {
+        var grLocGroups = new GlideRecord(CIRConstants.Tables.LOCATION_GROUP);
+        grLocGroups.addQuery('sys_id', 'IN', current.getValue('location_groups'));
+        grLocGroups.query();
+        while (grLocGroups.next()) {
+            if (grLocGroups.group_type.toString() == '1') {
+                if (grLocGroups.getValue('system_locations')) {
+                    var locGroupsVirt = grLocGroups.getValue('system_locations').split(',');
+                    for (var x = 0; x < locGroupsVirt.length; x++) {
+                        if (virtComp.indexOf(locGroupsVirt[x]) == -1) {
+                            virtComp.push(locGroupsVirt[x]);
+                        }
+                    }
+                }
+            } else {
+                if (grLocGroups.getValue('buildings')) {
+                    var locGroupBuilds = grLocGroups.getValue('buildings').split(',');
+                    for (var a = 0; a < locGroupBuilds.length; a++) {
+                        if (buildComp.indexOf(locGroupBuilds[a]) == -1) {
+                            buildComp.push(locGroupBuilds[a]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (var i = 0; i < buildComp.length; i++) {
+        peopleAffectedBuildings += parseInt(getNumbUsersByLoc(buildComp[i]));
+    }
+    for (var o = 0; o < virtComp.length; o++) {
+        peopleAffectedVirtualLocations += utils.GetNumbUsersbyVirtLoc(virtComp[o]);
+    }
+    var peopleAff = peopleAffectedBuildings + peopleAffectedVirtualLocations;
+    current.people_affected = peopleAff;
+})(current, previous);
+
+
+function getNumbUsersByLoc(locId) {
+    var locationId;
+    var total = 0;
+    var grLoc = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+    grLoc.addQuery('sys_id', locId);
+    grLoc.query();
+
+    if (grLoc.next()) {
+        locationId = grLoc.location.toString();
+    }
+
+    if (locationId) {
+        var grUserRec = new GlideAggregate(CIRConstants.Tables.USER);
+        grUserRec.addQuery('location', locationId);
+        grUserRec.addQuery('active', true);
+        grUserRec.addAggregate('COUNT');
+        grUserRec.query();
+        if (grUserRec.next()) {
+            total = grUserRec.getAggregate('COUNT');
+        }
+    }
+    return total;
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-24 16:39:58</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d5a22af41b33c450df7e43f4bd4bcb12</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>cir_get_people_affected</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_d5a22af41b33c450df7e43f4bd4bcb12</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-10 13:55:00</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=d5a22af41b33c450df7e43f4bd4bcb12"/>
+</record_update>

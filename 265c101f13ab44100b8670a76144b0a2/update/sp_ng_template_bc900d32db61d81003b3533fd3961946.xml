@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>cirTreeDropdownTemplate</id>
+        <sp_widget display_value="CIR CIRI Header Menu">3f8f7432db61d81003b3533fd3961932</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 14:29:56</sys_created_on>
+        <sys_id>bc900d32db61d81003b3533fd3961946</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cirTreeDropdownTemplate</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_ng_template_bc900d32db61d81003b3533fd3961946</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-25 14:29:56</sys_updated_on>
+        <template><![CDATA[<a ng-if="mi.type == 'link'" title="{{mi.title}}" target="{{mi.target}}" href="{{mi.href}}">
+  {{mi.title | limitTo:60}}
+</a>
+<a ng-if="mi.type == 'record' && !mi.__page" title="{{mi.short_description}}" href="?id=ticket&table={{mi.__table}}&sys_id={{mi.sys_id}}">
+  <span>{{mi.short_description | limitTo:60}}</span>
+  <span class="block color-primary text-muted">
+    <span class="block" style="float: right">
+      <sn-time-ago timestamp="mi.sys_updated_on" />
+    </span>
+    {{mi.number}}
+  </span>
+</a>
+<a ng-if="mi.type == 'record' && mi.__page" title="{{mi.short_description}}" href="?id={{mi.__page}}&table={{mi.__table}}&sys_id={{mi.sys_id}}">
+  <span>{{mi.short_description | limitTo:60}}</span>
+  <span class="block color-primary text-muted">
+    <span class="block" style="float: right">
+      <sn-time-ago timestamp="mi.sys_updated_on" />
+    </span>
+    {{mi.number}}
+  </span>
+</a>
+<a ng-if="mi.type == 'request'" title="{{mi.short_description}}" href="?id=sc_request&table={{mi.__table}}&sys_id={{mi.sys_id}}">
+  <span>{{mi.short_description | limitTo:60}}</span>
+  <span class="block color-primary text-muted">
+    <span class="block" style="float: right">
+      <sn-time-ago timestamp="mi.sys_updated_on" />
+    </span>
+    {{mi.number}}
+  </span>
+</a>
+<a ng-if="mi.type == 'approval'" title="{{mi.short_description}}" href="?id=approval&table={{mi.__table}}&sys_id={{mi.sys_id}}">
+  <span ng-if="mi.short_description">{{mi.short_description | limitTo:60}}</span>
+  <span class="block color-primary text-muted">
+    <span class="block" style="float: right">
+      <sn-time-ago timestamp="mi.sys_updated_on" />
+    </span>
+    {{mi.number}}
+  </span>
+</a>
+<a ng-if="mi.type == 'menu' && mi.items.length" title="{{mi.title}}" href="javascript:void(0)" class="menu_trigger right-caret">
+  {{mi.title | limitTo:60}}
+</a>
+
+<hr ng-if="mi.type == 'separator'" class="separator"> 
+<cir-menu-tree ng-if="mi.type == 'menu' && mi.items.length" items="mi.items" />]]></template>
+    </sp_ng_template>
+</record_update>

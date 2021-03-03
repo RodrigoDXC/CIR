@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>standard</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+
+	c.toggleMenu = function () {
+		if($('.navbar-toggle').attr('aria-expanded') == 'true') 
+			$('.navbar-toggle').click();
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>* {&#13;
+	font-size: $headers-font-size;&#13;
+}&#13;
+&#13;
+.navbar-brand .ng-scope {&#13;
+	font-size: 30px;&#13;
+}&#13;
+&#13;
+.header-loader {&#13;
+	float: left;&#13;
+  	width: 24px;&#13;
+  	position: relative;&#13;
+  	top: 24px;&#13;
+}&#13;
+&#13;
+.cart-dropdown, .wishlist-menu, .gtd-dropdown-container .empty-dropdown {&#13;
+  width: 350px;&#13;
+  padding: 0;&#13;
+  z-index: 1000;&#13;
+  border-top-left-radius: 4px !important;&#13;
+  border-top-right-radius: 4px !important;&#13;
+&#13;
+  ul {&#13;
+    max-height: 300px;&#13;
+    overflow: auto;&#13;
+  }&#13;
+&#13;
+  .subtotal {&#13;
+    display: block;&#13;
+  }&#13;
+&#13;
+  .item-image {&#13;
+    padding: 0;&#13;
+    margin: 0;&#13;
+    text-align: center;&#13;
+    max-width:100%;&#13;
+    height:auto;&#13;
+  }&#13;
+  label, p {&#13;
+    padding: 0;&#13;
+    margin: 0;&#13;
+  }&#13;
+  .media {&#13;
+    padding: 0;&#13;
+    margin: 0;&#13;
+  }&#13;
+  .media-left &gt; a {&#13;
+    display: block;&#13;
+    width: 48px;&#13;
+    max-width: 48px;&#13;
+  }&#13;
+  .media-body {&#13;
+    label {&#13;
+      font-weight: bold;&#13;
+    }&#13;
+  }&#13;
+  li.media {&#13;
+    border-top: 1px solid #cccccc;&#13;
+    padding: 1rem;&#13;
+  }&#13;
+  .panel {&#13;
+    margin: 0;&#13;
+  }&#13;
+  .panel .panel-body {&#13;
+    padding: 0;&#13;
+  }&#13;
+  .btn-clear {&#13;
+		color: #333;&#13;
+    background-color: #fff;&#13;
+  }&#13;
+  p.quantity-price {&#13;
+    padding-top: 0.5rem;&#13;
+    span {&#13;
+      color: $text-muted;&#13;
+      padding-right: 0.5rem;&#13;
+    }&#13;
+  }&#13;
+  .align-right {&#13;
+  	text-align: right;&#13;
+  }&#13;
+}&#13;
+&#13;
+.item-added-tooltip, wishlist-item-added-tooltip {&#13;
+  width: 184px;&#13;
+  font-size: 14px;&#13;
+}&#13;
+&#13;
+.gtd-dropdown-container {&#13;
+  .empty-tour-content{&#13;
+    text-align: center;&#13;
+    margin:40px 20px;&#13;
+  }&#13;
+  .dropdown-menu li {&#13;
+    a {&#13;
+      cursor: pointer;&#13;
+    }&#13;
+    min-width: 20em;&#13;
+  }&#13;
+  .label-as-badge{&#13;
+    width: 12px;&#13;
+    height: 12px;&#13;
+    display: inline-block;&#13;
+    padding: 0px;&#13;
+    padding-top: 2px;&#13;
+  }&#13;
+  .badge-container {&#13;
+    display: inline-block;&#13;
+    width: 12px;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media  (max-width: 845px) and (min-width: 768px)  {&#13;
+	.header-menu-item ul {&#13;
+		right: auto;&#13;
+		left: auto;&#13;
+	}&#13;
+}&#13;
+&#13;
+.link {&#13;
+	color: $menu-item; &#13;
+  	white-space: nowrap;&#13;
+}&#13;
+&#13;
+.link:hover { &#13;
+	color: $menu-item-hover; &#13;
+  	&#13;
+}&#13;
+&#13;
+&#13;
+</css>
+        <data_table>sp_instance_menu</data_table>
+        <demo_data/>
+        <description>Widget containing the menu within the header</description>
+        <docs/>
+        <field_list>title</field_list>
+        <has_preview>false</has_preview>
+        <id>cir-header-menu</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>CIR Header Menu</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.cir_base</roles>
+        <script><![CDATA[(function(){
+	// build menus
+	var menu_id = $sp.getValue('sys_id'); // instance sys_id
+	data.menu = {};
+	data.menu.items = $sp.getMenuItems(menu_id);
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 10:31:03</sys_created_on>
+        <sys_id>cbc75e4d1bb30850df7e43f4bd4bcb4b</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>CIR Header Menu</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_cbc75e4d1bb30850df7e43f4bd4bcb4b</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 09:36:49</sys_updated_on>
+        <template><![CDATA[<ul class="nav navbar-nav"> 
+  <div class="header-loader" ng-show="loadingIndicator"> 
+    <div class="hidden-xs sp-loading-indicator la-sm"> 
+      <div></div> 
+      <div></div> 
+      <div></div>
+    </div> 
+  </div>
+    <li ng-repeat="item in data.menu.items">
+      <a href="{{::item.url}}" target="{{::item.url_target}}">
+        <span ng-bind-html="item.label" class="ng-binding link">{{::item.label}}</span> 
+      </a>
+  </li>
+</ul>]]></template>
+    </sp_widget>
+</record_update>

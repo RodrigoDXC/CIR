@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_wizard_answer">
+    <sys_wizard_answer action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <answer>Hazard: situations where an incident could occur due to a hazard</answer>
+        <button_label/>
+        <dependent_value/>
+        <element/>
+        <name>Hazard</name>
+        <next_question/>
+        <order>300</order>
+        <payload_name/>
+        <question display_value="CIR Case" name="CIR Case">fbb0a7d2db25981003b3533fd3961982</question>
+        <roles/>
+        <script/>
+        <sys_class_name>sys_wizard_answer</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-24 12:55:09</sys_created_on>
+        <sys_id>8561ebd2db25981003b3533fd3961922</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Hazard</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_wizard_answer_8561ebd2db25981003b3533fd3961922</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-24 12:57:10</sys_updated_on>
+        <table/>
+        <target_url>x_fru_cir_hazard.do?sys_id=-1</target_url>
+        <type>1</type>
+    </sys_wizard_answer>
+</record_update>

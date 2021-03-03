@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="email_client=true" audit="true" extends="task" label="Product Recall" max_length="40" name="x_fru_cir_product_recall" sizeclass="1" type="collection">
+        <element label="Batch Number" max_length="100" name="batch_number" type="string"/>
+        <element label="emailSendTo" max_length="50000" name="emailsendto" type="string"/>
+        <element label="Expiration Date of Product" max_length="40" name="expiration_date_of_product" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Issuer" max_length="40" name="issuer" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Authorities" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="Internal" sequence="20" value="2"/>
+                <element inactive_on_update="false" label="Manufacturer" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="Supplier" sequence="40" value="4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Private Brand" max_length="40" name="private_brand" type="boolean"/>
+        <element label="Product BarCode" max_length="100" name="product_barcode" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Product Category" mandatory="true" max_length="40" name="product_category" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Food" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="Non-Food" sequence="20" value="2"/>
+            </choice>
+        </element>
+        <element label="Product Name" mandatory="true" max_length="100" name="product_name" type="string"/>
+        <element label="Reason for Recall" mandatory="true" max_length="4000" name="reason_for_recall" type="string"/>
+        <element label="Supplier" mandatory="true" max_length="150" name="supplier" type="string"/>
+    </element>
+</database>

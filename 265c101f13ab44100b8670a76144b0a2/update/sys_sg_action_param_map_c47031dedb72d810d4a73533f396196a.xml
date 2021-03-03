@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_action_param_map">
+    <sys_sg_action_param_map action="INSERT_OR_UPDATE">
+        <button display_value="Edit injury/illness">b10d215edb72d810d4a73533f39619fb</button>
+        <item_parameter display_value="followUpTreatment">4c7031dedb72d810d4a73533f3961966</item_parameter>
+        <sys_class_name>sys_sg_action_param_map</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-25 07:59:51</sys_created_on>
+        <sys_id>c47031dedb72d810d4a73533f396196a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>4c7031dedb72d810d4a73533f3961966</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_action_param_map_c47031dedb72d810d4a73533f396196a</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-25 07:59:51</sys_updated_on>
+        <ui_parameter display_value="Follow-up treatment">28cead1edb72d810d4a73533f39619b8</ui_parameter>
+    </sys_sg_action_param_map>
+</record_update>

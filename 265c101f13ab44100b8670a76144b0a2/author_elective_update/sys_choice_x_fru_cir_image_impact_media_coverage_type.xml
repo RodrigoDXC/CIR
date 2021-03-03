@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="media_coverage_type" table="x_fru_cir_image_impact" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>media_coverage_type</element>
+            <name>x_fru_cir_image_impact</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:19:42</sys_created_on>
+            <sys_id>e6b6bf74138a50500b8670a76144b0a3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>media_coverage_type</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_image_impact_media_coverage_type</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:19:42</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>media_coverage_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Print</label>
+            <language>en</language>
+            <name>x_fru_cir_image_impact</name>
+            <sequence>10</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:19:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4a4492a5db15101003b3533fd396191c</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:19:48</sys_updated_on>
+            <value>print</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>media_coverage_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Radio</label>
+            <language>en</language>
+            <name>x_fru_cir_image_impact</name>
+            <sequence>20</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:19:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>32379ae5db15101003b3533fd39619d2</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:19:57</sys_updated_on>
+            <value>radio</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>media_coverage_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Television</label>
+            <language>en</language>
+            <name>x_fru_cir_image_impact</name>
+            <sequence>30</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:20:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0d471ee5db15101003b3533fd39619d9</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:20:12</sys_updated_on>
+            <value>television</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>media_coverage_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Social Media</label>
+            <language>en</language>
+            <name>x_fru_cir_image_impact</name>
+            <sequence>40</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:20:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>17475229db15101003b3533fd396190d</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:20:24</sys_updated_on>
+            <value>social_media</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>media_coverage_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Word of Mouth</label>
+            <language>en</language>
+            <name>x_fru_cir_image_impact</name>
+            <sequence>50</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:20:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ef575229db15101003b3533fd3961919</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:20:47</sys_updated_on>
+            <value>word_of_mouth</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>media_coverage_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>News site/Blog</label>
+            <language>en</language>
+            <name>x_fru_cir_image_impact</name>
+            <sequence>60</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-09 13:20:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f367dee5db15101003b3533fd3961968</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-09 13:21:06</sys_updated_on>
+            <value>news_site_blog</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

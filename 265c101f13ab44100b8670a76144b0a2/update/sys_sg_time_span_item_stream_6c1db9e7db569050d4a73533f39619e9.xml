@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_time_span_item_stream">
+    <sys_sg_time_span_item_stream action="INSERT_OR_UPDATE">
+        <data_item display_value="CIR - My active actions">f021191edb5adc10d4a73533f396196b</data_item>
+        <end_date_field>due_date</end_date_field>
+        <interleaved_field>due_date</interleaved_field>
+        <name>My actions calendar</name>
+        <start_date_field>due_date</start_date_field>
+        <sys_class_name>sys_sg_time_span_item_stream</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-04 09:36:04</sys_created_on>
+        <sys_id>6c1db9e7db569050d4a73533f39619e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My actions calendar</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_time_span_item_stream_6c1db9e7db569050d4a73533f39619e9</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-04 09:36:04</sys_updated_on>
+        <table>x_fru_cir_action</table>
+    </sys_sg_time_span_item_stream>
+</record_update>

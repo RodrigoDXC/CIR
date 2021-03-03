@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_push_notif_msg_content">
+    <sys_push_notif_msg_content action="INSERT_OR_UPDATE">
+        <name>CIR - Investigation closed</name>
+        <push_app display_value="ServiceNow Mobile Application">05ed2fb177002300258da2e2c81061c2</push_app>
+        <script><![CDATA[(function buildJSON(/*GlideRecord*/ current, /*String*/ message, /*Object*/ attributes) {
+    var layoutFieldGenerator = new global.NotificationLayoutFieldGenerator();
+    var identifier = '';
+	var description = '';
+    var status = layoutFieldGenerator.layoutField(current.getTableName(), current.sys_id, "state");
+    
+	var deepLinkGenerator = new global.MobileDeepLinkGenerator("Agent");
+	var link = deepLinkGenerator.getFormScreenLink("b0c6a11edb9adc10d4a73533f396192c", current.getTableName(), current.getValue("sys_id"));
+	
+	var json = {};
+	
+	json = {
+        "aps" : {
+            "sound" : "default"
+        },
+		"Link": link,
+        "Layout" : {
+            "Status": status,
+            "Identifier" : identifier,
+            "Description" : description
+        }
+    };
+    
+    return json;
+    
+})(current, message, attributes);]]></script>
+        <sys_class_name>sys_push_notif_msg_content</sys_class_name>
+        <sys_created_by>antonio.carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-06 08:10:07</sys_created_on>
+        <sys_id>499c774cdbe2d450bf9ead8ed396199d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR - Investigation closed</sys_name>
+        <sys_package display_value="Health, Safety, and Environmental" source="x_fru_hse">7594c93613adb6001f8c7b1a6144b033</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_push_notif_msg_content_499c774cdbe2d450bf9ead8ed396199d</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-06 08:24:01</sys_updated_on>
+    </sys_push_notif_msg_content>
+</record_update>

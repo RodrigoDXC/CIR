@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_parameter">
+    <sys_sg_item_parameter action="INSERT_OR_UPDATE">
+        <default_value/>
+        <name>cirAssignmentGroup</name>
+        <parent>274c9a5edb1edc10d4a73533f39619d8</parent>
+        <parent_table>sys_sg_write_back_action_item</parent_table>
+        <sys_class_name>sys_sg_item_parameter</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-31 14:41:13</sys_created_on>
+        <sys_id>5d8c1e5edb1edc10d4a73533f3961924</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cirAssignmentGroup</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_item_parameter_5d8c1e5edb1edc10d4a73533f3961924</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-31 14:41:13</sys_updated_on>
+        <type>string</type>
+    </sys_sg_item_parameter>
+</record_update>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtModel</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Override Script include for the Assessment functionalities.</description>
+        <name>CIRAssmtModel</name>
+        <script><![CDATA[var CIRAssmtModel = Class.create();
+CIRAssmtModel.prototype = Object.extendsObject(CIRAssmtModelFP, {
+    initialize: function() {
+        CIRAssmtModelFP.prototype.initialize.call(this);
+    },
+
+    type: 'CIRAssmtModel'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:02:51</sys_created_on>
+        <sys_id>3ef0db89db8e1410d4a73533f396195c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIRAssmtModel</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_3ef0db89db8e1410d4a73533f396195c</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-15 11:02:51</sys_updated_on>
+    </sys_script_include>
+</record_update>

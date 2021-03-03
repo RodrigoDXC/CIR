@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="product_disposition" table="x_fru_cir_action" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>product_disposition</element>
+            <name>x_fru_cir_action</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:51:33</sys_created_on>
+            <sys_id>3779b88b138b90100b8670a76144b0cb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>product_disposition</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_action_product_disposition</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:51:33</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>product_disposition</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Quarantined and Labeled</label>
+            <language>en</language>
+            <name>x_fru_cir_action</name>
+            <sequence>10</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:52:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>556cbee1db83d050bf9ead8ed3961965</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:52:22</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>product_disposition</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Thrown away</label>
+            <language>en</language>
+            <name>x_fru_cir_action</name>
+            <sequence>20</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:51:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>aa5c3225db83d050bf9ead8ed3961995</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:52:07</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>product_disposition</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Returned</label>
+            <language>en</language>
+            <name>x_fru_cir_action</name>
+            <sequence>30</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:51:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8b4c36e1db83d050bf9ead8ed39619f9</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:51:50</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>product_disposition</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other</label>
+            <language>en</language>
+            <name>x_fru_cir_action</name>
+            <sequence>40</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:51:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>714cbae1db83d050bf9ead8ed3961947</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:51:42</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

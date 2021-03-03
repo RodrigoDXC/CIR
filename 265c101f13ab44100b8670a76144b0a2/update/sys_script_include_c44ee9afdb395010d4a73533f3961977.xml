@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRKpiPeriodFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRKpiPeriodFP</name>
+        <script><![CDATA[var CIRKpiPeriodFP = function() {
+    /**
+     * Wrap the text of the Field script in a try-catch to prevent any errors.
+     *
+     * @param {String} script - String containing the text for the script field
+     * @return {String} - String with the script wraped inside the try-catch
+     */
+    var wrapScriptInTryCatch = function(script) {
+        var prefix = 'try{';
+        var suffix =
+            "}catch(err){gs.info('CIRKpiPeriodFP:  There was an error executing the Period script: '+err);}";
+        return prefix + script + suffix;
+    };
+
+    /**
+     * Function to evaluate the scfipt returning the start date.
+     *
+     * @param {GlideRecord} grPeriod - GlideRecord of the KPI Period
+     * @return {GlideDate} - GlideDate object containing the start date for the period
+     */
+    var getEvaluatedStartDate = function(grPeriod) {
+        var gsEvaluator = new GlideScopedEvaluator();
+        gsEvaluator.putVariable('startDate', new GlideDate());
+        return gsEvaluator.evaluateScript(grPeriod, 'start_date_calculation', null);
+    };
+
+    /**
+     * Function to build the Object for each period.
+     *
+     * @param {GlideRecord} grPeriod - GlideRecord of the KPI Period
+     * @return {Object} - JSON object with the period SysID, Name and Start Date
+     */
+    var buildPeriodArrayFromGlideRecord = function(grPeriod) {
+        grPeriod.start_date_calculation = wrapScriptInTryCatch(grPeriod.getValue('start_date_calculation'));
+        var evaluatedStartDate = getEvaluatedStartDate(grPeriod);
+        var startDate = new GlideDate();
+        if(!gs.nil(evaluatedStartDate) && evaluatedStartDate !== 'undefined') {
+            evaluatedStartDate += '';
+            startDate.setDisplayValue(evaluatedStartDate);
+        } else {
+            throw new Error('Evaluated start date for period `' + grPeriod.getValue('name') +
+                '` is empty or undefined.');
+        }
+        return {
+            periodSysId: grPeriod.getValue('sys_id'),
+            periodName: grPeriod.getValue('name'),
+            startDate: startDate
+        };
+    };
+
+    /**
+     * Function to get all the active periods data.
+     *
+     * @return {Array} - Array with all the periods
+     */
+    var getPeriods = function() {
+        var arrPeriods = [];
+
+        var grPeriod = new GlideRecord(CIRConstants.Tables.KPI_PERIOD);
+        grPeriod.addActiveQuery();
+        grPeriod.query();
+        while(grPeriod.next()) {
+            arrPeriods.push(buildPeriodArrayFromGlideRecord(grPeriod));
+        }
+        return arrPeriods;
+    };
+
+    /**
+     * Function to get the sum of all the working hours for a specific location or all the locations
+     *
+     * @param {GlideDate} startDate - GlideDate for the start date
+     * @param {GlideDate} endDate - GlideDate for the end date
+     * @param {String} locationSysId - SysID of the location
+     * @return {int} - Sum of the working hours
+     */
+    var getWorkingHoursForPeriod = function(startDate, endDate, locationSysId) {
+        var workingHours = 0;
+
+        var aggWorkingHours = new GlideAggregate(CIRConstants.Tables.KPI_WORKING_HOURS);
+        aggWorkingHours.addQuery('start_date', '>=', startDate.getValue());
+        aggWorkingHours.addQuery('start_date', '<', endDate.getValue());
+
+        if(locationSysId !== 'Global') {
+            aggWorkingHours.addQuery('location', locationSysId);
+        }
+        aggWorkingHours.addAggregate('SUM', 'working_hours');
+        aggWorkingHours.setGroup(false);
+        aggWorkingHours.query();
+
+        CIRGlideUtilsFP.ValidateSingleRowReturned(aggWorkingHours);
+        if(aggWorkingHours.next()) {
+            workingHours = aggWorkingHours.getAggregate('SUM', 'working_hours') !== '' ? aggWorkingHours
+                .getAggregate('SUM', 'working_hours') : 0;
+        }
+        return workingHours;
+    };
+
+    return {
+        GetPeriods: getPeriods,
+        GetWorkingHoursForPeriod: getWorkingHoursForPeriod
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 12:00:52</sys_created_on>
+        <sys_id>c44ee9afdb395010d4a73533f3961977</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIRKpiPeriodFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_c44ee9afdb395010d4a73533f3961977</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:48:20</sys_updated_on>
+    </sys_script_include>
+</record_update>

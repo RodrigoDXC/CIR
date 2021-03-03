@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_action_role">
+    <sys_ui_action_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_ui_action_role</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-07 12:20:18</sys_created_on>
+        <sys_id>e64fb5e4db2a1450d4a73533f396194c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Add link to body.x_fru_cir.situation_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_ui_action display_value="Add link to body">bcfc892cdb25941003b3533fd39619b5</sys_ui_action>
+        <sys_update_name>sys_ui_action_role_e64fb5e4db2a1450d4a73533f396194c</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-07 12:20:18</sys_updated_on>
+        <sys_user_role display_value="x_fru_cir.situation_manager" name="x_fru_cir.situation_manager">1a30dc671ba34050df7e43f4bd4bcb17</sys_user_role>
+    </sys_ui_action_role>
+</record_update>

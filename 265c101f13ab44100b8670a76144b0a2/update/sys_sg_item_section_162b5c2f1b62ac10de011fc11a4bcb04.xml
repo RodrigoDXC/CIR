@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_section">
+    <sys_sg_item_section action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data_item/>
+        <destination_screen display_value="Situation Rooms">80aed60ddbb3085049959a82ca9619c6</destination_screen>
+        <display_title>true</display_title>
+        <hide_header>false</hide_header>
+        <hide_section_if_empty>false</hide_section_if_empty>
+        <max_items_display_count>15</max_items_display_count>
+        <orientation>horizontal</orientation>
+        <required_roles/>
+        <sys_class_name>sys_sg_item_section</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-03-03 08:55:08</sys_created_on>
+        <sys_id>162b5c2f1b62ac10de011fc11a4bcb04</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Ongoing Crisis Situations</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_item_section_162b5c2f1b62ac10de011fc11a4bcb04</sys_update_name>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-03-03 08:55:08</sys_updated_on>
+        <table/>
+        <title>Ongoing Crisis Situations</title>
+        <visible_condition/>
+    </sys_sg_item_section>
+</record_update>

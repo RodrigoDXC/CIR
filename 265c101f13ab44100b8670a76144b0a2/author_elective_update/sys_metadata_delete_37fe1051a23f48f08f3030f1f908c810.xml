@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function($uibModal, $scope, spUtil, $timeout, $window) {
+    var c = this;
+    var creatingRespRoom = false;
+    c.responseRoomUrl = '/cir?id=cir_response_plan_room&table=';
+
+    $scope.location = {
+        value: '',
+        name: 'location'
+    };
+
+    $scope.response_plan = {
+        value: '',
+        name: 'response_plan'
+    };
+
+    c.query_response_plans = 'none';
+    c.query_locations = "sys_idIN" + c.data.parent_locations;
+    c.data.location = '';
+    c.resp_plan = '';
+
+    c.addResponsePlan = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'addResponsePlan',
+            scope: $scope
+        });
+    };
+
+    c.closeModal = function() {
+        c.locations = '';
+        c.resp_plan = '';
+        $scope.location.value = '';
+        $scope.response_plan.value = '';
+        c.modalInstance.close();
+    };
+
+    // execution record watcher
+    spUtil.recordWatch($scope, c.data.table, c.data.parent_field + "=" + c.data.parent, function(name, data) {
+        c.server.update().then(function(response) {});
+    });
+
+    // crisis record watcher
+    spUtil.recordWatch($scope, c.data.tables.situation, "sys_id=" + c.data.parent, function(name, data) {
+        c.server.update().then(function(response) {});
+    });
+
+
+    $scope.$on("field.change", function(evt, parms) {
+        if (parms.field.name === 'location') {
+            c.locations = parms.newValue;
+            c.query_response_plans = parms.newValue != '' ? 'locationsLIKE' + parms.newValue : 'none';
+        }
+
+        if (parms.field.name === 'response_plan') {
+            c.resp_plan = parms.newValue;
+        }
+    });
+
+    c.createRecord = function() {
+        if (c.locations != '' && c.resp_plan != '') {
+
+            var obj = {};
+            obj.create_plan = true;
+            obj.location = c.locations;
+            obj.response_plan = c.resp_plan;
+
+            c.closeModal();
+            c.server.get(obj).then(function(result) {
+                $scope.location.value = '';
+                $scope.response_plan.value = '';
+                c.data.create_plan = false;
+                var hosturl = 'https://' + $window.location.host;
+                $window.location.href = hosturl + c.responseRoomUrl + c.data.table + '&sys_id=' + result.data.newsys_id;
+            });
+        } else {
+            alert(c.data.empty_mandatory_fields);
+        }
+    };
+
+    c.updateQuery = function() {
+        if (c.data.all_locations == true) {
+            return c.data.locationByCountryQuery;
+        } else {
+            return "sys_idIN" + c.data.parent_locations;
+        }
+    };
+
+    c.redirectTo = function(table, sys_id) {
+        var hosturl = 'https://' + $window.location.host;
+        $window.location.href = hosturl + c.responseRoomUrl + table + '&sys_id=' + sys_id;
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.action-btn {&#13;
+    color: #2e2e2e;&#13;
+    display: block;&#13;
+  	border-radius: 3px;&#13;
+  	border: solid 1px #cccccc;&#13;
+  	background-color: #ffffff;&#13;
+}&#13;
+&#13;
+.header-title{&#13;
+ 	vertical-align: -webkit-baseline-middle;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.06;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+}&#13;
+&#13;
+table {&#13;
+  border-collapse: collapse;&#13;
+  width: 100%;&#13;
+}&#13;
+&#13;
+th, td {&#13;
+  text-align: left;&#13;
+  padding: 8px;&#13;
+}&#13;
+&#13;
+th {&#13;
+	border: 1px solid #ddd;&#13;
+  color: $brand-primary;&#13;
+  border-top: 0;&#13;
+  position: sticky;&#13;
+  top: 0;&#13;
+  background: white;&#13;
+  border-collapse: collapse;&#13;
+}&#13;
+&#13;
+table {&#13;
+	border: 0;&#13;
+}&#13;
+&#13;
+tr {&#13;
+	border-bottom: solid 1px #dee5e7;&#13;
+}&#13;
+&#13;
+td {&#13;
+  height: 56px;&#13;
+  &#13;
+}&#13;
+th:first-child {&#13;
+	border-left: 0;&#13;
+}&#13;
+&#13;
+th:last-child {&#13;
+	border-right: 0;&#13;
+}&#13;
+&#13;
+&#13;
+tr:first-child {&#13;
+	border: 0;&#13;
+}&#13;
+&#13;
+tr:hover {&#13;
+ background-color: $list-hover-color !important;;&#13;
+}&#13;
+&#13;
+tr:last-child {&#13;
+	 border-collapse: collapse;&#13;
+}&#13;
+&#13;
+tr:nth-child(even) {background-color: #f9f9f9;}&#13;
+&#13;
+.panel-body{&#13;
+	padding:0;&#13;
+  overflow-y:auto;&#13;
+  height:593px;&#13;
+}&#13;
+&#13;
+.required {&#13;
+    color: red;&#13;
+}&#13;
+&#13;
+&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir_response_plans</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Response Plans</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.cir_base</roles>
+        <script><![CDATA[(function() {
+	data.table = options.table;
+	data.parent = $sp.getParameter('sys_id');
+	data.parent_field = options.parent_field;
+
+	//tables
+	data.tables = {};
+	data.tables.respPlanExec = CIRConstants.Tables.RESP_PLAN_EXEC;
+	data.tables.situation = CIRConstants.Tables.SITUATION;
+	data.tables.location = CIRConstants.Tables.LOCATION;
+	data.tables.respPlanTemp = CIRConstants.Tables.RESP_PLAN_TEMPLATE;
+
+	data.fields = options.fields.split(',');
+	data.records = [];
+	data.labels = [];
+	data.location = input ? input.location : '';
+	data.response_plan = input ? input.response_plan : '';
+	data.create_plan = input ? input.create_plan : false;
+	data.all_locations = input ? input.all_locations : false;
+	data.parent_record = getParentRecord();
+	data.parent_locations = data.parent_record.locations.toString();
+	data.parent_country = data.parent_record.country.toString();
+	data.locationByCountryQuery = new CIRSituationUtils().filterByCountry(data.parent_record);
+	data.user_id = gs.getUserID();
+
+	//Messages
+	data.no_records = gs.getMessage('cir_situation_no_records', gs.getMessage('Response plans'));
+	data.empty_mandatory_fields = gs.getMessage('Fill in the mandatory fields.');
+	data.message_select_locations = gs.getMessage('cir_situation_select_response_plan');
+
+
+	if (input && input.create_plan == true) {
+		data.create_plan = false;
+		input.create_plan = false;
+		data.newsys_id = createResponsePlan(input.location, input.response_plan);
+	}
+
+	var gr = new GlideRecord(data.tables.respPlanExec);
+	gr.addQuery(data.parent_field, data.parent);
+	gr.orderByDesc('sys_created_on');
+	gr.query();
+
+	while (gr.next()) {
+		var obj = {};
+		obj.data = [];
+		for (var i = 0; i < data.fields.length; i++) {
+			obj.data.push(gr[data.fields[i]].getDisplayValue());
+		}
+		obj.sys_id = gr.getUniqueValue();
+		data.records.push(obj);
+	}
+
+	var fieldsAux = $sp.getFields(gr, options.fields.toString());
+
+	for (var j = 0; j < data.fields.length; j++) {
+		data.labels.push(fieldsAux[j].label);
+	}
+
+	function createResponsePlan(location, respPlan) {
+		var gr = new GlideRecord(data.tables.respPlanExec);
+		gr.initialize();
+		gr.situation_location = location;
+		gr.response_plan_template = respPlan;
+		gr.parent_situation = data.parent;
+		var newid = gr.insert();
+
+		updateSituation(location);
+
+		data.location = '';
+		data.response_plan = '';
+		data.create_plan = false;
+
+		return newid;
+	}
+
+
+	function updateSituation(location) {
+		if (data.parent_record) {
+			var parentLocations = data.parent_record.getValue('locations');
+
+			if (!parentLocations) {
+				data.parent_record.setValue('locations', location);
+			}
+
+			if (parentLocations && parentLocations.indexOf(location) != -1) {
+				data.parent_record.setValue('locations', parentLocations);
+
+			} else if (parentLocations && parentLocations.indexOf(location) == -1) {
+				var locations = parentLocations + ',' + location;
+				data.parent_record.setValue('locations', locations);
+			}
+
+			data.parent_record.update();
+		}
+	}
+
+	function getParentRecord() {
+		var gr = new GlideRecord(data.tables.situation);
+		if (gr.get(data.parent)) {
+			return gr;
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 14:19:24</sys_created_on>
+        <sys_id>cc1c074d1bf70850df7e43f4bd4bcb4e</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIR Response Plans</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_cc1c074d1bf70850df7e43f4bd4bcb4e</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 17:40:09</sys_updated_on>
+        <template><![CDATA[<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix"><span class="header-title">${Response plans}</span>
+      <button ng-click="c.addResponsePlan()" class="btn btn-primary action-btn pull-right">${Add response plan}
+      </button>
+    </div>
+    <div class="panel-body">
+      <table ng-if="data.records.length > 0">
+        <tr>
+          <th ng-repeat="label in c.data.labels">
+            {{label}}
+          </th>
+        </tr>
+        <tr ng-click="c.redirectTo(data.table, record.sys_id)"
+            ng-href="{{c.creatingRespRoom}}{{data.table}}&sys_id={{record.sys_id}}"
+            ng-repeat="record in c.data.records">
+          <td ng-repeat="value in record.data track by $index">
+            {{value}}
+          </td>
+        </tr>
+      </table>
+      <div style="margin:20px" ng-if="data.records.length == 0">
+        <span style="font-weight: 500;">{{data.no_records}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="addResponsePlan">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${Add response plan}</h4>
+  </div>
+         <div class="panel-body wrapper-xl">
+            <input ng-model="data.all_locations" ng-change="c.updateQuery()" style="margin-bottom:30px" type="checkbox" name="">
+                <span style="margin-left: 5px;">${fsm_show_locations}</span>
+  </input>
+              <div style="margin-bottom:30px">
+                    <div>
+                        <span style="color:red" class="required">* </span>${fsm_select_location}
+  </div>
+                    <sn-record-picker name="location" default-query="c.updateQuery()" field="location" style="margin-top:5px" table="{{ data.tables.location }}" display-field="'name'"
+                                    value-field="'sys_id'" search-fields="'name'" page-size="100"></sn-record-picker>
+  </div>
+              <div>
+                  <div><span style="color:red" class="required">* </span>${fsm_select_response_plan}</div>
+                  <sn-record-picker name="response_plan" default-query="c.query_response_plans" field="response_plan"
+                                    style="margin-top:5px" table="{{ data.tables.respPlanTemp }}"
+                                    display-field="'name'" value-field="'sys_id'" search-fields="'name'"
+                                    page-size="100"></sn-record-picker>
+  </div>
+  </div>
+          <div class="panel-footer text-right">
+              <button class="btn btn-default" ng-click="c.closeModal()">${Close}</button>
+              <button class="btn btn-primary" ng-click="c.createRecord()">${Add}</button>
+  </div>
+  </div>
+</script>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sp_widget_cc1c074d1bf70850df7e43f4bd4bcb4e</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($uibModal, $scope, spUtil, $timeout, $window) {
+    var c = this;
+    var creatingRespRoom = false;
+    c.responseRoomUrl = '/cir?id=cir_response_plan_room&amp;table=';
+
+    $scope.location = {
+        value: '',
+        name: 'location'
+    };
+
+    $scope.response_plan = {
+        value: '',
+        name: 'response_plan'
+    };
+
+    c.query_response_plans = 'none';
+    c.query_locations = "sys_idIN" + c.data.parent_locations;
+    c.data.location = '';
+    c.resp_plan = '';
+
+    c.addResponsePlan = function() {
+        c.modalInstance = $uibModal.open({
+            templateUrl: 'addResponsePlan',
+            scope: $scope
+        });
+    };
+
+    c.closeModal = function() {
+        c.locations = '';
+        c.resp_plan = '';
+        $scope.location.value = '';
+        $scope.response_plan.value = '';
+        c.modalInstance.close();
+    };
+
+    // execution record watcher
+    spUtil.recordWatch($scope, c.data.table, c.data.parent_field + "=" + c.data.parent, function(name, data) {
+        c.server.update().then(function(response) {});
+    });
+
+    // crisis record watcher
+    spUtil.recordWatch($scope, c.data.tables.situation, "sys_id=" + c.data.parent, function(name, data) {
+        c.server.update().then(function(response) {});
+    });
+
+
+    $scope.$on("field.change", function(evt, parms) {
+        if (parms.field.name === 'location') {
+            c.locations = parms.newValue;
+            c.query_response_plans = parms.newValue != '' ? 'locationsLIKE' + parms.newValue : 'none';
+        }
+
+        if (parms.field.name === 'response_plan') {
+            c.resp_plan = parms.newValue;
+        }
+    });
+
+    c.createRecord = function() {
+        if (c.locations != '' &amp;&amp; c.resp_plan != '') {
+
+            var obj = {};
+            obj.create_plan = true;
+            obj.location = c.locations;
+            obj.response_plan = c.resp_plan;
+
+            c.closeModal();
+            c.server.get(obj).then(function(result) {
+                $scope.location.value = '';
+                $scope.response_plan.value = '';
+                c.data.create_plan = false;
+                var hosturl = 'https://' + $window.location.host;
+                $window.location.href = hosturl + c.responseRoomUrl + c.data.table + '&amp;sys_id=' + result.data.newsys_id;
+            });
+        } else {
+            alert(c.data.empty_mandatory_fields);
+        }
+    };
+
+    c.updateQuery = function() {
+        if (c.data.all_locations == true) {
+            return c.data.locationByCountryQuery;
+        } else {
+            return "sys_idIN" + c.data.parent_locations;
+        }
+    };
+
+    c.redirectTo = function(table, sys_id) {
+        var hosturl = 'https://' + $window.location.host;
+        $window.location.href = hosturl + c.responseRoomUrl + table + '&amp;sys_id=' + sys_id;
+    };
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.action-btn {&amp;#13;
+    color: #2e2e2e;&amp;#13;
+    display: block;&amp;#13;
+  	border-radius: 3px;&amp;#13;
+  	border: solid 1px #cccccc;&amp;#13;
+  	background-color: #ffffff;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.header-title{&amp;#13;
+ 	vertical-align: -webkit-baseline-middle;&amp;#13;
+    font-family: SourceSansPro;&amp;#13;
+    font-size: 16px;&amp;#13;
+    font-weight: normal;&amp;#13;
+    font-style: normal;&amp;#13;
+    font-stretch: normal;&amp;#13;
+    line-height: 1.06;&amp;#13;
+    letter-spacing: normal;&amp;#13;
+  	color: #4a4a4a;&amp;#13;
+}&amp;#13;
+&amp;#13;
+table {&amp;#13;
+  border-collapse: collapse;&amp;#13;
+  width: 100%;&amp;#13;
+}&amp;#13;
+&amp;#13;
+th, td {&amp;#13;
+  text-align: left;&amp;#13;
+  padding: 8px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+th {&amp;#13;
+	border: 1px solid #ddd;&amp;#13;
+  color: $brand-primary;&amp;#13;
+  border-top: 0;&amp;#13;
+  position: sticky;&amp;#13;
+  top: 0;&amp;#13;
+  background: white;&amp;#13;
+  border-collapse: collapse;&amp;#13;
+}&amp;#13;
+&amp;#13;
+table {&amp;#13;
+	border: 0;&amp;#13;
+}&amp;#13;
+&amp;#13;
+tr {&amp;#13;
+	border-bottom: solid 1px #dee5e7;&amp;#13;
+}&amp;#13;
+&amp;#13;
+td {&amp;#13;
+  height: 56px;&amp;#13;
+  &amp;#13;
+}&amp;#13;
+th:first-child {&amp;#13;
+	border-left: 0;&amp;#13;
+}&amp;#13;
+&amp;#13;
+th:last-child {&amp;#13;
+	border-right: 0;&amp;#13;
+}&amp;#13;
+&amp;#13;
+&amp;#13;
+tr:first-child {&amp;#13;
+	border: 0;&amp;#13;
+}&amp;#13;
+&amp;#13;
+tr:hover {&amp;#13;
+ background-color: $list-hover-color !important;;&amp;#13;
+}&amp;#13;
+&amp;#13;
+tr:last-child {&amp;#13;
+	 border-collapse: collapse;&amp;#13;
+}&amp;#13;
+&amp;#13;
+tr:nth-child(even) {background-color: #f9f9f9;}&amp;#13;
+&amp;#13;
+.panel-body{&amp;#13;
+	padding:0;&amp;#13;
+  overflow-y:auto;&amp;#13;
+  height:593px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.required {&amp;#13;
+    color: red;&amp;#13;
+}&amp;#13;
+&amp;#13;
+&amp;#13;
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;cir_response_plans&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]&gt;&lt;/link&gt;&lt;name&gt;CIR Response Plans&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles&gt;x_fru_cir.cir_base&lt;/roles&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	data.table = options.table;
+	data.parent = $sp.getParameter('sys_id');
+	data.parent_field = options.parent_field;
+
+	//tables
+	data.tables = {};
+	data.tables.respPlanExec = CIRConstants.Tables.RESP_PLAN_EXEC;
+	data.tables.situation = CIRConstants.Tables.SITUATION;
+	data.tables.location = CIRConstants.Tables.LOCATION;
+	data.tables.respPlanTemp = CIRConstants.Tables.RESP_PLAN_TEMPLATE;
+
+	data.fields = options.fields.split(',');
+	data.records = [];
+	data.labels = [];
+	data.location = input ? input.location : '';
+	data.response_plan = input ? input.response_plan : '';
+	data.create_plan = input ? input.create_plan : false;
+	data.all_locations = input ? input.all_locations : false;
+	data.parent_record = getParentRecord();
+	data.parent_locations = data.parent_record.locations.toString();
+	data.parent_country = data.parent_record.country.toString();
+	data.locationByCountryQuery = new CIRSituationUtils().filterByCountry(data.parent_record);
+	data.user_id = gs.getUserID();
+
+	//Messages
+	data.no_records = gs.getMessage('cir_situation_no_records', gs.getMessage('Response plans'));
+	data.empty_mandatory_fields = gs.getMessage('Fill in the mandatory fields.');
+	data.message_select_locations = gs.getMessage('cir_situation_select_response_plan');
+
+
+	if (input &amp;&amp; input.create_plan == true) {
+		data.create_plan = false;
+		input.create_plan = false;
+		data.newsys_id = createResponsePlan(input.location, input.response_plan);
+	}
+
+	var gr = new GlideRecord(data.tables.respPlanExec);
+	gr.addQuery(data.parent_field, data.parent);
+	gr.orderByDesc('sys_created_on');
+	gr.query();
+
+	while (gr.next()) {
+		var obj = {};
+		obj.data = [];
+		for (var i = 0; i &lt; data.fields.length; i++) {
+			obj.data.push(gr[data.fields[i]].getDisplayValue());
+		}
+		obj.sys_id = gr.getUniqueValue();
+		data.records.push(obj);
+	}
+
+	var fieldsAux = $sp.getFields(gr, options.fields.toString());
+
+	for (var j = 0; j &lt; data.fields.length; j++) {
+		data.labels.push(fieldsAux[j].label);
+	}
+
+	function createResponsePlan(location, respPlan) {
+		var gr = new GlideRecord(data.tables.respPlanExec);
+		gr.initialize();
+		gr.situation_location = location;
+		gr.response_plan_template = respPlan;
+		gr.parent_situation = data.parent;
+		var newid = gr.insert();
+
+		updateSituation(location);
+
+		data.location = '';
+		data.response_plan = '';
+		data.create_plan = false;
+
+		return newid;
+	}
+
+
+	function updateSituation(location) {
+		if (data.parent_record) {
+			var parentLocations = data.parent_record.getValue('locations');
+
+			if (!parentLocations) {
+				data.parent_record.setValue('locations', location);
+			}
+
+			if (parentLocations &amp;&amp; parentLocations.indexOf(location) != -1) {
+				data.parent_record.setValue('locations', parentLocations);
+
+			} else if (parentLocations &amp;&amp; parentLocations.indexOf(location) == -1) {
+				var locations = parentLocations + ',' + location;
+				data.parent_record.setValue('locations', locations);
+			}
+
+			data.parent_record.update();
+		}
+	}
+
+	function getParentRecord() {
+		var gr = new GlideRecord(data.tables.situation);
+		if (gr.get(data.parent)) {
+			return gr;
+		}
+	}
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;paulo.gomes&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-03-25 14:19:24&lt;/sys_created_on&gt;&lt;sys_id&gt;cc1c074d1bf70850df7e43f4bd4bcb4e&lt;/sys_id&gt;&lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;&lt;sys_name&gt;CIR Response Plans&lt;/sys_name&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_cc1c074d1bf70850df7e43f4bd4bcb4e&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;paulo.gomes&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-03-25 17:40:09&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="panel-group"&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-heading clearfix"&gt;&lt;span class="header-title"&gt;${Response plans}&lt;/span&gt;
+      &lt;button ng-click="c.addResponsePlan()" class="btn btn-primary action-btn pull-right"&gt;${Add response plan}
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;table ng-if="data.records.length &gt; 0"&gt;
+        &lt;tr&gt;
+          &lt;th ng-repeat="label in c.data.labels"&gt;
+            {{label}}
+          &lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr ng-click="c.redirectTo(data.table, record.sys_id)"
+            ng-href="{{c.creatingRespRoom}}{{data.table}}&amp;sys_id={{record.sys_id}}"
+            ng-repeat="record in c.data.records"&gt;
+          &lt;td ng-repeat="value in record.data track by $index"&gt;
+            {{value}}
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+      &lt;div style="margin:20px" ng-if="data.records.length == 0"&gt;
+        &lt;span style="font-weight: 500;"&gt;{{data.no_records}}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;script type="text/ng-template" id="addResponsePlan"&gt;
+    &lt;div class="panel panel-default"&gt;
+        &lt;div class="panel-heading"&gt;
+            &lt;h4 class="panel-title"&gt;${Add response plan}&lt;/h4&gt;
+  &lt;/div&gt;
+         &lt;div class="panel-body wrapper-xl"&gt;
+            &lt;input ng-model="data.all_locations" ng-change="c.updateQuery()" style="margin-bottom:30px" type="checkbox" name=""&gt;
+                &lt;span style="margin-left: 5px;"&gt;${fsm_show_locations}&lt;/span&gt;
+  &lt;/input&gt;
+              &lt;div style="margin-bottom:30px"&gt;
+                    &lt;div&gt;
+                        &lt;span style="color:red" class="required"&gt;* &lt;/span&gt;${fsm_select_location}
+  &lt;/div&gt;
+                    &lt;sn-record-picker name="location" default-query="c.updateQuery()" field="location" style="margin-top:5px" table="{{ data.tables.location }}" display-field="'name'"
+                                    value-field="'sys_id'" search-fields="'name'" page-size="100"&gt;&lt;/sn-record-picker&gt;
+  &lt;/div&gt;
+              &lt;div&gt;
+                  &lt;div&gt;&lt;span style="color:red" class="required"&gt;* &lt;/span&gt;${fsm_select_response_plan}&lt;/div&gt;
+                  &lt;sn-record-picker name="response_plan" default-query="c.query_response_plans" field="response_plan"
+                                    style="margin-top:5px" table="{{ data.tables.respPlanTemp }}"
+                                    display-field="'name'" value-field="'sys_id'" search-fields="'name'"
+                                    page-size="100"&gt;&lt;/sn-record-picker&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+          &lt;div class="panel-footer text-right"&gt;
+              &lt;button class="btn btn-default" ng-click="c.closeModal()"&gt;${Close}&lt;/button&gt;
+              &lt;button class="btn btn-primary" ng-click="c.createRecord()"&gt;${Add}&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/script&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-246767798</payload_hash>
+        <record_name>CIR Response Plans</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 17:40:09</sys_created_on>
+        <sys_id>a00afb891b7f0850df7e43f4bd4bcb20</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17112c7b1030000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 17:40:09</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>640a7789e37f085000d25480e69b8c19</update_guid>
+        <update_guid_history>640a7789e37f085000d25480e69b8c19:-246767798,b1b93789467f085085062b0384e9c2c3:175518978,eca9238d36fb08502d050adc6db6b25a:-1380063290,ca49674d1efb0850af8ebd47ccf5ff54:485211479,0ae413cd8c3b0850b5ed1d6ec89078c9:1471792823,c41c074d0bf708500cfbee9c508a0550:-929361022</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">e487c8d91bbf0850df7e43f4bd4bcb3f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 18:39:07</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>37fe1051a23f48f08f3030f1f908c810</sys_id>
+        <sys_metadata>cc1c074d1bf70850df7e43f4bd4bcb4e</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR Response Plans</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_37fe1051a23f48f08f3030f1f908c810</sys_update_name>
+        <sys_update_version display_value="sp_widget_cc1c074d1bf70850df7e43f4bd4bcb4e">a00afb891b7f0850df7e43f4bd4bcb20</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:04</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

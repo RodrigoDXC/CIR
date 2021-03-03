@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="classification" table="x_fru_cir_risk_hazard" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>classification</element>
+            <name>x_fru_cir_risk_hazard</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 15:49:39</sys_created_on>
+            <sys_id>044bbb70db106450d4a73533f39619a4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>classification</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_risk_hazard_classification</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 15:49:39</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>classification</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Biological Hazard</label>
+            <language>en</language>
+            <name>x_fru_cir_risk_hazard</name>
+            <sequence>0</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 15:49:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c84bbb70db106450d4a73533f39619a3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 15:49:39</sys_updated_on>
+            <value>biological_hazard</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>classification</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Chemical Hazard</label>
+            <language>en</language>
+            <name>x_fru_cir_risk_hazard</name>
+            <sequence>1</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 15:49:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4c4bbb70db106450d4a73533f39619a5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 15:49:39</sys_updated_on>
+            <value>chemical_hazard</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>classification</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Ergonomic Hazard</label>
+            <language>en</language>
+            <name>x_fru_cir_risk_hazard</name>
+            <sequence>2</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 15:49:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cc4bbb70db106450d4a73533f39619a6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 15:49:39</sys_updated_on>
+            <value>ergonomic_hazard</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>classification</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Physical Hazard</label>
+            <language>en</language>
+            <name>x_fru_cir_risk_hazard</name>
+            <sequence>3</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 15:49:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>504bbb70db106450d4a73533f39619a8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 15:49:39</sys_updated_on>
+            <value>physical_hazard</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>classification</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Safety Hazard</label>
+            <language>en</language>
+            <name>x_fru_cir_risk_hazard</name>
+            <sequence>4</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 15:49:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d04bbb70db106450d4a73533f39619a9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 15:49:39</sys_updated_on>
+            <value>safety_hazard</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>classification</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Work Organization Hazard</label>
+            <language>en</language>
+            <name>x_fru_cir_risk_hazard</name>
+            <sequence>5</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-11-03 15:49:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>544bbb70db106450d4a73533f39619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-11-03 15:49:39</sys_updated_on>
+            <value>work_organization_hazard</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

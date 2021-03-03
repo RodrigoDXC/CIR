@@ -1,0 +1,2889 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="nature_of_illness" table="x_fru_cir_injury_illness" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>nature_of_illness</element>
+            <name>x_fru_cir_injury_illness</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:05:51</sys_created_on>
+            <sys_id>3ab6ff74138a50500b8670a76144b006</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>nature_of_illness</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_injury_illness_nature_of_illness</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:05:51</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Anxiety or Panic Disorder</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:29:17</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>47a0eda3dbd51410bf9ead8ed396192a</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:32:07</sys_updated_on>
+            <value>acquired_immune_deficiency_syndrome_aids</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>mental_disorders_syndromes</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Adjustment Disorder</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:29:06</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>aca0eda3dbd51410bf9ead8ed3961909</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:52</sys_updated_on>
+            <value>adjustment_disorder</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Aluminosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1b906da3dbd51410bf9ead8ed39619e8</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:47</sys_updated_on>
+            <value>aluminosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>blood_diseases_disorders</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Anemia</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>24902da3dbd51410bf9ead8ed3961979</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:42</sys_updated_on>
+            <value>anemia</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Angina</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>57806da3dbd51410bf9ead8ed396190b</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:36</sys_updated_on>
+            <value>angina</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Anthrax</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3180eda3dbd51410bf9ead8ed3961909</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:31</sys_updated_on>
+            <value>anthrax</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>mental_disorders_syndromes</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Anxiety or Panic Disorder</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:28</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4b706da3dbd51410bf9ead8ed39619e6</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:21</sys_updated_on>
+            <value>anxiety_or_panic_disorder</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>mental_disorders_syndromes</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Anxiety / Stress</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e480eda3dbd51410bf9ead8ed3961928</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:26</sys_updated_on>
+            <value>anxiety_stress</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Arteries, Arterioles, &amp; Capillaries</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f5706da3dbd51410bf9ead8ed39619aa</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:16</sys_updated_on>
+            <value>arteries_arterioles_capillaries</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Arthropathies (i.e. Arthritis)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:28:17</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3e5069a3dbd51410bf9ead8ed39619cf</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:11</sys_updated_on>
+            <value>arthropathies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Bone and Articular Cartilage</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:16:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6fcdddefdb951410bf9ead8ed39619ca</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:17:07</sys_updated_on>
+            <value>bone_and_articular_cartilage</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Skin</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:39:19</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>306749e3db951410bf9ead8ed39619e7</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:39:36</sys_updated_on>
+            <value>skin</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>Acne</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>0</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:29:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>20b02da3dbd51410bf9ead8ed396197b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>acne</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Asbestosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>1</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:27:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b740e9a3dbd51410bf9ead8ed3961903</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>asbestosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>Acute Respiratory Infections</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>2</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:29:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b1a02da3dbd51410bf9ead8ed396197a</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:58</sys_updated_on>
+            <value>acute_respiratory_infections</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Asthma</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>2</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:27:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0840e9a3dbd51410bf9ead8ed3961902</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>asthma</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Atelectasis / Collapsed Lung</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>3</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:27:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ac30a9a3dbd51410bf9ead8ed39619f2</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>atelectasis_collapsed_lung</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Bacterial Food Poisoning</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>4</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:27:06</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2c2069a3dbd51410bf9ead8ed39619cb</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>bacterial_food_poisoning</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Berylliosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>5</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:26:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e010ad23dbd51410bf9ead8ed3961998</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>berylliosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>blood_diseases_disorders</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Bleeding Disorders</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>6</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:26:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>aaff99a3dbd51410bf9ead8ed396191e</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>bleeding_disorders</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Blindness</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>7</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:26:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a3fd9d23dbd51410bf9ead8ed3961996</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>blindness</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>blood_diseases_disorders</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Blood Cancers</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>8</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:17:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>27ed5defdb951410bf9ead8ed39619ef</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>blood_cancers</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>blood_diseases_disorders</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Blood Clots</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>9</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:17:12</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7fddddefdb951410bf9ead8ed39619cc</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>blood_clots</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>benign_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>Bone and Articular Cartilage</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>11</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:16:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b3bd5d23dbd51410bf9ead8ed39619af</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>bone_and_articular_cartilage</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Bronchitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>11</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:16:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>94bd9d23dbd51410bf9ead8ed3961935</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>bronchitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Brucellosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>12</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:16:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d8ad5923dbd51410bf9ead8ed396192c</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>brucellosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>benign_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>Skin</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>12</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:39:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fd8749e3db951410bf9ead8ed396199d</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>skin</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Byssinosis / Mill Fever</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>13</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:15:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a58d1123dbd51410bf9ead8ed3961999</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>byssinosis_mill_fever</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cataracts</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>14</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:15:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>347dddefdb951410bf9ead8ed396191b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>cataracts</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cellulitis and Abscess</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>15</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:15:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a3fc1923dbd51410bf9ead8ed39619e4</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>cellulitis_and_abscess</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Central Nervous System</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>16</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:13:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a42c1123dbd51410bf9ead8ed3961996</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>central_nervous_system</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cerebrovascular Disease</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>17</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:09:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>701cddefdb951410bf9ead8ed3961918</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>cerebrovascular_disease</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Chickenpox</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>18</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:09:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>680cddefdb951410bf9ead8ed39619c3</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>chickenpox</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cholera</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>19</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:08:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>68fbddefdb951410bf9ead8ed39619c1</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>cholera</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>musculoskeletal_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Chondropathies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>20</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:08:32</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1ceb5defdb951410bf9ead8ed396193f</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>chondropathies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Chronic Skin Ulcers</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>21</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:08:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a8db5defdb951410bf9ead8ed39619e9</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>chronic_skin_ulcers</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Coccidioidomycosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>22</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:07:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>90cb5defdb951410bf9ead8ed3961985</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:05</sys_updated_on>
+            <value>coccidioidomycosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Colitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>23</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:07:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>30bb99efdb951410bf9ead8ed396194e</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>colitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Corns and Calluses</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>24</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:07:27</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e0abd5efdb951410bf9ead8ed396194b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>corns_and_calluses</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cowpox and Paravaccinia</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>25</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:07:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>389b99efdb951410bf9ead8ed39619c6</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>cowpox_and_paravaccinia</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Deafness</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>26</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:06:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>108b19efdb951410bf9ead8ed3961925</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>deafness</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Dengue Fever</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>27</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:06:37</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fc7b11afdb951410bf9ead8ed39619f2</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>dengue_fever</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>mental_disorders_syndromes</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Depression or Depressive Episode</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>28</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:06:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>172b55efdb951410bf9ead8ed3961909</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>depression_or_depressive_episode</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Dermatophytosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>29</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:05:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3f1b11afdb951410bf9ead8ed3961906</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>dermatophytosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Digestive Organs</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>30</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:04:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d01b95efdb951410bf9ead8ed3961906</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>digestive_organs</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Diphtheria (whooping cough)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>31</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:04:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>600b95efdb951410bf9ead8ed3961930</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>diphtheria_whooping_cough</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Diseases &amp; Disorders of Breast</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>32</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:04:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f4fa95afdb951410bf9ead8ed396191f</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>diseases_disorders_of_breast</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Diseases &amp; Disorders of Genital Tract</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>33</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:04:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>55ea55efdb951410bf9ead8ed3961906</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>diseases_disorders_of_genital_tract</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Diseases &amp; Disorders of Urinary System</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>34</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:03:57</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>81dad1afdb951410bf9ead8ed39619bf</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>diseases_disorders_of_urinary_system</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Diseases of Sebaceous Glands</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>35</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:03:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8b9a11afdb951410bf9ead8ed3961901</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>diseases_of_sebaceous_glands</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Dorsopathies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>36</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 14:02:43</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3d4951afdb951410bf9ead8ed396191d</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>dorsopathies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Dysentery</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>37</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:56:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bd2951afdb951410bf9ead8ed396191c</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>dysentery</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Emphysema</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>38</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:56:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cdb8552fdb951410bf9ead8ed3961988</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>emphysema</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>digestive_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Esophagus, Stomach, and Duodenum</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>39</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:52:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6b18596fdb951410bf9ead8ed396193b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>esophagus_stomach_and_duodenum</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Foot and Mouth Disease</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>40</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:51:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3608152fdb951410bf9ead8ed396192b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>foot_and_mouth_disease</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Glaucoma</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>41</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:51:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fef7d52fdb951410bf9ead8ed3961967</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>glaucoma</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hearing Loss</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>42</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:51:13</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>10e5952fdb951410bf9ead8ed3961935</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>hearing_loss</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Heart Failure</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>43</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:42:02</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7cd5952bdb951410bf9ead8ed396196d</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>heart_failure</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Helminthiases (worm infections)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>44</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:41:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9dc5152fdb951410bf9ead8ed3961906</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>helminthiases_worm_infections</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>benign_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hemangioma and Lymphangioma</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>45</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:41:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b1b559ebdb951410bf9ead8ed39619b2</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>hemangioma_and_lymphangioma</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hemorrhagic Fever</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>46</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:41:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d39559ebdb951410bf9ead8ed39619b0</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>hemorrhagic_fever</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>digestive_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hernia (nontraumatic)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>47</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:40:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7785d1ebdb951410bf9ead8ed39619d2</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>hernia_nontraumatic</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Herpes Simplex or Zoster</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>48</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:40:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c485512fdb951410bf9ead8ed39619a2</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>herpes_simplex_or_zoster</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hodgkin's Disease</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>49</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:40:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2245512fdb951410bf9ead8ed3961979</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>hodgkins_disease</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Human Immunodeficiency Virus (HIV)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>50</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:39:28</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e57495ebdb951410bf9ead8ed396196e</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>human_immunodeficiency_virus_hiv</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hypertensive Disease</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>51</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:35:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>356419ebdb951410bf9ead8ed3961914</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>hypertensive_disease</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Impetigo</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>52</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:35:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a65419ebdb951410bf9ead8ed3961913</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>impetigo</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Infectious Mononucleosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>53</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:35:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8344d5ebdb951410bf9ead8ed39619f8</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>infectious_mononucleosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Infertility</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>54</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:35:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1f34d5ebdb951410bf9ead8ed39619c1</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>infertility</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Inflamation of the Eye</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>55</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:34:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7b24d5ebdb951410bf9ead8ed396195d</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>inflamation_eye</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Influenza</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>56</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:34:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>011455ebdb951410bf9ead8ed3961958</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>influenza</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Ingrown Nails &amp; Other Nail Diseases</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>57</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:34:09</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5904d1abdb951410bf9ead8ed39619a1</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>ingrown_nails_other_nail_diseases</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Ischemic Heart Disease</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>58</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:33:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3cf315ebdb951410bf9ead8ed39619e3</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>ischemic_heart_disease</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Leprosy</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>59</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:33:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7ce39dabdb951410bf9ead8ed39619a9</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>leprosy</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Leptospirosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>60</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:33:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>84d3d1abdb951410bf9ead8ed396199c</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>leptospirosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Leukemias</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>61</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:33:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d55f852bdb951410bf9ead8ed3961921</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>leukemias</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>benign_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Lipoma (fatty tumor)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>62</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:13:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>414f052bdb951410bf9ead8ed39619ae</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>lipoma_fatty_tumor</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Lyme Disease</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>63</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:13:09</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>753f852bdb951410bf9ead8ed3961967</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>lyme_disease</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Lymphoma</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>64</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:12:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d1fe852bdb951410bf9ead8ed3961914</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>lymphoma</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Malaria</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>65</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:11:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>68fecde7db951410bf9ead8ed3961953</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>malaria</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Measles</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>66</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:11:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d9ee852bdb951410bf9ead8ed396190e</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>measles</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Meningitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>67</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:11:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>51de812bdb951410bf9ead8ed3961978</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>meningitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Meningococcal Infection</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>68</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:11:15</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3cce052bdb951410bf9ead8ed3961907</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>meningococcal_infection</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Mesothelial and Soft Tissue</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>69</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:10:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c9bec9e7db951410bf9ead8ed39619cc</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>mesothelial_and_soft_tissue</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Mesothelioma</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>70</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:10:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a1ae8de7db951410bf9ead8ed396195a</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>mesothelioma</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Metabolic Disorders</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>71</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:10:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d99e89e7db951410bf9ead8ed3961985</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>metabolic_disorders</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Methicillin-resistant Infection</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>72</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:10:09</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cd8e412bdb951410bf9ead8ed39619d5</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>methicillin-resistant_infection</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>MRSA Infection</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>73</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:09:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>197ec5e7db951410bf9ead8ed3961942</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>mrsa_infection</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Multiple Myeloma</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>74</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:09:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5b2e89e7db951410bf9ead8ed39619ce</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>multiple_myeloma</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Mumps</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>75</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:08:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6a0e09e7db951410bf9ead8ed396193a</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>mumps</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Mycoses</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>76</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:07:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>56fd4de7db951410bf9ead8ed396195c</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>mycoses</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Myocardial Infarction (heart attack)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>77</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:07:30</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b8bd89e7db951410bf9ead8ed39619ca</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>heart_attack</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Nephritis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>78</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:06:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>94bd85e7db951410bf9ead8ed3961993</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>nephritis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Nephrosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>79</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:06:15</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a24d05e7db951410bf9ead8ed39619e9</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>nephrosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Nephrotic Syndrome</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>80</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:04:30</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>287c4da7db951410bf9ead8ed3961954</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>nephrotic_syndrome</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>digestive_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Noninfectious Enteritis and Colitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>81</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:00:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3e5c0da7db951410bf9ead8ed39619c9</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>noninfectious_enteritis_and_colitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>digestive_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Oral Cavity, Salivary Glands, and Jaws</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>82</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 13:00:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>404c89a7db951410bf9ead8ed396195a</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>oral_cavity_salivary_glands_and_jaws</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Ornithosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>83</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:59:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cc3c01a7db951410bf9ead8ed3961962</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>ornithosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>musculoskeletal_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Osteopathies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>84</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:59:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e31c8967db951410bf9ead8ed3961967</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>osteopathies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>digestive_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other Digestive System Diseases and Disorders</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>85</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:59:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>69ea01a7db951410bf9ead8ed3961903</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>other_digestive_system_diseases_and_disorders</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>mental_disorders_syndromes</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other Mental Disorders</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>86</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:54:04</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>95da8967db951410bf9ead8ed39619e7</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>other_mental_disorders</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other Skin Infections</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>87</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:53:45</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>68ca0d67db951410bf9ead8ed39619f4</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>other_skin_infections</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other Spirochetal Diseases</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>88</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:53:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6cbac967db951410bf9ead8ed3961963</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>other_spirochetal_diseases</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pediculosis and Phthirus Infestation (lice)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>89</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:53:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cb8a8967db951410bf9ead8ed396197e</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>pediculosis_and_phthirus_infestation_lice</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Peripheral Nervous System</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>90</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:52:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c53a0967db951410bf9ead8ed3961916</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>peripheral_nervous_system</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pneumoconioses</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>91</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:51:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>943a0967db951410bf9ead8ed39619af</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>pneumoconioses</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pneumonia</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>92</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:50:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>642ac567db951410bf9ead8ed3961902</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>pneumonia</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pneumonitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>93</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:50:43</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>570a8167db951410bf9ead8ed3961957</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>pneumonitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>mental_disorders_syndromes</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Post-Traumatic Stress</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>94</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:50:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ebf94567db951410bf9ead8ed3961922</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>post_traumatic_stress</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pulmonary Edema</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>95</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:50:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>25e9cd27db951410bf9ead8ed3961901</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>pulmonary_edema</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pulmonary Embolism</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>96</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:49:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e8d94567db951410bf9ead8ed3961920</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>pulmonary_embolism</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pulmonary Fibrosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>97</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:49:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f4c98167db951410bf9ead8ed39619b9</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>pulmonary_fibrosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pulmonary Heart Disease</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>98</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:49:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>20b98167db951410bf9ead8ed3961953</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>pulmonary_heart_disease</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Q Fever</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>99</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:48:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>46894d27db951410bf9ead8ed396193c</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>q_fever</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Rabies</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>100</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:48:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>41794127db951410bf9ead8ed39619df</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>rabies</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Reduced Vision</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>101</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:47:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5d698d27db951410bf9ead8ed39619d5</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>reduced_vision</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>malignant_neoplasms_tumors</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Respiratory and Intrathoracic</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>102</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:47:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>de390127db951410bf9ead8ed3961998</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>respiratory_and_intrathoracic</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Rickettsioses</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>103</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:46:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f5394d27db951410bf9ead8ed396193b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>rickettsioses</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Rubella</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>104</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:46:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>41390127db951410bf9ead8ed3961998</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>rubella</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Salmonella Infections</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>105</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:46:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bd294d27db951410bf9ead8ed3961928</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>salmonella_infections</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Scabies and Other Acariases</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>106</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:46:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f6d88127db951410bf9ead8ed39619d6</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>scabies_and_other_acariases</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Sebaceous Cyst</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>107</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:45:08</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7df74127db951410bf9ead8ed396199b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>sebaceous_cyst</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Septicemia</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>108</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:41:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>45e78de3db951410bf9ead8ed39619e2</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>septicemia</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Shingles</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>109</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:40:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>73b70127db951410bf9ead8ed39619ad</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>shingles</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Siderosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>110</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:40:17</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>87a709e3db951410bf9ead8ed39619e4</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>siderosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>respiratory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Silicosis / Talcosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>111</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:39:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a68709e3db951410bf9ead8ed39619e2</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>silicosis_talcosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Smallpox</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>113</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:38:43</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ec5789e3db951410bf9ead8ed39619ce</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>smallpox</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>musculoskeletal_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Soft Tissue Disorders</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>114</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:38:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>373709e3db951410bf9ead8ed39619dc</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>soft_tissue_disorders</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>genitourinary_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Spontaneous Abortion/Miscarriage</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>115</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:38:06</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f12749e3db951410bf9ead8ed3961933</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>spontaneous_abortion_miscarriage</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Spotted Fevers &amp; Tick Typhus</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>116</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:37:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>191741e3db951410bf9ead8ed396195c</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>spotted_fevers_tick_typhus</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Streptococcal Sore Throat and Scarlatina</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>117</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:37:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6af609e3db951410bf9ead8ed3961906</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>streptococcal_sore_throat_and_scarlatina</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Stroke</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>118</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:36:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>98e6cda3db951410bf9ead8ed3961991</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>stroke</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Sweat Gland Disorders (i.e. Heat Rash)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>119</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:36:30</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>85c60da3db951410bf9ead8ed396198a</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>sweat_gland_disorders</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Tetanus</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>120</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:36:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2ea649a3db951410bf9ead8ed39619f3</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>tetanus</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>skin_subcutaneous_tissue</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Thyroid Glands</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>121</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:35:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>26868da3db951410bf9ead8ed39619fb</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>thyroid_glands</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Tinnitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>122</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:35:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b7260da3db951410bf9ead8ed3961988</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>tinnitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>digestive_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Toxic Hepatitis (noninfective)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>123</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:33:27</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>301609a3db951410bf9ead8ed3961982</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>toxic_hepatitis_noninfective</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Transient Ischemia</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>124</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:32:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fff5c1a3db951410bf9ead8ed396194a</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>transient_ischemia</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Tuberculosis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>125</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:32:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6ae50da3db951410bf9ead8ed3961984</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>tuberculosis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Type A Viral Hepatitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>126</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:32:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>82c509a3db951410bf9ead8ed396197f</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>type_a_viral_hepatitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Type B viral Hepatitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>127</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:31:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>718581a3db951410bf9ead8ed3961953</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>type_b_viral_hepatitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Type C viral Hepatitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>128</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:30:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a26541a3db951410bf9ead8ed3961998</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>type_c_viral_hepatitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Type E viral Hepatitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>129</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:29:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3625cd63db951410bf9ead8ed3961975</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>type_e_viral_hepatitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Typhoid and Paratyphoid Fevers</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>130</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:27:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>69c48d63db951410bf9ead8ed39619e5</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>typhoid_and_paratyphoid_fevers</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>circulatory_system</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Veins &amp; Lymphatics</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>131</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:26:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0894c9efdb551410bf9ead8ed396199d</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>veins_lymphatics</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bacterial_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Venereal Diseases</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>132</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:26:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d274cd63db951410bf9ead8ed39619e1</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>venereal_diseases</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Viral Conjunctivitis (ophthalmia)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>133</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:25:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>28648d63db951410bf9ead8ed39619cf</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>viral_conjunctivitis_ophthalmia</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Viral Encephalitis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>134</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:25:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e1444d63db951410bf9ead8ed3961942</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>viral_encephalitis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>nervous_system_sense_organs</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Visual Disturbances</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>135</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:06:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>deffb4efdb551410bf9ead8ed3961973</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>visual_disturbances</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>West Nile Virus</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>136</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:06:15</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9cef74efdb551410bf9ead8ed396199b</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>west_nile_virus</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>viral_diseases</dependent_value>
+            <element>nature_of_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Yellow Fever</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>137</sequence>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:05:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b47ff0efdb551410bf9ead8ed39619a0</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 14:31:06</sys_updated_on>
+            <value>yellow_fever</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

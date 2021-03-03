@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="Financial Assessment" section_id="c570c8d7db3d1010d4a73533f3961975" sys_domain="global" table="x_fru_cir_external_physical_security_incident" version="3" view="portalview">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>local_currency</element>
+            <position>0</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>1d700cd7db3d1010d4a73533f3961915</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>loss_amount</element>
+            <position>1</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>91700cd7db3d1010d4a73533f3961916</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>office_risk_level</element>
+            <position>2</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>19700cd7db3d1010d4a73533f3961916</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>cost_of_incident</element>
+            <position>3</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>9d700cd7db3d1010d4a73533f3961916</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>4</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>15700cd7db3d1010d4a73533f3961917</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>maximum_amount</element>
+            <position>5</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>99700cd7db3d1010d4a73533f3961917</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>amount_recovered</element>
+            <position>6</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>11700cd7db3d1010d4a73533f3961918</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>result</element>
+            <position>7</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>95700cd7db3d1010d4a73533f3961918</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>converted_cost</element>
+            <position>8</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:45</sys_created_on>
+            <sys_id>1d700cd7db3d1010d4a73533f3961918</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Financial Assessment" display_value="Financial Assessment" name="x_fru_cir_external_physical_security_incident" sys_domain="global" view="fc81041bdb3d1010d4a73533f396199d">c570c8d7db3d1010d4a73533f3961975</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-09 09:21:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Financial Assessment</caption>
+            <header>false</header>
+            <name>x_fru_cir_external_physical_security_incident</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-09 09:21:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c570c8d7db3d1010d4a73533f3961975</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_name>x_fru_cir_external_physical_security_incident</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_section_c570c8d7db3d1010d4a73533f3961975</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-16 18:40:21</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="portalview" name="portalview">fc81041bdb3d1010d4a73533f396199d</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

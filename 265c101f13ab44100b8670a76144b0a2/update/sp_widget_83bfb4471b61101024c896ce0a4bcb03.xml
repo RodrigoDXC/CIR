@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope) {
+    /* widget controller */
+    var c = this;
+
+    $scope.addMarker = function(event, regionID) {
+        var recordType = jQuery('#recordType').val();
+        if(recordType == 'x_fru_cir_injury_illness') {
+            jQuery('.region').each(function() {
+                jQuery(this).removeClass('selected');
+            });
+            var region = jQuery('#' + regionID);
+            region.addClass('selected');
+            var position = region.position();
+            var positionX = position.left + event.offsetX - 5;
+            var positionY = position.top + event.offsetY - 5;
+            jQuery('.injury').remove();
+            jQuery('#coordinates').val((positionX + 5) + ',' + (positionY + 20));
+            jQuery("#injuryContainer").append('<i class="fa fa-circle injury" style="left:' + positionX +
+                'px;top:' + positionY + 'px;z-index:25;"></i>');
+        }
+    };
+
+    $scope.addInjury = function() {
+        var selectedRegion = jQuery('.selected').attr('id');
+        var coordinates = jQuery('#coordinates').val();
+        if(coordinates) {
+            c.server.get({
+                coordinates: coordinates,
+                selectedRegion: selectedRegion,
+                data: $scope.data
+            }).then(function() {
+                window.history.back();
+            });
+        } else {
+            window.history.back();
+        }
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.selected{&#13;
+  border: 2px solid #ff0000;&#13;
+}&#13;
+.region:hover{&#13;
+  border: 2px solid grey;&#13;
+}&#13;
+.selected:hover{&#13;
+  border: 2px solid #ff0000 !important;&#13;
+}&#13;
+.injury{&#13;
+  color: red;&#13;
+  position: absolute;&#13;
+  width: 10px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-body-location</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Body Location</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+	
+        var cirImpactUtils = new CIRImpactUtils();
+
+    if (input) {
+        data = input.data;
+		cirImpactUtils.AddInjury(data.recordSys, input.coordinates, input.selectedRegion);
+    } else {
+        data.locationSys = $sp.getParameter('location_id');
+        data.recordType = $sp.getParameter('table');
+        data.recordSys = $sp.getParameter('sys_id');
+        data.injuries = new global.JSON().decode(cirImpactUtils.GetInjuries(data.recordType, data.recordSys));
+        data.bodyLocations = cirImpactUtils.GetBodyLocations();
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 09:06:46</sys_created_on>
+        <sys_id>83bfb4471b61101024c896ce0a4bcb03</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>CIR CIRI Body Location</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_83bfb4471b61101024c896ce0a4bcb03</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-09-25 15:35:59</sys_updated_on>
+        <template><![CDATA[<div ng-if="data.injuries">
+  <input type="hidden" id="coordinates" value=""/>
+  <input type="hidden" id="recordType" value="{{data.recordType}}"/>
+  <div id="imageContainer" style="z-index:-1">
+    <img id="bodyImage" src="cir_body_img.png" style="z-index:-1"/>
+    <div ng-repeat="region in data.bodyLocations">
+      <div class="region" title="{{region.name}}" id="{{region.sys_id}}" ng-click="addMarker($event, region.sys_id)" 
+           style="position: absolute;width: {{region.width}}px;height: {{region.height}}px;
+                  top: {{region.y-20}}px;left:{{region.x-5}}px;z-index:50;background:transparent;"/>
+    </div>
+    <div id="injuryContainer" style="text-align:center">
+      <i ng-repeat="injury in data.injuries" class="fa fa-circle injury" 
+         style="left:{{injury.x-5}}px;top:{{injury.y-20}}px;width:{{injury.width}}px;height:{{injury.height}}px;font-size:{{injury.font_size}};" 
+         title="{{injury.label}}"></i>
+    </div>
+  </div>
+  <div ng-if="data.recordType == 'x_fru_cir_injury_illness'">
+    <button type="button" class="btn" style="margin-top:20px" onclick="window.history.back();">${cancel}</button>
+    <button type="button" class="btn btn-primary" style="margin-top:20px" ng-click="addInjury()">${add_injury}</button>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

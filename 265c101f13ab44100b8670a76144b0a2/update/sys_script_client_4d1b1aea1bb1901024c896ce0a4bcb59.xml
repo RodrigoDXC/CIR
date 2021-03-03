@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>activity_during_impact</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Show Related Lists base on Role</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+	var ga = new GlideAjax('CIRCaseManagementAjax');
+	ga.addParam('sysparm_name', 'getRoleAllowedRelatedLists');
+	ga.getXML(function (response) {
+		var answer = response.responseXML.documentElement.getAttribute("answer");
+		if(answer) {
+			var array = JSON.parse(answer);
+			if(array.length === 0) {
+				return;
+			}
+			g_form.hideRelatedLists();
+			for(var i in array) {
+				g_form.showRelatedList(array[i]);
+			}
+		}
+	});
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-07 12:41:51</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4d1b1aea1bb1901024c896ce0a4bcb59</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Show Related Lists base on Role</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_4d1b1aea1bb1901024c896ce0a4bcb59</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-07 12:42:31</sys_updated_on>
+        <table>x_fru_cir_person_impact</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

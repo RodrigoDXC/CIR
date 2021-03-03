@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>false</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>state</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>State changes</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	if (isLoading) {
+		return;
+	}
+
+	if(newValue == '2') {
+		g_form.setMandatory('feedback', false);
+		g_form.clearValue('feedback');
+
+	} else if(newValue == '3') {
+		g_form.setMandatory('feedback', true);
+	}
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-24 17:34:04</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>13ce2af41b73c450df7e43f4bd4bcbc1</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>State changes</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_13ce2af41b73c450df7e43f4bd4bcbc1</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-24 18:17:33</sys_updated_on>
+        <table>x_fru_cir_message_execution_recipient</table>
+        <type>onChange</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_script_client_13ce2af41b73c450df7e43f4bd4bcbc1</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;false&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field&gt;state&lt;/field&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;State changes&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	if (isLoading) {
+		return;
+	}
+
+	if(newValue == '2') {
+		g_form.setMandatory('feedback', false);
+		g_form.clearValue('feedback');
+
+	} else if(newValue == '3') {
+		g_form.setMandatory('feedback', true);
+	}
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;paulo.gomes&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-03-24 17:34:04&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;13ce2af41b73c450df7e43f4bd4bcbc1&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;State changes&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_13ce2af41b73c450df7e43f4bd4bcbc1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;paulo.gomes&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-03-24 18:17:33&lt;/sys_updated_on&gt;&lt;table&gt;x_fru_cir_message_execution_recipient&lt;/table&gt;&lt;type&gt;onChange&lt;/type&gt;&lt;ui_type&gt;0&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>971440545</payload_hash>
+        <record_name>State changes</record_name>
+        <reverted_from/>
+        <source>9edc14dbdb63005049959a82ca961963</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-24 18:17:33</sys_created_on>
+        <sys_id>6ef87ef01bb3c450df7e43f4bd4bcb57</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>1710dc392aa0000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-24 18:21:55</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>e2f87ef0c8b3c4502ba3793b89c2be57</update_guid>
+        <update_guid_history>e2f87ef0c8b3c4502ba3793b89c2be57:971440545,f50f66388073c450a99e7000017fa232:-1755435890</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-24 18:20:36</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>5fbc146451b74c11bc5fe148062aded1</sys_id>
+        <sys_metadata>13ce2af41b73c450df7e43f4bd4bcbc1</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>State changes</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Message Execution Recipient">46684a2fdb2f405049959a82ca96190a</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_5fbc146451b74c11bc5fe148062aded1</sys_update_name>
+        <sys_update_version display_value="sys_script_client_13ce2af41b73c450df7e43f4bd4bcbc1">6ef87ef01bb3c450df7e43f4bd4bcb57</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:02</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

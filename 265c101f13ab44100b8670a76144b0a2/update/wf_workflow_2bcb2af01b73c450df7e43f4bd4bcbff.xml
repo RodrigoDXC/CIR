@@ -1,0 +1,1387 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="wf_workflow_version">
+    <wf_workflow_version action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <activity_stages>{"stages":{},"activities":{},"subflows":[],"ends":["98a6d9c1db0c2c10d4a73533f3961907"]}</activity_stages>
+        <after_business_rules>false</after_business_rules>
+        <checked_out/>
+        <checked_out_by/>
+        <column_renderer display_value="Workflow-driven">a56213111b030100adca1e094f0713ac</column_renderer>
+        <condition table="x_fru_cir_message_execution_recipient">state=2^EQ<item display_value="Awaiting feedback" endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="2"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <condition_type>run_match</condition_type>
+        <description/>
+        <expected_sequences>1ca699c1db0c2c10d4a73533f39619da,18a6d9c1db0c2c10d4a73533f3961908,50a699c1db0c2c10d4a73533f39619dd,18a699c1db0c2c10d4a73533f39619de,98a6d9c1db0c2c10d4a73533f3961907,14a699c1db0c2c10d4a73533f39619d8</expected_sequences>
+        <expected_time>1970-01-01 14:00:00</expected_time>
+        <expected_time_type/>
+        <full_sequences>1ca699c1db0c2c10d4a73533f39619da,18a6d9c1db0c2c10d4a73533f3961908,50a699c1db0c2c10d4a73533f39619dd,18a699c1db0c2c10d4a73533f39619de,98a6d9c1db0c2c10d4a73533f3961907,14a699c1db0c2c10d4a73533f39619d8,5ca699c1db0c2c10d4a73533f39619db</full_sequences>
+        <journal/>
+        <max_activity_count>100</max_activity_count>
+        <name>CIR Message Execution with Backup Contacts</name>
+        <not_cacheable>false</not_cacheable>
+        <on_cancel><![CDATA[// This script executes if the workflow is cancelled.// The global variable context_sys_id contains the sys_id of the cancelled workflow context.]]></on_cancel>
+        <order>100</order>
+        <pin_type>set_by_activity</pin_type>
+        <published>true</published>
+        <relative_duration display_value="2 business days by 4pm">3bf802c20a0a0b52008e2859cd8abcf2</relative_duration>
+        <requires_ert>true</requires_ert>
+        <run_multiple>false</run_multiple>
+        <schedule/>
+        <stage_field/>
+        <stage_order>computed</stage_order>
+        <start display_value="Begin">1ca699c1db0c2c10d4a73533f39619da</start>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d8a699c1db0c2c10d4a73533f39619d5</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-10-29 13:36:40</sys_updated_on>
+        <table>x_fru_cir_message_execution_recipient</table>
+        <timezone/>
+        <validated>true</validated>
+        <workflow display_value="CIR Message Execution with Backup Contacts">2bcb2af01b73c450df7e43f4bd4bcbff</workflow>
+    </wf_workflow_version>
+    <wf_workflow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <description/>
+        <name>CIR Message Execution with Backup Contacts</name>
+        <preview/>
+        <sys_class_name>wf_workflow</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-24 17:19:59</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2bcb2af01b73c450df7e43f4bd4bcbff</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR Message Execution with Backup Contacts</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>wf_workflow_2bcb2af01b73c450df7e43f4bd4bcbff</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-24 17:21:10</sys_updated_on>
+        <table>x_fru_cir_message_execution_recipient</table>
+        <template>false</template>
+        <vars/>
+    </wf_workflow>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Begin">c7a5e32c0a0a0b3a002377c24ed8ea76</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>1</databus_lookup_id>
+        <height/>
+        <input/>
+        <is_parent>false</is_parent>
+        <name>Begin</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>1ca699c1db0c2c10d4a73533f39619da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width>80</width>
+        <workflow_version display_value="CIR Message Execution with Backup Contacts">d8a699c1db0c2c10d4a73533f39619d5</workflow_version>
+        <x>20</x>
+        <y>20</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=1ca699c1db0c2c10d4a73533f39619da"/>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Begin">1ca699c1db0c2c10d4a73533f39619da</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>54a699c1db0c2c10d4a73533f39619db</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="If">98f621ca0a0a0b5900f7c291f5e45a0e</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>10</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>Check if message was already sent to backup users</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>14a699c1db0c2c10d4a73533f39619d8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Message Execution with Backup Contacts">d8a699c1db0c2c10d4a73533f39619d5</workflow_version>
+        <x>693</x>
+        <y>244</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=14a699c1db0c2c10d4a73533f39619d8"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>14a699c1db0c2c10d4a73533f39619d8</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>5ca699c1db0c2c10d4a73533f39619d8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">493cba6a0a6a803f07df24b118473551</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>14a699c1db0c2c10d4a73533f39619d8</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a699c1db0c2c10d4a73533f39619d9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>answer = checkBackup();&#13;
+&#13;
+function checkBackup() {&#13;
+	if (current.primary_backup == '') {		&#13;
+		current.primary_backup = getBackupContact('primary');&#13;
+		workflow.scratchpad.backup_contact = current.primary_backup;&#13;
+		return 'no';&#13;
+	} &#13;
+	&#13;
+	if (current.secondary_backup == '') {&#13;
+		current.secondary_backup = getBackupContact('secondary');&#13;
+		workflow.scratchpad.backup_contact = current.secondary_backup;&#13;
+		return 'no';&#13;
+	} else {&#13;
+		return 'yes';&#13;
+	}&#13;
+}&#13;
+&#13;
+function getBackupContact(backupContact) {&#13;
+	var userProfileGr = new GlideRecord(CIRConstants.Tables.USER_PROFILE);&#13;
+	userProfileGr.addQuery('user', current.user);&#13;
+	userProfileGr.query();&#13;
+&#13;
+	if (userProfileGr.next()) {&#13;
+		switch (backupContact) {&#13;
+			case 'primary':&#13;
+				return userProfileGr.primary_backup.toString();&#13;
+			case 'secondary':&#13;
+				return userProfileGr.secondary_backup.toString();&#13;
+		}&#13;
+	}&#13;
+}&#13;
+&#13;
+</value>
+        <variable display_value="">c35e50810a0a0ba96248a709b450fc32</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>14a699c1db0c2c10d4a73533f39619d8</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d4a699c1db0c2c10d4a73533f39619d9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>1</value>
+        <variable display_value="">493d2c1d0a6a803f3217a75738ea3289</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>14a699c1db0c2c10d4a73533f39619d8</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>5ca699c1db0c2c10d4a73533f39619d8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">493cba6a0a6a803f07df24b118473551</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>14a699c1db0c2c10d4a73533f39619d8</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d4a699c1db0c2c10d4a73533f39619d9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>1</value>
+        <variable display_value="">493d2c1d0a6a803f3217a75738ea3289</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>14a699c1db0c2c10d4a73533f39619d8</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a699c1db0c2c10d4a73533f39619d9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>answer = checkBackup();&#13;
+&#13;
+function checkBackup() {&#13;
+	if (current.primary_backup == '') {		&#13;
+		current.primary_backup = getBackupContact('primary');&#13;
+		workflow.scratchpad.backup_contact = current.primary_backup;&#13;
+		return 'no';&#13;
+	} &#13;
+	&#13;
+	if (current.secondary_backup == '') {&#13;
+		current.secondary_backup = getBackupContact('secondary');&#13;
+		workflow.scratchpad.backup_contact = current.secondary_backup;&#13;
+		return 'no';&#13;
+	} else {&#13;
+		return 'yes';&#13;
+	}&#13;
+}&#13;
+&#13;
+function getBackupContact(backupContact) {&#13;
+	var userProfileGr = new GlideRecord(CIRConstants.Tables.USER_PROFILE);&#13;
+	userProfileGr.addQuery('user', current.user);&#13;
+	userProfileGr.query();&#13;
+&#13;
+	if (userProfileGr.next()) {&#13;
+		switch (backupContact) {&#13;
+			case 'primary':&#13;
+				return userProfileGr.primary_backup.toString();&#13;
+			case 'secondary':&#13;
+				return userProfileGr.secondary_backup.toString();&#13;
+		}&#13;
+	}&#13;
+}&#13;
+&#13;
+</value>
+        <variable display_value="">c35e50810a0a0ba96248a709b450fc32</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Check if message was already sent to backup users">14a699c1db0c2c10d4a73533f39619d8</activity>
+        <condition>activity.result == 'no'</condition>
+        <condition_default display_value="No">c1eff6430a0a0b59000f955abe842c94</condition_default>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>false</is_positive>
+        <name>No</name>
+        <order>200</order>
+        <short_description/>
+        <skip_during_generate>true</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>10a699c1db0c2c10d4a73533f39619da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+    </wf_condition>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Check if message was already sent to backup users">14a699c1db0c2c10d4a73533f39619d8</activity>
+        <condition>activity.result == 'yes'</condition>
+        <condition_default display_value="Yes">c1ef63200a0a0b59005ef89bae78feb7</condition_default>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Yes</name>
+        <order>100</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d0a699c1db0c2c10d4a73533f39619da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="End">c7a66f7d0a0a0b3a004544a6d2f14076</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>2</databus_lookup_id>
+        <height/>
+        <input/>
+        <is_parent>false</is_parent>
+        <name>End</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a6d9c1db0c2c10d4a73533f3961907</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width>80</width>
+        <workflow_version display_value="CIR Message Execution with Backup Contacts">d8a699c1db0c2c10d4a73533f39619d5</workflow_version>
+        <x>1286</x>
+        <y>154</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=98a6d9c1db0c2c10d4a73533f3961907"/>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Run Script">db8c65aec0a8016501d00259bc7203a4</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>3</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>Get message</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>18a6d9c1db0c2c10d4a73533f3961908</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Message Execution with Backup Contacts">d8a699c1db0c2c10d4a73533f39619d5</workflow_version>
+        <x>18</x>
+        <y>153</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=18a6d9c1db0c2c10d4a73533f3961908"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a6d9c1db0c2c10d4a73533f3961908</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a6d9c1db0c2c10d4a73533f3961908</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>workflow.scratchpad.message = getMessage();&#13;
+&#13;
+function getMessage() {&#13;
+	var stepMsgGr = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP_MSG);&#13;
+	stepMsgGr.addQuery('sys_id', current.step_message_execution.response_plan_step);&#13;
+	stepMsgGr.query();&#13;
+&#13;
+	if (stepMsgGr.next()) {&#13;
+		return stepMsgGr.message.plain_text;&#13;
+	}&#13;
+	return '';&#13;
+}</value>
+        <variable display_value="">c35ddef20a0a0ba96248a7090eccd518</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a6d9c1db0c2c10d4a73533f3961908</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a6d9c1db0c2c10d4a73533f3961908</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>workflow.scratchpad.message = getMessage();&#13;
+&#13;
+function getMessage() {&#13;
+	var stepMsgGr = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP_MSG);&#13;
+	stepMsgGr.addQuery('sys_id', current.step_message_execution.response_plan_step);&#13;
+	stepMsgGr.query();&#13;
+&#13;
+	if (stepMsgGr.next()) {&#13;
+		return stepMsgGr.message.plain_text;&#13;
+	}&#13;
+	return '';&#13;
+}</value>
+        <variable display_value="">c35ddef20a0a0ba96248a7090eccd518</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Get message">18a6d9c1db0c2c10d4a73533f3961908</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>9ca6d9c1db0c2c10d4a73533f3961908</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Run Script">db8c65aec0a8016501d00259bc7203a4</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>11</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>Send to backup contact</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>5ca699c1db0c2c10d4a73533f39619db</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:20:26</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Message Execution with Backup Contacts">d8a699c1db0c2c10d4a73533f39619d5</workflow_version>
+        <x>956</x>
+        <y>317</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=5ca699c1db0c2c10d4a73533f39619db"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>5ca699c1db0c2c10d4a73533f39619db</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d0a699c1db0c2c10d4a73533f39619dc</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:20:26</sys_updated_on>
+        <value>var stepExecution = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC_STEP_MSG);&#13;
+stepExecution.addQuery('sys_id', current.step_message_execution);&#13;
+stepExecution.query();&#13;
+&#13;
+if (stepExecution.next()) {&#13;
+	if (checkIfBackupHasMsg(workflow.scratchpad.backup_contact)) {&#13;
+		current.state = '3';&#13;
+		current.feedback = workflow.scratchpad.feedback;&#13;
+	} else {&#13;
+		switch (current.message_type.toString()) {&#13;
+			case 'email':&#13;
+				gs.eventQueue('x_fru_cir.message.send', stepExecution, workflow.scratchpad.backup_contact);&#13;
+				setBackupOnTeamMember(workflow.scratchpad.backup_contact);&#13;
+				break;&#13;
+&#13;
+			case 'sms':&#13;
+				var fromNumber = gs.getProperty('x_fru_cir.twilio.phone.number').toString();&#13;
+				var number = new CIRSituationUtils().GetPhoneNumbers(workflow.scratchpad.backup_contact);&#13;
+				var notify = new sn_notify.NotifyScoped();&#13;
+&#13;
+				notify.sendBulkSMS(fromNumber, number, workflow.scratchpad.message, stepExecution);&#13;
+				setBackupOnTeamMember(workflow.scratchpad.backup_contact);&#13;
+				break;&#13;
+&#13;
+			case 'push':&#13;
+				gs.eventQueue('x_fru_cir.send.push.message', stepExecution, workflow.scratchpad.backup_contact);&#13;
+				setBackupOnTeamMember(workflow.scratchpad.backup_contact);&#13;
+				break;&#13;
+&#13;
+			case 'voice':&#13;
+				var fromNumber = gs.getProperty('x_fru_cir.twilio.phone.number').toString();&#13;
+				var number = new CIRSituationUtils().GetPhoneNumbers(workflow.scratchpad.backup_contact);&#13;
+				var notify = new sn_notify.NotifyScoped();&#13;
+&#13;
+				notify.call(fromNumber, number[0], null, null, null, stepExecution);&#13;
+				setBackupOnTeamMember(workflow.scratchpad.backup_contact);&#13;
+				break;		&#13;
+		}&#13;
+&#13;
+	}&#13;
+}&#13;
+&#13;
+function checkIfBackupHasMsg(backupId) {&#13;
+	var msgRecipientGr = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);&#13;
+	msgRecipientGr.addQuery('user', backupId);&#13;
+	msgRecipientGr.addQuery('step_message_execution', current.step_message_execution);&#13;
+	msgRecipientGr.addQuery('state', '3');&#13;
+	msgRecipientGr.query();&#13;
+&#13;
+	if (msgRecipientGr.next()) {&#13;
+		workflow.scratchpad.feedback = msgRecipientGr.feedback;&#13;
+		return true;&#13;
+	}&#13;
+&#13;
+	return false;&#13;
+}&#13;
+&#13;
+// gets the response team member and sets the new backup contact that was notified&#13;
+function setBackupOnTeamMember(backupId) {	&#13;
+	var grTMember = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);&#13;
+	grTMember.addQuery('response_execution_id', current.step_message_execution.response_plan.toString());&#13;
+	grTMember.addQuery('user', current.user.toString());&#13;
+	grTMember.query();&#13;
+	&#13;
+	if(grTMember.next()) {&#13;
+		grTMember.setValue('backed_up_by', backupId);&#13;
+		grTMember.update();&#13;
+	}&#13;
+}</value>
+        <variable display_value="">c35ddef20a0a0ba96248a7090eccd518</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>5ca699c1db0c2c10d4a73533f39619db</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d0a699c1db0c2c10d4a73533f39619dc</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:20:26</sys_updated_on>
+        <value>var stepExecution = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC_STEP_MSG);&#13;
+stepExecution.addQuery('sys_id', current.step_message_execution);&#13;
+stepExecution.query();&#13;
+&#13;
+if (stepExecution.next()) {&#13;
+	if (checkIfBackupHasMsg(workflow.scratchpad.backup_contact)) {&#13;
+		current.state = '3';&#13;
+		current.feedback = workflow.scratchpad.feedback;&#13;
+	} else {&#13;
+		switch (current.message_type.toString()) {&#13;
+			case 'email':&#13;
+				gs.eventQueue('x_fru_cir.message.send', stepExecution, workflow.scratchpad.backup_contact);&#13;
+				setBackupOnTeamMember(workflow.scratchpad.backup_contact);&#13;
+				break;&#13;
+&#13;
+			case 'sms':&#13;
+				var fromNumber = gs.getProperty('x_fru_cir.twilio.phone.number').toString();&#13;
+				var number = new CIRSituationUtils().GetPhoneNumbers(workflow.scratchpad.backup_contact);&#13;
+				var notify = new sn_notify.NotifyScoped();&#13;
+&#13;
+				notify.sendBulkSMS(fromNumber, number, workflow.scratchpad.message, stepExecution);&#13;
+				setBackupOnTeamMember(workflow.scratchpad.backup_contact);&#13;
+				break;&#13;
+&#13;
+			case 'push':&#13;
+				gs.eventQueue('x_fru_cir.send.push.message', stepExecution, workflow.scratchpad.backup_contact);&#13;
+				setBackupOnTeamMember(workflow.scratchpad.backup_contact);&#13;
+				break;&#13;
+&#13;
+			case 'voice':&#13;
+				var fromNumber = gs.getProperty('x_fru_cir.twilio.phone.number').toString();&#13;
+				var number = new CIRSituationUtils().GetPhoneNumbers(workflow.scratchpad.backup_contact);&#13;
+				var notify = new sn_notify.NotifyScoped();&#13;
+&#13;
+				notify.call(fromNumber, number[0], null, null, null, stepExecution);&#13;
+				setBackupOnTeamMember(workflow.scratchpad.backup_contact);&#13;
+				break;		&#13;
+		}&#13;
+&#13;
+	}&#13;
+}&#13;
+&#13;
+function checkIfBackupHasMsg(backupId) {&#13;
+	var msgRecipientGr = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);&#13;
+	msgRecipientGr.addQuery('user', backupId);&#13;
+	msgRecipientGr.addQuery('step_message_execution', current.step_message_execution);&#13;
+	msgRecipientGr.addQuery('state', '3');&#13;
+	msgRecipientGr.query();&#13;
+&#13;
+	if (msgRecipientGr.next()) {&#13;
+		workflow.scratchpad.feedback = msgRecipientGr.feedback;&#13;
+		return true;&#13;
+	}&#13;
+&#13;
+	return false;&#13;
+}&#13;
+&#13;
+// gets the response team member and sets the new backup contact that was notified&#13;
+function setBackupOnTeamMember(backupId) {	&#13;
+	var grTMember = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);&#13;
+	grTMember.addQuery('response_execution_id', current.step_message_execution.response_plan.toString());&#13;
+	grTMember.addQuery('user', current.user.toString());&#13;
+	grTMember.query();&#13;
+	&#13;
+	if(grTMember.next()) {&#13;
+		grTMember.setValue('backed_up_by', backupId);&#13;
+		grTMember.update();&#13;
+	}&#13;
+}</value>
+        <variable display_value="">c35ddef20a0a0ba96248a7090eccd518</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Send to backup contact">5ca699c1db0c2c10d4a73533f39619db</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>58a699c1db0c2c10d4a73533f39619dc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Timer">3961a1da0a0a0b5c00ecd84822f70d85</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>4</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>Wait until get a response</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>18a699c1db0c2c10d4a73533f39619de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Message Execution with Backup Contacts">d8a699c1db0c2c10d4a73533f39619d5</workflow_version>
+        <x>220</x>
+        <y>278</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=18a699c1db0c2c10d4a73533f39619de"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>10a699c1db0c2c10d4a73533f39619e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>3bf802c20a0a0b52008e2859cd8abcf2</value>
+        <variable display_value="">220cd53d0a0a0b214103bdc2ec5c7ab4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1350</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>14a699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cc836da0a0a0b520083ebc07da2f47c</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1320</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>14a6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cc6788c0a0a0b5200e6743c94001b16</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>500</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>50a699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">220dc5a40a0a0b2109fbd28b8c4b6213</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1320</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>50a6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>08fcd0830a0a0b2600079f56b1adb9ae</value>
+        <variable display_value="">4cc4a4030a0a0b52007334f001376dc5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1360</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>58a699c1db0c2c10d4a73533f39619e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">292b2f0e0a0a0b215aa2dd2cbc578dc5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>5ca699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">c35dc0df0a0a0ba96248a7098d737925</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1350</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>5ca6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cc740fe0a0a0b520025dcf8e2ff78e7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1360</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>94a699c1db0c2c10d4a73533f39619e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">292bd15e0a0a0b215a040c701033e3c5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>3000</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>var stepMsg = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC_STEP_MSG); &#13;
+stepMsg.addQuery('sys_id', current.step_message_execution); &#13;
+stepMsg.query(); &#13;
+&#13;
+if (stepMsg.next()) { &#13;
+&#13;
+	var time = stepMsg.response_plan_step.timer;&#13;
+&#13;
+	answer = time * 60;&#13;
+}&#13;
+&#13;
+</value>
+        <variable display_value="">293493710a0a0b2115e3e5b4fce1d12a</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>script</value>
+        <variable display_value="">21f80cd00a0a0b2101fcd5b5defc0810</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>320</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>9ca699c1db0c2c10d4a73533f39619de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cba34da0a0a0b5200798c86eafe1203</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d0a699c1db0c2c10d4a73533f39619e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">21fd462c0a0a0b211c997276d7806c03</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>350</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d4a699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cbfe48a0a0a0b5200cf8b82cc6685f1</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1360</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d4a6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">292c91070a0a0b212543d91ffde5014c</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>script</value>
+        <variable display_value="">21f80cd00a0a0b2101fcd5b5defc0810</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>320</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>9ca699c1db0c2c10d4a73533f39619de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cba34da0a0a0b5200798c86eafe1203</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>350</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d4a699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cbfe48a0a0a0b5200cf8b82cc6685f1</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>500</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>50a699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">220dc5a40a0a0b2109fbd28b8c4b6213</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>10a699c1db0c2c10d4a73533f39619e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>3bf802c20a0a0b52008e2859cd8abcf2</value>
+        <variable display_value="">220cd53d0a0a0b214103bdc2ec5c7ab4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d0a699c1db0c2c10d4a73533f39619e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">21fd462c0a0a0b211c997276d7806c03</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>5ca699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">c35dc0df0a0a0ba96248a7098d737925</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1320</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>14a6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cc6788c0a0a0b5200e6743c94001b16</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1320</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>50a6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>08fcd0830a0a0b2600079f56b1adb9ae</value>
+        <variable display_value="">4cc4a4030a0a0b52007334f001376dc5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1350</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>5ca6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cc740fe0a0a0b520025dcf8e2ff78e7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1350</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>14a699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">4cc836da0a0a0b520083ebc07da2f47c</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1360</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>94a699c1db0c2c10d4a73533f39619e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">292bd15e0a0a0b215a040c701033e3c5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1360</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>58a699c1db0c2c10d4a73533f39619e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">292b2f0e0a0a0b215aa2dd2cbc578dc5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>1360</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d4a6d9c1db0c2c10d4a73533f3961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value/>
+        <variable display_value="">292c91070a0a0b212543d91ffde5014c</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>18a699c1db0c2c10d4a73533f39619de</document_key>
+        <order>3000</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a699c1db0c2c10d4a73533f39619df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>var stepMsg = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC_STEP_MSG); &#13;
+stepMsg.addQuery('sys_id', current.step_message_execution); &#13;
+stepMsg.query(); &#13;
+&#13;
+if (stepMsg.next()) { &#13;
+&#13;
+	var time = stepMsg.response_plan_step.timer;&#13;
+&#13;
+	answer = time * 60;&#13;
+}&#13;
+&#13;
+</value>
+        <variable display_value="">293493710a0a0b2115e3e5b4fce1d12a</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Wait until get a response">18a699c1db0c2c10d4a73533f39619de</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d0a6d9c1db0c2c10d4a73533f3961907</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+    </wf_condition>
+    <wf_activity action="INSERT_OR_UPDATE">
+        <activity_definition display_value="Wait for condition">d93a02ae0a0a0aa30077abad3fdac035</activity_definition>
+        <activity_definition_updated>false</activity_definition_updated>
+        <databus_lookup_id>7</databus_lookup_id>
+        <height/>
+        <input>{}</input>
+        <is_parent>false</is_parent>
+        <name>Wait until the message state change</name>
+        <new_activity_definition/>
+        <notes/>
+        <out_of_date>false</out_of_date>
+        <parent/>
+        <pinned>false</pinned>
+        <pinned_version/>
+        <stage/>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>50a699c1db0c2c10d4a73533f39619dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <timeout>1970-01-01 00:00:00</timeout>
+        <vars/>
+        <width/>
+        <workflow_version display_value="CIR Message Execution with Backup Contacts">d8a699c1db0c2c10d4a73533f39619d5</workflow_version>
+        <x>264</x>
+        <y>102</y>
+    </wf_activity>
+    <sys_variable_value action="delete_multiple" query="document_key=50a699c1db0c2c10d4a73533f39619dd"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>50a699c1db0c2c10d4a73533f39619dd</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a699c1db0c2c10d4a73533f39619dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>state=3^EQ</value>
+        <variable display_value="">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>50a699c1db0c2c10d4a73533f39619dd</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d4a699c1db0c2c10d4a73533f39619dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>// Set the variable 'answer' to true or false to indicate if the condition has been met or not.&#13;
+answer = true;&#13;
+</value>
+        <variable display_value="">c35debce0a0a0ba96248a709440cf31a</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>50a699c1db0c2c10d4a73533f39619dd</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a699c1db0c2c10d4a73533f39619dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>state=3^EQ</value>
+        <variable display_value="">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>wf_activity</document>
+        <document_key>50a699c1db0c2c10d4a73533f39619dd</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d4a699c1db0c2c10d4a73533f39619dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <value>// Set the variable 'answer' to true or false to indicate if the condition has been met or not.&#13;
+answer = true;&#13;
+</value>
+        <variable display_value="">c35debce0a0a0ba96248a709440cf31a</variable>
+    </sys_variable_value>
+    <wf_condition action="INSERT_OR_UPDATE">
+        <activity display_value="Wait until the message state change">50a699c1db0c2c10d4a73533f39619dd</activity>
+        <condition>true</condition>
+        <condition_default/>
+        <condition_type>standard</condition_type>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <is_positive>true</is_positive>
+        <name>Always</name>
+        <order>0</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>10a699c1db0c2c10d4a73533f39619de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+    </wf_condition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">9ca6d9c1db0c2c10d4a73533f3961908</condition>
+        <from display_value="Get message">18a6d9c1db0c2c10d4a73533f3961908</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>10a6d9c1db0c2c10d4a73533f396190a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <to display_value="Wait until the message state change">50a699c1db0c2c10d4a73533f39619dd</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Yes">d0a699c1db0c2c10d4a73533f39619da</condition>
+        <from display_value="Check if message was already sent to backup users">14a699c1db0c2c10d4a73533f39619d8</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>1ca6d9c1db0c2c10d4a73533f396190a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <to display_value="Wait until the message state change">50a699c1db0c2c10d4a73533f39619dd</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">10a699c1db0c2c10d4a73533f39619de</condition>
+        <from display_value="Wait until the message state change">50a699c1db0c2c10d4a73533f39619dd</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>54a6d9c1db0c2c10d4a73533f396190b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <to display_value="End">98a6d9c1db0c2c10d4a73533f3961907</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">58a699c1db0c2c10d4a73533f39619dc</condition>
+        <from display_value="Send to backup contact">5ca699c1db0c2c10d4a73533f39619db</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>90a6d9c1db0c2c10d4a73533f396190b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <to display_value="Wait until get a response">18a699c1db0c2c10d4a73533f39619de</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">d0a6d9c1db0c2c10d4a73533f3961907</condition>
+        <from display_value="Wait until get a response">18a699c1db0c2c10d4a73533f39619de</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>94a6d9c1db0c2c10d4a73533f396190a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <to display_value="Check if message was already sent to backup users">14a699c1db0c2c10d4a73533f39619d8</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="No">10a699c1db0c2c10d4a73533f39619da</condition>
+        <from display_value="Check if message was already sent to backup users">14a699c1db0c2c10d4a73533f39619d8</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>98a6d9c1db0c2c10d4a73533f396190a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <to display_value="Send to backup contact">5ca699c1db0c2c10d4a73533f39619db</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">9ca6d9c1db0c2c10d4a73533f3961908</condition>
+        <from display_value="Get message">18a6d9c1db0c2c10d4a73533f3961908</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>d0a6d9c1db0c2c10d4a73533f396190a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <to display_value="Wait until get a response">18a699c1db0c2c10d4a73533f39619de</to>
+    </wf_transition>
+    <wf_transition action="INSERT_OR_UPDATE">
+        <condition display_value="Always">54a699c1db0c2c10d4a73533f39619db</condition>
+        <from display_value="Begin">1ca699c1db0c2c10d4a73533f39619da</from>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>dca6d9c1db0c2c10d4a73533f396190a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <to display_value="Get message">18a6d9c1db0c2c10d4a73533f3961908</to>
+    </wf_transition>
+    <wf_estimated_runtime_config action="INSERT_OR_UPDATE">
+        <estimated_run_time/>
+        <no_of_data_points>1</no_of_data_points>
+        <percentage_threshold_ert>20</percentage_threshold_ert>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-10-22 12:13:11</sys_created_on>
+        <sys_id>10a699c1db0c2c10d4a73533f39619d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:13:11</sys_updated_on>
+        <workflow_version display_value="CIR Message Execution with Backup Contacts">d8a699c1db0c2c10d4a73533f39619d5</workflow_version>
+    </wf_estimated_runtime_config>
+    <wf_workflow_version action="update_multiple" query="workflow=2bcb2af01b73c450df7e43f4bd4bcbff^sys_id!=d8a699c1db0c2c10d4a73533f39619d5">
+        <published>false</published>
+    </wf_workflow_version>
+</record_update>

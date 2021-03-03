@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_wizard_answer">
+    <sys_wizard_answer action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <answer>Drive Off: situations where a Drive Off occurs </answer>
+        <button_label/>
+        <dependent_value/>
+        <element/>
+        <name>Drive Off</name>
+        <next_question/>
+        <order>500</order>
+        <payload_name/>
+        <question display_value="CIR Case" name="CIR Case">fbb0a7d2db25981003b3533fd3961982</question>
+        <roles>x_fru_cir.drive_off</roles>
+        <script/>
+        <sys_class_name>sys_wizard_answer</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-21 17:09:01</sys_created_on>
+        <sys_id>e1c70fcddb365810bf9ead8ed3961922</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Drive Off</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_wizard_answer_e1c70fcddb365810bf9ead8ed3961922</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-21 17:11:11</sys_updated_on>
+        <table/>
+        <target_url>x_fru_cir_drive_off_case.do?sys_id=-1</target_url>
+        <type>1</type>
+    </sys_wizard_answer>
+</record_update>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="mandatory_cat_ui_policy" label="Mandatory Cat UI Policy" language="en" table="x_fru_cir_assessment_field">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>mandatory_cat_ui_policy</element>
+            <help/>
+            <hint/>
+            <label>Mandatory Cat UI Policy</label>
+            <language>en</language>
+            <name>x_fru_cir_assessment_field</name>
+            <plural>Mandatory Cat UI Policies</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-10 14:40:39</sys_created_on>
+            <sys_id>ae0352a7dbb95010d4a73533f3961938</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Mandatory Cat UI Policy</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_assessment_field_mandatory_cat_ui_policy_en</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-10 14:40:39</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

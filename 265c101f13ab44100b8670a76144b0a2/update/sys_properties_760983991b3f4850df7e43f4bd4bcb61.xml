@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Phone number used in the integration with twilio outgoing for voice calls and sms in the Situation Management process. If there's multiple numbers seperate them by comma.</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_fru_cir.twilio.phone.number</name>
+        <read_roles>admin</read_roles>
+        <suffix>twilio.phone.number</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-26 08:45:48</sys_created_on>
+        <sys_id>760983991b3f4850df7e43f4bd4bcb61</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>x_fru_cir.twilio.phone.number</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_properties_760983991b3f4850df7e43f4bd4bcb61</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-26 09:23:18</sys_updated_on>
+        <type>string</type>
+        <value/>
+        <write_roles>admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=760983991b3f4850df7e43f4bd4bcb61"/>
+</record_update>

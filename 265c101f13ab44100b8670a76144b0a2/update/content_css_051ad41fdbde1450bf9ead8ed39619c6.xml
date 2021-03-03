@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_css">
+    <content_css action="INSERT_OR_UPDATE">
+        <name>cir_bg_schedule_list</name>
+        <style>/*!&#13;
+FullCalendar List View Plugin v4.1.0&#13;
+Docs &amp; License: https://fullcalendar.io/&#13;
+(c) 2019 Adam Shaw&#13;
+*/&#13;
+/* List View&#13;
+--------------------------------------------------------------------------------------------------*/&#13;
+/* possibly reusable */&#13;
+.fc-event-dot {&#13;
+  display: inline-block;&#13;
+  width: 10px;&#13;
+  height: 10px;&#13;
+  border-radius: 5px; }&#13;
+&#13;
+/* view wrapper */&#13;
+.fc-rtl .fc-list-view {&#13;
+  direction: rtl;&#13;
+  /* unlike core views, leverage browser RTL */ }&#13;
+&#13;
+.fc-list-view {&#13;
+  border-width: 1px;&#13;
+  border-style: solid; }&#13;
+&#13;
+/* table resets */&#13;
+.fc .fc-list-table {&#13;
+  table-layout: auto;&#13;
+  /* for shrinkwrapping cell content */ }&#13;
+&#13;
+.fc-list-table td {&#13;
+  border-width: 1px 0 0;&#13;
+  padding: 8px 14px; }&#13;
+&#13;
+.fc-list-table tr:first-child td {&#13;
+  border-top-width: 0; }&#13;
+&#13;
+/* day headings with the list */&#13;
+.fc-list-heading {&#13;
+  border-bottom-width: 1px; }&#13;
+&#13;
+.fc-list-heading td {&#13;
+  font-weight: bold; }&#13;
+&#13;
+.fc-ltr .fc-list-heading-main {&#13;
+  float: left; }&#13;
+&#13;
+.fc-ltr .fc-list-heading-alt {&#13;
+  float: right; }&#13;
+&#13;
+.fc-rtl .fc-list-heading-main {&#13;
+  float: right; }&#13;
+&#13;
+.fc-rtl .fc-list-heading-alt {&#13;
+  float: left; }&#13;
+&#13;
+/* event list items */&#13;
+.fc-list-item.fc-has-url {&#13;
+  cursor: pointer;&#13;
+  /* whole row will be clickable */ }&#13;
+&#13;
+.fc-list-item-marker,&#13;
+.fc-list-item-time {&#13;
+  white-space: nowrap;&#13;
+  width: 1px; }&#13;
+&#13;
+/* make the dot closer to the event title */&#13;
+.fc-ltr .fc-list-item-marker {&#13;
+  padding-right: 0; }&#13;
+&#13;
+.fc-rtl .fc-list-item-marker {&#13;
+  padding-left: 0; }&#13;
+&#13;
+.fc-list-item-title a {&#13;
+  /* every event title cell has an &lt;a&gt; tag */&#13;
+  text-decoration: none;&#13;
+  color: inherit; }&#13;
+&#13;
+.fc-list-item-title a[href]:hover {&#13;
+  /* hover effect only on titles with hrefs */&#13;
+  text-decoration: underline; }&#13;
+&#13;
+/* message when no events */&#13;
+.fc-list-empty-wrap2 {&#13;
+  position: absolute;&#13;
+  top: 0;&#13;
+  left: 0;&#13;
+  right: 0;&#13;
+  bottom: 0; }&#13;
+&#13;
+.fc-list-empty-wrap1 {&#13;
+  width: 100%;&#13;
+  height: 100%;&#13;
+  display: table; }&#13;
+&#13;
+.fc-list-empty {&#13;
+  display: table-cell;&#13;
+  vertical-align: middle;&#13;
+  text-align: center; }&#13;
+&#13;
+.fc-unthemed .fc-list-empty {&#13;
+  /* theme will provide own background */&#13;
+  background-color: #eee; }</style>
+        <sys_class_name>content_css</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-03 07:45:04</sys_created_on>
+        <sys_id>051ad41fdbde1450bf9ead8ed39619c6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_bg_schedule_list</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>content_css_051ad41fdbde1450bf9ead8ed39619c6</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-03 07:45:04</sys_updated_on>
+        <type>local</type>
+        <url/>
+    </content_css>
+</record_update>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="PSI Category" max_length="40" name="x_fru_cir_psi_category" sizeclass="13" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="class" choice_table="x_fru_cir_psi_asset_type" label="Class" max_length="40" name="class" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="400" name="description" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true,pdf_cell_type=image" label="Icon" max_length="40" name="icon" type="user_image"/>
+        <element attributes="edge_encryption_enabled=true" label="Message - English" max_length="8000" name="message" type="html"/>
+        <element attributes="edge_encryption_enabled=true" label="Message - Spanish" max_length="8000" name="message_es" type="html"/>
+        <element attributes="edge_encryption_enabled=true" label="Name" mandatory="true" max_length="40" name="name" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Parent" mandatory="true" max_length="32" name="parent" reference="x_fru_cir_psi_category" reference_qual="tierLT_OR_EQUALS_FIELDtier^typeSAMEAStype^EQ" reference_qual_condition="tierLT_OR_EQUALS_FIELDtier^typeSAMEAStype^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Short description" max_length="40" name="short_description" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true" label="Tier" max_length="40" name="tier" read_only="true" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" read_only="true" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="External" sequence="1" value="0"/>
+                <element inactive_on_update="false" label="Internal" sequence="2" value="1"/>
+            </choice>
+        </element>
+        <element label="Value" mandatory="true" max_length="40" name="value" type="string"/>
+        <index name="index">
+            <element name="parent"/>
+        </index>
+    </element>
+</database>

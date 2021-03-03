@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRProductRecallFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRProductRecallFP</name>
+        <script><![CDATA[var CIRProductRecallFP = (function() {
+    var CIRProductRecallFP = Class.create();
+    var initialize = function() {};
+
+    //Constant to be used in Set Send To Field Function
+    var POPULATE_SEND_TO = {
+        'email_stakeholders': function(product) {
+            return getEmailsFromGroup(product.getValue('assignment_group'));
+        },
+        'sms_stakeholders': function(product) {
+            return getNumberFromGroup(product.getValue('assignment_group'));
+        },
+        'email_storemanagers': function(product) {
+            return getEmailFromStores(product.getUniqueValue());
+        },
+        'sms_storemanagers': function(product) {
+            return getNumberFromStores(product.getUniqueValue());
+        },
+
+
+    };
+
+    /**
+     * Call function to update m2m table between product Recall and Locations 
+     * USED IN - UI Action - Load Impacted Stores
+     * USED IN - Business Rule - Update Affected Stores after Location change
+     * @param  {Object} productRecall - Product Recall Objet
+     * @return {void}
+     */
+    var updateImpactedStores = function(productRecall) {
+        updateM2mLocation(productRecall.getValue('location'), productRecall.getUniqueValue());
+    };
+
+    /**
+     * Function that Update the M2M Table between Locations and Product Recall
+     * USED IN - function  - updateImpactedStores
+     * 
+     * @param  {String} location - Location Sys ID
+     * @param  {String} productRecallSysId - Product Recall Sys ID
+     * @return {void}
+     */
+    var updateM2mLocation = function(location, productRecallSysId) {
+        var locationGR = new GlideRecord(CIRConstants.Tables.LOCATION);
+        if (locationGR.get(location)) {
+            //If location is a store creates a record in the m2m
+            if (locationGR.getValue('x_fru_cir_cir_types') === '2') {
+                createM2mRecord(location, productRecallSysId);
+            }
+            //If is not a store looks for a child location
+            else {
+                getChildren(location, productRecallSysId);
+            }
+        }
+    };
+    /**
+     * Function that Deletes all the Records in the m2m table that are related with the product REcall
+     * USED IN - Business Rule  - Update Affected Stores after Location change
+     * USED IN - UI Action - Load Impacted Stores
+     * @param  {String} productRecallSysId - Product Recall Sys ID
+     * @return {void}
+     */
+    var deleteM2mLocations = function(productRecallSysId) {
+        var gr = new GlideRecordSecure(CIRConstants.Tables.AFFECTED_STORES);
+        gr.addQuery('product_recall', productRecallSysId);
+        gr.query();
+        gr.deleteMultiple();
+    };
+
+    /**
+     * Function that makes the recursive part for updateM2mLocation
+     * USED IN - function  - updateM2mLocation
+     * 
+     * @param  {String} location - Location Sys ID
+     * @param  {String} productRecallSysId - Product Recall Sys ID
+     * @return {void}
+     */
+    var getChildren = function(location, productRecallSysId) {
+        var gr = new GlideRecord(CIRConstants.Tables.LOCATION);
+        gr.addQuery('parent', location);
+        gr.query();
+        while (gr.next()) {
+            updateM2mLocation(gr.getUniqueValue(), productRecallSysId);
+        }
+    };
+    /**
+     * Function that Update the M2M Table between Locations and Product Recall
+     * USED IN - function  - updateM2mLocation
+     * 
+     * @param  {String} location - Location Sys ID
+     * @param  {String} productRecallSysId - Product Recall Sys ID
+     * @return {void}
+     */
+    var createM2mRecord = function(location, productRecallSysId) {
+        if (!existsM2M(location, productRecallSysId)) {
+            var gr = new GlideRecordSecure(CIRConstants.Tables.AFFECTED_STORES);
+            gr.initialize();
+            gr.setValue('location', location);
+            gr.setValue('product_recall', productRecallSysId);
+            gr.insert();
+        }
+    };
+    /**
+     * Function that verify if certain record already exists in the m2m table
+     * USED IN - function  - createM2mRecord
+     * 
+     * @param  {String} location - Location Sys ID
+     * @param  {String} productRecallSysId - Product Recall Sys ID
+     * @return {Boolean} True if exists, false otherwise
+     */
+    var existsM2M = function(location, productRecallSysId) {
+        var gr = new GlideRecordSecure(CIRConstants.Tables.AFFECTED_STORES);
+        gr.addQuery('product_recall', productRecallSysId);
+        gr.addQuery('location', location);
+        gr.query();
+        return gr.hasNext();
+    };
+
+    /**
+     * Function that Create a new action for each affected store, assigning it to the Contact of that Location(cir_type store)
+     * USED IN - UI Page  - cir_product_recall_create_action
+     * 
+     * @param  {String} productRecallSysId - Product Recall Sys ID
+     * @param  {String} shortDescription - Action Short DEscription
+     * @param  {String} description - Action Description
+     * @param  {String} priority - Action Pryority
+     * @param  {Date} due_date - Product Recall Sys ID
+     * @return {Integer} Number of new actions created
+     */
+    var createActions = function(productRecallSysId, shortDescription, description, priority, due_date) {
+        var count = 0;
+
+        var productRecall = new GlideRecordSecure(CIRConstants.Tables.PRODUCT_RECALL);
+
+        if (productRecall.get(productRecallSysId)) {
+            var stores = new GlideRecordSecure(CIRConstants.Tables.AFFECTED_STORES);
+            stores.addEncodedQuery('product_recall=' + productRecallSysId);
+            stores.query();
+            while (stores.next()) {
+                if (!existsAction(stores.getValue('location'), productRecallSysId)) {
+                    var action = new GlideRecordSecure(CIRConstants.Tables.ACTION);
+                    action.initialize();
+                    action.setValue('due_date', due_date);
+                    action.setValue('short_description', shortDescription);
+                    action.setValue('description', description);
+                    action.setValue('priority', priority);
+                    action.setValue('parent', productRecallSysId);
+                    action.setValue('product_recall', productRecallSysId);
+                    action.setValue('location', stores.getValue('location'));
+                    action.setValue('assigned_to', stores.location.contact);
+                    action.insert();
+                    count++;
+                }
+            }
+        }
+        return count;
+    };
+
+    /**
+     * Function that verify if a certain location(store), have an action tht the parent is the Product Recall
+     * USED IN - funciton  - createActions
+     * 
+     * @param  {String} store - Location Sys ID
+     * @param  {String} productRecall - Product Recall Sys ID
+
+     * @return {Boolean} True if exists, false otherwise
+     */
+    var existsAction = function(store, productRecall) {
+        var gr = new GlideRecord(CIRConstants.Tables.ACTION);
+        gr.addEncodedQuery('parent=' + productRecall + '^location=' + store);
+        gr.query();
+        if (gr.next()) {
+            return true;
+        }
+
+        return false;
+    };
+
+	
+    /**
+     * Function that verify if a certain Product Recall, have an action that the parent is the Product Recall
+     * USED IN - UI Action condition  - create Actions for Store Manager
+     * 
+     * @param  {String} store - Location Sys ID
+     * @param  {String} productRecall - Product Recall Sys ID
+
+     * @return {Boolean} True if exists, false otherwise
+     */
+    var actionsCreated = function(productRecall) {
+        var gr = new GlideRecord(CIRConstants.Tables.ACTION);
+        gr.addQuery('parent', productRecall);
+        gr.query();
+        return gr.hasNext();
+    };
+
+    var productRecallStoreCount = function(productSysId) {
+
+        var ga = new GlideAggregate(HSEConstantsFP.Tables.M2M_LOCATIONS_PRODUCT_RECALLS);
+        ga.addQuery('product_recall', productSysId);
+        ga.addAggregate('COUNT');
+        ga.query();
+
+        if (ga.next()) {
+            return ga.getAggregate('COUNT');
+        }
+    };
+
+     /**
+         * Populate the Field SendTo on Product Recall with the correct emails/numbers to send.
+         * USED IN - Script Include - CIRDriveOffProductRecallAjax
+         * 
+         * @param  {String} productSysId - Location Sys ID
+         * @param  {String} type - Product Recall Sys ID
+    	 POPULATE_SEND_TO - have configurations about 
+
+         * @return {Boolean} True if sucess, false otherwise
+         */
+    var populateToField = function(productSysId, type) {
+        var product = new GlideRecord(CIRConstants.Tables.PRODUCT_RECALL);
+        if (!product.get(productSysId)) {
+            return false;
+        }
+        product.setValue('emailsendto', POPULATE_SEND_TO[type](product));
+        return product.update() ? true : false;
+
+    };
+
+
+    /**
+     * Get all emails from users in a certain Group
+     * USED IN - function - populateToField
+     * 
+     * @param  {String} groupSysId - Group Sys ID
+	 POPULATE_SEND_TO - have configurations about 
+
+     * @return {String} All emails separated by ';''
+     */
+    var getEmailsFromGroup = function(groupSysId) {
+        var toReturn = '';
+        var gr = new GlideRecord('sys_user_grmember');
+        gr.addEncodedQuery('group=' + groupSysId);
+        gr.query();
+        while (gr.next()) {
+            toReturn += gr.user.email + ';';
+        }
+        toReturn = toReturn.substring(0, toReturn.length - 1);
+
+        return toReturn;
+    };
+
+
+    /**
+     * Get all number@provider from users of a specific Group
+     * USED IN - function - populateToField
+     * 
+     * @param  {String} groupSysId - Group Sys ID
+	 
+     * @return {String} a list of phone_number@provider separated by ;
+     */
+    var getNumberFromGroup = function(groupSysId) {
+        var toReturn = '';
+        var gr = new GlideRecord(CIRConstants.Tables.GROUP_MEMBER);
+        gr.addEncodedQuery('group=' + groupSysId);
+        gr.query();
+        while (gr.next()) {
+            
+            if (getProviderFromUser(gr.user)) {
+                toReturn += getProviderFromUser(gr.user) + ';';
+            }
+        }
+        toReturn = toReturn.substring(0, toReturn.length - 1);
+        return toReturn;
+    };
+
+    /**
+     * Get the number@Service Provider suffix, from a user if have one SMS provider defined
+     * USED IN - function - getNumberFromGroup
+     * 
+     * @param  {Object} user - User object
+     * @return {String} a list of phone_number@provider separated by ;
+     */
+    var getProviderFromUser = function(user) {
+        var provider = new GlideRecord(CIRConstants.Tables.USER_PROVIDER);
+        provider.addQuery('active', true);
+        provider.addQuery('type', 'SMS');
+        provider.addQuery('user.sys_id', user);
+        provider.query();
+        if (provider.next()) {
+            return provider.getValue('phone_number') + '@' + getProviderSuffix(provider.getValue('service_provider'));
+        }
+    };
+
+    /**
+     * Get the Service Provider suffix, a service Provider
+     * USED IN - function - getProviderFromUser
+     * 
+     * @param  {String} providerUser - Provider Service Sys Id
+ 
+
+     * @return {String} All emails separated by ';''
+     */
+    var getProviderSuffix = function(providerUser) {
+        var grProvider = new GlideRecord(CIRConstants.Tables.PROVIDER);
+        if (grProvider.get(providerUser)) {
+            return grProvider.getValue('email_suffix');
+        }
+        return false;
+    };
+
+    /**
+     * Get all the emails from the conctact of a location for all locations type store related with a specific product recall
+     * USED IN - function - getProviderFromUser
+     * 
+     * @param  {String} productRecall - Product Recall Sys ID
+ 
+
+     * @return {String} All emails separated by ';''
+     */
+    var getEmailFromStores = function(productRecall) {
+        var toReturn = '';
+        var gr = new GlideRecord(CIRConstants.Tables.AFFECTED_STORES);
+        gr.addEncodedQuery('product_recall=' + productRecall);
+        gr.query();
+        while (gr.next()) {
+            if (gr.location.contact.email) {
+                toReturn += gr.location.contact.email + ';';
+            }
+        }
+        toReturn = toReturn.substring(0, toReturn.length - 1);
+        return toReturn;
+    };
+
+
+    /**
+     * Get all number@provider from Contact of all affected stores
+     * USED IN - function - populateToField
+     * 
+     * @param  {String} productRecall - Product Recall Sys ID
+	 
+     * @return {String} a list of phone_number@provider separated by ;
+     */
+    var getNumberFromStores = function(productRecall) {
+        var toReturn = '';
+        var gr = new GlideRecord(CIRConstants.Tables.AFFECTED_STORES);
+        gr.addEncodedQuery('product_recall=' + productRecall);
+        gr.query();
+        while (gr.next()) {
+            if (gr.location.contact && getProviderFromUser(gr.location.contact)){
+				
+                toReturn += getProviderFromUser(gr.location.contact) + ';';
+				}
+            }
+        
+        toReturn = toReturn.substring(0, toReturn.length - 1);
+        return toReturn;
+    };
+    /**
+     * Function that verify if certain record already exists in the m2m table
+     * USED IN - Business Rule  - Only allow one entry for each case - x_fru_cir_near_miss_product_recall
+     * 
+     * @param  {String} Near Miss - Near Miss sys_id
+     * 
+     * @return {Boolean} True if exists, false otherwise
+     */
+    var checkNearMissm2m = function(nearMiss) {
+        var gr = new GlideRecord(CIRConstants.Tables.NEARMISS_PRODUCTRECALL);
+        gr.addEncodedQuery('near_miss=' + nearMiss);
+        gr.query();
+        return gr.hasNext();
+    };
+
+
+    /**
+     * Function that verify if certain record already exists in the m2m table
+     * USED IN - Business Rule  - Only allow one entry for each case - x_fru_cir_incident_product_recall
+     * 
+     * @param  {String} incident - Incident sys_id
+     * 
+     * @return {Boolean} True if exists, false otherwise
+     */
+    var checkIncidentm2m = function(incident) {
+        var gr = new GlideRecord(CIRConstants.Tables.INCIDENT_PRODUCTRECALL);
+        gr.addEncodedQuery('incident=' + incident);
+        gr.query();
+        return gr.hasNext();
+    };
+
+
+    /**
+     * Function that Set the field has product as True or false 
+     * USED IN - Business Rule  - Only allow one entry for each case - x_fru_cir_incident_product_recall
+     * 
+     * @param  {Object} m2mRecord - Record of m2m
+     * @param  {Boolean} add - True if is insert , false if it is delete
+     * @return {Boolean} True if exists, false otherwise
+     */
+    var makeHasProduct = function(m2mRecord, add) {
+        if (m2mRecord.getTableName() === CIRConstants.Tables.NEARMISS_PRODUCTRECALL) {
+            var near = new GlideRecord(CIRConstants.Tables.NEAR_MISS);
+            if (near.get(m2mRecord.near_miss)) {
+                if (add) {
+                    near.setValue('has_product', true);
+                    near.update();
+                } else {
+                    near.setValue('has_product', false);
+                    near.update();
+                }
+            }
+        } else if (m2mRecord.getTableName() === CIRConstants.Tables.INCIDENT_PRODUCTRECALL) {
+            var gr = new GlideRecord(CIRConstants.Tables.INCIDENT);
+            if (gr.get(m2mRecord.incident)) {
+                if (add) {
+                    gr.setValue('has_product', true);
+                    gr.update();
+                } else {
+                    gr.setValue('has_product', false);
+                    gr.update();
+                }
+            }
+        }
+    };
+
+    CIRProductRecallFP.prototype = {
+        initialize: initialize,
+
+        UpdateImpactedStores: updateImpactedStores,
+        DeleteM2mLocations: deleteM2mLocations,
+        CreateActions: createActions,
+        ActionsCreated: actionsCreated,
+        ProductRecallStoreCount: productRecallStoreCount,
+        PopulateToField: populateToField,
+        CheckNearMissm2m: checkNearMissm2m,
+        CheckIncidentm2m: checkIncidentm2m,
+        MakeHasProduct: makeHasProduct
+
+    };
+
+    return CIRProductRecallFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-28 10:44:46</sys_created_on>
+        <sys_id>85f2799fdb729c10bf9ead8ed39619b7</sys_id>
+        <sys_mod_count>41</sys_mod_count>
+        <sys_name>CIRProductRecallFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_85f2799fdb729c10bf9ead8ed39619b7</sys_update_name>
+        <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+        <sys_updated_on>2020-09-25 17:12:30</sys_updated_on>
+    </sys_script_include>
+</record_update>

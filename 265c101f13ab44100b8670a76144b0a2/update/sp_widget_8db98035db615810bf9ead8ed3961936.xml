@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil, $timeout, $location, $window, amb, spModal, $uibModal, $rootScope) {
+	/* widget controller */
+	var c = this;
+	
+
+	//Sort Functionality
+	c.sortOrder = c.data.sortOrder || false;
+	c.orderCol = c.data.orderCol || false;
+	c.changeSortCol = function(key){
+
+		/* If the user is selecting the same column, reverse the sort order, else set the order to false which forces a new sort in ascending order */
+		if(key  ==  c.orderCol)
+			c.sortOrder = !c.sortOrder;
+		else
+			c.sortOrder = false;
+
+		c.orderCol = key;
+		$scope.data.orderCol = c.orderCol;
+		$scope.data.sortOrder = c.sortOrder;
+		spUtil.update($scope);
+	}
+
+	//Record Watch Functionality
+	//a flag to indicate if a live update has been triggered by the Record Watcher
+	c.updatedFromServer = false;
+	
+	// crisis record record watcher
+	spUtil.recordWatch($scope, c.data.tables.SITUATION, "sys_id=" + c.data.crisis_id, function () {
+		c.server.update();
+	});
+
+	/* empty string is a filter. For example 'active=true' would only trigger
+	the callback function when changes are made to active records */
+	spUtil.recordWatch($scope, c.data.table, c.data.filter, function(updateObj){
+		spUtil.update($scope);
+		c.updatedFromServer = true;
+		if (!c.updatedRegs) {
+			c.updatedRegs = {};
+		}
+
+		/* add sys_ids of any changed records to an array
+			this will allow us to highlight them in the HTML template */
+		c.updatedRegs[updateObj.data.sys_id] = true;
+		$timeout(function(){
+			c.updatedRegs[updateObj.data.sys_id] = false;
+		},6000);
+	});
+
+
+	c.openRecord = function(record){
+		var input = '';
+
+		if(c.options.parent || c.options.table == "x_lsmcb_fsm_notification_log") {
+			input = {id: 'cir_sit_form', table: c.options.table, sys_id: record.sys_id};
+			_openModal(input);
+
+		} else {
+			var id = c.options.record_page_id;
+			input = {id: id, table: c.options.table, sys_id: record.sys_id};
+			$location.search(input);
+		}
+	}
+
+
+	function _openModal(input) {
+		c.modalInstance = spModal.open({
+			widget: input.id,
+			widgetInput: {sys_id : input.sys_id, table : input.table, parentId : input.parentId},
+			size: 'lg',
+			buttons: []
+		}).then(function(){});
+	}
+
+
+	c.redirectNew = function(){
+		if (c.options.new_url != ''){
+			var hosturl = 'https://' + $window.location.host;
+			$window.location.href = hosturl + '/' + c.options.new_url;
+			return;
+		} 
+
+		var input = {
+			id: 'cir_form', 
+			sys_id : -1,
+			table : c.options.table, 
+			parentId : c.data.parentId
+		};
+		_openModal(input);
+	}
+
+
+	// Count Rows and next records
+	var watcher;
+	function initRecordWatcher(table, filter){
+		if (watcher)
+			watcher.unsubscribe();
+
+		if (table && filter) {
+			var watcherChannel = amb.getChannelRW(table, filter);
+			amb.connect();
+			watcher = watcherChannel.subscribe(function() {
+				spUtil.update($scope)
+			});
+		}
+	}
+
+	function getData(updateUrl) {
+		// all the records from the data source
+		spUtil.update($scope).then(function(data) {
+			initRecordWatcher($scope.data.table, $scope.data.filter);
+		});
+	}
+
+
+	$scope.mathMin = function(v1,v2) {
+		return Math.min(v1,v2);
+	}
+
+	// Page number per row
+	$scope.getNumber = function(num) {
+		return new Array(num);
+	}
+
+	$scope.setPageNum = function(num) {
+		$scope.data.p = num;
+		$scope.data.records_id = $scope.data.record_to_filter;
+		getData(true);
+	}
+
+	$scope.rowsWerePruned = function() {
+		if (!$scope.data.records)
+			return;
+
+		$scope.rowsPruned = $scope.mathMin($scope.data.window_end,$scope.data.row_count) - $scope.data.window_start - $scope.data.records.length;
+		return $scope.rowsPruned > 0;
+	}
+
+
+	//Functions used to open the Task Execution form
+	var isModalOpen = false;
+	c.addTask = function() {
+		if (isModalOpen) {
+			return;
+		}
+		isModalOpen = true;
+		var crisis_record = c.data.crisis_id; 
+		var dimension = c.data.dimension;
+
+		var modalInstance = spModal.open({
+			size: 'lg',
+			buttons: [],
+			widget: 'cir_sit_form',
+			widgetInput: { 
+				sys_id: '-1',
+				table: c.data.tables.TASK_EXECUTION,
+				view: 'cir_sec_portal_view',
+				crisis: crisis_record,
+				dimension: dimension
+			}
+		}).then('', function () {
+			 isModalOpen = false;
+    });
+
+  };
+
+	c.updateTask = function(record) {
+		if(isModalOpen){
+			return;
+		}
+		
+		var crisis_record = c.data.crisis_id; 
+		var dimension = c.data.dimension;
+		isModalOpen = true;
+		spModal.open({
+			buttons: [],
+			widget: 'cir_sit_form',
+			widgetInput: { 
+				sys_id: record.sys_id,
+				table: c.data.tables.TASK_EXECUTION,
+				view: 'cir_sec_portal_view',
+				crisis: crisis_record,
+				dimension: dimension
+			},
+			size: 'lg'
+		}).then('', function () {
+		 isModalOpen = false;
+    });
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.header-title{&#13;
+ 	vertical-align: -webkit-baseline-middle;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.06;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+}&#13;
+&#13;
+.panel-body{&#13;
+	padding:0;&#13;
+  overflow-y:auto !important;&#13;
+  height:258px !important;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+  color: #2e2e2e;&#13;
+  display: block;&#13;
+  border-radius: 3px;&#13;
+  border: solid 1px #cccccc;&#13;
+  background-color: #ffffff;&#13;
+}&#13;
+&#13;
+th {&#13;
+	border: 1px solid #ddd;&#13;
+  color: $brand-primary;&#13;
+  border-top: 0;&#13;
+  position: sticky;&#13;
+  top: 0;&#13;
+  background: white;&#13;
+  border-collapse: collapse;&#13;
+  }&#13;
+&#13;
+tbody tr:hover{&#13;
+  background-color: $list-hover-color;&#13;
+}&#13;
+&#13;
+.table &gt; thead &gt; tr &gt; th {&#13;
+  &#13;
+  position: sticky;&#13;
+  vertical-align: bottom;&#13;
+  border-bottom: 2px solid #ddd;&#13;
+  color: $brand-primary;&#13;
+}&#13;
+&#13;
+//Setting a little space before the anchor tag&#13;
+.anchor-tag:before {&#13;
+  content:"";&#13;
+  display:block;&#13;
+  height:10px; &#13;
+  margin:-10px 0 0;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir_situation_tasks</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR Situation Tasks</name>
+        <option_schema>[{"name":"new_url","section":"Data","label":"Url for new records","type":"string"},{"name":"reference_table","section":"Data","label":"Reference Table","type":"string"},{"name":"reference_field","section":"Data","label":"Reference Field","type":"string"},{"name":"hide_on_empty","section":"Presentation","default_value":"false","label":"Hide on empty","type":"boolean"},{"name":"limit","section":"Data","label":"Record limit","type":"integer"},{"name":"parent","section":"Data","label":"Parent","type":"string"},{"name":"record_page_id","section":"other","default_value":"fsm_crisis_room","label":"record_page_id","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.cir_base</roles>
+        <script><![CDATA[(function () {
+	data.tables = CIRConstants.Tables;
+	function addTaskQueries(gr, dataSource, crisisId) {
+		if (dataSource.table === data.tables.TASK_EXECUTION) {
+			var query = new CIRSituationUtils().GetExecutionTasks(crisisId);
+			gr.addEncodedQuery(query);
+		}
+	}
+
+	var fetchData = function (dataSource) {
+		if (dataSource.table != '') {
+			data.records = [];
+			data.crisis_id = $sp.getParameter("sys_id");
+
+			if (data.crisis_id) {
+				var crisisRecord = new GlideRecordSecure(data.tables.SITUATION);
+				crisisRecord.addQuery("sys_id", data.crisis_id);
+				crisisRecord.query();
+				if (crisisRecord.next()) {
+					data.dimension = crisisRecord.dimension.toString();
+				}
+			}
+
+			var gr = new GlideRecordSecure(dataSource.table);
+			data.canCreate = gr.canCreate();
+			gr.addEncodedQuery(dataSource.filter);
+			addTaskQueries(gr, dataSource, data.crisis_id);
+
+			if (dataSource.relatedList && dataSource.parentId != '' && dataSource.relatedField) {
+				gr.addQuery(dataSource.relatedField, dataSource.parentId);
+			}
+			
+			//Sort the table
+			if (!gs.nil(dataSource.orderCol)) {
+				if (dataSource.sortOrder) {
+					gr.orderByDesc(dataSource.orderCol);
+				} else {
+					gr.orderBy(dataSource.orderCol);
+				}
+			} else if (!gs.nil(options.order_by)) {
+				data.orderCol = options.order_by;
+				if (options.order_direction != 'asc') {
+					data.sortOrder = true;
+					gr.orderByDesc(options.order_by);
+				} else {
+					gr.orderBy(options.order_by);
+				}
+			}
+			gr.query();
+			
+			while (gr.next()) {
+				var o = {};
+				//use $sp utility methods rather than manually creating record objects
+				$sp.getRecordDisplayValues(o, gr, dataSource.fields);
+				$sp.getRecordValues(o, gr, 'sys_id');
+				data.records.push(o);
+			}
+			data.tooltip = gs.getMessage(options.button_tooltip);
+
+			//use an array to order columns
+			data.labels = [];
+			var labels = $sp.getFieldsObject(gr, dataSource.fields);
+			for (var label in labels) {
+				data.labels.push({
+					"key": label,
+					"type": labels[label].type,
+					"value": labels[label].label
+				});
+			}
+			if (gs.nil(dataSource.tableLabel)) {
+				tableLabel = gr.getED().getPlural().toLowerCase();
+				tableLabel = tableLabel.replace(/\s+/g, "_");
+				data.tableLabel = tableLabel;
+			} else {
+				data.tableLabel = dataSource.tableLabel;
+			}
+		}
+	};
+
+	if (!input) {
+		data.records = [];
+		data.hidePanel = false;
+		data.table = options.table || '';
+		data.groupBy = $sp.getParameter('groupBy') || options.aggregate_field || '';
+		data.fields = $sp.getParameter('fields') || options.field_list || '';
+		data.filter = $sp.getParameter('filter') || options.filter || '';
+		data.parent = options.parent;
+
+		var myTableMessage = gs.getMessage(options.title).toLowerCase();
+		data.noItemMessage = gs.getMessage('cir_sit_no_records');
+
+		if (options.reference_table != '') {
+			if ($sp.getParameter('table') == options.reference_table) {
+				data.relatedList = true;
+				data.relatedTable = options.reference_table;
+				data.relatedField = options.reference_field;
+				data.parentId = $sp.getParameter('sys_id');
+
+				fetchData(data);
+			} else {
+				data.hidePanel = true;
+			}
+		} else {
+			fetchData(data);
+		}
+
+		if (options.hide_on_empty == 'true') {
+			if (data.records.length == 0) {
+				data.hidePanel = true;
+			}
+		}
+	}
+
+	if (input) {
+		fetchData(input);
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-06-22 08:02:38</sys_created_on>
+        <sys_id>8db98035db615810bf9ead8ed3961936</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>CIR Situation Tasks</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_8db98035db615810bf9ead8ed3961936</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-14 09:22:44</sys_updated_on>
+        <template><![CDATA[<a name="{{::data.tableLabel}}" class="anchor-tag"></a>
+<div ng-if="!c.data.hidePanel" class="panel panel-{{::c.options.color}}">
+    <!-- Default panel contents -->
+    <div class="panel-heading clearfix"><span class="header-title">${cir_sit_tasks}</span>
+        <div class="pull-right" uib-tooltip="{{::c.data.tooltip}}" tooltip-placement="top" tooltip-append-to-body="true"
+            tooltip-enable="!c.data.canCreate">
+            <button ng-disabled="!c.data.canCreate" ng-if="options.new_records == 'true'"
+                class="btn btn-sm m-l-xs pull-right"
+                ng-class="::{'btn-primary':c.options.color != 'primary','btn-default':c.options.color === 'primary'}"
+                ng-click="c.redirectNew()">
+                <span ng-if="c.data.table==='x_fru_cir_situation'">${cir_sit_create_sit_room}</span>
+            </button>
+        </div>
+        <!-- DIV USED ON TASKS LIST ON A CRISIS ROOM -->
+        <button ng-if="c.data.table=='x_fru_cir_situation_task_execution'" ng-disabled="!c.data.canCreate"
+            ng-click="c.addTask()" class="btn btn-primary action-btn pull-right">${cir_sit_add_new_task}</button>
+    </div>
+    <div class="panel-body">
+        <table class="table overview-widget table-{{::c.options.color}}" ng-if="c.data.records.length > 0">
+            <thead>
+                <tr >
+                    <th ng-repeat="label in c.data.labels" ng-click="c.changeSortCol(label.key)">
+                        {{ label.value }}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="record in c.data.records " ng-click="c.openRecord(record)"
+                    ng-if="c.data.table!='x_fru_cir_situation_task_execution'">
+
+                    <td ng-repeat="label in c.data.labels">
+                        {{record[label.key]}}
+                    </td>
+                </tr>
+
+                <!-- TASK LIST -->
+                <tr ng-repeat="record in c.data.records" ng-click="c.updateTask(record)"
+                    ng-if="c.data.table=='x_fru_cir_situation_task_execution'">
+
+                    <td ng-repeat="label in c.data.labels">
+                        {{record[label.key]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="margin:20px" ng-if="c.data.records.length == 0">
+            <span style="font-weight: 500;">{{data.noItemMessage}}</span>
+        </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

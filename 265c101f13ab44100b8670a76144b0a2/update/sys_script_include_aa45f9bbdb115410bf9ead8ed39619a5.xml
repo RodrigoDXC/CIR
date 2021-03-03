@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRLogUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script include used to create Log records on the Log table of CIR</description>
+        <name>CIRLogUtils</name>
+        <script><![CDATA[var CIRLogUtils = function(current, previous) {
+
+	var tables = CIRConstants.Tables;
+	// since the br runs after the creation of the record, the current.isNewRecord returns always false
+	var isNewRecord = current.getValue('sys_mod_count') == '0';
+
+	// object with arrays that cointais a list of field to track for each table
+	var fieldsToTrack = {
+		x_fru_cir_situation: ['escalation_level', 'people_affected', 'country', 'buildings', 'people_affected_manual', 'location_groups', 'comments',
+							 'virtual_locations', 'parametrization', 'description', 'sys_created_by'
+							],
+		x_fru_cir_situation_member: ['user_id'],
+		x_fru_cir_situation_task_execution: ['description', 'name', 'task_type', 'assigned_to', 'state'],
+		x_fru_cir_response_plan_execution: ['number', 'assigned_to', 'state', 'country', 'buildings', 'location_groups', 'virtual_locations', 'people_affected', 'description', 'short_description'],
+		x_fru_cir_response_team: ['user'],
+		x_fru_cir_response_plan_execution_step: ['assigned_to', 'short_description', 'description', 'state'],
+		x_fru_cir_response_plan_execution_step_action: ['assigned_to', 'short_description', 'description', 'state'],
+		x_fru_cir_response_plan_execution_step_condition: ['assigned_to', 'short_description', 'description', 'state'],
+		x_fru_cir_response_plan_execution_step_message: ['assigned_to', 'short_description', 'description', 'state'],
+		x_fru_cir_response_room_message: ['user', 'message_type', 'message_content']
+	};
+
+	// array with objects that contains the current table, parent table and field to get a specific value
+	var parentRecordsTable = [{
+		table: tables.SITUATION_MEMBER,
+		parent_table: tables.SITUATION,
+		field: 'situation'
+	}, {
+		table: tables.RESP_PLAN_EXEC,
+		parent_table: tables.SITUATION,
+		field: 'parent_situation'
+	}, {
+		table: tables.SITUATION,
+		parent_table: tables.SITUATION,
+		field: 'situation'
+	}, {
+		table: tables.RESPONSE_TEAM,
+		parent_table: tables.RESP_PLAN_EXEC,
+		field: 'response_execution_id'
+	}, {
+		table: tables.RESPONSE_ROOM_MESSAGE,
+		parent_table: tables.RESP_PLAN_EXEC,
+		field: 'response_execution_id'
+	}, {
+		table: tables.RESP_PLAN_EXEC_STEP,
+		parent_table: tables.RESP_PLAN_EXEC,
+		field: 'response_plan'
+	}, {
+		table: tables.RESP_PLAN_EXEC_STEP_ACTN,
+		parent_table: tables.RESP_PLAN_EXEC,
+		field: 'response_plan'
+	}, {
+		table: tables.RESP_PLAN_EXEC_STEP_COND,
+		parent_table: tables.RESP_PLAN_EXEC,
+		field: 'response_plan'
+	}, {
+		table: tables.RESP_PLAN_EXEC_STEP_MSG,
+		parent_table: tables.RESP_PLAN_EXEC,
+		field: 'response_plan'
+	}];
+	
+	/**
+	 * function that executes the tracking of changes in the record
+	 */
+	var trackRecord = function () {
+		
+		// getting the fields for a specific table
+		var fields = fieldsToTrack[current.getTableName()];
+
+		// if it is not new, it will check what fields have changed
+		if (!isNewRecord) {
+
+			// checks which field has changed
+			fields = fields.filter(function(el) {
+				return current[el].changes();
+			});
+		}
+
+		// if the array is not empty, it will create a new log's record
+		if (fields.length) {
+			createLogRecord(fields);
+		}
+	};
+
+	/**
+	 * creates a log record for each field with the old and new value of it
+	 *
+	 * @param {array} fields - list of fields to create a log
+	 */
+	var createLogRecord = function (fields) {
+		var gr = new GlideRecord(tables.LOG);
+		var timestamp = getTimestamp();
+		fields.forEach(function (el) {
+			var fieldType = current[el].getED().getInternalType();
+			// it will not create a new log if it is a new record and the value is empty
+			if (this.isNewRecord && !current.getValue(el)) {
+				return;
+			}
+			gr.initialize();
+			gr.setValue('timestamp', timestamp);
+			
+			if (current.operation() !== 'delete' && !isNewRecord && fieldType !== 'journal_input') {
+				gr.setValue('old_value', previous[el].getDisplayValue() ? previous[el].getDisplayValue() : gs.getMessage('cir_empty'));
+			}
+			gr.setValue('type', current.operation());
+			gr.setValue('field', current[el].getLabel());
+			if (fieldType == 'journal_input') {
+				var notes = current[el].getJournalEntry(-1);
+				if (!notes) {
+					return;
+				}
+				var value = notes.split("\n\n"); // getting all the additional comments and convert it into an array
+				var finalValue = value[0].split('\n'); // splitting the latest additional comment
+				finalValue.shift(); // removing the information of the date time and user
+				finalValue = finalValue.join('\n'); // join the information
+				gr.setValue('new_value', finalValue);
+			} else {
+				gr.setValue('new_value', current[el].getDisplayValue() ? current[el].getDisplayValue() : gs.getMessage('cir_empty'));
+			}
+			gr.setValue('table', current.getTableName());
+			gr.setValue('record', current.getUniqueValue());
+
+			// looking for a current table in the parenRecordsTable to get the right parent table and field
+			var index = parentRecordsTable.map(function (x) {return x.table;}).indexOf(current.getTableName());
+
+			// this is to add the crisis as a parent and it is already prepared for the response plan
+			if (index != -1 && ((current.getTableName() === tables.RESP_PLAN_EXEC && el === 'number') ||
+								(current.getTableName() !== tables.RESP_PLAN_EXEC ))) {
+				gr.setValue('parent_table', parentRecordsTable[index].parent_table);
+				gr.setValue('parent_record', current.getValue(parentRecordsTable[index].field));
+			}
+			gr.insert();
+		}, this);
+	};
+
+	/**
+	 * returns the date/time of the current record
+	 * 
+	 * @returns {string} date time
+	 */
+	var getTimestamp = function () {
+		var GDT = new GlideDateTime();
+
+		// sys_updated_on is not updated when the record is deleted
+		if (current.operation() !== 'delete') {
+			GDT.setDisplayValue(current.getDisplayValue('sys_updated_on'));
+		}
+		return GDT.getValue();
+	};
+	
+	return {
+		TrackRecord: trackRecord,
+		CreateLogRecord: createLogRecord,
+		GetTimestamp: getTimestamp
+	};
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-06-16 10:54:18</sys_created_on>
+        <sys_id>aa45f9bbdb115410bf9ead8ed39619a5</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIRLogUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_aa45f9bbdb115410bf9ead8ed39619a5</sys_update_name>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-09-16 14:39:19</sys_updated_on>
+    </sys_script_include>
+</record_update>

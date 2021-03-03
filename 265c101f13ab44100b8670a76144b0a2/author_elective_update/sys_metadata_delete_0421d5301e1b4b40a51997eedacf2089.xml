@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column">
+    <sp_column action="DELETE">
+        <class_name/>
+        <order>1</order>
+        <size>9</size>
+        <size_lg/>
+        <size_sm/>
+        <size_xs/>
+        <sp_row display_value="1">101fdb011bbb0850df7e43f4bd4bcb18</sp_row>
+        <sys_class_name>sp_column</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 15:42:26</sys_created_on>
+        <sys_id>181fdb011bbb0850df7e43f4bd4bcb1a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_column_181fdb011bbb0850df7e43f4bd4bcb1a</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 15:42:26</sys_updated_on>
+    </sp_column>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sp_column_181fdb011bbb0850df7e43f4bd4bcb1a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column"><sp_column action="INSERT_OR_UPDATE"><class_name/><order>1</order><size>9</size><size_lg/><size_sm/><size_xs/><sp_row display_value="1">101fdb011bbb0850df7e43f4bd4bcb18</sp_row><sys_class_name>sp_column</sys_class_name><sys_created_by>paulo.gomes</sys_created_by><sys_created_on>2020-03-25 15:42:26</sys_created_on><sys_id>181fdb011bbb0850df7e43f4bd4bcb1a</sys_id><sys_mod_count>0</sys_mod_count><sys_name>1</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sp_column_181fdb011bbb0850df7e43f4bd4bcb1a</sys_update_name><sys_updated_by>paulo.gomes</sys_updated_by><sys_updated_on>2020-03-25 15:42:26</sys_updated_on></sp_column></record_update>]]></payload>
+        <payload_hash>-213627794</payload_hash>
+        <record_name>1</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 15:42:26</sys_created_on>
+        <sys_id>141fdb011bbb0850df7e43f4bd4bcb1c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>171125bee020000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 15:42:26</sys_updated_on>
+        <type>Column</type>
+        <update_guid>1c1fdb0110bb08502c5891bf5114b11b</update_guid>
+        <update_guid_history>1c1fdb0110bb08502c5891bf5114b11b:-213627794</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">86dcb38d1b7f0850df7e43f4bd4bcbd9</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 17:52:33</sys_created_on>
+        <sys_db_object display_value="" name="sp_column">sp_column</sys_db_object>
+        <sys_id>0421d5301e1b4b40a51997eedacf2089</sys_id>
+        <sys_metadata>181fdb011bbb0850df7e43f4bd4bcb1a</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_0421d5301e1b4b40a51997eedacf2089</sys_update_name>
+        <sys_update_version display_value="sp_column_181fdb011bbb0850df7e43f4bd4bcb1a">141fdb011bbb0850df7e43f4bd4bcb1c</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:02</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAjaxUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>CIRAjaxUtils</name>
+        <script><![CDATA[var CIRAjaxUtils = Class.create();
+CIRAjaxUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+	getLocationData: function() {
+		var locationData = {};
+		locationData.name = this.getParameter('sysparm_location');
+		var obj = new CIRUtils().GetLocationFilterData(locationData);
+		return JSON.stringify(obj);
+		/*
+		var addressValues = {};
+		//addressValues.country = "Japan";
+		
+		var grLocation = new GlideRecord(tables.LOCATION);
+		//grLocation.addEncodedQuery('active=true^type=1^sys_id='+locationData.name);
+		grLocation.addEncodedQuery('sys_id='+locationData.name);
+		grLocation.query();
+
+		if (grLocation.next()) {
+			addressValues.country = grLocation.getValue('country');
+			//addressValues.state = getAdressValueId('state',grLocation.getValue('state'));
+			//addressValues.city = getAdressValueId('city',grLocation.getValue('city'));
+			//addressValues.state = grLocation.getValue('state');
+			//addressValues.city = grLocation.getValue('city');
+		}
+		
+		return JSON.stringify(addressValues);*/
+
+		
+	},
+
+	type: 'CIRAjaxUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-23 10:02:08</sys_created_on>
+        <sys_id>75bdd3f81ba66410d4bca977b04bcb3a</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>CIRAjaxUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_75bdd3f81ba66410d4bca977b04bcb3a</sys_update_name>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-23 22:33:20</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_script_include_75bdd3f81ba66410d4bca977b04bcb3a</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;x_fru_cir.CIRAjaxUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;true&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;CIRAjaxUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var CIRAjaxUtils = Class.create();
+CIRAjaxUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+	getLocationData: function() {
+		var locationData = {};
+		locationData.name = this.getParameter('sysparm_location');
+		var obj = new CIRUtils().GetLocationFilterData(locationData);
+		return JSON.stringify(obj);
+		/*
+		var addressValues = {};
+		//addressValues.country = "Japan";
+		
+		var grLocation = new GlideRecord(tables.LOCATION);
+		//grLocation.addEncodedQuery('active=true^type=1^sys_id='+locationData.name);
+		grLocation.addEncodedQuery('sys_id='+locationData.name);
+		grLocation.query();
+
+		if (grLocation.next()) {
+			addressValues.country = grLocation.getValue('country');
+			//addressValues.state = getAdressValueId('state',grLocation.getValue('state'));
+			//addressValues.city = getAdressValueId('city',grLocation.getValue('city'));
+			//addressValues.state = grLocation.getValue('state');
+			//addressValues.city = grLocation.getValue('city');
+		}
+		
+		return JSON.stringify(addressValues);*/
+
+		
+	},
+
+	type: 'CIRAjaxUtils'
+});]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;lopez-aznar@dxc.com&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-02-23 10:02:08&lt;/sys_created_on&gt;&lt;sys_id&gt;75bdd3f81ba66410d4bca977b04bcb3a&lt;/sys_id&gt;&lt;sys_mod_count&gt;11&lt;/sys_mod_count&gt;&lt;sys_name&gt;CIRAjaxUtils&lt;/sys_name&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_75bdd3f81ba66410d4bca977b04bcb3a&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;lopez-aznar@dxc.com&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-02-23 22:33:20&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>777218658</payload_hash>
+        <record_name>CIRAjaxUtils</record_name>
+        <reverted_from/>
+        <source>20f0dcaf1b566010d4bca977b04bcb1a</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-23 22:33:20</sys_created_on>
+        <sys_id>f9b9c6051bae6410d4bca977b04bcbdf</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>177d10682920000001</sys_recorded_at>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:39</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>71b9c60563ae6410aafe90e264a98fdf</update_guid>
+        <update_guid_history>71b9c60563ae6410aafe90e264a98fdf:777218658,45694245f6ae6410d5abc0c41b03503d:1799321282,5b18460594ae6410b43213163a7fd155:-81091633,bda706c178ae6410d5c1f711b626d748:-155996317,e65642c15dae641021e7df9672250438:-48622104,7633cecd5f6e64100512af2fb87172df:1691142309,cc330a01d7ae6410606a2c426575f789:-1495735329,5fff3d4d316e6410b627df20ad1879e3:-294543534,d293cdc1eaea6410d6645a2a0986deda:485044062,15a189c19dea64100f2e5dbb9e32609c:-447600427,9c40bb38d1e66410192665ea56c5039c:2022413051,bdcd5ff868a664103511a2bb5922ba8f:265738174</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-26 08:42:39</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>581f301327124e94b71404dc77a81944</sys_id>
+        <sys_metadata>75bdd3f81ba66410d4bca977b04bcb3a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIRAjaxUtils</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_script_include_75bdd3f81ba66410d4bca977b04bcb3a</sys_update_name>
+        <sys_update_version display_value="sys_script_include_75bdd3f81ba66410d4bca977b04bcb3a">f9b9c6051bae6410d4bca977b04bcbdf</sys_update_version>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:39</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

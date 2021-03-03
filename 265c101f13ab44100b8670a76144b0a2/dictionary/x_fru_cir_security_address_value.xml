@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Security Address Value" max_length="40" name="x_fru_cir_security_address_value" sizeclass="48" type="collection">
+        <element label="Country ISO long" max_length="40" name="country_iso_long" type="string"/>
+        <element label="Country ISO short" max_length="40" name="country_iso_short" type="string"/>
+        <element label="Language" max_length="40" name="language" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Country" sequence="0" value="country"/>
+                <element inactive_on_update="false" label="State" sequence="1" value="state"/>
+                <element inactive_on_update="false" label="City" sequence="2" value="city"/>
+                <element inactive_on_update="false" label="Building" sequence="3" value="building"/>
+                <element inactive_on_update="false" label="Space" sequence="4" value="space"/>
+                <element inactive_on_update="false" label="Floor" sequence="5" value="floor"/>
+            </choice>
+        </element>
+        <element label="User country code" max_length="40" name="user_country_code" type="string"/>
+        <element attributes="edge_encryption_enabled=true,serializer=com.glide.script.TranslatedTextXMLSerializer" display="true" label="Value" max_length="40" name="value" type="translated_text"/>
+    </element>
+</database>

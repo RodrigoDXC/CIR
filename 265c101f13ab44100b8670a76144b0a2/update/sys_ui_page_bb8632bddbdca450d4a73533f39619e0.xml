@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var buttonMsg = "";
+if(document.getElementById('activate').value === 'false' && document.getElementById('published').value === 'true') {
+	buttonMsg = "${JS:gs.getMessage('cir_assmt_unpublish')}";
+} else if(document.getElementById('activate').value === 'false') {
+	buttonMsg = "${JS:gs.getMessage('cir_assmt_deactivate')}";
+} else if(document.getElementById('activate').value === 'true') {
+	buttonMsg = "${JS:gs.getMessage('cir_assmt_activate')}";
+}
+document.getElementById('ok_button').className = "btn btn-destructive";
+document.getElementById('ok_button').innerText = buttonMsg;
+document.getElementById('cancel_button').className = "btn btn-default";
+
+function cancelAction() {
+    GlideDialogWindow.get().destroy();
+    return false;
+}]]></client_script>
+        <description>This UI Page will be used to remove all the objects linked to an Assessment.</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_activate_deactivate_assessment_objects.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <g:ui_form>
+        <g:evaluate>
+            var tableName = RP.getWindowProperties().table_name;
+            var activate = RP.getWindowProperties().activate;
+            var published = RP.getWindowProperties().published;
+            var currentSysId = RP.getWindowProperties().current_sys_id;
+            var bodyMsg = new CIRAssmtModel().GetActivateDeactivateAssessmentMessage(tableName, published === 'true', activate === 'true');
+        </g:evaluate>
+        <input type="hidden" id="currentSysId" name="currentSysId" value="${currentSysId}" />
+        <input type="hidden" id="tableName" name="tableName" value="${tableName}" />
+        <input type="hidden" id="activate" name="activate" value="${activate}" />
+        <input type="hidden" id="published" name="published" value="${published}" />
+        <div class="container-fluid">
+            <div style="text-align:left;"><br />
+                <div>${bodyMsg}</div><br /><br />
+                <div align="right" class="modal-footer">
+                    <g:dialog_buttons_ok_cancel ok="return true;" cancel="return cancelAction();" />
+                </div>
+            </div>
+        </div>
+    </g:ui_form>
+</j:jelly>]]></html>
+        <name>activate_deactivate_assessment_objects</name>
+        <processing_script><![CDATA[var activateMessage = new CIRAssmtModel().ActivateAssessmentObject(tableName, currentSysId, activate === 'true', published === 'true');
+response.sendRedirect(tableName + '.do?sys_id=' + currentSysId);]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-11-06 13:23:26</sys_created_on>
+        <sys_id>bb8632bddbdca450d4a73533f39619e0</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>activate_deactivate_assessment_objects</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_bb8632bddbdca450d4a73533f39619e0</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-09 11:46:01</sys_updated_on>
+    </sys_ui_page>
+</record_update>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application/>
+        <key>cir_sit_message_set_sent_task</key>
+        <language>en</language>
+        <message>The message was sent via {0} to the following users: {1}</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-06-30 09:50:40</sys_created_on>
+        <sys_id>bdb0f594db7d1010bf9ead8ed396192e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_sit_message_set_sent_task</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_message_bdb0f594db7d1010bf9ead8ed396192e</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-30 09:50:40</sys_updated_on>
+    </sys_ui_message>
+</record_update>

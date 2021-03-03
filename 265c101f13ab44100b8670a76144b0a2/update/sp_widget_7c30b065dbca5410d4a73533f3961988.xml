@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function(spUtil, $location,spAriaFocusManager,spModal) {
+	/* widget controller */
+	var c = this;
+	c.published = false;
+	
+	// CALLS PREVIEW WIDGET
+	if(c.data.catalogCategory){
+		spUtil.get("cir-ciri-assessment-form", {assessmentId : c.data.catalogCategory, isPreview: true }).then(function(response) {
+			c.assessmentPreviewWidget = response;
+		});
+	}
+
+	// TRIGEERS ASSESSMENT PUBLISHING
+	c.publish = function() {
+		spModal.open({
+			title: c.data.msgs.publishBtn,
+			message: c.data.msgs.confirmPublish,
+			buttons: [{
+				label: c.data.msgs.cancelModalBtnMsg,
+				cancel: true
+			},					
+			{
+				label: c.data.msgs.okModalBtnMsg,
+				primary: true
+			}
+		]
+		}).then(function() {
+			var obj = {};
+			obj.publish = true;
+			c.published = true;
+
+			c.server.get(obj).then(function(){});
+		});
+	}
+
+	// EXITS PAGE WITHOUT PUBSLISIHNG
+	c.exit = function() {
+		redirect(c.data.defManagerPage);
+	}
+
+	// REDIRECTS TO BACK PAGE
+	c.back = function() {
+		if(c.data.validAssessment) { // BACK PAGE WILL BE ADD CHOICES/FIELDS
+			editUrl(['table', 'assessment', 'view']);
+		}
+		redirect(c.data.backPage);
+	}
+
+	// EDITS URL TEMPLATE SO IT INCLUDES THE REQURIED PARAMS
+	var editUrl = function(params) {
+		for (var i = 0; i < params.length; i++) {
+			c.data.templateURL += '&' + params[i] + '={' + params[i] + '}';
+		}
+	};
+
+	// REDIRECT HANDLER
+	var redirect = function(pageDesc) {
+		var urlFormat = spUtil.format(c.data.templateURL, pageDesc);
+		var url = $location.search(urlFormat);
+		spAriaFocusManager.navigateToLink(url.url());
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.title {&#13;
+  text-align: center;&#13;
+  padding-top: 20px;&#13;
+}&#13;
+&#13;
+.buttons-footer {&#13;
+  padding-bottom: 50px;&#13;
+  margin-top: 40px;&#13;
+  margin-right: 30px;&#13;
+}&#13;
+&#13;
+.back-button {&#13;
+  border: 1px solid #717171;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+  margin-right: 5px;&#13;
+}&#13;
+&#13;
+.widget-container {&#13;
+  margin: 30px;&#13;
+  max-height: 60vh;&#13;
+  overflow-y: auto;&#13;
+}&#13;
+&#13;
+hr {&#13;
+  margin-right:30px;&#13;
+  margin-left:30px;&#13;
+}&#13;
+&#13;
+.preview{&#13;
+  border-radius: 6px;&#13;
+  border-style: solid;&#13;
+  border-color: #717171;&#13;
+  border-width: 5px 5px 5px;&#13;
+  margin-left: 5%;&#13;
+  margin-right: 5%;&#13;
+}&#13;
+&#13;
+.error {&#13;
+  margin-top: 15px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-assessment-publish</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Assessment Publish</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.assessment_manager</roles>
+        <script><![CDATA[(function() {
+    //URL PARAMS
+    data.assessmentId = options.assessment || $sp.getParameter('assessment'); // sys_id of the assessment
+    if(!new CIRAssmtModel().HasAssessmentDefinition(data.assessmentId, false)) {
+        data.error = true;
+        return;
+    }
+    data.catalogCategory = new CIRAssmtModel().GetCatalogCategoryFromAssessment(data.assessmentId);
+
+    //MESSAGES
+    data.msgs = {};
+    data.msgs.publishBtn = gs.getMessage('cir_assmt_manager_publish_btn');
+    data.msgs.exitBtn = gs.getMessage('cir_assmt_manager_exit_publish_btn');
+    data.msgs.backBtn = gs.getMessage('cir_assmt_manager_back_btn');
+    data.msgs.noSections = gs.getMessage('cir_assmt_list_manager_no_sections');
+    data.msgs.noAssessment = gs.getMessage('cir_assmt_not_found', gs.getMessage('cir_assmtessment'));
+    data.msgs.preview = gs.getMessage('cir_assmt_preview');
+    data.msgs.publishSuccess = gs.getMessage('cir_assmt_assessment_published');
+    data.msgs.publishErrors = gs.getMessage('cir_assmt_publish_errors');
+    data.msgs.confirmPublish = gs.getMessage('cir_assmt_publish_confirmation');
+    data.msgs.cancelModalBtnMsg = gs.getMessage('cir_assmt_list_manager_cancel_modal_btn');
+    data.msgs.okModalBtnMsg = gs.getMessage('cir_assmt_list_manager_ok_modal_btn');
+
+    //FETCH ASSESSMENT DATA [ASSESSMENT NAME, SECTIONS, FIELDS]
+    var assMgrUtils = CIRAssmtPortalListManagerFP();
+    var cirUtils = new CIRGenericUtils();
+    var cirModelUtils = new CIRAssmtModel();
+
+    data.validAssessment = cirModelUtils.ValidateAssessmentDefinitionId(data.assessmentId);
+    data.templateURL = 'id={id}';
+
+    // VALID ASSSESSMENT ID
+    if (data.validAssessment === true) {
+        data.assessmentData = {};
+        var assessment = cirUtils.QueryTable({
+            tableName: CIRConstants.Tables.ASSESSMENT_DEFINITION,
+            query: 'sys_id=' + data.assessmentId,
+            fields: ['name']
+        });
+        data.assessmentData.name = assessment[0] ? assessment[0].name + '' : '';
+        //data.assessmentData.sections = fetchSections();
+        data.title = data.assessmentData.name + ' - ' + data.msgs.preview;
+
+        // REDIRECT DATA
+        data.defManagerPage = {
+            id: CIRConstants.AssessmentPortalConstants.ASSESSMENT_DEF_MANAGER_PAGE
+        };
+        data.backPage = getBackPageURL(data.assessmentData.sections);
+
+    } else { // INVALID ASSSESSMENT ID
+        data.title = data.msgs.noAssessment;
+        data.backPage = {
+            id: CIRConstants.AssessmentPortalConstants.ASSESSMENT_DEF_MANAGER_PAGE
+        };
+    }
+
+
+    // GETS THS CORRECT BACK PAGE DEPENDING
+    function getBackPageURL(sections) {
+        var page = CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_ADD_FIELD;
+        var table = CIRConstants.Tables.ASSESSMENT_FIELD;
+
+        if (cirModelUtils.AssmtDefHasChoices(data.assessmentId)) {
+            // CHOICE DEFINITION PAGE - NEEDS TO BE FINISHED
+            page = CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_FIELD_CHOICE;
+            // TO CONFIRM AFTER CHOICE PAGE IS DONE
+            table = CIRConstants.Tables.ASSESSMENT_CHOICE;
+        }
+
+
+        var urlObj = {
+            id: page,
+            table: table,
+            assessment: data.assessmentId,
+            view: 'cir_portal_view'
+        };
+        return urlObj;
+    }
+
+
+
+    // PUBLISH ASSESSMENT
+    if (input && input.publish) {
+        var checkScript = new CIRAssmtModel().CheckGlobalScript();
+        if (checkScript.isOk) {
+            var allFieldsCreated = new CIRAssmtModel().CheckCatalogObject(data.assessmentId + '');
+            var allChoiceCreated = new CIRAssmtModel().CheckChoices(data.assessmentId + '');
+            if (!allFieldsCreated) {
+                gs.addErrorMessage(gs.getMessage('cir_assmt_mandatory_not_created'));
+            }
+            else if(!allChoiceCreated){
+                gs.addErrorMessage(gs.getMessage('cir_assmt_choice_not_created'));
+            }
+            else if(allFieldsCreated) {
+                new CIRAssmtModel().PublishAssessmentDefinition(data.assessmentId + '');
+                gs.addInfoMessage(gs.getMessage('cir_assmt_successfully_published'));
+            }
+		} 
+		else {
+            var msg = checkScript.msg + ' ' + gs.getMessage('cir_assmt_global_script_installer_page_msg');
+            gs.addErrorMessage(msg);
+        }
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:37:37</sys_created_on>
+        <sys_id>7c30b065dbca5410d4a73533f3961988</sys_id>
+        <sys_mod_count>39</sys_mod_count>
+        <sys_name>CIR CIRI Assessment Publish</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_7c30b065dbca5410d4a73533f3961988</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 12:13:06</sys_updated_on>
+        <template><![CDATA[<div ng-if="!data.error">
+  <!-- TITLE -->
+  <div>
+    <h2 class="title">
+      <strong>{{::data.title}}</strong>
+    </h2>
+    <hr ng-if="data.assessmentData.sections.length > 0 ">
+  </div>
+  
+  <!-- PREVIEW WIDGET -->
+  <div  class="widget-container preview">
+   	<sp-widget widget="c.assessmentPreviewWidget"></sp-widget>
+    <h3>
+    	<strong ng-if="data.assessmentData.sections.length === 0 && data.assessmentData.name">{{::data.msgs.noSections}}</strong>
+    </h3>  
+  </div>
+  
+  <!-- FOOTER BUTTONS -->
+  <hr>
+  <div class="buttons-footer ng-scope"> 
+    <button ng-if="data.validAssessment" ng-click="c.publish()" class="btn btn-primary action-btn pull-right next-button ng-binding" ng-disabled="data.assessmentData.sections.length === 0 || c.published">{{::data.msgs.publishBtn}}</button> 
+    <button ng-if="data.validAssessment" ng-click="c.exit()" class="btn btn-primary action-btn pull-right next-button" ng-disabled="c.published">{{::data.msgs.exitBtn}}</button> 
+    <button ng-click="c.back()" class="btn action-btn pull-right back-button ng-binding">{{::data.msgs.backBtn}}</button> 
+  </div>
+</div>
+<div class="error" ng-if="data.error">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">${Item not found}</h4>
+        </div>
+        <div class="panel-body wrapper">
+            <p>${This item is not found or currently not available}</p>
+        </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

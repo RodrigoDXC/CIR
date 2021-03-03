@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="pa_dashboards_permissions">
+    <pa_dashboards_permissions action="INSERT_OR_UPDATE">
+        <dashboard display_value="Static Protection Daily Report">3bc2252edbe6d010d4a73533f39619e4</dashboard>
+        <delete>false</delete>
+        <group/>
+        <identity>x_fru_cir.static_protection_manager</identity>
+        <read>true</read>
+        <role display_value="x_fru_cir.static_protection_manager" name="x_fru_cir.static_protection_manager">3daa8d89db9e1c10d4a73533f396192a</role>
+        <sys_class_name>pa_dashboards_permissions</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-13 15:53:35</sys_created_on>
+        <sys_id>56c96922db2ad010d4a73533f396198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.static_protection_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>pa_dashboards_permissions_56c96922db2ad010d4a73533f396198e</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-13 15:53:35</sys_updated_on>
+        <type>1</type>
+        <user/>
+        <write>false</write>
+    </pa_dashboards_permissions>
+</record_update>

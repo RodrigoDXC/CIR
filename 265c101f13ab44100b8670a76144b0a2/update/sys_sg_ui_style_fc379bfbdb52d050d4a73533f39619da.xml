@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_ui_style">
+    <sys_sg_ui_style action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="x_fru_cir_security_impact">potential_severity=1^EQ<item display_value="Extreme" endquery="false" field="potential_severity" goto="false" newquery="false" operator="=" or="false" value="1"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <field>potential_severity</field>
+        <item_vew/>
+        <item_view_element/>
+        <name>CIR - Security Impact: Potential severity Extreme</name>
+        <style>{"background_color":"FFA4A3","font_color":"64201A"}</style>
+        <sys_class_name>sys_sg_ui_style</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-05 10:48:19</sys_created_on>
+        <sys_id>fc379bfbdb52d050d4a73533f39619da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR - Security Impact: Potential severity Extreme</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_ui_style_fc379bfbdb52d050d4a73533f39619da</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-05 10:48:19</sys_updated_on>
+        <table>x_fru_cir_security_impact</table>
+        <use_item_view_elements>false</use_item_view_elements>
+    </sys_sg_ui_style>
+</record_update>

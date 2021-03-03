@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Contributing Factors" max_length="40" name="x_fru_cir_m2m_contributing_factor" sizeclass="2" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Contributing Factor" max_length="32" name="contributing_factor" reference="x_fru_cir_contributing_factor" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Investigation" max_length="32" name="investigation" reference="x_fru_cir_investigation" type="reference"/>
+        <index name="index">
+            <element name="contributing_factor"/>
+        </index>
+        <index name="index2">
+            <element name="investigation"/>
+        </index>
+    </element>
+</database>

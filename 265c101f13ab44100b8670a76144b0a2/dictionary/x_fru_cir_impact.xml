@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" label="Impact" max_length="40" name="x_fru_cir_impact" sizeclass="48" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Actual severity" mandatory="true" max_length="40" name="actual_severity" type="integer">
+            <choice>
+                <element inactive_on_update="false" label="Negligible" sequence="10" value="5"/>
+                <element inactive_on_update="false" label="Minor" sequence="20" value="4"/>
+                <element inactive_on_update="false" label="Noticeable" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="Significant" sequence="40" value="2"/>
+                <element inactive_on_update="false" label="Major" sequence="50" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Case" max_length="32" name="cir_case" read_only="true" reference="x_fru_cir_case" type="reference"/>
+        <element label="Description" mandatory="true" max_length="4000" name="description" type="string"/>
+        <element display="true" label="Name" max_length="255" name="display_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="likelihood" choice_table="x_fru_cir_incident" label="Future likelihood" mandatory="true" max_length="40" name="future_likelihood" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Certain to Occur" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="Very Likely" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="Possible" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="Unlikely" sequence="3" value="4"/>
+                <element inactive_on_update="false" label="Rare" sequence="4" value="5"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="consequence" choice_table="x_fru_cir_incident" label="Potential consequence" mandatory="true" max_length="40" name="potential_consequence" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Negligible" sequence="0" value="5"/>
+                <element inactive_on_update="false" label="Minor" sequence="1" value="4"/>
+                <element inactive_on_update="false" label="Moderate" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="Major" sequence="3" value="2"/>
+                <element inactive_on_update="false" label="Catastrophic" sequence="4" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="3" choice_field="severity" choice_table="x_fru_cir_case" default="4" label="Potential severity" max_length="40" name="potential_severity" read_only="true" type="integer">
+            <choice>
+                <element inactive_on_update="false" label="Extreme" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="High" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="Medium" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="Low" sequence="3" value="4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Recovery cost" max_length="20" name="recovery_cost" type="currency"/>
+        <element attributes="edge_encryption_enabled=true" default="javascript:current.getTableName();" dynamic_default_value="b5cb83a85f220100a9ad2572f2b4773c" label="Class" max_length="80" name="sys_class_name" type="sys_class_name" use_dynamic_default="true"/>
+        <element label="Work notes" max_length="4000" name="work_notes" type="journal_input"/>
+        <index name="index">
+            <element name="cir_case"/>
+        </index>
+        <index name="index2">
+            <element name="sys_class_name"/>
+        </index>
+    </element>
+</database>

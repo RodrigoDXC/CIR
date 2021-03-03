@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_impact" label="Physical Impact" max_length="40" name="x_fru_cir_physical_impact" sizeclass="26" type="collection">
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Actual damages" max_length="20" name="actual_damages" type="currency"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;&#9;// Add your code here&#13;&#10;&#9;return '';  // return the calculated value&#13;&#10;&#13;&#10;})(current);" label="Affected Vehicle" max_length="32" name="affected_vehicle" reference="x_fru_cir_vehicle" type="reference"/>
+        <element choice="1" label="Asset behaviour" max_length="40" name="asset_behaviour" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="It has worked properly" sequence="10" value="It has worked properly"/>
+                <element inactive_on_update="false" label="It has not worked properly" sequence="20" value="It has not worked properly"/>
+                <element inactive_on_update="false" label="It was turn off" sequence="30" value="It was turn off"/>
+                <element inactive_on_update="false" label="It was broken" sequence="40" value="It was broken"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Current mileage" max_length="40" name="current_mileage" type="integer"/>
+        <element label="Driver" max_length="255" name="driver" type="string"/>
+        <element label="Justification" max_length="4000" name="justification" type="string"/>
+        <element label="Make" max_length="40" name="make" type="string"/>
+        <element label="Model" max_length="40" name="model" type="string"/>
+        <element label="Plate number" max_length="40" name="plate_number" type="string"/>
+        <element label="Property description" max_length="4000" name="property_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Property type" mandatory="true" max_length="40" name="property_type" type="choice">
+            <choice>
+                <element inactive="true" inactive_on_update="true" label="Product" sequence="10" value="product"/>
+                <element inactive_on_update="false" label="Equipment" sequence="20" value="equipment"/>
+                <element inactive_on_update="false" label="Vehicle" sequence="30" value="vehicle"/>
+                <element inactive_on_update="false" label="3rd Party Property" sequence="40" value="third_party_property"/>
+                <element inactive_on_update="false" label="3rd Party Vehicle" sequence="50" value="third_party_vehicle"/>
+                <element inactive_on_update="false" label="Other" sequence="60" value="other"/>
+                <element inactive="true" inactive_on_update="true" label="Structure" sequence="70" value="structure"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Recovery time" max_length="40" name="recovery_time" type="glide_duration"/>
+        <element label="3rd party contact" max_length="4000" name="third_party_contact" type="string"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="3rd party damages" max_length="20" name="third_party_damages" type="currency"/>
+        <element label="3rd party property" max_length="4000" name="third_party_property" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Damage" sequence="10" value="damage"/>
+                <element inactive_on_update="false" label="Failure" sequence="20" value="failure"/>
+                <element inactive_on_update="false" label="Loss" sequence="30" value="loss"/>
+                <element inactive_on_update="false" label="Other" sequence="40" value="other"/>
+            </choice>
+        </element>
+        <element label="Type notes" max_length="40" name="type_notes" type="string"/>
+        <element label="Year" max_length="40" name="year" type="string"/>
+        <index name="index">
+            <element name="affected_vehicle"/>
+        </index>
+    </element>
+</database>

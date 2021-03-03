@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_fru_cir_situation_task_template</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>cir_add_template_to_match_param</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	var grET = new GlideRecord(CIRConstants.Tables.PARAMETRIZATION);
+    grET.addEncodedQuery('category.sys_id=' + current.category + '^dimension.sys_id=' + current.dimension);
+    grET.query();
+    if (!grET.hasNext()) {
+        return;
+    } else {
+        var existing = new GlideRecord(CIRConstants.Tables.SIT_TSK_TEMP_PARAM_M2M);
+        existing.addQuery('situation_task_template', current.sys_id);
+        existing.query();
+        while (existing.next()) {
+            existing.deleteRecord();
+        }
+        while (grET.next()) {
+            var nGRET = new GlideRecord(CIRConstants.Tables.SIT_TSK_TEMP_PARAM_M2M);
+            nGRET.initialize();
+            nGRET.setValue('situation_task_template', current.sys_id);
+            nGRET.setValue('situation_parametrization', grET.sys_id);
+            nGRET.insert();
+        }
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-23 14:52:42</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5a42728adb69581003b3533fd396194d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_add_template_to_match_param</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_5a42728adb69581003b3533fd396194d</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-23 14:52:42</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=5a42728adb69581003b3533fd396194d"/>
+</record_update>

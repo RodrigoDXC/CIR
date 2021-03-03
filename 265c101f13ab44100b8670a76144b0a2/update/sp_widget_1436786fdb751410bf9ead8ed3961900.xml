@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $scope, $timeout, $location, $log, $window, spUtil, nowAttachmentHandler, spAriaUtil, spNavStateManager, cabrillo) {
+
+    var c = this;
+
+    $scope.submitting = false;
+    $scope.saveButtonSuffix = spUtil.getAccelerator('s');
+    $scope.isPageReady = false;
+    var isNative = cabrillo.isNative();
+    if (isNative) {
+        var title = c.data.title;
+        cabrillo.viewLayout.setTitle(title);
+        cabrillo.viewLayout.setNavigationBarButtons([{
+                title: c.data.save,
+                enabled: true
+            }],
+            function(buttonIndex) {
+                _save();
+            }
+        );
+    }
+
+    spUtil.recordWatch($scope, c.data.table, "sys_id=" + c.data.sys_id, function(name, data) {
+        c.server.update();
+    });
+
+    $rootScope.$on('$sp.html.editor.progress', function(e, conf) {
+        $scope.submitting = conf.state;
+    });
+
+    $scope.getPrimaryAction = function() {
+        var primaryActions = $scope.data.f._ui_actions.filter(function(action) {
+            return action.primary;
+        });
+        return (primaryActions.length) ? primaryActions[0] : null;
+    }
+
+    $scope.triggerUIAction = function(action) {
+        if ($scope.data.disableUIActions && !action.primary) {
+            return;
+        }
+        $rootScope.$broadcast('sp.form.ui_action.triggered');
+
+        var activeElement = document.activeElement;
+        if (activeElement) {
+            activeElement.blur();
+        }
+
+        $scope.$evalAsync(function() {
+            if (g_form) {
+                $scope.submitting = true;
+                if (!g_form.submit(action.action_name || action.sys_id))
+                    $scope.submitting = false;
+            }
+        });
+    }
+
+    $scope.$on("spModel.uiActionComplete", function(evt, response) {
+        $scope.submitting = false;
+        var sysID = (response.isInsert) ? response.sys_id : $scope.data.sys_id;
+        var fail = response.$$uiNotification[0];
+
+        if (!fail || fail.type != 'error') {
+            var message = response.isInsert ? c.data.recordAddedMsg : c.data.updatedMsg;
+            cabrillo.message.showMessage(cabrillo.message.SUCCESS_MESSAGE_STYLE, message);
+            $timeout(function() {
+                cabrillo.message.showMessage(cabrillo.message.SUCCESS_MESSAGE_STYLE, c.data.refreshRecord);
+                cabrillo.flowControl.flowEnded();
+            }, 1500);
+            return;
+        }
+    });
+
+    function _save() {
+        var primaryAction = $scope.getPrimaryAction();
+        if (primaryAction)
+            $scope.triggerUIAction(primaryAction);
+    }
+
+    var g_form;
+
+    function initForm(gFormInstance) {
+
+        if (gFormInstance.getTableName() == $scope.data.f.table) {
+            g_form = gFormInstance;
+            spNavStateManager.register($scope.data.table, _save, g_form);
+            $scope.isPageReady = true;
+            if (c.data.parent_sys_id) {
+                g_form.setValue('incident', c.data.parent_sys_id);
+            }
+            $timeout(function() {
+                $rootScope.$emit('spModel.gForm.rendered', g_form);
+            }, 175);
+        }
+    }
+
+    $scope.$on('spModel.gForm.initialized', function(e, gFormInstance) {
+        initForm(gFormInstance);
+    });
+
+    $scope.$on('spModel.gForm.env.created', function(e, gFormInstance) {
+        initForm(gFormInstance);
+    });
+
+    if ($scope.data.f.title) {
+        $scope.$emit('sp.widget-modal.set-aria-label', $scope.data.f.title);
+    }
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-psi-form-mobile</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR PSI Form Mobile</name>
+        <option_schema>[{"name":"showFormView","section":"Behavior","label":"Display current form view","type":"boolean"},{"name":"view","section":"Presentation","default_value":"portal_view","label":"View","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.cir_base</roles>
+        <script><![CDATA[// form functionality - URL parameter driven
+(function ($sp, input, data, options, gs) {
+
+	// getting options
+	data.table = $sp.getParameter("table"); // getting table name
+	data.sys_id = input ? input.sys_id : $sp.getParameter("sys_id") || -1; // getting sys_id of the record
+	data.view = options.view;
+	data.parent_sys_id = $sp.getParameter("parent_sys_id") || '';
+	
+	// getting messages
+	data.recordAddedMsg = gs.getMessage("Record Added");
+	data.updatedMsg = gs.getMessage("updated_uppercase");
+	data.refreshRecord = gs.getMessage("cir_refresh_record");
+	data.title = data.table == CIRConstants.Tables.PSI_INTERNAL ? gs.getMessage("cir_psi_mobile_title_update") : gs.getMessage("cir_psi_mobile_title_add_people");
+	data.save = gs.getMessage("Save");
+	
+	if (data.sys_id) {
+		data.isValid = true;
+	} else {
+		return;
+	}
+	
+	// getting form
+	data.f = $sp.getForm(data.table, data.sys_id, data.query, data.view);
+})($sp, input, data, options, gs);]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-10 07:57:28</sys_created_on>
+        <sys_id>1436786fdb751410bf9ead8ed3961900</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CIR PSI Form Mobile</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_1436786fdb751410bf9ead8ed3961900</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:45:58</sys_updated_on>
+        <template><![CDATA[<div ng-if="data.isValid" class="panel-shift">
+	<div ng-show="isPageReady" ng-if="::data.f._view.length || !data.hideRelatedLists">
+		<div class="panel-body">
+			<div>
+				<sp-model form_model="data.f" mandatory="mandatory"></sp-model>
+			</div>
+		</div>
+	</div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

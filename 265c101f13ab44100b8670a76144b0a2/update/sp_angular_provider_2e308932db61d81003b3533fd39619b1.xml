@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>cirMenuTree</name>
+        <script><![CDATA[function () {
+	return {
+		restrict: 'E',
+		scope: {items: '='},
+		replace: true,
+		template: '<ul class="dropdown-menu">' +
+		'<li ng-repeat="mi in items" style="min-width: 20em;" ng-class="{\'dropdown-submenu\': mi.type == \'menu\', \'dropdown-menu-line\':$index < items.length - 1}" ng-include="getURL()">' +
+		'</ul>',
+		link : function(scope, element, attrs, controller) {
+			scope.getURL = function() {
+				return 'cirTreeDropdownTemplate';
+			};
+		}
+	};
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 14:28:03</sys_created_on>
+        <sys_id>2e308932db61d81003b3533fd39619b1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cirMenuTree</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_angular_provider_2e308932db61d81003b3533fd39619b1</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-25 14:28:03</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+</record_update>

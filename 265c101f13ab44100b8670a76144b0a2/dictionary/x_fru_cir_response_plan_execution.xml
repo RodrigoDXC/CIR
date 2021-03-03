@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="task" label="Response Plan Execution" max_length="40" name="x_fru_cir_response_plan_execution" sizeclass="2" type="collection">
+        <element label="Alert level" max_length="40" name="alert_level" type="string"/>
+        <element label="Area affected" max_length="40" name="area_affected" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Buildings" max_length="4000" name="buildings" reference="x_fru_cir_security_location" reference_qual="javascript: new CIRSituationUtils().GetBuildingsByCountries(current.buildings, current.country);" type="glide_list" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Category" max_length="32" name="category" read_only="true" reference="x_fru_cir_response_plan_category" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" choice="1" choice_field="country" choice_table="cmn_location" label="Country" max_length="1024" name="country" reference="x_fru_cir_security_address_value" reference_qual="javascript: CIRSituationUtils).GetCrisisCountries(current.country);" type="glide_list" use_reference_qualifier="advanced">
+            <choice>
+                <element inactive_on_update="false" label="Belgium" sequence="0" value="Belgium"/>
+                <element inactive_on_update="false" label="Canada" sequence="1" value="Canada"/>
+                <element inactive_on_update="false" label="France" sequence="2" value="France"/>
+                <element inactive_on_update="false" label="Germany" sequence="3" value="Germany"/>
+                <element inactive_on_update="false" label="Italy" sequence="4" value="Italy"/>
+                <element inactive_on_update="false" label="Japan" sequence="5" value="Japan"/>
+                <element inactive_on_update="false" label="Mexico" sequence="6" value="Mexico"/>
+                <element inactive_on_update="false" label="United Kingdom" sequence="7" value="United Kingdom"/>
+                <element inactive_on_update="false" label="USA" sequence="8" value="USA"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Current step" max_length="4000" name="current_step" reference="x_fru_cir_response_plan_execution_step" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" max_length="32" name="dimension" read_only="true" reference="x_fru_cir_situation_dimension" type="reference"/>
+        <element label="Level escalated" max_length="40" name="level_escalated" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Location groups" max_length="4000" name="location_groups" reference="x_fru_cir_location_group" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Parent situation" max_length="32" name="parent_situation" read_only="true" reference="x_fru_cir_situation" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="People affected - Calculated" max_length="40" name="people_affected" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="People affected - Manual" max_length="40" name="people_affected_manual" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Response plan template" max_length="32" name="response_plan_template" reference="x_fru_cir_response_plan_template" type="reference"/>
+        <element label="Situation input" max_length="4000" name="situation_input" type="journal_input"/>
+        <element label="Location" max_length="40" name="situation_location" type="string"/>
+        <element label="Situation type" max_length="40" name="situation_type" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Virtual locations" max_length="4000" name="virtual_locations" reference="x_fru_cir_security_virtual_location" type="glide_list"/>
+    </element>
+</database>

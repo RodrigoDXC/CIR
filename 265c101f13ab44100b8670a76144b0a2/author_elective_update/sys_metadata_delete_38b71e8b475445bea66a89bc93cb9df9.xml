@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+    <sp_container action="DELETE">
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>Situation Room - Container 3</name>
+        <order>3</order>
+        <sp_page display_value="cir_situation_room">aee96a891b370850df7e43f4bd4bcb90</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 11:50:12</sys_created_on>
+        <sys_id>eae9e6c91b370850df7e43f4bd4bcbf5</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Situation Room - Container 3</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_container_eae9e6c91b370850df7e43f4bd4bcbf5</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 15:42:24</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sp_container_eae9e6c91b370850df7e43f4bd4bcbf5</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container"><sp_container action="INSERT_OR_UPDATE"><background_color/><background_image/><background_style>default</background_style><bootstrap_alt>false</bootstrap_alt><class_name/><container_class_name/><name>Situation Room - Container 3</name><order>3</order><sp_page display_value="cir_situation_room">aee96a891b370850df7e43f4bd4bcb90</sp_page><subheader>false</subheader><sys_class_name>sp_container</sys_class_name><sys_created_by>paulo.gomes</sys_created_by><sys_created_on>2020-03-25 11:50:12</sys_created_on><sys_id>eae9e6c91b370850df7e43f4bd4bcbf5</sys_id><sys_mod_count>3</sys_mod_count><sys_name>Situation Room - Container 3</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sp_container_eae9e6c91b370850df7e43f4bd4bcbf5</sys_update_name><sys_updated_by>paulo.gomes</sys_updated_by><sys_updated_on>2020-03-25 15:42:24</sys_updated_on><title/><width>container</width></sp_container></record_update>]]></payload>
+        <payload_hash>-422757808</payload_hash>
+        <record_name>Situation Room - Container 3</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 15:42:24</sys_created_on>
+        <sys_id>730f5f011bbb0850df7e43f4bd4bcb97</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>171125be5f90000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 15:42:24</sys_updated_on>
+        <type>Container</type>
+        <update_guid>3b0f5f0158bb08508340788fb558b996</update_guid>
+        <update_guid_history>3b0f5f0158bb08508340788fb558b996:-422757808,4b25dfcd243b0850a30b93f9f4d3edf6:693614447,4f4aaa89143708501fd1d07724aff2a1:34470537,62e9e6c9d137085049a575b3d05468f7:-1563494349</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">1e1fdb011bbb0850df7e43f4bd4bcbc7</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 15:42:35</sys_created_on>
+        <sys_db_object display_value="" name="sp_container">sp_container</sys_db_object>
+        <sys_id>38b71e8b475445bea66a89bc93cb9df9</sys_id>
+        <sys_metadata>eae9e6c91b370850df7e43f4bd4bcbf5</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Situation Room - Container 3</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_38b71e8b475445bea66a89bc93cb9df9</sys_update_name>
+        <sys_update_version display_value="sp_container_eae9e6c91b370850df7e43f4bd4bcbf5">730f5f011bbb0850df7e43f4bd4bcb97</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:05</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

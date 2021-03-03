@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRKpiCalculationHelperFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRKpiCalculationHelperFP</name>
+        <script><![CDATA[var CIRKpiCalculationHelperFP = (function () {
+    var initialize = function () { };
+
+    var isGlobalCalculation = function (location) {
+        return location === 'Global';
+    };
+    /**
+     * Function return sum of Total Time Lost for provided location, and period
+     * @param {GlideDateTime} startDate - first day of reporting time period (e.g. 2019-05-01)
+     * @param {GlideDateTime} endDate - last day of reporting time period  (e.g. 2019-05-31)
+     * @param {string} location - sys_id of a location
+     */
+    var getSumOfTotalTimeLostForPeriod = function (startDate, endDate, location) {
+        var lti = 0;
+        var daysLost = 0;
+        var ONE_DAY_IN_MILLISECONDS = 86400000;
+
+        var aggCase = new GlideAggregate(CIRConstants.Tables.CASE);
+        aggCase.addQuery('state', '!=', CIRCaseRiskImpGenericUtilsFP().GetStateValue('non_cir'));
+        aggCase.addQuery('state', '!=', CIRCaseRiskImpGenericUtilsFP().GetStateValue('duplicate_case'));
+        aggCase.addQuery('occurred_on', '>=', startDate.getValue());
+        aggCase.addQuery('occurred_on', '<', endDate.getValue());
+        aggCase.addQuery('total_time_lost', '>', new GlideDuration('0 0:0:0'));
+
+        if (!isGlobalCalculation(location)) {
+            aggCase.addQuery('location', location);
+        }
+
+        aggCase.addAggregate('SUM', 'total_time_lost');
+        aggCase.setGroup(false);
+        aggCase.query();
+
+        CIRGlideUtilsFP.ValidateSingleRowReturned(aggCase);
+        if (!aggCase.next()) {
+            return daysLost;
+        }
+
+        lti = aggCase.getAggregate('SUM', 'total_time_lost');
+        var duration = new GlideDuration();
+        duration.setValue(lti);
+        daysLost = duration.getNumericValue() / ONE_DAY_IN_MILLISECONDS;
+        return daysLost;
+    };
+
+
+    /**
+     * Depending on the 'kpiType' - Calculation Type 
+     *      this function will return the count of LTI for provided location and period OR
+     *      this function will return the count of Near misses and Unsafe Situation for provided location and period
+     * @param {GlideDateTime} startDate - first day of reporting time period (e.g. 2019-05-01)
+     * @param {GlideDateTime} endDate - last day of reporting time period  (e.g. 2019-05-31)
+     * @param {string} location - sys_id of a location
+     */
+    var getLTIForPeriod = function (startDate, endDate, location, kpiType) {
+        var lti = 0;
+        var msgPrefix;
+
+        var aggCase = new GlideAggregate(CIRConstants.Tables.CASE);
+        aggCase.addQuery('state', '!=', CIRCaseRiskImpGenericUtilsFP().GetStateValue('non_cir'));
+        aggCase.addQuery('state', '!=', CIRCaseRiskImpGenericUtilsFP().GetStateValue('duplicate_case'));
+        aggCase.addQuery('occurred_on', '>=', startDate.getValue());
+        aggCase.addQuery('occurred_on', '<', endDate.getValue());
+
+        switch (kpiType) {
+            case CIRConstants.KpiCalculationTypes.LTIF:
+            case CIRConstants.KpiCalculationTypes.LTIF_V1:
+                msgPrefix = 'Total number of Incidents with Time Lost from ';
+                aggCase.addQuery('total_time_lost', '>', new GlideDuration('0 0:0:0'));
+                break;
+            case CIRConstants.KpiCalculationTypes.LTIF_V2:
+                var query = CIRConstants.Tables.HAZARD + ',' + CIRConstants.Tables.NEAR_MISS;
+                msgPrefix = 'Total number of Near Misses and Hazards from ';
+                aggCase.addQuery('sys_class_name', 'IN', query);
+                break;
+            default:
+                throw new Error('Type `' + kpiType + '` not available for LTI calculation.');
+        }
+
+        if (!isGlobalCalculation(location)) {
+            aggCase.addQuery('location', location);
+        }
+
+        aggCase.addAggregate('COUNT');
+        aggCase.setGroup(false);
+        aggCase.query();
+
+        CIRGlideUtilsFP.ValidateSingleRowReturned(aggCase);
+        if (aggCase.next()) {
+            lti = aggCase.getAggregate('COUNT');
+        }
+
+        return lti;
+    };
+
+    /**
+    * Function return count of medical treatments for provided location, and period
+    * @param {GlideDateTime} startDate - first day of reporting time period (e.g. 2019-05-01)
+    * @param {GlideDateTime} endDate - last day of reporting time period  (e.g. 2019-05-31)
+    * @param {string} location - sys_id of a location
+    */
+    var getMedicalTreatmentForPeriod = function (startDate, endDate, location) {
+        var numMedicalTreatment = 0;
+
+        var aggMedicalTreatment = new GlideAggregate(CIRConstants.Tables.PERSON_IMPACT);
+        aggMedicalTreatment.addQuery('cir_case.state', '!=', CIRCaseRiskImpGenericUtilsFP().GetStateValue('non_cir'));
+        aggMedicalTreatment.addQuery('cir_case.state', '!=', CIRCaseRiskImpGenericUtilsFP().GetStateValue('duplicate_case'));
+        aggMedicalTreatment.addQuery('cir_case.occurred_on', '>=', startDate.getValue());
+        aggMedicalTreatment.addQuery('cir_case.occurred_on', '<', endDate.getValue());
+        aggMedicalTreatment.addQuery('cir_case.total_time_lost', '>', new GlideDuration('0 0:0:0'));
+
+        if (!isGlobalCalculation(location)) {
+            aggMedicalTreatment.addQuery('cir_case.location', location);
+        }
+
+        aggMedicalTreatment.addQuery('job_impact', 'medical_treatment');
+        aggMedicalTreatment.addAggregate('COUNT');
+        aggMedicalTreatment.query();
+
+        CIRGlideUtilsFP.ValidateSingleRowReturned(aggMedicalTreatment);
+        if (aggMedicalTreatment.next()) {
+            numMedicalTreatment = aggMedicalTreatment.getAggregate('COUNT');
+        }
+        return numMedicalTreatment;
+    };
+
+    var getCalculationTypes = function() {
+        var arrCalculationTypes = [];
+        var grCalculationType = new GlideRecord(CIRConstants.Tables.KPI_CALCULATION_TYPE);
+        grCalculationType.addActiveQuery();
+        grCalculationType.query();
+        while(grCalculationType.next()) {
+            arrCalculationTypes.push({
+                calculationTypeName: grCalculationType.getValue('name'),
+                calculationTypeSysId: grCalculationType.getValue('sys_id')
+            });
+        }
+
+        return arrCalculationTypes;
+    };
+
+    var CIRKpiCalculationHelperFP = Class.create();
+    CIRKpiCalculationHelperFP.prototype = {
+        initialize: initialize,
+
+        GetSumOfTotalTimeLostForPeriod: getSumOfTotalTimeLostForPeriod,
+        GetLTIForPeriod: getLTIForPeriod,
+        GetMedicalTreatmentForPeriod: getMedicalTreatmentForPeriod,
+        GetCalculationTypes: getCalculationTypes
+    };
+
+    return CIRKpiCalculationHelperFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 11:59:55</sys_created_on>
+        <sys_id>9fad21afdb395010d4a73533f39619c5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIRKpiCalculationHelperFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_9fad21afdb395010d4a73533f39619c5</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:48:41</sys_updated_on>
+    </sys_script_include>
+</record_update>

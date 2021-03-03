@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRPersonalProtectionUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRPersonalProtectionUtilsFP</name>
+        <script><![CDATA[var CIRPersonalProtectionUtilsFP = (function() {
+	var CIRPersonalProtectionUtilsFP = Class.create();
+	var initialize = function() {};
+
+	/**
+	*
+	* - Creates protection agent reports (x_lsmcb_fsm_protection_agent_report) assigned to
+	*   the bodyguars present in the Protection Service Order List. 
+	* - Creates one report for each bodyguard and day of the protection service order
+	* - called from "Protection Service Order" wokflow (Send bodyguard reports script) -
+	* @param {Gliderecord} serviceorder - Protection Service Order that triggers the workflow
+	* 
+	**/
+	var createBodyguardReports = function(serviceorder) {
+		var bodyguards = serviceorder.bodyguards;
+		var durationDays = getServiceDurationDays(serviceorder.start_date, serviceorder.end_date);
+		var startDate = serviceorder.start_date + ' ' + serviceorder.getValue('start_time');
+
+		// assigns a new report with the first day start date and time
+		assignReport(serviceorder, bodyguards, startDate);
+
+		// if the service order has more than one day, creates a new report per day starting at 09:00:00
+		if (durationDays > 1) {
+			var newDate = new GlideDateTime(startDate);
+
+			for (var i = 0; i < durationDays - 1; i++) {
+				newDate.addDaysUTC(1);
+				assignReport(serviceorder, bodyguards, newDate);
+			}
+		}
+	};
+
+
+	var cancelBodyguardReports = function(serviceOrder) {
+		var grBgReport = new GlideRecord(CIRConstants.Tables.PROTECTION_AGENT_REPORT);
+		grBgReport.addQuery('service_order', serviceOrder.sys_id);
+		grBgReport.query();
+
+		while (grBgReport.next()) {
+			grBgReport.setValue('state','3');
+			grBgReport.update();
+		}
+	};
+
+
+	/**
+	*
+	* - Assigns a new protection agent report for each bodyguard present on the list
+	* @param {Gliderecord} serviceorder - Protection Service Order to be associated to the protection agent report
+	* @param {String Array} serviceorder - Protection Service Order that triggers the workflow
+	* @param {Array} bodyguards - Bodyguards present on the protection  service order list
+	* @param {String} startDate - Start date of the protection service order
+	* 
+	**/
+	var assignReport = function(serviceorder, bodyguards, startDate){
+		if (bodyguards.indexOf(',')) {
+			bodyguards = bodyguards.split(',');
+
+			for ( var i = 0; i < bodyguards.length; i ++) {
+				createReport(serviceorder, bodyguards[i], startDate);
+			}
+		} else {
+			createReport(serviceorder, bodyguards, startDate);
+		}
+	};
+
+
+	/**
+	*
+	* - Gets the difference between the end and the start of the service order in days
+	* @param {Gliderecord} serviceorder - Protection Service Order 
+	* @return {Integer} - number of days that the service will last
+	* 
+	**/
+	var getServiceDurationDays = function(start, end) {
+		var startDate = new GlideDateTime(start);
+		var endDate = new GlideDateTime(end);
+		var duration = GlideDateTime.subtract(startDate, endDate);
+
+		return parseInt(duration.getDayPart()) + 1;   
+	};
+
+
+	/**
+	*
+	* - Creates a new protection agent report with a
+	* @param {Gliderecord} service - Protection Service Order 
+	* @param {String} bg_sysId - Bodyguard sys_id 
+	* @param {GlideDateTime} startTime - Protection agent report start time
+	* 
+	**/
+	var createReport = function(service, bg_sysId, startTime){
+		var start = new GlideDateTime();
+		start.setDisplayValue(service.start_date + ' ' + service.start_time.getDisplayValue());
+		var end = new GlideDateTime();
+		end.setDisplayValue(service.end_date + ' ' + service.end_time.getDisplayValue());
+
+		var grBgReport = new GlideRecord(CIRConstants.Tables.PROTECTION_AGENT_REPORT);
+		grBgReport.initialize();
+		grBgReport.setValue('service', service.service);
+		grBgReport.setValue('service_order', service.sys_id);
+		grBgReport.setValue('start_time', service.start_time);
+		grBgReport.setValue('start', start);
+		grBgReport.setValue('end_time', service.end_time);
+		grBgReport.setValue('end', end);
+		grBgReport.setValue('service_date', startTime);
+		grBgReport.setValue('bodyguard', bg_sysId);
+		grBgReport.insert();
+	};
+
+
+	/**
+	*  Used to fill the list of the bodyguards
+	*  It will only fill the field with the bodyguards available at that time
+	*  @param {Date} starDate - Protection Service Order Start Date
+	*  @param {Date} endDate - Protection Service Order End Date
+	*  @param {Time} endDate - Protection Service Order Start Time
+	*  @param {Time} endDate - Protection Service Order End Time
+	**/
+	var getAvailableBG = function (startDate, endDate, startTime, endTime, vipAlias) {
+		var bgList = getBGList();
+
+		var bg = '';
+		var bgs = [];
+
+		//GlideRecord to query for Service Orders between the dates passed as parameters in the function @startDate and @endDate
+		var grServiceOrder = new GlideRecord(CIRConstants.Tables.PROTECTION_SERVICE_ORDER);
+		grServiceOrder.addEncodedQuery("start_dateBETWEENjavascript:gs.dateGenerate(\'" + startDate +"\', 'start')@javascript:gs.dateGenerate(\'" + endDate + "\', 'end')^ORend_dateBETWEENjavascript:gs.dateGenerate(\'" + startDate + "\', 'start')@javascript:gs.dateGenerate(\'" + endDate + "\', 'end')");	
+		grServiceOrder.addQuery('state', '2');
+		grServiceOrder.query();
+
+		while (grServiceOrder.next()) {
+			//Condition to check if the time introduced
+			var startDT = new GlideDateTime(startDate + ' ' + startTime.split(' ')[1]);
+			var endDT = new GlideDateTime(endDate + ' ' + endTime.split(' ')[1]);
+
+			var grSDT = new GlideDateTime(grServiceOrder.start_date + ' ' + grServiceOrder.start_time.split(' ')[1]);
+			var grEDT = new GlideDateTime(grServiceOrder.end_date + ' ' + grServiceOrder.end_time.split(' ')[1]);
+
+			if (startDT >= grSDT && startDT <= grEDT || endDT >= grSDT && endDT <= grEDT) {
+				bg = grServiceOrder.bodyguards +'';
+				bgs = bg.indexOf(',')  != -1 ? bg.split(',') : [bg];
+
+				for (var i = 0; i < bgs.length; i++) {
+					for (var j = 0; j < bgList.length; j++) {
+						if (bgList[j] === bgs[i]) {
+							// Remove the bodyguards from the list
+							bgList.splice(j, 1);
+							j--;
+						}
+					}
+				}
+			}
+		}
+		
+		var filteredByVIP = filterBgListByVIP(bgList.join(','), vipAlias);
+		
+
+		return 'sys_idIN' + filteredByVIP.join(',');//'sys_idIN' + bgList.join(',');
+	};
+
+
+	var filterBgListByVIP = function(bgList, vipId) {
+		var result = [];
+
+		var grVipToBg = new GlideRecord(CIRConstants.Tables.PROTECTION_PRFILE_M2M);
+		grVipToBg.addQuery('protection_profile_vip', vipId.toString());
+		grVipToBg.query();
+
+		while (grVipToBg.next()) {
+			if (bgList.indexOf(grVipToBg.protection_profile_bodyguard) + '' !== '-1' && result.indexOf(grVipToBg.protection_profile_bodyguard) + '' === '-1') {
+				result.push(grVipToBg.protection_profile_bodyguard.toString());
+			}
+		} 
+		return result;
+	};
+
+
+	/**
+	*  Returns the list of all the bodyguards registrated
+	**/
+	var getBGList = function () {
+		var bodyguards = [];
+
+		var grBodyguards = new GlideRecord(CIRConstants.Tables.PROTECTION_PROFILE);
+		grBodyguards.orderBy('hours_worked');
+		grBodyguards.addQuery('role', '1');
+		grBodyguards.query();
+
+		while (grBodyguards.next()) {
+			bodyguards.push(grBodyguards.sys_id.toString());
+		}
+		return bodyguards;
+	};
+
+
+	/**
+	*  Called on fsm_protection_utils_client to return protected agenda sys_id
+	*  Will always return only one record where the service vip matches a agenda. 
+	*  if it finds more than one record dosn't return any.
+	*  If a also gets a service start date as argument, will search for a protectde agenda  
+	*  record that matches both, the service and the date
+	*  @param {string} service - sys_id of the selescted protection service
+	*  @param {srting} servStart - service start date. Format: 'DD_MM_YYYY'
+	*  @return {String} - sys_id of the found protected agenda record (if any)
+	**/
+	var getAgenda = function(service, servStart){
+		var vipId = getServiceVIP(service);
+		var encQuery = 'vip_alias='+ vipId; 
+		var agenda = [];
+
+		if (servStart) {
+			var date = formatDate(servStart);
+			encQuery +="^dateON" + date;
+		}
+
+		var grAgendas = new GlideRecord(CIRConstants.Tables.PROTECTED_AGENDA);
+		grAgendas.addEncodedQuery(encQuery);
+		grAgendas.query();
+
+		while (grAgendas.next()) {
+			agenda.push(grAgendas.sys_id.toString());
+		}
+
+		if (service && servStart && agenda.length < 1) {
+			var warning = gs.getMessage('cir_personal_protection_no_agendas');
+			gs.addInfoMessage(warning);
+		}
+		
+		if (agenda.length === 1) {
+			return agenda;
+		}
+	};
+
+
+	/**
+	*  Returns the sys_id of the vip_alias reference field from a protection service
+	*  @param {string} service - sys_id of the selected protection service
+	*  @return {String} - sys_id of the vip_alias reference field
+	**/
+	var getServiceVIP = function(service) {
+		var vipId = '';
+		var grService = new GlideRecord(CIRConstants.Tables.PROTECTION_SERVICE);
+		grService.addQuery('sys_id', service);
+		grService.query();
+
+		if (grService.next()) {
+			vipId = grService.vip_alias;
+		}
+		return vipId;
+	};
+
+
+	/**
+	*  Used to fetch the available vehicles for the dates that the user selected
+	*  @param {string} serviceOrder - Protection Service Order record sys_id
+	*  @param {Date/Time} starDate - Protection Service Order Service Start
+	*  @param {Date/Time} endDate - Protection Service Order Service End
+	**/
+	var getAvailableVehicles = function(serviceOrder, startDate, endDate) {
+		var vehiclesList = new CIRFleetUtils().GetVehicles();
+		var sDate = startDate.split(' ')[0];
+
+		var vehicleUnavGr = new GlideRecord(CIRConstants.Tables.VEHICLE_UNAVAILABILITY);
+		if (endDate != '') {
+			var eDate = endDate.split(' ')[0];
+			//vehicleUnavGr.addEncodedQuery('from_date>=' + sDate + '^from_date<=' + eDate);
+			//vehicleUnavGr.addEncodedQuery('NQto_date>=' + sDate + '^to_date<=' + eDate);
+			vehicleUnavGr.addEncodedQuery('to_date>=' + sDate + '^from_date<=' +eDate);
+		} else {
+			vehicleUnavGr.addEncodedQuery('from_date<=' + sDate + '^to_date>=' + sDate);
+		}
+
+		var sys_id = serviceOrder ? serviceOrder.toString() : '';
+		vehicleUnavGr.addQuery('sys_id', '!=', sys_id);
+		vehicleUnavGr.query();
+		while (vehicleUnavGr.next()) {
+			if (vehicleUnavGr.sys_class_name + '' !== CIRConstants.Tables.ASSIGNED_UNAVAILABILITY) {
+				vehiclesList = removeVehicleFromList(vehiclesList, vehicleUnavGr);
+			} else {
+				var soCheck = new CIRFleetUtils().CheckUnavailabilityExistence(serviceOrder, vehicleUnavGr);
+				if (!soCheck) {
+					vehiclesList = removeVehicleFromList(vehiclesList, vehicleUnavGr);
+				}
+			}
+		}
+		return 'sys_idIN' + vehiclesList.join(',');
+	};
+
+
+	/**
+	*  Used to remove a vehicle present in an unavailability record from the vehicle list
+	*  @param {array} vehiclesList - array with the registered vehicles
+	*  @param {GlideRecord} unavailabilityRec - glide record of an unavailability vehicle record
+	**/
+	var removeVehicleFromList = function (vehiclesList, unavailabilityRec) {
+		for (var i = 0; i < vehiclesList.length; i++) {
+			if (unavailabilityRec.vehicle + '' === vehiclesList[i]) {
+				vehiclesList.splice(i, 1);
+			}
+		}
+		return vehiclesList;
+	};
+
+
+	/**
+	*  Returns date in the folwing format: YYYY-MM-DD
+	*  @param {string} dateString - date in the folowinf format DD-MM-YYYY
+	*  @return {String} - date in the folwing format: YYYY-MM-DD
+	**/
+	var formatDate = function(dateString) {
+		var dateArr = dateString.split('-');
+		var date = dateArr[2] + '-' + dateArr[1] + '-' + dateArr[0];
+
+		return date;
+	};
+
+
+	/**
+	*  Called on  x_lsmcb_fsm_protection_service_order 'agenda'(service_details) reference qualifier
+	*  @return {String} - sys_id of the selected records
+	**/
+	var agendaRefQual = function(){
+		if (current.service && !current.service_start) {
+			return "vip_alias=" + current.service.vip_alias;
+		}
+
+		if (!current.service && current.service_start) {
+			return "date=" + current.service_start;
+		}
+
+		if (current.service && current.service_start) {
+			return 'vip_alias=' + current.service.vip_alias + '^date=' + current.service_start;
+		}
+	};
+
+
+	/**
+	*  Used on reference qualifier called on the service order field of the Protection Agent Reports table
+	*  Is used to filter the service orders where the logged bodyguard is on the list
+	*  Mostly used on the mobile platform, when creating expenses
+	**/
+	var getBodyguardSO = function () {
+		var serviceOrders = [];
+
+		var grProfiles = new GlideRecord(CIRConstants.Tables.PROTECTION_PROFILE);
+		grProfiles.addEncodedQuery('role=1^userDYNAMIC' + gs.getUserID());
+		grProfiles.query();
+
+		while (grProfiles.next()) {
+			var grSO = new GlideRecord(CIRConstants.Tables.PROTECTION_SERVICE_ORDER);
+			grSO.addEncodedQuery('state=3^bodyguardsCONTAINS' + grProfiles.getUniqueValue());
+			grSO.query();
+			while (grSO.next()) {
+				serviceOrders.push(grSO.getUniqueValue());
+			}
+		}
+		return 'sys_idIN' + serviceOrders.join(',');
+	};
+
+
+	var getCostcentersSysidFromLocation = function (fsmLocation, includeChild) {
+		if (!fsmLocation) {
+			return ['-1'];
+		}
+		var arrayUtil = new global.ArrayUtil();
+		var locationsIds = [];
+		var grFsmLocation = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		var condition = grFsmLocation.addQuery('sys_id', fsmLocation);
+
+		if (includeChild) {
+			condition.addOrCondition('parent', fsmLocation);
+		}
+		grFsmLocation.query();
+		while (grFsmLocation.next()) {
+			if (grFsmLocation.getValue('location')) {
+				locationsIds.push(grFsmLocation.getValue('location'));
+			}
+		}
+		var costcenterSysids = [];
+		var grCostcenter = new GlideRecord('cmn_cost_center');
+		grCostcenter.addQuery('location', 'IN', locationsIds.join(','));
+		grCostcenter.query();
+		while (grCostcenter.next()) {
+			if (arrayUtil.contains(costcenterSysids, grCostcenter.getUniqueValue())) continue;
+			costcenterSysids.push(grCostcenter.getUniqueValue());
+		}
+		return costcenterSysids.length != 0 ? costcenterSysids : ['-1'];
+	};
+
+	var updateExpenseRecord = function(currentExpLn, previousExpLn) {
+		var grExp = new GlideRecord(CIRConstants.Tables.EXPENSE);
+		if (grExp.get(currentExpLn.expense_id.toString())) {
+			var valueTax = parseFloat(currentExpLn.value - currentExpLn.value_exc_tax);
+			var newTax = parseFloat(grExp.total_tax) - parseFloat(previousExpLn.value - previousExpLn.value_exc_tax) + valueTax;
+			var newValue = parseFloat(grExp.total_value - previousExpLn.value) + parseFloat(currentExpLn.value);
+
+			var newExcTax = parseFloat(grExp.total_value_exc_tax - previousExpLn.value_exc_tax) + parseFloat(currentExpLn.value_exc_tax);
+
+			grExp.total_value = newValue > 0 ? newValue : 0;
+			grExp.total_value_exc_tax = newExcTax > 0 ? newExcTax : 0;
+			grExp.total_tax = newTax > 0 ? newTax : 0;
+			grExp.update();
+		}
+	};
+	
+	/**
+     * Called in cir_expense_line_deleted business rule 
+     * Updates the total values of an expense if a an expense line is deleted
+     * @param  {String} currentExpLn - expense line deleted
+     * @return {void}
+     */
+	var updateExpenseRecordAfterDelete = function (currentExpLn) {
+		var grExp = new GlideRecord(CIRConstants.Tables.EXPENSE);
+		if (grExp.get(currentExpLn.expense_id.toString())) { 
+			var valueTax = parseFloat(currentExpLn.value - currentExpLn.value_exc_tax);
+			var newTax = parseFloat(grExp.total_tax) -  valueTax;
+			var newValue = parseFloat(grExp.total_value) - parseFloat(currentExpLn.value);
+			var newExcTax = parseFloat(grExp.total_value_exc_tax) - parseFloat(currentExpLn.value_exc_tax);
+			
+			grExp.total_value = newValue > 0 ? newValue : 0;
+			grExp.total_value_exc_tax = newExcTax > 0 ? newExcTax : 0;
+			grExp.total_tax = newTax > 0 ? newTax : 0;
+			grExp.update();
+		}
+	};
+
+	/**
+	*  Used on fsm_calculate_hours_worked BR. returns the duration between the start and end times
+	*  @param {String} startTime - Service start
+	*  @param {string} endTime - Service end
+	*  @return {GlideDuration} - difference between start and end time
+	**/
+	var getWorkedHours = function(startTime, endTime) {
+		var start = new GlideDuration();
+		start.setValue(startTime);
+
+		var end = new GlideDuration();
+		end.setValue(endTime);
+
+		return end.subtract(start);
+	};
+
+
+	/**
+	*  Used on fsm_calculate_hours_worked BR. Returns a number of hours to show correctelly on a report
+	*  @param {GlideDuration} workedHours - total of hours worked (diff between start/end time)
+	*  @return {String} - formated worked hours
+	**/
+	var getFormatedWorkedHours = function(workedHours) {
+		var formatedHours = [0,0];
+		var hours = parseInt(workedHours.getByFormat("HH:mm").split(':')[0]);
+		var minutes = parseInt(workedHours.getByFormat("HH:mm").split(':')[1]);
+
+		minutes = (minutes * 100) / 60;
+
+		formatedHours[0] = hours;
+		formatedHours[1] = minutes;
+		return formatedHours.join('.');
+	};
+
+
+	/**
+	*  Used on hours_worked filed of the portection profile table. calculates the total worked hours of the month
+	*  Sums the saved worked hours to the bg record month worked hours
+	*  @param {string} bodyguardId - sys_id of the current bodyguard
+	*  @param {duration} workedHours - number of worked hours calculated on the agent report
+	**/
+	var updateBgWorkedHours = function(bodyguardId, workedHours) {
+		var grProfile = new GlideRecord(CIRConstants.Tables.PROTECTION_PROFILE);
+		if (grProfile.get('sys_id',bodyguardId)) {
+			var savedWorkedHours = new GlideDuration();
+			
+			if (grProfile.getValue('hours_worked') === '') {
+				var initialDuration = new GlideDuration('00:00:00');
+				savedWorkedHours.setValue(initialDuration);
+			} else {
+				savedWorkedHours.setValue(grProfile.hours_worked + '');
+			}
+
+			var totalWorkedHours = savedWorkedHours.add(workedHours);
+			grProfile.setValue('hours_worked', totalWorkedHours);
+			grProfile.update();
+		}
+	};
+
+
+	/**
+	*  Used on Expense Rejection workflow
+	*  Triggers an event to send a notification to the user, when the expense is rejected
+	*  @param {string} event - name of the event
+	*  @param {GlideRecord} record - glide record of an expense record
+	*  @param {string} user - sys_id of the user that will receive the notification
+	**/
+	var sendExpenseNotification = function(event, record, user) {
+		gs.eventQueue(event, record, user);
+	};
+
+
+	CIRPersonalProtectionUtilsFP.prototype = {
+		initialize: initialize,
+		CreateBodyguardReports: createBodyguardReports,
+		CancelBodyguardReports: cancelBodyguardReports,
+		AssignReport: assignReport,
+		GetServiceDurationDays: getServiceDurationDays,
+		CreateReport: createReport,
+		GetAvailableBG: getAvailableBG,
+		FilterBgListByVIP: filterBgListByVIP,
+		GetBGList: getBGList,
+		GetAgenda: getAgenda,
+		GetServiceVIP: getServiceVIP,
+		GetAvailableVehicles: getAvailableVehicles,
+		FormatDate: formatDate,
+		AgendaRefQual: agendaRefQual,
+		GetBodyguardSO: getBodyguardSO,
+		GetCostcentersSysidFromLocation: getCostcentersSysidFromLocation,
+		UpdateExpenseRecord: updateExpenseRecord,
+		GetWorkedHours: getWorkedHours,
+		GetFormatedWorkedHours: getFormatedWorkedHours,
+		UpdateBgWorkedHours: updateBgWorkedHours,
+		SendExpenseNotification: sendExpenseNotification,
+		UpdateExpenseRecordAfterDelete: updateExpenseRecordAfterDelete
+
+	};
+
+	return CIRPersonalProtectionUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-30 09:06:22</sys_created_on>
+        <sys_id>a4e2048edb9e9c10d4a73533f3961947</sys_id>
+        <sys_mod_count>55</sys_mod_count>
+        <sys_name>CIRPersonalProtectionUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_a4e2048edb9e9c10d4a73533f3961947</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-12-11 10:12:09</sys_updated_on>
+    </sys_script_include>
+</record_update>

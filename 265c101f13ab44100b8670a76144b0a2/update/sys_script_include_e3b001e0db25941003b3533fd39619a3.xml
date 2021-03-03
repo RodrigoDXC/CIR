@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRImpactUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRImpactUtilsFP</name>
+        <script><![CDATA[var CIRImpactUtilsFP = (function() {
+    /**
+     * Calculates the total time, damages, and recovery costs for an incident 
+     * USED IN - Business Rule: Calculate Losses for case (for Case), Calculate Losses for case (for Impact)
+     *
+     * @param {GlideRecord} caseRecord - the GlideRecord of the case we are calculating for
+     * @param {boolean} ignoreUpdate - if true it will not update the record
+     * @return {void}
+     */
+    var calculateLosses = function(caseRecord, ignoreUpdate) {
+        // TODO: Use aggregate queries?
+        var totalCost = 0;
+        var impactRecord = new GlideRecord(CIRConstants.Tables.IMPACT);
+        impactRecord.addQuery('cir_case', caseRecord.sys_id.toString());
+        impactRecord.addQuery('recovery_cost', '>', 0);
+        impactRecord.query();
+        while(impactRecord.next()) {
+            totalCost += parseFloat(impactRecord.recovery_cost.getSessionValue());
+        }
+        caseRecord.total_recovery_cost = totalCost;
+        gs.debug('Calculating total recovery costs from all impacts: ' + totalCost);
+
+        var totalTimeLostMilliseconds = 0;
+        var totalDamages = 0;
+        var physicalImpacts = new GlideRecord(CIRConstants.Tables.PHYSICAL_IMPACT);
+        physicalImpacts.addQuery('cir_case', caseRecord.sys_id.toString());
+        physicalImpacts.query();
+        while(physicalImpacts.next()) {
+            totalDamages += parseFloat(physicalImpacts.actual_damages.getSessionValue());
+            totalDamages += parseFloat(physicalImpacts.third_party_damages.getSessionValue());
+            var physicalGDT = new GlideDateTime(physicalImpacts.recovery_time.toString());
+            totalTimeLostMilliseconds += physicalGDT.getNumericValue();
+        }
+		var securityImpacts = new GlideRecord(CIRConstants.Tables.SECURITY_IMPACT);
+        securityImpacts.addQuery('cir_case', caseRecord.sys_id.toString());
+        securityImpacts.query();
+		while(securityImpacts.next()) {
+            totalDamages += parseFloat(securityImpacts.loss_amount.getSessionValue());
+			totalDamages -= parseFloat(securityImpacts.amount_recovered.getSessionValue());
+		}
+        caseRecord.total_damages = totalDamages;
+        gs.debug('Calculating total damages from physical impacts: ' + totalDamages);
+
+        var personRecord = new GlideRecord(CIRConstants.Tables.PERSON_IMPACT);
+        personRecord.addQuery('cir_case', caseRecord.sys_id.toString());
+        personRecord.query();
+        while(personRecord.next()) {
+            var gdt = new GlideDateTime(personRecord.time_lost_restricted.toString());
+            totalTimeLostMilliseconds += gdt.getNumericValue();
+        }
+
+        var timeLostDuration = new GlideDuration(totalTimeLostMilliseconds);
+        caseRecord.total_time_lost = timeLostDuration;
+        gs.debug('Calculating total time lost from person impacts: ' + timeLostDuration);
+        if(!ignoreUpdate)
+            caseRecord.update();
+    };
+
+    /**
+     * Checks for any type of impact record added to the incident
+     * USED IN - Business Rule: Pass values to Client (For Case)
+     *
+     * @param  {sys_id} recordSys - sys_id of the incident record we are checking against
+     * @return {boolean} - returns true if there is an impact already created
+     */
+    var checkForImpact = function(recordSys) {
+        var impact = new GlideRecord(CIRConstants.Tables.IMPACT);
+        impact.addQuery('cir_case', recordSys);
+        impact.setLimit(1);
+        impact.query();
+        gs.debug('Checking for impact records, found? ' + impact.hasNext().toString());
+        return impact.hasNext();
+    };
+
+    /**
+     * Gets all body locations defined in body location table for body image
+     * USED IN - UI Page: body_location_map
+     *
+     * @return {array} of {object} - returns an array of body location objects
+     */
+    var getBodyLocations = function() {
+        var bodyHTMLArr = [];
+        var bodyLocations = new GlideRecord(CIRConstants.Tables.BODY_LOCATION);
+        bodyLocations.addQuery('active', true);
+        bodyLocations.query();
+        while (bodyLocations.next()) {
+            bodyHTMLArr.push({
+                name: bodyLocations.name.toString(),
+                sys_id: bodyLocations.sys_id.toString(),
+                x: bodyLocations.x_coordinate.toString(),
+                y: bodyLocations.y_coordinate.toString(),
+                height: bodyLocations.height.toString(),
+                width: bodyLocations.width.toString()
+            });
+        }
+        gs.debug('Getting body location records, found: ' + bodyHTMLArr.length + ' using query: ' +
+            bodyLocations
+            .getEncodedQuery());
+        return bodyHTMLArr;
+    };
+
+    /**
+     * Gets injury information for a specific record or query
+     * USED IN - UI Page: body_location_map
+     *
+     * @param  {string} tableName - name of the table to get injuries for
+     * @param  {sys_id} tableSys - sys_id of the record we are getting injuries for
+     * @param  {string} query - encoded query to get list of impacted persons
+     * @return {string} - returns a JSON encoded array of objects with the body locations
+     */
+    var getInjuries = function(tableName, tableSys, query) {
+        var injuryArr = [];
+        var injuryRecords = '';
+        if (!tableName) {
+            gs.debug('No table provided by UI page, getting all injuries for all cases');
+            var impactedPersonSysIds = [];
+            var impactedPersons = new GlideRecord(CIRConstants.Tables.PERSON_IMPACT);
+            if (query) {
+                gs.debug('Getting injuries from impacted Persons based on query: ' + query);
+                impactedPersons.addQuery(query);
+            }
+            impactedPersons.query();
+            while (impactedPersons.next()) {
+                impactedPersonSysIds.push(impactedPersons.sys_id.toString());
+            }
+
+            var bodyLocations = [];
+            var totalInjuries = 0;
+            injuryRecords = new GlideAggregate(CIRConstants.Tables.INJURY_ILLNESS);
+            injuryRecords.addQuery('impacted_person.sys_id', 'IN', impactedPersonSysIds.toString());
+            injuryRecords.addQuery('injury_coordinates', '!=', '');
+            injuryRecords.addQuery('body_location', '!=', '');
+            injuryRecords.addAggregate('COUNT', 'body_location');
+            injuryRecords.query();
+            while (injuryRecords.next()) {
+                var count = parseInt(injuryRecords.getAggregate('COUNT', 'body_location'));
+                bodyLocations.push({
+                    record: _getBodyLocationRecord(injuryRecords.body_location.toString()),
+                    count: count
+                });
+                totalInjuries += count;
+            }
+
+            for (var i = 0; i < bodyLocations.length; i++) {
+                location = bodyLocations[i];
+                var injuryFactor = Math.ceil(((location.count / totalInjuries) * 100) / 10);
+                gs.debug('Got factor: ' + injuryFactor + ' from percent: ' + ((location.count /
+                        totalInjuries) *
+                    100));
+                injuryArr.push(_getInjuryHeatMapObject(location.record, injuryFactor));
+            }
+        } else {
+            gs.debug('Getting all injuries related to: ' + tableName + ' for record: ' + tableSys);
+            var record = new GlideRecord(tableName);
+            if (record.get(tableSys)) {
+                switch (tableName) {
+                    case CIRConstants.Tables.INJURY_ILLNESS:
+                        injuryArr.push(_getInjuryObject(record));
+                        break;
+
+                    case CIRConstants.Tables.PERSON_IMPACT:
+                        injuryRecords = new GlideRecord(CIRConstants.Tables.INJURY_ILLNESS);
+                        injuryRecords.addQuery('impacted_person', tableSys);
+                        injuryRecords.addQuery('injury_coordinates', '!=', '');
+                        injuryRecords.query();
+                        while (injuryRecords.next()) {
+                            injuryArr.push(_getInjuryObject(injuryRecords));
+                        }
+                        break;
+                }
+            }
+        }
+        var result = new global.JSON().encode(injuryArr);
+        gs.debug('Returning array of injury objects: ' + result);
+        return result;
+    };
+
+    /**
+     * Gets the GlideRecord of a specific body location
+     * @param  {sys_d} sys_id - the body location sys_id
+     * @return {[type]}        [description]
+     */
+    var _getBodyLocationRecord = function(sys_id) {
+        gs.debug('Getting body location record from sys: ' + sys_id);
+        var bodyLocation = new GlideRecord(CIRConstants.Tables.BODY_LOCATION);
+        return bodyLocation.get(sys_id) ? bodyLocation : null;
+    };
+
+    /**
+     * Gets an object with the coordinates of an injury for the body location map
+     * @param  {GlideRecord} injuryRecord - the injury record we are mapping
+     * @return {object} - - returns the coordinates, size, label, and coloring of the case for the map
+     */
+    var _getInjuryObject = function(injuryRecord) {
+        var coordinates = injuryRecord.injury_coordinates.toString().split(',');
+        var injuryObject = {
+            x: coordinates[0],
+            y: coordinates[1],
+            height: 10,
+            width: 10,
+            font_size: 'inherit',
+            label: injuryRecord.getDisplayValue(),
+            sys_id: injuryRecord.sys_id.toString()
+        };
+        if (gs.isDebugging()) {
+            gs.debug('Returning injury Object: ' + new global.JSON().encode(injuryObject));
+        }
+        return injuryObject;
+    };
+
+    /**
+     * Gets a heat map object for a location for the body location map
+     * @param  {object} bodyLocation - body location record to pull center and name from
+     * @param  {integer} sizeFactor - integer of the size to make the dot based on total dots in that region
+     * @return {object} - returns a heatmap object with coordinates and size for the body location map
+     */
+    var _getInjuryHeatMapObject = function(bodyLocation, sizeFactor) {
+        var height = sizeFactor * 5;
+        var centerCoordinates = bodyLocation.center.split(',');
+        var heatMapObject = {
+            x: centerCoordinates[0] - sizeFactor,
+            y: centerCoordinates[1],
+            height: height,
+            width: height,
+            font_size: height + 'px',
+            label: bodyLocation.name.toString()
+        };
+        if (gs.isDebugging()) {
+            gs.debug('Returning heat map Object: ' + new global.JSON().encode(heatMapObject));
+        }
+        return heatMapObject;
+    };
+
+    /**
+     * Gets the full days since the last injury occurred
+     * @return {integer} - returns an integer of the days or a string of "None"
+     */
+    var getDaysSinceLastInjury = function() {
+        // TODO: Is there any way to improve this with an aggregate?  We are only allowed one level of sub-queries with addJoinQuery.
+        var impact = new GlideRecord(CIRConstants.Tables.PERSON_IMPACT);
+        impact.addNotNullQuery('cir_case.occurred_on');
+        impact.addJoinQuery(CIRConstants.Tables.INJURY_ILLNESS, 'sys_id', 'impacted_person');
+        impact.orderByDesc('cir_case.occurred_on');
+        impact.setLimit(1);
+        impact.query();
+        if(impact.next()) {
+            var result = _getDaysAndSecondsSince(impact.getElement('cir_case').getRefRecord().getValue(
+                'occurred_on'));
+            gs.debug('Total seconds between current moment and last injury: ' + result.seconds +
+                ' which is complete days: ' + result.days);
+            return result.days;
+        }
+
+        gs.debug('No injuries found');
+        return gs.getMessage('None');
+    };
+
+    /**
+     * Calculates the amount of seconds and days since the last Incident
+     * @param  {Date} date - date to calculate
+     * @return {Object} - Object containing the amount of seconds and days since last Incident
+     */
+    var _getDaysAndSecondsSince = function(date) {
+        date = new GlideDateTime(date);
+        var todayDateTime = new GlideDateTime();
+        var seconds = Math.round((todayDateTime.getNumericValue() - date.getNumericValue()) / 1000);
+        return {
+            seconds: seconds,
+            days: Math.floor(seconds / 86400).toFixed(0)
+        };
+    };
+	
+	
+	/**
+     *
+     * Add injury in Injury/Illness tbale
+     * - called in the 'cir_ciri_body_location' widget
+     * @param {string} recordSys - sys_id of the injury/illness record
+     * @param {string} bodyLocation - location of the body where the injury/illness occurred
+	 * @param {string} coordinates - coordinates where the injury/illness was marked
+     * 
+     *
+     **/
+	var addInjury = function(recordSys, coordinates, bodyLocation) {
+        var injuryGr = new GlideRecord(CIRConstants.Tables.INJURY_ILLNESS);
+        if (injuryGr.get(recordSys)) {
+            injuryGr.setValue('injury_coordinates', coordinates);
+            injuryGr.setValue('body_location', bodyLocation);
+            injuryGr.update();
+        }
+	};
+	
+
+    var CIRImpactUtilsFP = Class.create();
+    var initialize = function() {};
+
+    CIRImpactUtilsFP.prototype = {
+        initialize: initialize,
+        CalculateLosses: calculateLosses,
+        CheckForImpact: checkForImpact,
+        GetBodyLocations: getBodyLocations,
+        GetInjuries: getInjuries,
+        GetDaysSinceLastInjury: getDaysSinceLastInjury,
+		AddInjury: addInjury
+    };
+
+    return CIRImpactUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-18 14:43:54</sys_created_on>
+        <sys_id>e3b001e0db25941003b3533fd39619a3</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>CIRImpactUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_e3b001e0db25941003b3533fd39619a3</sys_update_name>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-25 14:14:16</sys_updated_on>
+    </sys_script_include>
+</record_update>

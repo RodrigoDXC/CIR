@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>03fca012dbf95010bf9ead8ed396197c</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_psi_category">
+    <x_fru_cir_psi_category action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class/>
+        <description/>
+        <icon/>
+        <message/>
+        <message_es/>
+        <name>Internal test category</name>
+        <parent display_value="Internal">37b181dddbbd9010bf9ead8ed396191a</parent>
+        <short_description/>
+        <sys_created_by>psi.internal.manager</sys_created_by>
+        <sys_created_on>2020-07-06 10:03:36</sys_created_on>
+        <sys_id>03fca012dbf95010bf9ead8ed396197c</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-09 08:28:49</sys_updated_on>
+        <tier>1</tier>
+        <type>1</type>
+        <value>4</value>
+    </x_fru_cir_psi_category>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-21 10:09:37</sys_created_on>
+        <sys_id>677e71cfdbce1810d4a73533f39619f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Internal test category</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_677e71cfdbce1810d4a73533f39619f8</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-21 10:09:37</sys_updated_on>
+        <tablename>x_fru_cir_psi_category</tablename>
+    </sys_metadata_link>
+</record_update>

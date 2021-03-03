@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Case - Risk" max_length="40" name="x_fru_cir_m2m_risk_case" sizeclass="8" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Case" max_length="32" name="related_case" reference="x_fru_cir_case" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Risk" max_length="32" name="risk" reference="x_fru_cir_risk" type="reference"/>
+        <index name="index">
+            <element name="risk"/>
+        </index>
+        <index name="index2">
+            <element name="related_case"/>
+        </index>
+    </element>
+</database>

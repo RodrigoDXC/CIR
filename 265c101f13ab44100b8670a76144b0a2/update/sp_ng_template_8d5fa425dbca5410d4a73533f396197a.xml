@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>cir_ciri_assessment_selector_copy_modal</id>
+        <sp_widget display_value="CIR CIRI Assessment Selector">181fe025dbca5410d4a73533f3961990</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:33:28</sys_created_on>
+        <sys_id>8d5fa425dbca5410d4a73533f396197a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_ciri_assessment_selector_copy_modal</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_ng_template_8d5fa425dbca5410d4a73533f396197a</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 12:33:28</sys_updated_on>
+        <template><![CDATA[<div class="modal-content">
+  <div class="modal-header ng-scope" >
+    <button type="button" class="close pull-right" ng-click="$dismiss()" aria-label="Close modal">×</button>
+    <h1 class="modal-title h4 ng-binding">{{::data.msgs.copyConfirmTitle}}</h1>
+  </div>
+  <div class="modal-body ng-scope" ng-keyup="keyPress($event.keyCode)">
+    <p style="font-weight:bold; margin-bottom:20px;">{{::data.msgs.copyConfirmMsg}}</p>
+    <label class="field-label ng-binding ng-scope" for="sp_formfield_name" title="" tooltip-right="true"><span class="field-decorations"><span class="fa fa-asterisk mandatory" ng-class="{'mandatory-filled' : c.newName !== ''}"  title="Required" style="padding-right: .25em" aria-label="Required Filled " aria-hidden="false"></span></span>{{::data.msgs.nameInputQuestion}}</label>
+    <input name="name" id="sp_formfield_name" class="form-control ng-pristine ng-valid ng-scope ng-not-empty ng-valid-maxlength ng-touched" maxlength="40" ng-model="c.newName" ng-model-options="{allowInvalid: true}" ng-change="c.checkDuplicates()" type="string" aria-required="true" aria-invalid="false">
+    <div style="margin-top:30px" ng-if="c.copyCreated === true" class="alert alert-success" role="alert">
+      <span>{{::data.msgs.assmentCopied}}</span>
+      <div class="loader">Loading...</div>
+    </div>
+  </div>
+  <div class="modal-footer ng-scope" ng-style="options.footerStyle">
+    <button ng-disabled="c.copyCreated === true" class="btn btn-default" ng-click="$dismiss()">{{::data.msgs.cancelModalBtnMsg}}</button>
+    <button ng-disabled="c.newName === '' || c.copyCreated === true" class="btn btn-default  btn-primary" ng-click="c.triggerCopy()">{{::data.msgs.okModalBtnMsg}}</button><!-- end ngRepeat: button in options.buttons track by button.label -->
+  </div>
+</div>
+<style>
+  .loader,
+  .loader:after {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+  }
+  .loader {
+    float: right;
+    display: inline-block;
+    vertical-align: bottom;
+    margin:0;
+    font-size: 2px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-left: 1.1em solid #155724;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 0.3s infinite linear;
+  }
+  @-webkit-keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+</style>  ]]></template>
+    </sp_ng_template>
+</record_update>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Language" max_length="40" name="x_fru_cir_language" sizeclass="0" type="collection">
+        <element label="Code" max_length="40" name="code" type="string"/>
+        <element label="Name" max_length="40" name="name" type="string"/>
+    </element>
+</database>

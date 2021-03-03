@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="task" label="Risk" max_length="40" name="x_fru_cir_risk" sizeclass="4" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Category" mandatory="true" max_length="40" name="category" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Equipment Failure / Loss" sequence="10" value="equipment_damage"/>
+                <element inactive_on_update="false" label="Injury / Illness" sequence="20" value="injury_illness"/>
+                <element inactive_on_update="false" label="Non-conformance / Compliance" sequence="30" value="non_conformance"/>
+                <element inactive_on_update="false" label="Property Damage / Loss" sequence="40" value="property_damage"/>
+                <element inactive_on_update="false" label="Vehicle Damage / Loss" sequence="50" value="vehicle_damage"/>
+                <element inactive_on_update="false" label="Security" sequence="60" value="security"/>
+                <element inactive_on_update="false" label="Other" sequence="70" value="other"/>
+            </choice>
+        </element>
+        <element label="Category notes" max_length="4000" name="category_notes" type="string"/>
+        <element label="Contingency plan" max_length="4000" name="contingency_plan" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="likelihood" choice_table="x_fru_cir_incident" label="Future likelihood" max_length="40" name="future_likelihood" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Certain to Occur" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="Very Likely" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="Possible" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="Unlikely" sequence="3" value="4"/>
+                <element inactive_on_update="false" label="Rare" sequence="4" value="5"/>
+            </choice>
+        </element>
+        <element active="false" attributes="edge_encryption_enabled=true,encode_utf8=false" label="Investigation" max_length="32" name="investigation" read_only="true" reference="x_fru_cir_investigation" type="reference"/>
+        <element label="Justification" max_length="4000" name="justification" type="string"/>
+        <element label="Last review" max_length="40" name="last_review" type="glide_date"/>
+        <element label="Mitigation summary" max_length="4000" name="mitigation_summary" type="string"/>
+        <element label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="consequence" choice_table="x_fru_cir_hazard" label="Potential consequence" max_length="40" name="potential_consequence" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Negligible" sequence="0" value="5"/>
+                <element inactive_on_update="false" label="Minor" sequence="1" value="4"/>
+                <element inactive_on_update="false" label="Noticeable" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="Significant" sequence="3" value="2"/>
+                <element inactive_on_update="false" label="Major" sequence="4" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="3" choice_field="severity" choice_table="x_fru_cir_case" default="4" label="Potential severity" max_length="40" name="potential_severity" read_only="true" type="integer">
+            <choice>
+                <element inactive_on_update="false" label="Extreme" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="High" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="Medium" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="Low" sequence="3" value="4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Potential total damages" max_length="20" name="potential_total_damages" type="currency"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Potential total recovery cost" max_length="20" name="potential_total_recovery_cost" type="currency"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Response" max_length="40" name="response" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Avoid" sequence="10" value="avoid"/>
+                <element inactive_on_update="false" label="Transfer" sequence="20" value="transfer"/>
+                <element inactive_on_update="false" label="Reduce" sequence="30" value="reduce"/>
+                <element inactive_on_update="false" label="Accept" sequence="40" value="accept"/>
+            </choice>
+        </element>
+    </element>
+</database>

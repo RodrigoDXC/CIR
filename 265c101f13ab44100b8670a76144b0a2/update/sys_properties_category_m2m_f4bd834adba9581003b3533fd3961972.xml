@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="Security Properties">e55dc70adba9581003b3533fd39619fa</category>
+        <order>100</order>
+        <property display_value="message_set_enabled" name="message_set_enabled">9389a8a4dbe1941003b3533fd3961937</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-23 16:50:21</sys_created_on>
+        <sys_id>f4bd834adba9581003b3533fd3961972</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>message_set_enabled.Security Properties</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_f4bd834adba9581003b3533fd3961972</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-23 16:50:21</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>

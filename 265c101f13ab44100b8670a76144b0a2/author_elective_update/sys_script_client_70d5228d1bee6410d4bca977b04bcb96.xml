@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>active</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Country Read Only Role</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+    if (g_user.hasRoleExactly('x_fru_cir.case_manager')) {
+        g_form.setReadOnly('country', false);
+    } else {
+        g_form.setReadOnly('country', true);
+    }
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-24 00:36:48</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>70d5228d1bee6410d4bca977b04bcb96</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Country Read Only Role</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_70d5228d1bee6410d4bca977b04bcb96</sys_update_name>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-24 00:37:20</sys_updated_on>
+        <table>incident</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_script_client_70d5228d1bee6410d4bca977b04bcb96</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field&gt;active&lt;/field&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;Country Read Only Role&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onLoad() {
+    if (g_user.hasRoleExactly('x_fru_cir.case_manager')) {
+        g_form.setReadOnly('country', false);
+    } else {
+        g_form.setReadOnly('country', true);
+    }
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;lopez-aznar@dxc.com&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-02-24 00:36:48&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;70d5228d1bee6410d4bca977b04bcb96&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;Country Read Only Role&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_70d5228d1bee6410d4bca977b04bcb96&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;lopez-aznar@dxc.com&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-02-24 00:37:20&lt;/sys_updated_on&gt;&lt;table&gt;incident&lt;/table&gt;&lt;type&gt;onLoad&lt;/type&gt;&lt;ui_type&gt;10&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1321093421</payload_hash>
+        <record_name>Country Read Only Role</record_name>
+        <reverted_from/>
+        <source>20f0dcaf1b566010d4bca977b04bcb1a</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-24 00:37:20</sys_created_on>
+        <sys_id>0e16ee4d1bee6410d4bca977b04bcbd5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>177d17806fa0000001</sys_recorded_at>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:38</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>8216ee4dbbee6410d801364d35161cd5</update_guid>
+        <update_guid_history>8216ee4dbbee6410d801364d35161cd5:-1321093421,12f5aa4df0ee641057a5df6762187ebe:213509349</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-24 00:37:54</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>011e8317416c48d880333d3a39a355d1</sys_id>
+        <sys_metadata>70d5228d1bee6410d4bca977b04bcb96</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Country Read Only Role</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Incident">d70944161bc110107a7d624d6e4bcbf0</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_script_client_70d5228d1bee6410d4bca977b04bcb96</sys_update_name>
+        <sys_update_version display_value="sys_script_client_70d5228d1bee6410d4bca977b04bcb96">0e16ee4d1bee6410d4bca977b04bcbd5</sys_update_version>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-24 00:37:54</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

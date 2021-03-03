@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_related sys_domain="global" table="x_fru_cir_assessment_section" version="2" view="">
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Assessment Section - Default view" name="x_fru_cir_assessment_section" related_list="NULL" sys_domain="global" view="Default view">f0ec1a2fdbb95010d4a73533f39619d7</list_id>
+            <order_by/>
+            <position>0</position>
+            <related_list>x_fru_cir_assessment_field.assessment_section</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-10 15:23:40</sys_created_on>
+            <sys_id>b0ec1a2fdbb95010d4a73533f39619d8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-10 15:23:40</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Assessment Section - Default view" name="x_fru_cir_assessment_section" related_list="NULL" sys_domain="global" view="Default view">f0ec1a2fdbb95010d4a73533f39619d7</list_id>
+            <order_by/>
+            <position>1</position>
+            <related_list>x_fru_cir_assessment_instance_section.assessment_section</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-10 15:23:40</sys_created_on>
+            <sys_id>38ec1a2fdbb95010d4a73533f39619d8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-10 15:23:40</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list action="INSERT_OR_UPDATE">
+            <calculated_name>Assessment Section - Default view</calculated_name>
+            <filter/>
+            <name>x_fru_cir_assessment_section</name>
+            <order_by/>
+            <position/>
+            <related_list/>
+            <sys_class_name>sys_ui_related_list</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-07-10 15:23:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f0ec1a2fdbb95010d4a73533f39619d7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Assessment Section - Default view</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_related_x_fru_cir_assessment_section_null</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-07-10 15:23:40</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_related_list>
+    </sys_ui_related>
+</record_update>

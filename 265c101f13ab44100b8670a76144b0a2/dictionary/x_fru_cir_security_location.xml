@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" label="Security Location" max_length="40" name="x_fru_cir_security_location" sizeclass="14" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Building class" max_length="40" name="building_class" type="string"/>
+        <element label="Building code" max_length="40" name="building_code" type="string"/>
+        <element label="Building date" max_length="40" name="building_date" type="string"/>
+        <element label="Building id" max_length="40" name="building_id" type="string"/>
+        <element label="Building type" max_length="40" name="building_type" type="string"/>
+        <element label="Category of space" max_length="40" name="category" type="string"/>
+        <element label="City" max_length="40" name="city" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Company" max_length="32" name="company" reference="core_company" type="reference"/>
+        <element label="Building company code(partenon)" max_length="40" name="company_code" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Contact" max_length="32" name="contact" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Cost centre" max_length="32" name="cost_centre" reference="cmn_cost_center" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="country" choice_table="cmn_location" label="Country" max_length="40" name="country" type="choice">
+            <choice/>
+        </element>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,pdf_cell_type=image" label="Drawing" max_length="40" name="drawing" type="user_image"/>
+        <element label="Email address" max_length="40" name="email" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Employees" max_length="40" name="employees" type="integer"/>
+        <element label="End date" max_length="40" name="end_date" type="glide_date"/>
+        <element label="Flat box" max_length="40" name="flat_box" type="string"/>
+        <element label="Floor id" max_length="40" name="floor_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Floor in use" max_length="40" name="floor_in_use" type="boolean"/>
+        <element label="Floor type" max_length="40" name="floor_type" type="string"/>
+        <element label="Forced the ordinal and cost center" max_length="40" name="forced_ordinal" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Is parking" max_length="40" name="is_parking" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Latitude" max_length="40" name="latitude" type="float"/>
+        <element label="Leasing contract" max_length="40" name="leasing" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Location" max_length="32" name="location" read_only="true" reference="cmn_location" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Longitude" max_length="40" name="longitude" type="float"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Main department" max_length="32" name="main_department" reference="cmn_department" type="reference"/>
+        <element display="true" label="Name" mandatory="true" max_length="40" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Opening hours" max_length="32" name="opening_hours" reference="cmn_schedule" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Ownership" max_length="40" name="ownership" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Property" sequence="0" value="property"/>
+                <element inactive_on_update="false" label="Rent" sequence="1" value="rent"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Parent" max_length="32" name="parent" reference="x_fru_cir_security_location" type="reference"/>
+        <element label="Reference building for parking" max_length="40" name="parking_ref" type="string"/>
+        <element label="Partenon id" max_length="40" name="partenon_id" type="string"/>
+        <element label="Principal building ordinal" max_length="40" name="principal_ordinal" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Protection required" max_length="40" name="protection_required" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Reservability" max_length="40" name="reservability" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Reservable" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Planned closure" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Not reservable" sequence="2" value="2"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Security managed" max_length="40" name="security_managed" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="security" label="Source" max_length="40" name="source" read_only="true" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Security" sequence="0" value="security"/>
+                <element inactive_on_update="false" label="Global" sequence="1" value="global"/>
+            </choice>
+        </element>
+        <element label="Space class" max_length="40" name="space_class" type="string"/>
+        <element label="Space id" max_length="40" name="space_id" type="string"/>
+        <element label="Space name" max_length="40" name="space_name" type="string"/>
+        <element label="Space ordinal" max_length="40" name="space_ordinal" type="string"/>
+        <element label="Space type" max_length="40" name="space_type" read_only="true" type="string"/>
+        <element label="State/Province" max_length="40" name="state" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Status" max_length="40" name="status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="New" sequence="0" value="new"/>
+                <element inactive_on_update="false" label="In use" sequence="1" value="in _use"/>
+                <element inactive_on_update="false" label="Not in use" sequence="2" value="not_in_use"/>
+                <element inactive_on_update="false" label="To be sold" sequence="3" value="to_be_sold"/>
+                <element inactive_on_update="false" label="Sold" sequence="4" value="sold"/>
+                <element inactive_on_update="false" label="To rent" sequence="5" value="to_rent"/>
+                <element inactive_on_update="false" label="Rent cancelled" sequence="6" value="rent_cancelled"/>
+            </choice>
+        </element>
+        <element label="Street" max_length="4000" name="street" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Complex" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Building" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Space" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="Floor" sequence="3" value="3"/>
+            </choice>
+        </element>
+        <element label="Unit code" max_length="40" name="unit_code" type="string"/>
+        <element label="Zip code" max_length="40" name="zip" type="string"/>
+        <index name="index">
+            <element name="parent"/>
+        </index>
+        <index name="index2">
+            <element name="contact"/>
+        </index>
+        <index name="index3">
+            <element name="opening_hours"/>
+        </index>
+        <index name="index4">
+            <element name="company"/>
+        </index>
+        <index name="index5">
+            <element name="location"/>
+        </index>
+        <index name="index6">
+            <element name="main_department"/>
+        </index>
+        <index name="index7">
+            <element name="cost_centre"/>
+        </index>
+    </element>
+</database>

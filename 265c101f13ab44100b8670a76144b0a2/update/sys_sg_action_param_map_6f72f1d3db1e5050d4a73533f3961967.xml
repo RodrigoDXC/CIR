@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_action_param_map">
+    <sys_sg_action_param_map action="INSERT_OR_UPDATE">
+        <button display_value="New person impact">52017193db1e5050d4a73533f3961978</button>
+        <item_parameter display_value="cirPhone">877f4656db1edc10d4a73533f396193e</item_parameter>
+        <sys_class_name>sys_sg_action_param_map</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-03 14:11:31</sys_created_on>
+        <sys_id>6f72f1d3db1e5050d4a73533f3961967</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>877f4656db1edc10d4a73533f396193e</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_action_param_map_6f72f1d3db1e5050d4a73533f3961967</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-03 14:11:31</sys_updated_on>
+        <ui_parameter display_value="Phone">bbf1f993db1e5050d4a73533f39619da</ui_parameter>
+    </sys_sg_action_param_map>
+</record_update>

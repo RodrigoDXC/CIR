@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>REST Authprofile for Situation audit PDF gen (sys_id) for english speaking users</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_fru_cir.customer.pdf.authprofile.en</name>
+        <read_roles>admin</read_roles>
+        <suffix>customer.pdf.authprofile.en</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-18 13:15:50</sys_created_on>
+        <sys_id>effaa8e4dbe1941003b3533fd3961999</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_fru_cir.customer.pdf.authprofile.en</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_properties_effaa8e4dbe1941003b3533fd3961999</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-11 10:16:00</sys_updated_on>
+        <type>string</type>
+        <value>2e5c6ce4dbe1941003b3533fd3961996</value>
+        <write_roles>admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=effaa8e4dbe1941003b3533fd3961999"/>
+</record_update>

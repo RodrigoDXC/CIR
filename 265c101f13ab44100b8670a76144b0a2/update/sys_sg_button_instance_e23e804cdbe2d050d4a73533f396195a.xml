@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_button_instance">
+    <sys_sg_button_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <button display_value="Approve approval for investigation">18076853db5a5050d4a73533f39619df</button>
+        <color_theme>primary</color_theme>
+        <description>Footer action to change the state of an approval to Approved.</description>
+        <field_name/>
+        <icon/>
+        <label>Approve</label>
+        <location>footer</location>
+        <name>CIR Approve approval for investigation Footer</name>
+        <order>10</order>
+        <parent>a478a55edb9adc10d4a73533f39619af</parent>
+        <parent_table>sys_sg_screen</parent_table>
+        <sys_class_name>sys_sg_button_instance</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-05 14:48:44</sys_created_on>
+        <sys_id>e23e804cdbe2d050d4a73533f396195a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR Approve approval for investigation Footer</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_button_instance_e23e804cdbe2d050d4a73533f396195a</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-05 14:48:44</sys_updated_on>
+        <table/>
+    </sys_sg_button_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=e23e804cdbe2d050d4a73533f396195a"/>
+</record_update>

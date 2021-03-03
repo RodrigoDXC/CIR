@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Police Report" max_length="40" name="x_fru_cir_police_report" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Drive Off" max_length="32" name="drive_off" read_only="true" reference="x_fru_cir_drive_off" type="reference"/>
+        <element label="Police Officer Name" max_length="250" name="police_officer_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Police Station Address" max_length="32" name="police_station_address" reference="cmn_location" reference_qual="x_fru_cir_cir_types=1^EQ" reference_qual_condition="x_fru_cir_cir_types=1^EQ" type="reference"/>
+        <element label="Police system to register Drive off" max_length="1024" name="police_system_to_register_drive_off" type="url"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Reported to Police?" max_length="40" name="reported_to_police" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="No" sequence="20" value="0"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="drive_off"/>
+        </index>
+        <index name="index2">
+            <element name="police_station_address"/>
+        </index>
+    </element>
+</database>

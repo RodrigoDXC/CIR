@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_related sys_domain="global" table="x_fru_cir_investigation" version="2" view="">
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Investigation - Default view" name="x_fru_cir_investigation" related_list="NULL" sys_domain="global" view="Default view">c72e1e981bbd101024c896ce0a4bcb5a</list_id>
+            <order_by/>
+            <position>0</position>
+            <related_list>x_fru_cir_action.parent</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-12-11 08:48:40</sys_created_on>
+            <sys_id>44578a0d1bcde410d4bca977b04bcb00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-12-11 08:48:40</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Investigation - Default view" name="x_fru_cir_investigation" related_list="NULL" sys_domain="global" view="Default view">c72e1e981bbd101024c896ce0a4bcb5a</list_id>
+            <order_by/>
+            <position>1</position>
+            <related_list>x_fru_cir_m2m_contributing_factor.investigation</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-12-11 08:48:40</sys_created_on>
+            <sys_id>00578a0d1bcde410d4bca977b04bcb01</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-12-11 08:48:40</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Investigation - Default view" name="x_fru_cir_investigation" related_list="NULL" sys_domain="global" view="Default view">c72e1e981bbd101024c896ce0a4bcb5a</list_id>
+            <order_by/>
+            <position>2</position>
+            <related_list>sysapproval_approver.sysapproval</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-12-11 08:48:40</sys_created_on>
+            <sys_id>84578a0d1bcde410d4bca977b04bcb01</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-12-11 08:48:40</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Investigation - Default view" name="x_fru_cir_investigation" related_list="NULL" sys_domain="global" view="Default view">c72e1e981bbd101024c896ce0a4bcb5a</list_id>
+            <order_by/>
+            <position>3</position>
+            <related_list>REL:96064ac91bcde410d4bca977b04bcb77</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-12-11 08:48:40</sys_created_on>
+            <sys_id>0c578a0d1bcde410d4bca977b04bcb01</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-12-11 08:48:40</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list action="INSERT_OR_UPDATE">
+            <calculated_name>Investigation - Default view</calculated_name>
+            <filter/>
+            <name>x_fru_cir_investigation</name>
+            <order_by/>
+            <position/>
+            <related_list/>
+            <sys_class_name>sys_ui_related_list</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-12-11 08:48:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c72e1e981bbd101024c896ce0a4bcb5a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Investigation - Default view</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_related_x_fru_cir_investigation_null</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-12-11 08:48:40</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_related_list>
+    </sys_ui_related>
+</record_update>

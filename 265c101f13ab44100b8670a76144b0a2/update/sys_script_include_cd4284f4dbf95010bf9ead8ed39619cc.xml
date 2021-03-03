@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRPSIImportHelper</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRPSIImportHelper</name>
+        <script><![CDATA[var CIRPSIImportHelper = function() {
+	
+	/**
+	*
+	* will return value (number) of the option splitting the string to get it 
+	* called in the map fields of the FSI import transform map
+	* @param {string} option - option that came from the excel column
+	* @return {string} - identifiser of the value of the option so it can be mapped to the correct record
+	* 
+	**/
+	var getValue =  function(option) {
+		return option.split('-')[0];
+	};
+	
+	/**
+	*
+	* will return the gliderecord for a given query. 
+	* called in the map fields of the FSI import transform map
+	* @param {string} table - table to query
+	* @param {string} field - field that will be in query
+	* @param {string} value - value to query
+	* @return {GlideRecord} - GlideRecord. Empty string if doesn't find.
+	* 
+	**/
+	var getGlideRecord = function (table, query) {
+		var gr = new GlideRecord(table);
+		gr.addEncodedQuery(query);
+		gr.setLimit(1);
+		gr.query();
+		if(gr.next()) {
+			return gr;
+		}
+		return '';
+	};
+	
+	/**
+	*
+	* will delete an email attachment at sys_data_source . 
+	* called in PSI Import - Inbound Email Actions
+	* @param  email_id - email id
+	* 
+	**/
+	var switchAttachment = function (email_id){
+	
+		var grDataSrc = new GlideRecord('sys_data_source');
+		
+		if (grDataSrc.get('name', 'PSI Data Source')) {
+			var attach = new GlideRecord('sys_attachment');
+			attach.addQuery('table_sys_id', grDataSrc.getUniqueValue());
+			attach.query();
+			
+			while (attach.next()) {
+				var gAttach = new GlideSysAttachment();
+				gAttach.deleteAttachment(attach.getUniqueValue());
+			}
+			
+			
+			GlideSysAttachment.copy('sys_email', email_id.toString(), 'sys_data_source', grDataSrc.sys_id.toString());
+		}
+		
+		var grSched = new GlideRecord('scheduled_import_set');
+		
+		if (grSched.get('name', 'PSI Schedule Import')) {
+			grSched.run_as = gs.getUserID();
+			grSched.update();
+			gs.executeNow(grSched);
+		}
+	};
+	
+	/**
+	*
+	* will confirm if the attachment recived on th email is valid . 
+	* called in FSI Import - Inbound Email Actions
+	* @param  email_id - email id
+	* @param  tablename - email table
+	* 
+	**/
+	var hasCorrectAttachments = function (email_id, tablename) {
+		
+		var result = false;
+		var gr = new GlideRecord('sys_attachment');
+		gr.addQuery('table_sys_id', email_id.toString());
+		gr.addQuery('table_name',tablename + '');
+		//gr.addQuery('content_type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //extension is .xls
+		gr.query();
+		
+		while (gr.next()) {
+			if(gr.content_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+				result = true;	
+				
+			} else {
+				var gAttach = new GlideSysAttachment();
+				gAttach.deleteAttachment(gr.getUniqueValue());
+			}
+		}
+		
+		return result; 
+
+	};
+	
+	var getCurrency = function(code) {
+		var grCur = new GlideRecord('fx_currency');
+		grCur.addQuery('code', code.toString());
+		grCur.setLimit(1);
+		grCur.query();
+		
+		if(grCur.next()) {
+			return grCur;
+		}	
+	};
+	
+	var convertCost = function(currency, value) {
+		var globalCur = gs.getProperty('glide.i18n.single_currency.code');
+		var rate = getRate(currency, globalCur);
+		var symbol = getCurrency(globalCur).symbol.toString();
+		
+		value = parseFloat(value);
+		var result = parseFloat(value * rate);
+
+		return result === 0 ? '0.00 ' + symbol : parseFloat(value * rate).toFixed(2) + ' ' + symbol; 
+	};
+	
+	var getRate = function(fromCode, toCode) {
+		var fromCur = getCurrency(fromCode);
+		var toCur = getCurrency(toCode);
+		
+		var grRate = new GlideRecord('x_fru_cir_currency');
+		grRate.addQuery('from_currency', fromCur.sys_id.toString());
+		grRate.addQuery('to_currency', toCur.sys_id.toString());
+		grRate.setLimit(1);
+		grRate.query();
+		
+		if (grRate.next()) {
+			return grRate.rate;
+		} return 1;
+	};
+	
+	return {
+		GetValue: getValue,
+		GetGlideRecord: getGlideRecord,
+		SwitchAttachment: switchAttachment,
+		HasCorrectAttachments: hasCorrectAttachments,
+		GetCurrency: getCurrency,
+		ConvertCost: convertCost,
+		GetRate: getRate
+	};
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-01 15:10:22</sys_created_on>
+        <sys_id>cd4284f4dbf95010bf9ead8ed39619cc</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>CIRPSIImportHelper</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_cd4284f4dbf95010bf9ead8ed39619cc</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-08 08:41:32</sys_updated_on>
+    </sys_script_include>
+</record_update>

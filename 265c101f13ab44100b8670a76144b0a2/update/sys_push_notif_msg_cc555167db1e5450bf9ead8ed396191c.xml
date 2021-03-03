@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_push_notif_msg">
+    <sys_push_notif_msg action="INSERT_OR_UPDATE">
+        <message_string>A new Service Order was assigned to you - ${service_order.number}.</message_string>
+        <name>CIR Personal Protection Agent Report</name>
+        <push_app display_value="ServiceNow Mobile Application">05ed2fb177002300258da2e2c81061c2</push_app>
+        <push_message_content display_value="CIR Protection Agent Report Msg Content">04a5d167db1e5450bf9ead8ed39619e1</push_message_content>
+        <subject/>
+        <sys_class_name>sys_push_notif_msg</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-04 06:43:05</sys_created_on>
+        <sys_id>cc555167db1e5450bf9ead8ed396191c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR Personal Protection Agent Report</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_push_notif_msg_cc555167db1e5450bf9ead8ed396191c</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-04 06:45:29</sys_updated_on>
+        <table>x_fru_cir_protection_agent_report</table>
+        <type>push</type>
+    </sys_push_notif_msg>
+</record_update>

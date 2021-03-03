@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope) {
+	/* widget controller */
+	var c = this;
+	var g_form = $scope.page.g_form;
+	var assetArray = [];
+	c.assetList = document.getElementById("selectedCategory").getAttribute("value");
+	c.createRow = function() {
+
+		
+		var selected = document.getElementById("selectedCategory").getAttribute("value");
+		
+		if (assetArray.indexOf(selected) != -1) {
+			g_form.addInfoMessage(c.data.msgs.security_already_selected);
+			return;
+			
+		} else if(selected == 'false') {
+			return;
+		}
+
+		c.server.get({
+			asset: selected
+		}).then(function(r) {
+			var assetObject = JSON.parse(r.data.assetObj);
+			var obj = g_form.getValue("security_measures").length != 0 ? JSON.parse(g_form.getValue("security_measures")) : [];
+			obj.push({
+				type: assetObject.type + '',
+				security_measure: assetObject.asset+ '',
+				parent: assetObject.parent+ '',
+				operational: g_form.getValue('operational_tree'),
+				effective: g_form.getValue('effective_tree')
+			});
+			g_form.setValue("security_measures", JSON.stringify(obj));
+			assetArray.push(selected);
+		});
+	}
+
+	c.remove = function() {
+		g_form.clearValue("security_measures");
+		assetArray = [];
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.btn {&#13;
+  line-height: 1.42857143;&#13;
+}&#13;
+&#13;
+.btn-primary {&#13;
+  color: #fff;&#13;
+  background-color: #ce0000;&#13;
+  border-color: #b50000;&#13;
+  margin-left: 10px;&#13;
+}&#13;
+&#13;
+.btn-secondary {&#13;
+  color : #333;&#13;
+  background-color: #ffffff;&#13;
+  border-color: #ccc;&#13;
+  margin-left : 10px;&#13;
+}&#13;
+&#13;
+.m-r {&#13;
+    margin-right: 15px !important;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-psi-add-asset</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR PSI Add Asset</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.psi_global_manager,x_fru_cir.psi_internal_manager,x_fru_cir.psi_internal_user,x_fru_cir.psi_local_manager</roles>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.msgs = {};
+    data.msgs.add = gs.getMessage("cir_sit_add");
+    data.msgs.remove = gs.getMessage("cir_sit_remove");
+	data.msgs.security_already_selected = gs.getMessage("cir_psi_sec_measure_already_selected");
+	
+	if(input && input.asset){
+		var assetObj = {};
+		var asset = new GlideRecordSecure(CIRConstants.Tables.SECURITY_ASSET);
+		if (asset.get(input.asset)) {
+			assetObj = {
+				type: asset.getDisplayValue('u_type'),
+				asset: asset.getUniqueValue(),
+				parent: asset.getDisplayValue('u_parent')
+			};
+		}
+		data.assetObj = JSON.stringify(assetObj);
+		return data.assetObj;
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-09 09:03:35</sys_created_on>
+        <sys_id>e6cbbb47dbf9d010bf9ead8ed39619a6</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>CIR PSI Add Asset</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_e6cbbb47dbf9d010bf9ead8ed39619a6</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-09 10:46:58</sys_updated_on>
+        <template><![CDATA[<div>
+<button type="button" class="btn btn-primary m-r" id="addAssetButton" ng-click="c.createRow()">{{c.data.msgs.add}}</button>
+<button type="button" class="btn btn-secondary m-r" ng-click="c.remove()">{{c.data.msgs.remove}}</button>
+</div>]]></template>
+    </sp_widget>
+</record_update>

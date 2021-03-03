@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>b8e3edcfdb8e1810d4a73533f39619f2</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_psi_category">
+    <x_fru_cir_psi_category action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class/>
+        <description/>
+        <icon/>
+        <message/>
+        <message_es/>
+        <name>Confidential document breach</name>
+        <parent display_value="Confidentiality breach">aa53e103dbce1810d4a73533f39619ce</parent>
+        <short_description/>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-21 08:13:40</sys_created_on>
+        <sys_id>b8e3edcfdb8e1810d4a73533f39619f2</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-21 08:13:40</sys_updated_on>
+        <tier>2</tier>
+        <type>1</type>
+        <value>internal_2</value>
+    </x_fru_cir_psi_category>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-21 10:09:45</sys_created_on>
+        <sys_id>218e35cfdbce1810d4a73533f396193e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Confidential document breach</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_218e35cfdbce1810d4a73533f396193e</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-21 10:09:45</sys_updated_on>
+        <tablename>x_fru_cir_psi_category</tablename>
+    </sys_metadata_link>
+</record_update>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_parameter">
+    <sys_sg_item_parameter action="INSERT_OR_UPDATE">
+        <default_value/>
+        <name>Follow-up treatment</name>
+        <parent>1e89e186db7a9810d4a73533f3961990</parent>
+        <parent_table>sys_sg_write_back_action_item</parent_table>
+        <sys_class_name>sys_sg_item_parameter</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-24 12:59:33</sys_created_on>
+        <sys_id>a47b25c6db7a9810d4a73533f39619ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Follow-up treatment</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_item_parameter_a47b25c6db7a9810d4a73533f39619ef</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-24 12:59:33</sys_updated_on>
+        <type>string</type>
+    </sys_sg_item_parameter>
+</record_update>

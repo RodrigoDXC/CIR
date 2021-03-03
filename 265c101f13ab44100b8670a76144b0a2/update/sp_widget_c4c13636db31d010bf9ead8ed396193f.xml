@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $location, $timeout, $window, $document, $rootScope, spUtil,spAriaUtil) {
+	var c = this;
+	
+	$scope.selectedCatalog = c.data.catalogSelectorArr[c.data.selectedCatalogIndex];
+	$scope.changeCatalog = function (selectedCatalog) {
+		$timeout(function() {
+			if (selectedCatalog && selectedCatalog.hasOwnProperty("value")) {
+				$location.search('catalog_id', selectedCatalog.value ? selectedCatalog.value : -1);
+				$location.search('sys_id', null);
+			}
+		});
+	}
+	$scope.handleKeyPressOnCategory = function($event, category) {
+		$event.stopPropagation();
+		var currentElement = $($event.currentTarget);
+		var allCategories = currentElement.closest('ul.category-list').find('.group-item');
+		var index = -1;
+		if(allCategories.length > 0) {
+			index = allCategories.index(currentElement);
+		}
+		switch($event.which) {
+			case 40: // bottom key
+				if(index+1 < allCategories.length) {
+					allCategories.get(index+1).focus();
+				}
+				break;
+			case 38: // top key
+				if(index > 0) {
+					allCategories.get(index-1).focus();
+				}
+				break;
+			case 37: // Left key
+				if(category.showChildren) {
+					$scope.displayChildren($event, category);
+				}
+				break;
+			case 39: //right key
+				if(!category.showChildren) {
+					$scope.displayChildren($event, category);
+				}
+				break;
+		}
+		
+	}
+	
+	$scope.hideCategoryWidgetInXS = (c.options.hide_xs == 'true');
+	if (c.data.categoryId) {
+		if (!$scope.hideCategoryWidgetInXS)
+			$scope.hideCategoryWidgetInXS = true;
+	} else {
+		if ($scope.hideCategoryWidgetInXS)
+			$scope.hideCategoryWidgetInXS = false;
+	}
+	
+	spUtil.getPreference('glide.ui.accessibility', function(value) {
+		if (value == "true")
+			$scope.tabindex = 0;
+		else
+			$scope.tabindex = -1;
+	});
+	
+	$scope.displayChildren = function($event, category) {
+		$event.stopPropagation();
+		if(!category || !category.subcategories || category.subcategories.length === 0) {
+			return;
+		}
+		category.showChildren = !category.showChildren;
+		if (category.showChildren) {
+			spAriaUtil.sendLiveMessage(category.title + ' '+ c.data.messages.expanded);
+		} 
+		else {
+			spAriaUtil.sendLiveMessage(category.title + ' ' +c.data.messages.collapsed);
+		}
+	};
+	
+	$scope.toggleSubCategories =  function(val) {
+		toggleSubCategories(c.data.categoriesList, val);
+	};
+	
+	function toggleSubCategories(categories, val) {
+		categories.forEach(function(category) {
+			category.showChildren = val;
+			if (category.subcategories && category.subcategories.length > 0) {
+				toggleSubCategories(category.subcategories, val);
+			}
+		});
+	}
+	
+	$scope.loadMore =  function() {
+		c.data.new_limit = c.data.limit + (c.options.number_of_categories_to_load || 15);
+		c.data.more_msg = c.data.pleaseWait;
+		c.server.update();
+	};
+	
+	$scope.categorySelected = function(category) {
+			$timeout(function() {
+				$rootScope.$emit('showCategories', category.sys_id.toString());
+// 				$location.search('sys_id', category.sys_id);
+// 				$location.search('catalog_id', c.data.catalog_id);
+// 				$location.search('id', c.data.page ||'fsm_category'); //x_lsmcb_fsm_fsi_category
+			});
+	};
+	
+	var listenerForBrowseCategories = $scope.$on("$sp.service_catelog.show.categories_widget", function() {
+		$scope.hideCategoryWidgetInXS = false;
+	});
+	
+	/*$scope.hideBrowseCategory = function () {
+		$scope.hideCategoryWidgetInXS = true;
+		$rootScope.$broadcast("$sp.service_catelog.show.items_widget");
+	*/
+	
+	$scope.$on("$destroy", function() {
+		listenerForBrowseCategories();
+	});
+	
+	$scope.isTouchDevice = function() {
+		return ('ontouchstart' in $window);
+	}
+	
+	$scope.getCategoryPadding = function(categoryLevel) {
+		if (categoryLevel >= 4)
+			categoryLevel = 4;
+		return 15*categoryLevel + "px";
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.category-widget {&#13;
+	border: 1px solid $panel-inner-border;&#13;
+  &#13;
+  .category-list {&#13;
+    .fa {&#13;
+      margin-right: 5px;&#13;
+    }&#13;
+    .l-h-1_6x {&#13;
+      line-height: 1.6em;&#13;
+    }&#13;
+    a {&#13;
+		width: 100%;&#13;
+      	vertical-align: middle;&#13;
+	    display: inline-block;&#13;
+    }&#13;
+    .list-group {&#13;
+      margin-bottom: 0;&#13;
+    }&#13;
+    .list-group-item {&#13;
+      padding: 0;&#13;
+      border: 0;&#13;
+    }&#13;
+    .group-item {&#13;
+      padding: 10px 15px;&#13;
+    }&#13;
+    .group-item-default {&#13;
+      &amp;:hover, &amp;:focus {&#13;
+        background-color: darken($panel-default-heading-bg, 2%);&#13;
+      }&#13;
+    }&#13;
+    .group-item-primary {&#13;
+      &amp;:hover, &amp;:focus {&#13;
+        border-left: 3px solid $primary !important;&#13;
+      }&#13;
+    }&#13;
+    .group-item-success {&#13;
+      &amp;:hover {&#13;
+        background-color: lighten($panel-success-heading-bg, 3%)&#13;
+      }&#13;
+    }&#13;
+    .group-item-info {&#13;
+      &amp;:hover, &amp;:focus {&#13;
+        background-color: lighten($panel-info-heading-bg, 3%)&#13;
+      }&#13;
+    }&#13;
+    .group-item-warning {&#13;
+      &amp;:hover, &amp;:focus {&#13;
+        background-color: $panel-warning-heading-bg&#13;
+      }&#13;
+    }&#13;
+    .group-item-danger {&#13;
+      &amp;:hover, &amp;:focus {&#13;
+        background-color: lighten($panel-danger-heading-bg, 3%)&#13;
+      }&#13;
+    }&#13;
+    &#13;
+    .list-bg-default {&#13;
+      background-color: $panel-default-heading-bg;&#13;
+    }&#13;
+    .list-bg-primary {&#13;
+      background-color: lighten($panel-info-heading-bg, 6%);&#13;
+    }&#13;
+    .list-bg-success {&#13;
+      background-color: lighten($panel-success-heading-bg, 6%);&#13;
+    }&#13;
+    .list-bg-info {&#13;
+      background-color: lighten($panel-info-heading-bg, 6%);&#13;
+    }&#13;
+    .list-bg-warning {&#13;
+      background-color: lighten($panel-warning-heading-bg, 3%);&#13;
+    }&#13;
+    .list-bg-danger {&#13;
+      background-color: lighten($panel-danger-heading-bg, 6%);&#13;
+    }&#13;
+  }&#13;
+}&#13;
+.panel-primary .badge {&#13;
+  background-color: $primary;&#13;
+  color: white;&#13;
+}&#13;
+.panel-default .badge {&#13;
+  background-color: $panel-default-text;&#13;
+  color: white&#13;
+}&#13;
+.panel-success .badge {&#13;
+  background-color:  $panel-success-text;&#13;
+  color: white;&#13;
+}&#13;
+.panel-info .badge {&#13;
+  background-color: $panel-info-text;&#13;
+  color: white;&#13;
+}&#13;
+.panel-warning .badge {&#13;
+  background-color: $panel-warning-text;&#13;
+  color: white;&#13;
+}&#13;
+.panel-danger .badge {&#13;
+  background-color: $panel-danger-text;&#13;
+  color: white;&#13;
+}&#13;
+.category-list .badge {&#13;
+  text-align: right;&#13;
+}&#13;
+.text-active {&#13;
+   color: $link-color;&#13;
+   border-left: 3px solid $primary&#13;
+}&#13;
+.text-default {&#13;
+   color: $text-muted;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-psi-category-tree</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR PSI Category tree</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.psi_global_manager,x_fru_cir.psi_internal_manager,x_fru_cir.psi_internal_user,x_fru_cir.psi_local_manager</roles>
+        <script><![CDATA[(function () {
+
+	// checks if a user has internal or external roles. or both. in order to show the correct category type
+	var isInternalUser = gs.hasRole('x_fru_cir.psi_internal_manager') || gs.hasRole('x_fru_cir.psi_internal_user');
+	var isExternaluser = gs.hasRole('x_fru_cir.psi_global_manager') || gs.hasRole('x_fru_cir.psi_local_manager') ;
+
+	var msg = data.messages = {};
+	msg.expanded = gs.getMessage("cir_expanded");
+	msg.collapsed = gs.getMessage("cir_collapsed");
+	msg.catalogTitle = options.catalog_title ? gs.getMessage(options.catalog_title) : gs.getMessage('cir_categories');
+
+
+	var catalog_id = $sp.getParameter("catalog_id") ? $sp.getParameter("catalog_id") + "" : "-1";
+	var catalogSelectorArr = [{
+		value: "-1",
+		displayValue: gs.getMessage("All")
+	}];
+	data.selectedCatalogIndex = catalog_id == -1 ? 0 : -1;
+	var catalogIDs = $sp.getCatalogs().value + "";
+	var catalogs = catalogIDs.split(",");
+	var isCatalogAccessibleViaPortal = catalog_id == -1 ? true : false;
+	catalogs.forEach(function (catalogSysId) {
+		if (catalog_id == catalogSysId) {
+			isCatalogAccessibleViaPortal = true;
+		}
+	});
+
+	var counter = 1;
+	catalogs.forEach(function (catalogSysId) {
+		var catalog = new sn_sc.Catalog(catalogSysId);
+		var catalogObj = {
+			value: catalogSysId,
+			displayValue: catalog.getTitle()
+		};
+		if (catalog.canView()) {
+			if (catalog_id === catalogSysId) {
+				data.selectedCatalogIndex = counter;
+			}
+			catalogSelectorArr.push(catalogObj);
+			counter++;
+		}
+	});
+	data.catalogSelectorArr = catalogSelectorArr;
+
+	data.catalog_id = catalog_id ? catalog_id : "-1";
+	data.showMoreMsg = gs.getMessage("cir_show_more");
+	data.pleaseWait = gs.getMessage("Please wait... fetching categories");
+	var categoryId = $sp.getParameter('sys_id') ? $sp.getParameter('sys_id') + "" : "";
+	data.categoryId = categoryId;
+	var catalogIDs = (data.catalog_id && data.catalog_id !== "-1") ? data.catalog_id : $sp.getCatalogs().value + "";
+	var viewType = '';
+	var checkCanView = false;
+	var nestedLayout = (options.category_layout !== "Flat");
+	var dynamicCategory = false;
+
+	var catalogArr = catalogIDs.split(",");
+	var catalogs = [];
+	catalogArr.forEach(function (catalogSysId) {
+		var catalog = new sn_sc.Catalog(catalogSysId);
+		if (catalog.canView()) {
+			catalogs.push(catalogSysId);
+		}
+	});
+
+	data.categoryId = categoryId;
+
+
+	data.largeDataSet = gs.getProperty("glide.sc.largeSet.optimization.enable", "false");
+	if (data.largeDataSet == 'true')
+		nestedLayout = false;
+
+	if (options.page) {
+		var page = new GlideRecordSecure('sp_page');
+		if (page.get(options.page))
+			data.page = page.id + '';
+	}
+	checkCanView = (options.check_can_view == 'true');
+
+	if (!isCatalogAccessibleViaPortal) {
+		return;
+	}
+	data.categoriesList = [];
+	var categoriesInPage = options.number_of_categories_to_load || 15;
+	data.limit = categoriesInPage;
+	data.categoriesList = getPSICategories();
+
+
+
+	if (input && input.new_limit)
+		data.limit = input.new_limit;
+
+	if (input && input.startWindow) {
+		data.endWindow = input.endWindow;
+	} else {
+		data.startWindow = 0;
+		data.endWindow = 0;
+	}
+
+
+
+	//data.startWindow = data.endWindow;
+	//data.endWindow = data.endWindow + categoriesInPage;
+	//var catGr = queryCategory(catalogs, nestedLayout, dynamicCategory, data.startWindow, data.endWindow);
+	//gs.info('BS > catGR.sys_id > ' + catGr.getUniqueValue());
+	//if (!catGr.hasNext())
+	//break;
+
+
+
+
+	if (data.categoriesList.length > data.limit) {
+		data.showMore = true;
+	} else {
+		data.showMore = false;
+	}
+
+	data.more_msg = gs.getMessage("Showing {0} categories", data.limit);
+
+
+	function getPSICategories() {
+
+		var psiCategories = [];
+		var grCat = new GlideRecordSecure(CIRConstants.Tables.PSI_CATEGORY);
+		grCat.addQuery('active', 'true');
+		grCat.addQuery('tier', '0');
+		grCat.query();
+
+		while (grCat.next()) {
+
+			if (isInternalUser && grCat.getValue('type') == '1') {
+				psiCategories.push(getCategoryDetails(grCat, grCat.tier));
+			}
+
+			if (isExternaluser && grCat.getValue('type') == '0') {
+				psiCategories.push(getCategoryDetails(grCat, grCat.tier));
+			}
+		}
+
+		return psiCategories;
+	}
+
+	function getCategoryDetails(psiCategory, level) {
+		var categoryDetails = {};
+		var showChildren = false;
+
+		categoryDetails.title = psiCategory.name.toString();
+		categoryDetails.level = level;
+		//categoryDetails.description = '';
+		//categoryDetails.full_description = '';
+		//categoryDetails.icon = '';
+		//categoryDetails.header_icon = '';
+		//categoryDetails.homepage_image = '';
+		categoryDetails.sys_id = psiCategory.getUniqueValue();
+		categoryDetails.showChildren = (categoryDetails.sys_id === categoryId);
+		categoryDetails.totalCount = 1;
+
+
+		var subCategoryCounts = 0;
+		if (nestedLayout) {
+			var subcategories = getSubCategories(psiCategory.getUniqueValue(), level + 1);
+
+			if (subcategories.length == 0) {
+				categoryDetails.subcategories = [];
+			} else {
+				categoryDetails.subcategories = [];
+
+				for (var j = 0; j < subcategories.length; j++) {
+
+					var category = getCategoryDetails(subcategories[j], level + 1);
+					categoryDetails.totalCount = categoryDetails.totalCount + category.totalCount;
+					categoryDetails.subcategories.push(category);
+					categoryDetails.showChildren = categoryDetails.showChildren || category.showChildren;
+
+				}
+			}
+		} else {
+			categoryDetails.totalCount = categoryDetails.count;
+		}
+		return categoryDetails;
+	}
+
+	function getSubCategories(parent, level) {
+
+		var psiCategories = [];
+		var grCat = new GlideRecordSecure(CIRConstants.Tables.PSI_CATEGORY);
+		grCat.addQuery('active', 'true');
+		grCat.addQuery('parent', parent.toString());
+		grCat.addQuery('tier', level);
+		grCat.query();
+
+		while (grCat.next()) {
+
+			var grNewCat = new GlideRecordSecure(CIRConstants.Tables.PSI_CATEGORY);
+			if (grNewCat.get(grCat.getUniqueValue())) {
+				if (hasChildren(grNewCat.getUniqueValue())) {
+					psiCategories.push(grNewCat);
+				}
+			}
+		}
+
+		return psiCategories;
+	}
+
+	function hasChildren(categoryId) {
+
+		var grCat = new GlideRecordSecure(CIRConstants.Tables.PSI_CATEGORY);
+		grCat.addQuery('parent', categoryId);
+		grCat.query();
+		if (grCat.hasNext()) {
+			return true;
+		}
+		return false;
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-08 09:18:43</sys_created_on>
+        <sys_id>c4c13636db31d010bf9ead8ed396193f</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CIR PSI Category tree</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_c4c13636db31d010bf9ead8ed396193f</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-31 06:52:10</sys_updated_on>
+        <template><![CDATA[<script type="text/ng-template" id="catalog-template.html">
+  <select class="sc-basic-select" aria-label="{{::data.messages.catalogTitle}}" ng-change="changeCatalog(selectedCatalog)" sn-focus="true" ng-model="selectedCatalog" ng-options="catalog.displayValue for catalog in c.data.catalogSelectorArr track by catalog.value"/>
+</script>
+
+<div class="panel panel-{{::options.color}} category-widget no-border">
+  <div class="panel-heading">
+    <!--<h2 class="h4 panel-title">
+      <span class="pull-right visible-xs" >
+      	<i class="fa fa-times-circle" ng-click="hideBrowseCategory()" aria-label="${Show Items}" tabindex="0"/>
+      </span>
+      <span ng-if="::options.glyph">
+        <fa name="{{::options.glyph}}" />
+      </span>{{::options.title}}</h2>-->
+  </div>
+  <ul class="list-group category-list" role="list" aria-label="${Categories}">
+    <li role="listitem" 
+        class="list-group-item text-overflow-ellipsis" 
+        ng-if="category.totalCount > 0" ng-include="'category-template.html'" 
+        ng-repeat="category in data.categoriesList | limitTo: data.limit track by category.sys_id">
+    </li>
+  </ul>
+  <div class="panel-footer text-center" ng-if="data.showMore">
+    <a href="javascript:void(0)" role="button" class="text-center" ng-click="loadMore()" >{{::data.showMoreMsg}}</a>
+    <div class="text-muted text-center">
+      {{data.more_msg}}
+    </div>
+  </div>
+</div>
+  
+<script type="text/ng-template" id="category-template.html">
+	<div ng-click="categorySelected(category)"
+  ng-keydown="handleKeyPressOnCategory($event, category)"
+		sn-focus="category.sys_id == data.categoryId"
+		ng-enabled="category.totalCount > 0"
+    ng-class="{true: 'text-active', false: ''}[category.sys_id == data.categoryId]"
+          tabindex="0" class="group-item group-item-primary" style="padding-left:{{getCategoryPadding(category.level + 1)}}">
+      <i ng-if="::category.subcategories.length > 0 " 
+          class="l-h-1_6x pull-left fa collapse-icon" 
+          ng-class="{true: 'fa-minus-square-o', false: 'fa-plus-square-o'}[category.showChildren]" 
+          aria-label="{{category.showChildren? '${collapse category} ' + category.title : '${expand category} ' + category.title}}"
+          ng-click="displayChildren($event, category)"/></i>
+      <!--<span class="badge pull-right pointer" ng-if="options.omit_badges != 'true' && data.largeDataSet != 'true'">{{::category.totalCount}}</span>-->
+      <span class="block text-overflow-ellipsis category" 
+				  id="{{::category.sys_id}}"
+          uib-tooltip="{{::category.title}} {{::category.catalog_tooltip}}"
+          tooltip-placement="top"
+          tooltip-enable="!isTouchDevice()"
+          tooltip-append-to-body="true">
+          {{::category.title}}
+          <span class="sr-only">${items}</span>
+      </span>
+    </div>
+  	<ul class="list-group sub-category-list list-bg-primary" role="list" aria-label="{{category.title}} ${subcategories}" ng-if="category.showChildren && category.subcategories.length > 0" ng-class="{true: 'no-indent', false: ''}[category.level > 5]">
+      <li role="listitem" 
+      		class="list-group-item text-overflow-ellipsis" 
+          ng-include="'category-template.html'" 
+          ng-repeat="category in category.subcategories track by category.sys_id" 
+          ng-if="category.totalCount > 0">
+      </li>
+  	</ul>
+</script>]]></template>
+    </sp_widget>
+</record_update>

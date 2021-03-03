@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>80dca4bddbc29410d4a73533f3961978</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_security_location">
+    <x_fru_cir_security_location action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <building_class/>
+        <building_code/>
+        <building_date/>
+        <building_id/>
+        <building_type/>
+        <category/>
+        <city>London</city>
+        <company/>
+        <company_code/>
+        <contact/>
+        <cost_centre/>
+        <country>United Kingdom</country>
+        <description/>
+        <drawing/>
+        <email/>
+        <employees/>
+        <end_date/>
+        <flat_box/>
+        <floor_id/>
+        <floor_in_use>false</floor_in_use>
+        <floor_type/>
+        <forced_ordinal/>
+        <is_parking>false</is_parking>
+        <latitude/>
+        <leasing/>
+        <location display_value="3 Whitehall Court, London">8225b668ac1d55eb679878e192fca315</location>
+        <longitude/>
+        <main_department/>
+        <name>3 Whitehall Court, London</name>
+        <opening_hours/>
+        <ownership/>
+        <parent display_value="United Kingdom">1fcc64bddbc29410d4a73533f39619bf</parent>
+        <parking_ref/>
+        <partenon_id/>
+        <principal_ordinal/>
+        <protection_required>false</protection_required>
+        <reservability/>
+        <security_managed>false</security_managed>
+        <source>global</source>
+        <space_class/>
+        <space_id/>
+        <space_name/>
+        <space_ordinal/>
+        <space_type/>
+        <state/>
+        <status/>
+        <street>3 Whitehall Court</street>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2020-07-17 07:00:20</sys_created_on>
+        <sys_id>80dca4bddbc29410d4a73533f3961978</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-07-17 07:00:20</sys_updated_on>
+        <type/>
+        <unit_code/>
+        <zip>SW1A 2EL</zip>
+    </x_fru_cir_security_location>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-20 21:38:10</sys_created_on>
+        <sys_id>b772dff6db8a1810d4a73533f39619f4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>3 Whitehall Court, London</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_b772dff6db8a1810d4a73533f39619f4</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-20 21:38:10</sys_updated_on>
+        <tablename>x_fru_cir_security_location</tablename>
+    </sys_metadata_link>
+</record_update>

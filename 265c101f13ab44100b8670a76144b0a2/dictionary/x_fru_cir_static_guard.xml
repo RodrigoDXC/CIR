@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Static Guard" max_length="40" name="x_fru_cir_static_guard" sizeclass="1" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Driving permit" max_length="40" name="driving_permit" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" display="true" label="Guard" max_length="32" name="guard" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Languages" max_length="1024" name="languages" reference="x_fru_cir_language" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service" max_length="32" name="service" reference="x_fru_cir_service_function" type="reference"/>
+        <element label="Training courses" max_length="4000" name="training_courses" type="string"/>
+        <index name="index">
+            <element name="service"/>
+        </index>
+        <index name="index2">
+            <element name="guard"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="cmdb_ci" label="Security Asset" max_length="40" name="x_fru_cir_security_asset" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Parent" max_length="32" name="u_parent" reference="x_fru_cir_security_asset" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="u_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Family" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Installation" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="Subinstallation" sequence="3" value="3"/>
+                <element inactive_on_update="false" label="Type of Asset" sequence="4" value="4"/>
+            </choice>
+        </element>
+    </element>
+</database>

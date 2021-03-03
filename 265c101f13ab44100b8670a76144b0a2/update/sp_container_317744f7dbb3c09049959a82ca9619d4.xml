@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+    <sp_container action="INSERT_OR_UPDATE">
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>Situation categories - Container 3</name>
+        <order>3</order>
+        <sp_page display_value="cir_situation_categories">127cd2c51bf30850df7e43f4bd4bcbb0</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-04-02 13:03:45</sys_created_on>
+        <sys_id>317744f7dbb3c09049959a82ca9619d4</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Situation categories - Container 3</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_container_317744f7dbb3c09049959a82ca9619d4</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-04-02 15:39:15</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+</record_update>

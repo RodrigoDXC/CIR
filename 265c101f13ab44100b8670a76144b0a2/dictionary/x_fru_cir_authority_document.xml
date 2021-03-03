@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" label="Authority Document" max_length="40" name="x_fru_cir_authority_document" sizeclass="0" type="collection">
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element display="true" label="Short description" mandatory="true" max_length="40" name="short_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="draft" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Draft" sequence="0" value="draft"/>
+                <element inactive_on_update="false" label="Active" sequence="1" value="active"/>
+                <element inactive_on_update="false" label="Inactive" sequence="2" value="inactive"/>
+            </choice>
+        </element>
+    </element>
+</database>

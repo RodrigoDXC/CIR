@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_related action="DELETE" sys_domain="global" table="x_fru_cir_incident" version="2" view="">
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>0</position>
+            <related_list>x_fru_cir_action.parent</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>41d177241b6a6410de011fc11a4bcb11</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>1</position>
+            <related_list>x_fru_cir_person_impact.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>c5d177241b6a6410de011fc11a4bcb11</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>2</position>
+            <related_list>x_fru_cir_physical_impact.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>4dd177241b6a6410de011fc11a4bcb11</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>3</position>
+            <related_list>x_fru_cir_security_impact.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>c1d177241b6a6410de011fc11a4bcb12</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>4</position>
+            <related_list>x_fru_cir_non_conformance_compliance.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>49d177241b6a6410de011fc11a4bcb12</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>5</position>
+            <related_list>x_fru_cir_environmental_impact.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>cdd177241b6a6410de011fc11a4bcb12</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>6</position>
+            <related_list>x_fru_cir_image_impact.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>45d177241b6a6410de011fc11a4bcb13</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>7</position>
+            <related_list>x_fru_cir_witness.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>c9d177241b6a6410de011fc11a4bcb13</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>8</position>
+            <related_list>x_fru_cir_m2m_incidents_hazards.incident</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>41d177241b6a6410de011fc11a4bcb14</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>9</position>
+            <related_list>x_fru_cir_near_miss.parent</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>c5d177241b6a6410de011fc11a4bcb14</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>10</position>
+            <related_list>x_fru_hse_near_miss.parent</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>4dd177241b6a6410de011fc11a4bcb14</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>11</position>
+            <related_list>x_fru_cir_investigation.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>c1d177241b6a6410de011fc11a4bcb15</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>12</position>
+            <related_list>x_fru_cir_suspect.cir_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>49d177241b6a6410de011fc11a4bcb15</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>13</position>
+            <related_list>x_fru_cir_m2m_risk_case.related_case</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>cdd177241b6a6410de011fc11a4bcb15</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id>
+            <order_by/>
+            <position>14</position>
+            <related_list>x_fru_cir_incident_product_recall.incident</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_id>45d177241b6a6410de011fc11a4bcb16</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list action="INSERT_OR_UPDATE">
+            <calculated_name>Incident - Default view</calculated_name>
+            <filter/>
+            <name>x_fru_cir_incident</name>
+            <order_by/>
+            <position/>
+            <related_list/>
+            <sys_class_name>sys_ui_related_list</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c1d177241b6a6410de011fc11a4bcb10</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Incident - Default view</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_related_x_fru_cir_incident_null</sys_update_name>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_related_list>
+    </sys_ui_related>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_ui_related_x_fru_cir_incident_null</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_related sys_domain="global" table="x_fru_cir_incident" version="2" view=""><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>0</position><related_list>x_fru_cir_action.parent</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>41d177241b6a6410de011fc11a4bcb11</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>1</position><related_list>x_fru_cir_person_impact.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>c5d177241b6a6410de011fc11a4bcb11</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>2</position><related_list>x_fru_cir_physical_impact.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>4dd177241b6a6410de011fc11a4bcb11</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>3</position><related_list>x_fru_cir_security_impact.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>c1d177241b6a6410de011fc11a4bcb12</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>4</position><related_list>x_fru_cir_non_conformance_compliance.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>49d177241b6a6410de011fc11a4bcb12</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>5</position><related_list>x_fru_cir_environmental_impact.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>cdd177241b6a6410de011fc11a4bcb12</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>6</position><related_list>x_fru_cir_image_impact.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>45d177241b6a6410de011fc11a4bcb13</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>7</position><related_list>x_fru_cir_witness.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>c9d177241b6a6410de011fc11a4bcb13</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>8</position><related_list>x_fru_cir_m2m_incidents_hazards.incident</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>41d177241b6a6410de011fc11a4bcb14</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>9</position><related_list>x_fru_cir_near_miss.parent</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>c5d177241b6a6410de011fc11a4bcb14</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>10</position><related_list>x_fru_hse_near_miss.parent</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>4dd177241b6a6410de011fc11a4bcb14</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>11</position><related_list>x_fru_cir_investigation.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>c1d177241b6a6410de011fc11a4bcb15</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>12</position><related_list>x_fru_cir_suspect.cir_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>49d177241b6a6410de011fc11a4bcb15</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>13</position><related_list>x_fru_cir_m2m_risk_case.related_case</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>cdd177241b6a6410de011fc11a4bcb15</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list_entry action="INSERT_OR_UPDATE"><filter/><list_id display_value="Incident - Default view" name="x_fru_cir_incident" related_list="NULL" sys_domain="global" view="Default view">c1d177241b6a6410de011fc11a4bcb10</list_id><order_by/><position>14</position><related_list>x_fru_cir_incident_product_recall.incident</related_list><sys_class_name>sys_ui_related_list_entry</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_id>45d177241b6a6410de011fc11a4bcb16</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on></sys_ui_related_list_entry><sys_ui_related_list action="INSERT_OR_UPDATE"><calculated_name>Incident - Default view</calculated_name><filter/><name>x_fru_cir_incident</name><order_by/><position/><related_list/><sys_class_name>sys_ui_related_list</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-22 16:51:15</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>c1d177241b6a6410de011fc11a4bcb10</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Incident - Default view</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_ui_related_x_fru_cir_incident_null</sys_update_name><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-22 16:51:15</sys_updated_on><sys_user/><view display_value="Default view" name="NULL">Default view</view><view_name/></sys_ui_related_list></sys_ui_related></record_update>]]></payload>
+        <payload_hash>-1931387672</payload_hash>
+        <record_name>Incident</record_name>
+        <reverted_from/>
+        <source>b30b0fe31bd6a010de011fc11a4bcb06</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-22 16:51:15</sys_created_on>
+        <sys_id>c1d177241b6a6410de011fc11a4bcb19</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>177caa6f6300000001</sys_recorded_at>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-22 16:51:15</sys_updated_on>
+        <type>Related Lists</type>
+        <update_guid>49d17724c66a6410a355438dbf8f8418</update_guid>
+        <update_guid_history>49d17724c66a6410a355438dbf8f8418:-1931387672,5c3ee720166a6410a375353554f17163:-991889612,6299bc742e41e4109cd480abc32aa8a0:-1093660261,15b1064c956c20107a75599d7e54ef40:133798006</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-22 16:53:09</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_related_list">sys_ui_related_list</sys_db_object>
+        <sys_id>7624749bd0fa4f08bda0d6fa9a006fa4</sys_id>
+        <sys_metadata>3528ad521b39501024c896ce0a4bcb0e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Incident - Default view</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Incident">02abbbeddb05101003b3533fd396195f</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_ui_related_x_fru_cir_incident_null</sys_update_name>
+        <sys_update_version display_value="sys_ui_related_x_fru_cir_incident_null">c1d177241b6a6410de011fc11a4bcb19</sys_update_version>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-22 16:53:09</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

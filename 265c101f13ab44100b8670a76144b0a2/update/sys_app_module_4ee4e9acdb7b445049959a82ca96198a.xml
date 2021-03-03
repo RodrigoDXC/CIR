@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="Situation Management">e5e0e524db7b445049959a82ca9619a2</application>
+        <assessment/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>LIST</link_type>
+        <map_page/>
+        <mobile_title>Closed Response Plans</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>x_fru_cir_response_plan_execution</name>
+        <order>240</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query>&amp;sysparm_fixed_query=active=false</query>
+        <report/>
+        <roles>x_fru_cir.situation_manager,x_fru_cir.situation_administrator,x_fru_cir.situation_operator</roles>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-23 17:32:49</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4ee4e9acdb7b445049959a82ca96198a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Closed Response Plans</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_app_module_4ee4e9acdb7b445049959a82ca96198a</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-26 06:39:41</sys_updated_on>
+        <timeline_page/>
+        <title>Closed Response Plans</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+</record_update>

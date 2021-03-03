@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spModal, $uibModal, $uibModalStack, spUtil, spAriaFocusManager, $location, $timeout) {
+	var c = this;
+
+	c.selectedRow = null;
+	c.orderCol = c.data.order;
+	c.newName = '';
+	c.copyCreated = false;
+
+	// FILTER LIST BASED ON INPUT OF COLUMN
+	c.changeFilterCol = function () {
+		var filter = '';
+		var headers = c.data.rows.headers;
+		for(var i = 0; i < headers.length; i++) {
+			filter += '^' + headers[i].value + 'LIKE' + headers[i].filter;
+		}			
+
+		var obj = {
+			action : 'filter',
+			filter : filter,
+			sort : c.data.sort,
+			order : c.data.order
+		};
+		c.server.get(obj).then(function(response){
+			c.data.rows.records = response.data.rows.records;
+			c.data.query = response.data.query;
+			c.selectedRow = null;
+		});
+	};
+
+	// UPDATE SORTING
+	c.updateSort = function (field) {
+		var newSort = c.data.sort;
+		if(c.orderCol === field) {
+			newSort = c.data.sort === 'asc' ? 'desc' : 'asc';
+		}
+
+		c.orderCol = field;
+		var obj  = { 
+			action : 'sort',
+			order : field,
+			sort : newSort,
+			filter : c.data.query
+		}
+
+		c.server.get(obj).then(function(response){
+			c.data.rows.records = response.data.rows.records;
+			c.data.sort = response.data.sort;
+		});
+	};
+
+	// SELECT ROW
+	c.selectRow = function(rowContent) {
+		c.selectedRow = {
+			sys_id : rowContent.sys_id,
+			catalog : rowContent.catalog
+		};
+	}
+
+	// CONFIRMATION POP-UP FOR COPYING ASSESSMENT
+	c.confirmCopy = function() {
+		c.modalInstance = $uibModal.open({
+			templateUrl: 'cir_ciri_assessment_selector_copy_modal',
+			scope: $scope
+		}).result.then(c.clearName())
+	};
+	
+	// FUNCTION TO CLEAR THE NAME
+	c.clearName = function(){
+		c.newName = '';
+	}
+
+	// FUNCTION THAT WILL TRIGGER THE CREATION OF A COPY	
+	c.triggerCopy = function () {
+		var obj  = { 
+			action : 'copy',
+			record : c.selectedRow.sys_id,
+			catalog : c.selectedRow.catalog,
+			name : c.newName
+		};
+		c.server.get(obj).then(function(response){
+			if(response.data.duplicates) {
+				alert(c.data.msgs.errorDuplicateRecord);
+
+			} else {
+				if(!response.data.copySysId) {
+					spUtil.addErrorMessage(c.data.msgs.noValidAction);
+					return;
+				}
+				c.copyCreated = true;
+				$timeout(function(){
+					$uibModalStack.dismissAll(); // c.modalInstance WAS NOT WORKING
+					c.redirect(c.data.urls.next + response.data.copySysId+'&copy=true');
+				}, 1300);
+			}
+		})	
+	};
+
+	// TAKES APROPRIATE ACTION FOR NEXT BUTTON
+	c.nextHandler = function () {
+		switch (c.data.assessmentAction) {
+			case 'edit':
+				c.redirect(c.data.urls.next + c.selectedRow.sys_id);
+				break;
+
+			case 'copy':
+				c.confirmCopy()
+				break;
+
+			default:
+				alert(c.data.msgs.noValidAction);
+		}
+	};
+
+	// RECORD WATCH FOR ASSESSMENTS
+	spUtil.recordWatch($scope, c.data.table, '', function() {
+		c.server.update();
+	});
+	
+	// REDIRECT HANDLER
+	c.redirect = function(url) {
+		var urlObj = $location.search(url);
+		spAriaFocusManager.navigateToLink(urlObj.url());
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>tbody tr:hover {&#13;
+  background-color: $list-hover-color;&#13;
+}&#13;
+&#13;
+.search{&#13;
+  width: 100%;&#13;
+  font-family: "SourceSansPro", Helvetica, Arial, sans-serif;&#13;
+  font-size: 14px;&#13;
+  font-weight: normal;&#13;
+  line-height: 1.42857;&#13;
+  color: #2e2e2e;&#13;
+  background-color: #ffffff;&#13;
+  border-radius: 3px;&#13;
+  border-color: #cbcbcb;&#13;
+  border-width: 1px;&#13;
+  border-style: solid;&#13;
+  margin-top: 3px;&#13;
+  height: 3.5vh;&#13;
+}&#13;
+&#13;
+h3 {&#13;
+	font-weight: bold;&#13;
+}&#13;
+&#13;
+tbody tr:nth-child(odd) {&#13;
+  background-color: #f9f9f9;&#13;
+}&#13;
+&#13;
+.main-container {&#13;
+  padding: 30px;&#13;
+  padding-top: 0;&#13;
+  padding-bottom: 0;&#13;
+}&#13;
+&#13;
+.table&gt;thead&gt;tr&gt;th {&#13;
+  vertical-align: bottom;&#13;
+  //border-bottom: 1px solid #ddd;&#13;
+  color: $brand-primary;&#13;
+  padding-right: 0;&#13;
+  padding-left: 8px;&#13;
+}&#13;
+&#13;
+.table&gt;thead&gt;tr&gt;th:first-child {&#13;
+ padding-left: 0;&#13;
+}&#13;
+&#13;
+table {&#13;
+	border-collapse: separate;&#13;
+}&#13;
+&#13;
+tr:first-child&gt;td {&#13;
+	border-top: 0;&#13;
+}&#13;
+&#13;
+th {&#13;
+  position: sticky;&#13;
+ 	top : 0;&#13;
+  background-color: white;&#13;
+  &#13;
+}&#13;
+&#13;
+.icons-edit-remove {&#13;
+  cursor: pointer;&#13;
+  font-size: 1.5em;&#13;
+}&#13;
+&#13;
+.icons-up-down {&#13;
+  cursor: pointer;&#13;
+  font-size: 4em;&#13;
+}&#13;
+&#13;
+.new-button {&#13;
+  border: 1px solid #717171;&#13;
+}&#13;
+&#13;
+.margin-top-1em {&#13;
+  margin-top: 1em;&#13;
+}&#13;
+&#13;
+.margin-bottom-1em {&#13;
+  margin-bottom: 1em;&#13;
+}&#13;
+&#13;
+.margin-left-1em {&#13;
+  margin-left: 1em;&#13;
+}&#13;
+&#13;
+.back-button {&#13;
+  border: 1px solid #717171;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+  margin-right: 5px;&#13;
+}&#13;
+&#13;
+.buttons-footer {&#13;
+  padding-bottom: 50px;&#13;
+  margin-top: 40px;&#13;
+  margin-right: 30px;&#13;
+}&#13;
+&#13;
+.align-middle-flex {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  padding: 0;&#13;
+}&#13;
+&#13;
+.align-middle-grid {&#13;
+  display: grid;&#13;
+  align-items: center;&#13;
+&#13;
+}&#13;
+&#13;
+.inherit-height {&#13;
+  height: inherit;&#13;
+}&#13;
+&#13;
+.selectedRow {&#13;
+  color: #fff;&#13;
+  background-color: #717171;&#13;
+  border-color: 1px solid #fff;&#13;
+}&#13;
+&#13;
+&#13;
+.container-out-table-top {&#13;
+  height: 60vh;&#13;
+  overflow: auto;&#13;
+  padding-right:10px;&#13;
+}&#13;
+&#13;
+hr {&#13;
+	margin-right:30px;&#13;
+  margin-left:30px;&#13;
+}&#13;
+&#13;
+.right-side {&#13;
+  height: 85%;&#13;
+  float: right;&#13;
+  padding-left: 3%;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-assessment-selector</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Assessment Selector</name>
+        <option_schema>[{"hint":"Table name to query from","name":"table","section":"Data","label":"table","type":"string"},{"hint":"Fields to show in list","name":"columns","section":"Data","label":"Fields","type":"field_list"},{"hint":"Field to order the records by","name":"order","section":"Data","label":"Order","type":"string"},{"hint":"Encoded query to filter the records","name":"query","section":"Data","label":"Query","type":"string"},{"hint":"Enables search on columns","name":"search","section":"Data","label":"Search enabled","type":"boolean"},{"hint":"Default value for sorting the list","name":"sort","section":"Data","default_value":"asc","label":"Sort","type":"choice","choices":[{"label":"asc","value":"asc"},{"label":"desc","value":"desc"}]}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.assessment_manager</roles>
+        <script><![CDATA[(function() {
+	// GET URL PARAMS
+	data.assessmentAction = $sp.getParameter('action');
+
+	// UTILS INSTANCES
+	var widgetUtils = CIRAssmtPortalSelectorFP();
+	var genericUtils = new CIRGenericUtils();
+
+	// GET REQUIRED OPTIONS
+	data.table = options.table ? options.table : '';
+	data.query = options.query ? options.query : '';
+	data.columns = options.columns ? options.columns.split(',') : '';
+	data.order = options.order_by ? options.order_by : '';
+	data.search = options.search;
+	data.sort = options.sort;
+
+	// GET ASSESSMENT SPECIFIC QUERY
+	if(data.table === CIRConstants.Tables.ASSESSMENT_DEFINITION && data.assessmentAction === 'edit') {
+		var specQueryEdit = 'active=true^published=false^sys_idNOT IN ' + widgetUtils.GetAssessmentFromInstances();
+		data.query = data.query ? data.query + '^' + specQueryEdit : specQueryEdit;
+	}
+	
+	if(data.table === CIRConstants.Tables.ASSESSMENT_DEFINITION && data.assessmentAction === 'copy') {
+		var specQueryCopy = 'active=true';
+		data.query = data.query ? data.query + '^' + specQueryCopy : specQueryCopy;
+	}
+
+	// INPUT HANDLER 
+	if(input) {
+		handleInput(input);
+	}
+
+	// GET DATA 
+	data.rows = widgetUtils.GetData(data.table, data.query, data.columns, data.order, data.sort);
+
+	// MESSAGES
+	data.msgs = {};
+	data.msgs.title = gs.getMessage('cir_assmt_select_assessment', gs.getMessage('cir_assmt_' + data.assessmentAction));
+	data.msgs.search = gs.getMessage('cir_assmt_search');
+	data.msgs.next = gs.getMessage('cir_assmt_manager_next_btn');
+	data.msgs.back = gs.getMessage('cir_assmt_manager_back_btn');
+	data.msgs.noRecords = gs.getMessage('cir_assmt_not_found', gs.getMessage('cir_assmt_records'));
+	data.msgs.copyConfirmTitle = gs.getMessage('cir_assmt_copy_existent_assessment');
+	data.msgs.copyConfirmMsg = gs.getMessage('cir_assmt_confirm_assessment_copy');
+	data.msgs.cancelModalBtnMsg = gs.getMessage('cir_assmt_list_manager_cancel_modal_btn');
+	data.msgs.okModalBtnMsg = gs.getMessage('cir_assmt_list_manager_ok_modal_btn');
+	data.msgs.noValidAction = gs.getMessage('cir_assmt_no_valid_action');
+	data.msgs.assmentCopied = gs.getMessage('cir_assmt_assessment_copied');
+	data.msgs.errorDuplicateRecord = gs.getMessage('cir_assmt_assess_duplicate_record');
+	data.msgs.nameLabel = gs.getMessage('cir_assmt_name');
+	data.msgs.nameInputQuestion = gs.getMessage('cir_assmt_copy_assessment_name');
+	
+	// REDIRECT DATA
+	var pages = CIRConstants.AssessmentPortalConstants;
+	var urlPrefix = 'id=';
+	data.pages = {};
+	data.pages.createNewAssessment = pages.ASSESS_DEFINITION;
+	data.pages.defineNewAssessment = pages.ASSESS_DEFINITION_DEFINE_NEW;
+	data.pages.assessmnetMgr = pages.ASSESSMENT_DEF_MANAGER_PAGE;
+
+	data.urls = {};
+	data.urls.back = getBackURl();
+	data.urls.next = urlPrefix + 
+		data.pages.createNewAssessment +
+		'&table=' + data.table +
+		'&view=cir_portal_view&assessment=';
+
+	// FUNCTION TO HANDLE INPUT
+	function handleInput(input) {
+		if(!input)
+			return;
+
+		var action = input.action;
+		switch (action) {
+			case 'filter':
+				updateFilter(input.filter, input.order, input.sort);
+				break;
+
+			case 'sort':
+				updateFilter(input.filter, input.order, input.sort);
+				break;
+
+			case 'copy':
+				createCopy(input.record, input.catalog, input.name)
+				break;
+
+			default:
+				return;
+		}
+	}
+
+	// FUNCTION TO TRIGGER THE COPY FUNCTIONALITY
+	function createCopy(sys_id, catalog, name) {
+		var queryForDuplicates = 'name=' + name + '^catalog=' + catalog;
+		var queryProps = {
+			tableName: CIRConstants.Tables.ASSESSMENT_DEFINITION,
+			fields: ['sys_id'],
+			query: queryForDuplicates
+		};
+
+		var recordsFound = genericUtils.QueryTable(queryProps);
+		if(recordsFound.length === 0) {
+			data.copySysId = widgetUtils.CreateAssessmentCopy(sys_id, name);	
+		} else {
+			data.duplicates = true;
+		}
+	}
+
+	// FUNCTION TO UPDATE THE FILTER DATA PROPS
+	function updateFilter (filter, order, sort) {
+		data.query += filter;
+		data.order = order;
+		data.sort = sort;
+	}
+
+	// GET THE CORRECT URL TO GO BACK
+	function getBackURl() {
+		var url = urlPrefix;
+
+		if(data.assessmentAction === 'edit') {
+			url += data.pages.assessmnetMgr;
+		} else {
+			url += data.pages.defineNewAssessment;
+		}
+		return url;
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:32:42</sys_created_on>
+        <sys_id>181fe025dbca5410d4a73533f3961990</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>CIR CIRI Assessment Selector</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_181fe025dbca5410d4a73533f3961990</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 10:02:31</sys_updated_on>
+        <template><![CDATA[<div class="main-container">
+  
+  <!-- TITLE -->
+  <div style="padding-left: 0;" class="row margin-top-1em margin-bottom-1em align-middle-flex">
+    <div class="header pull-left">
+      <h3>{{::data.msgs.title}}</h3>
+  	</div>
+        
+  </div>  
+  
+  <!-- LIST -->
+  <div class='container-out-table-top'>
+    <table class="table overview-widget">
+      <thead>
+        
+        <!-- COLUMN HEADERS -->
+        <tr class="header">
+          <th ng-repeat="header in c.data.rows.headers">
+            <span style="padding-left: 8px" ng-click="c.updateSort(header.value)">
+              {{header.displayValue}}
+            </span>
+            
+             <!-- SORT FUNCTIONALITY -->
+            <span ng-show="c.orderCol == header.value">
+              <span class="fa fa-sort-up" ng-show="c.data.sort === 'asc'"></span>
+              <span class="fa fa-sort-down" ng-show="c.data.sort === 'desc'"></span>
+            </span>
+            
+            <!-- SEARCH FUNCTIONALITY -->
+            <input ng-if="data.search === 'true'" class="search" type="text" ng-model="header.filter" ng-keydown="$event.keyCode === 13 && c.changeFilterCol()"
+                   placeholder="{{data.msgs.search}}" ng-disabled="" data-toggle="tooltip" data-placement="top">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <!-- LIST ROWS -->
+        <tr ng-repeat="rowContent in c.data.rows.records" >
+          <td id="{{ c.data.table + '_' + rowContent.sys_id }}"
+              ng-repeat="header in c.data.rows.headers"
+              ng-class="{selectedRow: c.selectedRow.sys_id === rowContent.sys_id}"
+              ng-click="c.selectRow(rowContent)"
+              ng-dblclick="c.nextHandler()">
+            {{rowContent.fields[header.displayValue]}}
+          </td> 
+        </tr>
+        <tr ng-if="c.data.rows.records.length === 0">
+          <td>
+            <span  >{{c.data.msgs.noRecords}}</span>
+          </td>
+        </tr>  
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- FOOTER BUTTONS -->
+<hr>
+<div class="buttons-footer">
+  <button ng-click="c.nextHandler()" class="btn btn-primary action-btn pull-right next-button" ng-disabled="!c.selectedRow">{{ c.data.msgs.next }}</button>
+  <button ng-click="c.redirect(data.urls.back)" class="btn action-btn pull-right back-button">{{ c.data.msgs.back  }}</button>
+</div>]]></template>
+    </sp_widget>
+</record_update>

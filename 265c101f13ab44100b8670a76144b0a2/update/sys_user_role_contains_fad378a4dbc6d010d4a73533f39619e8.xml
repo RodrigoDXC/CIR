@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+    <sys_user_role_contains action="INSERT_OR_UPDATE">
+        <contains display_value="x_fru_cir.user" name="x_fru_cir.user">7dcae510db19541003b3533fd3961963</contains>
+        <role display_value="x_fru_cir.assessment_manager" name="x_fru_cir.assessment_manager">67933ca4dbc6d010d4a73533f396194c</role>
+        <sys_class_name>sys_user_role_contains</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-13 10:18:42</sys_created_on>
+        <sys_id>fad378a4dbc6d010d4a73533f39619e8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.user.x_fru_cir.assessment_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_user_role_contains_fad378a4dbc6d010d4a73533f39619e8</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-13 10:18:42</sys_updated_on>
+    </sys_user_role_contains>
+</record_update>

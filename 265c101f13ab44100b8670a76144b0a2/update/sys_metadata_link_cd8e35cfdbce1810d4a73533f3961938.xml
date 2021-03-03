@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>aa53e103dbce1810d4a73533f39619ce</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_fru_cir_psi_category"&gt;
+    &lt;x_fru_cir_psi_category action="INSERT_OR_UPDATE"&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;class/&gt;
+        &lt;description/&gt;
+        &lt;icon/&gt;
+        &lt;message&gt;&lt;![CDATA[&lt;p&gt;#{country} &lt;/p&gt;
+&lt;p&gt;#{inc_location}&lt;/p&gt;]]&gt;&lt;/message&gt;
+        &lt;message_es/&gt;
+        &lt;name&gt;Confidentiality breach&lt;/name&gt;
+        &lt;parent display_value="Internal"&gt;37b181dddbbd9010bf9ead8ed396191a&lt;/parent&gt;
+        &lt;short_description/&gt;
+        &lt;sys_created_by&gt;Paulo.Gomes@fruitionpartners.pt&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2020-07-21 08:13:12&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;aa53e103dbce1810d4a73533f39619ce&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;Paulo.Gomes@fruitionpartners.pt&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2020-07-21 08:13:12&lt;/sys_updated_on&gt;
+        &lt;tier&gt;1&lt;/tier&gt;
+        &lt;type&gt;1&lt;/type&gt;
+        &lt;value&gt;internal_1&lt;/value&gt;
+    &lt;/x_fru_cir_psi_category&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-21 10:09:43</sys_created_on>
+        <sys_id>cd8e35cfdbce1810d4a73533f3961938</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Confidentiality breach</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_cd8e35cfdbce1810d4a73533f3961938</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-21 10:09:43</sys_updated_on>
+        <tablename>x_fru_cir_psi_category</tablename>
+    </sys_metadata_link>
+</record_update>

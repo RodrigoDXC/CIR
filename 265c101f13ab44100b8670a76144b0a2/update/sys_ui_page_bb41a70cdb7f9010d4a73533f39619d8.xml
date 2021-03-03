@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[document.getElementById('ok_button').className = "btn btn-destructive";
+document.getElementById('ok_button').innerText = "${JS:gs.getMessage('Delete')}";
+document.getElementById('cancel_button').className = "btn btn-default";
+
+function cancelAction() {
+    GlideDialogWindow.get().destroy();
+    return false;
+}]]></client_script>
+        <description>This UI Page will be used to remove all the objects linked to an Assessment.</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_remove_assessment_objects.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <g:ui_form>
+        <g:evaluate>
+            var tableName = RP.getWindowProperties().table_name;
+            var currentSysId = RP.getWindowProperties().current_sys_id;
+            var bodyMsg = new CIRAssmtModel().GetRemoveAssessmentMessage(tableName, currentSysId);
+        </g:evaluate>
+        <input type="hidden" id="currentSysId" name="currentSysId" value="${currentSysId}" />
+        <input type="hidden" id="tableName" name="tableName" value="${tableName}" />
+        <div class="container-fluid">
+            <div style="text-align:left;"><br />
+                <div>${bodyMsg}</div><br /><br />
+                <div align="right" class="modal-footer">
+                    <g:dialog_buttons_ok_cancel ok="return true;" cancel="return cancelAction();" />
+                </div>
+            </div>
+        </div>
+    </g:ui_form>
+</j:jelly>]]></html>
+        <name>remove_assessment_objects</name>
+        <processing_script><![CDATA[var removeMessage = new CIRAssmtModel().RemoveAssessmentObjects(tableName, currentSysId);
+gs.addInfoMessage(removeMessage);
+response.sendRedirect(tableName + '_list.do');]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-10-07 09:58:21</sys_created_on>
+        <sys_id>bb41a70cdb7f9010d4a73533f39619d8</sys_id>
+        <sys_mod_count>28</sys_mod_count>
+        <sys_name>remove_assessment_objects</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_bb41a70cdb7f9010d4a73533f39619d8</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-08 12:50:41</sys_updated_on>
+    </sys_ui_page>
+</record_update>

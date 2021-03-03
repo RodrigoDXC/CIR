@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Situation Member" max_length="40" name="x_fru_cir_situation_member" sizeclass="61" type="collection">
+        <element label="Last access end time" max_length="40" name="last_access_end_time" type="glide_date_time"/>
+        <element label="Last access time" max_length="40" name="last_access_time" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Online" max_length="40" name="online" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Situation" max_length="32" name="situation" reference="x_fru_cir_situation" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User" max_length="32" name="user_id" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="user_id"/>
+        </index>
+        <index name="index2">
+            <element name="situation"/>
+        </index>
+    </element>
+</database>

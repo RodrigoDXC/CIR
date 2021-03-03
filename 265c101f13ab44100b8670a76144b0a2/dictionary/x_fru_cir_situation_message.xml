@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_fru_cir_response_plan_template_step_message" label="Situation Message" max_length="40" name="x_fru_cir_situation_message" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Contact option" mandatory="true" max_length="40" name="contact_option" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Manual" sequence="0" value="manual"/>
+                <element inactive_on_update="false" label="Dynamic" sequence="1" value="dynamic"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Dynamic contact" max_length="40" name="dynamic_contact" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Assignee of situation task" value="assignee_of_situation_task"/>
+                <element inactive_on_update="false" label="Escalation team" value="escalation_team"/>
+                <element inactive_on_update="false" label="Member added" value="member_added"/>
+                <element inactive_on_update="false" label="Response plan coordinator" value="response_plan_coordinator"/>
+                <element inactive_on_update="false" label="Response plan team" value="response_plan_team"/>
+                <element inactive_on_update="false" label="Situation members" value="situation_members"/>
+                <element inactive_on_update="false" label="To on-call contact" value="on_call_contact"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Message set" max_length="32" name="message_set" reference="x_fru_cir_message_set" type="reference"/>
+        <index name="index">
+            <element name="message_set"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>3</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">fb7940dd1bbf0850df7e43f4bd4bcbb4</sp_column>
+        <sp_widget display_value="CIR Response Plans">83a40c151bbf0850df7e43f4bd4bcb5e</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 18:49:17</sys_created_on>
+        <sys_id>19d948dd1bbf0850df7e43f4bd4bcb62</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_instance_19d948dd1bbf0850df7e43f4bd4bcb62</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-24 09:34:51</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"table": {
+		"value": "",
+		"displayValue": ""
+	},
+	"parent_field": {
+		"value": "",
+		"displayValue": ""
+	},
+	"fields": {
+		"value": "response_plan_template,situation_location,current_step,assigned_to,sys_created_on,state",
+		"displayValue": "response_plan_template,situation_location,current_step,assigned_to,sys_created_on,state"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=19d948dd1bbf0850df7e43f4bd4bcb62"/>
+</record_update>

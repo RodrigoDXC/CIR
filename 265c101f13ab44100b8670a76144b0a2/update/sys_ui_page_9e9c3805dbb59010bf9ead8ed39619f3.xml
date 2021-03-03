@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[$j(document).ready(function() {
+    $j('#fields')
+        .find('option')
+        .remove()
+        .end()
+        .append('<option value="none">${gs.getMessage("None")}</option>>')
+        .val('none');
+    var table = "";
+    if (g_form.getValue('type') == "1") {
+        table = ("x_fru_cir_internal_physical_security_incident");
+    } else if (g_form.getValue('type') == "0") {
+        table = ("x_fru_cir_external_physical_security_incident");
+    }
+
+    if (table != '') {
+        var ga = new GlideAjax('CIRPSIAjaxUtils');
+        ga.addParam('sysparm_name', 'getFields');
+        ga.addParam('sysparm_table_name', table);
+        ga.getXML(getIt);
+    }
+});
+var type = 'email';
+var newBody = "";
+var newBodyEsp = "";
+
+$j("#add_tag").click(function() {
+
+    if ($j('#fields').val() != 'none') {
+        if ($j('#field').val() == 'es') {
+            if (type == 'email') {
+                newBodyEsp = g_form.getValue('message_es') + ' #{' + $j('#fields').val() + '}';
+                g_form.setValue('message_es', newBodyEsp);
+            }
+        } else if ($j('#field').val() == 'eng') {
+            if (type == 'email') {
+                newBody = g_form.getValue('message') + ' #{' + $j('#fields').val() + '}';
+                g_form.setValue('message', newBody);
+
+            }
+        }
+
+    }
+    GlideModal.get().destroy();
+});
+
+function getIt(response) {
+    var answer = JSON.parse(response.responseXML.documentElement.getAttribute("answer"));
+	var aaa = JSON.stringify(answer[1]);
+	for (var i = 0; i < answer.length; i++) {
+        $j('#fields').append($j('<option>', {
+            value: answer[i].value
+        }).text(getMessage(answer[i].label)));
+    }
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_psi_add_field_tag.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<div style="padding:10px">
+	<g:ui_choice_input_field  id="field" name="field" label="${gs.getMessage('Select Destination')}">
+		<option value="eng">${gs.getMessage('English')}</option>
+		<option value="es">${gs.getMessage('Spanish')}</option>
+	</g:ui_choice_input_field>
+	</div>
+	<div style="padding:10px">
+		<g:ui_choice_input_field  id="fields" name="fields" label="${gs.getMessage('Select field')}">
+			<option value="none">${gs.getMessage('None')}</option>
+		</g:ui_choice_input_field>	
+	</div>
+	
+	<div style="float: right;" >
+		<button id="add_tag" class="btn-primary">${gs.getMessage('cir_add_tag')}</button>
+		<button onclick="GlideModal.get().destroy()">${gs.getMessage('cir_sit_cancel')}</button>	
+	</div>
+	
+	<style>
+		select {
+			width: 170px;
+		}
+	</style>	
+	
+</j:jelly>]]></html>
+        <name>psi_add_field_tag</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-02 13:58:27</sys_created_on>
+        <sys_id>9e9c3805dbb59010bf9ead8ed39619f3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>psi_add_field_tag</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_9e9c3805dbb59010bf9ead8ed39619f3</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 08:52:42</sys_updated_on>
+    </sys_ui_page>
+</record_update>

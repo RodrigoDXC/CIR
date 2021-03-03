@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="INSERT_OR_UPDATE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>condition</field>
+        <mandatory>ignore</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-24 15:58:57</sys_created_on>
+        <sys_id>523996781bff8450df7e43f4bd4bcb6c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>condition</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_policy_action_523996781bff8450df7e43f4bd4bcb6c</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-24 15:58:57</sys_updated_on>
+        <table>x_fru_cir_response_plan_template_step_action</table>
+        <ui_policy display_value="Show condition if dependent on is not empty (action)">a12916781bff8450df7e43f4bd4bcb7c</ui_policy>
+        <visible>true</visible>
+    </sys_ui_policy_action>
+</record_update>

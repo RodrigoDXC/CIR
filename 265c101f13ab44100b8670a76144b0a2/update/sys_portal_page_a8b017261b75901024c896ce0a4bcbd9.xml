@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update node_type="sys_portal_page" unload_date="2021-03-03 17:59:45">
+    <sys_portal_page action="INSERT_OR_UPDATE">
+        <layout/>
+        <order>300000</order>
+        <read_roles>x_fru_cir.psi_global_manager,x_fru_cir.psi_local_manager</read_roles>
+        <roles/>
+        <selectable>false</selectable>
+        <sys_class_name>sys_portal_page</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-07 16:36:06</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a8b017261b75901024c896ce0a4bcbd9</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>PA Physical Security In - New Tab</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_portal_page_a8b017261b75901024c896ce0a4bcbd9</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 08:46:29</sys_updated_on>
+        <title>PA Physical Security In - New Tab</title>
+        <user/>
+        <view>pa_physical_security_in_-_new_tab</view>
+        <related_items_node>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Physical Security In - New Tab">a8b017261b75901024c896ce0a4bcbd9</page>
+                <summary>Last 24 hours Incidents Costs</summary>
+                <sys_created_by>hugo.reis</sys_created_by>
+                <sys_created_on>2020-07-10 09:25:32</sys_created_on>
+                <sys_id>3aeac12fdbb51410bf9ead8ed3961926</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>hugo.reis</sys_updated_by>
+                <sys_updated_on>2020-07-10 09:25:32</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:32">3aeac12fdbb51410bf9ead8ed3961926</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:32</sys_created_on>
+                        <sys_id>36eac12fdbb51410bf9ead8ed3961927</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:32</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:32">3aeac12fdbb51410bf9ead8ed3961926</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:32</sys_created_on>
+                        <sys_id>3eeac12fdbb51410bf9ead8ed3961926</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:32</sys_updated_on>
+                        <value>9037056bdbb51410bf9ead8ed396194f</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:32">3aeac12fdbb51410bf9ead8ed3961926</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:32</sys_created_on>
+                        <sys_id>72eac12fdbb51410bf9ead8ed3961927</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:32</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:32">3aeac12fdbb51410bf9ead8ed3961926</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:32</sys_created_on>
+                        <sys_id>7eeac12fdbb51410bf9ead8ed3961927</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:32</sys_updated_on>
+                        <value>Last 24 hours Incidents Costs</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:32">3aeac12fdbb51410bf9ead8ed3961926</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:32</sys_created_on>
+                        <sys_id>baeac12fdbb51410bf9ead8ed3961927</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:32</sys_updated_on>
+                        <value>bar</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:32">3aeac12fdbb51410bf9ead8ed3961926</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:32</sys_created_on>
+                        <sys_id>f6eac12fdbb51410bf9ead8ed3961927</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:32</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Physical Security In - New Tab">a8b017261b75901024c896ce0a4bcbd9</page>
+                <summary>Last 24 hours External PSIs</summary>
+                <sys_created_by>hugo.reis</sys_created_by>
+                <sys_created_on>2020-07-10 09:24:57</sys_created_on>
+                <sys_id>46cac52fdbb51410bf9ead8ed3961968</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>hugo.reis</sys_updated_by>
+                <sys_updated_on>2020-07-10 09:24:57</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:57">46cac52fdbb51410bf9ead8ed3961968</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:57</sys_created_on>
+                        <sys_id>06cac52fdbb51410bf9ead8ed3961969</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:57</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:57">46cac52fdbb51410bf9ead8ed3961968</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:57</sys_created_on>
+                        <sys_id>42cac52fdbb51410bf9ead8ed3961969</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:57</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:57">46cac52fdbb51410bf9ead8ed3961968</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:57</sys_created_on>
+                        <sys_id>4acac52fdbb51410bf9ead8ed3961968</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:57</sys_updated_on>
+                        <value>1358c1abdbb51410bf9ead8ed39619c6</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:57">46cac52fdbb51410bf9ead8ed3961968</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:57</sys_created_on>
+                        <sys_id>8acac52fdbb51410bf9ead8ed3961969</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:57</sys_updated_on>
+                        <value>Last 24 hours External PSIs</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:57">46cac52fdbb51410bf9ead8ed3961968</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:57</sys_created_on>
+                        <sys_id>8ecac52fdbb51410bf9ead8ed3961968</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:57</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:57">46cac52fdbb51410bf9ead8ed3961968</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:57</sys_created_on>
+                        <sys_id>c6cac52fdbb51410bf9ead8ed3961969</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:57</sys_updated_on>
+                        <value>bar</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Physical Security In - New Tab">a8b017261b75901024c896ce0a4bcbd9</page>
+                <summary>External PSIs by Type</summary>
+                <sys_created_by>hugo.reis</sys_created_by>
+                <sys_created_on>2020-07-10 09:27:28</sys_created_on>
+                <sys_id>4b5bc92fdbb51410bf9ead8ed396198e</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>hugo.reis</sys_updated_by>
+                <sys_updated_on>2020-07-10 09:27:28</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:28">4b5bc92fdbb51410bf9ead8ed396198e</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:28</sys_created_on>
+                        <sys_id>0b5bc92fdbb51410bf9ead8ed396198f</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:28</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:28">4b5bc92fdbb51410bf9ead8ed396198e</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:28</sys_created_on>
+                        <sys_id>475bc92fdbb51410bf9ead8ed396198f</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:28</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:28">4b5bc92fdbb51410bf9ead8ed396198e</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:28</sys_created_on>
+                        <sys_id>4f5bc92fdbb51410bf9ead8ed396198e</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:28</sys_updated_on>
+                        <value>b7870d6bdbb51410bf9ead8ed3961993</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:28">4b5bc92fdbb51410bf9ead8ed396198e</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:28</sys_created_on>
+                        <sys_id>835bc92fdbb51410bf9ead8ed396198f</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:28</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:28">4b5bc92fdbb51410bf9ead8ed396198e</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:28</sys_created_on>
+                        <sys_id>8f5bc92fdbb51410bf9ead8ed396198f</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:28</sys_updated_on>
+                        <value>External PSIs by Type</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:28">4b5bc92fdbb51410bf9ead8ed396198e</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:28</sys_created_on>
+                        <sys_id>cb5bc92fdbb51410bf9ead8ed396198f</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:28</sys_updated_on>
+                        <value>donut</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Physical Security In - New Tab">a8b017261b75901024c896ce0a4bcbd9</page>
+                <summary>Active External PSIs</summary>
+                <sys_created_by>hugo.reis</sys_created_by>
+                <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                <sys_id>955b8d2fdbb51410bf9ead8ed39619ec</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>hugo.reis</sys_updated_by>
+                <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:21">955b8d2fdbb51410bf9ead8ed39619ec</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                        <sys_id>115b016fdbb51410bf9ead8ed39619df</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_real_time</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:21">955b8d2fdbb51410bf9ead8ed39619ec</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                        <sys_id>555b8d2fdbb51410bf9ead8ed39619ed</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>is_using_database_view</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:21">955b8d2fdbb51410bf9ead8ed39619ec</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                        <sys_id>5d5b016fdbb51410bf9ead8ed39619df</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                        <value>false</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:21">955b8d2fdbb51410bf9ead8ed39619ec</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                        <sys_id>915b8d2fdbb51410bf9ead8ed39619ed</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:21">955b8d2fdbb51410bf9ead8ed39619ec</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                        <sys_id>955b016fdbb51410bf9ead8ed39619df</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                        <value>Active External PSIs</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:21">955b8d2fdbb51410bf9ead8ed39619ec</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                        <sys_id>995b8d2fdbb51410bf9ead8ed39619ec</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                        <value>1ee889abdbb51410bf9ead8ed3961972</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:21">955b8d2fdbb51410bf9ead8ed39619ec</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                        <sys_id>d15b016fdbb51410bf9ead8ed39619df</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                        <value>single_score</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-07-10 11:27:21">955b8d2fdbb51410bf9ead8ed39619ec</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:27:21</sys_created_on>
+                        <sys_id>dd5b8d2fdbb51410bf9ead8ed39619ec</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:27:21</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Physical Security In - New Tab">a8b017261b75901024c896ce0a4bcbd9</page>
+                <summary>External PSIs by Country and Type</summary>
+                <sys_created_by>hugo.reis</sys_created_by>
+                <sys_created_on>2020-07-10 09:26:15</sys_created_on>
+                <sys_id>991b0d2fdbb51410bf9ead8ed3961955</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>hugo.reis</sys_updated_by>
+                <sys_updated_on>2020-07-10 09:26:15</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-07-10 11:26:15">991b0d2fdbb51410bf9ead8ed3961955</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:26:15</sys_created_on>
+                        <sys_id>1d1b0d2fdbb51410bf9ead8ed3961956</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:26:15</sys_updated_on>
+                        <value>bar</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-07-10 11:26:15">991b0d2fdbb51410bf9ead8ed3961955</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:26:15</sys_created_on>
+                        <sys_id>591b0d2fdbb51410bf9ead8ed3961956</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:26:15</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-07-10 11:26:15">991b0d2fdbb51410bf9ead8ed3961955</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:26:15</sys_created_on>
+                        <sys_id>951b0d2fdbb51410bf9ead8ed3961956</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:26:15</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-07-10 11:26:15">991b0d2fdbb51410bf9ead8ed3961955</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:26:15</sys_created_on>
+                        <sys_id>9d1b0d2fdbb51410bf9ead8ed3961955</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:26:15</sys_updated_on>
+                        <value>83a8c1abdbb51410bf9ead8ed39619aa</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-07-10 11:26:15">991b0d2fdbb51410bf9ead8ed3961955</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:26:15</sys_created_on>
+                        <sys_id>d11b0d2fdbb51410bf9ead8ed3961956</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:26:15</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-07-10 11:26:15">991b0d2fdbb51410bf9ead8ed3961955</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:26:15</sys_created_on>
+                        <sys_id>dd1b0d2fdbb51410bf9ead8ed3961956</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:26:15</sys_updated_on>
+                        <value>External PSIs by Country and Type</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Physical Security In - New Tab">a8b017261b75901024c896ce0a4bcbd9</page>
+                <summary>Externals PSIs by Type</summary>
+                <sys_created_by>hugo.reis</sys_created_by>
+                <sys_created_on>2020-07-10 09:25:13</sys_created_on>
+                <sys_id>cada012fdbb51410bf9ead8ed39619b5</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>hugo.reis</sys_updated_by>
+                <sys_updated_on>2020-07-10 09:25:13</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:13">cada012fdbb51410bf9ead8ed39619b5</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:13</sys_created_on>
+                        <sys_id>02da012fdbb51410bf9ead8ed39619b7</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:13</sys_updated_on>
+                        <value>Externals PSIs by Type</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:13">cada012fdbb51410bf9ead8ed39619b5</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:13</sys_created_on>
+                        <sys_id>06da012fdbb51410bf9ead8ed39619b6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:13</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:13">cada012fdbb51410bf9ead8ed39619b5</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:13</sys_created_on>
+                        <sys_id>4eda012fdbb51410bf9ead8ed39619b6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:13</sys_updated_on>
+                        <value>semi_donut</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:13">cada012fdbb51410bf9ead8ed39619b5</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:13</sys_created_on>
+                        <sys_id>8ada012fdbb51410bf9ead8ed39619b6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:13</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:13">cada012fdbb51410bf9ead8ed39619b5</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:13</sys_created_on>
+                        <sys_id>c6da012fdbb51410bf9ead8ed39619b6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:13</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-07-10 11:25:13">cada012fdbb51410bf9ead8ed39619b5</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:25:13</sys_created_on>
+                        <sys_id>ceda012fdbb51410bf9ead8ed39619b5</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:25:13</sys_updated_on>
+                        <value>b9e7896bdbb51410bf9ead8ed3961979</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Physical Security In - New Tab">a8b017261b75901024c896ce0a4bcbd9</page>
+                <summary>24 Hours Incidents</summary>
+                <sys_created_by>hugo.reis</sys_created_by>
+                <sys_created_on>2020-07-10 09:24:47</sys_created_on>
+                <sys_id>ffbac52fdbb51410bf9ead8ed39619cd</sys_id>
+                <sys_mod_count>1</sys_mod_count>
+                <sys_updated_by>hugo.reis</sys_updated_by>
+                <sys_updated_on>2020-07-10 09:24:47</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:47">ffbac52fdbb51410bf9ead8ed39619cd</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:47</sys_created_on>
+                        <sys_id>37bac52fdbb51410bf9ead8ed39619cf</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:47</sys_updated_on>
+                        <value>24 Hours Incidents</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:47">ffbac52fdbb51410bf9ead8ed39619cd</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:47</sys_created_on>
+                        <sys_id>3bbac52fdbb51410bf9ead8ed39619ce</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:47</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:47">ffbac52fdbb51410bf9ead8ed39619cd</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:47</sys_created_on>
+                        <sys_id>73bac52fdbb51410bf9ead8ed39619cf</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:47</sys_updated_on>
+                        <value>pivot_v2</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:47">ffbac52fdbb51410bf9ead8ed39619cd</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:47</sys_created_on>
+                        <sys_id>bfbac52fdbb51410bf9ead8ed39619ce</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:47</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:47">ffbac52fdbb51410bf9ead8ed39619cd</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:47</sys_created_on>
+                        <sys_id>f3bac52fdbb51410bf9ead8ed39619ce</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:47</sys_updated_on>
+                        <value>dd66092bdbb51410bf9ead8ed3961978</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-07-10 11:24:47">ffbac52fdbb51410bf9ead8ed39619cd</portal_section>
+                        <sys_created_by>hugo.reis</sys_created_by>
+                        <sys_created_on>2020-07-10 09:24:47</sys_created_on>
+                        <sys_id>fbbac52fdbb51410bf9ead8ed39619ce</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>hugo.reis</sys_updated_by>
+                        <sys_updated_on>2020-07-10 09:24:47</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+        </related_items_node>
+    </sys_portal_page>
+</record_update>

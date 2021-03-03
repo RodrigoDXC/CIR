@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="amount_recovered" label="Amount recovered" language="en" table="x_fru_cir_security_impact">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>amount_recovered</element>
+            <help/>
+            <hint/>
+            <label>Amount recovered</label>
+            <language>en</language>
+            <name>x_fru_cir_security_impact</name>
+            <plural>Amount recovered</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-24 14:30:19</sys_created_on>
+            <sys_id>44c4ed591be6e410de011fc11a4bcbc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Amount recovered</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_security_impact_amount_recovered_en</sys_update_name>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-24 14:30:19</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

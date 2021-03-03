@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="a3c01c2cdb21941003b3533fd3961949" sys_domain="global" table="x_fru_cir_response_plan_template_step_condition" version="3" view="parametrization">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>name</element>
+            <position>0</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_id>ebc01c2cdb21941003b3533fd396194e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_response_plan_template_step_condition" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">a3c01c2cdb21941003b3533fd3961949</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>dependent_on</element>
+            <position>1</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_id>63c01c2cdb21941003b3533fd396194f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_response_plan_template_step_condition" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">a3c01c2cdb21941003b3533fd3961949</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>2</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_id>63c01c2cdb21941003b3533fd396199a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_response_plan_template_step_condition" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">a3c01c2cdb21941003b3533fd3961949</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>response_plan_template</element>
+            <position>3</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_id>e7c01c2cdb21941003b3533fd396199a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_response_plan_template_step_condition" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">a3c01c2cdb21941003b3533fd3961949</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>active</element>
+            <position>4</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_id>6fc01c2cdb21941003b3533fd396199a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_response_plan_template_step_condition" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">a3c01c2cdb21941003b3533fd3961949</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>5</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_id>e3c01c2cdb21941003b3533fd396199b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_response_plan_template_step_condition" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">a3c01c2cdb21941003b3533fd3961949</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>condition</element>
+            <position>6</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_id>6bc01c2cdb21941003b3533fd396199b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_response_plan_template_step_condition" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">a3c01c2cdb21941003b3533fd3961949</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>description</element>
+            <position>7</position>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_id>efc01c2cdb21941003b3533fd396199b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_response_plan_template_step_condition" sys_domain="global" view="ffff802cdb21941003b3533fd3961949">a3c01c2cdb21941003b3533fd3961949</sys_ui_section>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_fru_cir_response_plan_template_step_condition</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-18 11:14:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a3c01c2cdb21941003b3533fd3961949</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_response_plan_template_step_condition</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_section_a3c01c2cdb21941003b3533fd3961949</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-18 11:14:10</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Parametrization" name="parametrization">ffff802cdb21941003b3533fd3961949</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

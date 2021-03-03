@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRKpiDbUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRKpiDbUtilsFP</name>
+        <script><![CDATA[var CIRKpiDbUtilsFP = function() {
+    /**
+     * Function helper to create the KPI Calculation record
+     *
+     * @param {Object} kpiObj - JSON object with all the related data necessary to create the record
+     * @param {String} reportingDate - Reporting date for the current processed month
+     * @return {String|null} - String with the record SysID in case of record created, null otherwise
+     */
+    var createKpiCalculation = function(kpiObj, reportingDate) {
+        var grKPICalc = new GlideRecord(CIRConstants.Tables.KPI_CALCULATION);
+        grKPICalc.initialize();
+        grKPICalc.setValue('name', kpiObj.name);
+        grKPICalc.setValue('reporting_date', reportingDate);
+        grKPICalc.setValue('value', kpiObj.kpiValue);
+        grKPICalc.setValue('period', kpiObj.periodSysId);
+        grKPICalc.setValue('location', kpiObj.locationSysId);
+        grKPICalc.setValue('calculation_type', kpiObj.calculationTypeSysId);
+
+        return grKPICalc.insert();
+    };
+
+    /**
+     * Function delete calculated KPIs from KPI Calculation table
+     *
+     * @param {String} locationSysId - Location SysID
+     * @param {String} periodSysId - period SysID
+     * @return {void}
+     */
+    var removeKpiCalculations = function(locationSysId, periodSysId) {
+        var grKPICalc = new GlideRecord(CIRConstants.Tables.KPI_CALCULATION);
+        grKPICalc.addQuery('location', locationSysId);
+        grKPICalc.addQuery('period', periodSysId);
+        grKPICalc.deleteMultiple();
+    };
+
+    return {
+        CreateKpiCalculation: createKpiCalculation,
+        RemoveKpiCalculations: removeKpiCalculations
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 12:02:20</sys_created_on>
+        <sys_id>a0aee9afdb395010d4a73533f396197d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIRKpiDbUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_a0aee9afdb395010d4a73533f396197d</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-19 16:08:13</sys_updated_on>
+    </sys_script_include>
+</record_update>

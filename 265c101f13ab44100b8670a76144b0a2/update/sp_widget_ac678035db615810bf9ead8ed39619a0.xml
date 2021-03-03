@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil, spModal) {
+	/* widget controller */
+	var c = this;
+
+	$scope.user = {
+		value: '',
+		name: 'user'
+	};
+
+	$scope.$on("field.change", function(evt, parms) {
+		if (parms.field.name == 'user') {
+			c.user = parms.newValue;
+		}
+	});
+
+	c.createRecord = function() {
+
+		if(c.user) {
+			var obj = {};
+			obj.add_member = true;
+			obj.new_member = c.user;
+			obj.sys_id = c.data.sys_id;
+
+			c.server.get(obj).then(function() {
+				$scope.user.value = '';
+				c.user = '';
+			})
+		}
+	};
+
+	
+	spUtil.recordWatch($scope, 'x_fru_cir_situation_member', 'situation=' + c.data.sys_id, function() {
+		c.server.update();
+	});
+
+	c.removeMember = function(member) {
+		var obj = {};
+		obj.member = member;
+		obj.sys_id = c.data.sys_id;
+
+		c.server.get(obj).then(function(response) {
+			if(response.data.canRemoveMember + '' == 'false') {
+				alert(c.data.notAllowed);
+			}
+			spUtil.update($scope);
+		})
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.picker {&#13;
+  padding-top: 10px;&#13;
+  padding-bottom: 30px; &#13;
+}&#13;
+&#13;
+.col-xs-11 {&#13;
+  width: 85%; &#13;
+}&#13;
+&#13;
+.list {&#13;
+  padding: 10px;&#13;
+  border: 1px solid #dee5e7;&#13;
+  border-style: solid;&#13;
+  border-collapse: collapse;&#13;
+}&#13;
+&#13;
+.list-center {&#13;
+  text-align:center;&#13;
+}&#13;
+&#13;
+.list-right {&#13;
+  text-align:right;&#13;
+}&#13;
+&#13;
+.members:nth-child(even) {&#13;
+  background: #f9f9f9; &#13;
+}&#13;
+&#13;
+.header {&#13;
+  font-weight: bold;&#13;
+  font-size: medium;&#13;
+}&#13;
+&#13;
+.header {&#13;
+  border-top-left-radius: 10px;&#13;
+  border-top-right-radius: 10px;&#13;
+}&#13;
+&#13;
+.header-right {&#13;
+  text-align:right;&#13;
+&#13;
+}&#13;
+&#13;
+.header-center {&#13;
+  text-align:center;&#13;
+}&#13;
+&#13;
+a {&#13;
+  color: #6495ED; &#13;
+}&#13;
+&#13;
+.remove_member {&#13;
+	cursor:pointer;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-sit-edit-members</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR Situation Edit Members</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.cir_base</roles>
+        <script><![CDATA[(function() {
+	
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	var utils = new CIRSituationUtils();
+	var tables = CIRConstants.Tables;
+	
+	if (input && input.sys_id) {
+		data.sys_id = input.sys_id;
+	}
+
+	if (input && input.add_member) {
+		addMember(input.new_member);
+	}
+
+	if (input && input.member) {
+		removeMember(input.member);
+	}
+
+	data.members = utils.GetMembers(data.sys_id);
+	data.filteredUsers = 'sys_idIN' + filterMembersOut();
+	data.notAllowed = gs.getMessage('cir_insufficient_rights');
+	
+	function addMember(newMember) {
+		var gr = new GlideRecordSecure(tables.SITUATION_MEMBER);
+		gr.initialize();
+		gr.user_id = newMember;
+		gr.situation = data.sys_id;
+		gr.insert();
+		
+		data.user = '';
+		data.add_member = false;
+	}
+
+	function filterMembersOut() {
+		
+		var roles = ['x_fru_cir.situation_administrator', 'x_fru_cir.situation_manager', 'x_fru_cir.situation_user', 'x_fru_cir.situation_operator', 'x_fru_cir.senior_situation_manager', 'x_fru_cir.situation_initiator'];
+		var array = [];
+		var idArrays = data.members.map(function(e) {
+			return e.id;
+		});
+		
+		var parentCrisis = new GlideRecordSecure(tables.SITUATION);
+		if (parentCrisis.get(data.sys_id)) {
+			var dimensionGroup = new GlideRecordSecure(tables.DIMENSION);
+			if (dimensionGroup.get(parentCrisis.dimension)) {
+				var groups = dimensionGroup.groups.split(",");
+				var users = new GlideRecord('sys_user_grmember');
+				var queryString = '';
+				for (var i = 0; i < groups.length; i++) {
+					if (i == 0) {
+						queryString += 'group.sys_id=' + groups[i];
+					} else {
+						queryString += '^ORgroup.sys_id=' + groups[i];
+					}
+				}
+				users.addEncodedQuery(queryString);
+				users.addQuery('user.active', true);
+				users.query();
+				while (users.next()) {
+
+					var userRoles = new GlideRecord('sys_user_has_role');
+					userRoles.addQuery('user', users.user);
+					userRoles.addQuery('role.name', 'IN', roles.join());
+					userRoles.query();
+
+					if (userRoles.next() && idArrays.indexOf(users.user + '') == -1) {
+						array.push(users.user + '');
+					}
+				}
+			}
+		}
+		return array;
+	}
+
+	function removeMember(member) {
+		var gr = new GlideRecordSecure(tables.SITUATION_MEMBER);
+		gr.addQuery('user_id', member);
+		gr.addQuery('situation', data.sys_id);
+		gr.setLimit(1);
+		gr.query();
+		
+		if (gr.next()) {
+			data.canRemoveMember = gr.canDelete();
+			gr.deleteRecord();
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-06-22 07:51:07</sys_created_on>
+        <sys_id>ac678035db615810bf9ead8ed39619a0</sys_id>
+        <sys_mod_count>23</sys_mod_count>
+        <sys_name>CIR Situation Edit Members</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_ac678035db615810bf9ead8ed39619a0</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-11 09:02:49</sys_updated_on>
+        <template><![CDATA[<body>
+  <div class="panel panel-default">
+    <div class="panel-body wrapper-xl" style="align:center">
+
+      <span class="required">${cir_sit_select_user}</span>
+      <div class="row picker">
+        <div class="col-xs-11">
+          <sn-record-picker name="user" default-query="c.data.filteredUsers" field="user" table="'sys_user'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+        </div>
+        <div class="col-xs-1">
+          <button class="btn btn-primary" ng-click="c.createRecord()">${cir_sit_add}</button> 
+        </div>
+      </div>
+
+      <div class="row list header">
+        <div class="col-xs-4 header-left">
+          ${cir_sit_name}
+        </div>
+        <div class="col-xs-4 header-center">
+          ${cir_sit_last_access}
+        </div>
+        <div class="col-xs-4 header-right">
+          ${cit_sit_action}
+        </div>
+      </div>
+      <div class="row list members" ng-repeat="member in data.members">
+        <div class="col-xs-4 member list-left">
+          {{ member.name }}
+        </div>
+        <div class="col-xs-4 member list-center">
+          {{ member.last_access }}
+        </div>
+        <div class="col-xs-4 member list-right">
+          <a class="remove_member" ng-click="c.removeMember(member.id)">${cir_sit_remove}</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>]]></template>
+    </sp_widget>
+</record_update>

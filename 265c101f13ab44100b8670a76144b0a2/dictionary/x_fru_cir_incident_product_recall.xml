@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Incident - Product Recall" max_length="40" name="x_fru_cir_incident_product_recall" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Incident" max_length="32" name="incident" reference="x_fru_cir_incident" reference_qual="categoryINinjury_illness,food_safety^has_product=false^EQ" reference_qual_condition="categoryINinjury_illness,food_safety^has_product=false^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Product Recall" max_length="32" name="product_recall" reference="x_fru_cir_product_recall" type="reference"/>
+        <index name="index">
+            <element name="product_recall"/>
+        </index>
+        <index name="index2">
+            <element name="incident"/>
+        </index>
+    </element>
+</database>

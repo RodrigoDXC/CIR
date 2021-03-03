@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope,spUtil,$timeout,$location,$window, amb, spModal, $rootScope) {
+	/* widget controller */
+	var c = this;
+
+	//Sort Functionality
+	c.sortOrder = c.data.sortOrder || false;
+	c.orderCol = c.data.orderCol || false;
+	c.changeSortCol = function(key){
+
+		/* If the user is selecting the same column, reverse the sort order, else set the order to false which forces a new sort in ascending order */
+		if(key  ==  c.orderCol)
+			c.sortOrder = !c.sortOrder;
+		else
+			c.sortOrder = false;
+
+		c.orderCol = key;
+		$scope.data.orderCol = c.orderCol;
+		$scope.data.sortOrder = c.sortOrder;
+		spUtil.update($scope);
+	}
+
+	//Record Watch Functionality
+	//a flag to indicate if a live update has been triggered by the Record Watcher
+	c.updatedFromServer = false;
+
+	/* empty string is a filter. For example 'active=true' would only trigger
+	the callback function when changes are made to active records */
+	spUtil.recordWatch($scope, c.data.table, c.data.filter, function(updateObj){
+		spUtil.update($scope);
+		c.updatedFromServer = true;
+		if (!c.updatedRegs) {
+			c.updatedRegs = {};
+		}
+
+		/* add sys_ids of any changed records to an array
+			this will allow us to highlight them in the HTML template */
+		c.updatedRegs[updateObj.data.sys_id] = true;
+		$timeout(function(){
+			c.updatedRegs[updateObj.data.sys_id] = false;
+		},6000);
+	});
+
+
+	c.openRecord = function(record){
+		var input = '';
+
+		if(c.options.parent || c.options.table == "x_fru_cir_notification_log") {
+			input = {id: 'cir_sit_form', table: c.options.table, sys_id: record.sys_id};
+			_openModal(input);
+
+		} else {
+			var id = c.options.record_page_id;
+			input = {id: id, table: c.options.table, sys_id: record.sys_id};
+			$location.search(input);
+		}
+	}
+
+
+	function _openModal(input) {
+
+		c.modalInstance = spModal.open({
+			widget: input.id,
+			widgetInput: {sys_id : input.sys_id, table : input.table, parentId : input.parentId},
+			size: 'lg',
+			buttons: []
+		}).then(function(){});
+	}
+
+
+	c.redirectNew = function(){
+
+		if(c.options.new_url != ''){
+			var hosturl = 'https://' + $window.location.host;
+			$window.location.href = hosturl + '/'+c.options.new_url;
+			return;
+		} 
+
+		var input = {id: 'cir_sit_form', sys_id : -1,table : c.options.table, parentId : c.data.parentId};
+		_openModal(input);
+
+	}
+
+
+
+	// Count Rows and next records
+	var watcher;
+	function initRecordWatcher(table, filter){
+		if (watcher)
+			watcher.unsubscribe();
+
+		if (table && filter) {
+			var watcherChannel = amb.getChannelRW(table, filter);
+			amb.connect();
+			watcher = watcherChannel.subscribe(function() {
+				spUtil.update($scope)
+			});
+		}
+	}
+
+	function getData(updateUrl) {
+		// all the records from the data source
+		spUtil.update($scope).then(function(data) {
+			initRecordWatcher($scope.data.table, $scope.data.filter);
+		});
+	}
+
+
+	$scope.mathMin = function(v1,v2) {
+		return Math.min(v1,v2);
+	}
+
+	// Page number per row
+	$scope.getNumber = function(num) {
+		return new Array(num);
+	}
+
+	$scope.setPageNum = function(num) {
+		$scope.data.p = num;
+		getData(true);
+	}
+
+	$scope.rowsWerePruned = function() {
+		if (!$scope.data.records)
+			return;
+
+		$scope.rowsPruned = $scope.mathMin($scope.data.window_end,$scope.data.row_count) - $scope.data.window_start - $scope.data.records.length;
+		return $scope.rowsPruned > 0;
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.highlight{&#13;
+	background-color: yellow;&#13;
+}&#13;
+&#13;
+tbody tr:hover{&#13;
+  background-color: $list-hover-color;&#13;
+}&#13;
+&#13;
+.table &gt; thead &gt; tr &gt; th {&#13;
+    vertical-align: bottom;&#13;
+    border-bottom: 2px solid #ddd;&#13;
+    color: $brand-primary;&#13;
+}&#13;
+&#13;
+//Setting a little space before the anchor tag&#13;
+.anchor-tag:before {&#13;
+content:"";&#13;
+display:block;&#13;
+height:10px; &#13;
+margin:-10px 0 0;</css>
+        <data_table>sp_instance_table</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-psi-external-list</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR PSI List</name>
+        <option_schema>[{"name":"new_url","section":"Data","label":"Url for new records","type":"string"},{"name":"reference_table","section":"Data","label":"Reference Table","type":"string"},{"name":"hide_on_empty","section":"Presentation","default_value":"false","label":"Hide on empty","type":"boolean"},{"name":"limit","section":"Data","label":"Record limit","type":"integer"},{"name":"parent","section":"Data","label":"Parent","type":"string"},{"name":"record_page_id","section":"other","default_value":"cir_sit_form","label":"record_page_id","type":"string"},{"name":"manager_role","section":"Data","label":"Manager role","type":"string"},{"name":"user_role","section":"Data","label":"User role","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.psi_global_manager,x_fru_cir.psi_local_manager,x_fru_cir.psi_internal_manager,x_fru_cir.psi_internal_user</roles>
+        <script><![CDATA[(function() {
+
+	data.title = gs.getMessage(options.title);
+
+	var countRecords = function(dataSource){
+		var amountRecords = 0;
+		var grA = new GlideAggregate(dataSource.table);
+		grA.addEncodedQuery(dataSource.filter);
+
+		if(dataSource.relatedList && dataSource.parentId != '' && dataSource.relatedField){
+			grA.addQuery(dataSource.relatedField,dataSource.parentId);
+		}
+		addPSIQuery(grA, dataSource);
+		grA.addAggregate('COUNT');
+		grA.query();
+		if(grA.next()){
+			amountRecords = grA.getAggregate('COUNT');
+		}
+		return amountRecords;
+
+	}
+
+
+
+	function getCountry(country) {
+		var countryValue = '';
+		var query = 'name=cmn_location^element=country^label='+ country;
+
+		var grCountry = new GlideRecord('sys_choice');
+		grCountry.addEncodedQuery(query);
+		grCountry.setLimit(1);
+		grCountry.query();
+
+		if(grCountry.next()) {
+			countryValue = grCountry.value;
+		}
+
+		return countryValue;
+	}
+
+
+	function getAdressValueId (type, value) {
+
+		var grAddr = new GlideRecordSecure(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+		grAddr.addQuery('type', type);
+		grAddr.addQuery('value', value);
+		grAddr.query();
+
+		if(grAddr.next()) {
+			return grAddr.getUniqueValue();
+		}
+	}
+
+
+	function addPSIQuery(gr, dataSource) {
+		if(gs.hasRole(options.manager_role)){
+			return;
+		}
+
+		if (dataSource.table == CIRConstants.Tables.PSI_EXTERNAL && !gs.hasRole(options.manager_role)) {
+			if(gs.hasRole(options.user_role)) {
+				gr.addQuery('country', getCountry(getUser(gs.getUserID()).getDisplayValue('country')));
+			}
+		} else if (dataSource.table == CIRConstants.Tables.PSI_INTERNAL && !gs.hasRole(options.manager_role)) {
+			if(gs.hasRole(options.user_role)) {
+				gr.addQuery('sys_created_by', gs.getUserName());
+			}
+		}
+	}
+
+	function getUser(sys_id){
+		var gr = new GlideRecordSecure('sys_user');
+		if(gr.get(sys_id)) {
+			return gr;
+		}
+	}
+
+	function filterByParent (parent, filter) {
+
+		if(data.table + '' == CIRConstants.Tables.NOTIFICATION_LOG){
+
+			var tst = "psi_id=" + $sp.getParameter("sys_id");
+
+			return tst;
+
+		} else {
+
+			if(filter){
+				return filter += '&' + parent + '=' +$sp.getParameter("sys_id");
+			} else {
+				return parent + '=' +$sp.getParameter("sys_id");
+			}
+		}
+
+	}
+
+	var fetchData = function(dataSource){
+		if(dataSource.table != ''){
+			data.records = [];
+			var gr = new GlideRecordSecure(dataSource.table);
+			gr.addEncodedQuery(dataSource.filter);
+			addPSIQuery(gr, dataSource);
+
+			if(dataSource.relatedList && dataSource.parentId != '' && dataSource.relatedField){
+				gr.addQuery(dataSource.relatedField,dataSource.parentId);
+			}
+			// to show the number os records in the source table
+			data.p = dataSource.p || $sp.getValue('p') || 1;
+			data.p = parseInt(data.p);
+			data.window_size = options.limit || 5;
+			data.page_index = data.p - 1;
+			data.window_start = data.page_index * data.window_size;
+			data.window_end = (data.page_index + 1) * data.window_size;
+
+			gr.chooseWindow(data.window_start, data.window_end);
+
+			//Sort the table
+			if(!gs.nil(dataSource.orderCol)){
+				if(dataSource.sortOrder){
+					gr.orderByDesc(dataSource.orderCol);
+				}else{
+					gr.orderBy(dataSource.orderCol);
+				}
+			}else if(!gs.nil(options.order_by)){
+				data.orderCol = options.order_by;
+				if(options.order_direction != 'asc'){
+					data.sortOrder = true;
+					gr.orderByDesc(options.order_by);
+				}else{
+					gr.orderBy(options.order_by);
+				}
+			}
+
+			gr.query();
+			data.canCreate = gr.canCreate();
+			// row count from the glide record data source
+			data.row_count = countRecords(dataSource);
+
+			data.num_pages = Math.ceil(data.row_count / data.window_size);
+
+			//data.row_count = 0;
+			while(gr.next()){
+				if(gr.canRead()) {
+					var o = {};
+					//use $sp utility methods rather than manually creating record objects
+					$sp.getRecordDisplayValues(o,gr,dataSource.fields);
+					$sp.getRecordValues(o,gr,'sys_id');
+					data.records.push(o);
+				}
+			}
+			data.canCreate = gr.canCreate();
+			data.tooltip = gs.getMessage(options.button_tooltip);
+			//use an array to order columns
+			if(!dataSource.labels){
+
+				data.labels = [];
+				var labels = $sp.getFieldsObject(gr, dataSource.fields);
+				for (var label in labels) {
+					data.labels.push({"key":label,
+									  "type": labels[label].type,
+									  "value":labels[label].label});
+				}
+			}else{
+				data.labels = dataSource.labels;
+			}
+
+			if(gs.nil(dataSource.tableLabel)){
+				tableLabel = gr.getED().getPlural().toLowerCase();
+				tableLabel = tableLabel.replace(/\s+/g,"_");
+				data.tableLabel = tableLabel;
+			}else{
+				data.tableLabel = dataSource.tableLabel;
+			}
+
+		}
+	}
+
+
+	if(!input) {
+
+		data.records = [];
+		data.hidePanel = false;
+		data.table = options.table || '';
+		data.groupBy = $sp.getParameter('groupBy') || options.aggregate_field || '';
+		data.fields = $sp.getParameter('fields') || options.field_list || '';
+		data.filter = $sp.getParameter('filter') || options.filter || '';
+		data.parent = options.parent;
+		if(data.parent || options.table == CIRConstants.Tables.NOTIFICATION_LOG) {
+			data.filter  = filterByParent(data.parent, data.filter);
+			data.parentId = $sp.getParameter("sys_id");
+
+		}
+		var myTableMessage = gs.getMessage(options.title).toLowerCase();
+		data.noItemMessage = gs.getMessage('cir_sit_no_records');
+
+		if(options.reference_table != ''){
+
+			if($sp.getParameter('table') == options.reference_table){
+				data.relatedList = true;
+				data.relatedTable = options.reference_table;
+				data.relatedField = options.reference_field;
+				data.parentId = $sp.getParameter('sys_id');
+
+				fetchData(data);
+			}else{
+				data.hidePanel = true;
+			}
+		}else{
+			fetchData(data);
+		}
+
+		if(options.hide_on_empty == 'true'){
+			if(data.records.length == 0){
+				data.hidePanel = true;
+			}
+		}
+	}
+
+
+	if(input) {
+		fetchData(input);
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-08 08:21:38</sys_created_on>
+        <sys_id>ffd762bedbfd9010bf9ead8ed39619d9</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>CIR PSI List</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_ffd762bedbfd9010bf9ead8ed39619d9</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-31 06:54:04</sys_updated_on>
+        <template><![CDATA[<div ng-if="data.canCreate">
+<a name="{{::data.tableLabel}}" class="anchor-tag"></a>
+<div ng-if="!c.data.hidePanel" class="panel panel-{{::c.options.color}}" >
+  <!-- Default panel contents -->
+  <div class="panel-heading clearfix">
+    {{::data.title}}
+		<div class="pull-right" uib-tooltip="{{::c.data.tooltip}}" tooltip-placement="top" tooltip-append-to-body="true" tooltip-enable="!c.data.canCreate">
+     
+    <button  ng-disabled="!c.data.canCreate" ng-if="options.new_records == 'true'"
+            class="btn btn-sm m-l-xs pull-right"
+            ng-class="::{'btn-primary':c.options.color != 'primary','btn-default':c.options.color === 'primary'}"
+            ng-click="c.redirectNew()"><span ng-if="c.data.table!='x_lsmcb_fsm_crisis'" class="fa fa-plus"></span><span ng-if="c.data.table=='x_lsmcb_fsm_crisis'">${Create Crisis Room}</span></button></div>
+  </div>
+
+  <table class="table overview-widget table-{{::c.options.color}}" 
+         ng-if="c.data.records.length > 0">
+    <thead>
+      <tr>
+        <th ng-repeat="label in c.data.labels" 
+            ng-click="c.changeSortCol(label.key)">
+          {{ label.value }}
+
+          <!-- Only show and style the selected column -->
+          <span ng-show="c.orderCol==label.key">
+            <span class="fa fa-sort-up"
+                  ng-show="!c.sortOrder"></span>
+
+            <span class="fa fa-sort-down"
+                  ng-show="c.sortOrder"></span>
+          </span>	
+
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="record in c.data.records" 
+          ng-class="{'highlight': c.updatedRegs[record.sys_id]}"
+          ng-click="c.openRecord(record)">
+
+        <td ng-repeat="label in c.data.labels"> 
+          {{record[label.key]}}
+        </td>        
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="panel-body"
+       ng-if="c.data.records.length == 0">
+    <span>
+      {{c.data.noItemMessage}}
+    </span>
+  </div>
+  <!-- footer -->
+  <div ng-if="!(data.num_pages <= 1 && data.relatedList)" class="panel-footer">
+        <div class="btn-toolbar m-r pull-left" ng-if="data.row_count > 0 && data.num_pages > 1">
+          <div class="btn-group">
+            <a ng-disabled="data.p == 1" href="javascript:void(0)" ng-click="setPageNum(data.p - 1)" class="btn btn-default"><i class="fa fa-chevron-left"></i></a>
+          </div>
+          <div ng-if="data.num_pages > 1 && data.num_pages < data.window_size" class="btn-group">
+            <a ng-repeat="i in getNumber(data.num_pages) track by $index" ng-click="setPageNum($index + 1)" href="javascript:void(0)" ng-class="{active: ($index + 1) == data.p}" type="button" class="btn btn-default">{{$index + 1}}</a>
+          </div>
+          <div class="btn-group">
+            <a ng-disabled="data.p == data.num_pages" href="javascript:void(0)" ng-click="setPageNum(data.p + 1)" class="btn btn-default"><i class="fa fa-chevron-right"></i></a>
+          </div>
+        </div>  
+      <div  ng-if="data.row_count >= 0" class="m-t-xs panel-title">${{{data.window_start + 1}} - {{ mathMin(data.window_end,data.row_count) }} of {{data.row_count}}}</div> 
+      <span class="clearfix"></span>
+      </div>
+</div>
+</div>  ]]></template>
+    </sp_widget>
+</record_update>

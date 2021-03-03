@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_related_list_map">
+    <sys_sg_related_list_map action="INSERT_OR_UPDATE">
+        <context_field/>
+        <destination_screen display_value="Expense Lines">bbd7c2d3db5e5050d4a73533f3961953</destination_screen>
+        <related_list_screen display_value="Expense Lines">4f13fd2bdb5e5450bf9ead8ed396193b</related_list_screen>
+        <relationship>x_fru_cir_expense_line.expense_id</relationship>
+        <sys_class_name>sys_sg_related_list_map</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-04 08:52:45</sys_created_on>
+        <sys_id>d2237d2bdb5e5450bf9ead8ed39619e3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>bbd7c2d3db5e5050d4a73533f3961953</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_related_list_map_d2237d2bdb5e5450bf9ead8ed39619e3</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-04 08:52:45</sys_updated_on>
+    </sys_sg_related_list_map>
+</record_update>

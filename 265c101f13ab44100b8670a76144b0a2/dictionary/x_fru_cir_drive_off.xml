@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Drive Off" max_length="40" name="x_fru_cir_drive_off" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Close Reason" max_length="40" name="close_reason" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Cash Payment" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="Execution" sequence="20" value="2"/>
+                <element inactive_on_update="false" label="Other Payment" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="Payment by bank card" sequence="40" value="4"/>
+                <element inactive_on_update="false" label="Payment: fleet card" sequence="50" value="5"/>
+                <element inactive_on_update="false" label="Settled VAT" sequence="60" value="6"/>
+                <element inactive_on_update="false" label="Not paid" sequence="70" value="7"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Is there a CCTV footage?" mandatory="true" max_length="40" name="is_there_a_cctv_footage" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="No" sequence="20" value="0"/>
+            </choice>
+        </element>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Other Employee on station" max_length="4000" name="other_employee_on_station" reference="sys_user" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Parent Case" max_length="32" name="parent_case" read_only="true" reference="x_fru_cir_drive_off_case" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Progress" max_length="40" name="progress" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Discontinuance" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="Discontinuance to review" sequence="20" value="2"/>
+                <element inactive_on_update="false" label="Discontinuance verified Execution" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="Court case" sequence="40" value="4"/>
+                <element inactive_on_update="false" label="Letter to police submitted" sequence="50" value="5"/>
+                <element inactive_on_update="false" label="Waiting for police registration" sequence="60" value="6"/>
+                <element inactive_on_update="false" label="Waiting for client's input" sequence="70" value="7"/>
+                <element inactive_on_update="false" label="Waiting for police" sequence="80" value="8"/>
+                <element inactive_on_update="false" label="Payment" sequence="90" value="9"/>
+                <element inactive_on_update="false" label="Closed" sequence="100" value="10"/>
+            </choice>
+        </element>
+        <element label="Reason" max_length="2500" name="reason" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Drive Off" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="Runaway/Run off" sequence="20" value="2"/>
+                <element inactive_on_update="false" label="Customer couldn't pay with Bank card" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="Store didn't request payment" sequence="40" value="4"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="parent_case"/>
+        </index>
+    </element>
+</database>

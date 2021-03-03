@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <misc>0</misc>
+        <order>400</order>
+        <question display_value="Case type">1d9508c3db0d901003b3533fd39619bc</question>
+        <rec_misc>0</rec_misc>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-24 14:58:15</sys_created_on>
+        <sys_id>7186ce06dbf6d810bf9ead8ed39619d9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Drive Off</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>question_choice_7186ce06dbf6d810bf9ead8ed39619d9</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-24 14:58:15</sys_updated_on>
+        <text>Drive Off</text>
+        <value>x_fru_cir_drive_off_case</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=7186ce06dbf6d810bf9ead8ed39619d9"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>misc</field>
+        <id>7186ce06dbf6d810bf9ead8ed39619d9</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-24 14:58:15</sys_created_on>
+        <sys_id>cb96ce06dbf6d810bf9ead8ed396193d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-24 14:58:15</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>rec_misc</field>
+        <id>7186ce06dbf6d810bf9ead8ed39619d9</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-24 14:58:15</sys_created_on>
+        <sys_id>4796ce06dbf6d810bf9ead8ed396193c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-24 14:58:15</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+</record_update>

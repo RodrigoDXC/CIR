@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected utility script for the Assessment functionality. Not extensible.</description>
+        <name>CIRAssmtUtilsFP</name>
+        <script><![CDATA[var CIRAssmtUtilsFP = function() {
+    /** @type {Object} - JSON object containing the field names for diferent tables */
+    var objField = {
+        assessmentDefinition: [
+            'sys_id',
+            'name',
+            'description',
+            'category',
+            'catalog'
+        ],
+        assessmentSection: [
+            'sys_id',
+            'active',
+            'order',
+            'assessment_definition.catalog',
+            'assessment_definition.category',
+            'name',
+            'short_description',
+            'description',
+            'record_producer'
+        ],
+        assessmentField: [
+            'sys_id',
+            'assessment_section.sys_id',
+            'assessment_section.record_producer',
+            'type',
+            'active',
+            'label',
+            'name',
+            'mandatory',
+            'order',
+            'default_value',
+            'variable',
+            'field_message',
+            'mandatory_condition',
+            'read_only_condition',
+            'visible_condition',
+            'field_message_condition',
+            'field_mess_cat_ui_policy',
+            'mandatory_cat_ui_policy',
+            'read_only_cat_ui_policy',
+            'visible_cat_ui_policy',
+            'include_none'
+        ],
+        assessmentChoice: [
+            'sys_id',
+            'assessment_field.sys_id',
+            'assessment_field.variable',
+            'label',
+            'value',
+            'choice'
+        ],
+        assessmentInstance: [
+            'sys_id'
+        ],
+        assessmentInstanceSection: [
+            'sys_id',
+            'score',
+            'assessment_section',
+            'assessment_instance'
+        ],
+        assessmentAnswer: [
+            'sys_id',
+            'assessment_instance_section',
+            'assessment_field',
+            'display_value',
+            'value'
+        ]
+    };
+
+    /** @type {Object} - JSON object containing the table names for each table used in the creation of an Assessment */
+    var objTableName = {
+        assessmentDefinition: CIRConstants.Tables.ASSESSMENT_DEFINITION,
+        assessmentSection: CIRConstants.Tables.ASSESSMENT_SECTION,
+        assessmentField: CIRConstants.Tables.ASSESSMENT_FIELD,
+        assessmentChoice: CIRConstants.Tables.ASSESSMENT_CHOICE,
+        assessmentInstance: CIRConstants.Tables.ASSESSMENT_INSTANCE,
+        assessmentInstanceSection: CIRConstants.Tables.ASSESSMENT_INSTANCE_SECTION,
+        assessmentAnswer: CIRConstants.Tables.ASSESSMENT_ANSWER,
+        category: CIRConstants.Tables.CATEGORY,
+        recordProducer: CIRConstants.Tables.CAT_ITEM_PRODUCER,
+        variable: CIRConstants.Tables.VARIABLE,
+        choice: CIRConstants.Tables.QUESTION_CHOICE,
+        uiPolicy: CIRConstants.Tables.CATALOG_UI_POLICY,
+        uiPolicyFieldMessage: CIRConstants.Tables.CATALOG_UI_POLICY,
+        uiPolicyAction: CIRConstants.Tables.CATALOG_UI_POLICY_ACTION
+    };
+
+    /** @type {Object} - JSON object containing functions which return the field values
+                         to be inserted/updated on tables */
+    var objFieldValues = {
+        assessmentDefinition: function(obj) {
+            return {
+                catalog: obj.catalog,
+                category: obj.category
+            };
+        },
+        assessmentSection: function(obj) {
+            return {
+                record_producer: obj.record_producer
+            };
+        },
+        assessmentField: function(obj) {
+            return {
+                variable: obj.variable,
+                field_mess_cat_ui_policy: obj.field_mess_cat_ui_policy,
+                mandatory_cat_ui_policy: obj.mandatory_cat_ui_policy,
+                read_only_cat_ui_policy: obj.read_only_cat_ui_policy,
+                visible_cat_ui_policy: obj.visible_cat_ui_policy,
+                include_none: obj.include_none,
+                default_value: obj.default_value
+            };
+        },
+        assessmentChoice: function(obj) {
+            return {
+                choice: obj.choice
+            };
+        },
+        assessmentInstance: function(obj) {
+            var objAssessmentInstance = {};
+            if(obj.assessment_definition) {
+                objAssessmentInstance = {
+                    new_guid_sys_id: obj.new_guid_sys_id,
+                    assessment_definition: obj.assessment_definition,
+                    user: obj.user
+                };
+            }
+            if(obj.state || !obj.assessment_definition) {
+                objAssessmentInstance.state = obj.state;
+            }
+
+            return objAssessmentInstance;
+        },
+        assessmentInstanceSection: function(obj) {
+            return {
+                assessment_section: obj.assessment_section,
+                assessment_instance: obj.assessment_instance,
+                score: obj.score
+            };
+        },
+        assessmentAnswer: function(obj) {
+            return {
+                assessment_field: obj.assessment_field,
+                assessment_instance_section: obj.assessment_instance_section,
+                display_value: obj.display_value,
+                value: obj.value
+            };
+        },
+        category: function(obj) {
+            return {
+                active: obj.active,
+                title: obj.name,
+                description: obj.description,
+                sc_catalog: obj.catalog
+            };
+        },
+        recordProducer: function(obj) {
+            return {
+                active: obj.active,
+                order: obj.order,
+                sc_catalogs: obj.assessment_definition.catalog,
+                category: obj.assessment_definition.category,
+                name: obj.name,
+                table_name: CIRConstants.Tables.ASSESSMENT_INSTANCE,
+                short_description: obj.short_description,
+                description: obj.description
+            };
+        },
+        variable: function(obj) {
+            return {
+                active: obj.active,
+                cat_item: obj.assessment_section.record_producer,
+                type: obj.type,
+                question_text: obj.label,
+                name: obj.name,
+                mandatory: obj.mandatory,
+                order: obj.order,
+                default_value: obj.default_value,
+                include_none: obj.include_none
+            };
+        },
+        choice: function(obj) {
+            return {
+                question: obj.assessment_field.variable,
+                order: obj.order,
+                text: obj.label,
+                value: obj.value
+            };
+        },
+        uiPolicy: function(obj) {
+            return {
+                catalog_item: obj.recordProducerId,
+                reverse_if_false: true,
+                catalog_conditions: obj.conditions
+            };
+        },
+        uiPolicyFieldMessage: function(obj) {
+            return {
+                catalog_item: obj.recordProducerId,
+                reverse_if_false: true,
+                catalog_conditions: obj.conditions,
+                run_scripts: true,
+                ui_type: 10,
+                script_true: 'function onCondition() {\n' +
+                    '    g_form.showFieldMsg(\'' + obj.variableName + '\', \'' + obj.fieldMessage + '\');\n' +
+                    '}',
+                script_false: 'function onCondition() {\n' +
+                    '    g_form.hideFieldMsg(\'' + obj.variableName + '\');\n' +
+                    '}'
+            };
+        },
+        uiPolicyAction: function(obj) {
+            var objUiPolicyAction = {
+                ui_policy: obj.catalogUIPolicyId,
+                catalog_variable: obj.variableId,
+            };
+            objUiPolicyAction[obj.fieldName] = true;
+            return objUiPolicyAction;
+        }
+    };
+
+    /**
+     * Function to get the properties needed to query a table.
+     *
+     * @return {Object} - JSON object containing the properties which will be used to query a table
+     */
+    var getQueryProps = function(property, queryString) {
+        return {
+            tableName: objTableName[property],
+            query: queryString,
+            fields: objField[property]
+        };
+    };
+
+    /**
+     * Function to get the properties needed to create a record or update it in case it exists.
+     *
+     * @return {Object} - JSON object containing the properties which will be used to create or update a record
+     */
+    var getCreateUpdateProps = function(property, obj, updateRecordId) {
+        return {
+            tableName: objTableName[property],
+            isCreate: !updateRecordId,
+            updateRecordId: updateRecordId,
+            fieldValues: objFieldValues[property](obj)
+        };
+    };
+
+    return {
+        GetQueryProps: getQueryProps,
+        GetCreateUpdateProps: getCreateUpdateProps
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:09:47</sys_created_on>
+        <sys_id>2b829fc9db8e1410d4a73533f3961984</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CIRAssmtUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_2b829fc9db8e1410d4a73533f3961984</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-06 12:07:24</sys_updated_on>
+    </sys_script_include>
+</record_update>

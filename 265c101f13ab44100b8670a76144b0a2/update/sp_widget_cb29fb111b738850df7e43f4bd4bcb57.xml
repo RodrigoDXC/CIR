@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope) {
+    /* widget controller */
+    var c = this;
+
+    $scope.location = {
+        value: '',
+        name: 'location'
+    };
+
+    $scope.response_plan = {
+        value: '',
+        name: 'response_plan'
+    };
+
+    c.query_response_plans = 'none';
+    c.data.location = '';
+    c.resp_plan = '';
+
+    $scope.$on("field.change", function(evt, parms) {
+        if (parms.field.name == 'location') {
+            c.locations = parms.newValue;
+            c.query_response_plans = parms.newValue != '' ? 'locationsLIKE' + parms.newValue : 'none';
+        }
+
+        if (parms.field.name == 'response_plan') {
+            c.resp_plan = parms.newValue;
+        }
+    });
+
+    c.createRecord = function() {
+        if (c.locations != '' && c.resp_plan != '') {
+            var obj = {};
+            obj.create_plan = true;
+            obj.location = c.locations;
+            obj.response_plan = c.resp_plan;
+
+            c.locations = '';
+            c.resp_plan = '';
+            c.server.get(obj).then(function() {
+                alert(c.data.resp_plan_added);
+                $scope.location.value = '';
+                $scope.response_plan.value = '';
+                c.data.all_locations = false;
+            });
+        } else {
+            alert(c.data.empty_mandatory_fields);
+        }
+    };
+
+    c.updateQuery = function() {
+        if (c.data.all_locations == true) {
+            return "country=" + c.data.parent_country;
+        } else {
+            return "sys_idIN" + c.data.parent_locations;
+        }
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Widget used in the ServinceNow Agent Mobile app to add a new response plan to a crisis room</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-add-response-plan</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>CIR Add Response Plan</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.situation_user</roles>
+        <script><![CDATA[(function() {
+    data.parent = $sp.getParameter('sys_id');
+    data.table = $sp.getParameter('table');
+    data.tables = CIRConstants.Tables;
+	
+    if (!data.parent && !data.table && input.parentId) {
+        data.parent = input.parentId;
+        data.table = input.table;
+    }
+	
+    data.all_locations = input ? input.all_locations : false;
+    data.location = input ? input.location : '';
+    data.response_plan = input ? input.response_plan : '';
+    data.parent_record = getParentRecord();
+    data.parent_locations = data.parent_record.locations.toString();
+    data.parent_country = data.parent_record.country.toString();
+	data.empty_mandatory_fields = gs.getMessage('cir_sit_fill_mandatory_fields');
+	data.resp_plan_added = gs.getMessage('cir_sit_resp_plan_added');
+
+    if (input && input.create_plan === true) {
+        input.create_plan = false;
+        createResponsePlan();
+    }
+
+    function createResponsePlan() {
+        var gr = new GlideRecord(data.tables.RESP_PLAN_EXEC);
+        gr.initialize();
+        gr.situation_location = data.location;
+        gr.response_plan_template = data.response_plan;
+        gr.parent_situation = data.parent;
+        gr.insert();
+
+        updateCrisis(data.location);
+
+        data.location = '';
+        data.response_plan = '';
+    }
+
+    function updateCrisis(location) {
+        if (data.parent_record) {
+            var parentLocations = data.parent_record.getValue('locations');
+
+            if (!parentLocations) {
+                data.parent_record.setValue('locations', location);
+            }
+
+            if (parentLocations && parentLocations.indexOf(location) != -1) {
+                data.parent_record.setValue('locations', parentLocations);
+
+            } else if (parentLocations && parentLocations.indexOf(location) === -1) {
+                var locations = parentLocations + ',' + location;
+                data.parent_record.setValue('locations', locations);
+            }
+            data.parent_record.update();
+        }
+    }
+
+    function getParentRecord() {
+        var gr = new GlideRecord(data.tables.SITUATION);
+        if (gr.get(data.parent)) {
+            return gr;
+        }
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-26 12:14:59</sys_created_on>
+        <sys_id>cb29fb111b738850df7e43f4bd4bcb57</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>CIR Add Response Plan</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_cb29fb111b738850df7e43f4bd4bcb57</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-22 07:41:41</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">${cir_sit_add_response_plan}</h4>
+    </div>
+    <div class="panel-body wrapper-xl">
+        <input ng-model="data.all_locations" ng-change="c.updateQuery()" style="margin-bottom:30px" type="checkbox" name="">
+        <span style="margin-left: 5px;">${cir_sit_show_locations}</span>
+        </input>
+        <div style="margin-bottom:30px">
+            <div>
+                <span style="color:red" class="required">* </span>${cir_sit_select_location}
+            </div>
+            <sn-record-picker name="location" default-query="c.updateQuery()" field="location" style="margin-top:5px" table="data.tables.LOCATION" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100"></sn-record-picker>
+        </div>
+        <div>
+            <div><span style="color:red" class="required">* </span>${cir_sit_select_response_plan}</div>
+            <sn-record-picker name="response_plan" default-query="c.query_response_plans" field="response_plan" style="margin-top:5px" table="data.tables.RESP_PLAN_TEMPLATE" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100"></sn-record-picker>
+        </div>
+    </div>
+    <div class="panel-footer text-right">
+        <button class="btn btn-primary" ng-click="c.createRecord()">${cir_sit_add_response_plan}</button>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

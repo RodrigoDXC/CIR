@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="KPI Working Hours" max_length="40" name="x_fru_cir_kpi_working_hours" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Location" mandatory="true" max_length="32" name="location" reference="cmn_location" reference_qual="x_fru_cir_kpi_for_cir=true^EQ" reference_qual_condition="x_fru_cir_kpi_for_cir=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Month" mandatory="true" max_length="40" name="month" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="January" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="February" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="March" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="April" sequence="3" value="4"/>
+                <element inactive_on_update="false" label="May" sequence="4" value="5"/>
+                <element inactive_on_update="false" label="June" sequence="5" value="6"/>
+                <element inactive_on_update="false" label="July" sequence="6" value="7"/>
+                <element inactive_on_update="false" label="August" sequence="7" value="8"/>
+                <element inactive_on_update="false" label="September" sequence="8" value="9"/>
+                <element inactive_on_update="false" label="October" sequence="9" value="10"/>
+                <element inactive_on_update="false" label="November" sequence="10" value="11"/>
+                <element inactive_on_update="false" label="December" sequence="11" value="12"/>
+            </choice>
+        </element>
+        <element label="Start date" max_length="40" name="start_date" read_only="true" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Working Hours" mandatory="true" max_length="40" name="working_hours" type="integer"/>
+        <element label="Year" mandatory="true" max_length="40" name="year" type="string"/>
+        <index name="index">
+            <element name="location"/>
+        </index>
+    </element>
+</database>

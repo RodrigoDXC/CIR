@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[$j(document).ready(function (){
+	var dimension = gel('dimension').value;	
+
+	var ga = new GlideAjax('CIRSituationUtilsClient');
+	ga.addParam('sysparm_name', 'getTemplates');
+	ga.addParam('sysparm_dimension', dimension);
+	ga.getXML(getAnswer);
+
+	function getAnswer(response){
+		var answer = response.responseXML.documentElement.getAttribute('answer');
+		var templateList = JSON.parse(answer);
+		showList(templateList);
+	}
+
+	function showList (templateList){
+		var body = '';
+		var name = '';
+		var description = '';
+		var rpId  = '';
+
+		if (templateList.length > 0) {
+			var header = "<tr>"
+			+"<th> ${gs.getMessage('Name')} </th>"
+			+"<th> ${gs.getMessage('Description')}</th>"
+			+"</tr>";
+
+			$j("#table_header").append(header);
+
+			for (var i = 0; i < templateList.length; i++) {
+				rpId = templateList[i].id ? templateList[i].id : '';
+				name = templateList[i].name ? templateList[i].name : '-';
+				description = templateList[i].description ? templateList[i].description : '';
+
+				body+= '<tr id=' + rpId +  ' ONCLICK=selectedRow(' + "'" + rpId + "'" + ');>'   //'<tr id=' + rpId +  ' ONCLICK="selectedRow(" \' + rpId + \' ");"'  +   '>'
+					+ '<td>' + name + '</td>'
+					+ '<td>' + description + '</td>'
+					+ '</tr>';
+			}
+		} else {
+			body += "<h3>There are no available templates to select</h3>";	
+		}
+		$j("#table_body").append(body);
+	}
+});
+
+function selectedRow(id){
+	$j("#" + id + "").addClass('selected').siblings().removeClass('selected');
+}
+
+function copyTemplate() {
+	var selected = $j(".selected")[0].id;
+	var parametrization = gel('parametrization').value;
+
+	var ga = new GlideAjax('CIRSituationUtilsClient');
+	ga.addParam('sysparm_name', 'createResponsePlan');
+	ga.addParam('sysparm_parent', selected);
+	ga.addParam('sysparm_parametrization',parametrization);	
+	ga.getXML(getParam);
+
+	function getParam(response) {		
+		var answer = response.responseXML.documentElement.getAttribute("answer");		
+		gsftSubmit(gel('sysverb_update_and_stay'));
+		GlideDialogWindow.get().destroy();	
+	}
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_cir_show_rp_templates.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<g:ui_form>
+		<g:evaluate var="jvar_dimension" expression="RP.getWindowProperties().dimension" />
+		<input type="hidden" id="dimension" value="${jvar_dimension}" />
+
+		<g:evaluate var="jvar_parametrization" expression="RP.getWindowProperties().parametrization" />
+		<input type="hidden" id="parametrization" value="${jvar_parametrization}" />
+	</g:ui_form>
+
+	<style>
+		#response_list {
+		//font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		}
+
+		#response_list td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 5px;
+		}
+
+		.selected {
+		background-color: brown;
+		color: #FFF;
+		}
+
+		#table_body tr:hover {
+		cursor: pointer;
+		background-color: #dbdad5;
+		}		
+	</style>
+
+	<table id="response_list" cellspacing="10" cellpadding="10">
+		<thead id="table_header" style="font-weight:bold;">  
+		</thead>
+		<tbody id="table_body">
+		</tbody>    
+	</table>
+	<br></br>
+
+	<button id="submit" onclick="copyTemplate()" type="submit">${gs.getMessage('cir_sit_add')}</button>	
+</j:jelly>]]></html>
+        <name>cir_show_rp_templates</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-19 10:28:39</sys_created_on>
+        <sys_id>3e6e053cdb2d941003b3533fd3961987</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>cir_show_rp_templates</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_3e6e053cdb2d941003b3533fd3961987</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-29 12:36:09</sys_updated_on>
+    </sys_ui_page>
+</record_update>

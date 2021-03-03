@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name/>
+        <active>true</active>
+        <client>false</client>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments/>
+        <condition/>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <hint/>
+        <isolate_script>false</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Create copy</name>
+        <onclick/>
+        <order>100</order>
+        <script><![CDATA[var newRecordSysid = '';
+
+var grTemplates = new GlideRecord(current.getTableName().toString());
+grTemplates.initialize();
+grTemplates.setValue('name', 'Copy of ' + current.getValue('name') + '');
+grTemplates.setValue('category', current.getValue('category'));
+grTemplates.setValue('message_type', current.getValue('message_type'));
+grTemplates.setValue('active', current.getValue('active'));
+grTemplates.setValue('manager', current.getValue('manager'));
+grTemplates.setValue('job_titles', current.getValue('job_titles'));
+grTemplates.setValue('description', current.getValue('description'));
+grTemplates.setValue('locations', current.getValue('locations'));
+newRecordSysid = grTemplates.insert();
+
+var aux = [];
+var grStepTemplates = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP);
+grStepTemplates.addQuery('response_plan_template', current.getUniqueValue().toString());
+grStepTemplates.query();
+
+
+while (grStepTemplates.next()) {
+	
+	var table = grStepTemplates.getValue('sys_class_name');
+	var name = grStepTemplates.getValue('name');
+	var dependentOn = grStepTemplates.getValue('dependent_on');		
+	var description = grStepTemplates.getValue('description');
+	
+	var grStepRead = new GlideRecord(table);
+	if(grStepRead.get(grStepTemplates.getUniqueValue().toString()))
+
+	var grStepWrite = new GlideRecord(table);
+	grStepWrite.initialize();
+	grStepWrite.setValue('name', name);
+	//grStepWrite.setValue('dependent_on', dependentOn);
+	grStepWrite.setValue('description', description);
+	grStepWrite.setValue('response_plan_template', newRecordSysid);
+	
+	switch (table) {
+		case x_fru_cir.CIRConstants.Tables.RESP_PLAN_STEP_COND:
+			grStepWrite.setValue('condition', grStepRead.getValue('condition'));
+			break;
+		case x_fru_cir.CIRConstants.Tables.RESP_PLAN_STEP_MSG:
+			grStepWrite.setValue('condition', grStepRead.getValue('condition'));
+			grStepWrite.setValue('message_type', grStepRead.getValue('message_type'));
+			grStepWrite.setValue('message', grStepRead.getValue('message'));
+			grStepWrite.setValue('contact_list', grStepRead.getValue('contact_list'));
+			grStepWrite.setValue('feedback', grStepRead.getValue('feedback'));
+			break;
+		case x_fru_cir.CIRConstants.Tables.RESP_PLAN_STEP_ACTN:
+			grStepWrite.setValue('short_description', grStepRead.getValue('short_description'));
+			grStepWrite.setValue('condition', grStepRead.getValue('condition'));
+			break;
+	}
+		
+	grStepWrite.insert();
+	var obj = {};
+	obj.from = grStepRead.sys_id.toString();
+	obj.copy = grStepWrite.sys_id.toString();
+	obj.dependent = grStepRead.dependent_on.toString();
+	
+	aux.push(obj);
+}
+
+var grStep = new GlideRecord(x_fru_cir.CIRConstants.Tables.RESP_PLAN_STEP);
+grStep.addQuery('response_plan_template', newRecordSysid);
+grStep.query();
+
+while(grStep.next()) {
+	var dependent = getElementOfArray('copy', grStep.sys_id.toString(), aux).dependent.toString();
+	var valueForDependent = getElementOfArray('from', dependent, aux) ? getElementOfArray('from', dependent, aux).copy.toString() : '';
+	grStep.dependent_on = valueForDependent;
+	grStep.update();
+}
+	
+function getElementOfArray(key, value, array) {
+	for (var i = 0; i<array.length; i++) {
+		if(array[i][key] == value) {
+			return array[i];
+		}
+	} return null;
+}
+
+var url = CIRConstants.Tables.RESP_PLAN_TEMPLATE +'.do?sys_id=' + newRecordSysid.toString();
+action.setRedirectURL(url);]]></script>
+        <show_insert>false</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-24 20:30:51</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2844dff0db37c45049959a82ca9619b2</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Create copy</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_action_2844dff0db37c45049959a82ca9619b2</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-05-29 07:30:33</sys_updated_on>
+        <table>x_fru_cir_response_plan_template</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

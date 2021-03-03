@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.status1{&#13;
+  color: #C00000;&#13;
+}&#13;
+&#13;
+.status2{&#13;
+  color: #ED7D31;&#13;
+}&#13;
+&#13;
+.status3{&#13;
+  color: #FFC000;&#13;
+}&#13;
+&#13;
+.status4{&#13;
+  color: #70AD47;&#13;
+}&#13;
+&#13;
+.pad-top{&#13;
+ padding-top:20px; &#13;
+}&#13;
+a{&#13;
+  padding-left: 5px;&#13;
+}&#13;
+.circle{&#13;
+  padding-top:3px;&#13;
+  padding-right:5px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-location-open-cases-overview</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Location Open Cases Overview</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+
+    // Get the field labels from sys_documentation table
+
+    var nearMissTableName = CIRConstants.Tables.NEAR_MISS;
+    var incidentName = CIRConstants.Tables.INCIDENT;
+    var hazardTableName = CIRConstants.Tables.HAZARD;
+    var element = '';
+
+    var cirCaseManagementUtils = new CIRCaseManagementUtils();
+
+    var nearMissGR = cirCaseManagementUtils.GetFieldLabels(nearMissTableName, element);
+    var incGR = cirCaseManagementUtils.GetFieldLabels(incidentName, element);
+    var hazardGR = cirCaseManagementUtils.GetFieldLabels(hazardTableName, element);
+
+    data.nearMissLabel = nearMissGR.plural.toString();
+    data.incLabel = incGR.plural.toString();
+    data.hazardLabel = hazardGR.plural.toString();
+
+    var location = $sp.getParameter('location_id');
+    data.location_id = location;
+    data.nearMisses = [];
+    data.incidents = [];
+    data.hazards = [];
+
+    var nearMisses = new GlideRecordSecure(CIRConstants.Tables.NEAR_MISS);
+    nearMisses.addQuery('active', true);
+    nearMisses.addQuery('location', location);
+    nearMisses.query();
+    while(nearMisses.next()) {
+        data.nearMisses.push({
+            number: nearMisses.number.toString(),
+            severity: nearMisses.potential_severity.toString(),
+            sys_id: nearMisses.sys_id.toString()
+        });
+    }
+
+    var incidents = new GlideRecordSecure(CIRConstants.Tables.INCIDENT);
+    incidents.addQuery('active', true);
+    incidents.addQuery('location', location);
+    incidents.query();
+    while(incidents.next()) {
+        data.incidents.push({
+            number: incidents.number.toString(),
+            severity: incidents.severity.toString(),
+            sys_id: incidents.sys_id.toString()
+        });
+    }
+
+    var hazards = new GlideRecordSecure(CIRConstants.Tables.HAZARD);
+    hazards.addQuery('active', true);
+    hazards.addQuery('location', location);
+    hazards.query();
+    while(hazards.next()) {
+        data.hazards.push({
+            number: hazards.number.toString(),
+            severity: hazards.potential_severity.toString(),
+            sys_id: hazards.sys_id.toString()
+        });
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 12:40:44</sys_created_on>
+        <sys_id>f050f9431be1101024c896ce0a4bcb93</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIR CIRI Location Open Cases Overview</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_f050f9431be1101024c896ce0a4bcb93</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-26 12:40:44</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-body">
+  <h2 style="margin-top:0px">${Open Cases}</h2>
+  <div class="col-sm-4 pad-top">
+    <div style="font-size:20px">
+      {{data.nearMissLabel}}
+    </div>
+    <div ng-repeat="nearMiss in data.nearMisses" class="pad-top">
+      <i class="fa fa-circle status{{nearMiss.severity}}"><a href="?id=cir_ciri_form&table=x_fru_cir_near_miss&sys_id={{nearMiss.sys_id}}&location_id={{data.location_id}}">{{nearMiss.number}}</a></i>
+    </div>
+  </div>
+  <div class="col-sm-4 pad-top">
+    <div style="font-size:20px">
+      {{data.incLabel}}
+    </div>
+    <div ng-repeat="incident in data.incidents" class="pad-top">
+      <i class="fa fa-circle status{{incident.severity}}"><a href="?id=cir_ciri_form&table=x_fru_cir_incident&sys_id={{incident.sys_id}}&location_id={{data.location_id}}">{{incident.number}}</a></i>
+    </div>
+  </div>
+  <div class="col-sm-4 pad-top">
+    <div style="font-size:20px">
+     {{data.hazardLabel}}
+    </div>
+    <div ng-repeat="hazard in data.hazards" class="pad-top">
+      <i class="fa fa-circle status{{hazard.severity}}"><a href="?id=cir_ciri_form&table=x_fru_cir_hazard&sys_id={{hazard.sys_id}}&location_id={{data.location_id}}">{{hazard.number}}</a></i>
+    </div>
+  </div>
+   <div class="col-sm-12" style="padding-bottom:20px;padding-top:10px">
+    <h4>${Severities}</h4>
+     <div class="col-sm-3">
+      <span><i class="fa fa-circle circle status1"></i>${Extreme}</span>
+    </div>
+    <div class="col-sm-3">
+      <span><i class="fa fa-circle circle status2"></i>${High}</span>
+    </div>
+    <div class="col-sm-3">
+      <span><i class="fa fa-circle circle status3"></i>${Medium}</span>
+    </div>
+     <div class="col-sm-3">
+      <span><i class="fa fa-circle circle status4"></i>${Low}</span>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

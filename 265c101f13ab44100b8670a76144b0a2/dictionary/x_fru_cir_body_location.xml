@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Body Location" max_length="40" name="x_fru_cir_body_location" sizeclass="37" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Center coordinates" max_length="40" name="center" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Height (pixels)" max_length="40" name="height" type="integer"/>
+        <element display="true" label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Width (pixels)" max_length="40" name="width" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="X coordinate (on map)" max_length="40" name="x_coordinate" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Y coordinate (on map)" max_length="40" name="y_coordinate" type="integer"/>
+    </element>
+</database>

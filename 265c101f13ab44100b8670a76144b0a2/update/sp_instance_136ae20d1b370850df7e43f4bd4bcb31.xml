@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>2</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="2">936ae20d1b370850df7e43f4bd4bcb2f</sp_column>
+        <sp_widget display_value="CIR Situation Response Team">659543c11bf70850df7e43f4bd4bcb02</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 11:52:27</sys_created_on>
+        <sys_id>136ae20d1b370850df7e43f4bd4bcb31</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Response Team</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_instance_136ae20d1b370850df7e43f4bd4bcb31</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-24 14:20:59</sys_updated_on>
+        <title>Response Team</title>
+        <url/>
+        <widget_parameters/>
+    </sp_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=136ae20d1b370850df7e43f4bd4bcb31"/>
+</record_update>

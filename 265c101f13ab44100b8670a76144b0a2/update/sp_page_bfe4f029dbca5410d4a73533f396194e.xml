@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>a.button{
+  	border-style: solid;
+  	margin-top: 20px;
+  	margin-bottom : 50px;
+}
+.row{
+ 	padding-left: 15px;
+	padding-right: 15px;
+}
+a &gt; h2.ng-binding {
+ font-weight: 600; 
+}</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>cir_ciri_assessment_def_manager</id>
+        <internal>false</internal>
+        <omit_watcher>false</omit_watcher>
+        <public>false</public>
+        <roles>x_fru_cir.assessment_manager</roles>
+        <seo_script/>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:57:54</sys_created_on>
+        <sys_id>bfe4f029dbca5410d4a73533f396194e</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>cir_ciri_assessment_def_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_page_bfe4f029dbca5410d4a73533f396194e</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 14:17:59</sys_updated_on>
+        <title>CIR Assessment Definition Manager</title>
+        <use_seo_script>false</use_seo_script>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=bfe4f029dbca5410d4a73533f396194e"/>
+</record_update>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRGlideUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Singleton to perform simple GlideRecord actions</description>
+        <name>CIRGlideUtilsFP</name>
+        <script><![CDATA[var CIRGlideUtilsFP = (function() {
+    /**
+     * Ensures only one record has been returned by query
+     *
+     * @param {String} gr - GlideRecord/GlideAggregate that has been queried (e.g. gr.query())
+     * @throws Custom error if more than one record found. Logs warning if no records found
+     */
+    var validateSingleRowReturned = function(gr) {
+        var EXPECTED_ROW_COUNT = 1;
+        var GLIDE_RECORD_TYPE = '[object ScopedGlideRecord]';
+        var GLIDE_AGGREGATE_TYPE = '[object ScopedGlideAggregate]';
+        var ALLOWED_TYPES = [GLIDE_RECORD_TYPE, GLIDE_AGGREGATE_TYPE];
+
+        var passedObjectType = gr.toString();
+        if (ALLOWED_TYPES.indexOf(passedObjectType) < 0) {
+            throw new Error('ValidateSingleRowReturned: Expected Glide Record, Actual type is ' + passedObjectType);
+        }
+        var rowCount = gr.getRowCount();
+        if (rowCount > EXPECTED_ROW_COUNT) {
+            throw new Error('Expected single row from query.  Actual count:  ' + rowCount);
+        } else if (rowCount === 0) {
+            gs.warn('Expected a single row but no rows returned.');
+        }
+    };
+    return {
+        ValidateSingleRowReturned: validateSingleRowReturned
+    };
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 13:09:39</sys_created_on>
+        <sys_id>e60eb12bdb795010d4a73533f39619d9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIRGlideUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_e60eb12bdb795010d4a73533f39619d9</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-10 13:09:39</sys_updated_on>
+    </sys_script_include>
+</record_update>

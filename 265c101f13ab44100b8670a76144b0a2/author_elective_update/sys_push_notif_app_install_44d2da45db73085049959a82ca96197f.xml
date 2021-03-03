@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_push_notif_app_install">
+    <sys_push_notif_app_install action="DELETE">
+        <active>true</active>
+        <last_registered_on>2020-03-25 18:23:34</last_registered_on>
+        <sys_class_name>sys_push_notif_app_install</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 10:09:17</sys_created_on>
+        <sys_id>44d2da45db73085049959a82ca96197f</sys_id>
+        <sys_mod_count>40</sys_mod_count>
+        <sys_name>e0crcds70Dk:APA91bHQrYAKJarZdtUbh3t_AIj9aGgt3cuyIPIEVaU_92Fs7Nhc5Xlz-CIyZ-ws1BeywDciXd81q5d6UM5RFSPbZJft4xTZfRm1VbW_Jum0fEFC3Dc1hDhZnODrAJRTab0CdXN1QBNx</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_push_application_id display_value="ServiceNow Mobile Application">05ed2fb177002300258da2e2c81061c2</sys_push_application_id>
+        <sys_push_platform_id display_value="Google">53e75f30ff0002009738ffffffffff12</sys_push_platform_id>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_push_notif_app_install_44d2da45db73085049959a82ca96197f</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 18:23:34</sys_updated_on>
+        <sys_user_id display_value="Antonio Carvalho">ade1d9851b29c810df7e43f4bd4bcb73</sys_user_id>
+        <token>e0crcds70Dk:APA91bHQrYAKJarZdtUbh3t_AIj9aGgt3cuyIPIEVaU_92Fs7Nhc5Xlz-CIyZ-ws1BeywDciXd81q5d6UM5RFSPbZJft4xTZfRm1VbW_Jum0fEFC3Dc1hDhZnODrAJRTab0CdXN1QBNx</token>
+    </sys_push_notif_app_install>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>832241aa6f5ebd80ffcca9cc5d3ee4d0</instance_id>
+        <instance_name>ven01084</instance_name>
+        <name>sys_push_notif_app_install_44d2da45db73085049959a82ca96197f</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_push_notif_app_install">
+    <sys_push_notif_app_install action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <last_registered_on>2020-03-25 18:23:34</last_registered_on>
+        <sys_class_name>sys_push_notif_app_install</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 10:09:17</sys_created_on>
+        <sys_id>44d2da45db73085049959a82ca96197f</sys_id>
+        <sys_mod_count>40</sys_mod_count>
+        <sys_name>e0crcds70Dk:APA91bHQrYAKJarZdtUbh3t_AIj9aGgt3cuyIPIEVaU_92Fs7Nhc5Xlz-CIyZ-ws1BeywDciXd81q5d6UM5RFSPbZJft4xTZfRm1VbW_Jum0fEFC3Dc1hDhZnODrAJRTab0CdXN1QBNx</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_push_application_id display_value="ServiceNow Mobile Application">05ed2fb177002300258da2e2c81061c2</sys_push_application_id>
+        <sys_push_platform_id display_value="Google">53e75f30ff0002009738ffffffffff12</sys_push_platform_id>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_push_notif_app_install_44d2da45db73085049959a82ca96197f</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-25 18:23:34</sys_updated_on>
+        <sys_user_id display_value="Antonio Carvalho">ade1d9851b29c810df7e43f4bd4bcb73</sys_user_id>
+        <token>e0crcds70Dk:APA91bHQrYAKJarZdtUbh3t_AIj9aGgt3cuyIPIEVaU_92Fs7Nhc5Xlz-CIyZ-ws1BeywDciXd81q5d6UM5RFSPbZJft4xTZfRm1VbW_Jum0fEFC3Dc1hDhZnODrAJRTab0CdXN1QBNx</token>
+    </sys_push_notif_app_install>
+</record_update>]]></payload>
+        <payload_hash>125796374</payload_hash>
+        <record_name>e0crcds70Dk:APA91bHQrYAKJarZdtUbh3t_AIj9aGgt3cuyIPIEVaU_92Fs7Nhc5Xlz-CIyZ-ws1BeywDciXd81q5d6UM5RFSPb</record_name>
+        <reverted_from/>
+        <source>1809d49513f30c100b8670a76144b05f</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>rnowell4@csc.com</sys_created_by>
+        <sys_created_on>2020-03-25 19:56:27</sys_created_on>
+        <sys_id>ed391cd513f30c100b8670a76144b02d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17113447c710000001</sys_recorded_at>
+        <sys_updated_by>rnowell4@csc.com</sys_updated_by>
+        <sys_updated_on>2020-03-25 19:56:27</sys_updated_on>
+        <type>Push Notification Installation</type>
+        <update_guid>ad391cd503f30c10ec7e7409a064ae2d</update_guid>
+        <update_guid_history>ad391cd503f30c10ec7e7409a064ae2d:125796374</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Hugo.Reis</sys_created_by>
+        <sys_created_on>2020-04-04 07:59:12</sys_created_on>
+        <sys_db_object display_value="" name="sys_push_notif_app_install">sys_push_notif_app_install</sys_db_object>
+        <sys_id>3e00316478ff4808b1096623d740f910</sys_id>
+        <sys_metadata>44d2da45db73085049959a82ca96197f</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>e0crcds70Dk:APA91bHQrYAKJarZdtUbh3t_AIj9aGgt3cuyIPIEVaU_92Fs7Nhc5Xlz-CIyZ-ws1BeywDciXd81q5d6UM5RFSPbZJft4xTZfRm1VbW_Jum0fEFC3Dc1hDhZnODrAJRTab0CdXN1QBNx</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_push_notif_app_install_44d2da45db73085049959a82ca96197f</sys_update_name>
+        <sys_update_version display_value="sys_push_notif_app_install_44d2da45db73085049959a82ca96197f">ed391cd513f30c100b8670a76144b02d</sys_update_version>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-04-04 07:59:12</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

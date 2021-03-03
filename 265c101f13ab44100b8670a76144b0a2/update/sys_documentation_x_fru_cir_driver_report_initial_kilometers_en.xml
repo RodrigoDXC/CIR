@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="initial_kilometers" label="Initial kilometers" language="en" table="x_fru_cir_driver_report">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>initial_kilometers</element>
+            <help/>
+            <hint/>
+            <label>Initial kilometers</label>
+            <language>en</language>
+            <name>x_fru_cir_driver_report</name>
+            <plural>Initial kilometers</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-08-05 09:55:40</sys_created_on>
+            <sys_id>2d2b87f7db5a9450bf9ead8ed3961993</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Initial kilometers</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_driver_report_initial_kilometers_en</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-08-05 09:55:40</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

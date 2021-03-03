@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Assessment Section" max_length="40" name="x_fru_cir_assessment_section" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" read_only="true" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Assessment Definition" mandatory="true" max_length="32" name="assessment_definition" reference="x_fru_cir_assessment_definition" reference_cascade_rule="delete" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="65536" name="description" type="html"/>
+        <element display="true" label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Order" max_length="40" name="order" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,pdf_cell_type=image" label="Picture" max_length="40" name="picture" type="user_image"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Record Producer" max_length="32" name="record_producer" read_only="true" reference="sc_cat_item_producer" type="reference"/>
+        <element label="Section Visibility Condition" max_length="255" name="section_visibility_condition" type="string"/>
+        <element label="Short description" max_length="200" name="short_description" type="string"/>
+        <element label="Technical name" max_length="40" name="technical_name" read_only="true" type="string"/>
+        <index name="index">
+            <element name="record_producer"/>
+        </index>
+        <index name="index2">
+            <element name="assessment_definition"/>
+        </index>
+    </element>
+</database>

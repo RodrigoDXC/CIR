@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Protection Agent Report" max_length="40" name="x_fru_cir_protection_agent_report" sizeclass="6" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Bodyguard" max_length="32" name="bodyguard" reference="x_fru_cir_protection_profile" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Driver report" max_length="32" name="driver_report" read_only="true" reference="x_fru_cir_driver_report" type="reference"/>
+        <element label="End" max_length="40" name="end" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="End time" max_length="40" name="end_time" type="glide_time"/>
+        <element label="Guard inspection" max_length="4000" name="guard_inspection" type="string"/>
+        <element attributes="edge_encryption_enabled=true,max_unit=hours" label="Hours worked" max_length="40" name="hours_worked" type="glide_duration"/>
+        <element attributes="edge_encryption_enabled=true" label="Report worked hours" max_length="20" name="report_worked_hours" type="decimal"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service" max_length="32" name="service" reference="x_fru_cir_protection_service" type="reference"/>
+        <element label="Service date" max_length="40" name="service_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service order" max_length="32" name="service_order" reference="x_fru_cir_protection_service_order" reference_qual="javascript: new CIRPersonalProtectionUtils().GetBodyguardSO()" type="reference" use_reference_qualifier="advanced"/>
+        <element label="Service updates" max_length="4000" name="service_updates" type="string"/>
+        <element label="Start" max_length="40" name="start" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Start time" max_length="40" name="start_time" type="glide_time"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="1" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="In Progress" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Pending" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Complete" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="Canceled" sequence="3" value="3"/>
+            </choice>
+        </element>
+        <element label="Training conducted" max_length="4000" name="training_conducted" type="string"/>
+        <index name="index">
+            <element name="bodyguard"/>
+        </index>
+        <index name="index2">
+            <element name="service"/>
+        </index>
+        <index name="index3">
+            <element name="driver_report"/>
+        </index>
+        <index name="index4">
+            <element name="service_order"/>
+        </index>
+    </element>
+</database>

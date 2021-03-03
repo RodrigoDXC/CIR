@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_impact" label="Non-Conformance/Compliance" max_length="40" name="x_fru_cir_non_conformance_compliance" sizeclass="3" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Response" mandatory="true" max_length="40" name="response" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Penalty/Fine" sequence="10" value="penalty_fine"/>
+                <element inactive_on_update="false" label="Improvement Notice" sequence="20" value="improvement_notice"/>
+                <element inactive_on_update="false" label="Internal Action" sequence="30" value="internal_action"/>
+                <element inactive_on_update="false" label="Loss of License" sequence="40" value="loss_of_license"/>
+                <element inactive_on_update="false" label="Prohibition Notice" sequence="50" value="prohibition_notice"/>
+                <element inactive_on_update="false" label="Prosecution" sequence="60" value="prosecution"/>
+                <element inactive_on_update="false" label="Notice of Violation" sequence="70" value="notice_of_violation"/>
+                <element inactive_on_update="false" label="Warning Letter" sequence="80" value="warning_letter"/>
+                <element inactive_on_update="false" label="Other" sequence="90" value="other"/>
+            </choice>
+        </element>
+        <element label="Response notes" max_length="40" name="response_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Source" mandatory="true" max_length="40" name="source" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Audit" sequence="10" value="audit"/>
+                <element inactive_on_update="false" label="Inspection" sequence="20" value="inspection"/>
+                <element inactive_on_update="false" label="Regulator" sequence="30" value="regulator"/>
+                <element inactive_on_update="false" label="System Failure" sequence="40" value="system_failure"/>
+                <element inactive_on_update="false" label="Other" sequence="50" value="other"/>
+            </choice>
+        </element>
+        <element label="Source notes" max_length="40" name="source_notes" type="string"/>
+    </element>
+</database>

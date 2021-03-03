@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRGlobalScriptUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRGlobalScriptUtilsFP</name>
+        <script><![CDATA[var CIRGlobalScriptUtilsFP = function() {
+    /**
+     * function that will check if the Global Helper script is installed, enabled and up to date.
+     * called in the Generate Category Objects UI Action
+     * @return {Object} - JSON Object containing an error message and a boolean that states if the script is ok or not.
+     */
+    var checkGlobalScript = function() {
+        var curVersion = gs.getProperty('x_fru_cir.global.template.current.version'),
+            upgVersion = gs.getProperty('x_fru_cir.global.template.upgrade.version'),
+            resp = {
+                isOk: true,
+            };
+
+        if(!curVersion) {
+            resp.msg = gs.getMessage('cir_assmt_global_script_install');
+            resp.isOk = false;
+
+        } else if(upgVersion != curVersion) {
+            resp.msg = gs.getMessage('cir_assmt_global_script_upgrade');
+            resp.isOk = false;
+
+        } else {
+            var grSI = new GlideRecord('sys_script_include');
+            var isSI = grSI.get('name', 'CIRGlobalHelperFP');
+            if(!isSI || (isSI && !grSI.active)) {
+                resp.msg = gs.getMessage('cir_assmt_global_script_enable');
+                resp.isOk = false;
+            }
+        }
+
+        return resp;
+    };
+
+    /**
+     * function that will update the property that stores the current version of the global script
+     * called in the CIRGlobalScriptUtilsAjaxFP.updateGlobalScriptVersion function
+     * @param {String} action - contains the action to perforom on the current version.
+     */
+    var updateGlobalScriptVersion = function(action) {
+        var curVersion = gs.getProperty('x_fru_cir.global.template.current.version'),
+            upgVersrion = gs.getProperty('x_fru_cir.global.template.upgrade.version');
+        switch (action) {
+            case 'upgrade':
+                curVersion != upgVersrion ? gs.setProperty('x_fru_cir.global.template.current.version',
+                    upgVersrion +
+                    '') : '';
+                break;
+
+            case 'uninstall':
+                gs.setProperty('x_fru_cir.global.template.current.version', '');
+                break;
+        }
+    };
+
+    return {
+        CheckGlobalScript: checkGlobalScript,
+        UpdateGlobalScriptVersion: updateGlobalScriptVersion
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:20:28</sys_created_on>
+        <sys_id>c815974ddb8e1410d4a73533f3961927</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIRGlobalScriptUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_c815974ddb8e1410d4a73533f3961927</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-28 10:22:37</sys_updated_on>
+    </sys_script_include>
+</record_update>

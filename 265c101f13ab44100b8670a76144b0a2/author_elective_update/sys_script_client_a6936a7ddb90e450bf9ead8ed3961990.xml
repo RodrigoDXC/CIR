@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>custom_message</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Clear Template Name</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	if (isLoading) {
+		return;
+	}
+
+	if (newValue === 'false') {
+		g_form.setValue('template_name', '');
+	}
+
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-11-06 12:01:36</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a6936a7ddb90e450bf9ead8ed3961990</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Clear Template Name</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_a6936a7ddb90e450bf9ead8ed3961990</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-11-06 12:02:48</sys_updated_on>
+        <table>x_fru_cir_situation_task_execution</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>cfb305280a0a3d2301801c2592067c19</instance_id>
+        <instance_name>dev01084</instance_name>
+        <name>sys_script_client_a6936a7ddb90e450bf9ead8ed3961990</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field&gt;custom_message&lt;/field&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;Clear Template Name&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	if (isLoading) {
+		return;
+	}
+
+	if (newValue === 'false') {
+		g_form.setValue('template_name', '');
+	}
+
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;hugo.reis&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-11-06 12:01:36&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;a6936a7ddb90e450bf9ead8ed3961990&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;Clear Template Name&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Corporate Incident Response" source="x_fru_cir"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Corporate Incident Response"&gt;265c101f13ab44100b8670a76144b0a2&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_a6936a7ddb90e450bf9ead8ed3961990&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;hugo.reis&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-11-06 12:02:48&lt;/sys_updated_on&gt;&lt;table&gt;x_fru_cir_situation_task_execution&lt;/table&gt;&lt;type&gt;onChange&lt;/type&gt;&lt;ui_type&gt;10&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1341376485</payload_hash>
+        <record_name>Clear Template Name</record_name>
+        <reverted_from/>
+        <source>2fb9357ddb10e450bf9ead8ed39619db</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-11-06 12:02:48</sys_created_on>
+        <sys_id>e614a6bddb90e450bf9ead8ed396195b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1759d7010380000001</sys_recorded_at>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-11-06 12:02:48</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>6e14a6bd8890e4500975e50d6000bc5a</update_guid>
+        <update_guid_history>6e14a6bd8890e4500975e50d6000bc5a:-1341376485,f90466bd9d90e45070da9827b4825526:1596439738,84f32e7dd790e450aa10a0deea00e5e8:349550626,c5d32e7dee90e450d4b6d2565eb7423f:-703486629</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-11-06 12:03:31</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>460c8e8c5a4541688c81fe767fbfa840</sys_id>
+        <sys_metadata>a6936a7ddb90e450bf9ead8ed3961990</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Clear Template Name</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Situation Task Execution">7daa98ebdb9dd01003b3533fd3961911</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_script_client_a6936a7ddb90e450bf9ead8ed3961990</sys_update_name>
+        <sys_update_version display_value="sys_script_client_a6936a7ddb90e450bf9ead8ed3961990">e614a6bddb90e450bf9ead8ed396195b</sys_update_version>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-11-06 12:03:31</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

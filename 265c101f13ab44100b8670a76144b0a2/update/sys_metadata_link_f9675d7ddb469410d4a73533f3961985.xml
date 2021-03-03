@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>9ad4113ddb469410d4a73533f396193b</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_situation_category">
+    <x_fru_cir_situation_category action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description>There is a Fire, Run! </description>
+        <dimension display_value="Physical security">836b21d5db065410d4a73533f396191c</dimension>
+        <icon>4816593ddb469410d4a73533f3961988</icon>
+        <name>Fire</name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 09:57:38</sys_created_on>
+        <sys_id>9ad4113ddb469410d4a73533f396193b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:00:34</sys_updated_on>
+    </x_fru_cir_situation_category>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color>#f4a32d</average_image_color>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/jpeg</content_type>
+        <file_name>icon</file_name>
+        <hash>3831ed4212a020f7388d0a3ca49fb280435b8539a85621d9bdee6bd06f6ba4a6</hash>
+        <image_height>150</image_height>
+        <image_width>150</image_width>
+        <size_bytes>3790</size_bytes>
+        <size_compressed>3624</size_compressed>
+        <state>available</state>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:00:34</sys_created_on>
+        <sys_id>4816593ddb469410d4a73533f3961988</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:00:34</sys_updated_on>
+        <table_name>ZZ_YYx_fru_cir_situation_category</table_name>
+        <table_sys_id>9ad4113ddb469410d4a73533f396193b</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="icon" sys_id="4816593ddb469410d4a73533f3961988">4816593ddb469410d4a73533f3961988</sys_attachment>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:00:34</sys_created_on>
+        <sys_id>8816593ddb469410d4a73533f3961988</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>4820</length>
+        <position>1</position>
+        <sys_attachment display_value="icon" sys_id="4816593ddb469410d4a73533f3961988">4816593ddb469410d4a73533f3961988</sys_attachment>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:00:34</sys_created_on>
+        <sys_id>4c161d3ddb469410d4a73533f39619fb</sys_id>
+    </sys_attachment_doc>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:06:26</sys_created_on>
+        <sys_id>f9675d7ddb469410d4a73533f3961985</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Fire</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_f9675d7ddb469410d4a73533f3961985</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:06:26</sys_updated_on>
+        <tablename>x_fru_cir_situation_category</tablename>
+    </sys_metadata_link>
+</record_update>

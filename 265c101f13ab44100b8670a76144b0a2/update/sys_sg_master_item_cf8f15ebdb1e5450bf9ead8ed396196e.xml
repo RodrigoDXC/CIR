@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_master_item">
+    <sys_sg_master_item action="INSERT_OR_UPDATE">
+        <condition_order>-1</condition_order>
+        <datasource_table>x_fru_cir_protection_agent_report</datasource_table>
+        <datasource_table_condition/>
+        <embedded_screen display_value="Closed Service Orders">7e8f15ebdb1e5450bf9ead8ed396194b</embedded_screen>
+        <item_view display_value="Closed Service Orders Item View">fe8f59abdb1e5450bf9ead8ed396195d</item_view>
+        <name>Closed Service Orders Master Item</name>
+        <sys_class_name>sys_sg_master_item</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-04 07:27:03</sys_created_on>
+        <sys_id>cf8f15ebdb1e5450bf9ead8ed396196e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Closed Service Orders Master Item</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_master_item_cf8f15ebdb1e5450bf9ead8ed396196e</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-04 07:32:18</sys_updated_on>
+    </sys_sg_master_item>
+</record_update>

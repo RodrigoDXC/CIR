@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Expense Type" max_length="40" name="x_fru_cir_expense_type" sizeclass="3" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="4000" name="description" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true" label="Evidence required" max_length="40" name="evidence_required" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" display="true" label="Expense type" mandatory="true" max_length="40" name="expense_type" type="translated_text"/>
+        <element attributes="edge_encryption_enabled=true,scale=2" label="Tax rate" mandatory="true" max_length="20" name="tax_rate" type="decimal"/>
+    </element>
+</database>

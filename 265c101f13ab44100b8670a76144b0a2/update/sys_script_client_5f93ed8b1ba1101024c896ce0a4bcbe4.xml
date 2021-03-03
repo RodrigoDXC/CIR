@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>buildings</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Hide related list based on Category</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+	if (g_form.getValue('category') === "") {
+		g_form.hideRelatedList('x_fru_cir_situation_task_template_parametrization_m2m.situation_parametrization');
+	} else {
+		g_form.showRelatedList('x_fru_cir_situation_task_template_parametrization_m2m.situation_parametrization');
+	}
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 11:42:31</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5f93ed8b1ba1101024c896ce0a4bcbe4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Hide related list based on Category</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_5f93ed8b1ba1101024c896ce0a4bcbe4</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-26 11:42:31</sys_updated_on>
+        <table>x_fru_cir_situation_parametrization</table>
+        <type>onLoad</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="message_type" table="x_fru_cir_response_plan_template" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>message_type</element>
+            <name>x_fru_cir_response_plan_template</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:55:54</sys_created_on>
+            <sys_id>8418930f134694500b8670a76144b0b9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>message_type</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_response_plan_template_message_type</sys_update_name>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:55:54</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>message_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Email</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_template</name>
+            <sequence>0</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:55:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2c797d7bdb99141003b3533fd396191c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:55:54</sys_updated_on>
+            <value>email</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>message_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Push</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_template</name>
+            <sequence>1</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:55:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e0797d7bdb99141003b3533fd396191e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:55:54</sys_updated_on>
+            <value>push</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>message_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>SMS</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_template</name>
+            <sequence>2</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:55:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>60797d7bdb99141003b3533fd396191f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:55:54</sys_updated_on>
+            <value>sms</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>message_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Voice</label>
+            <language>en</language>
+            <name>x_fru_cir_response_plan_template</name>
+            <sequence>3</sequence>
+            <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-16 10:55:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ec797d7bdb99141003b3533fd396191f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-16 10:55:54</sys_updated_on>
+            <value>voice</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

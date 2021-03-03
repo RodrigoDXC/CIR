@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-osha-300</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI OSHA Form 300</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    var year = new GlideDate();
+    data.currentYear = year.getByFormat("yy").split('');
+
+    data.deathTotal = 0;
+    data.lostTimeCaseTotal = 0;
+    data.restrictedCaseTotal = 0;
+    data.otherTotal = 0;
+    data.lostTimeTotal = 0;
+    data.restrictedTotal = 0;
+
+    data.injuryTotal = 0;
+    data.respiratoryTotal = 0;
+    data.skinTotal = 0;
+    data.hearingTotal = 0;
+    data.poisonTotal = 0;
+    data.otherIllnessTotal = 0;
+
+    var query = $sp.getParameter('ids') || options.ids;
+    var page = $sp.getParameter('page') || options.page || '1,1';
+    if(page)
+        page = page.split(',');
+
+    //data.casePeopleArr = [];
+    data.people = [];
+    data.totalPages = page[1];
+    data.currentPage = page[0];
+
+    //Must be glide record due to security that we have to bypass only for these OSHA forms
+    var impactedPersons = new GlideRecordSecure(CIRConstants.Tables.PERSON_IMPACT);
+    if(query)
+        impactedPersons.addQuery('sys_id', 'IN', query);
+    else
+        impactedPersons.addEncodedQuery(
+            'cir_case.occurred_onONlastyear@javascript:gs.beginningOfLastYear()@javascript:gs.endOfLastYear()');
+    impactedPersons.orderBy('cir_case.number');
+    impactedPersons.setLimit(13);
+    impactedPersons.query();
+    while(impactedPersons.next()) {
+        var grCase = impactedPersons.getElement('cir_case').getRefRecord();
+        var location = grCase.location.nil() ? grCase.location_notes
+            .toString() : grCase.location.getDisplayValue();
+        var number = grCase.number.toString();
+        number = number.replace('CIR', '');
+        number = parseInt(number, 10);
+
+        var occurredOn = new GlideDate();
+        occurredOn.setValue(grCase.occurred_on.toString());
+
+        var injuryDescription = '';
+        var injuryIllnessTypes = [];
+        var count = 0;
+        //Must be glide record due to security that we have to bypass only for these OSHA forms
+        var injuries = new GlideRecordSecure(CIRConstants.Tables.INJURY_ILLNESS);
+        injuries.addQuery('impacted_person', impactedPersons.sys_id.toString());
+        injuries.query();
+        while(injuries.next()) {
+            if(count == 0) {
+                injuryDescription = injuries.display_name.toString();
+                count++;
+            } else {
+                injuryDescription = '';
+            }
+
+            if(injuries.type == 'injury' && injuryIllnessTypes.indexOf('injury') == -1) {
+                injuryIllnessTypes.push('injury');
+                data.injuryTotal++;
+            } else if(injuries.type == 'illness' && injuries.subcategory == 'respiratory_system') {
+                injuryIllnessTypes.push('respiratory');
+                data.respiratoryTotal++;
+            } else if(injuries.type == 'illness' && injuries.subcategory == 'skin_subcutaneous_tissue') {
+                injuryIllnessTypes.push('skin');
+                data.skinTotal++;
+            } else if(injuries.type == 'illness' && injuries.nature_of_illness == 'hearing_loss') {
+                injuryIllnessTypes.push('hearing');
+                data.hearingTotal++;
+            } else if(injuries.type == 'illness' && injuries.nature_of_illness == 'bacterial_food_poisoning') {
+                injuryIllnessTypes.push('poison');
+                data.poisonTotal++;
+            } else {
+                injuryIllnessTypes.push('other');
+                data.otherIllnessTotal++;
+            }
+        }
+        var caseClassification = impactedPersons.job_impact.toString();
+        var timeLostRestricted = new GlideDateTime(impactedPersons.time_lost_restricted.toString());
+        var timeLost = 0;
+        var timeRestricted = 0;
+        if(caseClassification == 'lost_time') {
+            timeLost = Math.floor((timeLostRestricted.getNumericValue() / 1000) / 86400);
+            data.lostTimeTotal += timeLost;
+            data.lostTimeCaseTotal++;
+        } else if(caseClassification == 'restricted_duties') {
+            timeRestricted = Math.floor((timeLostRestricted.getNumericValue() / 1000) / 86400);
+            data.restrictedTotal += timeRestricted;
+            data.restrictedCaseTotal++;
+        } else if(caseClassification == 'deceased') {
+            data.deathTotal++;
+        } else {
+            caseClassification = 'other';
+            data.otherTotal++;
+        }
+
+        data.people.push({
+            number: number,
+            employeeName: impactedPersons.first_name + ' ' + impactedPersons.last_name,
+            jobTitle: impactedPersons.job_title.toString(),
+            occurredOn: occurredOn.getByFormat('MM-dd').split('-'),
+            location: location,
+            injuries: injuryDescription,
+            injuryTypes: injuryIllnessTypes.join(','),
+            classification: caseClassification,
+            timeLost: timeLost,
+            timeRestricted: timeRestricted
+        });
+
+    }
+    while(data.people.length < 13) {
+        data.people.push({
+            number: '',
+            employeeName: '',
+            jobTitle: '',
+            occurredOn: '',
+            location: '',
+            injuries: '',
+            injuryTypes: '',
+            classification: '',
+            timeLost: '',
+            timeRestricted: ''
+        });
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 08:49:39</sys_created_on>
+        <sys_id>52fabc831b61101024c896ce0a4bcb2f</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIR CIRI OSHA Form 300</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_52fabc831b61101024c896ce0a4bcb2f</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-06 14:01:46</sys_updated_on>
+        <template><![CDATA[<div style="overflow: hidden; position: relative; width: 1500px; height: 935px;margin-left:-20px;background-color:white">
+  <!-- header -->
+  <div id="formLabel" class="t headerText noWrap" style="left:20px"><em>OSHA's Form 300</em> <span style="font-size:55px">(Rev. 01/2004)</span></div>
+  <div id="injuryHeaderLabel" class="t subHeaderText noWrap boldAndItalic" style="left:20px">Log of Work-Related Injuries and Illnesses</div>
+  <div id="attention" class="t attentionBox questionText" style="left: 800px;font-size: 50px;">
+    <strong>Attention:</strong> This form contains information relating to employee health and must be used in a manner that protects the confidentiality of employees to the extent possible while the information is being used for occupational safety and health purposes.
+  </div>
+  <div id="yearLabel" class="t yearHeader">Year 20<div class="underlined" style="width:50px;height:110px">{{data.currentYear[0]}}</div><div class="underlined" style="width:50px;height:110px">{{data.currentYear[1]}}</div></div>
+  <img src="cir_osha.png" width="60" height="60" style="left: 1400px;top: 30px;position: absolute;"/>
+  <div id="departmentLaborLabel" class="t usLaborLabel noWrap boldAndItalic">U.S. Department of Labor</div>
+  <div id="oshaAdminLabel" class="t occupationalSafetyLabel noWrap boldAndItalic">Occupational Safety and Health Administration</div>
+  <div id="formApprovedLabel" class="t formApproval noWrap">Form approved OMB no. 1218-0176</div>
+  <div class="t" style="border: solid #c1c1c1 11px;top: 129px;height:1px;width: 5780px;left: 20px;"/>
+  <div id="headerTextBlock" class="t s7_1 fieldLabel" style="width:4100px;"><em>You must record information about every work-related death and about every work-related injury or illness that involves loss of consciousness, restricted work activity or job transfer, days away from work, or medical treatment beyond first aid. You must also record significant work-related injuries and illnesses that are diagnosed by a physician or licensed healthcare professional. You must also record work-related injuries and illnesses that meet any of the specific recording criteria listed in 29 CFR Part 1904.8 through 1904.12. Feel free to use two lines for a single case if you need to. You must complete an Injury and Illness Incident Report (OSHA Form 301) or equivalent form for each injury or illness recorded on this form. If you're not sure whether a case is recordable, call your local OSHA office for help.</em></div>
+  <div id="EstablishmentName300" class="t s13_1">Establishment name ___________________________________________</div>
+  <div id="CityName300" class="t s13_1">City ________________________________ </div>
+  <div id="StateName300" class="t s13_1">State ___________________</div>
+  <!-- end of header -->
+
+  <!-- idenitify person block -->
+  <div id="identifyPersonHeader" class="t formHeader boldAndItalic formHeader300" style="width:1300px">
+    <div style="padding-top:10px;width: 100%;"></div>
+    <span style="padding-left:50px;padding-top:10px;"/>Identify the person
+  </div>
+  <div id="t1e_1" class="t s18_1">(A) </div>
+  <div id="t7d_1" class="t s28_1 fieldLabel" style="width:100px"><strong>Case no.</strong></div>
+  <div class="t s24_1" style="left:34px;top:372px;" >
+    <div style="margin-bottom: 51px;height: 80px;width: 140px;" ng-repeat="person in data.people">
+      <div class="s31_1">
+        <div class="underlined300" style="width:140px">{{person.number}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t1f_1" class="t s18_1">(B) </div>
+  <div id="t7e_1" class="t s28_1 fieldLabel" style="width:550px"><strong>Employee's name</strong></div>
+  <div class="t s24_1" style="left:83px;top:372px;" >
+    <div style="margin-bottom: 51px;height: 80px;width: 661px;" ng-repeat="person in data.people">
+      <div class="s31_1">
+        <div class="underlined300" style="width:661px">{{person.employeeName}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t1g_1" class="t s18_1">(C) </div>
+  <div id="t7f_1" class="t s28_1 fieldLabel" style="width:280px"><strong>Job title (e.g., Welder)</strong></div>
+  <div class="t s24_1" style="left:272px;top:372px;" >
+    <div style="margin-bottom: 51px;height: 80px;width: 330px;" ng-repeat="person in data.people">
+      <div class="s31_1">
+        <div class="underlined300" style="width:330px">{{person.jobTitle}}</div>
+      </div>
+    </div>
+  </div>
+  <!-- end idenitfy person block -->
+
+  <!-- describe case block -->
+  <div id="describeCaseHeader" class="t formHeader boldAndItalic formHeader300" style="width:2080px">
+    <div style="padding-top:10px;width: 100%;"></div>
+    <span style="padding-left:50px;padding-top:10px;"/>Describe the case
+  </div>
+  <div id="t1h_1" class="t s18_1">(D) </div>
+  <div id="t7g_1" class="t s28_1 fieldLabel" style="width:300px"><strong>Date of injury or onset of illness</strong></div>
+  <div class="t s24_1" style="left:366px;top:372px;" >
+    <div style="margin-bottom: 51px;height: 80px;width: 675px;margin-left:30px" ng-repeat="person in data.people">
+      <div class="s31_1">
+        <div class="underlined300" style="width:100px">{{person.occurredOn[0]}}</div>
+        <span>/</span>
+        <div class="underlined300" style="width:80px">{{person.occurredOn[1]}}</div>
+      </div>
+      <div class="s17_1" style="padding-left: 20px;margin-top: -15px;">month / day</div>
+    </div>
+  </div>
+
+  <div id="t1i_1" class="t s18_1">(E) </div>
+  <div id="t7h_1" class="t s28_1 fieldLabel" style="width:600px"><strong>Where the event occurred</strong> <em>(e.g., Loading dock north end)</em></div>
+  <div class="t s24_1" style="left:461px;top:372px;" >
+    <div style="margin-bottom: 51px;height: 80px;width: 495px;" ng-repeat="person in data.people">
+      <div class="s31_1">
+        <div class="underlined300" style="width:495px">{{person.location}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t1j_1" class="t s18_1">(F)</div>
+  <div id="t7i_1" class="t s28_1 fieldLabel" style="width:950px"><strong>Describe injury or illness, parts of body affected, and object/substance that directly injured or made person ill</strong> <em>(e.g., Second degree burns onright forearm from acetylene torch)</em></div>
+  <div class="t s24_1" style="left:617px;top:372px;" >
+    <div style="margin-bottom: 51px;height: 80px;width: 1040px;" ng-repeat="person in data.people">
+      <div class="s31_1">
+        <div class="underlined300" style="width:1040px">{{person.injuries}}</div>
+      </div>
+    </div>
+  </div>
+  <!-- end describe case block -->
+
+  <!-- classify case block -->
+  <div id="cassifyCaseHeader" class="t formHeader boldAndItalic formHeader300" style="width:1000px">
+    <div style="padding-top:10px;width: 100%;"></div>
+    <span style="padding-left:50px;padding-top:10px;"/>Classify the case
+  </div>
+  <div id="cassifyCaseSubHeader" class="t formHeader boldAndItalic" style="width: 1000px;font-size: 40px;">
+    <div style="padding-top:10px;width: 100%;"></div>
+    <div style="padding-left:50px;padding-top:10px;height:150px;display:inline-block;float:left"/>
+    <div style="width: 900px;text-align: left;">CHECK ONLY ONE box for each case based on the most serious outcome for that case:</div>
+  </div>
+  <div class="t" style="border: solid #b0b0b0 11px;top: 280px;height:1px;width: 1000px;left: 885px;"/>
+  <div class="t" style="background-color: #D3D3D3;top: 285px;height:2050px;width: 1000px;left: 885px;"/>
+  <div id="t2d_1" class="t m1_1 s16_1 boldAndItalic" style="width: 450px;border-bottom: solid black 10px;">Remained at Work</div>
+  <div id="gLabel300" class="t s18_1">(G) </div>
+  <div id="t1r_1" class="t s19_1"><strong>Death</strong></div>
+  <div id="hLabel400" class="t s18_1">(H) </div>
+  <div id="t1s_1" class="t s20_1 fieldLabel" style="width:200px"><strong>Days away from work</strong></div>
+  <div id="iLabel300" class="t s18_1">(I) </div>
+  <div id="t29_1" class="t s20_1 fieldLabel" style="width:220px"><strong>Job transfer or restriction</strong></div>
+  <div id="jLabel300" class="t s18_1">(J)</div>
+  <div id="t2b_1" class="t s20_1 fieldLabel" style="width:210px"><strong>Other record-able cases</strong></div>
+  <div class="t s24_1" style="left:904px;top:365px;" >
+    <div style="margin-bottom: 53px;height: 80px;width: 675px;" ng-repeat="person in data.people">
+      <i class="paddingCheck300" style="padding-right:200px" ng-class="person.classification == 'deceased' ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+      <i class="paddingCheck300" style="padding-right:220px" ng-class="person.classification == 'lost_time' ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+      <i class="paddingCheck300" style="padding-right:260px" ng-class="person.classification == 'restricted_duties' ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+      <i class="paddingCheck300" ng-class="person.classification == 'other' ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+    </div>
+  </div>
+  <!-- end classify case block -->
+
+  <!-- days injured block -->
+  <div id="daysInjuredHeader" class="t formHeader boldAndItalic formHeader300" style="width:550px"></div>
+  <div id="daysInjuredLabel" class="t m5_1 s15_1 fieldLabel" style="width:550px;">Enter the number of days the injured or ill worker was:</div>
+  <div class="t" style="border: solid #b0b0b0 11px;top: 280px;height:1px;width: 550px;left: 1140px;"/>
+  <div id="t1l_1" class="t s18_1">(K) </div>
+  <div id="t1x_1" class="t s19_1 fieldLabel" style="width:100px">Away from work</div>
+  <div id="t1m_1" class="t s18_1">(L)</div>
+  <div id="t1u_1" class="t s19_1 fieldLabel" style="width:200px">On job transfer or restriction</div>
+  <div class="t s24_1" style="left:1150px;top:372px;" >
+    <div style="margin-bottom: 51px;height: 80px;width: 300px;margin-left:25px" ng-repeat="person in data.people">
+      <div class="underlined300" style="width:110px">{{person.timeLost}} </div>
+      <span class="daysLabelPadding">days</span>  
+      <div class="underlined300" style="width:110px">{{person.timeRestricted}} </div> 
+      <span class="daysLabelPadding">days</span>
+    </div>
+  </div>
+  <!-- end days injured block -->
+
+  <!-- injury type block -->
+  <div id="injuryTypeHeader" class="t formHeader boldAndItalic formHeader300" style="width:800px"></div>
+  <div id="injuryIllnessCheckboxLabel" class="t m1_1 s16_1 boldAndItalic fieldLabel" style="width:800px">Check the "Injury" column or choose one type of illness:</div>
+  <div class="t" style="background-color: #D3D3D3;top: 245px;height: 2210px;width: 800px;left: 1283px;z-index: 1;"/>
+  <div class="t" style="border: solid #b0b0b0 11px;top: 280px;height:1px;width: 800px;left: 1283px;"/>
+  <div id="m300Label" class="t s18_1">(M)</div>
+  <div id="injury1Label" class="t s18_1">(1)</div>
+  <div id="injury300TopLabel" class="t m4_1 s14_1 rotatedLabel">Injury</div>
+  <div id="skinDisorder2Label" class="t s18_1">(2)</div>
+  <div id="skinDisorder300Label" class="t m4_1 s10_1 rotatedLabel ">Skin disorder</div>
+  <div id="respiratory3label" class="t s18_1">(3)</div>
+  <div id="respiratory300Label" class="t m4_1 s10_1 rotatedLabel fieldLabel" style="width:20px">Respiratory condition</div>
+  <div id="poisoning4Label" class="t s18_1">(4)</div>
+  <div id="poisoning300Label" class="t m4_1 s10_1 rotatedLabel">Poisoning</div>
+  <div id="hearing5Label" class="t s18_1">(5)</div>
+  <div id="hearing300Label" class="t m4_1 s10_1 rotatedLabel">Hearing loss</div>
+  <div id="allOther6Label" class="t s18_1">(6)</div>
+  <div id="allOther300Label" class="t m4_1 s10_1 rotatedLabel fieldLabel" style="width:40px">All other illnesses</div>
+
+  <div class="t s24_1" style="top:365px;left:1296px;" >
+    <div style="margin-bottom: 53px;height: 80px;width: 675px;" ng-repeat="person in data.people">
+      <i class="paddingCheck300" ng-class="person.injuryTypes.indexOf('injury') != -1 ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+      <i class="paddingCheck300" ng-class="person.injuryTypes.indexOf('skin') != -1 ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+      <i class="paddingCheck300" ng-class="person.injuryTypes.indexOf('respiratory') != -1 ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+      <i class="paddingCheck300" ng-class="person.injuryTypes.indexOf('poison') != -1 ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+      <i class="paddingCheck300" ng-class="person.injuryTypes.indexOf('hearing') != -1 ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+      <i class="paddingCheck300" ng-class="person.injuryTypes.indexOf('other') != -1 ? ['fa', 'fa-check-square-o'] : ['fa', 'fa-square-o']" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div id="injury300LabelBottom" class="t m4_1 s14_1 rotatedLabel">Injury</div>
+  <div id="injury1LabelBottom" class="t s18_1">(1)</div>
+  <div id="skinDisorder300LabelBottom" class="t m4_1 s10_1 rotatedLabel">Skin disorder</div>
+  <div id="skinDisorder2LabelBottom" class="t s18_1">(2)</div>
+  <div id="respiratory300LabelBottom" class="t m4_1 s10_1 rotatedLabel fieldLabel" style="width:20px">Respiratory condition</div>
+  <div id="respiratory3labelBottom" class="t s18_1">(3)</div>
+  <div id="poisoning300LabelBottom" class="t m4_1 s10_1 rotatedLabel">Poisoning</div>
+  <div id="poisoning4LabelBottom" class="t s18_1">(4)</div>
+  <div id="hearing300LabelBottom" class="t m4_1 s10_1 rotatedLabel">Hearing loss</div>
+  <div id="hearing5LabelBottom" class="t s18_1">(5)</div>
+  <div id="allOther300LabelBottom" class="t m4_1 s10_1 rotatedLabel fieldLabel" style="width:40px">All other illnesses</div>
+  <div id="allOther6LabelBottom" class="t s18_1">(6)</div>
+  <!-- end injury type block -->
+
+  <div id="pageTotals" class="t m1_1 s12_1 boldAndItalic">Page totals <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+  <div class="t s31_1" style="left: 891px;top: 805px;"><div class="underlined300" style="width:150px">{{data.deathTotal}}</div></div>
+  <div class="t s31_1" style="left: 945px;top: 805px;"><div class="underlined300" style="width:150px">{{data.lostTimeCaseTotal}}</div></div>
+  <div class="t s31_1" style="left: 1005px;top: 805px;"><div class="underlined300" style="width:150px">{{data.restrictedCaseTotal}}</div></div>
+  <div class="t s31_1" style="left: 1074px;top: 805px;"><div class="underlined300" style="width:150px">{{data.otherTotal}}</div></div>
+
+  <div class="t s31_1" style="left: 1146px;top: 805px;"><div class="underlined300" style="width:150px">{{data.lostTimeTotal}}</div></div>
+  <div class="t s31_1" style="left: 1206px;top: 805px;"><div class="underlined300" style="width:150px">{{data.restrictedTotal}}</div></div>
+
+  <div class="t s31_1" style="left: 1290px;top: 805px;"><div class="underlined300" style="width:100px">{{data.injuryTotal}}</div></div>
+  <div class="t s31_1" style="left: 1320px;top: 805px;"><div class="underlined300" style="width:100px">{{data.skinTotal}}</div></div>
+  <div class="t s31_1" style="left: 1352px;top: 805px;"><div class="underlined300" style="width:100px">{{data.respiratoryTotal}}</div></div>
+  <div class="t s31_1" style="left: 1383px;top: 805px;"><div class="underlined300" style="width:100px">{{data.hearingTotal}}</div></div>
+  <div class="t s31_1" style="left: 1413px;top: 805px;"><div class="underlined300" style="width:100px">{{data.poisonTotal}}</div></div>
+  <div class="t s31_1" style="left: 1444px;top: 805px;"><div class="underlined300" style="width:100px">{{data.otherIllnessTotal}}</div></div>
+
+  <div id="tl_1" class="t s11_1"><em>Be sure to transfer these totals to the Summary page (Form 300A) before you post it.</em></div>
+
+  <!-- footer -->
+  <div id="t19_1" class="t s8_1" style="width:2300px;white-space:normal;text-align:left">Public reporting burden for this collection of information is estimated to average 14 minutes per response, including time to review the instructions, search and gather the data needed, and complete and review the collection of information. Persons are not required to respond to the collection of information unless it displays a currently valid OMB control number. If you have any comments about these estimates or any other aspects of this data collection, contact: US Department of Labor, OSHA Office of Statistical Analysis, Room N-3644, 200 Constitution Avenue, NW, Washington, DC 20210. Do not send the completed forms to this office.</div>
+  <div id="td_1" class="t m1_1 s9_1 boldAndItalic">Page <div class="underlined300" style="width:100px">{{data.currentPage}}</div> of <div class="underlined300" style="width:100px">{{data.totalPages}}</div></div>
+  <div class="t" style="border: solid grey 30px;top: 900px;height:1px;width: 5850px;"/>
+  <!-- end of footer -->
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtRemoveAssessmentFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRAssmtRemoveAssessmentFP</name>
+        <script><![CDATA[var CIRAssmtRemoveAssessmentFP = function() {
+    var ASSESSMENT_TYPES = {
+        no_instances: 'no_instances',
+        has_instances: 'instances'
+    };
+
+    var ASSESSMENT_TABLE_MAPPER = {};
+    ASSESSMENT_TABLE_MAPPER[CIRConstants.Tables.ASSESSMENT_DEFINITION] = [{
+        tableName: CIRConstants.Tables.CATEGORY,
+        fields: ['category']
+    }];
+    ASSESSMENT_TABLE_MAPPER[CIRConstants.Tables.ASSESSMENT_SECTION] = [{
+        tableName: CIRConstants.Tables.CAT_ITEM_PRODUCER,
+        fields: ['record_producer']
+    }];
+    ASSESSMENT_TABLE_MAPPER[CIRConstants.Tables.ASSESSMENT_FIELD] = [{
+        tableName: CIRConstants.Tables.VARIABLE,
+        fields: ['variable']
+    }, {
+        tableName: CIRConstants.Tables.CATALOG_UI_POLICY,
+        fields: ['mandatory_cat_ui_policy', 'read_only_cat_ui_policy', 'visible_cat_ui_policy',
+            'field_mess_cat_ui_policy'
+        ]
+    }];
+    ASSESSMENT_TABLE_MAPPER[CIRConstants.Tables.ASSESSMENT_CHOICE] = [{
+        tableName: CIRConstants.Tables.QUESTION_CHOICE,
+        fields: ['choice']
+    }];
+
+    /**
+     * Function to get the message to display to the user when removing an Assessment Object.
+     *
+     * @param {String} tableName - name of the current table
+     * @param {Array} currentArrId - Array of SysIDs of the current records
+     * @return {String} - Text with the message to show to the user
+     */
+    var getRemoveAssessmentMessage = function(tableName, currentArrId) {
+        var type = getTopHierarchyType(tableName, currentArrId);
+        if(!type) {
+            return '';
+        }
+        var tableNameNoPrefix = tableName.replace('x_fru_cir_', '');
+        var MESSAGE_PREFIX = 'cir_assmt_remove_',
+            MESSAGE_DELIMITER = '_';
+        return gs.getMessage(MESSAGE_PREFIX + tableNameNoPrefix + MESSAGE_DELIMITER + type);
+    };
+
+    /**
+     * Function to get the top most type based on hierachy:
+     * - If there is at least one Assessment with instances, then that is the most important
+     * - If there are no Assessments with instances then that is the most important
+     * This is used to give the most important message when removing through the list, it will not have any implication when removing through the form since the array only has one element.
+     *
+     * @param {String} tableName - name of the current table
+     * @param {Array} currentArrId - Array of SysIDs of the current records
+     * @return {String} - Text with the message to show to the user
+     */
+    var getTopHierarchyType = function(tableName, currentArrId) {
+        var currentObjId = currentArrId.split(',');
+        var type = '';
+        for(var index in currentObjId) {
+            var currentType = getAssessmentType(tableName, currentObjId[index]);
+            if(!currentType) {
+                continue;
+            }
+            if(currentType === ASSESSMENT_TYPES.has_instances) {
+                return currentType;
+            }
+            type = currentType;
+        }
+
+        return type;
+    };
+
+    /**
+     * Function to get the type of publish state for a specific Assessment.
+     *
+     * @param {String} tableName - name of the current table
+     * @param {String} currentObjId - SysID of the current record
+     * @return {String} - String with the type of publish state
+     */
+    var getAssessmentType = function(tableName, currentObjId) {
+        var assessmentDefinition = getAssessmentDefinition(tableName, currentObjId);
+        if(!assessmentDefinition) {
+            return '';
+        }
+        var hasInstances = new CIRAssmtReadFP().AssmtDefHasInstances(assessmentDefinition);
+        var type = ASSESSMENT_TYPES.no_instances;
+        if(hasInstances && tableName !== CIRConstants.Tables.ASSESSMENT_CHOICE) {
+            type = ASSESSMENT_TYPES.has_instances;
+        }
+        return type;
+    };
+
+    /**
+     * Get data from the referenced Assessment Definition
+     *
+     * @param {String} tableName - name of the current table
+     * @param {String} currentObjId - SysID of the current record
+     * @return {String} - String containing the Assessment Definition SysID
+     */
+    var getAssessmentDefinition = function(tableName, currentObjId) {
+        var grCurrent = new GlideRecord(tableName);
+        if(!grCurrent.get(currentObjId)) {
+            return null;
+        }
+        switch (tableName) {
+            case CIRConstants.Tables.ASSESSMENT_SECTION:
+                return grCurrent.assessment_definition + '';
+            case CIRConstants.Tables.ASSESSMENT_FIELD:
+                return grCurrent.assessment_section.assessment_definition + '';
+            case CIRConstants.Tables.ASSESSMENT_CHOICE:
+                return grCurrent.assessment_field.assessment_section.assessment_definition + '';
+            case CIRConstants.Tables.ASSESSMENT_INSTANCE:
+                return grCurrent.assessment_definition + '';
+            case CIRConstants.Tables.ASSESSMENT_INSTANCE_SECTION:
+                return grCurrent.assessment_instance.assessment_definition + '';
+            case CIRConstants.Tables.ASSESSMENT_ANSWER:
+                return grCurrent.assessment_instance_section.assessment_instance.assessment_definition + '';
+        }
+
+        return grCurrent.getUniqueValue();
+    };
+
+    /**
+     * Function to remove all the associated Assessment objects.
+     *
+     * @param {String} tableName - name of the current table
+     * @param {String} currentObjId - SysID of the current record
+     * @return {String} - Message to display to the user
+     */
+    var removeAssessmentObjects = function(tableName, currentObjId) {
+        var countErrors = 0;
+        var array = currentObjId.split(",");
+        var grToRemove = new GlideRecord(tableName);
+        array.forEach(function(item) {
+            if(!grToRemove.get(item) || (grToRemove.get(item) && !grToRemove.deleteRecord()))
+                countErrors += 1;
+
+        });
+        if(countErrors > 0) {
+            return gs.getMessage('cir_assmt_remove_assessment_error_message');
+        }
+        return gs.getMessage('cir_assmt_remove_assessment_success_message');
+    };
+
+    /**
+     * Function used to remove the records from the Catalog objects.
+     *
+     * @param {Object} grCurrent - GlideRecord of the current Assessment object
+     * @return {Boolean} - True if all records were removed, false otherwise
+     */
+    var removeCatalogObjects = function(grCurrent) {
+        try {
+            var arrTableMapper = ASSESSMENT_TABLE_MAPPER[grCurrent.getTableName()];
+            arrTableMapper.forEach(function(tableMapper) {
+                tableMapper.fields.forEach(function(fieldName) {
+                    if(!grCurrent.getValue(fieldName)) {
+                        return;
+                    }
+                    var objToRemove = {
+                        tableName: tableMapper.tableName,
+                        sysId: grCurrent.getValue(fieldName)
+                    };
+                    new global.CIRGlobalHelperFP().RemoveRecord(objToRemove);
+                });
+            });
+        } catch (error) {
+            return false;
+        }
+        return true;
+    };
+
+    return {
+        GetRemoveAssessmentMessage: getRemoveAssessmentMessage,
+        RemoveAssessmentObjects: removeAssessmentObjects,
+        RemoveCatalogObjects: removeCatalogObjects
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-10-07 10:38:11</sys_created_on>
+        <sys_id>82b0b704dbbf9010d4a73533f3961957</sys_id>
+        <sys_mod_count>101</sys_mod_count>
+        <sys_name>CIRAssmtRemoveAssessmentFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_82b0b704dbbf9010d4a73533f3961957</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-27 15:40:21</sys_updated_on>
+    </sys_script_include>
+</record_update>

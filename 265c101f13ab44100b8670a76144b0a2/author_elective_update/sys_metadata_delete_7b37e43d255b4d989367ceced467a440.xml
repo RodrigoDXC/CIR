@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="DELETE">
+        <application/>
+        <key>cir_situation_confirm_close_situation_main</key>
+        <language>en</language>
+        <message>Are you sure you want to close this Situation Room?</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 15:59:09</sys_created_on>
+        <sys_id>34c223811bfb0850df7e43f4bd4bcbcd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cir_situation_confirm_close_situation_main</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_message_34c223811bfb0850df7e43f4bd4bcbcd</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 15:59:09</sys_updated_on>
+    </sys_ui_message>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_ui_message_34c223811bfb0850df7e43f4bd4bcbcd</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message"><sys_ui_message action="INSERT_OR_UPDATE"><application/><key>cir_situation_confirm_close_situation_main</key><language>en</language><message>Are you sure you want to close this Situation Room?</message><sys_class_name>sys_ui_message</sys_class_name><sys_created_by>paulo.gomes</sys_created_by><sys_created_on>2020-03-25 15:59:09</sys_created_on><sys_id>34c223811bfb0850df7e43f4bd4bcbcd</sys_id><sys_mod_count>0</sys_mod_count><sys_name>cir_situation_confirm_close_situation_main</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_ui_message_34c223811bfb0850df7e43f4bd4bcbcd</sys_update_name><sys_updated_by>paulo.gomes</sys_updated_by><sys_updated_on>2020-03-25 15:59:09</sys_updated_on></sys_ui_message></record_update>]]></payload>
+        <payload_hash>1973723499</payload_hash>
+        <record_name>cir_situation_confirm_close_situation_main</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 15:59:09</sys_created_on>
+        <sys_id>01e223811bfb0850df7e43f4bd4bcb91</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>171126b39590000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 15:59:09</sys_updated_on>
+        <type>Message</type>
+        <update_guid>09e2238159fb0850dffff01051806b90</update_guid>
+        <update_guid_history>09e2238159fb0850dffff01051806b90:1973723499</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-27 08:52:29</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_message">sys_ui_message</sys_db_object>
+        <sys_id>7b37e43d255b4d989367ceced467a440</sys_id>
+        <sys_metadata>34c223811bfb0850df7e43f4bd4bcbcd</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>cir_situation_confirm_close_situation_main</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_7b37e43d255b4d989367ceced467a440</sys_update_name>
+        <sys_update_version display_value="sys_ui_message_34c223811bfb0850df7e43f4bd4bcbcd">01e223811bfb0850df7e43f4bd4bcb91</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

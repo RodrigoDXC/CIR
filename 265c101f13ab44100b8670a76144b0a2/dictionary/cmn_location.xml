@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="all_tables.text_index_translations=true" label="Location" max_length="40" name="cmn_location" sizeclass="439" text_index="true" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="CIR Case Management Group" max_length="32" name="x_fru_cir_case_management_group" reference="sys_user_group" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="CIR Type" max_length="40" name="x_fru_cir_cir_types" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Police Station" value="1"/>
+                <element inactive_on_update="false" label="Store" value="2"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Days without Incident" max_length="40" name="x_fru_cir_days_without_incident" read_only="true" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Days without Injury" max_length="40" name="x_fru_cir_days_without_injury" read_only="true" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="KPI for CIR" max_length="40" name="x_fru_cir_kpi_for_cir" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,pdf_cell_type=image" label="Floor plan" max_length="40" name="x_fru_cir_map" type="user_image"/>
+    </element>
+</database>

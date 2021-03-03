@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $scope, $timeout, $location, spUtil, spNavStateManager, spAriaFocusManager, spModal) {
+	var c = this;
+	c.mandatory = [];
+	$scope.isPageReady = false;
+	var c = this;
+	var g_form;
+	var hasChanges = false;
+	var pageToRedirect = {};
+
+	var initForm = function(gFormInstance) {
+		if (gFormInstance.getTableName() == $scope.data.f.table) {
+			g_form = gFormInstance;
+			spNavStateManager.register($scope.data.table, null, g_form);
+			$scope.isPageReady = true;
+			if (c.data.isModal) {
+				var objToEdit = c.data.shared.objectToEdit;
+				if (Object.entries(objToEdit).length !== 0) {
+					for (var key in objToEdit) {
+						g_form.setValue(key, objToEdit[key]);
+					}
+				}
+				g_form.onUserChangeValue(function(fieldName, originalValue, newValue) {
+					objToEdit[fieldName] = newValue;
+					g_form.$private.userState.clearModifiedFields();
+				});
+			} else {
+				g_form.onUserChangeValue(function() {
+					hasChanges = true;
+					g_form.$private.userState.clearModifiedFields();
+				});
+			}
+			$timeout(function() {
+				$rootScope.$emit('spModel.gForm.rendered', g_form);
+			}, 175);
+		}
+	}
+
+	$scope.$on('spModel.gForm.initialized', function(e, gFormInstance) {
+		initForm(gFormInstance);
+	});
+
+	$scope.redirectTo = function(page) {
+		switch (page) {
+			case 'back':
+				pageToRedirect = {
+					id: $scope.data.backPage
+				};
+
+				if (!hasChanges) {
+					exitPage(pageToRedirect);
+				} else {
+					spModal.confirm($scope.data.warningBackMsg).then(function(confirmed) {
+						if (confirmed) {
+							exitPage(pageToRedirect);
+						}
+					});
+				}
+				break;
+			case 'next':
+				pageToRedirect = {
+					id: $scope.data.nextPage,
+					table: $scope.data.sectionsTable,
+					assessment: $scope.data.sys_id,
+					view: $scope.data.view
+				};
+
+				if(!hasChanges) {
+					exitPage(pageToRedirect);
+				} else {
+					openSaveWindow(pageToRedirect);
+				}
+				break;
+			case 'import':
+				pageToRedirect = {
+					id: $scope.data.importPage,
+					assessment: ''
+				};
+				if(!hasChanges && c.data.sys_id !== -1) {
+					pageToRedirect.assessment = c.data.sys_id;
+					exitPage(pageToRedirect);
+				} else {
+					openSaveWindow(pageToRedirect);
+				}
+				break;
+			default:
+				alert($scope.data.actionErrorMsg);
+		}
+	};
+	
+	$scope.hasMandatory = function() {
+		return c.mandatory && c.mandatory.length > 0;
+	};
+
+	$scope.$watch($scope.hasMandatory, function(hasMandatory) {
+		$rootScope.$broadcast('assessment.form.manager.mandatory.fields', hasMandatory);
+	});
+
+	var openSaveWindow = function(pageToRedirect) {
+		spModal.open({
+			title: c.data.titleSaveDataMsg,
+			message: c.data.confirmSaveDataMsg,
+			buttons: [{
+				label: c.data.cancelModalBtnMsg,
+				cancel: true
+			}, {
+				label: c.data.okModalBtnMsg,
+				primary: true
+			}]
+		}).then(function() {
+			saveDataToDB(pageToRedirect);
+		});
+	};
+
+	var saveDataToDB = function(pageToRedirect) {
+		var newRecordObj = {
+			tableName: $scope.data.table,
+			isCreate: true,
+			fieldValues: {
+				active: true
+			}
+		};
+		for (var key in $scope.data.f._fields) {
+			newRecordObj.fieldValues[key] = g_form.getValue(key);
+		}
+		$scope.server.get(newRecordObj).then(function(response) {
+			if (response.data.duplicatesExist) {
+				spModal.alert($scope.data.errorDuplicateRecord);
+			} else {
+				g_form.$private.userState.clearModifiedFields();
+				constructResponseHandler(response, pageToRedirect);
+			}
+		});
+	};
+
+	var constructResponseHandler = function(response, pageToRedirect) {
+		var sysID = response.data.recordSysID;
+		if (!sysID) {
+			spUtil.addErrorMessage($scope.data.errorRecordAddedMsg);
+			$timeout($scope.page.g_form.clearMessages(), 2000);
+		}
+		if (response.data.recordSysID) {
+			pageToRedirect.assessment = response.data.recordSysID;
+			exitPage(pageToRedirect);
+		}
+	};
+
+	var exitPage = function(pageToRedirect) {
+		g_form.$private.userState.clearModifiedFields();
+		editUrlTemplate(Object.keys(pageToRedirect));
+		formatRedirectUrl($scope.data.urlRedirectionTemplate, pageToRedirect);
+	};
+
+	var formatRedirectUrl = function(urlTemplate, paramObj) {
+		var url = spUtil.format(urlTemplate, paramObj);
+		var newUrl = $location.search(url);
+		spAriaFocusManager.navigateToLink(newUrl.url());
+	};
+	
+	var editUrlTemplate = function(paramArr) {
+		for (var i = 0; i < paramArr.length; i++) {
+			if (i === 0) {
+				$scope.data.urlRedirectionTemplate += paramArr[i] + '={' + paramArr[i] + '}'
+				continue;
+			}
+			$scope.data.urlRedirectionTemplate += '&' + paramArr[i] + '={' + paramArr[i] + '}';
+		}
+	};
+	$scope.canRemoveAssmnt = function(){
+		return c.data.sys_id && c.data.sys_id !== -1;
+	}
+	
+	$scope.removeAssmnt = function() {
+        spModal.open({
+            title: c.data.titleDeleteMsg,
+            message: c.data.assmtRemoveAssessmentDefinition,
+            buttons: [{
+                label: c.data.cancelModalBtnMsg,
+                cancel: true
+            }, {
+                label: c.data.confirmDeleteMsg,
+                primary: true
+            }]
+        }).then(function() {
+			var deleteRecord= {
+				action : 'delete',
+				sys_id : c.data.sys_id,
+				table : c.data.table,
+				
+			}
+            
+            $scope.server.get(deleteRecord).then(function(response) {
+				$scope.redirectTo('back');
+				hasChanges = false;
+				g_form.addInfoMessage(c.data.deleteSuccess);
+			});
+        });
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.panel .panel {&#13;
+  height: auto !important;&#13;
+}&#13;
+&#13;
+.panel.panel-default.ng-scope {&#13;
+  border: 0px;&#13;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, .05);&#13;
+  -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, .05);&#13;
+}&#13;
+&#13;
+.error {&#13;
+  margin-top: 15px;&#13;
+}&#13;
+&#13;
+.page-title {&#13;
+  text-align: center;&#13;
+  padding-top: 60px;&#13;
+  padding-bottom: 30px;&#13;
+}&#13;
+&#13;
+legend {&#13;
+  display: none;&#13;
+}&#13;
+&#13;
+.text-success-alt {&#13;
+  background-color: $state-success-text;&#13;
+}&#13;
+&#13;
+.text-info-alt {&#13;
+  background-color: $state-info-text;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+  margin-right: 5px;&#13;
+  padding-left: 25px;&#13;
+  padding-right: 25px;&#13;
+}&#13;
+&#13;
+.back-button {&#13;
+  border: 1px solid #717171;&#13;
+}&#13;
+&#13;
+.buttons-container {&#13;
+  width: 90%;&#13;
+  margin: auto;&#13;
+}&#13;
+&#13;
+input#sp_formfield_name {&#13;
+  width: 80%;&#13;
+}&#13;
+&#13;
+span#sp_formfield_reference_catalog {&#13;
+  width: 80%;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-assessment-manager-form</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Assessment Manager Form</name>
+        <option_schema>[{"name":"disableUIActions","section":"Behavior","default_value":"true","label":"Disable UI Actions on Form","type":"boolean"},{"name":"showFormView","section":"Behavior","label":"Display current form view","type":"boolean"},{"name":"view","section":"Data","default_value":"","label":"View","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.assessment_manager</roles>
+        <script><![CDATA[(function($sp, input, data, gs) {
+	data.error = false;
+	data.sys_id = $sp.getParameter('assessment') ? $sp.getParameter('assessment') : '-1';
+	if(data.sys_id !== '-1' && !new CIRAssmtModel().HasAssessmentDefinition(data.sys_id, false)) {
+		data.error = true;
+		return;
+	}
+
+	loadMsgs();
+
+	data.comesFromImport = $sp.getParameter('import') && $sp.getParameter('import') === 'true' ? $sp.getParameter('import') : false;
+	data.copy = $sp.getParameter('copy');
+	data.table = $sp.getParameter('table');
+	data.view = 'cir_portal_view';
+	data.sectionsTable = CIRConstants.Tables.ASSESSMENT_SECTION;
+	data.duplicatesExist = false;
+	//data.pageTitle = data.sys_id !== '-1' ? gs.getMessage('Update Assessment Definition') : gs.getMessage('cir_assmt_assess_title_create_new_assess');
+	data.pageTitle = getCorrectTitle();
+	if (input) {
+		data.shared = input;
+		data.table = input.table;
+		data.view = input.view;
+		if (input.isModal) {
+			data.isModal = input.isModal;
+			data.sys_id = '-1';
+		}
+	}
+
+	data.query = $sp.getParameter('query') || '';
+	data.f = {};
+
+	if (input && input.tableName && input.fieldValues) {
+		var DUPLICATE_NO_ID = 'catalog=' + input.fieldValues.catalog + '^name=' + input.fieldValues.name;
+		var DUPLICATE_WITH_ID = '^sys_id!=' + data.sys_id;
+		var queryProps = {
+			tableName: CIRConstants.Tables.ASSESSMENT_DEFINITION,
+			fields: ['sys_id'],
+			query: DUPLICATE_NO_ID
+		};
+
+		if (data.sys_id !== '-1') {
+			input.isCreate = false;
+			input.updateRecordId = data.sys_id;
+			queryProps.query += DUPLICATE_WITH_ID;
+		}
+		var recordsFound = new CIRGenericUtils().QueryTable(queryProps);
+
+		if (recordsFound.length === 0) {
+			data.recordSysID = new CIRAssmtModel().SaveDataAssessment(input);
+		} else {
+			data.duplicatesExist = true;
+		}
+	}
+
+	if (!data.table) {
+		return;
+	}
+
+	if (!data.sys_id) {
+		return;
+	}
+
+	var rec = new GlideRecordSecure(data.table);
+	data.isValid = rec.isValid() || data.sys_id === "-1";
+
+	if (!data.isValid) {
+		return;
+	}
+	if(input  && input.action && input.action === 'delete'){
+		
+		return  new CIRAssmtModel().RemoveAssessmentObjects(data.table, data.sys_id);
+		
+	}
+
+	data.table = rec.getRecordClassName();
+	data.f = $sp.getForm(data.table, data.sys_id, data.query, data.view);
+
+	data.urlRedirectionTemplate = '';
+	data.backPage = CIRConstants.AssessmentPortalConstants.ASSESSMENT_DEF_MANAGER_PAGE;
+	data.nextPage = CIRConstants.AssessmentPortalConstants.ASSESS_DEFINITION_ADD_SECTION;
+	data.importPage = CIRConstants.AssessmentPortalConstants.ASSESSMENT_IMPORT_FILE_PAGE;
+
+	function loadMsgs() {
+		data.recordAddedMsg = gs.getMessage('cir_assmt_record_added');
+		data.recordUpdatedMsg = gs.getMessage('cir_assmt_record_updated');
+		data.warningBackMsg = gs.getMessage('cir_assmt_assess_create_new_warningMsg');
+		data.actionErrorMsg = gs.getMessage('cir_assmt_assess_create_new_actionErrorMsg');
+		data.errorRecordAddedMsg = gs.getMessage('cir_assmt_assess_create_new_errorRecordAddedMsg');
+		data.errorDuplicateRecord = gs.getMessage('cir_assmt_assess_duplicate_record');
+		data.importAssessButtonMsg = gs.getMessage('cir_assmt_assess_import_assessment');
+		data.okModalBtnMsg = gs.getMessage('cir_assmt_list_manager_ok_modal_btn');
+		data.cancelModalBtnMsg = gs.getMessage('cir_assmt_list_manager_cancel_modal_btn');
+		data.nextButtonMsg = gs.getMessage('cir_assmt_manager_next_btn');
+		data.backButtonMsg = gs.getMessage('cir_assmt_manager_back_btn');
+		data.titleSaveDataMsg = gs.getMessage('cir_assmt_list_manager_confirm_save_title');
+		data.confirmSaveDataMsg = gs.getMessage('cir_assmt_save_changes_confirmation');
+		data.actionCreate = gs.getMessage('cir_assmt_create');
+		data.actionUpdate = gs.getMessage('cir_assmt_update');
+		data.actionCopied = gs.getMessage('cir_assmt_copied');
+		data.deleteAssmntBtn = gs.getMessage('cir_delete_assmt_definition');
+		data.assmtRemoveAssessmentDefinition = gs.getMessage('cir_assmt_remove_assessment_definition_no_instances');
+		data.confirmDeleteMsg = gs.getMessage('cir_assmt_list_manager_delete_modal_btn');
+		data.deleteSuccess = gs.getMessage('cir_assmt_remove_assessment_success_message');
+	}
+	
+	function getCorrectTitle() {
+		var title = '';
+		
+		if(data.copy) {
+			title = gs.getMessage('cir_assmt_action_on_assessment', data.actionCopied);
+		} else if (data.sys_id !== '-1') {
+			title = gs.getMessage('cir_assmt_action_on_assessment', data.actionUpdate);
+		} else {
+			title = gs.getMessage('cir_assmt_action_on_assessment', data.actionCreate);
+		}
+		return title;
+	}
+})($sp, input, data, gs);]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:27:27</sys_created_on>
+        <sys_id>92dde4e1dbca5410d4a73533f396195b</sys_id>
+        <sys_mod_count>55</sys_mod_count>
+        <sys_name>CIR CIRI Assessment Manager Form</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_92dde4e1dbca5410d4a73533f396195b</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-11-10 12:11:19</sys_updated_on>
+        <template><![CDATA[<div ng-if="!data.error">
+  <div class="page-title" ng-if="!data.isModal">
+    
+    <h1>
+      <strong>
+      {{ data.pageTitle }}
+      </strong>
+    </h1>
+  </div>
+
+  <div ng-if="data.isValid" class="panel-shift">
+      <div ng-show="isPageReady" class="panel panel-default" ng-if="::data.f._view.length">
+
+          <div>
+              <!--form-->
+              <sp-model form_model="data.f" mandatory="c.mandatory"></sp-model>
+          </div>
+
+          <div class="buttons-container" ng-if="!data.isModal">
+              <!--buttons-->
+              <button ng-if="!data.comesFromImport" ng-click="redirectTo('next')" class="btn btn-primary action-btn pull-right next-button" ng-disabled="hasMandatory()">{{ data.nextButtonMsg }}</button>
+              <button ng-if="data.comesFromImport || (data.sys_id !== '-1' && !data.copy)" ng-click="redirectTo('import')" class="btn btn-primary action-btn pull-right" ng-disabled="hasMandatory()">{{ data.importAssessButtonMsg }}</button>
+              
+              <button ng-click="redirectTo('back')" class="btn action-btn pull-left back-button">{{ data.backButtonMsg }}</button>
+              <button type="button" ng-if='canRemoveAssmnt()' ng-click="removeAssmnt()" class="btn btn-destructive btn-danger pull-left action-btn">{{ data.deleteAssmntBtn }}</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="error" ng-if="data.error">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">${Item not found}</h4>
+    </div>
+    <div class="panel-body wrapper">
+      <p>${This item is not found or currently not available}</p>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

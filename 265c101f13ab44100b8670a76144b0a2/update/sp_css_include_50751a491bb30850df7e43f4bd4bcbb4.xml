@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include">
+    <sp_css_include action="INSERT_OR_UPDATE">
+        <name>CIR Portal Styles</name>
+        <source>local</source>
+        <sp_css display_value="cir_style_sheet">1ea51a891bb30850df7e43f4bd4bcbfc</sp_css>
+        <sys_class_name>sp_css_include</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 10:21:29</sys_created_on>
+        <sys_id>50751a491bb30850df7e43f4bd4bcbb4</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR Portal Styles</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_css_include_50751a491bb30850df7e43f4bd4bcbb4</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-25 10:22:19</sys_updated_on>
+        <url/>
+    </sp_css_include>
+</record_update>

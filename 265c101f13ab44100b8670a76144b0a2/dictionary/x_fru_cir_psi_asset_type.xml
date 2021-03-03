@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="PSI Asset Type" max_length="40" name="x_fru_cir_psi_asset_type" sizeclass="4" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Class" max_length="40" name="class" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Situation" sequence="1" value="situation"/>
+                <element inactive_on_update="false" label="Protection" sequence="2" value="protection"/>
+                <element inactive_on_update="false" label="PSI" sequence="3" value="psi"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Name" mandatory="true" max_length="120" name="name" type="translated_text"/>
+        <element label="Value" mandatory="true" max_length="40" name="value" type="string"/>
+    </element>
+</database>

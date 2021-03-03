@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="" label="Incident - Hazard" language="en" table="x_fru_cir_m2m_incidents_hazards">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element/>
+            <help/>
+            <hint/>
+            <label>Incident - Hazard</label>
+            <language>en</language>
+            <name>x_fru_cir_m2m_incidents_hazards</name>
+            <plural>Incident - Hazards</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-05-29 09:48:21</sys_created_on>
+            <sys_id>db5d38c2dbcd101003b3533fd3961945</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_name>Incident - Hazard</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_m2m_incidents_hazards__en</sys_update_name>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-08-19 17:53:21</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

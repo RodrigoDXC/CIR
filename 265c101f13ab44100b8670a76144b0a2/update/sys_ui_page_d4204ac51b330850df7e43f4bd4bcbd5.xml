@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function validateUserInput(){
+	var execId = gel("recId").value;
+	var activeTeam = document.getElementById("activeUsers").value;
+	var emailSubject = document.getElementById("subject").value;
+	var emailBody = document.getElementById("body").value;
+	
+	
+	if(activeTeam.indexOf('@') != -1){ // checks if the list has at least one contact
+	
+	var workNotesInfo = getMessage("Sent email to: ") + activeTeam + '\n\n' +
+						getMessage("Subject") + ": " + emailSubject + '\n\n' + 
+						getMessage("Body") + ": \n" + emailBody;
+		
+	var gaManageMail = new GlideAjax('CIRSituationUtilsClient');
+		gaManageMail.addParam('sysparm_name', 'manageEmail');
+		gaManageMail.addParam('sysparm_recId', execId);
+		gaManageMail.addParam('sysparm_activeUsers', activeTeam);
+		gaManageMail.addParam('sysparm_body', emailBody);
+		gaManageMail.addParam('sysparm_subject', emailSubject);
+		gaManageMail.addParam('sysparm_wnInfo', workNotesInfo);
+		gaManageMail.getXML();
+		
+		} else {
+			var warning = getMessage('There are no active members.');
+			alert(warning);
+		}
+	
+		GlideDialogWindow.get().destroy();	
+}
+
+function cancel(){
+	GlideDialogWindow.get().destroy();
+}
+
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_send_email_active_group.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	
+	<g:ui_form>
+		
+		<g:evaluate var="jvar_recId" expression="RP.getWindowProperties().recId" />
+		<g:evaluate var="jvar_activeTeam" expression="RP.getWindowProperties().activeUsers" />
+		
+	<div>
+		<p style="margin-bottom: 0px; margin-top: 2px" >${gs.getMessage('To')} :</p>
+		<textarea type="text" id="activeUsers" style="margin: 0px;width:100%;height:26px;min-height:0" >${jvar_activeTeam} </textarea>
+		<p style="margin-bottom: 0px; margin-top: 2px">${gs.getMessage('Subject')} :</p>
+		<textarea type="text" id="subject" style="margin: 0px;width:100%;height:10%;height:26px;min-height:0" > </textarea>
+		<p style="margin-bottom: 0px; margin-top: 2px">${gs.getMessage('Body')} :</p>
+		<textarea type="text" id="body" style="margin: 0px;width:100%;height:200px;" > </textarea>
+	</div>
+		
+	<div>
+		<button type="submit" onclick="validateUserInput()">
+			<span>${gs.getMessage('Send')}</span>
+		</button>
+		<button type="submit" onclick="cancel()">
+			<span>${gs.getMessage('Cancel')}</span>
+		</button>
+    </div>
+	
+		<input type="hidden" id="recId" value="${jvar_recId}" />
+		<input type="hidden" id="activeTeam" value="${jvar_activeTeam}" />
+        <input type="hidden" id="subject" value="${jvar_subject}" />
+		<input type="hidden" id="body" value="${jvar_body}" />
+		
+	</g:ui_form>
+	
+	
+	
+</j:jelly>
+
+]]></html>
+        <name>send_email_active_group</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 08:47:39</sys_created_on>
+        <sys_id>d4204ac51b330850df7e43f4bd4bcbd5</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>send_email_active_group</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_d4204ac51b330850df7e43f4bd4bcbd5</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-30 14:44:56</sys_updated_on>
+    </sys_ui_page>
+</record_update>

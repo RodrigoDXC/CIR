@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_response_plan_execution_step" label="Response Plan Execution Step Message" max_length="40" name="x_fru_cir_response_plan_execution_step_message" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="0" label="Feedback received" max_length="40" name="feedback_received" read_only="true" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" default="0" label="Notifications sent" max_length="40" name="notifications_sent" read_only="true" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Situation" max_length="32" name="situation" read_only="true" reference="x_fru_cir_situation" type="reference"/>
+    </element>
+</database>

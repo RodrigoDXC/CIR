@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_stream">
+    <sys_sg_item_stream action="INSERT_OR_UPDATE">
+        <data_item display_value="My Logged Internal PSI">707fa46bdb751410bf9ead8ed3961970</data_item>
+        <interleaved_field/>
+        <name>My logged PSI Item Stream</name>
+        <sys_class_name>sys_sg_item_stream</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-10 07:36:01</sys_created_on>
+        <sys_id>5ad130abdb751410bf9ead8ed39619ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My logged PSI Item Stream</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_item_stream_5ad130abdb751410bf9ead8ed39619ae</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 07:36:01</sys_updated_on>
+        <table>x_fru_cir_internal_physical_security_incident</table>
+    </sys_sg_item_stream>
+</record_update>

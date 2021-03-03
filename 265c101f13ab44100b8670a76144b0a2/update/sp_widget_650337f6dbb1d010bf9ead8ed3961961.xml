@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil, $uibModal, $rootScope, $location, $timeout, $window, cabrillo) {
+    var c = this;
+
+	
+    var isNative = cabrillo.isNative();
+    if (isNative) {
+        var buttons = [{
+                imageName: 'back',
+                buttonStyle: cabrillo.viewLayout.REPLACE_BACK_BUTTON_STYLE,
+                enabled: true
+            },
+            {
+                title: '',
+                enabled: true
+            }
+        ];
+
+        cabrillo.viewLayout.setNavigationBarButtons(buttons, function(buttonIndex) {
+            switch (buttonIndex) {
+                case 0:
+                    cabrillo.flowControl.flowEnded();
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
+
+	
+	
+    $scope.hideItemWidget = !$scope.data.category_id;
+    
+	if ($scope.data.category) {
+        if (!$scope.data.categories)
+            $scope.data.categories = [];
+        $scope.data.categories.forEach(function(category, index, categories) {
+            categories[index].url = category.url + '&catalog_id=' + $scope.data.catalog_id;
+        });
+        if ($scope.data.sc_catalog)
+            $scope.data.categories.unshift({
+                label: $scope.data.sc_catalog,
+                url: '?id=' + $scope.data.sc_category_page + '&catalog_id=' + $scope.data.catalog_id
+            });
+
+        $scope.data.categories.push({
+            label: $scope.data.category.title,
+            url: '#'
+        });
+    }
+
+    var unregister = $rootScope.$on($scope.options.click_event_name, function($event, o) {
+        if ("url" in o)
+            $location.href = o.url;
+        else
+            $location.search(o.search);
+    });
+    var mql;
+
+    if ($window.matchMedia) {
+        mql = $window.matchMedia('screen and (max-width: 768px)');
+        mql.addListener(handleMatchMedia);
+        handleMatchMedia(mql);
+    } 
+    $scope.isTouchDevice = function() {
+        return ('ontouchstart' in $window);
+    }
+
+	
+	
+    c.openRecProd = function(item) {
+        var input;
+        input = {
+            id: 'cir_sc_cat_item_psi_mobile',
+            sys_id: c.options.internalRP,
+            category: item.sys_id
+        };
+        $location.search(input);
+    };
+
+	
+    c.closeModal = function() {
+        c.modalInstance.close();
+    }
+
+
+    $scope.startItemList = function() {
+        $scope.stopLoader = true;
+    }
+
+	
+    $rootScope.$on('showCategories', function(event, selectedCategory) {
+        c.data.selectedCategory = selectedCategory;
+        c.server.update();
+    });
+	
+	
+	
+    function handleMatchMedia(mql) {
+        if (!mql.matches) {
+            spUtil.getPreference('catalog-item-list-view', function(value) {
+                $scope.view = value || 'card';
+                $scope.isMobile = false;
+            });
+        } else {
+            $timeout(function() {
+                $scope.view = 'card';
+                $scope.isMobile = true;
+            })
+        }
+    }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.toggle {&#13;
+  color: $dropdown-link-disabled-color;&#13;
+  i:not(.active):hover {&#13;
+	  color: $list-group-link-heading-color;&#13;
+  }&#13;
+}&#13;
+&#13;
+.fa.active {&#13;
+  color: $primary-color;&#13;
+}&#13;
+&#13;
+.item-table {&#13;
+  background-color: #fff;&#13;
+   tr {&#13;
+     th {&#13;
+       padding: 16px 10px;&#13;
+     }&#13;
+     td {&#13;
+       padding: 16px 10px;&#13;
+       border: none;&#13;
+     }&#13;
+   }&#13;
+}&#13;
+&#13;
+.btn-loadmore {&#13;
+    margin-left: auto;&#13;
+    margin-right: auto;&#13;
+    display: block;&#13;
+    margin-bottom: 20px;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-psi-int-cat-from-tree-mobile</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR Internal PSI Cat From Tree Mobile</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.psi_global_manager,x_fru_cir.psi_internal_manager,x_fru_cir.psi_internal_user,x_fru_cir.psi_local_manager</roles>
+        <script><![CDATA[(function() {
+
+	data.show_popular_item = true;
+    data.show_more = true;
+	data.limit = 9;
+	data.items = [];
+	data.selectedCategory = input ? input.selectedCategory : '';
+	
+	if(!data.selectedCategory){
+		data.show_more = false;
+		return;
+	}
+	
+    if (input && input.new_limit)
+        data.limit = input.new_limit;
+
+    if (input && input.startWindow) {
+        data.endWindow = input.endWindow;
+    } else {
+        data.startWindow = 0;
+        data.endWindow = 0;
+    }
+
+    data.startWindow = data.endWindow;
+    data.endWindow = data.endWindow + data.limit;
+    data.items = queryItems(data.startWindow, data.endWindow, data.selectedCategory);
+
+    if (data.items.length < data.limit) {
+        data.show_more = false;
+    }
+	
+    var numbers = Math.round(data.limit);
+    if (data.items.indexOf(data.placeholderItem)) {
+        numbers = numbers - 1;
+    }
+	
+
+    function queryItems(startWindow, endWindow, parentCatId) {
+		
+        var items = [];
+		var query = 'active=true';
+		query += parentCatId ? '^parent=' +parentCatId : '';
+		
+        var grCatgeories = new GlideRecordSecure(CIRConstants.Tables.PSI_CATEGORY);
+			grCatgeories.addEncodedQuery(query);
+			grCatgeories.chooseWindow(startWindow, endWindow);
+			grCatgeories.query();
+
+        while (grCatgeories.next()) {
+            items.push(fetchItemDetails(grCatgeories));
+        }
+		
+        return items;
+    }
+	
+	
+    function fetchItemDetails(itemRecord) {
+
+        var item = {};
+        item.name = itemRecord.name.toString();
+        item.short_description = itemRecord.short_description + '';
+        item.picture = itemRecord.icon ? itemRecord.icon.toString() + '.iix' : '';
+        item.sys_id = itemRecord.getUniqueValue().toString();
+				item.category = itemRecord.type.toString();
+		
+        return item;
+    }
+
+    
+})();
+
+
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-08 13:46:56</sys_created_on>
+        <sys_id>650337f6dbb1d010bf9ead8ed3961961</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR Internal PSI Cat From Tree Mobile</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_650337f6dbb1d010bf9ead8ed3961961</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 08:38:57</sys_updated_on>
+        <template><![CDATA[<div ng-if="!data.create_crisis" class="m-t-sm ">
+
+    <div class="row">
+        <div ng-if="view == 'card'">
+            <div class="col-sm-6 col-md-4" ng-repeat="item in data.items | orderBy: 'order' | limitTo: data.limit track by item.sys_id"
+                ng-init="startItemList()" ng-if="item.sys_id != data.placeholderItem">
+
+                <div class="panel panel-{{::options.color}} b">
+                    <a target="{{::item.target}}" href="javascript:;" ng-click="c.openRecProd(item)" class="panel-body block" sn-focus="{{::item.highlight}}">
+
+                        <div class="overflow-100">
+
+                            <h2 class="h4 m-t-none m-b-xs text-overflow-ellipsis" title="{{::item.name}}" style="padding-bottom:1px">{{::item.name}}</h2>
+                            <img ng-src="{{::item.picture}}?t=small" ng-if="item.picture" alt="{{::item.name}}" class="m-r-sm m-b-sm item-image pull-left" />
+                            <div class="text-muted item-short-desc break-word">{{::item.short_description}}</div>
+
+                        </div>
+                    </a>
+
+                    <div aria-hidden="true" class="panel-footer">
+                        <a aria-hidden="true" ng-click="c.openRecProd(item)" href="" target="_blank" class="pull-left text-muted" tabindex="-1">${cir_create}</a> &nbsp;
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

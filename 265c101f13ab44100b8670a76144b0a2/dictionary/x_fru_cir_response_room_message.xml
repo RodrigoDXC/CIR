@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Response Room Message" max_length="40" name="x_fru_cir_response_room_message" sizeclass="0" type="collection">
+        <element label="Message content" max_length="4000" name="message_content" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="message_type" choice_table="x_fru_cir_response_plan_template_step_message" label="Message type" max_length="40" name="message_type" read_only="true" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Response execution ID" max_length="32" name="response_execution_id" read_only="true" reference="x_fru_cir_response_plan_execution" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="response_execution_id"/>
+        </index>
+        <index name="index2">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

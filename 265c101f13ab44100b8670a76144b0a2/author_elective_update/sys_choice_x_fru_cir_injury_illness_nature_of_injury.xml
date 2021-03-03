@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="nature_of_injury" table="x_fru_cir_injury_illness" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>nature_of_injury</element>
+            <name>x_fru_cir_injury_illness</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:13:45</sys_created_on>
+            <sys_id>8bb6ff74138a50500b8670a76144b098</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>nature_of_injury</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_injury_illness_nature_of_injury</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:13:45</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>surface_wounds_bruises</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Abrasions and Scratches</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:13:45</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fca10da7db11141003b3533fd39619d6</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:14:15</sys_updated_on>
+            <value>abrasions_scratches</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>open_wounds</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Amputations</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:30:32</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>df55892bdb11141003b3533fd3961990</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:30:41</sys_updated_on>
+            <value>amputations</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>open_wounds</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Avulsions</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:31:17</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>98a5416bdb11141003b3533fd3961952</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:31:25</sys_updated_on>
+            <value>avulsions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>surface_wounds_bruises</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Blisters</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:31:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5ac5cd2bdb11141003b3533fd39619eb</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:32:08</sys_updated_on>
+            <value>blisters</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>surface_wounds_bruises</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Bruises and Contusions</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:32:13</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0ad5456bdb11141003b3533fd39619d1</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:32:23</sys_updated_on>
+            <value>bruises_contusions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>muscles_tendons_ligameents_joints</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cartilage Fractures or Tears</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:28:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4a05c92bdb11141003b3533fd39619c1</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:28:50</sys_updated_on>
+            <value>cartilage_fractures_tears</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Chemical (First Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:17:45</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3682c1e7db11141003b3533fd39619be</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:17:53</sys_updated_on>
+            <value>chemical_first</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Chemical (Second Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:16:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4d4289a7db11141003b3533fd396198c</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:16:42</sys_updated_on>
+            <value>chemical_second</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Chemical (Third Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:19:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>46d2c1e7db11141003b3533fd3961947</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:19:26</sys_updated_on>
+            <value>chemical_third</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cold/Frostbite (First Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:17:19</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0072cda7db11141003b3533fd3961974</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:17:27</sys_updated_on>
+            <value>cold_frostbite_first</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cold/Frostbite (Fourth Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:18:06</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3d9281e7db11141003b3533fd396198d</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:18:16</sys_updated_on>
+            <value>cold_frostbite_fourth</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cold/Frostbite (Second Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:18:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>07a285e7db11141003b3533fd3961923</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:18:34</sys_updated_on>
+            <value>cold_frostbite_second</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cold/Frostbite (Third Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:18:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>32c2c1e7db11141003b3533fd3961929</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:19:00</sys_updated_on>
+            <value>cold_frostbite_third</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>intracranial</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Concussions</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:21:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d7534de7db11141003b3533fd396192e</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:21:29</sys_updated_on>
+            <value>concussions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>open_wounds</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cuts and Lacerations</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:30:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c185892bdb11141003b3533fd3961996</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:30:56</sys_updated_on>
+            <value>cuts_lacerations</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>muscles_tendons_ligameents_joints</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Dislocations</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:29:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>30458de7db11141003b3533fd396193e</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:29:47</sys_updated_on>
+            <value>dislocations</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Electrical (First Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:18:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>feb205e7db11141003b3533fd3961934</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:18:46</sys_updated_on>
+            <value>electrical_first</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Electrical (Second Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:17:32</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>537205e7db11141003b3533fd3961942</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:17:40</sys_updated_on>
+            <value>electrical_second</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Electrical (Third Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:19:32</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6cf205e7db11141003b3533fd3961935</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:19:39</sys_updated_on>
+            <value>electrical_third</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>open_wounds</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Enucleations</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:31:43</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1fb5056bdb11141003b3533fd39619bd</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:31:50</sys_updated_on>
+            <value>enucleations</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bones_nerves_spinal_cord</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Fractures</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:14:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>96d185a7db11141003b3533fd3961952</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:15:04</sys_updated_on>
+            <value>fractures</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>open_wounds</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Gunshot Wounds</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:31:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ac95416bdb11141003b3533fd396194f</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:31:12</sys_updated_on>
+            <value>gunshot_wounds</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>intracranial</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Haemorrhages</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:19:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fe03c5e7db11141003b3533fd39619c9</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:21:02</sys_updated_on>
+            <value>haemorrhages</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Heat (First Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:19:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7bf281e7db11141003b3533fd396198f</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:19:53</sys_updated_on>
+            <value>heat_first</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Heat (Second Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:16:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dc520da7db11141003b3533fd39619d8</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:16:58</sys_updated_on>
+            <value>heat_second</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>burns_corrosions</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Heat (Third Degree)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:17:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>48624da7db11141003b3533fd3961973</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:17:14</sys_updated_on>
+            <value>heat_third</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>muscles_tendons_ligameents_joints</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Herniated Discs</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:29:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d055452bdb11141003b3533fd39619de</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:30:03</sys_updated_on>
+            <value>herniated_discs</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>muscles_tendons_ligameents_joints</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Ligament Tears</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:28:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>45e4452bdb11141003b3533fd396198d</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:28:35</sys_updated_on>
+            <value>ligament_tears</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>muscles_tendons_ligameents_joints</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Meniscus Tears</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:29:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0d35452bdb11141003b3533fd3961954</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:29:34</sys_updated_on>
+            <value>meniscus_tears</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>muscles_tendons_ligameents_joints</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Muscle Pulls or Tears</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:29:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1525452bdb11141003b3533fd39619dc</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:29:20</sys_updated_on>
+            <value>muscle_pulls_tears</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bones_nerves_spinal_cord</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Nerve Damage</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:15:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>411285a7db11141003b3533fd3961954</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:16:00</sys_updated_on>
+            <value>nerve_damage</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bones_nerves_spinal_cord</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Paralysis</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:15:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7c02c5a7db11141003b3533fd396197e</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:15:45</sys_updated_on>
+            <value>paralysis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bones_nerves_spinal_cord</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Paraplegia</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:16:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5d3209a7db11141003b3533fd396191e</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:16:29</sys_updated_on>
+            <value>paraplegia</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bones_nerves_spinal_cord</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pinched Nerve</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:15:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0cf189a7db11141003b3533fd3961988</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:15:24</sys_updated_on>
+            <value>pinched_nerve</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>open_wounds</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Puncture Wounds</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:31:30</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c8b5c16bdb11141003b3533fd39619d6</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:31:38</sys_updated_on>
+            <value>puncture_wounds</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bones_nerves_spinal_cord</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Quadriplegia</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:16:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ed2209a7db11141003b3533fd396191d</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:16:15</sys_updated_on>
+            <value>quadriplegia</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>intracranial</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Skull Fracture</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:21:08</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2e1389e7db11141003b3533fd3961987</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:21:16</sys_updated_on>
+            <value>skull_fracture</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>bones_nerves_spinal_cord</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Spinal Cord Damage</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:14:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c3a185a7db11141003b3533fd3961968</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:14:46</sys_updated_on>
+            <value>spinal_cord_damage</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>muscles_tendons_ligameents_joints</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Strains or Sprains</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:28:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ed150d2bdb11141003b3533fd3961987</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:29:05</sys_updated_on>
+            <value>strains_sprains</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>muscles_tendons_ligameents_joints</dependent_value>
+            <element>nature_of_injury</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Tendon Tears</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence/>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:27:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3a634de7db11141003b3533fd39619f8</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:27:59</sys_updated_on>
+            <value>tendon_tears</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysevent_register">
+    <sysevent_register action="INSERT_OR_UPDATE">
+        <caller_access/>
+        <description>Will trigger the Notification CIR Case worknoted (group)</description>
+        <event_name>x_fru_cir.notification.case.wn.group</event_name>
+        <fired_by>Business Rule: CIR Notification - Case Worknoted(group)</fired_by>
+        <queue/>
+        <suffix>notification.case.wn.group</suffix>
+        <sys_class_name>sysevent_register</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-22 10:09:18</sys_created_on>
+        <sys_id>1458643ddbe9181003b3533fd3961977</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.notification.case.wn.group</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sysevent_register_1458643ddbe9181003b3533fd3961977</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-22 10:09:18</sys_updated_on>
+        <table>x_fru_cir_case</table>
+    </sysevent_register>
+</record_update>

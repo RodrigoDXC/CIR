@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Situation Task Template" max_length="40" name="x_fru_cir_situation_task_template" sizeclass="2" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Assigned to" max_length="32" name="assigned_to" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Category" max_length="32" name="category" reference="x_fru_cir_situation_category" reference_qual="javascript: var query = new CIRSituationUtils().FilterCatByDimensionQuery(current.dimension.sys_id); query" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Contact list" max_length="32" name="contact_list" reference="x_fru_cir_contact_list" type="reference"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" mandatory="true" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Message" max_length="32" name="message" reference="x_fru_cir_message" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="message_type" choice_table="x_fru_cir_response_plan_template_step_message" label="Message type" max_length="40" name="message_type" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Name" max_length="40" name="name" type="translated_text"/>
+        <element default="javascript:getNextObjNumberPadded();" dynamic_default_value="fdcb83a85f220100a9ad2572f2b4773c" label="Number" max_length="40" name="number" read_only="true" type="string" use_dynamic_default="true"/>
+        <element label="Scope" max_length="40" name="scope" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Action" sequence="0" value="action"/>
+                <element inactive_on_update="false" label="Message" sequence="1" value="message"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="contact_list"/>
+        </index>
+        <index name="index2">
+            <element name="category"/>
+        </index>
+        <index name="index3">
+            <element name="message"/>
+        </index>
+        <index name="index4">
+            <element name="dimension"/>
+        </index>
+        <index name="index5">
+            <element name="assigned_to"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-print-osha-forms</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Print Osha Forms</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	
+	var query = $sp.getParameter('query') || 'cir_case.active=true^cir_case.occurred_onONlast3months@javascript:gs.monthsAgoStart(3)@javascript:gs.endOfThisMonth()';
+	if($sp.getParameter('query')){
+		query = 'cir_case.' + query;
+		query = query.replaceAll('^', '^cir_case.');
+		query = query.replaceAll('^OR', '^ORcir_case.');
+		query = query.replaceAll('^NQ', '^NQcir_case.');
+	}
+	
+	var totalPeople = new GlideAggregate(CIRConstants.Tables.PERSON_IMPACT);
+	totalPeople.addEncodedQuery(query);
+	totalPeople.addAggregate('COUNT');
+	totalPeople.query();
+	if(totalPeople.next()){
+		var total = parseInt(totalPeople.getAggregate("COUNT"));
+		if(total <= 13)
+			data.totalPages = 1;
+		else
+			data.totalPages = (Math.ceil(total / 13)).toFixed(0);
+	}
+	
+	var count = 1;
+	data.peopleArr = [];
+	data.osha300 = [];
+	data.osha301 = [];
+	var impacts = [];
+	var impactedPersons = new GlideRecordSecure(CIRConstants.Tables.PERSON_IMPACT);
+	impactedPersons.addEncodedQuery(query);
+	impactedPersons.orderBy('cir_case.number');
+	impactedPersons.query();
+	while(impactedPersons.next()){
+		impacts.push(impactedPersons.sys_id.toString());
+		if(impacts.length > 12 || !impactedPersons.hasNext()){
+			data.osha300.push($sp.getWidget('cir-ciri-osha-300', {ids: impacts, page: count + ',' + data.totalPages}));
+			impacts = [];
+			count++;
+		}
+		data.osha301.push($sp.getWidget('cir-ciri-osha-301', {record_id: impactedPersons.sys_id.toString()}));
+	}
+	
+	data.osha300A = $sp.getWidget('cir-ciri-osha-300a', {query: query});
+	data.oshaCss = gs.getProperty('x_fru_cir.osha.css.css', '');
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 08:40:51</sys_created_on>
+        <sys_id>3d2af4831b61101024c896ce0a4bcbcd</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>CIR CIRI Print Osha Forms</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_3d2af4831b61101024c896ce0a4bcbcd</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-06 14:05:41</sys_updated_on>
+        <template><![CDATA[<a href="javascript:void(0)"  onclick="printDiv('printDiv')"> <span class="glyphicon glyphicon-print"></span> Print</a>
+<div id="printDiv">
+  <link id="oshaCssId" rel="stylesheet" href="/{{data.oshaCss}}.spcssdbx" type="text/css" media="print"/>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <div ng-repeat="form300 in data.osha300">
+    <sp-widget widget="form300"></sp-widget>
+    <p style="page-break-after: always;"></p>
+  </div>
+  <sp-widget widget="data.osha300A"></sp-widget>
+  <p style="page-break-after: always;"></p>
+  <div ng-repeat="form301 in data.osha301">
+    <sp-widget widget="form301"></sp-widget>
+    <p style="page-break-after: always;"></p>
+  </div>
+</div>
+
+&lt;script&gt;
+  function printDiv(divName){
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+    var header = document.head.innerHTML;
+    window.document.write('<body/>');
+    document.body.innerHTML = printContents;
+    window.print();
+    document.head.innerHTML = header;
+    var oshaLink = document.getElementById('oshaCssId').getAttribute('href');
+    document.body.innerHTML = originalContents + '<link rel="stylesheet" href="' + oshaLink + '" type="text/css"/>';
+  }
+&lt;/script&gt;]]></template>
+    </sp_widget>
+</record_update>

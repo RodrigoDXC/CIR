@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_related sys_domain="global" table="x_fru_cir_situation" version="2" view="">
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Situation - Default view" name="x_fru_cir_situation" related_list="NULL" sys_domain="global" view="Default view">945e07811b3b0850df7e43f4bd4bcb14</list_id>
+            <order_by/>
+            <position>0</position>
+            <related_list>x_fru_cir_response_plan_execution.parent_situation</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-10-28 08:39:50</sys_created_on>
+            <sys_id>795f1b32dbc82050d4a73533f3961972</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-10-28 08:39:50</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Situation - Default view" name="x_fru_cir_situation" related_list="NULL" sys_domain="global" view="Default view">945e07811b3b0850df7e43f4bd4bcb14</list_id>
+            <order_by/>
+            <position>1</position>
+            <related_list>x_fru_cir_situation_member.situation</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-10-28 08:39:50</sys_created_on>
+            <sys_id>f15f1b32dbc82050d4a73533f3961973</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-10-28 08:39:50</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Situation - Default view" name="x_fru_cir_situation" related_list="NULL" sys_domain="global" view="Default view">945e07811b3b0850df7e43f4bd4bcb14</list_id>
+            <order_by/>
+            <position>2</position>
+            <related_list>x_fru_cir_situation_task_execution.situation</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-10-28 08:39:50</sys_created_on>
+            <sys_id>795f1b32dbc82050d4a73533f3961973</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-10-28 08:39:50</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Situation - Default view" name="x_fru_cir_situation" related_list="NULL" sys_domain="global" view="Default view">945e07811b3b0850df7e43f4bd4bcb14</list_id>
+            <order_by/>
+            <position>3</position>
+            <related_list>REL:03b27076db21d81003b3533fd3961934</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-10-28 08:39:50</sys_created_on>
+            <sys_id>fd5f1b32dbc82050d4a73533f3961973</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-10-28 08:39:50</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list action="INSERT_OR_UPDATE">
+            <calculated_name>Situation - Default view</calculated_name>
+            <filter/>
+            <name>x_fru_cir_situation</name>
+            <order_by/>
+            <position/>
+            <related_list/>
+            <sys_class_name>sys_ui_related_list</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-10-28 08:39:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>945e07811b3b0850df7e43f4bd4bcb14</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Situation - Default view</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_related_x_fru_cir_situation_null</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-10-28 08:39:50</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_related_list>
+    </sys_ui_related>
+</record_update>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="367e9c83db4d901003b3533fd39619f3" sys_domain="global" table="cmn_location" version="3" view="cir">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>name</element>
+            <position>0</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>26879f58dba3d810bf9ead8ed396198c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>street</element>
+            <position>1</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>ee879f58dba3d810bf9ead8ed396198c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>city</element>
+            <position>2</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>66879f58dba3d810bf9ead8ed396198d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>state</element>
+            <position>3</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>ea879f58dba3d810bf9ead8ed396198d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>zip</element>
+            <position>4</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>62879f58dba3d810bf9ead8ed396198e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>country</element>
+            <position>5</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>e6879f58dba3d810bf9ead8ed396198e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>x_fru_cir_kpi_for_cir</element>
+            <position>6</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>6e879f58dba3d810bf9ead8ed396198e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>x_fru_cir_days_without_incident</element>
+            <position>7</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>e2879f58dba3d810bf9ead8ed396198f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>x_fru_cir_days_without_injury</element>
+            <position>8</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>6a879f58dba3d810bf9ead8ed396198f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>x_fru_cir_cir_types</element>
+            <position>9</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>ee879f58dba3d810bf9ead8ed396198f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>10</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>66879f58dba3d810bf9ead8ed3961990</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>contact</element>
+            <position>11</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>ea879f58dba3d810bf9ead8ed3961990</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>phone</element>
+            <position>12</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>62879f58dba3d810bf9ead8ed3961991</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>fax_phone</element>
+            <position>13</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>e6879f58dba3d810bf9ead8ed3961991</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>parent</element>
+            <position>14</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>6e879f58dba3d810bf9ead8ed3961991</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>x_fru_cir_case_management_group</element>
+            <position>15</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>e2879f58dba3d810bf9ead8ed3961992</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>latitude</element>
+            <position>16</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>6a879f58dba3d810bf9ead8ed3961992</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>longitude</element>
+            <position>17</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>ee879f58dba3d810bf9ead8ed3961992</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>x_fru_cir_map</element>
+            <position>18</position>
+            <sys_created_by>jbaechle@dxc.com</sys_created_by>
+            <sys_created_on>2020-09-25 17:09:33</sys_created_on>
+            <sys_id>66879f58dba3d810bf9ead8ed3961993</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="cmn_location" sys_domain="global" view="513e5083db4d901003b3533fd39619f3">367e9c83db4d901003b3533fd39619f3</sys_ui_section>
+            <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+            <sys_updated_on>2020-09-25 17:09:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>cmn_location</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-01 10:07:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>367e9c83db4d901003b3533fd39619f3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>cmn_location</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_section_367e9c83db4d901003b3533fd39619f3</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-01 10:07:21</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="CIR" name="cir">513e5083db4d901003b3533fd39619f3</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

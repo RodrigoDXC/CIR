@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="2901fa5adb299810bf9ead8ed3961924" sys_domain="global" table="x_fru_cir_situation_task_execution" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-06-24 09:23:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e901fa5adb299810bf9ead8ed3961925</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_fru_cir_situation_task_execution" name="x_fru_cir_situation_task_execution" sys_domain="global" view="80ce9a9edbe59810bf9ead8ed39619f3">2901fa5adb299810bf9ead8ed3961924</sys_ui_form>
+            <sys_ui_section caption="NULL" display_value="" name="x_fru_cir_situation_task_execution" sys_domain="global" view="80ce9a9edbe59810bf9ead8ed39619f3">13cd5e1edbe59810bf9ead8ed39619b6</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-06-24 09:23:33</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-06-24 09:23:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ed01fa5adb299810bf9ead8ed3961927</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_fru_cir_situation_task_execution" name="x_fru_cir_situation_task_execution" sys_domain="global" view="80ce9a9edbe59810bf9ead8ed39619f3">2901fa5adb299810bf9ead8ed3961924</sys_ui_form>
+            <sys_ui_section caption="Message" display_value="Message" name="x_fru_cir_situation_task_execution" sys_domain="global" view="80ce9a9edbe59810bf9ead8ed39619f3">a501fa5adb299810bf9ead8ed3961926</sys_ui_section>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-06-24 09:23:33</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_fru_cir_situation_task_execution</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>hugo.reis</sys_created_by>
+            <sys_created_on>2020-06-24 09:23:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2901fa5adb299810bf9ead8ed3961924</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_situation_task_execution</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_form_sections_2901fa5adb299810bf9ead8ed3961924</sys_update_name>
+            <sys_updated_by>hugo.reis</sys_updated_by>
+            <sys_updated_on>2020-06-24 09:23:33</sys_updated_on>
+            <sys_user/>
+            <view display_value="CIR Security Portal View" name="cir_sec_portal_view">80ce9a9edbe59810bf9ead8ed39619f3</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

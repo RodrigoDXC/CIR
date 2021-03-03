@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($scope, spUtil, $timeout) {
+	var c = this;
+	c.updating = false;
+
+	c.updateDescription = function () {
+		c.updating = true;
+		c.data.updated = true;
+		c.data.new_desc = c.data.description;
+		c.server.update().then(function () {
+			c.updating = false;
+			c.data.updated = false;
+			spUtil.addTrivialMessage(c.data.upd_message);
+		});
+	};
+
+	$scope.incidata = {};
+	$scope.incidata.changed = false;
+	/* empty string is a filter. For example 'active=true' would only trigger
+	the callback function when changes are made to active records */
+	spUtil.recordWatch($scope, c.data.table, "sys_id=" + c.data.sys_id, function (name, data) {
+		$scope.incidata.changedRecord = name.data; // name.data has the updated or inserted record info
+		c.server.update();
+
+		$timeout(function () {
+			$scope.changeBg();
+		}, 500);
+	});
+
+	$scope.changeBg = function () {
+		$scope.incidata.changed = true;
+
+		$timeout(function () {
+			$scope.incidata.changed = false;
+		}, 500);
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.action-btn {&#13;
+    color: #2e2e2e;&#13;
+    display: block;&#13;
+  	border-radius: 3px;&#13;
+  	border: solid 1px #cccccc;&#13;
+  	background-color: #ffffff;&#13;
+}&#13;
+&#13;
+.header-title{&#13;
+ 	vertical-align: -webkit-baseline-middle;&#13;
+    font-family: SourceSansPro;&#13;
+    font-size: 16px;&#13;
+    font-weight: normal;&#13;
+    font-style: normal;&#13;
+    font-stretch: normal;&#13;
+    line-height: 1.06;&#13;
+    letter-spacing: normal;&#13;
+  	color: #4a4a4a;&#13;
+}&#13;
+&#13;
+.panel {&#13;
+height: 154px;&#13;
+&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-response-plan-room-description</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR Response Plan Room Description</name>
+        <option_schema>[{"name":"description_field","section":"Data","label":"Description field","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_fru_cir.cir_base</roles>
+        <script><![CDATA[(function () {
+	data.table = $sp.getParameter('table');
+	data.sys_id = $sp.getParameter('sys_id');
+	var utils = new CIRSituationUtils();
+	var record = utils.GetRecord(data.table, data.sys_id);
+	if (!record.valid) {
+		return;
+	}
+	data.record = record.glide_record;
+	data.description_field = options.description_field;
+	data.updated = input ? input.updated : false;
+	data.new_desc = input ? input.new_desc : '';
+	data.upd_message = gs.getMessage('cir_sit_updated');
+	data.placeholder = gs.getMessage('cir_sit_situation_desc_placeholder');
+	data.desc = gs.getMessage('cir_sit_resp_plan_description');
+
+	if (data.updated) {
+		data.record[data.description_field] = data.new_desc;
+		data.record.update();
+	}
+	data.description = data.record[data.description_field].toString();
+	data.canEditRecord = !data.record.description.canWrite();
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-06-22 07:40:54</sys_created_on>
+        <sys_id>fe73c8fddb215810bf9ead8ed396192d</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIR Response Plan Room Description</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_fe73c8fddb215810bf9ead8ed396192d</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-26 11:54:26</sys_updated_on>
+        <template><![CDATA[<div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix"><span class="header-title">{{data.desc}}</span>
+      <button ng-click="c.updateDescription()" ng-disabled="c.data.canEditRecord" class="btn btn-primary action-btn pull-right">${cir_sit_save_description}</button>
+      </div>
+      <div class="panel-body">
+       <textarea placeholder="{{data.placeholder}}" ng-disabled="c.data.canEditRecord" ng-model="data.description" style="resize: none;" class="form-control rounded-0" rows="3"></textarea>
+      </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

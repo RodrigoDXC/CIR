@@ -1,0 +1,3361 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRSituationUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script include to handle the Situation process&#13;
+</description>
+        <name>CIRSituationUtilsFP</name>
+        <script><![CDATA[var CIRSituationUtilsFP = (function() {
+    var CIRSituationUtilsFP = Class.create();
+    var initialize = function() {};
+
+
+    /**
+     *
+     * - will create a new record on the Crisis Scenario Execution table 
+     * - called in the 'Execute Scenario' UI Action, on the Crisis Scenario Templates
+     * @param {string} template - sys_id of the record where the UI Action was executed
+     * @return {string} - sys_id of the created record
+     * 
+     **/
+    var createExecScenario = function(template) {
+        var gr = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC);
+
+        gr.initialize();
+        gr.setValue('response_plan_template', template.sys_id + '');
+        gr.setValue('assigned_to', gs.getUserID());
+        gr.setValue('short_description', template.name + '');
+        gr.setValue('description', template.description + '');
+        gr.setValue('dimension', template.dimension + '');
+
+        return gr.insert();
+    };
+
+    /**
+     *
+     * - called on the fsm_add_person_on_call BR on the crisis table
+     * - will check what users on call are active and add then add them to the crisis members
+     * @param {string} situation - sys_id of the situation record that was created
+     * 
+     **/
+    var addPersonOnCall = function(situation) {
+        var usersOnCall = [];
+        usersOnCall.push(gs.getUserID());
+
+        var grOnCall = new GlideRecord(CIRConstants.Tables.ON_CALL_SITU_MGR);
+        grOnCall.addQuery('on_call', true);
+        grOnCall.query();
+
+        while (grOnCall.next()) {
+            if (usersOnCall.indexOf(grOnCall.getValue('user')) === -1) {
+                usersOnCall.push(grOnCall.getValue('user'));
+            }
+        }
+
+        for (var i = 0; i < usersOnCall.length; i++) {
+            createCrisisMember(situation, usersOnCall[i]);
+        }
+    };
+
+    /**
+     *
+     * - will create a new record on the crisis members table
+     * - called in the addPersonOnCall on this script include
+     * @param {string} crisisId - sys_id of the crisis record that was created
+     * @param {string} userId - sys_id of a user that is active on call
+     * 
+     **/
+    var createCrisisMember = function(situation, userId) {
+        var grMember = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+        grMember.initialize();
+        grMember.setValue('situation', situation + '');
+        grMember.setValue('user_id', userId + '');
+        grMember.insert();
+    };
+
+    /**
+     *
+     * - called through the 'Populate people affected' BR (scenarion execution table)
+     * - will reurtn the number of users that have the same location of the the current record
+     * @param {string} fsmLocId - sys_id the fsmLocation of the current execution
+     * @return {integer} - number of users 
+     * 
+     **/
+    var getNumbUsersByLoc = function(fsmLocId) {
+        var locationId;
+        var total = 0;
+        var grLoc = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+        grLoc.addQuery('sys_id', fsmLocId);
+        grLoc.query();
+
+        if (grLoc.next()) {
+            locationId = grLoc.location.toString();
+        }
+
+        if (locationId) {
+            var grUserRec = new GlideAggregate('sys_user');
+            grUserRec.addQuery('location', locationId);
+            grUserRec.addAggregate('COUNT');
+            grUserRec.query();
+            if (grUserRec.next()) {
+                total = grUserRec.getAggregate('COUNT');
+            }
+        }
+        return total;
+    };
+
+
+    /**
+     * Will return the amount of users of a specific Virtual Location
+     * @param {string} fsmVirtLocID - sys_id the fsm Virtual Location of the current execution
+	 * @return {integer} - amount of users
+     * Called from BR : cir_populate_people_affected , 	cir_get_people_affected
+	 * 
+     */
+    var getNumbUsersbyVirtLoc = function(fsmVirtLocID) {
+        //this is used for virtual locations!
+        var grVirtLoc = new GlideRecord(CIRConstants.Tables.SECURITY_VIRTUAL_LOCATION);
+        grVirtLoc.addQuery('sys_id', fsmVirtLocID);
+        grVirtLoc.query();
+
+        if (grVirtLoc.next()) {
+            var count = grVirtLoc.amount_of_users;
+            return count;
+        }
+    };
+
+    /**
+	 * !!Possible Deprecated - Called in BR 'cir_get_people_affected_response_plans	' - now deactivated
+     * Return the amount of users of a Location Group
+     * @param {string} fsmLocGroupID - sys_id the fsm Group Location of the current execution
+     *
+     *@return {integer} - amount of users affectd 
+	 * 
+     */
+    var getNumbUsersbyLocGroup = function(fsmLocGroupID) {
+        var peopleAffectedLocationGroups = 0;
+
+        var grLocGroup = new GlideRecord(CIRConstants.Tables.LOCATION_GROUP);
+        grLocGroup.addQuery('sys_id', fsmLocGroupID);
+        grLocGroup.query();
+
+        if (grLocGroup.next()) {
+
+            if (grLocGroup.group_type + '' === '1') {
+                if (grLocGroup.system_locations.toString().split(',') === -1) {
+                    peopleAffectedLocationGroups = getNumbUsersbyVirtLoc(grLocGroup.system_locations);
+                } else {
+                    var locationGroups = grLocGroup.system_locations.toString().split(',');
+                    for (var u = 0; u < locationGroups.length; u++) {
+                        peopleAffectedLocationGroups += getNumbUsersbyVirtLoc(locationGroups[u]);
+                    }
+                }
+
+            } else if (grLocGroup.group_type === '0') {
+                if (grLocGroup.buildings.toString().split(',') === -1) {
+                    peopleAffectedLocationGroups = getNumbUsersByLoc(grLocGroup.buildings);
+                } else {
+                    var buildings = grLocGroup.buildings.toString().split(',');
+                    for (var i = 0; i < buildings.length; i++) {
+                        peopleAffectedLocationGroups += getNumbUsersByLoc(buildings[i]);
+                    }
+                }
+            }
+        }
+        return peopleAffectedLocationGroups;
+    };
+
+    /**
+     * - called on reference qual of the field 'location' of the crisis scenatio execution
+     * - will reurtn the locations on the parent template
+     * @param {string} template - sys_id of the parent template
+     * @return {string} - query with the sys_id of the locations to be shown 
+     **/
+    var getTemplateLocations = function(template) {
+        var grTemplate = new GlideRecord(CIRConstants.Tables.RESP_PLAN_TEMPLATE);
+
+        if (grTemplate.get('sys_id', template + '')) {
+            return 'sys_idIN' + grTemplate.locations + '';
+        }
+    };
+
+    /**
+     * - will send an email message to contacts defined on the contact list from the current execution
+     * - creates a Message Execution Recipient record for each message sent
+     * - updates the 'notifications_sent' field on the Crisis Scenario Execution Step Message
+     * called in the 'Send message' UI Action, on the Crisis Scenario Execution Step Message
+     * @param {glideRecord} currentExecution - current execution that calls the function
+     **/
+    var sendMessage = function(currentExecution, recordHelper) {
+        if (!currentExecution || (currentExecution.response_plan_step.sys_class_name + '' === CIRConstants.Tables.SITUATION_MSG && !recordHelper)) {
+            return;
+        }
+
+        var contactList = [];
+
+        if (currentExecution.response_plan_step.sys_class_name + '' === CIRConstants.Tables.SITUATION_MSG) {
+            contactList = getContactMsgSet(currentExecution.response_plan_step, recordHelper);
+        } else {
+            contactList = getUnverifiedContacts(currentExecution.response_plan_step.contact_list);
+        }
+        //creates message execution recipient records
+        var verifiedContacts = getValidatedContacts(contactList, currentExecution);
+        //send the message to de contact list
+        var messageType = currentExecution.response_plan_step.message_type + '';
+
+        switch (messageType) {
+            case 'email':
+                var sender = gs.getUser().getEmail();
+                gs.eventQueue('x_fru_cir.message.send', currentExecution, verifiedContacts + '', sender);
+                verifiedContacts.push(gs.getUserID()); // add the sender to the verifiedContacts, so it can be displayed in the info message
+                break;
+
+            case 'sms':
+                var fromNumber = gs.getProperty('x_fru_cir.twilio.phone.number') + '';
+                var message = buildMessageBody(currentExecution);
+                var numbers = getPhoneNumbers(verifiedContacts);
+                var notify = new sn_notify.NotifyScoped();
+                notify.sendBulkSMS(fromNumber, numbers, message, currentExecution);
+                break;
+
+            case 'push':
+                gs.eventQueue('x_fru_cir.send.push.message', currentExecution, verifiedContacts + '');
+                break;
+
+            case 'voice':
+                triggerCall(verifiedContacts, currentExecution);
+                break;
+        }
+        currentExecution.notifications_sent = verifiedContacts.length - 1; //we don't want to contabilize the message sent to the sender
+        return verifiedContacts;
+    };
+
+    /**
+     * Send the Messages from a task associated with a situaton execution
+     * @param {obj} currentExecution - current task execution object 
+	 * @return {String} - Message to be present on the current execution after sending of message
+	 * Called from Widget 'cir_sit_form'
+     */
+    var sendMessageCrisisTask = function(currentExecution) {
+        var contactList = [];
+
+        var grContactList = new GlideRecord(CIRConstants.Tables.CONTACT_LIST);
+        grContactList.addQuery('sys_id', currentExecution.contact_list);
+        grContactList.query();
+
+        if (grContactList.next()) {
+            contactList = getUnverifiedContacts(grContactList);
+        }
+
+        var grExecution = new GlideRecord(CIRConstants.Tables.TASK_EXECUTION);
+        grExecution.addQuery('sys_id', currentExecution.sys_id);
+        grExecution.query();
+
+        if (grExecution.next()) {
+            var crisisTask = grExecution;
+        }
+
+        var messageType = currentExecution.message_type;
+        var verifiedContacts = getValidatedContactsCrisisTask(contactList, currentExecution);
+
+        switch (messageType) {
+            case 'email':
+                var sender = gs.getUser().getEmail();
+                gs.eventQueue('x_fru_cir.message_task_execution.send', crisisTask, sender, contactList);
+                break;
+
+            case 'sms':
+                var fromNumber = gs.getProperty('glide.notify.task.phone_number').toString();
+                var message = buildMessageBodyCrisisTask(currentExecution);
+                var numbers = getPhoneNumbers(contactList);
+                var notify = new sn_notify.NotifyScoped();
+
+                notify.sendBulkSMS(fromNumber, numbers, message, crisisTask);
+                break;
+
+            case 'push':
+
+                gs.eventQueue('x_fru_cir.send.push.situation.task', crisisTask, contactList);
+                break;
+
+            case 'voice':
+                triggerCall(contactList, crisisTask);
+                break;
+        }
+        // replace sys_ids by name
+        verifiedContacts.forEach(function(contact, index, verifiedContacts) {
+            if (contact.indexOf('@') != -1) {
+                verifiedContacts[index] = contact;
+            }
+            var grUser = new GlideRecord('sys_user');
+            if (grUser.get(contact)) {
+                verifiedContacts[index] = grUser.getValue('name');
+            }
+        });
+        var infoMessage = '';
+        if (verifiedContacts.length != 0) {
+            infoMessage = gs.getMessage('cir_sit_message_set_sent_task', [messageType, verifiedContacts.join(',')]); 
+        }
+        return infoMessage;
+    };
+
+
+    /**
+     * Gets the phone numbers for an array of users
+     * @param {Array} usersIds - sys_ids of the Usrs
+     * @return {Array} - array of phone numbers 
+     */
+    var getPhoneNumbers = function(usersIds) {
+        var numbers = [];
+        var grUser = new GlideRecord('sys_user');
+        grUser.addQuery('sys_id', 'IN', usersIds);
+        grUser.query();
+
+        var number = '';
+        while (grUser.next()) {
+            number = grUser.getValue('mobile_phone') ? grUser.getValue('mobile_phone') : grUser.getValue('phone');
+            if (number) {
+                numbers.push(number);
+            }
+        }
+        return numbers;
+    };
+
+    /**
+     *
+     * - gets the sys_id of the users that exists on the execution message contact list (user sys_ids);
+     * @param {glideRecord} currentExecution - current execution that calls the script
+     * @return {array} unverifiedContacts - recipients user sys_id that are on the contact list
+     *
+     **/
+    var getUnverifiedContacts = function(contactListId) {
+        if (!contactListId) {
+            return [];
+        }
+
+        if (!(contactListId instanceof GlideRecord)) {
+            var grContactList = new GlideRecord(CIRConstants.Tables.CONTACT_LIST);
+            if (grContactList.get(contactListId)) {
+                contactListId = grContactList;
+            }
+        }
+
+        var contactListGroups = contactListId.groups ? getContactGroups(contactListId) : '';
+        var contactLists = [];
+
+        for (i = 0; i < contactListGroups.length; i++) {
+            contactLists = contactLists.concat(getUsersFromGroup(contactListGroups[i]));
+        }
+
+        if (contactListId.getValue('users_condition')) {
+            contactLists = contactLists.concat(getUsersFromCondition(contactListId.getValue('users_condition')));
+        }
+
+        var users = contactListId.getValue('users');
+        if (users) {
+            users = users.split(',');
+            contactLists = contactLists.concat(users);
+        }
+        
+        return contactLists;
+    };
+
+    /**
+     * - gets a filtered list of validate contacts (user sys_ids);
+     * - calls the 'validateUser'function that creates a Message Execution Recipient
+     * @param {glideRecord} currentExecution - current execution that calls the script
+     * @param {array} contacts - unfiltered and unvalidates contact list
+     * @return {array} validContats- valid users id strings
+     **/
+    var getValidatedContacts = function(contacts, currentExecution) {
+        var validContacts = [];
+        for (var j = 0; j < contacts.length; j++) {
+            if (validContacts.indexOf(contacts[j]) == -1 && validateUser(contacts[j], currentExecution)) {
+                validContacts.push(contacts[j] + '');
+            }
+        }
+
+        return validContacts;
+    };
+
+    /**
+     * - gets a filtered list of validate contacts (user sys_ids);
+     * - calls the 'validateUser'function that creates a Message Execution Recipient
+     * @param {object} currentExecution - object utilized in the portal to data from an execution Step
+     * @param {array} contacts - unfiltered and unvalidates contact list
+     * @return {array} validContats- valid users id strings
+     */
+    var getValidatedContactsCrisisTask = function(contacts, currentExecution) {
+        var validContacts = [];
+
+        for (var j = 0; j < contacts.length; j++) {
+
+            if (validContacts.indexOf(contacts[j]) === -1 &&
+                validateUserCrisisTask(contacts[j], currentExecution)) {
+                validContacts.push(contacts[j]);
+            }
+        }
+        return validContacts;
+    };
+
+    /**
+     *
+     * - transforms the contactList.groups string into an array with the group sys_ids
+     * @param {GlideRecord} contactsList - contactList record
+     * @return {array} - array with the group sys_id
+     *
+     **/
+    var getContactGroups = function(contactList) {
+        if (contactList.groups.indexOf(',') !== -1) {
+            return contactList.groups.split(',');
+        } else {
+            return contactList.groups.split();
+        }
+    };
+
+    /**
+     *
+     * - gets a valid the contact list (user sys_ids);
+     * @param string} groupId - sys_id of a group
+     * @return {array} - all group user sys_id strings
+     *
+     **/
+    var getUsersFromGroup = function(groupId) {
+        var userList = [];
+        var grUserGroup = new GlideRecord('sys_user_grmember');
+        grUserGroup.addQuery('group', groupId);
+        grUserGroup.query();
+
+        while (grUserGroup.next()) {
+            userList.push(grUserGroup.getValue('user').toString(userList));
+        }
+
+        return userList;
+    };
+
+    /**
+     *
+     * - gets a valid the contact list (user sys_ids);
+     * @param {string} condition - encoded query defined on the contact list of the 
+     *                             execution step that calls the script
+     * @return {array} -  user sys_id strings that match the condition 
+     *
+     **/
+    var getUsersFromCondition = function(condition) {
+        var userList = [];
+        var grUserByCondition = new GlideRecord('sys_user');
+        grUserByCondition.addEncodedQuery(condition);
+        grUserByCondition.query();
+
+        while (grUserByCondition.next()) {
+            userList.push(grUserByCondition.sys_id + '');
+        }
+
+        return userList;
+    };
+
+    /**
+     *
+     * - checks if a user is available to recive an email (active = true, locked out = false, 
+     *   notification = enabled, has an email)
+     * - calls the 'createMessageRecipient' that creates a Message Execution Recipient record
+     * @param {string} user - user sys_id 
+     * @return {boolean} -  true/false;
+     *
+     **/
+    var validateUser = function(user, currentExecStep) {
+        var messageType = currentExecStep.response_plan_step.message_type + '';
+        var encodedCondition = 'active=true^locked_out=false^notification=2^emailISNOTEMPTY';
+
+        var grUser = new GlideRecord('sys_user');
+        grUser.addQuery('sys_id', user).addOrCondition('email', user + '');
+        grUser.addEncodedQuery(encodedCondition);
+        grUser.query();
+
+        if (grUser.next()) {
+            var contact = messageType === 'email' ? grUser.getValue('email') : grUser.getValue('mobile_phone') || grUser.getValue('phone');
+            if (contact || messageType === 'push') {
+                return createMessageRecipient(grUser.sys_id + '', contact, currentExecStep);
+            }
+        } else if (user.indexOf('@') !== -1 && messageType === 'email') {
+            createMessageRecipient('', user, currentExecStep);
+            return true;
+        }
+
+        return false;
+    };
+
+    /**
+     - checks if a user is available to recive an email (active = true, locked out = false, 
+     *   notification = enabled, has an email)
+     * - calls the 'createMessageRecipient' that creates a Message Execution Recipient record
+     * @param {string} user - user sys_id 
+	 * @param {object} currentExecStep - current execution Step Object 
+     * @return {boolean} -  true/false;
+     */
+    var validateUserCrisisTask = function(user, currentExecStep) {
+        var messageType = currentExecStep.message_type + '';
+        var encodedCondition = 'active=true^locked_out=false^notification=2^emailISNOTEMPTY';
+
+        var grUser = new GlideRecord('sys_user');
+        grUser.addQuery('sys_id', user).addOrCondition('email', user.toString());
+        grUser.addEncodedQuery(encodedCondition);
+        grUser.query();
+
+        if (grUser.next()) {
+            var contact = messageType === 'email' ? grUser.getValue('email') : grUser.getValue('mobile_phone') || grUser.getValue('phone');
+
+            if (contact || messageType === 'push') {
+                return createMessageRecipientCrisisTask(grUser.sys_id, contact, currentExecStep);
+            }
+        } else if (user.indexOf('@') !== -1 && messageType === 'email') {
+            createMessageRecipientCrisisTask(grUser.sys_id, grUser.email, currentExecStep);
+            return true;
+        }
+        return false;
+
+    };
+
+    /**
+     *
+     * - will create a new record on the Message Execution Recipient table
+     * @param {string} user - user sys_id
+     * @param {string} email - user email
+     * @param {glideRecord} currentExecution - current execution that calls the script
+     * @return {boolean}
+     **/
+    var createMessageRecipient = function(user, contact, currentExecution) {
+        var messageType = currentExecution.response_plan_step.message_type + '';
+        if (!messageExists(user, contact, currentExecution)) {
+            var grMessageRecip = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);
+            grMessageRecip.initialize();
+            grMessageRecip.setValue('step_message_execution', currentExecution.sys_id + '');
+            grMessageRecip.setValue('user', user);
+            grMessageRecip.setValue('contact', contact);
+            grMessageRecip.setValue('message_type', messageType);
+            grMessageRecip.setValue('state', getFeedbackState(currentExecution));
+            grMessageRecip.setValue('message_sent', buildMessageBody(currentExecution));
+            grMessageRecip.insert();
+
+            return true;
+        }
+
+        return false;
+    };
+
+    /**
+     *
+     * - will create a new record on the Message Execution Recipient table
+     * @param {string} user - user sys_id
+     * @param {string} contact - contact
+     * @param {Object} currentExecution - Object of the current Task
+     * @return {boolean}
+     */
+    var createMessageRecipientCrisisTask = function(user, contact, currentExecution) {
+        var messageType = currentExecution.message_type + '';
+        if (!messageExistsCrisisTask(user, contact, currentExecution)) {
+
+            var grMessageRecip = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);
+            grMessageRecip.initialize();
+            grMessageRecip.setValue('situation_task_execution', currentExecution.sys_id);
+            grMessageRecip.setValue('user', user);
+            grMessageRecip.setValue('contact', contact);
+            grMessageRecip.setValue('message_type', messageType);
+            grMessageRecip.setValue('state', '1');
+            grMessageRecip.setValue('message_sent', buildMessageBodyCrisisTask(currentExecution));
+            grMessageRecip.insert();
+            return true;
+        }
+        return false;
+    };
+
+    /**
+     - will check if a message execution recipient exists for a given user/contatc and task
+     * @param {string} user - user sys_id
+     * @param {string} contact - email
+     * @param {Object} currentExecution - message execution record presented in Portal
+     * @return {boolean} - message exists or not
+     */
+    var messageExistsCrisisTask = function(user, contact, currentExecution) {
+        var gr = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);
+        gr.addQuery('situation_task_execution', currentExecution.sys_id.toString());
+        if (user) {
+            gr.addQuery('user', user + '');
+        } else if (contact) {
+            gr.addQuery('contact', contact + '');
+        }
+        gr.query();
+
+        return gr.hasNext();
+    };
+
+    /**
+     *
+     * - will check if a message execution recipient exists for a given user/contatc and response plan step execution
+     * @param {string} user - user sys_id
+     * @param {string} contact - email
+     * @param {GlideRecord} currentExecution - step message execution GlideRecord
+     * @return {boolean} - message exists or not
+     **/
+    var messageExists = function(user, contact, currentExecution) {
+        var gr = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);
+        gr.addQuery('step_message_execution', currentExecution.sys_id + '');
+        if (user) {
+            gr.addQuery('user', user + '');
+        } else if (contact) {
+            gr.addQuery('contact', contact + '');
+        }
+        gr.query();
+
+        return gr.hasNext();
+    };
+
+    /**
+     * - will check if the current execution message has the feedback checkbox checked
+     * @param {glideRecord} currentExecution - current execution that calls the script
+     * @return {integer} -  2 or 1 corresponding to the state;
+     **/
+    var getFeedbackState = function(currentExecution) {
+        if (currentExecution.response_plan_step.feedback) {
+            return '2';
+        } else {
+            return '1';
+        }
+    };
+
+    /**
+     * - will generate and return a link, so the user can click and automatically open an email app
+     * - with the email address and subject automatically fulfilled
+     * @param {string} response - will be the user's response to the email
+     **/
+    var renderMailtoButton = function(response) {
+        var instance = gs.getProperty('instance_name');
+        var link = 'https://' + instance + '.service-now.com';
+        var number = current.number;
+        var emailAddress = instance + '@service-now.com';
+        var mailLink = 'mailto:' + emailAddress + '?subject= Re: Situation Feedback ' + number + ': ' + response;
+
+        return getButton(mailLink, response);
+    };
+
+    /**
+     * - will generate and return a button html
+     * - it will be used when creating the crisis email notification, and will allow the 
+     * user to quickly  give feedback
+     * @param {string} link - is the link to open the email app, and fulfill the subject and email address
+     * @param {string} text - is the text writted on the buttons
+     */
+    var getButton = function(link, text) {
+        return '<a href="' + link + '" style="text-align: center; width: 80px; font-size: 16px; font-family: Arial, Helvetica, sans-serif; color:#ffffff; background-color: #ec0000; text-decoration: none; -webkit-border-radius: 3px; -moz-border-radius: 3px; padding: 12px 18px; display: inline-block;">' +
+            '<strong style="font-weight: normal;">' + text + '</strong></a>';
+    };
+
+    /**
+     * - will return all the steps related to a Respons eplan Template
+     * called from the CIRSituationUtilsFPClient and used in the UI Page that shows the steps drawn in a flow interface
+     * @param {string} sys_id - sys_id of the response plan template or the response plan execution depending from where the UI Page is being triggered
+     * @param {string} table - name of the table: response plan tenplate or response plan execution
+     * @return {Object} - object containing the steps and its information
+     */
+    var getFlowSteps = function(sys_id, table) {
+        var scenTemplate = table + '' === CIRConstants.Tables.RESP_PLAN_TEMPLATE ? sys_id : getTemplate(sys_id);
+        var defaultState = table + '' === CIRConstants.Tables.RESP_PLAN_TEMPLATE ? 'default' : '';
+        var returnObj = {};
+        var helper = [];
+
+        var grStep = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP);
+        grStep.addQuery('response_plan_template', scenTemplate + '');
+        if (table + '' !== CIRConstants.Tables.RESP_PLAN_TEMPLATE) {
+            grStep.addQuery('sys_class_name', '!=', CIRConstants.Tables.SITUATION_MSG);
+        }
+        grStep.addQuery('active', true);
+        grStep.query();
+
+        while (grStep.next()) {
+            var obj = newStepObject(grStep, sys_id, defaultState);
+            helper.push(obj);
+        }
+        returnObj.scenario = grStep.response_plan_template.name + '';
+        returnObj.description = grStep.response_plan_template.description + '';
+        returnObj.steps = helper;
+
+        return returnObj;
+    };
+
+    /**
+     * - will return the ysys_id of a response plan template linked to a response plan execution
+     * called from the getFlowSteps function
+     * @param {string} sys_id - sys_id of the response plan execution
+     * @return {String} - sys_id of the response plan template 
+     */
+    var getTemplate = function(sys_id) {
+        var grExec = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC);
+
+        if (grExec.get(sys_id + '')) {
+            return grExec.response_plan_template + '';
+        }
+    };
+
+    /**
+     * builds  an object containing all information related to a Response Pan Step
+     * called from the getFlowSteps function
+     * @param {GlideRecord} grStep - GlideRecord of the response plan step
+     * @param {String} execScen - sys_id of the response plan execution
+     * @param {String} defaultState - string indicating the default state. has to be with color coding while drawing the flow in teh ui page
+     * @return {Object} - object containing all step realted info
+     */
+    var newStepObject = function(grStep, execScen, defaultState) {
+        var obj = {};
+        obj.sys_id = grStep.sys_id + '';
+        obj.sys_class_name = grStep.sys_class_name + '';
+        obj.dependent_on = grStep.dependent_on + '';
+        obj.description = grStep.description + '';
+        obj.condition = grStep.condition + '';
+        obj.name = grStep.name + '';
+        obj.exec_state = defaultState ? defaultState : getExecState(grStep.sys_id, execScen);
+
+        return obj;
+    };
+
+    /**
+     * gets the correct state of a given state. this function is usefull for the steps colors on the Flow UI
+     * called from the getFlowSteps function
+     * @param {String} step - sys_id of the response plan step
+     * @param {String} execScen - sys_id of the response plan execution
+     * @return {String} - with the the correct value of a state, acording to the color codes used in the ui page
+     */
+    var getExecState = function(step, execScen) {
+        var state = '';
+        var grExecStep = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC_STEP);
+        grExecStep.addQuery('response_plan', execScen + '');
+        grExecStep.addQuery('response_plan_step', step + '');
+        grExecStep.setLimit(1);
+        grExecStep.query();
+
+        if (grExecStep.next()) {
+            state = grExecStep.state + '' === '3' ? 'success' : 'primary';
+        } else {
+            state = 'default';
+        }
+
+        return state;
+    };
+
+    /**
+     * updates a message executioun recipient with the sms reply of a user
+     * called in a BR on the Notify Message table
+     * @param {String} smsReply - sms reply of the user
+     */
+    var updateMsgRecipient = function(smsReply) {
+        var user = getUserByNumber(smsReply.phone_number);
+
+        if (user) {
+            var feedback = smsReply.body.toLowerCase().indexOf('not ok') !== -1 ? '1' : '0';
+            var grMsgRec = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);
+            grMsgRec.addQuery('user', user.sys_id + '');
+            grMsgRec.addQuery('step_message_execution.state', '!=', '3');
+            grMsgRec.addQuery('state', '2');
+            grMsgRec.addQuery('message_type', 'sms');
+            //grMsgRec.setLimit(1);
+            grMsgRec.query();
+
+            while (grMsgRec.next()) {
+                grMsgRec.state = '3';
+                grMsgRec.feedback_message = smsReply.body + '';
+                grMsgRec.feedback = feedback;
+                grMsgRec.update();
+            }
+        }
+    };
+
+    /**
+     * gets a user GlideRecord based on its phone number
+     * called in the updateMsgRecipient function
+     * @param {String} phoneNumber - user phone number
+     * @return {GlideRecord} - GlideRecord of the user record. null if didin't find
+     */
+    var getUserByNumber = function(phoneNumber) {
+        var grUser = new GlideRecord('sys_user');
+        grUser.addQuery('mobile_phone', phoneNumber).addOrCondition('phone', phoneNumber);
+        grUser.setLimit(1);
+        grUser.query();
+
+        if (grUser.next()) {
+            return grUser;
+        }
+
+        return;
+    };
+
+    /**
+     *  !!!NOT BEING USED!!!!
+     * - called from 'Execute scenario' UI Action 
+     * - checks if the user is present on one of the Operator Groups on the record
+     * @param {String} currentUser - current user sys_id
+     * @param {List} operatorGroups - list of the sys_id of the groups present on the Operator Groups
+     * @return {boolean} hasPermission-  true if is present one of the groups
+     **/
+    var userExecPermission = function(currentUser, operatorGroups) {
+        var hasPermission = false;
+        var user = currentUser;
+        var groups = operatorGroups;
+
+        if (groups.indexOf(',') !== -1) {
+            groups = groups.split(',');
+            for (var i = 0; i < groups.length; i++) {
+                hasPermission = userExistsInGroup(groups[i], user);
+                if (hasPermission) {
+                    break;
+                }
+            }
+        } else {
+            hasPermission = userExistsInGroup(groups, user);
+        }
+
+        return hasPermission;
+    };
+
+    /**
+     * - checks a the user is present on one given group
+     * called in the userExecPermission function
+     * @param {String} user - user sys_id
+     * @param {String} group - group sys_id
+     * @return {boolean}  -  true if the user was found on the group
+     **/
+    var userExistsInGroup = function(group, user) {
+        var grGroupUsers = new GlideRecord('sys_user_grmember');
+        grGroupUsers.addQuery('group', group);
+        grGroupUsers.query();
+
+        while (grGroupUsers.next()) {
+            if (grGroupUsers.user + '' === user + '') {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    /**
+     * - called on by the  'Distribution List' ui action
+     * - returns an array of objects with a user info - name(if any), email - (if any), phone - (if any)
+     * @param {string} execution setp message sys_id
+     * @return {array}  -  user objects
+     **/
+    var getRecipientInfo = function(execId) {
+        var recipients = [];
+        var tempRecipInfo = {};
+        var recipientsInfo = [];
+
+        var grExecMessage = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC_STEP_MSG);
+        grExecMessage.addQuery('sys_id', execId);
+        grExecMessage.query();
+
+        if (grExecMessage.next()) {
+            recipients = getUnverifiedContacts(grExecMessage.response_plan_step.contact_list);
+        }
+
+        recipients = getSingleContacts(recipients);
+        for (var i = 0; i < recipients.length; i++) {
+            tempRecipInfo = getUserInfo(recipients[i]);
+
+            if (tempRecipInfo.name || tempRecipInfo.email) {
+                recipientsInfo.push(tempRecipInfo);
+            }
+        }
+
+        return recipientsInfo;
+    };
+
+    /**
+     * - checks if there exists repeated contacts on the list. returns a contact list with not repeated contacts
+     * @param {array}  - string array with user contacts (can be repeated)
+     * @return {array}  -  string array with non repeated user contacts
+     **/
+    var getSingleContacts = function(contacts) {
+        if (!contacts)
+            return [];
+        var singleContacts = [];
+
+        for (var j = 0; j < contacts.length; j++) {
+            if (singleContacts.indexOf(contacts[j]) === -1) {
+                singleContacts.push(contacts[j] + '');
+            }
+        }
+
+        return singleContacts;
+    };
+
+    /**
+     * - gets the user info (name, email, phone) from a user sys_id
+     * @param {string}  - string with a user sys_id
+     * @return {object}  -  object with user info (name, email, phone)
+     **/
+    var getUserInfo = function(userId) {
+        var canReceive = 'active=true^locked_out=false^notification=2^emailISNOTEMPTY';
+        var userInfo = {};
+
+        var grUserInfo = new GlideRecord('sys_user');
+        grUserInfo.addQuery('sys_id', userId).addOrCondition('email', userId + '');
+        grUserInfo.addEncodedQuery(canReceive);
+        grUserInfo.query();
+
+        if (grUserInfo.next()) {
+            userInfo.name = grUserInfo.name ? grUserInfo.name + '' : '';
+            userInfo.email = grUserInfo.email ? grUserInfo.email + '' : '';
+            userInfo.phone_number = grUserInfo.getValue('mobile_phone') ? grUserInfo.getValue('mobile_phone') : grUserInfo.getValue('phone');
+			
+        }
+
+        return userInfo;
+    };
+
+    /**
+     * - called from 'Send Email to Active Group' UI Action through the x_lsmcb_fsm.fsm_crisis_utils_client
+     * - get the email of the useres that already reponded 'OK' to the message sent from the execution Step Message
+     * @param {string} esecution setp message sys_id
+     * @return {string}  -  string with the emails (separated by ',')
+     **/
+    var getActiveTeam = function(recId) {
+        var activeUsers = [];
+
+        var grActvUsers = new GlideRecord(CIRConstants.Tables.MSG_EXEC_RECIPIENT);
+        grActvUsers.addQuery('step_message_execution', recId);
+        grActvUsers.addQuery('feedback', '0');
+        grActvUsers.query();
+
+        while (grActvUsers.next()) {
+            activeUsers.push(grActvUsers.user.email + '');
+        }
+
+        return activeUsers + '';
+    };
+
+    /**
+     * - called from 'fsm_send_email_active_group' UI Page through the x_lsmcb_fsm.fsm_crisis_utils_client
+     * - inserts an email on the sys_email tamble so it can be sent to the recipient list
+     * - creates a worknote on the activity of the Crisis Scenario Execution Step Message that triggered de action 
+     * with the reicipent list, subject and body of the email. (worknote content comes from the UI page)
+     * @param {string} esecution setp message sys_id
+     * @return {string}  -  string with the emails (separated by ',')
+     **/
+    var emailActiveTeam = function(execId, recipients, subject, body, workNotesInfo) {
+        var emailNotification = new GlideRecord('sys_email');
+        emailNotification.type = 'send-ready';
+        emailNotification.subject = subject;
+        emailNotification.body = body;
+        emailNotification.recipients = recipients;
+        emailNotification.insert();
+
+        var execStep = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC_STEP_MSG);
+        execStep.addQuery('sys_id', execId);
+        execStep.query();
+
+        if (execStep.next()) {
+            execStep.work_notes = workNotesInfo;
+            execStep.update();
+        }
+    };
+
+    /**
+     * triggeres a phone call for an array of phone numbers with a message defined in the response plan step
+     * called in the sendMessage and sendMsgToRTeam functions
+     * @param {array} contactList - array containg the phone numbers to call to
+     * @param {GlideRecord} execStep - setp message GlideRecord
+     **/
+    var triggerCall = function(contactList, execStep) {
+        var numbers = getPhoneNumbers(contactList);
+        var fromNumber = gs.getProperty('x_fru_cir.twilio.phone.number') + '';
+        var notify = new sn_notify.NotifyScoped();
+
+        for (var i = 0; i < numbers.length; i++) {
+            notify.call(fromNumber, numbers[i] + '', null, null, null, execStep);
+        }
+    };
+
+    /**
+     *  Used on reference qualifier called on the locations field on the Crisis record
+     *  Is used to filter the locations by the country field of the record
+     *  @param {GlideRecord} situation - situation object
+     *  @return {string} - string with the locations sys_id (separated by ',')
+     **/
+    var filterByCountry = function(situation) {
+        var query = 'sys_idIN';
+        var alreadySelected = situation.locations + '';
+
+        if (situation.country) {
+            query = 'country=' + situation.country + '^sys_idNOT IN' + alreadySelected;
+        }
+
+        return query;
+    };
+
+    /**
+     * !!!!!DEPRECATED!!!!!
+     *  Used to get all the locations, from a specidifc country, that aren't selected on a crisis record
+     *  @param {string} country - name of the country
+     *  @param {string} alreadySelected - string with the locations sys_id that are already selected on the crisis record (separated by ',')
+     *  @return {string} - string with the available locations sys_id (separated by ',')
+     **/
+    var getLocations = function(country, alreadySelected) {
+        var locations = [];
+
+        if (!country) {
+            return locations;
+        }
+
+        var grLocations = new GlideRecord(CIRConstants.Tables.LOCATION);
+        grLocations.addQuery('country', country + '');
+        grLocations.query();
+
+        while (grLocations.next()) {
+            if (alreadySelected.indexOf(grLocations.getUniqueValue()) === -1) {
+                locations.push(grLocations.getUniqueValue());
+            }
+        }
+
+        return locations;
+    };
+
+    /**
+     *  Used to get all the members associated with a certain situation room (situation record), and present them on the chat widget
+     *  It is called from the 'FSM Crisis Conversations with tabs' widget
+     *  @param {string} situation - sys_id of a situation record
+     *  @return {string} - string with the members sys_id (separated by ',')
+     **/
+    var getMembers = function(situation) {
+        var currentDateTime = new GlideDateTime();
+        var members = [];
+        var grCrisisMembers = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+        grCrisisMembers.addQuery('situation', situation);
+        grCrisisMembers.query();
+        while (grCrisisMembers.next()) {
+            var name = grCrisisMembers.user_id.first_name + ' ' + grCrisisMembers.user_id.last_name;
+
+            // check if the last acess end time is greater than an hour
+            // if it is, it will set the state of user to offline
+            var lastAccess = new GlideDateTime(grCrisisMembers.getValue('last_access_end_time'));
+            var duration = GlideDateTime.subtract(lastAccess, currentDateTime); // returns the number of seconds as String
+            if (grCrisisMembers.getValue('online') && (duration.getDayPart() > 0 || duration.getByFormat('HH:mm') >= '01:00')) {
+                grCrisisMembers.setValue('online', false);
+                grCrisisMembers.update();
+            }
+            members.push({
+                id: grCrisisMembers.user_id.toString(),
+                name: name,
+                last_access: grCrisisMembers.getDisplayValue('last_access_time'),
+                online: grCrisisMembers.getValue('online')
+            });
+
+        }
+        return members;
+    };
+
+    /**
+     *  Used on the chat widget to change the state of a user, from online to offline
+     *  It is called from the 'FSM Crisis Conversations with tabs' widget
+     *  @param {string} crisisRecord - sys_id of a crisis record
+     *  @param {string} userState - string with the user state online/offline
+     **/
+    var changeUserState = function(situation, userState) {
+        var state = false;
+        var actualHour = new GlideDateTime().getValue();
+
+        switch (userState) {
+            case 'online':
+                state = true;
+                break;
+            case 'offline':
+                state = false;
+                break;
+        }
+
+        var grCrisisMember = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+        grCrisisMember.addQuery('user_id', gs.getUserID());
+        grCrisisMember.addQuery('situation', situation);
+        grCrisisMember.query();
+
+        if (grCrisisMember.next()) {
+            grCrisisMember.setValue('last_access_end_time', actualHour);
+            if (state) {
+                grCrisisMember.setValue('last_access_time', actualHour);
+            }
+            grCrisisMember.setValue('online', state);
+            grCrisisMember.update();
+        }
+    };
+
+    /**
+     * - used in the FSM List widget so it only shows the records it should for both Crisis and Crisis Response plans 
+     * (ACls checks have low performance issues)
+     * @param {string} table - name of the table to filter tjeh records
+     * @returns {string} encoded query to filter the records one
+     **/
+    var getQueryForPortal = function(table) {
+        if (gs.hasRole('admin')) {
+            return '';
+        }
+        var array = [];
+        switch (table) {
+            case CIRConstants.Tables.SITUATION:
+                array = getQueryCrisis();
+                break;
+            case CIRConstants.Tables.RESP_PLAN_EXEC:
+                array = getQueryRespPlans();
+                break;
+            case CIRConstants.Tables.RESPONSE_TEAM:
+                array = getQueryRespPlanTeam();
+                break;
+        }
+
+        return 'sys_idIN' + array;
+    };
+
+    /**
+     * - gets the sys_ids of teh Crisis records that the user should see. called in the getQueryForPortal function.
+     * @returns {array} - array of sys_ids of the records
+     **/
+    var getQueryCrisis = function() {
+        var array = [];
+        var grCrisis = new GlideRecord(CIRConstants.Tables.SITUATION);
+        if (gs.hasRole('x_fru_cir.senior_situation_manager')) {
+            grCrisis.addEncodedQuery('dimension.groupsIN' + getUserGroups() + '^NQsys_idIN' + filterCrisisOnMembers(gs.getUserID()));
+        } else if (gs.hasRole('x_fru_cir.situation_manager')) {
+            grCrisis.addEncodedQuery('dimension.groupsIN' + getUserGroups() + '^country=' + getCountryID() + '^NQsys_idIN' + filterCrisisOnMembers(gs.getUserID()));
+        } else if (gs.hasRole('x_fru_cir.situation_initiator') || gs.hasRole('x_fru_cir.situation_user')) {
+            grCrisis.addEncodedQuery('sys_idIN' + filterCrisisOnMembers(gs.getUserID()));
+        }
+        grCrisis.query();
+        while (grCrisis.next()) {
+            array.push(grCrisis.getUniqueValue());
+        }
+        return array;
+    };
+
+    /**
+     * !!!DEPRECATED AFTER UPGRADE O SITUATION V2!!!
+     * - gets an encodeded query based on the access of the logged in user to the Situation records
+     * used because ACLs check have low performance
+     *  called in the getQueryCrisis function
+     * @returns {String} - encoded query
+     **/
+    var getRoleBasedSituationQuery = function() {
+        var query = '';
+        var array = filterCrisisOnMembers(gs.getUserID());
+        if (array.length > 0) {
+            query += 'sys_idIN' + array;
+        }
+        if (gs.hasRole('x_fru_cir.situation_manager')) {
+            var utils = CIRSituationAccessManager();
+            var usrCountry = utils.GetUserRecord().getDisplayValue('country');
+            usrCountry = usrCountry === 'United States' ? 'USA' : usrCountry;
+
+            query += '^NQcountry=' + usrCountry;
+        }
+
+        return query ? query : null;
+    };
+
+    /**
+     * gets the sys_ids of all Situation records that the logged in user is a member of
+     * called in the getRoleBasedSituationQuery function
+     * @returns {Array} - array containing the sys_ids of the Situation Records
+     **/
+    var filterCrisisOnMembers = function(userId) {
+        var array = [];
+
+        var grMember = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+        grMember.addQuery('user_id', userId);
+        grMember.query();
+
+        while (grMember.next()) {
+            array.push(grMember.situation + '');
+        }
+
+        return array;
+    };
+
+    /**
+     * - gets the sys_ids of teh Response plans execution that the user should see. 
+     * called in the getQueryForPortal function.
+     * @returns {array} - array of sys_ids of the records
+     **/
+    var getQueryRespPlans = function() {
+        var respPlans = [];
+        var encodedQuery = '';
+
+        if (gs.hasRole('x_fru_cir.situation_operator')) {
+            encodedQuery = 'assigned_to=' + gs.getUserID();
+        }
+        if (gs.hasRole('x_fru_cir.senior_situation_manager')) {
+            if (encodedQuery) {
+                encodedQuery += '^NQ';
+            }
+            encodedQuery += 'parent_situation.dimension.groupsIN' + getUserGroups();
+        }
+        if (gs.hasRole('x_fru_cir.situation_manager')) {
+            if (encodedQuery) {
+                encodedQuery += '^NQ';
+            }
+            encodedQuery += 'parent_situation.dimension.groupsIN' + getUserGroups() + '^parent_situation.countryIN' + getCountryID();
+        }
+        if (gs.hasRole('x_fru_cir.situation_initiator') || gs.hasRole('x_fru_cir.situation_user')) {
+            if (encodedQuery) {
+                encodedQuery += '^NQ';
+            }
+            encodedQuery += 'parent_situationIN' + filterCrisisOnMembers(gs.getUserID());
+        }
+        if (encodedQuery) {
+            var grPlans = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC);
+            grPlans.addEncodedQuery(encodedQuery);
+            grPlans.query();
+            while (grPlans.next()) {
+                respPlans.push(grPlans.getUniqueValue());
+            }
+        }
+        return respPlans;
+    };
+
+    /**
+     * !!!DEPRECATED AFTER UPGRADE O SITUATION V2!!!
+     * gets an econded query based on the Access of the logged in user towards Response Plan Execution records
+     * called in the getQueryRespPlans function
+     * @returns {String} - encoded query
+     **/
+    var getRoleBasedRespPlanQuery = function() {
+        var query = '';
+        var array = filterOnRespTeamMembers(gs.getUserID());
+        if (array.length > 0) {
+            query += 'sys_idIN' + array;
+        }
+
+        var situationQuery = getRoleBasedSituationQuery();
+        if (situationQuery) {
+            situationQuery = situationQuery.replace('sys_id', 'parent_situation');
+            situationQuery = situationQuery.replace('country', 'parent_situation.country');
+            query += '^NQ' + situationQuery;
+        }
+
+        return query ? query : null;
+    };
+
+    /**
+     * returns the records that a user can see.
+     */
+    var getQueryRespPlanTeam = function() {
+        var rptPlans = [];
+        var encodedQuery = '';
+        if (gs.hasRole('x_fru_cir.situation_operator')) {
+            encodedQuery = 'response_execution_id.assigned_to=' + gs.getUserID();
+        }
+        if (gs.hasRole('x_fru_cir.senior_situation_manager')) {
+            if (encodedQuery) {
+                encodedQuery += '^NQ';
+            }
+            encodedQuery += 'response_execution_id.parent_situation.dimension.groupsIN' + getUserGroups();
+        }
+        if (gs.hasRole('x_fru_cir.situation_manager')) {
+            if (encodedQuery) {
+                encodedQuery += '^NQ';
+            }
+            encodedQuery += 'response_execution_id.parent_situation.dimension.groupsIN' + getUserGroups() + '^response_execution_id.parent_situation.countryIN' + getCountryID();
+        }
+        if (gs.hasRole('x_fru_cir.situation_initiator') || gs.hasRole('x_fru_cir.situation_user')) {
+            if (encodedQuery) {
+                encodedQuery += '^NQ';
+            }
+            encodedQuery += 'response_execution_id.parent_situationIN' + filterCrisisOnMembers(gs.getUserID());
+        }
+
+        if (encodedQuery) {
+            var grRPT = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);
+            grRPT.addEncodedQuery(encodedQuery);
+            grRPT.query();
+            while (grRPT.next()) {
+                rptPlans.push(grRPT.getUniqueValue());
+            }
+        }
+        return rptPlans;
+    };
+
+    /**
+     * gets the sys_ids of all Response Plan Execution records that the logged in user is a member of the response team
+     * called in the getRoleBasedRespPlanQuery function
+     * @returns {Array} - sys_ids of the Response Plan Execution records
+     **/
+    var filterOnRespTeamMembers = function(user) {
+        var array = [];
+        var grRespTeam = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);
+        grRespTeam.addQuery('user', user + '');
+        grRespTeam.query();
+
+        while (grRespTeam.next()) {
+            array.push(grRespTeam.response_execution_id + '');
+        }
+
+        return array;
+    };
+
+    /**
+     *
+     * - gets the sys_ids of the Crisis Task Executions that the user should see. called in the FSM List widget.
+     * @param {string} crisisId - sys_id of the Crisis Room
+     * @returns {array} - array of sys_ids of the records
+     *
+     **/
+    var getExecutionTasks = function(situation) {
+        var array = [];
+        var grTasks = new GlideRecord(CIRConstants.Tables.TASK_EXECUTION);
+        //if(gs.hasRole('x_lsmcb_fsm.crisis_user') && !(gs.hasRole('admin') || gs.hasRole('x_lsmcb_fsm.crisis_manager') || gs.hasRole('x_lsmcb_fsm.senior_crisis_manager'))) {
+        grTasks.addQuery('situation', 'IN', situation);
+        //}
+        grTasks.query();
+
+        while (grTasks.next()) {
+            array.push(grTasks.getUniqueValue().toString());
+        }
+
+        return 'sys_idIN' + array;
+    };
+
+    /**
+     * <<<<DEPRECATED: all the BRs that use this  function are inactive.>>>>>
+     * - Called in the BRs that will trigger the message sets. It will query for the right message set record to use for the 
+     * notifications, based on condition
+     * @param {GlideRecord} current - GlideRecord of the current object
+     * @param {String} condition - Encodeded query to look for the right message set
+     **/
+    var executeMessageSet = function(current, condition) {
+        var grMsgSet = new GlideRecord(CIRConstants.Tables.MSG_SET);
+        grMsgSet.addEncodedQuery(condition);
+        grMsgSet.addActiveQuery();
+        grMsgSet.setLimit(1);
+        grMsgSet.query();
+
+        if (grMsgSet.next()) {
+            fetchStepMessages(grMsgSet, current);
+        }
+    };
+
+    /**
+     * - Called in the executeMessageSet function. It will query for the right messages that ar part of the message set.
+     * @param {GlideRecord} messageSet - GlideRecord of the message set
+     * @param {GlideRecord} current - GlideRecord of the current record
+     **/
+    var fetchStepMessages = function(messageSet, current) {
+        var msgInfo = [];
+        var grMsg = new GlideRecord(CIRConstants.Tables.SITUATION_MSG);
+        grMsg.addQuery('message_set', messageSet.sys_id + '');
+        grMsg.query();
+
+        while (grMsg.next()) {
+            var objAux = {};
+            objAux.name = grMsg.getValue('name');
+            objAux.type = grMsg.message_type;
+            objAux.contacts = executeMessage(grMsg, current);
+            msgInfo.push(objAux);
+        }
+        return msgInfo;
+    };
+
+    /**
+     * - Called in the fetchStepMessages function. It will create a new Crisis Execution Step Message so the notification 
+     * actually be sent. It also updates the Step Message with the correct info
+     * @param {GlideRecord} msg - GlideRecord of the message
+     * @param {GlideRecord} current - GlideRecord of the current record
+     **/
+    var executeMessage = function(msg, current) {
+        var grExecStp = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC_STEP_MSG);
+        grExecStp.initialize();
+        grExecStp.response_plan_step = msg.sys_id + '';
+        grExecStp.short_description = msg.description + '';
+        grExecStp.state = 3;
+        grExecStp.active = false;
+        grExecStp.insert();
+
+        setParentRecord(grExecStp, current);
+        var contacts = sendMessage(grExecStp, current);
+        grExecStp.update();
+        return contacts;
+    };
+
+    /**
+     * - Called in the sendMessage function. it wil build the array with the contacts that will be used to send notifications via the message sets 
+     * @param {GlideRecord} msg - GlideRecord of the message
+     * @param {GlideRecord} recordHelper - GlideRecord of the Execution Step Message
+     * @return {array} contactList - arrauy with the list of contacts to use in the Notifications
+     **/
+    var getContactMsgSet = function(msg, recordHelper) {
+        var contactList = [];
+        if (msg.contact_option + '' === 'manual') {
+            contactList = getUnverifiedContacts(msg.contact_list);
+        } else {
+            contactList = buildDynamicContactList(msg, recordHelper);
+        }
+
+        return contactList;
+    };
+
+    /**
+     * - Called in the getContactMesgSet function. It will build the array of contacts if the contact list is set to Dynamic Contact
+     * @param {GlideRecord} msg - GlideRecord of the message
+     * @param {GlideRecord} recordHelper - GlideRecord of the Execution Step Message
+     * @return {array} contactList - arrauy with the list of contacts to use in the Notifications
+     **/
+    var buildDynamicContactList = function(msg, recordHelper) {
+        var contactList = [];
+
+        switch (msg.dynamic_contact + '') {
+            case 'on_call_contact':
+                contactList = getOnCallContacts(recordHelper);
+                break;
+
+            case 'escalation_team':
+                contactList = getCEscalCtctLst(recordHelper);
+                break;
+
+            case 'member_added':
+                var user = recordHelper.user_id ? recordHelper.user_id : recordHelper.user;
+                contactList.push(user + '');
+                break;
+
+            case 'response_plan_team':
+                if (recordHelper.operation() === 'update') {
+                    contactList = getExecRTeam(recordHelper.sys_id);
+                } else {
+                    contactList = getContactsFromList(recordHelper.response_plan_template.contact_list);
+                }
+                break;
+
+            case 'assignee_of_situation_task':
+                contactList = recordHelper.assigned_to ? contactList.push(recordHelper.assigned_to + '') : '';
+                break;
+
+            case 'situation_members':
+                if (recordHelper.operation() === 'update') {
+                    contactList = getAllCrisisMembers(recordHelper.sys_id);
+                } else {
+                    contactList = getOnInsertCrisisMemberUsers(recordHelper);
+                }
+                break;
+
+            case 'response_plan_coordinator':
+                contactList.push(recordHelper.assigned_to);
+                break;
+        }
+
+        return contactList;
+    };
+
+    /**
+     *
+     * - From a given crisis record will initial crisis members (users)
+     * will get the user that created the crisis, the on call users, and 
+     * the users from the contact lists than belongs to the default escalation levels (country/dimension)
+     * @param {GideRecord} crisis - gliderecord of a crisis
+     * @return {array} array with user ids 
+     *
+     **/
+    var getOnInsertCrisisMemberUsers = function(crisis) {
+        var crisisMembers = [];
+
+        crisisMembers.push(gs.getUserID());
+        crisisMembers.push(getOnCallContacts(crisis).toString());
+
+        var defaultEscalatiosCL = getDefaultEscalationCL(crisis);
+
+        for (var i = 0; i < defaultEscalatiosCL.length; i++) {
+            crisisMembers.push(getContactsFromList(defaultEscalatiosCL[i]));
+        }
+
+        crisisMembers = crisisMembers.toString().split(',');
+
+        return new global.ArrayUtil().unique(crisisMembers);
+    };
+
+    /**
+     *
+     * - From a given crisis record will get the contact lists
+     * that belong to the default(country/dimension) escalation level 
+     * @param {GideRecord} crisis - gliderecord of a crisis
+     * @return {array} array with contact list records sys_ids
+     *
+     **/
+    var getDefaultEscalationCL = function(crisis) {
+        var contactLists = [];
+
+        var grEscalation = new GlideRecord(CIRConstants.Tables.SITUATION_ESCALATION_LEVEL);
+        grEscalation.addQuery('country', 'IN', crisis.getDisplayValue('country') + '');
+        grEscalation.addQuery('dimension', crisis.getValue('dimension') + '');
+        grEscalation.addQuery('order', '0');
+        grEscalation.addQuery('default', true);
+        grEscalation.query();
+
+        while (grEscalation.next()) {
+            contactLists.push(grEscalation.contact_list + '');
+        }
+
+        return contactLists;
+    };
+
+    /**
+     * called in the buildDynamicContactList function. It will return all on-call contacts
+     * @return {array} array - arrauy with the list of on call members
+     **/
+    var getOnCallContactsOld = function() {
+        var array = [];
+        var grOnCall = new GlideRecord(CIRConstants.Tables.ON_CALL_SITU_MGR);
+        grOnCall.addQuery('on_call', true);
+        grOnCall.query();
+
+        while (grOnCall.next()) {
+            array.push(grOnCall.getValue('user') + '');
+        }
+
+        return array;
+    };
+
+    /**
+     *
+     * - From a given contact list record will retrieve the sys_id of 
+     * the active users that belongs to it
+     * @param {string} contactList - sys_id of a contact list record
+     * @return {array} array with all users sys_id
+     *
+     **/
+    var getContactsFromList = function(contactList) {
+        var contactsList = getUnverifiedContacts(contactList);
+        var singleContacts = getSingleContacts(contactsList);
+        return getMemberIds(singleContacts);
+    };
+
+    /**
+     *
+     * - From a given crisis id will return all the crisis members
+     * @param {GlideRecord} record - GlideRecord of the crisis
+     * @return {array} members - array with all the crisis members ids
+     *
+     **/
+    var getAllCrisisMembers = function(crisisId) {
+        var members = [];
+
+        var grCrisisMembers = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+        grCrisisMembers.addQuery('situation', crisisId + '');
+        grCrisisMembers.query();
+
+        while (grCrisisMembers.next()) {
+            members.push(grCrisisMembers.user_id.toString());
+
+        }
+        return members;
+
+    };
+
+    /**
+     *
+     * - Called in the buildDynamicContactList function. It will return all on-call contacts
+     * @param {GlideRecord} record - GlideRecord of the crisis
+     * @return {array} array - arrauy with the list of on call members
+     *
+     **/
+    var getOnCallContacts = function(record) {
+        var onCallUsers = [];
+        var dimension = record.getValue("dimension");
+        var countries = record.getValue("country").split(",");
+
+        countries.forEach(function(country) {
+
+            var grTeam = new GlideRecord(CIRConstants.Tables.ON_CALL_TEAM);
+            grTeam.addQuery("dimension", dimension);
+            grTeam.addQuery("country", "CONTAINS", country);
+            grTeam.query();
+
+            while (grTeam.next()) {
+
+                var currentTime = new GlideDateTime();
+                var onCallRotation = new global.OnCallRotation();
+
+                onCallRotation.who(grTeam.getValue("group"), currentTime);
+                onCallUsers.push(onCallRotation.getPrimaryUser());
+            }
+        });
+        return onCallUsers;
+    };
+
+    /**
+     * - Called in the executeMessage function. It will set the Crisis or Crisis Execution fields of the Step Messages accordingly. 
+     * @param {GlideRecord} stepMsg - GlideRecord of the exec step message
+     * @param {GlideRecord} current - GlideRecord of current record that trigger the BR
+     **/
+    var setParentRecord = function(stepMsg, current) {
+        var sys_id = current.sys_id + '';
+        switch (current.getTableName()) {
+            case CIRConstants.Tables.SITUATION:
+                stepMsg.situation = sys_id;
+                break;
+
+            case CIRConstants.Tables.RESP_PLAN_EXEC:
+                stepMsg.response_plan = sys_id;
+                break;
+
+            case CIRConstants.Tables.SITUATION_MEMBER:
+                stepMsg.situation = current.situation + '';
+                break;
+
+            case CIRConstants.Tables.RESPONSE_TEAM:
+                stepMsg.response_plan = current.response_execution_id + '';
+                break;
+        }
+    };
+
+    /**
+     * - called on x_lsmcb_fsm_crisis BR (insert or escalation level changes)
+     * - will get the contact list from the escalation level record and add the users as crisis
+     * members to the crisis record
+     * @param {glideRecord} crisis - x_lsmcb_fsm_crisis gliderecord
+     **/
+    var addEscalationMembers = function(crisis) {
+        var fsmContactList = getCEscalCtctLst(crisis);
+
+        // sys_id of the users or user email from contact list
+        var singleContacts = getSingleContacts(fsmContactList);
+
+        // list with sys_id only
+        var membersIdList = getMemberIds(singleContacts);
+
+        // list of user sys_id that are not members of the crisis record yet
+        var filteredUniqueMbrs = filterOutExistingMbrs(crisis.getUniqueValue(), membersIdList);
+
+        //for each is on the filetred list, will create aq crisis member record
+        for (var i = 0; i < filteredUniqueMbrs.length; i++) {
+            if (crisis && filteredUniqueMbrs[i]) {
+                createCrisisMember(crisis.getValue('sys_id'), filteredUniqueMbrs[i]);
+            }
+        }
+    };
+
+    /**
+     * - Gets all the Contacts of a List of contacts of a specific escalation Level
+     *  @param {GlideRecord} recordHelper - Situation Record in the Portal
+	 * Return {Array} contacts
+     */
+    var getCEscalCtctLst = function(recordHelper) {
+        var contactList = '';
+        var escalationIds = recordHelper.getValue('escalation_level');
+        if (escalationIds) {
+            escalationIds = escalationIds.split(',');
+            for (var i in escalationIds) {
+                var grEscalation = new GlideRecord(CIRConstants.Tables.SITUATION_ESCALATION_LEVEL);
+                if (grEscalation.get(escalationIds[i]) && grEscalation.getValue('contact_list')) {
+                    var contacts = getUnverifiedContacts(grEscalation.getValue('contact_list'));
+                    contactList += contacts ? contacts.toString() : '';
+                }
+            }
+        }
+
+        return contactList.split(',');
+    };
+
+    /**
+     * - called on addEscalationMembers function
+     * - from an array of user sys_id and emails, will retrieve an array with the sys_id only
+     * - if an email is associated to a user, it will get the sys_id
+     * @param {array} userIds - string array with user sys_id or emails
+     * @return {array} - array with user sys_id strings
+     **/
+    var getMemberIds = function(userIds) {
+        if (!userIds)
+            return [];
+
+        var memberList = [];
+        var tempUser = '';
+
+        for (var i = 0; i < userIds.length; i++) {
+            if (userIds[i].indexOf('@') != -1) {
+                tempUser = getUserIdFromMail(userIds[i]);
+                if (memberList.indexOf(tempUser) == -1) {
+                    memberList.push(tempUser);
+                }
+            } else {
+                memberList.push(userIds[i]);
+            }
+        }
+
+        return memberList;
+    };
+
+    /**
+     * - called on addEscalationMembers function
+     * - from an array of user sys_id, and a crisis record id will retrun
+     * - an array with the sys_id that are present on the giver array but not associated to the
+     *   crisis recor already
+     * @param {string} crisisId - sys_id of the crisis record
+     * @param {array} memberList - list of user sys_ids strings
+     * @return {array} - array with user sys_id strings
+     **/
+    var filterOutExistingMbrs = function(crisisId, memberList) {
+        if (!crisisId || !memberList)
+            return [];
+
+
+        var filtered = [];
+        var existingMembers = [];
+
+        var grCrisisMembers = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+        grCrisisMembers.addQuery('situation', crisisId + '');
+        grCrisisMembers.query();
+
+        while (grCrisisMembers.next()) {
+            existingMembers.push(grCrisisMembers.getValue('user_id'));
+        }
+        for (var i = 0; i < memberList.length; i++) {
+            if (existingMembers.indexOf(memberList[i]) == -1) {
+                filtered.push(memberList[i]);
+            }
+        }
+
+        return filtered;
+    };
+
+    /**
+     * - called on getMemberIds function
+     * - from a given email returns the associated user id (if it exists)
+     * @param {string} email - email to be evaluated
+     * @return {string} - sys_id of a user (sys_user) (if any)
+     **/
+    var getUserIdFromMail = function(email) {
+        var grUser = new GlideRecord('sys_user');
+        grUser.addQuery('email', email + '');
+        grUser.query();
+
+        if (grUser.next()) {
+            return grUser.getUniqueValue();
+        }
+    };
+
+    /**
+     * - called on fsm_add_response_team BR (fsm crisis scenario execution)
+     * - will create a response team record for each user present on the contac list of the 
+     * - location associated to the current execution
+     * @param {string} execId - current execution id
+     * @param {gliderecrod} contactList - fsm contact list record 
+     **/
+    var manageRTeamCreation = function(execId, contactList, templateRoles) {
+        var cirTeamList = getUnverifiedContacts(contactList);
+        var singleContacts = getSingleContacts(cirTeamList); // sys_id of the users or user email from contact list
+        var teamMembersIds = getMemberIds(singleContacts); // list with sys_id only
+        var teamRoles = [];
+
+        var userRoles = '';
+        for (var i = 0; i < teamMembersIds.length; i++) {
+            if (teamMembersIds[i]) {
+                userRoles = getFsmRoles(teamMembersIds[i]);
+                teamRoles.push(userRoles);
+                createRTeamRec(execId, teamMembersIds[i], userRoles, '', 0);
+            }
+        }
+
+        var missingRoles = getMissingRoles(templateRoles.split(','), teamRoles + '');
+
+        for (var j = 0; j < missingRoles.length; j++) {
+            createRTeamRec(execId, '', missingRoles[j] + '', '', '');
+        }
+    };
+
+    /**
+     * - called on manageRTeamCreation 
+     * - from an array of fsm job title ids (from 'job titles' field of a crisis scenario template)
+     * and an array of fsm job title ids (from the users present on the response team of a crisis execution)
+     * will check if there is a job title of the template that is not covered by a user job title 
+     * @param {array} templateRoles - array of strings. job title ids from a crisis scenario template
+     * @param {array} rTeamRoles - array of strings. sum of job title ids of response team of a crisis execution
+     * @return {array} - string array of sys_id of fsm job titles (if any)
+     **/
+    var getMissingRoles = function(templateRoles, rTeamRoles) {
+        var missingRoles = [];
+
+        for (var i = 0; i < templateRoles.length; i++) {
+            if (rTeamRoles.indexOf(templateRoles[i]) === -1) {
+                missingRoles.push(templateRoles[i]);
+            }
+        }
+
+        return missingRoles;
+    };
+
+    /**
+     * - called on fmanageRTeamCreation
+     * - will create a response team record for a given user id and crisis execution id
+     * @param {string} execId - crisis execution execution id
+     * @param {string} user id - sys_user id
+     **/
+    var createRTeamRec = function(execId, userId, userRoles, feedback, type) {
+        var grRespTeam = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);
+        grRespTeam.initialize();
+        grRespTeam.setValue('user', userId);
+        grRespTeam.setValue('job_title', userRoles);
+        if (execId) {
+            grRespTeam.setValue('response_execution_id', execId);
+        }
+        grRespTeam.setValue('response_status', feedback);
+        grRespTeam.setValue('type', type + '');
+        grRespTeam.setValue('active', true);
+        grRespTeam.insert();
+    };
+
+    /**
+     * - called on fsm_fetch_roles BR (x_lsmcb_fsm_response_team)
+     * - will fetch the fsm roles form the fsm user profile
+     * @param {string} user id - sys_user id
+     * @return {string} - sys_id of fsm job titles
+     **/
+    var getFsmRoles = function(userId) {
+        var grCirProfile = new GlideRecord(CIRConstants.Tables.USER_PROFILE);
+        grCirProfile.addQuery('user', userId + '');
+        grCirProfile.query();
+
+        if (grCirProfile.next()) {
+            return grCirProfile.getValue('job_title');
+        }
+    };
+
+    /**
+     * - called on fsm_update_response_team_feedback BR (message execution recipient)
+     * - will update or create a response team record for a message execution recipient record
+     * @param {GlideRecord} feedbackRec - message execution recipient record
+     **/
+    var updateResponseTeam = function(feedbackRec) {
+        var execution = feedbackRec.step_message_execution.response_plan.toString();
+
+        var grRTeam = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);
+        grRTeam.addQuery('response_execution_id', execution.toString());
+        grRTeam.addQuery('user', feedbackRec.user.toString());
+        grRTeam.query();
+
+        if (grRTeam.next()) {
+            var backupUser = feedbackRec.primary_backup ? feedbackRec.primary_backup : feedbackRec.secondary_backup;
+
+            if (backupUser && feedbackRec.feedback) {
+                var userRoles = getFsmRoles(backupUser);
+                createRTeamRec(execution, backupUser, userRoles, feedbackRec.feedback.toString(), 1);
+                // type 1 = backup;
+
+            } else if (feedbackRec.feedback) {
+                grRTeam.setValue('response_status', feedbackRec.feedback.toString());
+            }
+            grRTeam.update();
+        }
+    };
+
+    /**
+     * - gets Situation or Response plan realted field labels so tehy can be showns and selected by the user while building messages
+     * called in the add_field_tag ui page 
+     * @param {String} tableName - name of the table 
+     **/
+    var getFields = function(tableName) {
+        var array = [];
+        var fieldPrefix = tableName + '' === CIRConstants.Tables.SITUATION ? 'situation.' : 'response_plan.';
+
+        var grDict = new GlideRecord('sys_documentation');
+        grDict.addQuery('name', tableName + '');
+        grDict.addQuery('language', gs.getSession().getLanguage());
+        grDict.addNotNullQuery('element');
+        grDict.query();
+
+        while (grDict.next()) {
+            var obj = {};
+            obj.label = grDict.label + '';
+            obj.value = fieldPrefix + grDict.element + '';
+            array.push(obj);
+        }
+
+        return JSON.stringify(array);
+    };
+
+    /**
+     * - replaces the field tags of the body of a message with actual values
+     * called in the sendMessage function
+     * @param {GlideRecord} stepMessage - GlideRecord of a response plan execution setp
+     * @return {Srting} - body of the message with the correct values
+     **/
+    var buildMessageBody = function(stepMessage, fromMailScript) {
+        var msgRecord = stepMessage.response_plan_step.message;
+        var body = msgRecord.type + '' === 'email' ? msgRecord.body + '' : msgRecord.plain_text + '';
+        var count = 0;
+
+        if (body.indexOf("#{") != -1) {
+            while (body.indexOf("#{") != -1 && count < 50) {
+                var occ = body.match("\#{(.*?)\}")[1];
+                if (occ.indexOf('record_link') != -1) {
+                    var table = CIRConstants.Tables.RESP_PLAN_EXEC;
+                    var page = 'cir_response_plan_room';
+                    var field = 'response_plan';
+
+
+                    // checking the table of the message set
+                    var grMS = new GlideRecord(CIRConstants.Tables.MSG_SET);
+                    if (grMS.get(stepMessage.response_plan_step.message_set) && grMS.getValue('table') == CIRConstants.Tables.SITUATION) {
+                        table = CIRConstants.Tables.SITUATION;
+                        page = 'cir_situation_room';
+                        field = 'situation';
+                    }
+                    var url = 'https://' + gs.getProperty('instance_name') + '.service-now.com/cir?id=' + page + '&table=' + table + '&sys_id=' + stepMessage.getValue(field);
+
+                    if (fromMailScript) {
+                        body = body.replace(occ, '<p><a title="link" href="' + url + '" rel="nofollow">' + url + '</a></p>');
+                    } else {
+                        body = body.replace(occ, ' ' + gs.getMessage('cir_sit_link_to_record') + ': ' + url);
+                    }
+                } else {
+                    body = body.replace(occ, getValue(occ, stepMessage));
+                }
+                body = body.replace('#{', '');
+                body = body.replace('}', '');
+                count++;
+            }
+        }
+
+        return body;
+    };
+
+    /**
+     * - gets the value of a ta in a message
+     * called in the buildMessageBody function
+     * @param {GlideRecord} stepMessage - GlideRecord of a response plan execution setp
+     * @param {String} occ - field name of the tag
+     * @return {Srting} - value for that field tag
+     **/
+    var getValue = function(occ, stepMessage) {
+
+        var auxGR = fetchResponsePlan(stepMessage);
+        var auxValue = auxGR.getDisplayValue(occ);
+        if (!auxValue && occ.indexOf('response_plan.') != -1) {
+            occ = occ.replace('response_plan.', '');
+            auxValue = auxGR.getDisplayValue(occ);
+        }
+
+        if (auxValue) {
+            return auxValue;
+
+        } else {
+            if (occ.indexOf('situation.') != -1 && auxGR.sys_class_name + '' !== CIRConstants.Tables.SITUATION) {
+                occ = occ.replace('situation.', 'parent_situation.');
+                auxValue = auxGR.getDisplayValue(occ);
+
+            } else {
+                occ = occ.replace('situation.', '');
+                auxValue = auxGR.getDisplayValue(occ);
+            }
+        }
+        return auxValue ? auxValue : '';
+    };
+
+    /**
+     * - replaces the field tags of the body of a message with actual values
+     
+     * @param {GlideRecord} stepMessage - GlideRecord of a response plan execution setp
+     * @return {String} - body of the message with the correct values
+     */
+    var buildMessageBodyCrisisTask = function(stepMessage) {
+        var body = stepMessage.body;
+        if (body.indexOf("#{") != -1) {
+            while (body.indexOf("#{") != -1 && count < 50) {
+                var occ = body.match("\#{(.*?)\}")[1];
+                if (occ.indexOf('record_link') != -1) {
+                    var table = CIRConstants.Tables.RESP_PLAN_EXEC;
+                    var page = 'cir_response_plan_room';
+                    var field = 'response_plan';
+
+
+                    // checking the table of the message set
+                    var grMS = new GlideRecord(CIRConstants.Tables.MSG_SET);
+                    if (grMS.get(stepMessage.response_plan_step.message_set) && grMS.getValue('table') == CIRConstants.Tables.SITUATION) {
+                        table = CIRConstants.Tables.SITUATION;
+                        page = 'cir_situation_room';
+                        field = 'situation';
+                    }
+                    var url = 'https://' + gs.getProperty('instance_name') + '.service-now.com/cir?id=' + page + '&table=' + table + '&sys_id=' + stepMessage.getValue(field);
+
+                    if (fromMailScript) {
+                        body = body.replace(occ, '<p><a title="link" href="' + url + '" rel="nofollow">' + url + '</a></p>');
+                    } else {
+                        body = body.replace(occ, ' ' + gs.getMessage('cir_sit_link_to_record') + ': ' + url);
+                    }
+                } else {
+                    body = body.replace(occ, getValue(occ, stepMessage));
+                }
+                body = body.replace('#{', '');
+                body = body.replace('}', '');
+                count++;
+            }
+        }
+
+        return body;
+    };
+
+    /**
+     * it is used in the portal to convert the tags to the real value
+     *
+     * @param {GlideRecord} record 
+     */
+    var replaceTagsToValue = function(record) {
+        var message, body;
+        var tableName = record.getTableName();
+        if (tableName === CIRConstants.Tables.RESP_PLAN_EXEC_STEP) {
+            message = record.response_plan_step.message;
+        } else {
+            message = record;
+        }
+
+        body = tableName === CIRConstants.Tables.RESP_PLAN_EXEC_STEP ? message.plain_text.toString() : record.message.toString();
+
+        if (message.type + '' === 'email' || message.message_type + '' === 'email') {
+            body = message.body.toString();
+        }
+
+        var count = 0;
+        if (body.indexOf("#{") != -1) {
+            while (body.indexOf("#{") != -1 && count < 10) {
+                var occ = body.match("\#{(.*?)\}")[1];
+                if (occ.indexOf('record_link') != -1) {
+                    var table = CIRConstants.Tables.RESP_PLAN_EXEC;
+                    var page = 'cir_response_plan_room';
+                    var field = 'response_plan';
+
+                    // checking the table of the message set
+                    var grMS = new GlideRecord(CIRConstants.Tables.MSG_SET);
+                    if (tableName === CIRConstants.Tables.TASK_EXECUTION || (grMS.get(record.response_plan_step.message_set) && grMS.getValue('table') === CIRConstants.Tables.SITUATION)) {
+                        table = CIRConstants.Tables.SITUATION;
+                        page = 'cir_situation_room';
+                        field = 'situation';
+                    }
+
+                    var url = 'https://' + gs.getProperty('instance_name') + '.service-now.com/cir?id=' + page + '&table=' + table + '&sys_id=' + record.getValue(field);
+                    body = body.replace(occ, ' ' + gs.getMessage('fsm_link_to_record') + ': ' + url);
+                } else {
+                    body = body.replace(occ, record.getDisplayValue(occ));
+                }
+                body = body.replace('#{', '');
+                body = body.replace('}', '');
+                count++;
+            }
+        }
+        return body;
+    };
+
+
+    /**
+     * - gets the Response plan GlideRecord
+     * called in the getValue function * @param {GlideRecord} stepMessage - GlideRecord of a response plan execution setp
+     * @param {String} sys_id - sys_id of the response plan
+     * @return {GlideRecord} - GlideRecord of the response plan
+     **/
+    var fetchResponsePlan = function(stepMsg) {
+        if (stepMsg.response_plan) {
+            var grRspPlan = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC);
+            if (grRspPlan.get('sys_id', stepMsg.response_plan + '')) {
+                return grRspPlan;
+            }
+
+        } else if (stepMsg.situation) {
+            return stepMsg.situation.getRefRecord();
+        }
+    };
+
+    /**
+     * filters the response plans for a given location
+     * called in the
+     * @param {Srting} location - sys_id of the location record
+     * @return {Srting} - body of the message with the correct values
+     **/
+    var filterResponsePlans = function(location) {
+        var array = [];
+        var grScenarioTemplate = new GlideRecord(CIRConstants.Tables.RESP_PLAN_TEMPLATE);
+        grScenarioTemplate.addQuery('locationsLIKE' + location);
+        grScenarioTemplate.query();
+
+        while (grScenarioTemplate.next()) {
+            array.push(grScenarioTemplate.getUniqueValue());
+        }
+
+        return 'sys_idIN' + array;
+    };
+
+    /**
+     * creates a copy of a message set
+     * called in the create copy ui action on the message set table
+     * @param {GlideRecord} currentMsgSet - GlideRecord of the Message set to copy
+     * @return {GlideRecord} - GlideRecord of the Message set created
+     **/
+    var createCopyMsgSet = function(currentMsgSet) {
+        var grMsgSet = new GlideRecord(CIRConstants.Tables.MSG_SET);
+        grMsgSet.initialize();
+        grMsgSet.table = currentMsgSet.table;
+        grMsgSet.on_insert = currentMsgSet.on_insert;
+        grMsgSet.on_update = currentMsgSet.on_update;
+        grMsgSet.condition = currentMsgSet.condition;
+        grMsgSet.description = currentMsgSet.description;
+        grMsgSet.situation_category = currentMsgSet.situation_category;
+        grMsgSet.response_plans = currentMsgSet.response_plans;
+        grMsgSet.insert();
+
+        return grMsgSet;
+    };
+
+    /**
+     * - called on fsm_send_message_to_resp_team BR (response room message table)
+     * - will send a message to a response team
+     * @param {GlideRecord} messageRec - message glide record
+     **/
+    var sendMsgToRTeam = function(messageRec) {
+        var rTeam = getExecRTeam(messageRec.response_execution_id);
+
+        switch (messageRec.message_type + ''.toLowerCase()) {
+            case 'email':
+                var sender = gs.getUser().getEmail();
+                gs.eventQueue('x_fru_cir.message.response.team', messageRec, rTeam + '', sender);
+                rTeam.push(gs.getUserID());
+                break;
+
+            case 'sms':
+                var fromNumber = gs.getProperty('x_fru_cir.twilio.phone.number') + '';
+                var numbers = getPhoneNumbers(rTeam);
+                var notify = new sn_notify.NotifyScoped();
+                notify.sendBulkSMS(fromNumber, numbers, messageRec.message_content + '');
+                break;
+
+            case 'push':
+                gs.eventQueue('x_fru_cir.send.push.response.team', messageRec, rTeam + '');
+                break;
+
+            case 'voice':
+                triggerCall(rTeam + '', messageRec);
+                break;
+        }
+        return rTeam;
+    };
+
+    /**
+     * gets the GlideRecord of Response Plan Execution based on a sys_id
+     * @param {String} exec - Response Plan Execution sys_id
+     * @return {GlideRecord} - Response Plan Execution GlideRecord
+     **/
+    var getExecRec = function(exec) {
+        var grExec = new GlideRecord(CIRConstants.Tables.RESP_PLAN_EXEC);
+        grExec.addQuery('sys_id', exec + '');
+        grExec.query();
+
+        if (grExec.next()) {
+            return grExec;
+        }
+    };
+
+    /**
+     * gets the sys_ids of the users that are part of the response team of a given resp plan execution record
+     * called in the sendMsgToRTeam function
+     * @param {String} execId - Response Plan Execution sys_id
+     * @return {Array} - sys_ids of the users
+     **/
+    var getExecRTeam = function(execId) {
+        var rTeam = [];
+
+        var grRespTeam = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);
+        grRespTeam.addQuery('response_execution_id', execId);
+        grRespTeam.query();
+
+        while (grRespTeam.next()) {
+            if (grRespTeam.user) {
+                rTeam.push(grRespTeam.user + '');
+            }
+        }
+
+        return rTeam;
+    };
+
+    /**
+     * - called on fsm_fetch_roles BR (x_lsmcb_fsm_response_team)
+     * - from a given sys_id will return the history set record
+     * @param {string} recId - sys_id of the record
+     * @return {string} - sys_id of the history set
+     **/
+    var getHistorySetId = function(recId) {
+        var grSet = new GlideRecord('sys_history_set');
+        grSet.addQuery('id', recId + '');
+        grSet.orderByDesc('last_update_recorded');
+        grSet.setLimit(1);
+        grSet.query();
+
+        if (grSet.next()) {
+            return grSet.getUniqueValue();
+        }
+
+        return '';
+    };
+
+    /**
+     * !!!!!DEPRECATED!!!!
+     * - called on fsm_gen_audit_pdf BR (x_lsmcb_fsm_crisis)
+     * - will generate and place a pdf attachament with the crisis record data
+     * @param {String} sourceTable - source table of the record.
+     * @param {String} sourceId - Record sys_id.
+     * @param {String} pdfView - View to use on the PDF
+     * @param {String} endTable - End table where the PDF will be attached
+     * @param {String} endId - sys_id of the record where the PDF will be attached
+     * @param {String} fileName - PDF file name
+     * @param {String} authProfileId - sys_id of the authentication profile 
+     **/
+    var genAttachment = function(settings) {
+
+        var table = settings.table; // name of the table
+        var record_sys_id = settings.sys_id; // sys_id of the record to create the pdf and where to save the generated pdf
+        var view = settings.view; // view of the record
+        var users = settings.user_files; // array with auth profiles and file names
+
+        for (var i in users) {
+            var request = new sn_ws.RESTMessageV2();
+            request.setHttpMethod('get');
+            request.setEndpoint('https://' + gs.getProperty('instance_name') + '.service-now.com/' + table + '.do?PDF&sys_id=' + record_sys_id + '&sysparm_view=' + view);
+            request.setAuthenticationProfile('basic', users[i].auth_profile);
+            request.saveResponseBodyAsAttachment(table, record_sys_id, users[i].filename);
+            request.execute();
+        }
+    };
+
+    /**
+     * - called on country emergency number data item (mobile)
+     * - from a given user sys_id will return a query 
+     * @param {string} recId - sys_id of the record
+     * @return {string} - sys_id of the history set 
+     **/
+    var getUserCountry = function(userId) {
+
+        var grUser = new GlideRecord('sys_user');
+        grUser.addQuery('sys_id', userId);
+        grUser.query();
+
+        if (grUser.next()) {
+            var grChoice = new GlideRecord('sys_choice');
+            grChoice.addQuery('name', 'sys_user');
+            grChoice.addQuery('language', 'en');
+            grChoice.addQuery('value', grUser.getValue('country'));
+            grChoice.query();
+
+            if (grChoice.next()) {
+                return 'country=' + grChoice.label.toString();
+            }
+        }
+        return;
+    };
+
+    /**
+     * Checks if the insert / update of a record matches the condition defined in the message set table
+     * @param {GlideRecord} current - current state of the inserted/updated record
+     * @param {GlideRecord} previous - state of the updated record before the update (which is null on insert)
+     **/
+    var messageSetConditionCheck = function(current, previous) {
+        var messages = [];
+        var infoMessage = '';
+        var crisisData = getParentCrisisData(current);
+
+        // Only retrieve active message sets
+        var query = ["active=true"];
+
+        // Ensure the right operation is retrieved (insert or update)
+        query.push("on_" + current.operation() + "=true");
+
+        // Allow for records from different tables triggering the message set
+        query.push("table=" + current.getTableName());
+
+        // Ensure only message sets with matching categories are used
+        query.push("situation_categoryLIKE" + crisisData.category);
+
+        // Find and loop over all matching message sets
+        var grMessage = new GlideRecord(CIRConstants.Tables.MSG_SET);
+        grMessage.addEncodedQuery(query.join("^"));
+        grMessage.query();
+
+        while (grMessage.next()) {
+            // Check if the condition defined on the MessageSet matches the current record change/insert
+            var gf = new CIRGlideFilterHelper();
+            if (!gf.checkFilter(current, grMessage.condition)) {
+                continue;
+            }
+
+            // Send the messages defined under the message set
+            messages = messages.concat(fetchStepMessages(grMessage, current));
+        }
+
+        if (messages.length != 0) {
+            messages = messages.map(function(obj) {
+                var contacts = getUsersName(obj.contacts); // convert the sys_id to the names
+                return gs.getMessage('cir_message_set_sent', [obj.name, obj.type, contacts.join(', ')]); //'Message ' + obj.name + ' was sent via ' + obj.type + ' to the following people: ' + contacts.join(',');
+            }, this);
+            infoMessage = messages.join('<br/>');
+        }
+        return infoMessage;
+    };
+
+    /** 
+     * Receive the encoded file and create a new response plan where attach that file. 
+     * If already exists a Response Plan with the same name return an error message and delete the record created 
+     * Else, process the row that contains information about the Response Plan Template, fill the information and create the steps for the Response Plan 
+     * @param {String} file – Encoded String of the file imported by the user 
+     * @return {String} – Return the sys_id of the Response Plan created in case of success, return a error message if not possible to create the Response Plan 
+     **/
+    var createRespTempExcel = function(file) {
+        var grRespTemp = new GlideRecord(CIRConstants.Tables.RESP_PLAN_TEMPLATE);
+        grRespTemp.initialize();
+        grRespTemp.setValue('name', new GlideDateTime().getDisplayValue());
+        grRespTemp.setValue('active', true);
+        var responsePlanTemplate = grRespTemp.insert();
+
+        var attachment = new GlideSysAttachment();
+        var newAttachId = attachment.writeBase64(grRespTemp, 'temp_file.xlsx', 'application/xlsx', file);
+        var parser = new sn_impex.GlideExcelParser();
+        var attachmentStream = new GlideSysAttachment().getContentStream(newAttachId);
+        parser.parse(attachmentStream);
+
+        while (parser.next()) {
+            var row = parser.getRow();
+            if (!templateExist(row, responsePlanTemplate)) {
+                createSteps(responsePlanTemplate, newAttachId);
+                return grRespTemp.sys_id;
+            } else {
+                var gr = new GlideRecord(CIRConstants.Tables.RESP_PLAN_TEMPLATE);
+                gr.addQuery('sys_id', grRespTemp.sys_id);
+                gr.query();
+                gr.next();
+                gr.deleteRecord();
+                return gs.getMessage('cir_already_exist_response_plan');
+            }
+        }
+    };
+
+    /** 
+     * Read row from excel sheet 2, and process it row by row, for each row dependent on the type that comes from excel, call function to create each type of step  
+     * @param {Object} respPlanID– Sys_id of the Response plan that will contain the steps 
+     * @param {String} newAttachId- Sys_id of the attachment that was been imported by the user 
+     * @return {Boolean} True if already exists one record with the same name, false if not  
+     **/
+    var createSteps = function(respPlanID, newAttachId) {
+        var parserStep = new sn_impex.GlideExcelParser();
+        var attachmentStream = new GlideSysAttachment().getContentStream(newAttachId);
+        parserStep.setSheetName('Steps');
+        parserStep.parse(attachmentStream);
+
+        while (parserStep.next()) {
+            var row = parserStep.getRow();
+            var type = row['Type'] + '';
+
+            if (type === 'Step Message') {
+                createMessageStep(row, respPlanID);
+            } else if (type === 'Step Action') {
+                createActionStep(row, respPlanID);
+            } else if (type === 'Step Condition') {
+                createConditionStep(row, respPlanID);
+            }
+        }
+    };
+
+    /** 
+     * Verify if one record with the same name exists on the Response Plan Template Table , if not set the values that come from excel  
+     * @param {Object} row – Row that comes from excel with data for the Response Plan 
+     * @param {String} respTemp- Sys_id of the Response Plan Template that will contain the record create 
+     * @return {Boolean} True if already exists one record with the same name, false if not  
+     **/
+    var templateExist = function(row, RespTemp) {
+        var template = new GlideRecord(CIRConstants.Tables.RESP_PLAN_TEMPLATE);
+        var name = row['Name'];
+        template.addQuery('name', name);
+        template.query();
+
+        if (template.next()) {
+            return true;
+        } else {
+            if (template.get(RespTemp)) {
+                template.setValue('name', row['Name']);
+                template.setValue('category', getCategoryByName(row['Category']));
+                template.setValue('description', row['Description']);
+                template.setValue('message_type', getChoiceValue(row['Message Type']));
+                template.update();
+            }
+            return false;
+        }
+    };
+
+    /** 
+     * Create a new record on the Response Plan Step Message  
+     * @param {Object} row – Row that comes from excel with data for the new record 
+     * @param {String} respTemp- Sys_id of the Response Plan Template that will contain the record create 
+     **/
+    var createMessageStep = function(row, respTemp) {
+        var grRespTempStep = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP_MSG);
+        grRespTempStep.initialize();
+        grRespTempStep.setValue('name', row['Name']);
+        grRespTempStep.setValue('response_plan_template', respTemp);
+        grRespTempStep.setValue('dependent_on', getStepsByName(row['Dependent on(name of previous steps separated by commas)'], respTemp));
+        grRespTempStep.setValue('message_type', getChoiceValue(row['Message Type']));
+        grRespTempStep.setValue('feedback', stringToBoolean(row['Feedback']));
+        grRespTempStep.setValue('message', getMessageByName(row['Message']));
+        grRespTempStep.setValue('description', row['Description']);
+        grRespTempStep.setValue('timer', row['Timer(min)']);
+        grRespTempStep.insert();
+    };
+
+    /** 
+     * Create a new record on the Response Plan Step Action  
+     * @param {Object} row – Row that comes from excel with data for the new record 
+     * @param {String} respTemp- Sys_id of the Response Plan Template that will contain the record create    
+     **/
+    var createActionStep = function(row, respTemp) {
+        var grRespTempStep = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP_ACTN);
+        grRespTempStep.setValue('name', row['Name']);
+        grRespTempStep.setValue('response_plan_template', respTemp);
+        grRespTempStep.setValue('dependent_on', getStepsByName(row['Dependent on(name of previous steps separated by commas)'], respTemp));
+        grRespTempStep.setValue('short_description', row['Action Required']);
+        grRespTempStep.insert();
+    };
+
+    /** 
+     * Create a new record on the Response Plan Step Condition  
+     * @param {Object}row – Row that comes from excel with data for the new record 
+     * @param {String} respTemp- Sys_id of the Response Plan Template that will contain the record create 
+     **/
+    var createConditionStep = function(row, respTemp) {
+        var grRespTempStep = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP_COND);
+        grRespTempStep.setValue('name', row['Name']);
+        grRespTempStep.setValue('response_plan_template', respTemp);
+        grRespTempStep.setValue('dependent_on', getStepsByName(row['Dependent on(name of previous steps separated by commas)'], respTemp));
+        grRespTempStep.insert();
+    };
+
+    /** 
+     * Transform a list of names in the correspondent list of sys_ids of Response Plan Template Steps  
+     * @param {List} listNames- List of names introduced in the excel 
+     * @param {String} respTemp- Sys_id of the Response Plan Template that contains the Steps 
+     * @return {List} List of Sys_ids  
+     **/
+    var getStepsByName = function(listNames, respTemp) {
+        var array = [];
+        if (!listNames) {
+            return array;
+        }
+        var splitted = listNames.split(',');
+        for (var i = 0; i < splitted.length; i++) {
+            var stepTemplate = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP);
+            stepTemplate.addQuery('response_plan_template', respTemp);
+            stepTemplate.addQuery('name', splitted[i]);
+            stepTemplate.query();
+            stepTemplate.setLimit(1);
+            if (stepTemplate.next()) {
+                array.push(stepTemplate.sys_id);
+            }
+        }
+
+        return array;
+    };
+
+    /** 
+     * Transform the value that comes from excel in the correspondent boolean  
+     * @param {String} string- Value that cames in the excel 
+     * @return {Boolean}  
+     **/
+    var stringToBoolean = function(string) {
+        if (string === 'true') {
+            return true;
+        } else if (string === 'false') {
+            return false;
+        }
+    };
+
+    /** 
+     * Search for a Message with the same name of the Parameter 
+     * @param {String} name- Value that cames in the excel 
+     * @return {String} sys id of the record that match. 
+     **/
+    var getMessageByName = function(name) {
+        if (name === '') {
+            return;
+        } else {
+            var message = new GlideRecord(CIRConstants.Tables.MESSAGE);
+            message.addQuery('name', name);
+            message.setLimit(1);
+            message.query();
+            if (message.next()) {
+                return message.sys_id;
+            }
+        }
+
+        return;
+    };
+
+    /** 
+     * Search for a Response Plan Category with the same name of the Parameter 
+     * @param {String} name- Value that cames in the excel 
+     * @return {String} sys id of the record that match. 
+     **/
+    var getCategoryByName = function(name) {
+        if (name + '' === '') {
+            return;
+        } else {
+            var category = new GlideRecord(CIRConstants.Tables.RESP_PLAN_CATEGORY);
+            category.addQuery('name', name);
+            category.setLimit(1);
+            category.query();
+            if (category.next()) {
+                return category.sys_id;
+            }
+        }
+    };
+
+    /** 
+     * Transform the label received in the string in lower case that correspond to the value 
+     * @param {String} label- Value that cames in the excel 
+     * @return {String} value of the choice. 
+     **/
+    var getChoiceValue = function(label) {
+        if (label) {
+            return label.toLowerCase();
+        } else {
+            return;
+        }
+    };
+
+    /** 
+     * Function to retrieve the sys_property that contains the sys_id of the attachment template for the Response Plan Import 
+     * @return {String} - the sys_id saved in the property 
+     **/
+    var getAttachmentID = function() {
+        return gs.getProperty('x_fru_cir.resp.plan.excel.template');
+    };
+
+    /** 
+     * Function that will check if there's more Escalation Levels to escalate to for a Situation Record
+     * @param {GlideRecord} situation - GlideRecord of the Sitiuation Record
+     * @return {boolean} - true if there's more Escalation Levels, false if there's NO more Escalation Levels 
+     **/
+    var checkSitEscalationLevel = function(situation) {
+        var currentLevel = situation.getValue('escalation_level') ? situation.escalation_level.getRefRecord() : '';
+
+        var grEscalation = new GlideRecord(CIRConstants.Tables.SITUATION_ESCALATION_LEVEL);
+        if (currentLevel) {
+            grEscalation.addQuery('order', '>', currentLevel.getValue('order'));
+        }
+        grEscalation.query();
+
+        return grEscalation.hasNext();
+    };
+
+    /**
+     * converts the sys_ids to names
+     * @param {array} contacts -> array with sys_ids of users
+     * @returns {array} array with the name of the users
+     */
+    var getUsersName = function(contacts) {
+        contacts.forEach(function(contact, index, contacts) {
+            if (contact.indexOf('@') !== -1) {
+                contacts[index] = contact;
+            } else {
+                var grUser = new GlideRecord('sys_user');
+                if (grUser.get(contact)) {
+                    contacts[index] = grUser.name;
+                }
+            }
+        });
+        return contacts;
+    };
+
+    /**
+     * From a given situation realted record will get the crisis countries and cantegry
+     * @param {GlideRecord} record - situation related record
+     * @param {Object} - object with the countries and category
+     **/
+    var getParentCrisisData = function(record) {
+        var crisisData = {};
+        var cirTables = CIRConstants.Tables;
+
+        switch (record.getTableName()) {
+            case cirTables.RESPONSE_TEAM:
+                crisisData.category = record.response_execution_id.parent_situation.category;
+                crisisData.countries = record.response_execution_id.parent_situation.country;
+                break;
+            case cirTables.SITUATION_MEMBER:
+                crisisData.category = record.situation.category;
+                crisisData.countries = record.situation.country;
+                break;
+            case cirTables.RESP_PLAN_EXEC:
+                crisisData.category = record.parent_situation.category;
+                crisisData.countries = record.parent_situation.country;
+                break;
+            case cirTables.TASK_EXECUTION:
+                crisisData.category = record.situation.category;
+                crisisData.countries = record.situation.country;
+                break;
+            case cirTables.SITUATION:
+                crisisData.category = record.category;
+                crisisData.countries = record.country;
+                break;
+        }
+
+        return crisisData;
+    };
+
+    /**
+     * Function called on CIRSituationUtilsFPClient and used to retrieve data from the fields of a Task Template
+     * @param {String} template - sys_id of the task template
+     * @return {String} - Stringified object
+     **/
+    var getTaskTemplateInfo = function(template) {
+        var grTaskTemplate = new GlideRecord(CIRConstants.Tables.TASK_TEMPLATE);
+        var result = {};
+        if (grTaskTemplate.get(template)) {
+            result = {
+                name: grTaskTemplate.getValue('name'),
+                type: grTaskTemplate.getValue('type'),
+                description: grTaskTemplate.getValue('description'),
+                assignee: grTaskTemplate.getValue('assigned_to'),
+                contacts: grTaskTemplate.getValue('contact_list'),
+                message_type: grTaskTemplate.getValue('message_type'),
+                message_template: grTaskTemplate.getValue('message')
+            };
+        }
+        return JSON.stringify(result);
+    };
+
+    /**
+     *
+     * Function used in the reference qualifier for the fields "location_groups" and "virtual_locations" 
+     * of the table "Situation". It returns the encoded query with only records with countries that exist
+     * in the Address value table. 
+     * @param {string} field - field name.
+     * @param {string} fieldValue - current value of the field.
+     * @param {string} countries - sys_ids of the countries.
+     * @return {string} - the encoded query to use in the reference qualifier
+     *
+     **/
+    var getLocationsListField = function(field, fieldValue, countries) {
+        var removeSelected = fieldValue != "" ? "^sys_idNOT IN" + fieldValue : "";
+
+        if (!countries) {
+            return "sys_id=0000";
+        }
+
+        var arrayCountries = countries.split(",");
+        var idsEncodedQuery = [];
+
+        for (var id = 0; id < arrayCountries.length; ++id) {
+            idsEncodedQuery.push(field + "LIKE" + arrayCountries[id]);
+        }
+
+        return idsEncodedQuery.join("^OR") + removeSelected;
+    };
+
+    /**
+     *
+     * Creates the encoded query to be use in the reference qualifier of the field "Buildings" in the table Situation. 
+     * Return the encoded query with buildings that have the same country as the ones in the "Country" field. 
+     * @param {string} fieldValue - current value of the field.
+     * @param {string} countries - sys_ids of the countries.
+     * @return {string} - the encoded query to use in the reference qualifier
+     *
+     **/
+    var getBuildingsByCountries = function(fieldValue, countries) {
+        var removeSelected = fieldValue != "" ? "^sys_idNOT IN" + fieldValue : "";
+
+        if (!countries) {
+            return "sys_id=0000";
+        }
+
+        var arrayCountries = countries.split(",");
+
+        for (var id = 0; id < arrayCountries.length; ++id) {
+            var gr = new GlideRecord(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+            if (gr.get(arrayCountries[id])) {
+                arrayCountries[id] = gr.getValue("value");
+            }
+        }
+        
+        return "type=1^countryIN" + arrayCountries.join(",") + removeSelected;
+    };
+
+    /**
+     * Function called on CIRSituationUtilsFPClient and used to retrieve the sys_id of record from Address value with the
+     * same country has the one related to the field "Country Code" of the login User. 
+     * @return {string} sys_id of the record from Address Value Table 
+     **/
+    var getCountryID = function() {
+        var countryCode = '';
+        var grUser = new GlideRecord("sys_user");
+        if (grUser.get(gs.getUserID())) {
+            countryCode = grUser.country === 'US' ? 'USA' : grUser.country;
+        }
+        var sysCountry = "";
+        var grChoice = new GlideRecord("sys_choice");
+        grChoice.addQuery("element", "country");
+        grChoice.addQuery("name", "sys_user");
+        grChoice.addQuery("language", "en");
+        grChoice.addQuery("value", countryCode);
+        grChoice.query();
+
+
+        if (grChoice.next()) {
+            sysCountry = grChoice.label.toString();
+        }
+
+        var addressID = "";
+
+        var grAddress = new GlideRecord(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+        grAddress.addQuery("type", "country");
+        grAddress.addQuery("language", "en");
+        grAddress.addQuery("value", sysCountry);
+        grAddress.query();
+
+        if (grAddress.next()) {
+            addressID = grAddress.getUniqueValue();
+        }
+        return addressID;
+    };
+
+    /**
+     *
+     * Creates the encoded query to be use in the reference qualifier of the field "Situation" in the table . 
+     * Returns the encoded query with the valid countries and without the ones that are already selected. 
+     * @param {string} fieldValue - current value of the field.
+     * @return {string} - the encoded query to use in the reference qualifier
+     *
+     **/
+    var getCrisisCountries = function(fieldValue) {
+        var removeSelected = fieldValue != "" ? "^sys_idNOT IN" + fieldValue : "";
+
+        return "type=country^language=en" + removeSelected;
+    };
+
+    /**
+     * Get the sys_id if exists of a Security Address Value of a certain Country introduced in Situation Parametrizations 
+     * @param {string} country - Name of the country
+	 * return {string} sys_id of the record or empty String
+	 * used in BR : 'cir_set_on_call_situation_team_param'
+     **/
+    var getCountryAddressID = function(country) {
+        var gr = new GlideRecord(CIRConstants.Tables.SECURITY_ADDRESS_VALUE);
+        gr.addQuery('language', 'en');
+        gr.addQuery('type', 'country');
+        gr.addQuery('value', country);
+        gr.query();
+
+        return gr.next() ? gr.getUniqueValue() : "";
+    };
+
+    /**
+     * Checks if there is a active shift with that specific group. 
+     * @param {string} group sys_id of the group.  
+     * @returns {boolean} 
+     **/
+    var checkGroupOnCall = function(group) {
+        var grShift = new GlideRecord("cmn_rota");
+        grShift.addQuery("active", true);
+        grShift.addQuery("group", group);
+        grShift.query();
+
+        return grShift.hasNext() ? true : false;
+    };
+
+    /**
+     * Create an Object based on a Message Template
+	 * @param {string} template :  sys_id of the template to be used in the task
+	 * return {string} : Object stringified
+	 * 
+     **/
+    var getMessageTemplateInfo = function(template) {
+        var grTaskTemplate = new GlideRecord(CIRConstants.Tables.MESSAGE);
+        var result = {};
+
+        if (grTaskTemplate.get(template)) {
+            result = {
+                name: grTaskTemplate.getValue('name'),
+                type: grTaskTemplate.getValue('type'),
+                body: grTaskTemplate.getValue('body'),
+                subject: grTaskTemplate.getValue('subject'),
+                plain: grTaskTemplate.getValue('plain_text')
+            };
+        }
+
+        return JSON.stringify(result);
+    };
+
+    /**
+     * Get all Response Plan Templates for a specific dimension
+	 * @param {string} dimension : sys_id of a dimension
+	 * return {Array} with all response Plan Teplates
+	 * Called in Script Include client Callable 'CIRSituationUtilsClient'
+     **/
+    var getResponsePlanTemplates = function(dimension) {
+        var templates = [];
+
+        var gr = new GlideRecord(CIRConstants.Tables.RESP_PLAN_TEMPLATE);
+        gr.addEncodedQuery('active=true^parametrization=false^dimension.sys_id=' + dimension);
+        gr.query();
+
+        while (gr.next()) {
+            templates.push({
+                id: gr.getUniqueValue().toString(),
+                name: gr.getValue('name'),
+                description: gr.getValue('description')
+            });
+        }
+        return templates;
+    };
+
+    /**
+     * Gets all On Call Teams for a specific country and dimension
+	 * @param {string} country : sys_id of a country
+	 * @param {string} dimension : sys_id of a dimension
+	 * return {string} list of all teams that matches the quey
+     **/
+    var filterOnCallTeamOnParamt = function(country, dimension) {
+        var onCallTeams = [];
+
+        var grOnCall = new GlideRecord(CIRConstants.Tables.ON_CALL_TEAM);
+        grOnCall.addQuery('country', 'CONTAINS', country);
+        grOnCall.addQuery('dimension', dimension);
+        grOnCall.query();
+
+        while (grOnCall.next()) {
+            onCallTeams.push(grOnCall.getUniqueValue());
+        }
+
+        return onCallTeams.toString();
+    };
+
+    /**
+     * Get all Message Sets for a specific dimension
+	 * @param {string} dimension : sys_id of a dimension
+	 * return {Array} with all Messages sets that matches the query
+	 * called from CIRSituationUtilsClient
+     **/
+    var getMessageSetTemplates = function(dimension) {
+        var templates = [];
+
+        var gr = new GlideRecord(CIRConstants.Tables.MSG_SET);
+        gr.addEncodedQuery('active=true^table=' + CIRConstants.Tables.SITUATION + '^ORtable=' + CIRConstants.Tables.RESP_PLAN_EXEC + '^parametrization=false^dimension.sys_id=' + dimension);
+        gr.query();
+
+        while (gr.next()) {
+            templates.push({
+                id: gr.getUniqueValue().toString(),
+                table: gr.getDisplayValue('table'),
+                description: gr.getValue('description')
+            });
+        }
+        return templates;
+    };
+
+
+    /**
+	 * -Creates a Message Set for a specific parametrization
+	 * @param {string} templateId : sys_id of a Message Set
+	 * @param {string} paramId : sys_id of a Parametrizatoin
+     * 	Called from CIRSituationUtilsClient from UI Page createMessageSet from UI page 'cir_show_message_set_templates'
+     **/
+    var createMessageSetParam = function(templateId, paramId) {
+        var grMSTemplate = new GlideRecord(CIRConstants.Tables.MSG_SET);
+
+        if (grMSTemplate.get(templateId)) {
+            var grNewMSParam = new GlideRecord(CIRConstants.Tables.MSG_SET);
+            grNewMSParam.initialize();
+            grNewMSParam.setValue('template', templateId);
+            grNewMSParam.setValue('parametrization', 'true');
+            grNewMSParam.setValue('situation_parametrization', paramId);
+            grNewMSParam.setValue('dimension', grMSTemplate.getValue('dimension'));
+            grNewMSParam.setValue('table', grMSTemplate.getValue('table'));
+            grNewMSParam.setValue('active', 'true');
+            grNewMSParam.setValue('description', grMSTemplate.getValue('description'));
+            grNewMSParam.setValue('on_insert', grMSTemplate.getValue('on_insert'));
+            grNewMSParam.setValue('on_update', grMSTemplate.getValue('on_update'));
+            var newMSParamId = grNewMSParam.insert();
+
+            copyCrisisMessages(templateId, newMSParamId);
+        }
+    };
+
+    /**
+     * Creates a copy of all message of a message set to another Message Set
+	 * @param {string} templateId : sys_id of a Message Set
+	 * @param {string} copyId : sys_id of a Message Set that contains the copy of the messages
+	 * return the result of the insertion of the Parametrizatoion Record
+     **/
+    var copyCrisisMessages = function(templateId, copyId) {
+        var grCMessage = new GlideRecord(CIRConstants.Tables.SITUATION_MSG);
+        grCMessage.addQuery('message_set', templateId);
+        grCMessage.query();
+
+        while (grCMessage.next()) {
+            var grNewCMessage = new GlideRecord(CIRConstants.Tables.SITUATION_MSG);
+            grNewCMessage.initialize();
+            grNewCMessage.setValue('active', grCMessage.getValue('active'));
+            grNewCMessage.setValue('condition', grCMessage.getValue('condition'));
+            grNewCMessage.setValue('contact_list', grCMessage.getValue('contact_list'));
+            grNewCMessage.setValue('contact_option', grCMessage.getValue('contact_option'));
+            grNewCMessage.setValue('dependent_on', grCMessage.getValue('dependent_on'));
+            grNewCMessage.setValue('description', grCMessage.getValue('description'));
+            grNewCMessage.setValue('dynamic_contact', grCMessage.getValue('dynamic_contact'));
+            grNewCMessage.setValue('feedback', grCMessage.getValue('feedback'));
+            grNewCMessage.setValue('message', grCMessage.getValue('message'));
+            grNewCMessage.setValue('message_set', copyId);
+            grNewCMessage.setValue('message_type', grCMessage.getValue('message_type'));
+            grNewCMessage.setValue('name', grCMessage.getValue('name'));
+            grNewCMessage.setValue('order', grCMessage.getValue('order'));
+            grNewCMessage.setValue('scenario_template', grCMessage.getValue('scenario_template'));
+            grNewCMessage.setValue('short_description', grCMessage.getValue('short_description'));
+            grNewCMessage.setValue('timer', grCMessage.getValue('timer'));
+            grNewCMessage.insert();
+        }
+    };
+
+    /**
+     * Create all the response plan Template and Steps for a specific  parametrizations based on a response Plan Template
+	 * @param {string} parent : sys_id of a Response Plan Template to be copied
+	 * @param {string} crisisParam : sys_id of te parametrization that will contain the copy of the Response Plan Template
+	 * return the result of insertion og the parametrization record
+     **/
+    var createResponsePlanParam = function(parent, crisisParam) {
+        var param = new GlideRecord(CIRConstants.Tables.RESP_PLAN_TEMPLATE);
+        param.initialize();
+
+        var template = new GlideRecord(CIRConstants.Tables.RESP_PLAN_TEMPLATE);
+        if (template.get(parent)) {
+            param.setValue('name', template.getValue('name') + " (*)");
+            param.setValue('active', template.getValue('active'));
+            param.setValue('category', template.getValue('category'));
+            param.setValue('description', template.getValue('description'));
+            param.setValue('dimension', template.getValue('dimension'));
+            param.setValue('message_type', template.getValue('message_type'));
+        }
+
+        param.setValue('parametrization', true);
+        param.setValue('situation_parametrization', crisisParam);
+        param.setValue('template', parent);
+
+        // record of resplonse plan parametrization
+        var paramRecord = param.insert();
+
+
+        var existing = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP);
+        existing.addEncodedQuery('response_plan_template=' + parent + "^active=true");
+        existing.query();
+
+        while (existing.next()) {
+
+            var paramStep = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP);
+            paramStep.initialize();
+
+            if (existing.getValue('sys_class_name') === CIRConstants.Tables.RESP_PLAN_STEP_MSG) {
+
+                var existingMessage = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP_MSG);
+                if (existingMessage.get(existing.getUniqueValue())) {
+                    paramStep.feedback = existingMessage.feedback;
+                    paramStep.message_type = existingMessage.message_type;
+                    paramStep.message = existingMessage.message;
+                    paramStep.contact_list = existingMessage.contact_list;
+                    paramStep.timer = existingMessage.timer;
+                }
+            } 
+			else if (existing.getValue('sys_class_name') === CIRConstants.Tables.RESP_PLAN_STEP_ACTN) {
+
+                var existingAction = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP_ACTN);
+
+                if (existingAction.get(existing.sys_id)) {
+                    paramStep.setValue('short_description', existing.getValue('short_description'));
+                }
+            }
+            paramStep.setValue('name', existing.getValue('name'));
+            paramStep.setValue('condition', existing.getValue('condition'));
+            paramStep.setValue('description', existing.getValue('description'));
+
+            paramStep.setValue('order', existing.getValue('order'));
+            paramStep.setValue('active', existing.getValue('active'));
+            paramStep.setValue('sys_class_name', existing.getValue('sys_class_name'));
+            paramStep.setValue('copied_from', existing.sys_id);
+            paramStep.setValue('response_plan_template', paramRecord);
+
+            paramStep.insert();
+        }
+
+        var rebuild = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP);
+        rebuild.addEncodedQuery('response_plan_template=' + paramRecord + '^order!=1');
+        rebuild.orderByDesc('order');
+        rebuild.query();
+
+        while (rebuild.next()) {
+            var dependentStep = [];
+            var copied = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP);
+            if (copied.get(rebuild.copied_from)) {
+                var copiedParent = copied.dependent_on.split(",");
+                for (var i = 0; i < copiedParent.length; i++) {
+                    var dependent = new GlideRecord(CIRConstants.Tables.RESP_PLAN_STEP);
+                    dependent.addEncodedQuery('response_plan_template=' + paramRecord);
+                    dependent.addEncodedQuery("^copied_from=" + copiedParent[i]);
+                    dependent.query();
+                    if (dependent.next()) {
+                        dependentStep.push(dependent.sys_id + '');
+                    }
+                }
+            }
+            rebuild.setValue('dependent_on', dependentStep);
+            rebuild.update();
+        }
+
+        return paramRecord;
+    };
+
+    /**
+     * called on category reference qual on multiple situation mgt tables
+     * gets the current dimension id
+     * returns query with the categories that has the selected dimension
+     */
+    var filterCatByDimensionQuery = function(dimensionId) {
+        var categories = [];
+
+        var grCat = new GlideRecord(CIRConstants.Tables.SITUATION_CATEGORY);
+        grCat.query('dimension', dimensionId);
+        grCat.addActiveQuery();
+        grCat.query();
+
+        while (grCat.next()) {
+            categories.push(grCat.getUniqueValue());
+        }
+
+        return 'sys_idIN' + categories.join(',') + '';
+    };
+
+    /**
+     * called on category reference qual on response template table
+     * gets the current dimension id
+     * returns query with the categories that has the selected dimension
+     */
+    var filterCatByDimensionForRespTemplate = function(dimensionId) {
+        var categories = [];
+        var grCat = new GlideRecord(CIRConstants.Tables.RESP_PLAN_CATEGORY);
+        grCat.addQuery('dimension', dimensionId);
+        grCat.addQuery('active', true);
+        grCat.query();
+        while (grCat.next()) {
+            categories.push(grCat.getUniqueValue());
+        }
+        return 'sys_idIN' + categories.toString();
+    };
+
+
+    /**
+     * Get all users with roles situation_administrator, situation_manager, situation_user, situation_operator, senior_situation_manager , situation_initiator of a dimension of a specific Situation or Response Plan Execution
+	 * @param {string} parent : sys_id of a Response Plan execution or Situation
+	 * @param {string} type : Type of record that we want to get the users from the group of the dimension
+	 * return {String} 'sys_idIN' +  sys_ids of users that match the role from the group of the dimension
+     **/
+    var filterCrisisMembers = function(parent, type) {
+        var table = type === 'situation' ? CIRConstants.Tables.SITUATION : CIRConstants.Tables.RESP_PLAN_EXEC;
+
+        var roles = ['x_fru_cir.situation_administrator', 'x_fru_cir.situation_manager', 'x_fru_cir.situation_user', 'x_fru_cir.situation_operator', 'x_fru_cir.senior_situation_manager', 'x_fru_cir.situation_initiator'];
+        var finalUsers = [];
+
+        var gr = new GlideRecord(table);
+        if (gr.get(parent)) {
+            var groupDimension = new GlideRecord(CIRConstants.Tables.DIMENSION);
+            if (groupDimension.get(gr.dimension)) {
+                var groups = groupDimension.groups.split(",");
+                var users = new GlideRecord('sys_user_grmember');
+                var queryString = '';
+                for (var i = 0; i < groups.length; i++) {
+                    if (i === 0) {
+                        queryString += 'group.sys_id=' + groups[i];
+                    } else {
+                        queryString += '^ORgroup.sys_id=' + groups[i];
+                    }
+                }
+                users.addEncodedQuery(queryString);
+                users.query();
+                while (users.next()) {
+                    var userRoles = new GlideRecord('sys_user_has_role');
+                    userRoles.addQuery('user', users.user);
+                    userRoles.addQuery('role.name', 'IN', roles.join());
+                    userRoles.query();
+                    if (userRoles.next()) {
+                        finalUsers.push(users.user + '');
+                    }
+                }
+            }
+        }
+        return 'sys_idIN' + finalUsers.join() + '';
+    };
+
+    /**
+     * gets the user's group
+     * @returns {array[strings]} returns an array with the sys_ids of the user's group
+     */
+    var getUserGroups = function() {
+        var groups = [];
+        var grGroup = new GlideRecord('sys_user_grmember');
+        grGroup.addQuery("user", gs.getUserID());
+        grGroup.query();
+        while (grGroup.next()) {
+            groups.push(grGroup.getValue('group'));
+        }
+        return groups;
+    };
+
+    /**
+     * it is used in the portal and it returns the record of the portal
+     * @param {string} table - name of the table
+     * @param {string} sys_id - sys_id of the record
+     * @returns {object}
+     */
+    var getRecord = function(table, sys_id) {
+        var obj = {
+            valid: false,
+            glide_record: {}
+        };
+        var grRecord = new GlideRecord(table);
+        grRecord.addQuery('sys_id', sys_id);
+        grRecord.query();
+        if (grRecord.next()) {
+            obj.valid = true;
+            obj.glide_record = grRecord;
+        }
+
+        return obj;
+    };
+
+    /**
+     * Get the number of users that already access a specific situation record
+	 * @param {string} crisisRecord - sys_id of the Situation record
+	 * return {Integer} number of users that match the query
+     */
+    var getOnlineMembers = function(crisisRecord) {
+        var total = 0;
+        var grCrisisMembers = new GlideAggregate(CIRConstants.Tables.SITUATION_MEMBER);
+        grCrisisMembers.addQuery('situation', crisisRecord);
+        grCrisisMembers.addEncodedQuery('last_access_time!=NULL');
+        grCrisisMembers.addAggregate('COUNT');
+        grCrisisMembers.query();
+        if (grCrisisMembers.next()) {
+            total = grCrisisMembers.getAggregate('COUNT');
+        }
+        return total;
+    };
+
+    /**
+     * checks how many dimensions the user belongs to
+     * @returns {integer} total of dimensions
+     */
+    var getTotalOfDimensions = function() {
+        var total = 0;
+        var groups = getUserGroups();
+
+        // getting total of dimensions of the user
+        var gaDimensions = new GlideAggregate(CIRConstants.Tables.DIMENSION);
+        gaDimensions.addEncodedQuery('groupsIN' + groups);
+        gaDimensions.addQuery('active', true);
+        gaDimensions.addAggregate('COUNT');
+        gaDimensions.query();
+        if (gaDimensions.next()) {
+            total = gaDimensions.getAggregate('COUNT');
+        }
+        // if the user only has one dimension, it will set the value in the current record
+        if (total === '1' && current.isNewRecord()) {
+
+            // getting the dimension to set in the current record
+            var grDimension = new GlideRecord(CIRConstants.Tables.DIMENSION);
+            grDimension.addEncodedQuery(gaDimensions.getEncodedQuery());
+            grDimension.setLimit(1);
+            grDimension.query();
+            if (grDimension.next()) {
+                current.dimension = grDimension.getUniqueValue();
+            }
+        }
+        return total;
+    };
+
+    /**
+     * returns a query with a list of groups that have the role crisis_dimensions_group
+     */
+    var getGroupsList = function() {
+        var groupsList = [];
+        var grGroup = new GlideRecord('sys_group_has_role');
+        grGroup.addEncodedQuery("role.name=x_fru_cir.situation_dimensions_group");
+        grGroup.query();
+        while (grGroup.next()) {
+            groupsList.push(grGroup.group + '');
+        }
+        return 'sys_idIN' + groupsList.toString();
+    };
+
+/**
+     * return {String} 'sys_idIN' +  sys_ids of users that match the job Title
+     */
+    var filterUserByJobTitle = function(jobTitle, user) {
+        var query = '';
+
+        if (jobTitle.indexOf(',') != -1) {
+            var jobTitles = jobTitle.split(',');
+            query += 'job_titleCONTAINS' + jobTitles[0];
+            for (var i = 1; i < jobTitles.length; i++) {
+                query += '^ORjob_titleCONTAINS' + jobTitles[i];
+            }
+        } else {
+            query = 'job_titleCONTAINS' + jobTitle.toString();
+        }
+
+        var users = [];
+        var grUserProfile = new GlideRecord(CIRConstants.Tables.USER_PROFILE);
+        grUserProfile.addEncodedQuery(query + '^user!=' + user);
+        grUserProfile.query();
+
+        while (grUserProfile.next()) {
+            users.push(grUserProfile.getValue('user'));
+        }
+        return 'sys_idIN' + users.toString();
+    };
+
+    CIRSituationUtilsFP.prototype = {
+        initialize: initialize,
+        CreateExecScenario: createExecScenario,
+        AddPersonOnCall: addPersonOnCall,
+        CreateCrisisMember: createCrisisMember,
+        GetNumbUsersByLoc: getNumbUsersByLoc,
+        GetTemplateLocations: getTemplateLocations,
+        SendMessage: sendMessage,
+        GetPhoneNumbers: getPhoneNumbers,
+        GetUnverifiedContacts: getUnverifiedContacts,
+        GetValidatedContacts: getValidatedContacts,
+        GetContactGroups: getContactGroups,
+        GetUsersFromGroup: getUsersFromGroup,
+        GetUsersFromCondition: getUsersFromCondition,
+        ValidateUser: validateUser,
+        CreateMessageRecipient: createMessageRecipient,
+        MessageExists: messageExists,
+        GetFeedbackState: getFeedbackState,
+        RenderMailtoButton: renderMailtoButton,
+        GetButton: getButton,
+        GetFlowSteps: getFlowSteps,
+        GetTemplate: getTemplate,
+        NewStepObject: newStepObject,
+        GetExecState: getExecState,
+        UpdateMsgRecipient: updateMsgRecipient,
+        GetUserByNumber: getUserByNumber,
+        UserExecPermission: userExecPermission,
+        UserExistsInGroup: userExistsInGroup,
+        GetRecipientInfo: getRecipientInfo,
+        GetSingleContacts: getSingleContacts,
+        GetUserInfo: getUserInfo,
+        GetActiveTeam: getActiveTeam,
+        EmailActiveTeam: emailActiveTeam,
+        TriggerCall: triggerCall,
+        FilterByCountry: filterByCountry,
+        GetLocations: getLocations,
+        GetMembers: getMembers,
+        ChangeUserState: changeUserState,
+        GetQueryForPortal: getQueryForPortal,
+        GetQueryCrisis: getQueryCrisis,
+        GetRoleBasedSituationQuery: getRoleBasedSituationQuery,
+        FilterCrisisOnMembers: filterCrisisOnMembers,
+        GetQueryRespPlans: getQueryRespPlans,
+        GetRoleBasedRespPlanQuery: getRoleBasedRespPlanQuery,
+        FilterOnRespTeamMembers: filterOnRespTeamMembers,
+        ExecuteMessageSet: executeMessageSet,
+        FetchStepMessages: fetchStepMessages,
+        ExecuteMessage: executeMessage,
+        GetContactMsgSet: getContactMsgSet,
+        BuildDynamicContactList: buildDynamicContactList,
+        GetOnCallContacts: getOnCallContacts,
+        SetParentRecord: setParentRecord,
+        AddEscalationMembers: addEscalationMembers,
+        GetMemberIds: getMemberIds,
+        FilterOutExistingMbrs: filterOutExistingMbrs,
+        GetUserIdFromMail: getUserIdFromMail,
+        ManageRTeamCreation: manageRTeamCreation,
+        GetMissingRoles: getMissingRoles,
+        CreateRTeamRec: createRTeamRec,
+        GetFsmRoles: getFsmRoles,
+        UpdateResponseTeam: updateResponseTeam,
+        GetFields: getFields,
+        BuildMessageBody: buildMessageBody,
+        FilterResponsePlans: filterResponsePlans,
+        CreateCopyMsgSet: createCopyMsgSet,
+        SendMsgToRTeam: sendMsgToRTeam,
+        GetExecRec: getExecRec,
+        GetExecRTeam: getExecRTeam,
+        GetUserCountry: getUserCountry,
+        MessageSetConditionCheck: messageSetConditionCheck,
+        CreateRespTempExcel: createRespTempExcel,
+        CreateSteps: createSteps,
+        TemplateExist: templateExist,
+        CreateMessageStep: createMessageStep,
+        CreateActionStep: createActionStep,
+        CreateConditionStep: createConditionStep,
+        GetStepsByName: getStepsByName,
+        StringToBoolean: stringToBoolean,
+        GetMessageByName: getMessageByName,
+        GetCategoryByName: getCategoryByName,
+        GetChoiceValue: getChoiceValue,
+        GetAttachmentID: getAttachmentID,
+        FetchResponsePlan: fetchResponsePlan,
+        GetValue: getValue,
+        CheckSitEscalationLevel: checkSitEscalationLevel,
+        GetUsersName: getUsersName,
+        GetTaskTemplateInfo: getTaskTemplateInfo,
+        GetLocationsListField: getLocationsListField,
+        GetCountryID: getCountryID,
+        GetCrisisCountries: getCrisisCountries,
+        GetCountryAddressID: getCountryAddressID,
+        CheckGroupOnCall: checkGroupOnCall,
+        GetResponsePlanTemplates: getResponsePlanTemplates,
+        FilterOnCallTeamOnParamt: filterOnCallTeamOnParamt,
+        GetMessageSetTemplates: getMessageSetTemplates,
+        CreateMessageSetParam: createMessageSetParam,
+        CopyCrisisMessages: copyCrisisMessages,
+        CreateResponsePlanParam: createResponsePlanParam,
+        FilterCatByDimensionQuery: filterCatByDimensionQuery,
+        FilterCatByDimensionForRespTemplate: filterCatByDimensionForRespTemplate,
+        GetUserGroups: getUserGroups,
+        GetRecord: getRecord,
+        GetOnlineMembers: getOnlineMembers,
+        GetTotalOfDimensions: getTotalOfDimensions,
+        GetNumbUsersbyVirtLoc: getNumbUsersbyVirtLoc,
+        GetNumbUsersbyLocGroup: getNumbUsersbyLocGroup,
+        SendMessageCrisisTask: sendMessageCrisisTask,
+        GetValidatedContactsCrisisTask: getValidatedContactsCrisisTask,
+        ValidateUserCrisisTask: validateUserCrisisTask,
+        CreateMessageRecipientCrisisTask: createMessageRecipientCrisisTask,
+        MessageExistsCrisisTask: messageExistsCrisisTask,
+        GetOnInsertCrisisMemberUsers: getOnInsertCrisisMemberUsers,
+        GetDefaultEscalationCL: getDefaultEscalationCL,
+        GetContactsFromList: getContactsFromList,
+        BuildMessageBodyCrisisTask: buildMessageBodyCrisisTask,
+        GetGroupsList: getGroupsList,
+        GenAttachment: genAttachment,
+        GetBuildingsByCountries: getBuildingsByCountries,
+        GetExecutionTasks: getExecutionTasks,
+        ReplaceTagsToValue: replaceTagsToValue,
+        FilterUserByJobTitle: filterUserByJobTitle,
+        GetMessageTemplateInfo: getMessageTemplateInfo
+    };
+
+    return CIRSituationUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-24 08:53:55</sys_created_on>
+        <sys_id>7627f8781bf78450df7e43f4bd4bcb5b</sys_id>
+        <sys_mod_count>374</sys_mod_count>
+        <sys_name>CIRSituationUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_7627f8781bf78450df7e43f4bd4bcb5b</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-10-28 11:06:44</sys_updated_on>
+    </sys_script_include>
+</record_update>

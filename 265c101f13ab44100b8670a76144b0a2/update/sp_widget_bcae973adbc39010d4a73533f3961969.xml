@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil, cabrillo) {
+	var c = this;
+
+	//a-b
+	//c-d
+	var calculateRuleOfThree = function(a, b, c) {
+		return (b * c) / a;
+	};
+	
+	var showBodyFront = function() {
+		jQuery('#imageContainerFront').show();
+		jQuery('#imageContainerBack').hide();
+	};
+
+	var showBodyBack = function() {
+		jQuery('#imageContainerFront').hide();
+		jQuery('#imageContainerBack').show();
+	};
+
+	var increaseContainerSize = function(container) {
+		for (var i = 0; i < container.length; i++) {
+			container[i].width = calculateRuleOfThree(c.imgOriginalW, c.imgWidth, container[i].width);
+			container[i].height =  calculateRuleOfThree(c.imgOriginalH, c.imgHeight, container[i].height);
+			//the coordinates where define for an image with a 20px padding, so we need to remove it
+			//-20 didn't worked for the back of the body, because the initial image had both sides togehter
+			if (container[i].x > c.imgOriginalW) {
+				container[i].x =  calculateRuleOfThree(c.imgOriginalW, c.imgWidth, container[i].x - 10);
+			} else {
+				container[i].x =  calculateRuleOfThree(c.imgOriginalW, c.imgWidth, container[i].x - 20);
+			}
+			container[i].y =  calculateRuleOfThree(c.imgOriginalH, c.imgHeight, container[i].y - 20);
+		}
+		return container;
+	};
+
+	var createCoordinatesForOriginalResolution =  function(coordinates) {
+		var coordinatesArr = coordinates.split(',');
+		var xMargin = 20;
+		if (coordinatesArr[0] > c.imgWidth) {
+			xMargin = 10;
+		}
+		var x = calculateRuleOfThree(c.imgWidth, coordinatesArr[0], c.imgOriginalW) + xMargin;
+		var y = calculateRuleOfThree(c.imgHeight, coordinatesArr[1], c.imgOriginalH) + 20;
+		return x + ',' + y;
+	};
+
+	var putMarkerOnImage = function() {
+		var injuries = c.data.injuries;
+		if (injuries) {
+			for (var i = 0; i < injuries.length; i++) {
+				if (injuries[i].x > 0) {
+					var container = jQuery("#injuryContainerFront");
+					var xMargin = 20;
+
+					if (injuries[i].x > c.imgOriginalW) {
+						xMargin = 10;
+						injuries[i].x -= c.imgOriginalW;
+						container = jQuery("#injuryContainerBack");
+						if (c.data.recordType === "x_fru_cir_injury_illness") {
+							showBodyBack();
+						}
+					}
+					
+					var newX = calculateRuleOfThree(c.imgOriginalW, injuries[i].x - xMargin, c.imgWidth);
+					var newY = calculateRuleOfThree(c.imgOriginalH, injuries[i].y - 20, c.imgHeight);
+					
+					var injuryObject = '<i class="fa fa-circle injury" style="position:absolute;left:' + newX + 'px;top:' + newY + 'px;width:' + injuries[i].width + 'px;height:' + injuries[i].width + 'px;font-size:' + injuries[i].font_size + ';z-index:25;" title="' + injuries[i].label + '"></i>';
+					container.append(injuryObject);
+
+					var bodyLocation = injuries[i].label.split('-')[1];
+					jQuery("#bodyLocation").text(bodyLocation);
+				}
+			}
+		}
+	};
+
+	var swipeDetect = function(el, callback) {
+		var touchsurface = el,
+			swipedir,
+			startX,
+			startY,
+			distX,
+			distY,
+			threshold = 150, //required min distance traveled to be considered swipe
+			restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+			allowedTime = 300, // maximum time allowed to travel that distance
+			elapsedTime,
+			startTime,
+			handleswipe = callback || function(swipedir){}
+
+		touchsurface.addEventListener('touchstart', function(e) {
+			var touchobj = e.changedTouches[0];
+			swipedir = 'none';
+			dist = 0;
+			startX = touchobj.pageX;
+			startY = touchobj.pageY;
+			startTime = new Date().getTime(); // record time when finger first makes contact with surface
+		}, false);
+
+		touchsurface.addEventListener('touchend', function(e) {
+			var touchobj = e.changedTouches[0];
+			distX = touchobj.pageX - startX; // get horizontal dist traveled by finger while in contact with surface
+			distY = touchobj.pageY - startY; // get vertical dist traveled by finger while in contact with surface
+			elapsedTime = new Date().getTime() - startTime; // get time elapsed
+			if (elapsedTime <= allowedTime) { // first condition for swipe met
+				if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+					swipedir = (distX < 0)? 'left' : 'right'; // if dist traveled is negative, it indicates left swipe
+				}
+			}
+			handleswipe(swipedir);
+		}, false);
+	};
+
+	var el = document.getElementById('imagesContainer');
+	swipeDetect(el, function(swipedir) {
+		if (swipedir === 'right' || swipedir === 'left') {
+			if (jQuery('#imageContainerFront').is(":hidden")) {
+				showBodyFront();
+			} else {
+				showBodyBack();
+			}
+		}
+	});
+
+	jQuery(document).ready(function() {
+		jQuery('#bodyImage').load(function() {
+			c.imgOriginalW = jQuery('#bodyImage')[0].naturalWidth;
+			c.imgOriginalH = jQuery('#bodyImage')[0].naturalHeight;
+			c.imgWidth = jQuery('#bodyImage')[0].width;
+			c.imgHeight = jQuery('#bodyImage')[0].height;
+
+			c.bodyLocationsBack = increaseContainerSize(c.data.bodyLocationsBack);
+			c.bodyLocationsFront = increaseContainerSize(c.data.bodyLocationsFront);
+
+			showBodyFront();
+			putMarkerOnImage();
+		});
+	});
+
+	c.addMarker = function(event, regionID) {
+		var imageContainer = jQuery("#imageContainerFront");
+		if (jQuery(this).parent('#imageContainerBack').length) {
+			imageContainer = jQuery("#imageContainerBack");
+		}
+
+		var recordType = c.data.recordType;
+		if (recordType == 'x_fru_cir_injury_illness') {
+			jQuery('.region').each(function(){
+				jQuery(this).removeClass('selected');
+			});
+			var region = jQuery('#' + regionID);
+			region.addClass('selected');
+
+			var title = region.attr('title');
+			jQuery("#bodyLocation").text(title);
+
+			imageContainer.each(function() {
+				var container = jQuery('#injuryContainerFront');
+				var position = region.position();
+				var positionX = position.left + event.offsetX;
+				var positionY = position.top + event.offsetY;
+				jQuery('.injury').remove();
+				if (jQuery('#imageContainerFront').is(":hidden")) {
+					container = jQuery('#injuryContainerBack');
+					//add the width, so the X coordinates are stored with values that can be used on the platform
+					jQuery('#coordinates').val((positionX + c.imgWidth) + ',' + positionY);
+				} else {
+					jQuery('#coordinates').val(positionX + ',' + positionY);
+				}
+				container.append('<i class="fa fa-circle injury" style="left:' + positionX + 'px;top:' + positionY + 'px;z-index:25;"></i>');
+			});
+		}
+	};
+
+	c.addInjury = function() {
+		var selectedRegion = jQuery('.selected').attr('id');
+		var coordinates = jQuery('#coordinates').val();
+		var newCoordinates = createCoordinatesForOriginalResolution(coordinates);
+
+		if (newCoordinates) {
+			c.server.get({
+				addInjury: true,
+				coordinates: newCoordinates,
+				selectedRegion: selectedRegion
+			}).then(function() {
+				cabrillo.navigation.goBack();
+			});
+		} else {
+			cabrillo.navigation.goBack();
+		}
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/*&#13;
+to manage the colors of the arrows, change values on variables:&#13;
+--arrow-color_1&#13;
+--arrow-color_2&#13;
+--arrow-color_3&#13;
+*/&#13;
+#swipe_text {&#13;
+  --distance-from-screen-sides: 5%;&#13;
+  --distance-from-screen-top: 35%;&#13;
+  --position: absolute;&#13;
+  --arrow-color_1: #c8c4bb;&#13;
+  --arrow-color_2: #fff;&#13;
+  --arrow-color_3: #c8b891;&#13;
+  z-index: 50;&#13;
+  font-size: 10vw;&#13;
+}&#13;
+&#13;
+#left_arrows {&#13;
+  text-align: left;&#13;
+  position: var(--position);&#13;
+  left: var(--distance-from-screen-sides);&#13;
+  top: var(--distance-from-screen-top);&#13;
+&#13;
+  background: linear-gradient(to right, var(--arrow-color_1) 10%, var(--arrow-color_2) 50%, var(--arrow-color_3) 60%);&#13;
+  background-size: auto auto;&#13;
+  background-clip: border-box;&#13;
+  background-size: 200% auto;&#13;
+  background-clip: text;&#13;
+  text-fill-color: transparent;&#13;
+  -webkit-background-clip: text;&#13;
+  -webkit-text-fill-color: transparent;&#13;
+  animation: textclip_left 1.5s linear infinite;&#13;
+}&#13;
+&#13;
+#right_arrows {&#13;
+  text-align: right;&#13;
+  position: var(--position);&#13;
+  right: var(--distance-from-screen-sides);&#13;
+  top: var(--distance-from-screen-top);&#13;
+&#13;
+  background: linear-gradient(to right, var(--arrow-color_1) 10%, var(--arrow-color_2) 50%, var(--arrow-color_3) 60%);&#13;
+  background-size: auto auto;&#13;
+  background-clip: border-box;&#13;
+  background-size: 200% auto;&#13;
+  background-clip: text;&#13;
+  text-fill-color: transparent;&#13;
+  -webkit-background-clip: text;&#13;
+  -webkit-text-fill-color: transparent;&#13;
+  animation: textclip_right 1.5s linear infinite;&#13;
+}&#13;
+&#13;
+@keyframes textclip_left {&#13;
+  to {&#13;
+    background-position: 220% center;&#13;
+  }&#13;
+}&#13;
+&#13;
+@keyframes textclip_right {&#13;
+  to {&#13;
+    background-position: -220% center;&#13;
+  }&#13;
+}&#13;
+&#13;
+.selected {&#13;
+  border: 2px solid #ff0000;&#13;
+}&#13;
+&#13;
+.region:hover {&#13;
+  border: 2px solid grey;&#13;
+}&#13;
+&#13;
+.selected:hover {&#13;
+  border: 2px solid #ff0000 !important;&#13;
+}&#13;
+&#13;
+.injury {&#13;
+  color: red;&#13;
+  position: absolute;&#13;
+  width: 10px;&#13;
+}&#13;
+&#13;
+#buttons {&#13;
+  padding: 5px;&#13;
+  display: flex; &#13;
+  justify-content: center; &#13;
+}&#13;
+&#13;
+#bodyLocation {&#13;
+  text-align:center;&#13;
+  width:100%;&#13;
+  z-index:50;&#13;
+  background: #ffffff;&#13;
+  color: #000000;&#13;
+  padding: 7px&#13;
+}&#13;
+&#13;
+img {&#13;
+  z-index:-1;&#13;
+  width: 100%;&#13;
+  height: auto;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir_body_location</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR Body location</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+	data.recordType = $sp.getParameter('recordType');
+	data.recordSys =  $sp.getParameter('recordSys');
+	data.filter = $sp.getParameter('filter');
+
+	var cirImpactUtils = new CIRImpactUtils();
+	var cirMobileUtils = new CIRMobileUtils();
+
+	data.bodyLocationsFront = cirMobileUtils.GetBodyLocations('front');
+	data.bodyLocationsBack = cirMobileUtils.GetBodyLocations('back');
+	data.injuryMessage = gs.getMessage('cir_add_injury');
+	data.rotateMessage = gs.getMessage('cir_body_rotate');
+
+	data.injuries = '';
+
+	if (data.filter) {
+		data.injuries = new global.JSON().decode(cirImpactUtils.GetInjuries('', '', data.filter));
+	}
+	else {
+		data.injuries = new global.JSON().decode(cirImpactUtils.GetInjuries(data.recordType, data.recordSys));
+	}
+
+	if (input && input.addInjury) {
+		cirMobileUtils.AddInjury(data.recordSys, input.selectedRegion, input.coordinates);
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-09-08 16:17:01</sys_created_on>
+        <sys_id>bcae973adbc39010d4a73533f3961969</sys_id>
+        <sys_mod_count>284</sys_mod_count>
+        <sys_name>CIR Body location</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_bcae973adbc39010d4a73533f3961969</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-15 14:45:58</sys_updated_on>
+        <template><![CDATA[<input type="hidden" id="coordinates" value="" />
+
+<div id="imagesContainer" style="z-index:-5">  
+  <div id="imageContainerFront" style="z-index:-1">
+    <img id="bodyImage" class="bodyImg" src="cir_body_front.png"/>
+    <div ng-repeat="region in c.bodyLocationsFront">
+      <div class="region" title="{{region.name}}" id="{{region.sys_id}}" ng-click="c.addMarker($event, region.sys_id)"
+           style="position: absolute; width: {{region.width}}px; height: {{region.height}}px;
+                  top: {{region.y}}px; left:{{region.x}}px; z-index:50; background:transparent;" />
+    </div>
+    <div id="injuryContainerFront" style="text-align:center"></div>
+  </div>
+
+  <div id="imageContainerBack" style="z-index:-1">
+    <img id="bodyImage" class="bodyImg" src="cir_body_back.png"/>
+    <div ng-repeat="region in c.bodyLocationsBack">
+      <div class="region" title="{{region.name}}" id="{{region.sys_id}}" ng-click="c.addMarker($event, region.sys_id)"
+           style="position: absolute; width: {{region.width}}px; height: {{region.height}}px;
+                  top: {{region.y}}px; left:{{region.x-c.imgWidth}}px; z-index:50; background:transparent;" />
+    </div>
+    <div id="injuryContainerBack" style="text-align:center"></div>
+  </div>
+  
+   <div id="swipe_text">
+    <div id="left_arrows">&lt;&lt;</div>
+    <div id="right_arrows">&gt;&gt;</div>
+  </div>
+</div>
+
+<div ng-if="data.recordType==='x_fru_cir_injury_illness'">
+  <h4 id="bodyLocation"></h4>
+  <div id="buttons">
+    <button type="button" class="btn btn-primary" ng-click="c.addInjury()">{{data.injuryMessage}}</button>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

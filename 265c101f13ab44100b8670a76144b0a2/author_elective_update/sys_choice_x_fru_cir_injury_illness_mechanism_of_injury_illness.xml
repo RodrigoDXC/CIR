@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="mechanism_of_injury_illness" table="x_fru_cir_injury_illness" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>mechanism_of_injury_illness</element>
+            <name>x_fru_cir_injury_illness</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:06:11</sys_created_on>
+            <sys_id>fab6bf74138a50500b8670a76144b0f1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>mechanism_of_injury_illness</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_injury_illness_mechanism_of_injury_illness</sys_update_name>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:06:11</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Being hit by moving objects</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>10</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:06:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>06ef7867db11141003b3533fd396195a</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:06:20</sys_updated_on>
+            <value>hit_by_moving_object</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Contact or exposure to heat and cold</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>20</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:06:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>90ff7867db11141003b3533fd396195b</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:06:37</sys_updated_on>
+            <value>temperature_exposure</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Contact with electricity</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>30</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:06:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7800c967db11141003b3533fd3961971</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:06:48</sys_updated_on>
+            <value>electricity</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Contact with, or exposure to, biological factors</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>40</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:07:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>40104967db11141003b3533fd396193d</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:07:17</sys_updated_on>
+            <value>biological_exposure</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Exposure to mechanical vibration</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>50</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:07:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ba200d67db11141003b3533fd3961954</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:07:30</sys_updated_on>
+            <value>mechanical_vibration</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Exposure to mental stress factors</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>60</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:07:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7130c967db11141003b3533fd39619c7</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:07:41</sys_updated_on>
+            <value>mental_stress_factors</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Exposure to radiation</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>70</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:07:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f0408d67db11141003b3533fd3961905</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:07:53</sys_updated_on>
+            <value>radiation_exposure</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Exposure to sharp, sudden sound</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>80</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:07:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a3408d67db11141003b3533fd39619dd</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:08:04</sys_updated_on>
+            <value>sudden_sound</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Exposure to variations in pressure (other than sound)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>90</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:08:13</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ee508d67db11141003b3533fd39619f6</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:08:18</sys_updated_on>
+            <value>pressure_exposure</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Falls from a height</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>100</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:08:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c6604d67db11141003b3533fd39619de</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:08:31</sys_updated_on>
+            <value>falling_from_height</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Falls on the same level (including trips and slips)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>110</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:08:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b4704967db11141003b3533fd3961943</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:08:45</sys_updated_on>
+            <value>fall_from_same_level</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hitting objects with a part of the body</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>120</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:08:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>18808d67db11141003b3533fd39619fd</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:09:00</sys_updated_on>
+            <value>hitting_objects</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Long term contact with chemical or substance</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>130</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:09:06</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0490cd67db11141003b3533fd396198a</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:09:16</sys_updated_on>
+            <value>long_term_chemical_contact</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Long term exposure to sounds</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>140</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:09:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cb9041a7db11141003b3533fd3961943</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:09:31</sys_updated_on>
+            <value>long_term_sound</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other contact with chemical or substance (includes insect and spider bites and stings)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>150</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:09:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>76a041a7db11141003b3533fd3961915</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:09:45</sys_updated_on>
+            <value>other_chemical_contact</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other mechanism of injury</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>160</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:09:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>43b08d67db11141003b3533fd3961932</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:09:56</sys_updated_on>
+            <value>other_mechanism</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other muscular stress</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>170</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:10:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>75c041a7db11141003b3533fd3961917</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:10:09</sys_updated_on>
+            <value>other_muscle_stress</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Repetitive movement with low muscle loading</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>180</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:10:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>64d041a7db11141003b3533fd396194a</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:10:27</sys_updated_on>
+            <value>low_muscle_loading</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Single contact with chemical or substance (excludes insect and spider bites and stings)</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>190</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:10:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>51e0c1a7db11141003b3533fd39619fa</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:10:46</sys_updated_on>
+            <value>single_chemical_contact</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Slide or cave-in</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>200</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:10:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fdf0c1a7db11141003b3533fd39619fa</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:10:58</sys_updated_on>
+            <value>slide_or_cave_in</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Unspecified mechanisms of injury</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>210</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:11:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b80145a7db11141003b3533fd39619d1</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:11:09</sys_updated_on>
+            <value>unspecified_mechanisms</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>mechanism_of_injury_illness</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Vehicle accident</label>
+            <language>en</language>
+            <name>x_fru_cir_injury_illness</name>
+            <sequence>220</sequence>
+            <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-06-15 12:11:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>af0101a7db11141003b3533fd39619b1</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-06-15 12:11:21</sys_updated_on>
+            <value>vehicle</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

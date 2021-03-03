@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRAssmtImportUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected script for genereating the Assessment Definition objects from an excel file for the Assessment functionality. Not extensible.</description>
+        <name>CIRAssmtImportUtilsFP</name>
+        <script><![CDATA[var CIRAssmtImportUtilsFP = function() {
+    /**
+     * Function to validate and process the Excel file.
+     * Used in the 'Import Excel' UI Action for the 'Assesment Definition' table.
+     *
+     * @param {GlideRecord} grAssessmentDefinition - GlideRecord of the Current record
+     * @param {Object} parser - Parser element of Excel
+     * @return {Array} - Array with error messages to diplay
+     */
+    var processExcel = function(grAssessmentDefinition, parser) {
+        var arrErrors = [];
+        var SHEET_NUMBER = 0;
+        var HEADER_ROW_NUMBER = 0;
+        var grAttachment;
+        try {
+            grAttachment = getAttachment(grAssessmentDefinition);
+            var attachmentStream = new GlideSysAttachment().getContentStream(grAttachment.getUniqueValue());
+            if(!parser.parse(attachmentStream)) {
+                throw new Error(gs.getMessage('cir_assmt_error_parsing_file'));
+            }
+            var arrayAllRows = [];
+            var currentRowNumber = 1;
+            parser.setSheetNumber(SHEET_NUMBER);
+            parser.setHeaderRowNumber(HEADER_ROW_NUMBER);
+
+            CIRAssmtImportValidationFP().IsUsingTemplateFile(parser);
+
+            while(parser.next()) {
+                var row = parser.getRow();
+                currentRowNumber++;
+                arrayAllRows.push(createObjFromExcel(row, currentRowNumber));
+            }
+
+            if(arrayAllRows.length === 0) {
+                throw new Error(gs.getMessage('cir_assmt_no_valid_rows'));
+            }
+
+            arrErrors = CIRAssmtImportValidationFP().ValidateExcelData(arrayAllRows);
+
+            if(arrErrors.length === 0) {
+                processObject(arrayAllRows, grAssessmentDefinition.getUniqueValue());
+            }
+        } catch (error) {
+            arrErrors.push(error);
+        }
+
+        if(grAttachment) {
+            markFileAsProcessed(grAssessmentDefinition, grAttachment.getUniqueValue());
+        }
+        return arrErrors;
+    };
+
+    /**
+     * Get the attachement sys_id attached in the current definitions and create the parser for the excel content
+     * Used in the 'Process Excel' UI Action for the 'Assesment Definition' table.  
+     *
+     * @param {Object} grAssessmentDefinition - GlideRecord of the Current record
+     * @return {boolean} - True in case the attachment exists and readable, false otherwise
+     */
+    var getAttachment = function(grAssessmentDefinition) {
+        var processedFiles = grAssessmentDefinition.getValue('processed_files');
+        var EXCEL_CONTENT_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        var grAttachment = new GlideRecord(CIRConstants.Tables.ATTACHMENT);
+        grAttachment.addQuery('table_name', CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        grAttachment.addQuery('table_sys_id', grAssessmentDefinition.getUniqueValue());
+        grAttachment.addQuery('content_type', EXCEL_CONTENT_TYPE);
+        if(processedFiles !== '') {
+            grAttachment.addQuery('sys_id', 'NOT IN', processedFiles);
+        }
+        grAttachment.setLimit(1);
+        grAttachment.query();
+        if(grAttachment.next()) {
+            return grAttachment;
+        } else {
+            throw new Error(gs.getMessage('cir_assmt_no_unprocessed_file_found'));
+        }
+    };
+
+    /**
+     * Process the row, fill the object with information that comes from Excel row
+     * Used in the 'Process Excel' function before start creating records
+     *
+     * @param {Object} row - Current row to be evaluated
+     * @param {Integer} rowNumber - Current row number
+     * @return {obj} - Each row is a new object
+     */
+    var createObjFromExcel = function(row, rowNumber) {
+        var allowedExcelHeaders = CIRConstants.AssessmentValidations.ALLOWED_EXCEL_HEADERS;
+        var obj = {
+            section: {
+                active: row[allowedExcelHeaders.SECTION_ACTIVE] || '',
+                name: row[allowedExcelHeaders.SECTION_NAME] || '',
+                visibility_condition: row[allowedExcelHeaders.SECTION_VISIB_COND] || '',
+                order: row[allowedExcelHeaders.SECTION_ORDER] || '',
+                short_description: row[allowedExcelHeaders.SHORT_DESCRIPTION] || '',
+                description: row[allowedExcelHeaders.DESCRIPTION] || '',
+            },
+            field: {
+                active: row[allowedExcelHeaders.FIELD_ACTIVE] || '',
+                order: row[allowedExcelHeaders.FIELD_ORDER] || '',
+                type: row[allowedExcelHeaders.FIELD_TYPE] || '',
+                mandatory: row[allowedExcelHeaders.FIELD_MANDATORY] || '',
+                label: row[allowedExcelHeaders.FIELD_LABEL] || '',
+                name: row[allowedExcelHeaders.FIELD_NAME] || '',
+                message: row[allowedExcelHeaders.FIELD_MESSAGE] || '',
+                mandatory_condition: row[allowedExcelHeaders.FIELD_MAND_COND] || '',
+                read_condition: row[allowedExcelHeaders.FIELD_READ_ONLY_COND] || '',
+                visible_condition: row[allowedExcelHeaders.FIELD_VISIB_COND] || '',
+                message_condition: row[allowedExcelHeaders.FIELD_MSG_COND] || '',
+                default_value: row[allowedExcelHeaders.FIELD_DEFAULT_VALUE],
+            },
+            choice: {
+                labels: row[allowedExcelHeaders.CHOICE_LABELS] || '',
+                values: row[allowedExcelHeaders.CHOICE_VALUES] || '',
+                orders: row[allowedExcelHeaders.CHOICE_ORDERS] || '',
+            },
+            rowNumber: rowNumber
+        };
+        return obj;
+    };
+
+    /**
+     * Process the array of objects already verified
+     * Used in the 'processExcel' to create records
+     *
+     * @param {array} array - array with all objects
+     * @param {String} definitionSysId - Definition sys_id
+     * @return {void}
+     */
+    var processObject = function(array, definitionSysId) {
+        var sectionNames = getDistincSectionNames(array);
+        for(u = 0; u < sectionNames.length; u++) {
+            saveSection(array, sectionNames[u], definitionSysId);
+        }
+    };
+
+    /**
+     * Get all section names of array of objects
+     * Used in the 'checkErrorLinesDuplicate' function before start creating records
+     *
+     * @param {array} array - array with all objects
+     * @return {array} - With all section names
+     */
+    var getDistincSectionNames = function(array) {
+        var unique = [];
+        for(var i = 0; i < array.length; i++) {
+            if(unique.indexOf(array[i].section.name) === -1) {
+                unique.push(array[i].section.name);
+            }
+        }
+        return unique;
+    };
+
+    /**
+     * creates a new section record if it doens't exist already and calls 
+     * the function to create the fields for that section, update in case already exists a section for the first element of the array
+     * called in processExcel function
+     *
+     * @param {array} array - containing all Objects
+     * @param {String} definitionSysId - sys_id of Assessment Definition record that the section will be linked to
+     * @return {void}
+     */
+    var saveSection = function(array, sectionName, definitionSysId) {
+        for(var i = 0; i < array.length; i++) {
+            if(array[i].section.name === sectionName) {
+                var grAssessmentSection = getAssessmentSection(array[i], definitionSysId);
+                if(!grAssessmentSection) {
+                    grAssessmentSection = new GlideRecord(CIRConstants.Tables.ASSESSMENT_SECTION);
+                    grAssessmentSection.initialize();
+                    grAssessmentSection.setValue('assessment_definition', definitionSysId);
+                }
+                grAssessmentSection.setValue('active', transformStringToBoolean(array[i].section.active));
+                grAssessmentSection.setValue('name', array[i].section.name);
+                grAssessmentSection.setValue('section_visibility_condition', array[i].section
+                    .visibility_condition);
+                grAssessmentSection.setValue('order', array[i].section.order);
+                grAssessmentSection.setValue('short_description', array[i].section.short_description);
+                grAssessmentSection.setValue('description', array[i].section.description);
+                var sectionSysId = grAssessmentSection.update();
+
+                saveField(sectionSysId, array[i]);
+            }
+        }
+    };
+
+    /**
+     * Verifies if a given section exists for this definition
+     * Called in saveSection function
+     *
+     * @param {Object} row - Object that contains the row of an excel
+     * @param {String} definitionSysId - sys_id of Assessmnet Definition record that the section is linked to
+     * @return {string} - The SysID of the Section if it exists, undefined otherwise
+     */
+    var getAssessmentSection = function(row, definitionSysId) {
+        var grAssessmentSection = new GlideRecord(CIRConstants.Tables.ASSESSMENT_SECTION);
+        grAssessmentSection.addQuery('assessment_definition', definitionSysId);
+        grAssessmentSection.addQuery('name', row.section.name);
+        grAssessmentSection.setLimit(1);
+        grAssessmentSection.query();
+        if(grAssessmentSection.next()) {
+            return grAssessmentSection;
+        }
+        return undefined;
+    };
+
+    /**
+     * Create the field record, update in case already exists the same name field
+     * Used in the 'saveSection' function.
+     *
+     * @param {String} sectionSysID - Sys id of the section where the field belong.
+     * @param {array} row - current row being processed
+     * @return {void}
+     */
+    var saveField = function(sectionSysID, row) {
+        var grAssessmentField = getAssessmentField(row.field.name, sectionSysID);
+        if(!grAssessmentField) {
+            grAssessmentField = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+            grAssessmentField.initialize();
+            grAssessmentField.setValue('assessment_section', sectionSysID);
+        }
+        grAssessmentField.setValue('active', transformStringToBoolean(row.field.active));
+        grAssessmentField.setValue('order', row.field.order);
+        grAssessmentField.setValue('type', transformChoiceTypeField(row.field.type));
+        grAssessmentField.setValue('mandatory', transformStringToBoolean(row.field.mandatory));
+        grAssessmentField.setValue('label', row.field.label);
+        grAssessmentField.setValue('name', row.field.name);
+        grAssessmentField.setValue('field_message', row.field.message);
+        grAssessmentField.setValue('mandatory_condition', row.field.mandatory_condition);
+        grAssessmentField.setValue('read_only_condition', row.field.read_condition);
+        grAssessmentField.setValue('visible_condition', row.field.visible_condition);
+        grAssessmentField.setValue('field_message_condition', row.field.message_condition);
+        grAssessmentField.setValue('default_value', row.field.default_value);
+        var fieldSysId = grAssessmentField.update();
+        createChoice(fieldSysId, row);
+    };
+
+    /**
+     * checks if field already exists in this section for this label and name
+     * called in saveField function
+     *
+     * @param {String} name - name of the new field
+     * @param {String} sectionSysId - sys_id of Assessmnet Field record that the choices are linked to
+     * @return {Object|undefined} - GlideRecord if the field exists, undefined otherwise
+     */
+    var getAssessmentField = function(name, sectionSysId) {
+        var grAssessmentField = new GlideRecord(CIRConstants.Tables.ASSESSMENT_FIELD);
+        grAssessmentField.addQuery('name', name);
+        grAssessmentField.addQuery('assessment_section', sectionSysId);
+        grAssessmentField.setLimit(1);
+        grAssessmentField.query();
+        if(grAssessmentField.next()) {
+            return grAssessmentField;
+        }
+        return undefined;
+    };
+
+    /**
+     * Transform the String of the field type in the value
+     * Used in the 'Create Field' function.
+     *
+     * @param {String} choiceString - Choice Label that comes from excel.
+     * @return {String} - The field value if found, empty otherwise
+     */
+    var transformChoiceTypeField = function(choiceString) {
+        var grChoice = new GlideRecord(CIRConstants.Tables.CHOICE);
+        grChoice.addQuery('name', CIRConstants.Tables.ASSESSMENT_FIELD);
+        grChoice.addQuery('element', 'type');
+        grChoice.addQuery('label', choiceString);
+        grChoice.query();
+        if(grChoice.next()) {
+            return grChoice.getValue('value');
+        }
+        return '';
+    };
+
+    /**
+     * Transform the String of the Mandatory field in the boolean.
+     * Used in the 'Create Field' function.
+     *
+     * @param {String} string - String that comes from excel.
+     * @return {String} - True if the string falue is true, false otherwise
+     */
+    var transformStringToBoolean = function(fieldValue) {
+        return fieldValue.toLowerCase() === 'true';
+    };
+
+    /**
+     * creates all choices for a given assessment field
+     * called in saveField function
+     *
+     * @param {Object} row - Object that contains the row of an excel
+     * @param {String} fieldSysId - sys_id of Assessmnet Field record that the choices will be linked to
+     * @return {void}
+     */
+    var createChoice = function(fieldSysId, row) {
+        var SPLIT_DELIMITER = ',';
+        if(row.choice.labels) {
+            var choicesLabels = row.choice.labels.split(SPLIT_DELIMITER);
+            var choicesValues = row.choice.values.split(SPLIT_DELIMITER);
+            var choicesOrders = row.choice.orders.split(SPLIT_DELIMITER);
+            var grChoice = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+            for(var i = 0; i < choicesLabels.length; i++) {
+                var label = choicesLabels[i] + '';
+                var value = choicesValues[i] + '';
+                var order = choicesOrders[i] + '';
+                if(!choiceExists(value, fieldSysId)) {
+                    grChoice.initialize();
+                    grChoice.setValue('label', label);
+                    grChoice.setValue('value', value);
+                    grChoice.setValue('order', order);
+                    grChoice.setValue('assessment_field', fieldSysId);
+                    grChoice.insert();
+                }
+            }
+        }
+    };
+
+    /**
+     * checks if choice already exists in this field for this label and name
+     * called in createChoice function
+     *
+     * @param {String} value - value of the new choice
+     * @param {String} fieldSysId - sys_id of Assessmnet Field record that the choices are linked to
+     * @return {String} - True if the choice exists, false otherwise
+     */
+    var choiceExists = function(value, fieldSysId) {
+        var grAssessmentChoice = new GlideRecord(CIRConstants.Tables.ASSESSMENT_CHOICE);
+        grAssessmentChoice.addQuery('value', value);
+        grAssessmentChoice.addQuery('assessment_field', fieldSysId);
+        grAssessmentChoice.setLimit(1);
+        grAssessmentChoice.query();
+
+        return grAssessmentChoice.next();
+    };
+
+    /**
+     * Update the processed files field to include the file processed.
+     *
+     * @param {Object} grAssessmentDefinition - GlideRecord of the Current record
+     * @param {String} attachmentSysId - sys_id of the attachment excel file processed
+     * @return {void}
+     */
+    var markFileAsProcessed = function(grAssessmentDefinition, attachmentSysId) {
+        var processedFiles = grAssessmentDefinition.getValue('processed_files');
+        if(processedFiles !== '') {
+            processedFiles = [processedFiles, attachmentSysId].join(',');
+        } else {
+            processedFiles = [attachmentSysId];
+        }
+        grAssessmentDefinition.setValue('processed_files', processedFiles);
+        grAssessmentDefinition.update();
+    };
+
+    /**
+     * Function to validate and process the Excel file.
+     * Used in the CIR CIRI Import Assessment widget
+     * @param {String} grAssessmentDefinition - sys_id of the assessment definition
+     * @param {Object} parser - Parser element of Excel
+     * @return {Object} - Object containing an array with the rows to process and an array with error messages to diplay
+     */
+    var processFile = function(grAssessmentDefinition, parser) {
+        grAssessmentDefinition = getAssessmentDefinitionRecord(grAssessmentDefinition);
+
+        var obj = {};
+        var arrErrors = [];
+        var arrayAllRows = [];
+        var SHEET_NUMBER = 0;
+        var HEADER_ROW_NUMBER = 0;
+        var grAttachment;
+        try {
+            grAttachment = getAttachment(grAssessmentDefinition);
+            var attachmentStream = new GlideSysAttachment().getContentStream(grAttachment.getUniqueValue());
+            if(!parser.parse(attachmentStream)) {
+                arrErrors.push((gs.getMessage('cir_assmt_error_parsing_file')));
+            }
+
+            var currentRowNumber = 1;
+            parser.setSheetNumber(SHEET_NUMBER);
+            parser.setHeaderRowNumber(HEADER_ROW_NUMBER);
+
+            CIRAssmtImportValidationFP().IsUsingTemplateFile(parser);
+
+            while(parser.next()) {
+                var row = parser.getRow();
+                currentRowNumber++;
+                arrayAllRows.push(createObjFromExcel(row, currentRowNumber));
+            }
+
+            if(arrayAllRows.length === 0) {
+                arrErrors.push(gs.getMessage('cir_assmt_no_valid_rows'));
+            } else {
+                arrErrors = arrErrors.concat(CIRAssmtImportValidationFP().ValidateExcelData(arrayAllRows));
+            }
+
+        } catch (error) {
+            arrErrors.push(error);
+        }
+
+        obj.rows = arrayAllRows;
+        obj.errors = arrErrors;
+
+
+        return obj;
+    };
+
+    /**
+     * Function to return the assessment definiotoin gliderecord
+     * called in the in the processFile function
+     * @param {String} sys_id - sys_id of the assessment definition
+     * @return {GlideRecord} - GlideRecord of the assessment definition record
+     */
+    var getAssessmentDefinitionRecord = function(sys_id) {
+        if(!sys_id)
+            return;
+
+        var grAssessment = new GlideRecord(CIRConstants.Tables.ASSESSMENT_DEFINITION);
+        if(grAssessment.get('sys_id', sys_id)) {
+            return grAssessment;
+        }
+        return;
+    };
+
+    /** 
+     * function that will return the sys_id of the template attachment for the asessnment import
+     * called in the CIR CIRI Import Assessment widget
+     * @return {String} - sys_id of the attachment if
+     */
+    var getAttachmentSysId = function() {
+        var attachment = '';
+        var grProperty = new GlideRecord('sys_properties');
+        grProperty.addQuery('name', 'x_fru_cir.sys_id_template_attachment');
+        grProperty.setLimit(1);
+        grProperty.query();
+
+        if(grProperty.next()) {
+            var grAttachment = new GlideRecord('sys_attachment');
+            grAttachment.addQuery('table_name', 'sys_properties');
+            grAttachment.addQuery('table_sys_id', grProperty.getUniqueValue());
+            grAttachment.query();
+
+            if(grAttachment.next()) {
+                attachment = grAttachment.getUniqueValue();
+            }
+        }
+        return attachment;
+    };
+
+    return {
+        ProcessExcel: processExcel,
+        CreateObjFromExcel: createObjFromExcel,
+        ProcessObject: processObject,
+        GetAttachment: getAttachment,
+        ProcessFile: processFile,
+        GetAssessmentDefinitionRecord: getAssessmentDefinitionRecord,
+        GetAttachmentSysId: getAttachmentSysId
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:11:12</sys_created_on>
+        <sys_id>80d29fc9db8e1410d4a73533f396197a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CIRAssmtImportUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_80d29fc9db8e1410d4a73533f396197a</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-16 09:47:36</sys_updated_on>
+    </sys_script_include>
+</record_update>

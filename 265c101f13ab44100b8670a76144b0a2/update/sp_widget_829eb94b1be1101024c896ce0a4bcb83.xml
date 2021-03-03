@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $scope, $window) {
+	/* widget controller */
+	var c = this;
+
+	$scope.checkFilter = function(criteria){
+		return function(item) {
+			if((criteria.favorites_only == true && item.favorite == true) || criteria.favorites_only == false){
+				var searchText = criteria.searchText ? criteria.searchText.toLowerCase() : '';
+				if(searchText == '' || (item.name.toLowerCase().indexOf(searchText) != -1 || item.address.toLowerCase().indexOf(searchText) != -1)){
+					var caseTypes = item.caseTypes;
+					var caseTypeMatch = false;
+					for(var caseType in caseTypes){
+						if(criteria.caseTypes.indexOf(caseTypes[caseType].value) != -1){
+							caseTypeMatch = true;
+						}
+					}
+					var locationTypeMatch = false;
+					var locationTypes = item.locationTypes;
+					for(var locationType in locationTypes){
+						
+						if(criteria.locationTypes.indexOf(locationTypes[locationType].value) != -1){
+							locationTypeMatch = true;
+						}
+					}
+					if(caseTypeMatch == true && locationTypeMatch == true)
+						return true;
+				}
+			}
+			return false;
+		};
+	};
+
+	$scope.setSearchText = function(){
+		$rootScope.locationFilter.searchText = $scope.searchText;
+		$rootScope.updateFilter();
+	};
+
+	$scope.setFavoriteLocation = function(location){
+		c.server.get({faveLocation: location.id}).then(function(r) { 
+			location.favorite = r.data.favorite;
+		});
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tooltiptext {&#13;
+  width: 150px;&#13;
+  color: #fff;&#13;
+  text-align: center;&#13;
+  border-radius: 6px;&#13;
+&#13;
+  /* Position the tooltip */&#13;
+  z-index: 100;&#13;
+  left: 100%;&#13;
+  overflow: visible !important;&#13;
+}&#13;
+&#13;
+.ttip:hover .tooltiptext {&#13;
+  visibility: visible;&#13;
+}&#13;
+.listBadge{&#13;
+  float:none;&#13;
+  margin-left:10px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-location-overview-list</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Location Overview List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    // Get the field labels from sys_documentation table
+
+    var nearMissTableName = CIRConstants.Tables.NEAR_MISS;
+    var incidentName = CIRConstants.Tables.INCIDENT;
+    var hazardTableName = CIRConstants.Tables.HAZARD;
+    var element = '';
+
+    var cirCaseManagementUtils = new CIRCaseManagementUtils();
+
+    var nearMissGR = cirCaseManagementUtils.GetFieldLabels(nearMissTableName, element);
+    var incGR = cirCaseManagementUtils.GetFieldLabels(incidentName, element);
+    var hazardGR = cirCaseManagementUtils.GetFieldLabels(hazardTableName, element);
+
+    data.nearMissLabel = nearMissGR.plural.toString();
+    data.incLabel = incGR.plural.toString();
+    data.hazardLabel = hazardGR.plural.toString();
+
+    if(input) {
+        var favorite = cirCaseManagementUtils.SaveFavoriteLocation(input.faveLocation);
+        data.favorite = favorite;
+        return;
+    }
+    data.locations = cirCaseManagementUtils.GetLocationRecords();
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 13:41:33</sys_created_on>
+        <sys_id>829eb94b1be1101024c896ce0a4bcb83</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CIR CIRI Location Overview List</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_829eb94b1be1101024c896ce0a4bcb83</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-06 10:28:41</sys_updated_on>
+        <template><![CDATA[<div class="panel locationOverviewList hidden-xs">
+  <div class="col-sm-12 panel-body" style="padding:10px 45px 0px 30px">
+    <input type="text" id="searchText" ng-model="searchText" ng-change="setSearchText()" style="width:100%" placeholder="${cir_case_management_filter_by_name_or_address}"/>
+  </div>
+  <div class="panel-body" style="height:90vh;overflow-y:scroll">
+    <ul>
+      <div ng-repeat="location in data.locations | filter:checkFilter($root.locationFilter)">
+        <div class="col-sm-12">
+          <a href="{{location.url}}">
+            <li id='{{::location.id}}'>
+              <i class="fa fa-circle status{{location.status}}" style="float:left;font-size: 16px;padding-top: 7px;"></i>
+              <div style="padding-left:24px">
+                <div style="font-size:20px;height:auto;overflow:hidden">{{::location.name}}
+                  <i ng-class="location.favorite == true  ? 'glyphicon glyphicon-star' : 'glyphicon glyphicon-star-empty'"  ng-click="setFavoriteLocation(location);$event.preventDefault()" title="${cir_case_management_toggle_following_location}" data-toggle="tooltip" style="padding-left:5px;font-size: 16px;" ></i>
+                </div>
+                <span class="location-address col-sm-12" style="padding-top:5px;padding-left:0px;white-space:pre-wrap;">{{::location.address}}</span>
+                <i class="fa fa-arrow-circle-o-right" style="font-size:20px;padding-top: 4px;"></i>
+                <div class="col-sm-12" style="font-size:14px;padding-left:0px;">
+                  <div class="col-sm-4" style="padding: 0px">{{data.nearMissLabel}}<span class="label label-as-badge label-primary sp-navbar-badge-count ng-binding ng-scope listBadge">{{location.nearMisses}}</span></div>
+                  <div class="col-sm-4" style="padding: 0px">{{data.incLabel}}<span class="label label-as-badge label-primary sp-navbar-badge-count ng-binding ng-scope listBadge">{{location.incidents}}</span></div>
+                  <div class="col-sm-4" style="padding: 0px">{{data.hazardLabel}}<span class="label label-as-badge label-primary sp-navbar-badge-count ng-binding ng-scope listBadge">{{location.hazards}}</span></div>
+                </div>
+              </div>
+            </li>
+          </a>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

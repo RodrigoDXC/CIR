@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_button_instance">
+    <sys_sg_button_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <button display_value="New incident">7df9ed1fdbda5050d4a73533f396191c</button>
+        <color_theme>primary</color_theme>
+        <description>Quick action to create an Incident record. Using New incident function.</description>
+        <field_name/>
+        <icon display_value="icon-plus">5fff75251b3584106515db56dc4bcb27</icon>
+        <label>Create Incident</label>
+        <location>quick_action</location>
+        <name>New incident Quick Action</name>
+        <order/>
+        <parent>2d917ae91bb584106515db56dc4bcbe6</parent>
+        <parent_table>sys_sg_screen</parent_table>
+        <sys_class_name>sys_sg_button_instance</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-03 14:55:37</sys_created_on>
+        <sys_id>3f9cfd9bdb1e5050d4a73533f3961968</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>New incident Quick Action</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_button_instance_3f9cfd9bdb1e5050d4a73533f3961968</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-03 14:55:54</sys_updated_on>
+        <table/>
+    </sys_sg_button_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=3f9cfd9bdb1e5050d4a73533f3961968"/>
+</record_update>

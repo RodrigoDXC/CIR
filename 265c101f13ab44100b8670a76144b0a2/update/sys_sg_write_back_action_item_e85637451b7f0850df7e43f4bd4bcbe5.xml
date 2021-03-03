@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description/>
+        <execution_script><![CDATA[(function WriteBackAction(input) {
+    
+	var tables = x_fru_cir.CIRConstants.Tables;
+	var grSituationExecutions = new GlideRecord(tables.RESP_PLAN_EXEC);
+	grSituationExecutions.addQuery('parent_situation', input.sys_id);
+	grSituationExecutions.addQuery('state', '!=', 3 );
+	grSituationExecutions.query();
+	
+		if (grSituationExecutions.next()) {
+			gs.addErrorMessage(gs.getMessage('cir_sit_error_response_plan_open'));
+			return;			
+	}
+	
+	var grSituation = new GlideRecord(tables.SITUATION);
+	grSituation.get(input.sys_id);
+	grSituation.setValue('state', 1);
+	grSituation.update();
+ 
+})(input);]]></execution_script>
+        <name>CIR Close situation room </name>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-25 17:28:28</sys_created_on>
+        <sys_id>e85637451b7f0850df7e43f4bd4bcbe5</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>CIR Close situation room </sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_e85637451b7f0850df7e43f4bd4bcbe5</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-03-31 09:00:24</sys_updated_on>
+        <table/>
+        <template/>
+        <type>script</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=e85637451b7f0850df7e43f4bd4bcbe5"/>
+</record_update>

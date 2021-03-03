@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="DELETE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-19 11:02:51</sys_created_on>
+        <sys_id>d80547af1b96a010de011fc11a4bcbc7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir_case.maximum_amount.x_fru_cir.investigator</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_security_acl display_value="x_fru_cir_case.maximum_amount">87f443af1b96a010de011fc11a4bcbe6</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_d80547af1b96a010de011fc11a4bcbc7</sys_update_name>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-19 11:02:51</sys_updated_on>
+        <sys_user_role display_value="x_fru_cir.investigator" name="x_fru_cir.investigator">d38bad10db19541003b3533fd3961911</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_security_acl_role_d80547af1b96a010de011fc11a4bcbc7</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>rodrigo.ortega@dxc.com</sys_created_by><sys_created_on>2021-02-19 11:02:51</sys_created_on><sys_id>d80547af1b96a010de011fc11a4bcbc7</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_fru_cir_case.maximum_amount.x_fru_cir.investigator</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_security_acl display_value="x_fru_cir_case.maximum_amount">87f443af1b96a010de011fc11a4bcbe6</sys_security_acl><sys_update_name>sys_security_acl_role_d80547af1b96a010de011fc11a4bcbc7</sys_update_name><sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by><sys_updated_on>2021-02-19 11:02:51</sys_updated_on><sys_user_role display_value="x_fru_cir.investigator" name="x_fru_cir.investigator">d38bad10db19541003b3533fd3961911</sys_user_role><transaction_id/></sys_security_acl_role></record_update>]]></payload>
+        <payload_hash>729384285</payload_hash>
+        <record_name>x_fru_cir_case.maximum_amount.x_fru_cir.investigator</record_name>
+        <reverted_from/>
+        <source>b576f59f1b966010de011fc11a4bcb5a</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-19 11:02:51</sys_created_on>
+        <sys_id>1055cbaf1b96a010de011fc11a4bcb39</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>177b9f4ea840000001</sys_recorded_at>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:31:17</sys_updated_on>
+        <type>Access Roles</type>
+        <update_guid>1855cbaf7396a010a52e4cd057778538</update_guid>
+        <update_guid_history>1855cbaf7396a010a52e4cd057778538:729384285</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="x_fru_cir_case.maximum_amount.x_fru_cir.investigator">5cc5ea751be26810de011fc11a4bcbc3</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-26 08:31:17</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl_role">sys_security_acl_role</sys_db_object>
+        <sys_id>4020fa22bd5c422cbed3bc3bb30c8fd9</sys_id>
+        <sys_metadata>d80547af1b96a010de011fc11a4bcbc7</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir_case.maximum_amount.x_fru_cir.investigator</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="">87f443af1b96a010de011fc11a4bcbe6</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_security_acl_role_d80547af1b96a010de011fc11a4bcbc7</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_role_d80547af1b96a010de011fc11a4bcbc7">1055cbaf1b96a010de011fc11a4bcb39</sys_update_version>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:31:17</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Suspect" max_length="40" name="x_fru_cir_suspect" sizeclass="2" type="collection">
+        <element label="Case" max_length="32" name="cir_case" read_only="true" reference="x_fru_cir_case" type="reference"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <index name="index">
+            <element name="cir_case"/>
+        </index>
+    </element>
+</database>

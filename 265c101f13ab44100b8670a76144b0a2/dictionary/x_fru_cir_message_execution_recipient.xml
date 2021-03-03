@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Message Execution Recipient" max_length="40" name="x_fru_cir_message_execution_recipient" sizeclass="0" type="collection">
+        <element label="Contact" max_length="4000" name="contact" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Feedback" max_length="40" name="feedback" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Not Ok" value="1"/>
+                <element inactive_on_update="false" label="OK" value="0"/>
+            </choice>
+        </element>
+        <element label="Feedback message" max_length="8000" name="feedback_message" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Message sent" max_length="4000" name="message_sent" type="html"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" choice_field="message_type" choice_table="x_fru_cir_response_plan_template_step_message" label="Message type" max_length="40" name="message_type" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Sent to Primary Backup" max_length="32" name="primary_backup" read_only="true" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Sent to Secondary Backup" max_length="32" name="secondary_backup" read_only="true" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Situation task execution" max_length="32" name="situation_task_execution" read_only="true" reference="x_fru_cir_situation_task_execution" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Awaiting feedback" value="2"/>
+                <element inactive_on_update="false" label="Feedback received" value="3"/>
+                <element inactive_on_update="false" label="Message Sent" value="1"/>
+                <element inactive_on_update="false" label="Unreachable" value="4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Step message execution" max_length="32" name="step_message_execution" reference="x_fru_cir_response_plan_execution_step_message" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="step_message_execution"/>
+        </index>
+        <index name="index2">
+            <element name="situation_task_execution"/>
+        </index>
+        <index name="index3">
+            <element name="primary_backup"/>
+        </index>
+        <index name="index4">
+            <element name="user"/>
+        </index>
+        <index name="index5">
+            <element name="secondary_backup"/>
+        </index>
+    </element>
+</database>

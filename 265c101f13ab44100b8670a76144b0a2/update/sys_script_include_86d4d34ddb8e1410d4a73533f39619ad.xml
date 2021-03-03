@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRGenericUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRGenericUtilsFP</name>
+        <script><![CDATA[var CIRGenericUtilsFP = (function() {
+    var CIRGenericUtilsFP = Class.create();
+    var initialize = function() {};
+
+    /**
+     * Function to build a JSON object.
+     * Examples (test with the following examples for better understanding):
+     * var objectTest = {};
+     * buildJsonObject(objectTest, 'test.arrayValue[*]', 3);
+     * buildJsonObject(objectTest, 'test.arrayValue[2]', 2);
+     * buildJsonObject(objectTest, 'test.arrayValue[3]', 2);
+     * buildJsonObject(objectTest, 'test.arrayObj[1].value1', 1);
+     * buildJsonObject(objectTest, 'test.arrayObj[1].value2', 2);
+     * buildJsonObject(objectTest, 'test.arrayObj[0].value3', 3);
+     * buildJsonObject(objectTest, 'test.value', 2);
+     * buildJsonObject(objectTest, 'test.obj.value1', 1);
+     * buildJsonObject(objectTest, 'test.obj.value2', 2);
+     *
+     * @param {Object} obj - JSON object with properties or empty
+     * @param {String} properties - String containing the key(s) to be inserted into the JSON object
+     * @param {any} value - Any type of value to be assigned to the last property
+     * @return {Object} - JSON object built from the properties and values sent by parameter
+     */
+    var buildJsonObject = function(obj, properties, value) {
+        var ARRAY_IDENTIFIER_REGEX = /^(\S+)\[(\d+|\*)\]$/;
+        if(typeof obj !== 'object' ||
+            (typeof obj === 'object' && Object.keys(obj).length === 0)) {
+            obj = {};
+        }
+
+        var _obj = JSON.parse(JSON.stringify(obj));
+
+        var arrProps = properties ? properties.split('.') : [];
+        if(arrProps.length == 0) {
+            return value;
+        }
+        var currStep = arrProps[0];
+        var isArrPath = currStep.match(ARRAY_IDENTIFIER_REGEX);
+        var pushToArray = isArrPath && isArrPath[2] === '*' ? true : false;
+        var arrIndex = isArrPath && !pushToArray ? parseInt(isArrPath[2]) : null;
+        currStep = isArrPath ? isArrPath[1] : currStep;
+
+        if(arrProps.length == 1 && !isArrPath) {
+            _obj[currStep] = value;
+            return JSON.parse(JSON.stringify(_obj));
+        }
+
+        arrProps.shift();
+
+        if(_obj[currStep]) {
+            var objHelper = isArrPath && !pushToArray ? _obj[currStep][arrIndex] : _obj[currStep];
+            objHelper = objHelper ? objHelper : {};
+            if(isArrPath) {
+                if(pushToArray) {
+                    _obj[currStep].push(buildJsonObject({}, arrProps.join('.'), value));
+                } else {
+                    _obj[currStep][arrIndex] = buildJsonObject(objHelper, arrProps.join('.'), value, true);
+                }
+            } else {
+                _obj[currStep] = buildJsonObject(objHelper, arrProps.join('.'), value, true);
+            }
+            return JSON.parse(JSON.stringify(_obj));
+        }
+
+        if(isArrPath) {
+            _obj[currStep] = [];
+            if(pushToArray) {
+                _obj[currStep].push(buildJsonObject({}, arrProps.join('.'), value));
+            } else {
+                _obj[currStep][arrIndex] = buildJsonObject({}, arrProps.join('.'), value);
+            }
+            return JSON.parse(JSON.stringify(_obj));
+        } else {
+            _obj[currStep] = buildJsonObject({}, arrProps.join('.'), value);
+            return JSON.parse(JSON.stringify(_obj));
+        }
+    };
+
+    /**
+     * The find() method returns the value of the first element in the array that satisfies
+     * the provided testing function. Otherwise undefined is returned.
+     *
+     * Polyfill of ES6 Array.prototype.find.
+     *
+     * @param {Array} arr - where to look for the specific index
+     * @param {findCallback} - callback Function to execute on each value in the array, taking three arguments
+     * @param {this} [thisArg] - Optional object to use as 'this' when executing 'callback'
+     * @returns {any|undefined} - The first element in the array that satisfies the provided testing function,
+     *                            otherwise `undefined` is returned.
+     */
+    var find = function(arr, callback, thisArg) {
+        if(!Array.isArray(arr) || typeof callback !== 'function') {
+            return undefined;
+        }
+        for(var idx in arr) {
+            if(callback.call(thisArg || this, arr[idx], idx, arr) === true) {
+                return arr[idx];
+            }
+        }
+        return undefined;
+    };
+
+    /**
+     * Function to query a table based on properties sent by parameter.
+     *
+     * @param {Object} queryProps - JSON object containing the table name, the encoded query and an array of fields
+     * @return {Array[Objects]} - An array of JSON objects:
+     *                            each element is an object with key-values (field-field values) of one record
+     */
+    var queryTable = function(queryProps, sysId) {
+        var arrRecords = [];
+        var gr = new GlideRecord(queryProps.tableName);
+        if(sysId && gr.get(sysId)) {
+            return buildObjFromRecord(gr, queryProps.fields);
+        }
+        gr.addQuery(queryProps.query);
+        gr.query();
+        while(gr.next()) {
+            arrRecords.push(buildObjFromRecord(gr, queryProps.fields));
+        }
+
+        return arrRecords.slice();
+    };
+
+    /**
+     * Build the Object from the record using the requested fields.
+     *
+     * @param {Object} gr - GlideRecord containing the current record
+     * @param {Array} arrFields - Array containing the fields requested
+     * @return {Object} - An Object with the key-values field_name-field_value
+     */
+    var buildObjFromRecord = function(gr, arrFields) {
+        var objRecord = {};
+        arrFields.forEach(function(field) {
+            var fieldValue = '';
+            var arrFields = field ? field.split('.') : [];
+            if(arrFields.length === 2) { // For now only for one reference
+                fieldValue = gr.getElement(arrFields[0]).getRefRecord().getValue(arrFields[1]);
+            } else {
+                fieldValue = gr.getValue(field);
+            }
+            objRecord = buildJsonObject(objRecord, field, fieldValue);
+        });
+        return objRecord;
+    };
+
+    /**
+     * Function to create or update a record based on properties sent by parameter.
+     *
+     * @param {Object} createUpdateProps - JSON object containing the table name,
+     *                                     a boolean indicating if the operation is 'Create',
+     *                                     the SysID of the record to update if applicable and
+     *                                     a JSON object with key-values (field-field value)
+     * @return {String|null} - Returns the SysID of the record if the operation was succesful and null otherwise
+     */
+    var createUpdateRecord = function(createUpdateProps) {
+        var grCreateUpdate = new GlideRecord(createUpdateProps.tableName);
+        if(createUpdateProps.isCreate) {
+            grCreateUpdate.initialize();
+            var newGuidValue = '';
+            if(createUpdateProps.fieldValues.new_guid_sys_id) {
+                newGuidValue = createUpdateProps.fieldValues.new_guid_sys_id;
+            } else {
+				newGuidValue = gs.generateGUID();
+			}
+            grCreateUpdate.setNewGuidValue(newGuidValue);
+        } else if(!grCreateUpdate.get(createUpdateProps.updateRecordId)) {
+            return undefined;
+        }
+        Object.keys(createUpdateProps.fieldValues).forEach(function(field) {
+            grCreateUpdate.setValue(field, createUpdateProps.fieldValues[field]);
+        });
+
+        // If the table is Assessment Section and the record has a picture,
+        // remove the old pictures in case it is a new picture or a new record, otherwise do nothing
+        if(createUpdateProps.tableName === CIRConstants.Tables.ASSESSMENT_SECTION &&
+            createUpdateProps.fieldValues.picture) {
+            var isOldPicture = false;
+            var picture = createUpdateProps.fieldValues.picture.replace('.iix?t=medium', '');
+            if(!createUpdateProps.isCreate) {
+                var attachmentTableName = 'ZZ_YY' + CIRConstants.Tables.ASSESSMENT_SECTION;
+                var grAttachment = new GlideSysAttachment().getAttachments(
+                    attachmentTableName, createUpdateProps.updateRecordId);
+                while(grAttachment.next()) {
+                    if(grAttachment.getUniqueValue() === picture) {
+                        isOldPicture = true;
+                        break;
+                    }
+                    new GlideSysAttachment().deleteAttachment(grAttachment.getUniqueValue());
+                }
+            }
+            if(!isOldPicture) {
+                new global.CIRGlobalHelperFP().ModifyAssessment(picture, grCreateUpdate.getUniqueValue());
+            }
+        }
+
+        return createUpdateProps.isCreate ? grCreateUpdate.insert() : grCreateUpdate.update();
+    };
+
+    /**
+     * Function to log messages for success or fail statuses.
+     *
+     * @param {Object} logObj - JSON object containing the log messages
+     * @param {Boolean} status - True if it's for success, false otherwise
+     * @param {String} message - String containing the value of the message to be added to the log
+     * @return {Object} - Returns the object with the new message added
+     */
+    var logStack = function(logObj, status, message) {
+        if(typeof logObj !== 'object' ||
+            (typeof logObj === 'object' && Object.keys(logObj).length === 0)) {
+            logObj = {};
+        }
+
+        _logObj = JSON.parse(JSON.stringify(logObj));
+
+        var _status = 'undefined';
+        if(status) {
+            _status = gs.getMessage('cir_assmt_success_log');
+        } else {
+            _status = gs.getMessage('cir_assmt_fail_log');
+        }
+        _logObj = buildJsonObject(_logObj, _status + '[*]', message);
+
+        return JSON.parse(JSON.stringify(_logObj));
+    };
+
+    CIRGenericUtilsFP.prototype = {
+        initialize: initialize,
+        BuildJsonObject: buildJsonObject,
+        Find: find,
+        QueryTable: queryTable,
+        CreateUpdateRecord: createUpdateRecord,
+        LogStack: logStack
+    };
+
+    return CIRGenericUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:19:41</sys_created_on>
+        <sys_id>86d4d34ddb8e1410d4a73533f39619ad</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_name>CIRGenericUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_86d4d34ddb8e1410d4a73533f39619ad</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-27 13:46:08</sys_updated_on>
+    </sys_script_include>
+</record_update>

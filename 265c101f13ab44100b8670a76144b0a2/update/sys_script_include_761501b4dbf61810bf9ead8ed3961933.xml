@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRDriveOffHelperFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRDriveOffHelperFP</name>
+        <script><![CDATA[var CIRDriveOffHelperFP = (function() {
+
+
+    /** 
+     * Verify if the  Drive Off case already have a Drive off associated
+     * 
+     * USED IN - List Control in  Related List of Drive Off and Drive Off Case
+     * USED IN - Businnes Rule - CIR - Calculate Value From Impact
+     * 
+     * @param  {sys_id} parent - sysID of case to be checked
+     * @return {Boolean} true if a case already have a Drive off associated, false otherwise
+     */
+    var driveOffExists = function(parent) {
+
+        var gr = new GlideRecord(CIRConstants.Tables.DRIVE_OFF);
+        gr.addQuery('parent_case', parent);
+        gr.query();
+        return gr.hasNext();
+    };
+
+
+    /** 
+     * Verify if the Drive Off associated with the Drive Off case is closed
+     * 
+     * USED IN - Businnes Rule - CIR- Avoid Closure
+     * 
+     * @param  {sys_id} caseSysId - sysID of Drive Off case 
+     * @return {Boolean} true if drive off is closed, false otherwise
+     */
+    var isChildClose = function(caseSysId) {
+        var gr = new GlideRecord(CIRConstants.Tables.DRIVE_OFF);
+        gr.query('parent_case', caseSysId);
+        gr.query();
+        if (gr.next()) {
+            return gr.getValue('progress') !== '10';
+        }
+        return true;
+    };
+
+
+    /** 
+     *Change the state of the Drive off case based on the Drive of state 
+     * 
+     * USED IN - Businnes Rule - CIR - 
+     * 
+     * @param  {sys_id} caseSysId - sysID of Drive Off case 
+     * @return {Boolean} true if drive off is closed, false otherwise
+     */
+    var changeParent = function(driveOffParent, newState) {
+        var parentCase = new GlideRecord(CIRConstants.Tables.DRIVE_OFF_CASE);
+        if (parentCase.get(driveOffParent)) {
+            switch (newState) {
+                case 'close':
+                    parentCase.setValue('state', 99);
+                    parentCase.update();
+                    break;
+                case 'under_investigation':
+                    parentCase.setValue('state', 92);
+                    parentCase.update();
+                    break;
+                case 'review':
+                    parentCase.setValue('state', 90);
+                    parentCase.update();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
+
+    /** 
+     *Get the user location 
+     * 
+     * USED IN - Autopopulate data if  case typedrive off - Catalog Client Script
+     * 
+     * @return {Sys Id} of the user location, void if cannot reach the user.
+     */
+    var getUserLocation = function() {
+        var gr = new GlideRecord('sys_user');
+        if (gr.get(gs.getUserID())) {
+            return gr.getValue('location');
+        }
+        return;
+    };
+/** 
+     *Return True if the record is in cases  and category is fuel_theft_drive_off
+     * 
+     * USED IN - Begin Investigation UI action Condition
+     * 
+     * @return {Boolean} True if the record is a Drive Off Case
+     */
+    var isDriveOff = function(sys_id) {
+        var parentCase = new GlideRecord(CIRConstants.Tables.DRIVE_OFF_CASE);
+        if(parentCase.get(sys_id)){
+        return parentCase.getValue('category') === 'fuel_theft_drive_off';
+		}
+		return false;
+    };
+
+    /** 
+     * Every time an Ower Loss or a Impact is inserted, updated or Deleted Update Total Damages in Parent Case
+     * 
+     * USED IN - Businnes Rule - CIR - Calculate Value From Owner Loss
+     * USED IN - Businnes Rule - CIR - Calculate Value From Impact
+     * 
+     * @param  {GlideRecord} driveOffCase - Glide Record of the case
+     * @return {void}
+     */
+    var calculateLosses = function(driveOffCase) {
+        //calculate From Impacts impacts
+        new CIRImpactUtils().CalculateLosses(driveOffCase);
+        //calculate from Owner Losses
+        var grDriveOff = new GlideRecord(CIRConstants.Tables.DRIVE_OFF);
+        grDriveOff.addQuery('parent_case', driveOffCase.getUniqueValue());
+        grDriveOff.query();
+        if (grDriveOff.next()) {
+            var total = parseFloat(driveOffCase.total_damages);
+            var grOwnerLoss = new GlideRecord(CIRConstants.Tables.OWNER_LOSS);
+            grOwnerLoss.addQuery('drive_off', grDriveOff.getUniqueValue());
+            grOwnerLoss.query();
+            while (grOwnerLoss.next()) {
+                total += parseFloat(grOwnerLoss.gross_value_loss);
+            }
+            driveOffCase.total_damages = total;
+            gs.debug('Drive Off Case Updated with Total Damages' + total);
+            driveOffCase.update();
+        }
+    };
+
+
+    /**
+     *Creates a new Drive off Record already related with a Drive receiving the Drive Off Case Sys_id
+     * Type is set default 'Drive off' - 1
+     * USED IN - Businnes Rule - CIR - Automatically create drive off
+     * 
+     * 
+     * @param  {String} parent - sys_id of the drive off case
+     * @return {Object} - returns an object by class type with arrays
+     */
+    var createChildDriveOff = function(parent) {
+        var grDriveOff = new GlideRecord(CIRConstants.Tables.DRIVE_OFF);
+        grDriveOff.initialize();
+        grDriveOff.setValue('parent_case', parent);
+        grDriveOff.setValue('type', '1');
+        var newDriveOff = grDriveOff.insert();
+        gs.debug('Drive off created: ' + grDriveOff.number);
+        return newDriveOff;
+    };
+
+ /**
+     * Verify if the Payment is valid, is not higher than the (Total Damages of the case -  All payments on Database)
+     * 
+     * USED IN - Businnes Rule - CIR -Payment never excceed total damages
+     * 
+     * 
+     * @param  {Float} paymentValue - Value of Payment
+	 * @param  {Float} driveOffCaseLostValue - Total damages from Drive Off Case
+	 * @param  {Object} driveOff - drive off where we are trying to insert a new payment
+     * @return {BOOLEAN} - returns TRUE if the payment is lower than (Total Damages - All Payments in Database)
+     */
+    var validPayment = function(paymentValue, driveOffCaseLostValue, driveOff) {
+        var payments = getPayments(driveOff);
+        var missingPayment = driveOffCaseLostValue - payments;
+        return paymentValue > missingPayment ? false : true;
+    };
+ /**
+     * Calculate the sum of all payments of a specific Drive Off
+     * 
+     * USED IN - validPayment function 
+     * 
+     * 
+     * @param  {String} parent - sys_id of the drive off case
+     * @return {Float} - returns the sum of all payments of a specific Drive Off
+     */
+    var getPayments = function(driveOff) {
+        var total = 0;
+        var gr = new GlideRecord(CIRConstants.Tables.PAYMENT);
+        gr.addQuery('drive_off=' + driveOff);
+        gr.query();
+        while (gr.next()) {
+            total += parseFloat(gr.payment_value);
+        }
+        return total;
+    };
+
+
+    var CIRDriveOffHelperFP = Class.create();
+    var initialize = function() {};
+    CIRDriveOffHelperFP.prototype = {
+        initialize: initialize,
+        IsChildClose: isChildClose,
+        ChangeParent: changeParent,
+        GetUserLocation: getUserLocation,
+        IsDriveOff: isDriveOff,
+        CalculateLosses: calculateLosses,
+        CreateChildDriveOff: createChildDriveOff,
+        ValidPayment: validPayment,
+        DriveOffExists: driveOffExists
+
+    };
+
+    return CIRDriveOffHelperFP;
+
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-20 13:00:07</sys_created_on>
+        <sys_id>761501b4dbf61810bf9ead8ed3961933</sys_id>
+        <sys_mod_count>36</sys_mod_count>
+        <sys_name>CIRDriveOffHelperFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_761501b4dbf61810bf9ead8ed3961933</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-26 11:03:03</sys_updated_on>
+    </sys_script_include>
+</record_update>

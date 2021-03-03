@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_view">
+    <sys_ui_view action="INSERT_OR_UPDATE">
+        <group/>
+        <hidden>false</hidden>
+        <name>product_recall_view</name>
+        <roles/>
+        <sys_class_name>sys_ui_view</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-09-04 12:25:44</sys_created_on>
+        <sys_id>d03d0a65db03d050bf9ead8ed396194e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Product Recall View</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_view_d03d0a65db03d050bf9ead8ed396194e</sys_update_name>
+        <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-09-04 12:25:44</sys_updated_on>
+        <title>Product Recall View</title>
+        <user/>
+    </sys_ui_view>
+</record_update>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRGlideFilterHelper</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRGlideFilterHelper</name>
+        <script><![CDATA[var CIRGlideFilterHelper = Class.create();
+CIRGlideFilterHelper.prototype = {
+    initialize: function() {
+    },
+
+	
+	checkFilter : function (gr, query) {
+		return GlideFilter.checkRecord(gr,query);
+	},
+	
+    type: 'CIRGlideFilterHelper'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-06-26 10:21:03</sys_created_on>
+        <sys_id>060199cbdb211c10bf9ead8ed3961946</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIRGlideFilterHelper</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_060199cbdb211c10bf9ead8ed3961946</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-06-26 10:21:03</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>.container{&#13;
+	height:100%;&#13;
+&#13;
+}&#13;
+&#13;
+.fill-section {&#13;
+    position: absolute;&#13;
+    top: 15px;&#13;
+    bottom: 0;&#13;
+    left: 15px;&#13;
+    right: 15px;&#13;
+    overflow: hidden;&#13;
+  	height: fit-content;&#13;
+}&#13;
+&#13;
+.panel-heading {&#13;
+	border-bottom: solid 1px #dee5e7;&#13;
+} &#13;
+</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>cir_response_plan_room</id>
+        <internal>false</internal>
+        <omit_watcher>false</omit_watcher>
+        <public>false</public>
+        <roles>x_fru_cir.situation_user</roles>
+        <seo_script/>
+        <short_description>Crisis Response Room </short_description>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-25 11:52:27</sys_created_on>
+        <sys_id>576aa20d1b370850df7e43f4bd4bcb67</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>cir_response_plan_room</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_page_576aa20d1b370850df7e43f4bd4bcb67</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-25 11:59:57</sys_updated_on>
+        <title>Situation Response Plan Room</title>
+        <use_seo_script>false</use_seo_script>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=576aa20d1b370850df7e43f4bd4bcb67"/>
+</record_update>

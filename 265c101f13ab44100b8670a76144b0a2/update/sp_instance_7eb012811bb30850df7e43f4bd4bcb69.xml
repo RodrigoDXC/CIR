@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">beb012811bb30850df7e43f4bd4bcb67</sp_column>
+        <sp_widget display_value="CIR HTML">936226411b370850df7e43f4bd4bcb5f</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-25 10:00:11</sys_created_on>
+        <sys_id>7eb012811bb30850df7e43f4bd4bcb69</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Welcome to Corporate Incident Response Portal</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_instance_7eb012811bb30850df7e43f4bd4bcb69</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-03-25 11:24:32</sys_updated_on>
+        <title>Welcome to Corporate Incident Response Portal</title>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"html": {
+		"value": "<h5>&nbsp;<br></h5><h1>${Welcome to the</h1><h2>Corporate Incident Response Portal}<br></h2><h4>${Please login}</h4><p>&nbsp;</p><p>&nbsp;<br></p>",
+		"displayValue": "<h5>&nbsp;<br></h5><h1>${Welcome to the</h1><h2>Corporate Incident Response Portal}<br></h2><h4>${Please login}</h4><p>&nbsp;</p><p>&nbsp;<br></p>"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=7eb012811bb30850df7e43f4bd4bcb69"/>
+</record_update>

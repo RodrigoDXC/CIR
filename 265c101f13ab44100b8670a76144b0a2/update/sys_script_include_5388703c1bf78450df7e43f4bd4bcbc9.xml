@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRConstants</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script include containing all relevant constants for the CIR app.</description>
+        <name>CIRConstants</name>
+        <script><![CDATA[var CIRConstants = {
+	Tables: {
+		// Situation Management
+		SITUATION: 'x_fru_cir_situation',
+		SITUATION_CATEGORY: 'x_fru_cir_situation_category',
+		SITUATION_ESCALATION_LEVEL: 'x_fru_cir_situation_escalation_level',
+		SITUATION_MEMBER: 'x_fru_cir_situation_member',
+		RESPONSE_TEAM: 'x_fru_cir_response_team',
+		RESPONSE_ROOM_MESSAGE: 'x_fru_cir_response_room_message',
+		RESP_PLAN_STEP: 'x_fru_cir_response_plan_step',
+		RESP_PLAN_STEP_MSG: 'x_fru_cir_response_plan_template_step_message',
+		RESP_PLAN_STEP_COND: 'x_fru_cir_response_plan_template_step_condition',
+		RESP_PLAN_STEP_ACTN: 'x_fru_cir_response_plan_template_step_action',
+		RESP_PLAN_TEMPLATE: 'x_fru_cir_response_plan_template',
+		RESP_PLAN_EXEC_STEP: 'x_fru_cir_response_plan_execution_step',
+		RESP_PLAN_EXEC_STEP_ACTN: 'x_fru_cir_response_plan_execution_step_action',
+		RESP_PLAN_EXEC_STEP_COND: 'x_fru_cir_response_plan_execution_step_condition',
+		RESP_PLAN_EXEC_STEP_MSG: 'x_fru_cir_response_plan_execution_step_message',
+		RESP_PLAN_EXEC: 'x_fru_cir_response_plan_execution',
+		RESP_PLAN_CATEGORY: 'x_fru_cir_response_plan_category',
+		ON_CALL_SITU_MGR: 'x_fru_cir_on_call_situation_manager',
+		MSG_SET: 'x_fru_cir_message_set',
+		MSG_EXEC_RECIPIENT: 'x_fru_cir_message_execution_recipient',
+		MESSAGE: 'x_fru_cir_message',
+		LOCATION: 'cmn_location',
+		JOB_TITLE: 'x_fru_cir_job_title',
+		EMG_NUMBER: 'x_fru_cir_emergency_number',
+		CONTACT_LIST: 'x_fru_cir_contact_list',
+		SITUATION_MSG: 'x_fru_cir_situation_message',
+		USER_PROFILE: 'x_fru_cir_user_profile',
+		DIMENSION: 'x_fru_cir_situation_dimension',
+		TASK_TEMPLATE: 'x_fru_cir_situation_task_template',
+		TASK_EXECUTION: 'x_fru_cir_situation_task_execution',
+		PARAMETRIZATION: 'x_fru_cir_situation_parametrization',
+		LOCATION_GROUP: 'x_fru_cir_location_group',
+		ON_CALL_TEAM: 'x_fru_cir_situation_on_call_team',
+		LOG: 'x_fru_cir_log',
+		SIT_TSK_TEMP_PARAM_M2M: 'x_fru_cir_situation_task_template_parametrization_m2m',
+		SECURITY_LOCATION: 'x_fru_cir_security_location',
+		SECURITY_ADDRESS_VALUE: 'x_fru_cir_security_address_value',
+		SECURITY_VIRTUAL_LOCATION: 'x_fru_cir_security_virtual_location',
+		MSG_SET_PARAM_M2M: 'x_fru_cir_message_set_parametrization_m2m',
+		LOCATION_GROUP_PARAM_M2M: 'x_fru_cir_location_group_parametrization_m2m',
+		SEC_VIRTUAL_LOCATON_PARAM_M2M: 'x_fru_cir_security_virtual_locations_parametrization_m2m',
+		SEC_LOCATION_PARAM_M2M: 'x_fru_cir_security_location_parametrization_m2m',
+
+		//Physical Security Incident
+		SECURITY_ASSET: 'x_fru_cir_security_asset',
+		NOTIFICATION_LOG: '	x_fru_cir_notification_log',
+		PSI_MEASURE_USED: '	x_fru_cir_psi_measure_used',
+		PSI_INVOLVED_PERSON: '	x_fru_cir_psi_involved_person',
+		PSI_SUSPECT: 'x_fru_cir_psi_suspect',
+		PSI_TOOL: '	x_fru_cir_psi_tool',
+		PSI_CATEGORY: 'x_fru_cir_psi_category',
+		PSI_ASSET_TYPE: 'x_fru_cir_psi_asset_type',
+		PSI_EXTERNAL: 'x_fru_cir_external_physical_security_incident',
+		PSI_INTERNAL: 'x_fru_cir_internal_physical_security_incident',
+		PSI: 'x_fru_cir_physical_security_incident',
+
+		// Static Protection
+		VENDOR_REPORT_DETAILS : 'x_fru_cir_vendor_report_details',
+		VENDOR_REPORT : 'x_fru_cir_vendor_report',
+		STATIC_SERVICE: 'x_fru_cir_static_service',	
+		STATIC_SERVICE_REPORT: 'x_fru_cir_static_service_report',
+		STATIC_SERVICE_ORDER: 'x_fru_cir_static_service_order',
+		STATIC_SERVICE_MASTER: 'x_fru_cir_static_service_master',
+		STATIC_GUARD_LOCATION: 'x_fru_cir_guard_location',
+		STATIC_SERVICE_ORDER_TEMPLATE: 'x_fru_cir_static_service_order_template',
+		STATIC_GUARD: 'x_fru_cir_static_guard',
+		SERVICE_FUNCTION: 'x_fru_cir_service_function',	
+		SERVICE_ROLE: 'x_fru_cir_service_role',
+		SERVICE_ATTRIBUTE: 'x_fru_cir_service_attribute',
+		SERVICE_TARIFF: 'x_fru_cir_service_tariff',
+		SERVICE_MASTER_SERVICE_TEMPLATE_M2M: 'x_fru_cir_static_service_master_service_template_m2m',
+
+		// Personal Protection
+		EXPENSE_LINE : 'x_fru_cir_expense_line',
+		EXPENSE : 'x_fru_cir_expense',
+		EXPENSE_TYPE : 'x_fru_cir_expense_type',
+		PROTECTION_AGENT_REPORT : 'x_fru_cir_protection_agent_report',
+		PROTECTION_SERVICE_ORDER : 'x_fru_cir_protection_service_order',
+		PROTECTED_AGENDA : 'x_fru_cir_protected_agenda',
+		PROTECTION_SERVICE : 'x_fru_cir_protection_service',
+		PROTECTION_PROFILE : 'x_fru_cir_protection_profile',
+		PROTECTION_PRFILE_M2M : 'x_fru_cir_m2m_protection_p_protection_p',
+
+		//Fleet Management
+		DRIVER_REPORT :  'x_fru_cir_driver_report',
+		ASSIGNED_UNAVAILABILITY :  'x_fru_cir_assigned_unavailability',
+		MAINTENANCE_UNAVAILABILITY :  'x_fru_cir_maintenance_unavailability',
+		RESERVED_UNAVAILABILITY :  'x_fru_cir_reserved_unavailability',
+		VEHICLE_UNAVAILABILITY :  'x_fru_cir_vehicle_unavailability',
+		VEHICLE_EQUIPMENT :  'x_fru_cir_vehicle_equipment',
+		VEHICLE : 'x_fru_cir_vehicle',
+
+		USER: 'sys_user',
+		ATTACHMENT: 'sys_attachment',
+		SCHEDULED_IMPORT_SET: 'scheduled_import_set',
+		DOCUMENTATION: 'sys_documentation',
+		SERVICE_PORTAL: 'sp_portal',
+		//Case Management 
+		CASE: 'x_fru_cir_case',
+		INCIDENT: 'x_fru_cir_incident',
+		HAZARD: 'x_fru_cir_hazard',
+		NEAR_MISS: 'x_fru_cir_near_miss',
+		INVESTIGATION: 'x_fru_cir_investigation',
+		EVENT_TIMELINE: 'x_fru_cir_event_timeline',
+		M2M_CONTRIBUTING_FACTOR: 'x_fru_cir_m2m_contributing_factor',
+		IMPACT: 'x_fru_cir_impact',
+		PHYSICAL_IMPACT: 'x_fru_cir_physical_impact',
+		PERSON_IMPACT: 'x_fru_cir_person_impact',
+		ACTION: 'x_fru_cir_action',
+		RISK: 'x_fru_cir_risk',
+		BODY_LOCATION: 'x_fru_cir_body_location',
+		INJURY_ILLNESS: 'x_fru_cir_injury_illness',
+		CONTROL: 'x_fru_cir_control',
+		SCHEDULED_ACTION: 'x_fru_cir_scheduled_action',
+		CONTRIBUTING_FACTOR: 'x_fru_cir_contributing_factor',
+		LIST_CONTROL: 'sys_ui_list_control',
+		MEDICAL_DOCUMENTATION: 'x_fru_cir_medical_documentation',
+		SYS_APPROVAL: 'sysapproval_approver',
+		WITNESS: 'x_fru_cir_witness',
+		SECURITY_IMPACT: 'x_fru_cir_security_impact',
+		NON_CONFORMANCE_COMPLIANCE: 'x_fru_cir_non_conformance_compliance',
+		ENVIRONMENTAL_IMPACT: 'x_fru_cir_environmental_impact',
+		IMAGE_IMPACT: 'x_fru_cir_image_impact',
+		M2M_INCIDENTS_HAZARDS: 'x_fru_cir_m2m_incidents_hazards',
+		M2M_NEAR_MISSES_HAZARDS: 'x_fru_cir_m2m_near_miss_hazards',
+		KPI_CALCULATION_TYPE: 'x_fru_cir_kpi_calculation_type',
+		KPI_CALCULATION: 'x_fru_cir_kpi_calculation',
+		KPI_WORKING_HOURS: 'x_fru_cir_kpi_working_hours',
+		KPI_PERIOD: 'x_fru_cir_kpi_period',
+		ASSESSMENT_DEFINITION: 'x_fru_cir_assessment_definition',
+		ASSESSMENT_SECTION: 'x_fru_cir_assessment_section',
+		ASSESSMENT_FIELD: 'x_fru_cir_assessment_field',
+		ASSESSMENT_CHOICE: 'x_fru_cir_assessment_choice',
+		ASSESSMENT_INSTANCE: 'x_fru_cir_assessment_instance',
+		ASSESSMENT_INSTANCE_SECTION: 'x_fru_cir_assessment_instance_section',
+		ASSESSMENT_ANSWER: 'x_fru_cir_assessment_answer',
+		CATEGORY: 'sc_category',
+		CAT_ITEM_PRODUCER: 'sc_cat_item_producer',
+		VARIABLE: 'item_option_new',
+		QUESTION_CHOICE: 'question_choice',
+		CATALOG_UI_POLICY: 'catalog_ui_policy',
+		CATALOG_UI_POLICY_ACTION: 'catalog_ui_policy_action',
+		CHOICE: 'sys_choice',
+		FIELD_LABEL: 'sys_documentation',
+		PERSONNEL_CERTIFICATION: 'x_fru_cir_personnel_certification',
+		CERTIFICATION: 'x_fru_cir_certification', 
+		CIR_CATEGORY: 'x_fru_cir_category',
+		CIR_RISK_CATEGORY: 'x_fru_cir_risk_category',
+		INVESTIGATION_RISK: 'x_fru_cir_m2m_risks_investigations',
+		RISK_LOCATION: 'x_fru_cir_m2m_risks_locations',
+		RISK_HAZARD: 'x_fru_cir_risk_hazard',
+		M2M_RISK_HAZARD: 'x_fru_cir_m2m_risks_risk_hazards',
+		AUTHORITY_DOCUMENT: 'x_fru_cir_authority_document',
+		M2M_AUTHORITY_DOC_CONTROL: 'x_fru_cir_m2m_authority_doc_controls',
+		EQUIPMENT: 'x_fru_cir_equipment',
+		COMPONENT: 'x_fru_cir_component',
+		SUB_COMPONENT: 'x_fru_cir_sub_component',
+		M2M_CASE_RISK: 'x_fru_cir_m2m_risk_case',
+		
+		//Drive Off
+		DRIVE_OFF : 'x_fru_cir_drive_off',
+		DRIVE_OFF_CASE : 'x_fru_cir_drive_off_case',
+		SEVERITY_LOOKUP : 'x_fru_cir_severity_lookup', 
+		OWNER_LOSS : 'x_fru_cir_owner_loss',
+		PAYMENT : 'x_fru_cir_payment_details', 
+		
+		//Product Recall
+		PRODUCT_RECALL : 'x_fru_cir_product_recall',
+		AFFECTED_STORES : 'x_fru_cir_affected_stores',
+		INCIDENT_PRODUCTRECALL : 'x_fru_cir_incident_product_recall',
+		NEARMISS_PRODUCTRECALL : 'x_fru_cir_near_miss_product_recall',
+		GROUP_MEMBER : 'sys_user_grmember',
+		USER_PROVIDER : 'cmn_notif_device',
+		PROVIDER : 'cmn_notif_service_provider'
+
+	},
+
+	Ui_pages: {
+		SEND_EMAIL_ACTIVE_GROUP: 'x_fru_cir_send_email_active_group',
+		DISTRUBUTION_LIST: 'x_fru_cir_distribution_list',
+		ADD_FIELD_TAG: 'x_fru_cir_add_field_tag',
+		RESPONSE_PLAN_FLOW: 'x_fru_cir_showWorkflow'
+	},
+
+	KpiCalculationTypes: {
+		LTIF: 'LTIF',
+		LTIF_V2: 'LTIF V2',
+		LTIF_V1: 'LTIF V1',
+		LTI_SR: 'LTI SR',
+	},
+
+	AssessmentPortalConstants: {
+		ASSESSMENT_START_PAGE: 'cir_ciri_assessment_start',
+		ASSESSMENT_PAGE: 'cir_ciri_assessment',
+		ASSESSMENT_BOARD_PAGE: 'cir_ciri_assessment_board',
+		ASSESSMENT_LIST_PAGE: 'cir_ciri_assessment_list',
+		ASSESSMENT_DEF_MANAGER_PAGE: 'cir_ciri_assessment_def_manager',
+		ASSESS_DEFINITION_DEFINE_NEW: 'cir_ciri_assessment_new_definition',
+		ASSESS_DEFINITION: 'cir_ciri_assessment_definition',
+		ASSESS_DEFINITION_ADD_SECTION: 'cir_ciri_assessment_section',
+		ASSESS_DEFINITION_ADD_FIELD: 'cir_ciri_assessment_field',
+		ASSESS_DEFINITION_PUBLISH: 'cir_ciri_assessment_publish',
+		ASSESS_DEFINITION_SELECTOR: 'cir_ciri_assessment_selector',
+		ASSESS_DEFINITION_FIELD_CHOICE: 'cir_ciri_assessment_field_choice',
+		ASSESSMENT_IMPORT_FILE_PAGE: 'cir_ciri_assessment_import'
+	},
+
+	AssessmentStates: {
+		ASSESSMENT_INSTANCE_WIP: 'in_progress',
+		ASSESSMENT_INSTANCE_COMPLETE: 'complete',
+		ASSESSMENT_INSTANCE_CANCELED: 'canceled'
+	},
+
+	AssessmentValidations: {
+		ALLOWED_EXCEL_HEADERS: {
+			SECTION_ACTIVE: gs.getMessage('cir_assmt_import_headers_section_active'),
+			SECTION_NAME: gs.getMessage('cir_assmt_import_headers_section_name'),
+			SECTION_VISIB_COND: gs.getMessage('cir_assmt_import_headers_section_visib_cond'),
+			SECTION_ORDER: gs.getMessage('cir_assmt_import_headers_section_order'),
+			SHORT_DESCRIPTION: gs.getMessage('cir_assmt_import_headers_short_desc'),
+			DESCRIPTION: gs.getMessage('cir_assmt_import_headers_desc'),
+			FIELD_ACTIVE: gs.getMessage('cir_assmt_import_headers_field_active'),
+			FIELD_ORDER: gs.getMessage('cir_assmt_import_headers_field_order'),
+			FIELD_TYPE: gs.getMessage('cir_assmt_import_headers_field_type'),
+			FIELD_MANDATORY: gs.getMessage('cir_assmt_import_headers_field_mandatory'),
+			FIELD_LABEL: gs.getMessage('cir_assmt_import_headers_field_label'),
+			FIELD_NAME: gs.getMessage('cir_assmt_import_headers_field_name'),
+			FIELD_MESSAGE: gs.getMessage('cir_assmt_import_headers_field_message'),
+			FIELD_MAND_COND: gs.getMessage('cir_assmt_import_headers_field_mand_cond'),
+			FIELD_READ_ONLY_COND: gs.getMessage('cir_assmt_import_headers_field_read_only_cond'),
+			FIELD_VISIB_COND: gs.getMessage('cir_assmt_import_headers_field_visib_cond'),
+			FIELD_MSG_COND: gs.getMessage('cir_assmt_import_headers_field_msg_cond'),
+			FIELD_DEFAULT_VALUE: gs.getMessage('cir_assmt_import_headers_field_default_value'),
+			CHOICE_LABELS: gs.getMessage('cir_assmt_import_headers_choice_labels'),
+			CHOICE_VALUES: gs.getMessage('cir_assmt_import_headers_choice_values'),
+			CHOICE_ORDERS: gs.getMessage('cir_assmt_import_headers_choice_orders')
+		},
+		MANDATORY_FIELDS: [{
+			field: 'section.name',
+			message: 'cir_assmt_section_name_row'
+		}, {
+			field: 'section.active',
+			message: 'cir_assmt_section_active_row'
+		}, {
+			field: 'field.type',
+			message: 'cir_assmt_field_type_row'
+		}, {
+			field: 'field.active',
+			message: 'cir_assmt_field_active_row'
+		}, {
+			field: 'field.name',
+			message: 'cir_assmt_field_name_row'
+		}, {
+			field: 'field.mandatory',
+			message: 'cir_assmt_field_mandatory_row'
+		}, {
+			field: 'field.label',
+			message: 'cir_assmt_field_label_row'
+		}],
+		ALLOWED_FIELD_TYPES: {
+			BREAK: gs.getMessage('cir_assmt_import_field_types_break'),
+			CHECKBOX: gs.getMessage('cir_assmt_import_field_types_checkbox'),
+			DATE: gs.getMessage('cir_assmt_import_field_types_date'),
+			DATE_TIME: gs.getMessage('cir_assmt_import_field_types_date_time'),
+			DURATION: gs.getMessage('cir_assmt_import_field_types_duration'),
+			EMAIL: gs.getMessage('cir_assmt_import_field_types_email'),
+			HTML: gs.getMessage('cir_assmt_import_field_types_html'),
+			IP_ADDRESS: gs.getMessage('cir_assmt_import_field_types_ip_address'),
+			LABEL: gs.getMessage('cir_assmt_import_field_types_label'),
+			MACRO: gs.getMessage('cir_assmt_import_field_types_macro'),
+			MACRO_WITH_LABEL: gs.getMessage('cir_assmt_import_field_types_macro_w_label'),
+			MASKED: gs.getMessage('cir_assmt_import_field_types_masked'),
+			MULTI_LINE_TEXT: gs.getMessage('cir_assmt_import_field_types_multi_line_text'),
+			MULTIPLE_CHOICE: gs.getMessage('cir_assmt_import_field_types_multi_choice'),
+			NUMERIC_SCALE: gs.getMessage('cir_assmt_import_field_types_num_scale'),
+			SELECT_BOX: gs.getMessage('cir_assmt_import_field_types_select_box'),
+			SINGLE_LINE_TEXT: gs.getMessage('cir_assmt_import_field_types_single_line'),
+			UI_PAGE: gs.getMessage('cir_assmt_import_field_types_ui_page'),
+			URL: gs.getMessage('cir_assmt_import_field_types_url'),
+			WIDE_SINGLE_LINE_TEXT: gs.getMessage('cir_assmt_import_field_types_wide_single_line'),
+			YES_NO: gs.getMessage('cir_assmt_import_field_types_yes_no')
+		},
+		ALLOWED_FIELD_TYPES_W_CHOICES: {
+			MULTIPLE_CHOICE: gs.getMessage('cir_assmt_import_field_types_multi_choice'),
+			SELECT_BOX: gs.getMessage('cir_assmt_import_field_types_select_box'),
+		},
+		MANDATORY_FIELD_TYPES_W_CHOICES: {
+			MULTIPLE_CHOICE: gs.getMessage('cir_assmt_import_field_types_multi_choice')
+		},
+		//Field Names should not include white spaces, need to begin with a letter and need to end with number or letter. 
+		ALLOWED_FIELD_NAME_REGEX: /^([a-zA-Z])([a-zA-Z0-9])*(_*[a-zA-Z0-9]+)*$/g
+	}
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-24 08:58:53</sys_created_on>
+        <sys_id>5388703c1bf78450df7e43f4bd4bcbc9</sys_id>
+        <sys_mod_count>61</sys_mod_count>
+        <sys_name>CIRConstants</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_5388703c1bf78450df7e43f4bd4bcbc9</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-12-07 10:23:29</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_button_instance">
+    <sys_sg_button_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <button display_value="Update PSI Location">7cc5706fdb751410bf9ead8ed39619ab</button>
+        <color_theme>primary</color_theme>
+        <description/>
+        <field_name/>
+        <icon/>
+        <label>Update</label>
+        <location>top</location>
+        <name>Update</name>
+        <order>10</order>
+        <parent>2475306fdb751410bf9ead8ed39619e8</parent>
+        <parent_table>sys_sg_screen</parent_table>
+        <sys_class_name>sys_sg_button_instance</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-10 08:01:38</sys_created_on>
+        <sys_id>ac87b8afdb751410bf9ead8ed396198c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Update</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_button_instance_ac87b8afdb751410bf9ead8ed396198c</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 08:01:38</sys_updated_on>
+        <table/>
+    </sys_sg_button_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=ac87b8afdb751410bf9ead8ed396198c"/>
+</record_update>

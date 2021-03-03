@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRPSIUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script Include responsible for supporting the Physical Security Incident process.</description>
+        <name>CIRPSIUtilsFP</name>
+        <script><![CDATA[var CIRPSIUtilsFP =  (function() {
+	var CIRPSIUtilsFP = Class.create();
+	var initialize = function() {};
+	
+	var tables = CIRConstants.Tables;
+	
+	//var tables = CIRConstants.Tables;
+	
+	/**
+     * Gets a sys_id of a category by a given type\class and value
+     * @param {string} type
+     * @param {string} value
+     * @return {string} sys_id of a category
+     */
+	var getCategoryId = function (type, value) {
+		var sys_id = '';
+		var grCategory = new GlideRecord(tables.PSI_CATEGORY);
+		grCategory.addQuery('value', value);
+		//grCategory.addQuery('class', type);
+		grCategory.query();
+		if (grCategory.next()) {
+			sys_id = grCategory.getUniqueValue();
+		}
+		return sys_id;
+	};
+
+	/**
+     * Called from the submit script from the PSI record producers
+     * Updates @param current with data with from producers variables
+     * @param {GlideRecord} current
+     * @param {*} producer
+     */
+	var createFromRP = function (current, producer, table) {
+
+		if(table === tables.PSI_EXTERNAL){
+			createExternalRec(current, producer);
+		}
+		if(table === tables.PSI_INTERNAL) {
+			createInternalRec(current, producer);
+		}
+	};
+
+	var createInternalRec = function(current, producer) {
+
+		//category
+		current.setValue('category', producer.selected_cat);
+		current.setValue('state', producer.state);
+
+		//location
+		if(producer.country){
+			current.setValue('country', producer.country);
+		}
+		if(producer.building_name){
+			current.setValue('building_name', producer.building_name);
+		}
+		if(producer.state_province){
+			current.setValue('state_province', producer.state_province);
+		}
+		if(producer.floor){
+			current.setValue('floor', producer.floor);
+		}
+		if(producer.city){
+			current.setValue('city', producer.city);
+		}
+		if(producer.space){
+			current.setValue('space', producer.space);
+		}
+		current.setValue('location_remarks', producer.location_remarks);
+
+
+		//Description
+		current.setValue('description', producer.incident_description);
+		current.setValue('date_occurred', producer.start_time.toString());
+
+
+		//Report
+		if (producer.report.getRowCount()) {
+			current.auto_submit_notification = producer.notification_submission;
+			current.setValue('report_to', createStringReportTo(producer.report));
+		}
+
+		current.update();
+
+		//People
+		if (producer.people_involved.getRowCount() > 0) {
+			_createPSIINTERNALInvolvedPerson(producer.people_involved, current.getUniqueValue());
+		}
+
+	};
+
+	var createExternalRec = function(current, producer) {
+
+		//category
+		current.setValue('category', producer.selected_cat);
+		current.setValue('state', producer.state);
+		current.setValue('asset_type', producer.asset_type);
+
+		//location
+		if(producer.location){
+			current.setValue('inc_location', producer.location);
+		}
+
+		if(producer.facility_type) {
+			current.setValue('u_facility_type', producer.facility_type);
+		}
+
+		if(producer.department) {
+			current.setValue('u_department', producer.department);
+		}
+
+		//date
+		if (producer.start_time) {
+			current.setValue('date_occurred', producer.start_time.toString());
+		}
+		if (producer.end_time) {
+			current.setValue('end_date', producer.end_time.toString());
+		}
+
+		//Financial Assessment
+		current.setValue('local_currency', producer.local_currency);
+		current.setValue('maximum_amount', producer.maximum_amount);
+		current.setValue('loss_amount', producer.loss_amount);
+		current.setValue('amount_recovered', producer.amount_recovered);
+		current.setValue('office_risk_level', producer.office_risk_level);
+		current.setValue('result', producer.result);
+		current.setValue('costcenter', producer.costcenter);
+		current.setValue('company', producer.company);
+
+		//Description
+		if (producer.methods_used) {
+			current.setValue('methods_used', producer.methods_used.toString());
+		}
+		if (producer.tools_used) {
+			current.setValue('tools_used', producer.tools_used.toString());
+		}
+		if (producer.means_of_escape) {
+			current.setValue('means_of_escape', producer.means_of_escape.toString());
+		}
+		//if (producer.counter_vaulted) {
+		//  current.setValue('counter_vaulted', producer.counter_vaulted.toString());
+		//}
+		current.setValue('description', producer.incident_description);
+
+		//Report
+		if (producer.report.getRowCount()) {
+			current.auto_submit_notification = producer.notification_submission;
+			current.setValue('report_to', createStringReportTo(producer.report));
+		}
+
+		current.update();
+		//Suspects
+		if (producer.suspect_description.getRowCount() > 0) {
+			_createSuspects(producer.suspect_description, current.getUniqueValue());
+		}
+		//means
+		/*if (producer.security_measures.getRowCount() > 0) {
+			_createPSIMeasuresUsed(producer.security_measures, current.getUniqueValue());
+		}*/
+		//People
+		if (producer.people_involved.getRowCount() > 0) {
+			_createPSIInvolvedPerson(producer.people_involved, current.getUniqueValue());
+		}
+	};
+
+	var getFields = function(tableName) {
+		var array = [];
+		var fieldsIgnore = ["converted_cost", "cost_of_incident", "local_currency", "result", "sys_id", "upload", "user"];
+		var fieldsget = ["description", "state","sys_created_by","sys_created","sys_updated_by","sys_updated"];
+		var fieldPrefix = '';
+		var extended = tables.PSI;
+		var task = "task";
+
+
+		var grDict = new GlideRecord('sys_documentation');
+		grDict.addQuery('name', tableName.toString());
+		grDict.addQuery('language', gs.getSession().getLanguage());
+		grDict.addNotNullQuery('element');
+		grDict.query();
+		while(grDict.next()) {
+			var obj = {};		
+			obj.label = grDict.label.toString();
+			obj.value = fieldPrefix + grDict.element.toString();
+			array.push(obj);
+		}
+
+		var grDictExt = new GlideRecord('sys_documentation');
+		grDictExt.addQuery('name', extended);
+		grDictExt.addQuery('language', gs.getSession().getLanguage());
+		grDictExt.addNotNullQuery('element');
+		grDictExt.query();
+		while(grDictExt.next()) {
+			if (fieldsIgnore.indexOf(grDictExt.getValue('element')) == -1){
+				var obj2 = {};
+				obj2.label = grDictExt.label.toString();
+				obj2.value = fieldPrefix + grDictExt.element.toString();
+				array.push(obj2);	
+			}
+		}
+
+		var grDictTask = new GlideRecord('sys_documentation');
+		grDictTask.addQuery('name', task);
+		grDictTask.addQuery('language', gs.getSession().getLanguage());
+		grDictTask.addNotNullQuery('element');
+		grDictTask.query();
+		while(grDictTask.next()) {
+			if (fieldsget.indexOf(grDictTask.getValue('element')) != -1){
+				var obj3 = {};
+				obj3.label = grDictTask.label.toString();
+				obj3.value = fieldPrefix + grDictTask.element.toString();
+				array.push(obj3);	
+			}
+		}
+
+		return JSON.stringify(array);
+	};
+
+	/**
+     * Gets a object containing information from the user table
+     * @param {string} id sys_id of a user
+     * @return {{id_number: String, phone_number: String, company: String, email: String}}
+     */
+	var getFieldsFromUserTable = function (id) {
+		var result;
+		var gr = new GlideRecord('sys_user');
+		if (gr.get(id)) {
+			result = {
+				'phone_number': gr.getValue('mobile_phone'),
+				'id_number': gr.getValue('user_name'),
+				'email': gr.getValue('email'),
+				'user_company': gr.getValue('company')
+			};
+
+		}
+		return result;
+	};
+
+	/**
+     * Gets an Array of sys_ids of all costcenters associated to the locations @param fsmLocation
+     * @param {string} fsmLocation sys_id of a location
+     * @return {string[]} Array of sys_ids
+     */
+	var getCostcentersSysidFromLocation = function (fsmLocation) {
+		if (!fsmLocation) {
+			return ['-1'];
+		}
+		var arrayUtil = new global.ArrayUtil();
+		var locationsIds = [];
+		var includeChild = false;
+		var costcenterSysids = [];
+		//var grFsmLocation = new GlideRecord('x_lsmcb_fsm_fsm_locations');
+		//         if (grFsmLocation.get(fsmLocation)) {
+		//             includeChild = grFsmLocation.getValue('type') != '2';
+		//         }
+		var grFsmLocation = new GlideRecord(tables.SECURITY_LOCATION);
+		//         var condition = grFsmLocation.addQuery('sys_id', fsmLocation);
+
+		//         if (includeChild) {
+		grFsmLocation.addQuery('parent', fsmLocation);
+		grFsmLocation.addQuery('type', 2);
+		//         }
+		grFsmLocation.query();
+		while (grFsmLocation.next()) {
+			//             if (grFsmLocation.getValue('location')) {
+			//                 locationsIds.push(grFsmLocation.getValue('location'));
+			//             }
+			//         }
+			//        
+			//         var grCostcenter = new GlideRecord('cmn_cost_center');
+			//         grCostcenter.addQuery('location', 'IN', locationsIds.join(','));
+			//         grCostcenter.query();
+			//         while (grCostcenter.next()) {
+			if (arrayUtil.contains(costcenterSysids, grFsmLocation.getValue('cost_centre'))) continue;
+
+			costcenterSysids.push(grFsmLocation.getValue('cost_centre'));
+			costcenterSysids = costcenterSysids.concat(getCostcentersSysidFromLocation(grFsmLocation.getUniqueValue() + ''));
+		}
+
+		return costcenterSysids.length != 0 ? costcenterSysids : ['-1'];
+	};
+
+	/**
+     * Creates a record for each row of the obj @param suspects
+     * @param {Object} suspects Object from the producer of a multirow variable set
+     * @param {string} psiId sys_id
+     * @private
+     */
+	var _createSuspects = function (suspects, psiId) {
+		var suspRecord;
+		var rowCount = suspects.getRowCount();
+		for (var i = 0; i < rowCount; i++) {
+			var row = suspects.getRow(i);
+			suspRecord = new GlideRecord(tables.PSI_SUSPECT);
+			suspRecord.initialize();
+			//suspRecord.setValue('number', i+1);
+			suspRecord.description  = row.susp_description;
+			suspRecord.incident = psiId;
+			suspRecord.insert();
+		}
+	}; 
+
+	/**
+     * Creates a record for each row of the obj @param measures
+     * @param measures Object from the producer of a multirow variable set
+     * @param {string} psiId sys_id of a psi
+     * @private
+     */
+	var _createPSIMeasuresUsed = function (measures, psiId) {
+		var measureUsedRecord;
+		var rowCount = measures.getRowCount();
+		for (var i = 0; i < rowCount; i++) {
+			var row = measures.getRow(i);
+			measureUsedRecord = new GlideRecord('x_fru_cir_psi_measure_used');
+			measureUsedRecord.initialize();
+			measureUsedRecord.security_measure = row.security_measure;
+			measureUsedRecord.operational =row.operational ;
+			measureUsedRecord.effective = row.effective;
+			measureUsedRecord.incident = psiId;
+			measureUsedRecord.insert();
+		}
+	};
+
+	/**
+     * Creates a record for each row of the obj @param measures
+     * @param person Object from the producer of a multirow variable set
+     * @param psiId sys_id of a psi
+     * @private
+     */
+	var _createPSIInvolvedPerson = function (person, psiId) {
+		var personRecord;
+		var rowCount = person.getRowCount();
+		for (var i = 0; i < rowCount; i++) {
+			var row = person.getRow(i);
+			personRecord = new GlideRecord('x_fru_cir_psi_involved_person');
+			personRecord.initialize();
+			personRecord.name =row.name;
+			personRecord.role = row.role;
+			personRecord.company = row.user_company;
+			personRecord.id_number = row.id_number;
+			personRecord.phone_number = row.phone_number;
+			personRecord.email = row.email;
+			personRecord.incident = psiId;
+			personRecord.insert();
+
+		}
+	};
+
+	var _createPSIINTERNALInvolvedPerson = function (person, psiId) {
+		var personRecord;
+		var rowCount = person.getRowCount();
+		for (var i = 0; i < rowCount; i++) {
+			var row = person.getRow(i);
+			personRecord = new GlideRecord('x_fru_cir_psi_involved_person');
+			personRecord.initialize();
+			personRecord.name =row.select_user;
+			personRecord.company = row.company;
+			personRecord.id_number= row.user_id;
+			personRecord.phone_number = row.phone_number;
+			personRecord.email =  row.email;
+			personRecord.incident =  psiId;
+			personRecord.insert();
+
+		}
+	};
+
+	/**
+     * Sends a notifications to all users in the field "report_to" base on there language by default is english
+     * @param {string} sys_id  a sys_id of a psi record
+     * @return {boolean} returns if it was successful
+     */
+	var sendSummary = function (sys_id, table) {
+		var status = false;
+		var internal = tables.PSI_INTERNAL;
+		var external = tables.PSI_EXTERNAL; 
+
+		var grPSI = new GlideRecord(table);
+
+		if (grPSI.get(sys_id.toString())) {
+
+			var users = grPSI.getValue('report_to');
+			if (!users) return;
+
+			var usersArray = users.split(',');
+			var userByPrefLang = _getUsersPrefLang(usersArray);
+
+			if (table == internal){
+
+				if (userByPrefLang.en) {
+					gs.eventQueue('x_fru_cir.psi.internal.notification.en', grPSI, userByPrefLang.en.join(','));
+					status = true;
+				}
+				if (userByPrefLang.es) {
+					gs.eventQueue('x_fru_cir.psi.internal.notification.es', grPSI, userByPrefLang.es.join(','));
+					status = true;
+				}
+				if (userByPrefLang.pt) {
+					gs.eventQueue('x_fru_cir.psi.internal.notification.pt', grPSI, userByPrefLang.pt.join(','));
+					status = true;
+				}
+
+			} else if (table == external){
+
+				if (userByPrefLang.es) {
+					gs.eventQueue('x_fru_cir.psi.manual.notification.es', grPSI, userByPrefLang.es.join(','));
+					status = true;
+				}
+				if (userByPrefLang.en) {
+					gs.eventQueue('x_fru_cir.psi.manual.notification.en', grPSI, userByPrefLang.en.join(','));
+					status = true;
+				}
+				if (userByPrefLang.pt) {
+					gs.eventQueue('x_fru_cir.psi.manual.notification.pt', grPSI, userByPrefLang.pt.join(','));
+					status = true;
+				}
+			}
+
+			if (status){
+				grPSI.setValue('last_report', new GlideDateTime().getValue());
+				grPSI.update();
+			}          
+		}
+		return status;
+	};
+
+	/**
+     * Gets user prefered language is not prepared to use that language set to default en and returns a object
+     * with user arranged aby language
+     * @param {string[]} usersArray array os user sys_ids
+     * @return {object} properties are arrays
+     * @private
+     */
+	var _getUsersPrefLang = function (usersArray) {
+		var userByPrefLang = {
+			en: []
+		};
+		var gr;
+
+		for (var i = 0; i < usersArray.length; i++) {
+			gr = new GlideRecord('sys_user_preference');
+			gr.addQuery('name', 'user.language');
+			gr.addQuery('user', usersArray[i]);
+			gr.query();
+			if (gr.next()) {
+				switch (gr.getValue('value')) {
+					case 'es':
+						if (!userByPrefLang.es) userByPrefLang.es = [];
+						userByPrefLang.es.push(usersArray[i]);
+						break;
+					case 'pt':
+						if (!userByPrefLang.pt) userByPrefLang.pt = [];
+						userByPrefLang.pt.push(usersArray[i]);
+						break;
+					case 'en':
+					default:
+						userByPrefLang.en.push(usersArray[i]);
+				}
+			} else {
+				userByPrefLang.en.push(usersArray[i]);
+			}
+		}
+
+		return userByPrefLang;
+	};
+
+	/**
+     * Transforms the object into a string with user separated by comma
+     * @param report Object from the producer of a multirow variable set
+     * @return {string}
+     */
+	var createStringReportTo = function (report) {
+		var sys_ids = [];
+		var rowCount = report.getRowCount();
+		for (var i = 0; i < rowCount; i++) {
+			var row = report.getRow(i);
+			sys_ids.push(row.report_to.toString());
+		}
+		return sys_ids.join(',');
+	};
+
+	/**
+     * Transforms the object into a string with user separated by comma
+     * @param report Object from the producer of a multirow variable set
+     * @return {string}
+     */
+	var createStringReportUsers = function (report) {
+		var sys_ids = [];
+		for (var i = 0; i < report.length; i++) {
+			sys_ids.push(report[i].report_to.toString());
+		}
+		return sys_ids.join(',');
+	};	
+
+	var getFsmBuidings = function() {
+		var buildings = [];
+
+		var grLoc = new GlideRecord(tables.SECURITY_LOCATION);
+		grLoc.addEncodedQuery('type=1');
+		grLoc.query();
+
+		while(grLoc.next()){
+			buildings.push(grLoc.getUniqueValue());
+		}
+
+		return 'sys_idIN'+ buildings.toString();
+	};
+
+	var setSuspectNumber = function(incident) {
+		var currentNumber = 0;
+		var grSuspect = new GlideRecord(tables.PSI_SUSPECT)
+		grSuspect.addQuery('incident', incident);
+		grSuspect.orderByDesc('number');
+		grSuspect.query();
+
+		if(grSuspect.next()) {
+			currentNumber = grSuspect.number;
+		}
+
+		return currentNumber+1;
+	};
+
+	var getCompaniesForBuilding = function(location) {
+		var array = [];
+		var count = 0;
+
+		var grSpaces = new GlideRecord(tables.SECURITY_LOCATION);
+		grSpaces.addQuery('parent', location.toString());
+		grSpaces.query();
+
+		while(grSpaces.next()) {
+			if(grSpaces.company) {
+				array.push(grSpaces.company.toString());
+			}
+			array = array.concat(getCompaniesForBuilding(grSpaces.sys_id));
+		}
+		return array;
+	};
+
+	var getCurrentUserRecord = function() {
+		var grUser = new GlideRecord('sys_user');
+		if(grUser.get(gs.getUserID())) {
+			return grUser;
+		}
+		return;
+	};
+
+	var buildPSILocationQuery = function(country, state, city) {
+		var addressCodes = {};
+		addressCodes.country = country;
+		addressCodes.state = state;
+		addressCodes.city = city;
+		var addressVal = buildFsiObject(addressCodes);
+		// type is building or space
+		var query = 'type=1^ORtype=2';
+
+		// if local manager the country will be the same as the user
+		if(gs.hasRole('x_fru_cir.psi_local_manager') && !gs.hasRole('x_fru_cir.psi_global_manager')) {
+			addressVal.country = getChoiceForCountry(getCurrentUserRecord().getDisplayValue('country'));
+		}
+
+		// if state, city or country is already selected, will get update query to retieve only the correspondet locations
+		var addressQuery = buildAddressQuery(addressVal);
+		if(country || state || city) {
+			query +=  addressQuery ? '^sys_idIN' + addressQuery + '' : '^sys_idIN';
+		}
+		return query;
+	};
+
+	var buildAddressQuery = function(addressVal){
+		var locations = [];
+
+		var grLoc = new GlideRecord(tables.SECURITY_LOCATION);
+		grLoc.addEncodedQuery('active=true^type=1');
+		if(addressVal.country) {
+			grLoc.addQuery('country', addressVal.country);
+		}
+		if(addressVal.state) {
+			grLoc.addQuery('state', addressVal.state);
+		}
+		if(addressVal.city){
+			grLoc.addQuery('city', addressVal.city);
+		}
+		grLoc.query();
+
+		while(grLoc.next()){
+			locations.push(grLoc.getUniqueValue());
+		}
+
+		return locations.toString();
+	};
+
+	var getChoiceForCountry =  function(label) {
+		var gr = new GlideRecord('sys_choice');
+		gr.addQuery('language', gs.getSession().getLanguage());
+		gr.addQuery('name', 'cmn_location');
+		gr.addQuery('element', 'country');
+		gr.addQuery('label', label);
+		gr.setLimit(1);
+		gr.query();
+
+		if(gr.next()) {
+			return gr.value;
+		}
+		return '';
+	};
+
+
+	/**
+     * Called on internal psi location fileds ref qualifyers (backend and record producer)
+	 * Gets the name of the field that calls the functions and goes to the x_lsmcb_fsm_fsm_address_value table to retrieve 
+	 * the correct records
+     * @param {string} type - name of the field the calls the function (where the ref qualifyer is placed on)
+     * @param {GlideRecord} fsi - current psi record
+     * @return {string} sys_id of the filtered type values separated by ','
+     */
+	var addrValueFilter = function(type,fsi) {
+		var addrValues = [];
+		var query = 'type='+type+'^';
+
+
+		switch (type) {
+
+			case 'country':
+				var language = gs.getSession().getLanguage();
+				query += language ? 'language=' + language + '^' : 'language=en^';
+				if(fsi.state_province) 
+					query += 'value='+ getFromLocations(type, fsi.state_province.value, 'state','');
+
+				if(fsi.city) 
+					query += 'value='+ getFromLocations(type, fsi.city.value, 'city','');
+				break;
+
+			case 'state':
+
+				if(fsi.country != '' && !fsi.city) {
+					query += 'value='+ getFromLocations(type, fsi.country, 'country','');
+				}
+				if(fsi.city)
+					query += 'value='+ getFromLocations(type, fsi.city.value, 'city','');
+				break;
+
+			case 'city':
+
+				if(fsi.country && !fsi.state_province) {
+					query += 'value='+ getFromLocations(type, fsi.country, 'country','');
+				}
+				if(fsi.state_province) 
+					query += 'value='+ getFromLocations(type, fsi.state_province.value, 'state','');
+				break;
+
+			case 'building': 
+
+				if(fsi.country && !fsi.state_province && !fsi.city) {
+					query += 'value='+ buildBuildingQuery('name', fsi.country, 'country','1');
+				}
+				if(fsi.state_province && !fsi.city) {
+					query += 'value='+ buildBuildingQuery('name', fsi.state_province.value, 'state','1','',fsi.country);
+				}
+
+				if(fsi.city) {
+					query += 'value='+ buildBuildingQuery('name', fsi.city.value, 'city','1',fsi.state_province.value, fsi.country);
+				}
+				break;
+
+			case 'floor':
+
+				if(fsi.building_name && !fsi.space) 
+					query += 'value='+ getFromLocations('name', fsi.building_name.value, 'parent.name', '3');
+
+				if(fsi.building_name && fsi.space) 
+					query += 'value='+ getSpaceNameFloors(fsi.space.name, fsi.building_name.value);
+				break;
+
+
+		}
+
+		var grAddrValues = new GlideRecord(tables.SECURITY_ADDRESS_VALUE);
+		grAddrValues.addEncodedQuery(query);
+		grAddrValues.query();
+
+		while(grAddrValues.next()) {
+			addrValues.push(grAddrValues.getUniqueValue());
+		}
+
+		return  addrValues.toString();
+
+	};
+
+	/**
+     * Called on addrValueFilter
+	 * From a type, a value a sourceField and a spacetype, goes to the x_lsmcb_fsm_fsm_locations table a and gets
+	 * the value of a given filed 
+     * @param {string} type - name of the field to get the values from
+     * @param {string} value - value of the sourceFiled to query
+	 * @param {string}sourceField - name of the source filed to query
+     * @return {string} values of the matching fields. separated by ','
+     */
+	var getFromLocations = function(type, value, sourceField, spaceType) {
+
+		var fsmLocValues = [];
+
+		var grFsmLoc = new GlideAggregate(tables.SECURITY_LOCATION);
+		grFsmLoc.addQuery(sourceField, value);
+		grFsmLoc.addQuery('active', 'true');
+		if(spaceType) {
+			grFsmLoc.addQuery('type', spaceType);
+		}
+		grFsmLoc.groupBy(type);
+        grFsmLoc.setGroup(true);
+		grFsmLoc.query();
+
+		while(grFsmLoc.next()) {
+			if(grFsmLoc.getDisplayValue(type)){
+				fsmLocValues.push(grFsmLoc.getDisplayValue(type));
+			}
+		}
+
+		return fsmLocValues.join('^ORvalue=');
+	};
+
+	var buildBuildingQuery = function(type, value, sourceField, spaceType, state, country){
+
+		var fsmLocValues = [];
+
+		var grFsmLoc = new GlideRecord(tables.SECURITY_LOCATION);
+		grFsmLoc.addQuery(sourceField, value);
+		grFsmLoc.addQuery('active', 'true');
+		grFsmLoc.addQuery('type', spaceType);
+		if(state) {
+			state = state == 'test' ? '': state;
+			grFsmLoc.addQuery('state', state);
+		}
+		if(country) {
+			grFsmLoc.addQuery('country', country);
+		}
+		grFsmLoc.query();
+		return grFsmLoc.getEncodedQuery();
+
+		// 		while(grFsmLoc.next()) {
+		// 			if(grFsmLoc.getDisplayValue(type)){
+		// 			fsmLocValues.push(grFsmLoc.getDisplayValue(type));
+		// 			}
+		// 		}
+
+		// 		return fsmLocValues.join('^ORvalue=');
+
+	};
+
+	/**
+     * Called on space field reference qual on the internal psi table
+	 * retrives the spaces that are childs of a selected floor. 
+	 * If a floor is not selected will retive the grand childs of the selected building
+     * @param {string} fsi - current internal psi recrod
+     * @return {string} sys_id of the matching x_lsmcb_fsm_fsm_locations records. separated by ','
+     */
+	var psiSpaceFilter = function(fsi) {
+		var spaces = 'active=true^type=2';
+		var parent = fsi.floor ? fsi.floor : fsi.building_name;
+		
+		
+		
+		return spaces+'^parent='+parent+'^ORparent.parent='+parent;
+	};
+
+	/**
+     * Called on fsiSpaceFilter function
+	 * retrives the parent (floor) or grand parent (building) x_lsmcb_fsm_fsm_locations ID of a given space 
+     * @param {string} fsi - current internal psi recrod
+     * @return {string} sys_id of the matching x_lsmcb_fsm_fsm_locations record
+     */
+	var getSpaceFilterParent =  function(fsi) {
+		var parent = '';
+		var parentType = fsi.floor ? '3': '1';
+		var parentName = fsi.floor ? fsi.floor.value : fsi.building_name.value;
+
+		var grParent = new GlideRecord(tables.SECURITY_LOCATION);
+		grParent.addEncodedQuery('type='+parentType+'^name='+parentName+'^active=true');
+		grParent.query();
+
+		if(grParent.next()) {
+			parent = grParent.getUniqueValue();
+		}
+		return parent;
+	};
+
+	/**
+     * Called on addrValueFilter when type is floor
+	 * from a given space name and building name will retrive all the floor names that has 
+	 * the given building as parent and the given space as child
+     * @param {string} spaceName - name of the child space
+     * @param {string} buildingName - name of the parent building
+     * @return {string} name of the matching floors. separated by ','
+     */
+	var getSpaceNameFloors = function(spaceName, buildingName) {
+		var parents = [];
+
+		var grFloors = new GlideRecord(tables.SECURITY_LOCATION);
+		grFloors.addQuery('active', 'true');
+		grFloors.addQuery('name', spaceName);
+		grFloors.query();
+
+		while(grFloors.next()) {
+			if(grFloors.parent.parent.name == buildingName && grFloors.parent.type == '3'){
+				parents.push(grFloors.parent.name.toString());
+			}
+		}
+		return parents.join('^ORvalue=');	
+	};
+
+	/**
+     * Called on fsm_fsi_client_utils , getBuildingData function, that is called on 
+	 * 'Populate adress from building'  client script of the internal psi table (backend and record producer)
+	 * from a given building name, and/or: state, city, will get the 
+	 * the given building as parent and the given space as child x_lsmcb_fsm_fsm_locations record 
+	 * to populate addres values fomr the selected building
+     * @param {object} buildingData - selected building info (name, country)
+     * @return {object} building address data (country, state, city);
+     */
+	var getBuildingFilterData = function(buildingData) {
+		var addressValues = {};
+
+		var grBuilding = new GlideRecord(tables.SECURITY_LOCATION);
+		grBuilding.addEncodedQuery('active=true^type=1^sys_id='+buildingData.name);
+		if (buildingData.country) {
+			grBuilding.addQuery('country', buildingData.country);
+		}
+		grBuilding.query();
+
+		if (grBuilding.next()) {
+			addressValues.country = grBuilding.getValue('country');
+			addressValues.state = getAdressValueId('state',grBuilding.getValue('state'));
+			addressValues.city = getAdressValueId('city',grBuilding.getValue('city'));
+		}
+		return addressValues;
+	};
+
+
+	/**
+     * Called on getBuildingFilterData. From a given value and type
+	 * will retrun a sys_id of a record from x_lsmcb_fsm_fsm_address_value
+     * @param {string} type - value of the 'type' field  on the x_lsmcb_fsm_fsm_address_value table
+     * @param {string} value - value of the 'value' field on the x_lsmcb_fsm_fsm_address_value tbale
+     * @return {string} sys_id of the macthing x_lsmcb_fsm_fsm_address_value record
+     */
+	var getAdressValueId = function(type, value) {
+
+		var grAddr = new GlideRecord(tables.SECURITY_ADDRESS_VALUE);
+		grAddr.addQuery('type', type);
+		if(type == 'country'){
+			grAddr.addQuery('language', gs.getSession().getLanguage());
+		}
+		grAddr.addQuery('value', value);
+		grAddr.query();
+
+		if(grAddr.next()) {
+			return grAddr.getUniqueValue();
+		}
+	};
+
+	/**
+     * Called on fsm_psi_ajax_utils. From a given address values from a fsm location
+	 * will retrun the  sys_id of the records from x_lsmcb_fsm_fsm_address_value
+     * @param {object} addressVal - object with the values of the country, state and city of an fsm location
+     * @return {object} object with the sys_ids of the country, state and city of the fsm location (from x_lsmcb_fsm_fsm_address_value)
+     */
+	var getAddressValueIds = function(locationId) {
+		var addressRecs = {};
+
+		var grLoc = new GlideRecord(tables.SECURITY_LOCATION);
+
+		if(grLoc.get(locationId)){
+			addressRecs.country = grLoc.getValue('country');
+			addressRecs.state = getAdressValueId('state', grLoc.getValue('state'));
+			addressRecs.city = getAdressValueId('city', grLoc.getValue('city'));
+		}
+
+		return addressRecs;
+
+	};
+
+	/**
+     * Called on the getFsmLocSpace function of the 'fsm_fsi_client_utils' script include that is called on the 
+	 *'Set fsm space from floor' client script 
+	 * form a given space name, building name and floor name will return an fsm location space record
+     * @param {object} spaceData - object with the space record data
+     * @return {string} sys_id of the matching fsm location record
+     */
+	var getFsmLocationSpace = function(spaceData, isFromRP) {
+		spaceData = isFromRP ? buildFsiObject(spaceData) : spaceData;
+		var spaceName = getSpaceName(spaceData.spaceId).toString();
+
+		var grSpace = new GlideRecord(tables.SECURITY_LOCATION);
+		grSpace.addQuery('active', 'true');
+		grSpace.addQuery('type','2');
+		grSpace.addQuery('name', spaceName);
+		grSpace.addQuery('parent.name', spaceData.floor.toString());
+		grSpace.addQuery('parent.parent.name', spaceData.building.toString());
+		grSpace.query();
+
+		if(grSpace.next()) {
+			return grSpace.getUniqueValue();
+		}
+	};
+
+	/**
+     * Called on the functions that are called from a internal psi record producer client script
+	 * form a griven variable ids (from x_lsmcb_fsm_fsm_address_value table) 
+	 * will build an obejct with the displayValues 
+     * @param {object} variableIds - object with the x_lsmcb_fsm_fsm_address_value ids for the fields: 
+	 * state, city, name, floor, building or space
+     * @return {object} formated object to with the display values. ready to use on the caller function
+     */
+	var buildFsiObject = function(variableIds) {
+		var fsiObj = {};
+		fsiObj.state = variableIds.state ? getAddrDisplayValue(variableIds.state) : '';
+		fsiObj.city = variableIds.city ? getAddrDisplayValue(variableIds.city) : '';
+		fsiObj.name = variableIds.name ? getAddrDisplayValue(variableIds.name) : '';
+		fsiObj.floor = variableIds.floor ? getAddrDisplayValue(variableIds.floor) : '';
+		fsiObj.building = variableIds.building ? getAddrDisplayValue(variableIds.building) : '';
+		fsiObj.country = variableIds.country ? getAddrDisplayValue(variableIds.country) : '';
+		fsiObj.spaceId = variableIds.spaceId ? variableIds.spaceId : '';
+
+		return fsiObj;	
+	};
+
+	var getAddrDisplayValue = function(addrValueId, key) {
+		var grAddrDispVal = new GlideRecord(tables.SECURITY_ADDRESS_VALUE);
+		if (grAddrDispVal.get(addrValueId)){
+			return grAddrDispVal.value.toString();
+		}
+	};
+
+	/**
+     * From a given space sys_id (x_lsmcb_fsm_fsm_locations) will return the space name
+     * @param {string} spaceId - sys_id of a x_lsmcb_fsm_fsm_locations space
+     * @return {string} name of the space
+     */
+	var getSpaceName = function(spaceId) {
+		var grSpace = new GlideRecord(tables.SECURITY_LOCATION);
+		if(grSpace.get(spaceId.toString())){
+			return grSpace.getValue('name');
+		}
+	};
+
+	/**
+     * Called from 'Set country by user' client script on the internal psi table (backend and record producer)
+     * @return {string} sys_id of a 'x_lsmcb_fsm_fsm_address_value' record type = country and value = current user country
+     */
+	var getUserCountryValue = function() {
+		var usrCountry = getCurrentUserRecord().getDisplayValue('country');
+		var language = gs.getSession().getLanguage() ? gs.getSession().getLanguage() : 'en';
+		var grAddrValues = new GlideRecord(tables.SECURITY_ADDRESS_VALUE);
+		grAddrValues.addQuery('type','country');
+		grAddrValues.addQuery('value', usrCountry.toString());
+		grAddrValues.addQuery('language', language);
+		grAddrValues.query();
+
+		if(grAddrValues.next()) {
+			return grAddrValues.getUniqueValue();
+		}
+		return '';
+	};
+
+	var filterBuildingForPSI = function (incident) {
+		var query = '';
+		if(incident.country && !incident.state_province && !incident.city) {
+			query += buildBuildingQuery('name', incident.country, 'country','1');
+		}
+		if(incident.state_province && !incident.city) {
+			query += buildBuildingQuery('name', incident.state_province.value, 'state','1','',incident.country);
+		}
+
+		if(incident.city) {
+			query += buildBuildingQuery('name', incident.city.value, 'city','1',incident.state_province.value, incident.country);
+		}
+
+		return query;
+	};
+
+	var filterFloorForPSI = function(incident) {
+		var query = 'active=true^type=3';
+		if(incident.building_name && !incident.space) 
+			query += '^parent='+incident.building_name;
+
+		if(incident.building_name && incident.space) 
+			query += '^sys_id=' + incident.space.parent;
+		
+		return query;
+	};
+	
+	var getLocationQuery = function(sourceField, value) {
+		var fsmLocValues = [];
+
+		var grFsmLoc = new GlideRecord(tables.SECURITY_LOCATION);
+		grFsmLoc.addQuery(sourceField, value);
+		grFsmLoc.addQuery('active', 'true');
+		if(spaceType) {
+			grFsmLoc.addQuery('type', spaceType);
+		}
+		grFsmLoc.query();
+
+		return fsmLocValues.join('^ORvalue=');
+	};
+	
+	var updateTierOnCascade = function(currentRec) {
+		if(currentRec.parent.changes()) {
+			currentRec.tier = currentRec.parent ? currentRec.parent.tier + 1 : 0;
+		}
+		var grPsiCategory = new GlideRecord(CIRConstants.Tables.PSI_CATEGORY);
+		grPsiCategory.addQuery('parent', currentRec.getUniqueValue());
+		grPsiCategory.query();
+		while(grPsiCategory.next()) {
+			grPsiCategory.setValue('tier', currentRec.tier + 1);
+			grPsiCategory.update();
+		}
+	};
+	
+	CIRPSIUtilsFP.prototype = {
+		initialize: initialize,
+		GetCategoryId: getCategoryId, 
+		CreateFromRP: createFromRP,
+		CreateInternalRec: createInternalRec,
+		CreateExternalRec: createExternalRec,
+		GetFields: getFields,
+		GetFieldsFromUserTable: getFieldsFromUserTable,
+		GetCostcentersSysidFromLocation: getCostcentersSysidFromLocation,
+		SendSummary: sendSummary,
+		CreateStringReportTo: createStringReportTo,
+		CreateStringReportUsers: createStringReportUsers,
+		GetFsmBuidings: getFsmBuidings,
+		SetSuspectNumber: setSuspectNumber,
+		GetCompaniesForBuilding: getCompaniesForBuilding,
+		GetCurrentUserRecord: getCurrentUserRecord,
+		BuildPSILocationQuery: buildPSILocationQuery,
+		BuildAddressQuery: buildAddressQuery,
+		GetChoiceForCountry: getChoiceForCountry,
+		AddrValueFilter: addrValueFilter, 
+		GetFromLocations: getFromLocations,
+		BuildBuildingQuery: buildBuildingQuery,
+		PsiSpaceFilter: psiSpaceFilter,
+		GetSpaceFilterParent: getSpaceFilterParent,
+		GetSpaceNameFloors: getSpaceNameFloors,
+		GetBuildingFilterData: getBuildingFilterData,
+		GetAdressValueId: getAdressValueId,
+		GetAddressValueIds: getAddressValueIds,
+		GetFsmLocationSpace: getFsmLocationSpace,
+		BuildFsiObject: buildFsiObject,
+		GetAddrDisplayValue: getAddrDisplayValue,
+		GetSpaceName: getSpaceName,
+		GetUserCountryValue: getUserCountryValue,
+		FilterBuildingForPSI: filterBuildingForPSI,
+		FilterFloorForPSI: filterFloorForPSI,
+		UpdateTierOnCascade: updateTierOnCascade
+	};
+	
+	return CIRPSIUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-01 14:30:16</sys_created_on>
+        <sys_id>59e5a328dbb95010bf9ead8ed396190c</sys_id>
+        <sys_mod_count>44</sys_mod_count>
+        <sys_name>CIRPSIUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_59e5a328dbb95010bf9ead8ed396190c</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2021-01-13 09:47:57</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" label="Static Service" max_length="40" name="x_fru_cir_static_service" sizeclass="0" type="collection">
+        <element label="Date" max_length="40" name="date" type="glide_date"/>
+        <element default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service master" max_length="32" name="service_master" read_only="true" reference="x_fru_cir_static_service_master" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="0" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="New" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Open" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Closed" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="Canceled" sequence="3" value="2"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="service_master"/>
+        </index>
+    </element>
+</database>

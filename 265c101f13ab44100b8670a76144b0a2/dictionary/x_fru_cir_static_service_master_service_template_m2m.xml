@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Cir Static Service Master Service Template M2m" max_length="40" name="x_fru_cir_static_service_master_service_template_m2m" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Static Service Master" max_length="32" name="static_service_master" reference="x_fru_cir_static_service_master" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Static Service Order Template" max_length="32" name="static_service_order_template" reference="x_fru_cir_static_service_order_template" type="reference"/>
+        <index name="index">
+            <element name="static_service_master"/>
+        </index>
+        <index name="index2">
+            <element name="static_service_order_template"/>
+        </index>
+    </element>
+</database>

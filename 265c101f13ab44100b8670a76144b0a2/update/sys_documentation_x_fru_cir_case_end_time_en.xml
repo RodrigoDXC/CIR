@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="end_time" label="End time" language="en" table="x_fru_cir_case">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>end_time</element>
+            <help/>
+            <hint/>
+            <label>End time</label>
+            <language>en</language>
+            <name>x_fru_cir_case</name>
+            <plural>End times</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-17 10:33:17</sys_created_on>
+            <sys_id>ef5b6c4b1bd62010de011fc11a4bcb89</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>End time</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_documentation_x_fru_cir_case_end_time_en</sys_update_name>
+            <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-17 10:33:17</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

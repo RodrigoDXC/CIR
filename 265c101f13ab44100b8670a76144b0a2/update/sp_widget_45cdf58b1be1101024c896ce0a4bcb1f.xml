@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, $timeout) {
+	/* widget controller */
+	var c = this;
+	$rootScope.locationFilter = {
+		locationTypes: $scope.data.locationTypes,
+		caseTypes: $scope.data.caseTypes,
+		favorites_only: $scope.data.favorites_only,
+		searchText: ''
+	};
+
+	$scope.toggleFavorites = function(){
+		$scope.data.favorites_only = !$scope.data.favorites_only;
+		$rootScope.updateFilter('favorites_only', false);
+	};
+
+	$scope.clearSelected = function(fieldName) {
+		jQuery('#' + fieldName + ' option').each(function(){
+			jQuery(this).prop('selected', false);
+		});
+		$scope.data[fieldName] = '';
+		$rootScope.updateFilter(fieldName, true);
+	};
+
+	$scope.markSelected = function(fieldName) {
+		var values = [];
+		jQuery('#' + fieldName + ' option').each(function(){
+			jQuery(this).prop('selected', true);
+			values.push(jQuery(this).val());
+		});
+		$scope.data[fieldName] = values;
+		$rootScope.updateFilter(fieldName, true);
+	};
+
+	$rootScope.updateFilter = function(fieldName, buttonClick){
+		$rootScope.locationFilter[fieldName] = $scope.data[fieldName];
+		if(buttonClick){
+			$timeout(function() {
+				angular.element('#' + fieldName).triggerHandler('change');
+			});
+		}
+		else{
+			$rootScope.clearMarkers();
+		}
+		$rootScope.updateGrid();
+	};
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.selectFilterDiv{&#13;
+  z-index: 100;&#13;
+  position: absolute;&#13;
+  background-color: white;&#13;
+  width: 80%;&#13;
+  padding: 10px;&#13;
+  display: none;&#13;
+  border-style: solid;&#13;
+  margin: 0 auto;&#13;
+}&#13;
+.selectFilter{&#13;
+  display: none;&#13;
+  width: 100%;&#13;
+  height: 97px;&#13;
+}&#13;
+.filterHeader{&#13;
+  color: white;&#13;
+  padding: 10px;&#13;
+  margin-bottom: 0px;&#13;
+}&#13;
+.pad-bottom{&#13;
+  padding-bottom: 10px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-location-map-filters</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Location Map Filters</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    data.favorites_only = false;
+    data.locationTypes = [];
+    data.allLocationTypes = [];
+    var locationTypes = new GlideAggregate(CIRConstants.Tables.CASE);
+    locationTypes.addAggregate('COUNT', 'location_type');
+    locationTypes.orderBy('location_Type');
+    locationTypes.query();
+    while(locationTypes.next()) {
+        data.allLocationTypes.push({
+            displayValue: locationTypes.location_type.getDisplayValue(),
+            value: locationTypes.location_type.toString()
+        });
+        data.locationTypes.push(locationTypes.location_type.toString());
+    }
+
+    data.caseTypes = [];
+    data.allCaseTypes = [];
+    var caseTables = new GlideRecord('sys_db_object');
+    caseTables.addQuery('super_class.name', gs.getProperty('x_fru_cir.case.table.name'));
+    caseTables.orderBy('label');
+    caseTables.query();
+    while(caseTables.next()) {
+        data.allCaseTypes.push({
+            displayValue: caseTables.label.toString(),
+            value: caseTables.name.toString()
+        });
+        data.caseTypes.push(caseTables.name.toString());
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 13:37:57</sys_created_on>
+        <sys_id>45cdf58b1be1101024c896ce0a4bcb1f</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIR CIRI Location Map Filters</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_45cdf58b1be1101024c896ce0a4bcb1f</sys_update_name>
+        <sys_updated_by>jbaechle@dxc.com</sys_updated_by>
+        <sys_updated_on>2020-09-14 14:54:34</sys_updated_on>
+        <template><![CDATA[<div class="hidden-xs">
+  <div class="col-sm-4 pad-bottom">
+    <div style="width: 80%;margin: 0 auto;">
+      <div class="filterHeader navbar-inverse" ng-click="toggleFavorites()">${cir_case_management_filter_to_following}
+        <i ng-class="data.favorites_only == true  ? 'glyphicon glyphicon-star' : 'glyphicon glyphicon-star-empty'" title="${cir_case_management_toggle_showing_only_favorite_stores}" data-toggle="tooltip" style="float:right"></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 pad-bottom">
+    <div style="width: 80%;margin: 0 auto;">
+      <div class="filterHeader navbar-inverse">${cir_case_management_filter_by_location_type}</div>
+      <div class="selectFilterDiv">
+        <a href="javascript:void(0)" ng-click="markSelected('locationTypeFilter')">${Select All}</a>
+        <a href="javascript:void(0)" ng-click="clearSelected('locationTypeFilter')" style="float:right">${Clear}</a>
+        <select multiple class="selectFilter" id="locationTypeFilter" ng-change="$root.updateFilter('locationTypes')" ng-model="data.locationTypes">
+          <option ng-repeat="locationType in data.allLocationTypes" value="{{locationType.value}}" selected="true">{{locationType.displayValue}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 pad-bottom">
+    <div style="width: 80%;margin: 0 auto;">
+      <div class="filterHeader navbar-inverse">${cir_case_management_filter_by_case_type}</div>
+      <div class="selectFilterDiv">
+        <a href="javascript:void(0)" ng-click="markSelected('caseTypeFilter')">${Select All}</a>
+        <a href="javascript:void(0)" ng-click="clearSelected('caseTypeFilter')" style="float:right">${Clear}</a>
+        <select multiple class="selectFilter" id="caseTypeFilter" ng-change="$root.updateFilter('caseTypes')" ng-model="data.caseTypes">
+          <option ng-repeat="caseType in data.allCaseTypes" value="{{caseType.value}}" selected="true">{{caseType.displayValue}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <script>
+    jQuery(".filterHeader").on('click', function() {
+      jQuery(this).parent().find(".selectFilterDiv").toggle();
+      jQuery(this).parent().find(".selectFilter").slideToggle('fast');
+    });
+    jQuery(document).ready(function() {
+      jQuery(window).on('resize', function(){
+        var width = jQuery('.filterHeader').width();
+        jQuery('.selectFilterDiv').each(function() {
+          jQuery(this).width(width - 5);
+        });
+      });
+      var width = jQuery('.filterHeader').width();
+      jQuery('.selectFilterDiv').each(function() {
+        jQuery(this).width(width - 10);
+      });
+    });
+  </script>
+</div>]]></template>
+    </sp_widget>
+</record_update>

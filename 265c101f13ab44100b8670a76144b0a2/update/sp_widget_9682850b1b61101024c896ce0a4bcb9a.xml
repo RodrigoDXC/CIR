@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope) {
+	/* widget controller */
+	var c = this;
+	var map = '';
+	var latlngbounds;
+	var locations = $scope.data.locations;
+	$scope.visibleLocations = locations;
+
+	function containsSearchText(value, searchText) {
+		return value.toLowerCase().indexOf(searchText) !== -1;
+	}
+
+	function hasMatchingType(typesToCheck, typesWeWant) {
+		for (var type in typesToCheck){
+			if (typesWeWant.indexOf(typesToCheck[type].value) !== -1){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function locationMatchesCriteria(location, criteria) {
+		if (criteria.favorites_only && !location.favorite) {
+			return false;
+		}
+
+		var searchText = criteria.searchText ? criteria.searchText.toLowerCase() : '';
+		if (!(searchText === '' ||
+					containsSearchText(location.name, searchText) ||
+					containsSearchText(location.address, searchText))) {
+			return false;
+		}
+
+		return hasMatchingType(location.caseTypes, criteria.caseTypes) &&
+			hasMatchingType(location.locationTypes, criteria.locationTypes);
+	}
+
+	// TODO: Look into an injected service / common model instead of using the root scope
+	$rootScope.markers = [];
+	$rootScope.clearMarkers = function() {
+		for (var i = 0; i < $rootScope.markers.length; i++) {
+			$rootScope.markers[i].setMap(null);
+		}
+		$rootScope.markers = [];
+
+		$scope.visibleLocations = [];
+		var criteria = $rootScope.locationFilter;
+		for (i = 0; i < locations.length; i++) {
+			var location = locations[i];
+			if (locationMatchesCriteria(location, criteria)) {
+				$scope.visibleLocations.push(location);
+			}
+		}
+
+		DropMarker(0);
+	};
+
+	function initMap() {
+		var usa = { lat: 40.00, lng: -96.00 };
+		var mandalayBay = { lat: 36.092745, lng: -115.175288 };
+		var center = { lat: 47.984667, lng: -53.960506 };
+
+		map = new google.maps.Map(
+			document.getElementById("map"), {
+				center: usa,
+				zoom: 4
+			});
+		latlngbounds = new google.maps.LatLngBounds();
+
+		DropMarker(0);
+	}
+
+	function DropMarker(i) {
+		i = i || 0;
+		var location = $scope.visibleLocations[i];
+		if (location) {
+			var location_li = jQuery('#' +location.id);
+			var location_url = location_li.parent().attr('href');
+			var pinColor = location.icon;
+			var pinImage = new google.maps.MarkerImage($scope.data.googleChartUrl + pinColor,
+													   new google.maps.Size(21, 34),
+													   new google.maps.Point(0,0),
+													   new google.maps.Point(10, 34));
+			var marker = new google.maps.Marker({
+				map: map,
+				title: location.name,
+				position: {lat: parseFloat(location.lat), lng: parseFloat(location.lng)},
+				draggable: false,
+				animation: google.maps.Animation.DROP,
+				icon: pinImage,
+				filterId: location.id
+			});
+			$rootScope.markers.push(marker);
+
+			location_li.mouseenter(function() { startBounce(marker); });
+			location_li.mouseleave(function() { stopBounce(marker); });
+
+			var caseTypes = [];
+			for(var x = 0; x < location.caseTypes.length; x++){
+				caseTypes.push(location.caseTypes[x].displayValue);
+			}
+
+			var contentString = '<div id="content">'+
+				'<div id="locationPopup">'+
+				'</div>'+
+				'<h3 style="margin-top:0">'+ location.name +'</h3>'+
+				'<div id="bodyContent">'+
+				'<p style="margin:0">'+ location.address +'</p>'+
+				'<p style="margin:0; font-weight:bold; color:darkgreen;">'+ caseTypes.join(', ') +'</p>'+
+				'<p style="margin:0"><a href="'+ location.url +'">${Go to Location Page}</a></p>'+
+				'</div>'+
+				'</div>';
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+			marker.addListener('click', function() { infowindow.open(map, marker); });
+
+			latlngbounds.extend(marker.getPosition());
+		}
+
+		if (++i < $scope.visibleLocations.length) {
+			setTimeout(function() {
+				DropMarker(i);
+			}, 1000 / $scope.visibleLocations.length);
+		} else {
+			map.setCenter(latlngbounds.getCenter());
+			map.fitBounds(latlngbounds);
+		}
+	}
+
+	function toggleBounce(marker) {
+		marker.setAnimation(marker.getAnimation() === null ? google.maps.Animation.BOUNCE : null);
+	}
+
+	function startBounce(marker) {
+		marker.setAnimation(google.maps.Animation.BOUNCE);
+		map.panTo(marker.getPosition());
+	}
+
+	function stopBounce(marker) {
+		marker.setAnimation(null);
+	}
+
+	window.map_api_loaded = window.map_api_loaded || false;
+	if (window.map_api_loaded) {
+		initMap();
+	} else {
+		jQuery.ajax({
+			dataType: 'script',
+			cache: true,
+			url: $scope.options.map_api_url
+		}).then(function() {
+			window.map_api_loaded = true;
+			initMap();
+		});
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>#map {&#13;
+  height: 500px;&#13;
+  width: 100%;&#13;
+  border: 2px solid green;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-location-map</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Location Map</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() {
+	options.map_api_url = gs.getProperty('x_fru_cir.google.api.map.url', '') + gs.getProperty('x_fru_cir.google.api.key', '');
+	data.locations = new CIRCaseManagementUtils().GetLocationRecords();
+	data.page = 'retail_map';
+	data.googleChartUrl = gs.getProperty('x_fru_cir.google.api.chart.url', '');
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-26 09:20:49</sys_created_on>
+        <sys_id>9682850b1b61101024c896ce0a4bcb9a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR CIRI Location Map</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_9682850b1b61101024c896ce0a4bcb9a</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-26 13:54:06</sys_updated_on>
+        <template><![CDATA[<div class="hidden-xs">
+  <div id="map"/>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>1e0ad9fddb469410d4a73533f396197f</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_fru_cir_contact_list">
+    <x_fru_cir_contact_list action="INSERT_OR_UPDATE">
+        <description/>
+        <dimension display_value="Physical security">836b21d5db065410d4a73533f396191c</dimension>
+        <groups/>
+        <name>Escalation team 2 - USA</name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:17:55</sys_created_on>
+        <sys_id>1e0ad9fddb469410d4a73533f396197f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:17:55</sys_updated_on>
+        <type>0</type>
+        <users>d2eacd71db469410d4a73533f39619b1,ac82c9b9db069410d4a73533f396191d,ec13c1f9db069410d4a73533f3961983</users>
+        <users_condition/>
+    </x_fru_cir_contact_list>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:19:04</sys_created_on>
+        <sys_id>324a5dfddb469410d4a73533f3961974</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Escalation team 2 - USA</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_metadata_link_324a5dfddb469410d4a73533f3961974</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:19:04</sys_updated_on>
+        <tablename>x_fru_cir_contact_list</tablename>
+    </sys_metadata_link>
+</record_update>

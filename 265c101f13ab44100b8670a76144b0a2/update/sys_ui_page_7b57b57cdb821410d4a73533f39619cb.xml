@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var TABLE = '/api/now/table/sys_script_include';
+var FIELDS_QUERY = 'sysparm_fields='+['sys_id', 'active', 'name', 'script'].join(',');
+var requestBody = '';
+var isGlobalScope = document.querySelector('#isGlobalScope').value === 'true';
+var sourceScript = {
+    name: document.querySelector('#sourceSIname').textContent,
+    script: (document.querySelector('#sourceSIscript').textContent).replace(/\n/g, '\r\n')
+};
+var targetScript = {
+    id: document.querySelector('#targetID').value,
+    name: document.querySelector('#targetName').value,
+    active: !document.querySelector('#buttons_container button#enable').hasClassName('disabled')
+};
+
+var MESSAGES = {
+    ERROR_DUPLICATES_FOUND: 'The script is duplicated. Please contact your System Administrator.',
+    ERROR_ALREADY_INSTALLED: 'Script Include already installed.',
+    SUCCESS_INSTALL: 'Installed Script Include.',
+    ERROR_INSTALL: 'Failed to install Script Include',
+    SUCCESS_UNINSTALL: 'Uninstalled Script Include.',
+    ERROR_UNINSTALL: 'Failed to uninstall Script Include',
+    SUCCESS_UPDATE: 'Updated Script Include.',
+    ERROR_UPDATE: 'Failed to update Script Include',
+    ERROR_NOT_INSTALLED: 'Script not installed',
+    EMPTY_CHANGES: 'Changes is empty, not sending update',
+	UPDATE_SCRIPT_VERSION: ' Please change your scope to "Health, Safety and Environmental" and click "Update script version"',
+	VERSION_UPDATED: 'The script version is now up to date.'
+};
+
+function addErrorMessage(msg) {
+    GlideUI.get().addOutputMessage({msg: msg, type: 'error', preventDuplicates: true});
+}
+
+function addInfoMessage(msg) {
+    GlideUI.get().addOutputMessage({msg: msg, type: 'info', preventDuplicates: true});
+}
+
+function getScript() {
+
+}
+
+function installScript() {
+    if (typeof targetScript.id === 'string' && targetScript.id !== '') {
+        addErrorMessage(MESSAGES.ERROR_ALREADY_INSTALLED);
+        return;
+    }
+    var request = new XMLHttpRequest();
+    request.open('POST', TABLE, true);
+    request.setRequestHeader('Accept', 'application/json');
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('X-UserToken', window.g_ck);
+    request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+            var installedScript = JSON.parse(this.response).result;
+            targetScript.id = installedScript.sys_id;
+            activateButtons(['uninstall', 'enable']);
+			addInfoMessage(MESSAGES.SUCCESS_INSTALL + MESSAGES.UPDATE_SCRIPT_VERSION);
+        } else {
+            addErrorMessage(MESSAGES.ERROR_INSTALL);
+        }
+    };
+    request.send(JSON.stringify({
+        name: targetScript.name,
+        active: false,
+        access: 'public',
+        script: sourceScript.script
+    }));
+}
+
+function uninstallScript() {
+    if (typeof targetScript.id !== 'string' && targetScript.id === '') {
+        addErrorMessage(MESSAGES.ERROR_NOT_INSTALLED);
+        return;
+    }
+    var request = new XMLHttpRequest();
+    request.open('DELETE', TABLE + '/' + targetScript.id, true);
+    request.setRequestHeader('X-UserToken', window.g_ck);
+    request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+            targetScript.id = undefined;
+            targetScript.active = undefined;
+            activateButtons(['install']);
+            addInfoMessage(MESSAGES.SUCCESS_UNINSTALL + MESSAGES.UPDATE_SCRIPT_VERSION);
+        } else {
+            addErrorMessage(MESSAGES.ERROR_UNINSTALL);
+        }
+    };
+    request.send();
+}
+
+
+function updateInstalledScript(type, changes) {
+    // disable buttons that call this to avoid more than one request for changes at the same time
+    if (typeof targetScript.id !== 'string' || targetScript.id === '') {
+        addErrorMessage(MESSAGES.ERROR_NOT_INSTALLED);
+        return;
+    }
+    var request = new XMLHttpRequest();
+    request.open('PATCH', TABLE + '/' + targetScript.id + '?' + FIELDS_QUERY);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Accept', 'application/json');
+    request.setRequestHeader('X-UserToken', window.g_ck);
+    request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+            var installedScript = JSON.parse(this.response).result;
+            targetScript.active = installedScript.active === 'true';
+            switch(type) {
+                case 'upgrade':
+                    activateButtons(['uninstall', 'enable']);
+                    break;
+                case 'enable':
+                    activateButtons(['uninstall', 'disable']);
+                    break;
+                case 'disable':
+                    activateButtons(['uninstall', 'enable']);
+                    break;
+            }
+            addInfoMessage(MESSAGES.SUCCESS_UPDATE + MESSAGES.UPDATE_SCRIPT_VERSION);
+        } else {
+            addErrorMessage(MESSAGES.ERROR_UPDATE);
+        }
+    };
+    request.send(JSON.stringify(changes));
+}
+
+function upgradeScript() {
+    updateInstalledScript('upgrade', {script: sourceScript.script, active: 'false'});
+}
+
+function enableScript() {
+    updateInstalledScript('enable', {active: 'true'});
+}
+function disableScript() {
+    updateInstalledScript('disable', {active: 'false'});
+}
+
+function activateButtons(arrEnable) {
+    document.querySelector('#buttons_container').childElements().forEach(function(button) {
+        if(arrEnable.indexOf(button.id) >= 0) {
+            document.querySelector('#' + button.id).classList.remove('disabled');
+        } else {
+            button.classList.add('disabled');
+        }
+    });
+}
+
+
+function updateVersion() {
+	activateButtons([]);
+	var isInstalled = document.querySelector('#isInstalled').value === "true",
+		action  = isInstalled ? 'upgrade' : 'uninstall';
+	var ga = new GlideAjax('CIRGlobalScriptUtilsAjaxFP');
+	ga.addParam('sysparm_name', 'updateGlobalScriptVersion');
+	ga.addParam('sysparm_action', action);
+	ga.getXML(showSucess);
+}
+
+function showSucess(response) {
+  addInfoMessage(MESSAGES.VERSION_UPDATED);
+}
+
+getScript();]]></client_script>
+        <description>Global helper script installer, this script helps with database manipulation on the Global scope.</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_CIR_Global_Helper_Installer.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+  <j:set var="jvar_show_target_script" value="false" />
+  <j:set var="jvar_show_info_json" value="false" />
+  <g:evaluate var="jvar_info" object="true">
+    var scriptName = {
+        src: 'CIRGlobalHelperFPTemplate',
+        tgt: 'CIRGlobalHelperFP'
+    };
+
+    var info = {
+        isGlobalScope: gs.getCurrentApplicationId() === 'global',
+	  	isCIRScope: gs.getCurrentApplicationId() === '265c101f13ab44100b8670a76144b0a2',
+        scriptInstalled: undefined,
+        scriptEnabled: undefined,
+        scriptsMatch: undefined,
+        sourceSI: {
+            name: undefined,
+            api_name: undefined,
+            script: undefined
+        },
+        targetSI: {
+            id: undefined,
+            name: undefined,
+            apiName: undefined,
+            script: undefined
+        }
+    };
+    var srcScriptInclude = new GlideRecord('sys_script_include');
+    if(srcScriptInclude.get('name', scriptName.src)) {
+        info.sourceSI.name = srcScriptInclude.getValue('name');
+        info.sourceSI.api_name = srcScriptInclude.getValue('api_name');
+        info.sourceSI.script = srcScriptInclude.getValue('script');
+
+        var tgtScriptInclude = new GlideRecord('sys_script_include');
+        if(tgtScriptInclude.get('name', scriptName.tgt)) {
+            info.scriptInstalled = true;
+            info.scriptEnabled = tgtScriptInclude.getValue('active') === '1';
+            //info.scriptsMatch = tgtScriptInclude.getValue('script').replace(/\r?\n/g, '\r\n') == srcScriptInclude.getValue('script').replace(/\r?\n/g, '\r\n');
+	  		info.isInstalledVS = true;
+	  		info.scriptsMatch = gs.getProperty('x_fru_cir.global.template.upgrade.version') == gs.getProperty('x_fru_cir.global.template.current.version');
+            info.targetSI.id = tgtScriptInclude.getUniqueValue();
+            info.targetSI.name = tgtScriptInclude.getValue('name');
+            info.targetSI.apiName = tgtScriptInclude.getValue('api_name');
+            info.targetSI.script = tgtScriptInclude.getValue('script');
+        } else {
+            info.scriptInstalled = false;
+            info.targetSI.name = scriptName.tgt;
+        }
+    }
+    if(!info.isGlobalScope) {
+      info.scriptInstalled = undefined;
+      info.scriptEnabled = undefined;
+      info.scriptsMatch = undefined;
+    }
+  </g:evaluate>
+  <style>
+    #main_container {
+        margin: 5em;
+    }
+    #buttons_container {
+        text-align: center;
+    }
+    #sourceSI {
+        width: 100%;
+        border-spacing: 1em;
+        border-collapse: separate;
+    }
+  </style>
+  <div id="main_container">
+    <input type="hidden" id="isGlobalScope" value="${info.isGlobalScope}" />
+    <input type="hidden" id="targetID" value="${info.targetSI.id}" />
+    <input type="hidden" id="targetName" value="${info.targetSI.name}" />
+	<input type="hidden" id="isInstalled" value="${info.isInstalledVS}" />
+    <div id="buttons_container">
+      <button class="btn btn-primary ${info.scriptInstalled === false &amp;&amp; gs.hasRole('admin') ? '' : 'disabled'}" id="install" onclick="installScript()">Install</button>
+	  <button class="btn btn-primary ${info.scriptsMatch === false &amp;&amp; gs.hasRole('admin') ? '' : 'disabled'}" id="upgrade" onclick="upgradeScript()">Upgrade</button>
+      <button class="btn btn-primary ${info.scriptInstalled === true &amp;&amp; gs.hasRole('admin') ? '' : 'disabled'}" id="uninstall" onclick="uninstallScript()">Uninstall</button>
+      <button class="btn btn-primary ${info.scriptEnabled === false &amp;&amp; gs.hasRole('admin') ? '' : 'disabled'}" id="enable" onclick="enableScript()">Enable</button>
+      <button class="btn btn-primary ${info.scriptEnabled === true &amp;&amp; gs.hasRole('admin') ? '' : 'disabled'}" id="disable" onclick="disableScript()">Disable</button>
+	  <button class="btn btn-primary ${info.isCIRScope === true &amp;&amp; gs.hasRole('admin') ? '' : 'disabled'}" id="script_version" onclick="updateVersion()">Update script version</button>
+    </div>
+    <table id="sourceSI">
+      <tr id="sourceName">
+        <td>Name</td>
+        <td id="sourceSIname">${info.sourceSI.name}</td>
+      </tr>
+      <tr id="sourceApiname">
+        <td>API Name</td>
+        <td>${info.sourceSI.api_name}</td>
+      </tr>
+      <tr id="sourceScriptDisplay">
+        <td>Script</td>
+        <td>
+          <pre id="sourceSIscript">${HTML:info.sourceSI.script}</pre>
+        </td>
+      </tr>
+    </table>
+  </div>
+</j:jelly>]]></html>
+        <name>CIR_Global_Helper_Installer</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-14 09:56:52</sys_created_on>
+        <sys_id>7b57b57cdb821410d4a73533f39619cb</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIR_Global_Helper_Installer</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_7b57b57cdb821410d4a73533f39619cb</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:00:05</sys_updated_on>
+    </sys_ui_page>
+</record_update>

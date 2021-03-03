@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>start_date</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages>cir_invalid_date&#13;
+cir_invalid_dates_order</messages>
+        <name>Check start date</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (isLoading || newValue === '') {
+      return;
+   }
+
+     g_form.clearMessages();
+    var startDate = g_form.getValue('start_date');
+    var endDate = g_form.getValue('end_date');
+
+    var ga = new GlideAjax('CIRDateUtilsAjax');
+    ga.addParam("sysparm_name", 'validateDates');
+    ga.addParam("sysparm_start_date", startDate);
+    ga.addParam("sysparm_end_date", endDate);
+    ga.addParam("sysparm_validate_past", 'true');
+    ga.getXML(function (response) {
+        var answer = JSON.parse(response.responseXML.documentElement.getAttribute("answer"));
+        if (!answer) {
+            g_form.addInfoMessage(getMessage('cir_invalid_date'));
+            g_form.setValue('start_date', '');
+        }
+    });   
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-31 13:47:44</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1e001e56db1edc10d4a73533f396192a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Check start date</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_client_1e001e56db1edc10d4a73533f396192a</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-03 09:29:19</sys_updated_on>
+        <table>x_fru_cir_protection_service_order</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

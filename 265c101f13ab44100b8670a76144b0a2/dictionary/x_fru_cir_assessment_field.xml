@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Assessment Field" max_length="40" name="x_fru_cir_assessment_field" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" read_only="true" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Assessment Section" mandatory="true" max_length="32" name="assessment_section" reference="x_fru_cir_assessment_section" reference_cascade_rule="delete" type="reference"/>
+        <element label="Default value" max_length="512" name="default_value" type="string"/>
+        <element label="Field message" max_length="255" name="field_message" type="string"/>
+        <element label="Field message condition" max_length="4000" name="field_message_condition" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Field message Cat UI Policy" max_length="32" name="field_mess_cat_ui_policy" read_only="true" reference="catalog_ui_policy" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Include none" max_length="40" name="include_none" type="boolean"/>
+        <element display="true" label="Label" mandatory="true" max_length="255" name="label" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Mandatory" max_length="40" name="mandatory" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Mandatory Cat UI Policy" max_length="32" name="mandatory_cat_ui_policy" read_only="true" reference="catalog_ui_policy" type="reference"/>
+        <element label="Mandatory condition" max_length="4000" name="mandatory_condition" type="string"/>
+        <element label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Order" max_length="40" name="order" type="integer"/>
+        <element label="Portal view" max_length="40" name="portal_view" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Read only Cat UI Policy" max_length="32" name="read_only_cat_ui_policy" read_only="true" reference="catalog_ui_policy" type="reference"/>
+        <element label="Read only condition" max_length="4000" name="read_only_condition" type="string"/>
+        <element choice="3" label="Type" mandatory="true" max_length="40" name="type" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Break" sequence="1" value="12"/>
+                <element inactive_on_update="false" label="CheckBox" sequence="2" value="7"/>
+                <element inactive_on_update="false" label="Date" sequence="6" value="9"/>
+                <element inactive_on_update="false" label="Date/Time" sequence="7" value="10"/>
+                <element inactive_on_update="false" label="Duration" sequence="8" value="29"/>
+                <element inactive_on_update="false" label="Email" sequence="9" value="26"/>
+                <element inactive_on_update="false" label="HTML" sequence="10" value="23"/>
+                <element inactive_on_update="false" label="IP Address" sequence="11" value="28"/>
+                <element inactive_on_update="false" label="Label" sequence="12" value="11"/>
+                <element inactive_on_update="false" label="Macro" sequence="16" value="14"/>
+                <element inactive_on_update="false" label="Macro with Label" sequence="17" value="17"/>
+                <element inactive_on_update="false" label="Masked" sequence="18" value="25"/>
+                <element inactive_on_update="false" label="Multi Line Text" sequence="19" value="2"/>
+                <element inactive_on_update="false" label="Multiple Choice" sequence="20" value="3"/>
+                <element inactive_on_update="false" label="Numeric Scale" sequence="21" value="4"/>
+                <element inactive_on_update="false" label="Select Box" sequence="23" value="5"/>
+                <element inactive_on_update="false" label="Single Line Text" sequence="24" value="6"/>
+                <element inactive_on_update="false" label="UI Page" sequence="25" value="15"/>
+                <element inactive_on_update="false" label="URL" sequence="26" value="27"/>
+                <element inactive_on_update="false" label="Wide Single Line Text" sequence="27" value="16"/>
+                <element inactive_on_update="false" label="Yes / No" sequence="28" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Variable" max_length="32" name="variable" read_only="true" reference="item_option_new" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Visible Cat UI Policy" max_length="32" name="visible_cat_ui_policy" read_only="true" reference="catalog_ui_policy" type="reference"/>
+        <element label="Visible condition" max_length="4000" name="visible_condition" type="string"/>
+        <index name="index">
+            <element name="assessment_section"/>
+        </index>
+        <index name="index2">
+            <element name="field_mess_cat_ui_policy"/>
+        </index>
+        <index name="index3">
+            <element name="variable"/>
+        </index>
+        <index name="index4">
+            <element name="visible_cat_ui_policy"/>
+        </index>
+        <index name="index5">
+            <element name="read_only_cat_ui_policy"/>
+        </index>
+        <index name="index6">
+            <element name="mandatory_cat_ui_policy"/>
+        </index>
+    </element>
+</database>

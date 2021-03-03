@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
+    <catalog_ui_policy_action action="INSERT_OR_UPDATE">
+        <catalog_item display_value="External PSI Incident">ae5b296e1b31901024c896ce0a4bcb75</catalog_item>
+        <catalog_variable>IO:dcf775661b71901024c896ce0a4bcb4b</catalog_variable>
+        <cleared>false</cleared>
+        <disabled>true</disabled>
+        <field/>
+        <mandatory>ignore</mandatory>
+        <order>100</order>
+        <sys_class_name>catalog_ui_policy_action</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-07 13:27:23</sys_created_on>
+        <sys_id>4875e2261bf1901024c896ce0a4bcbef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>copied</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>catalog_ui_policy_action_4875e2261bf1901024c896ce0a4bcbef</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-07 13:27:23</sys_updated_on>
+        <table/>
+        <ui_policy display_value="Make 'copied' not visible">a75562261bf1901024c896ce0a4bcbe2</ui_policy>
+        <variable>copied</variable>
+        <variable_set/>
+        <visible>false</visible>
+    </catalog_ui_policy_action>
+</record_update>

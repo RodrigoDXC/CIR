@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="DELETE" field="potential_severity" table="x_fru_cir_near_miss" version="3">
+        <sys_choice_set action="DELETE">
+            <element>potential_severity</element>
+            <name>x_fru_cir_near_miss</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+            <sys_created_on>2021-02-21 21:25:13</sys_created_on>
+            <sys_id>acf62bdc1beee010d4bca977b04bcb27</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>potential_severity</sys_name>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_choice_x_fru_cir_near_miss_potential_severity</sys_update_name>
+            <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+            <sys_updated_on>2021-02-21 21:25:13</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>d31921780a0a3d230031345680af41dc</instance_id>
+        <instance_name>dev01083</instance_name>
+        <name>sys_choice_x_fru_cir_near_miss_potential_severity</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_choice action="INSERT_OR_UPDATE" field="potential_severity" table="x_fru_cir_near_miss" version="3"><sys_choice_set action="INSERT_OR_UPDATE"><element>potential_severity</element><name>x_fru_cir_near_miss</name><sys_class_name>sys_choice_set</sys_class_name><sys_created_by>lopez-aznar@dxc.com</sys_created_by><sys_created_on>2021-02-21 21:25:13</sys_created_on><sys_id>acf62bdc1beee010d4bca977b04bcb27</sys_id><sys_mod_count>0</sys_mod_count><sys_name>potential_severity</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_choice_x_fru_cir_near_miss_potential_severity</sys_update_name><sys_updated_by>lopez-aznar@dxc.com</sys_updated_by><sys_updated_on>2021-02-21 21:25:13</sys_updated_on></sys_choice_set></sys_choice></record_update>]]></payload>
+        <payload_hash>-1882376078</payload_hash>
+        <record_name>Near Miss.potential_severity</record_name>
+        <reverted_from/>
+        <source>f96c6c4b1b122010d4bca977b04bcb2b</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-26 08:42:37</sys_created_on>
+        <sys_id>9a5822791be26810de011fc11a4bcbef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>177dd810b590000001</sys_recorded_at>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:37</sys_updated_on>
+        <type>Choice list</type>
+        <update_guid>525822798be268107b9287b30541b7ef</update_guid>
+        <update_guid_history>525822798be268107b9287b30541b7ef:-1882376078,5258227945e26810a23450712e051ceb:-712811280,de582279d1e2681066ebea9402f54ae6:-1394503385,9e5822796de268103b7ffab7775577e2:1973736339,28f62bdcd5eee010134a95d91fad7433:-1998523133</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>lopez-aznar@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-26 08:42:37</sys_created_on>
+        <sys_db_object display_value="" name="sys_choice_set">sys_choice_set</sys_db_object>
+        <sys_id>017ef9fbab694080ac600074b8c5c010</sys_id>
+        <sys_metadata>acf62bdc1beee010d4bca977b04bcb27</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>potential_severity</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="x_fru_cir_near_miss">4d8e04f9db45101003b3533fd3961981</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_choice_x_fru_cir_near_miss_potential_severity</sys_update_name>
+        <sys_update_version display_value="sys_choice_x_fru_cir_near_miss_potential_severity">9a5822791be26810de011fc11a4bcbef</sys_update_version>
+        <sys_updated_by>lopez-aznar@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-26 08:42:37</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

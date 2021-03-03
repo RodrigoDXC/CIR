@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRStaticProtectionUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRStaticProtectionUtilsFP</name>
+        <script><![CDATA[var CIRStaticProtectionUtilsFP = (function() {
+	var CIRStaticProtectionUtilsFP = Class.create();
+	var initialize = function() {};
+
+	var getSpacesByBuilding = function (buildings) {
+		var spaceQuery = [];
+
+		if(buildings.indexOf(',') !== -1) {
+			buildings = buildings.split(',');
+			for (var i = 0; i < buildings.length; i++) {
+				spaceQuery.push(filterSpaces(buildings[i]));
+			}
+		}
+
+		if (spaceQuery.indexOf(',') !== -1) {
+			return spaceQuery.join('^');
+		} 
+		return filterSpaces(buildings);
+	};
+
+
+	/**
+	 *  Called on reference qualifier of 'space' dictionary on 'x_lsmcb_fsm_static_service_master' table
+	 *  It will return all the spaces that have the 'building', passed as argument, as parent
+	 *  @param {String} building - sys_id of the building selected on the form
+	 *  @return {String} - encoded query with the filtered sys_ids
+	 **/
+	var filterSpaces = function (building) {
+		var arrUtil = new global.ArrayUtil();
+		var allSpaces = [];
+		var finalSpaces = [];
+		var directSpaces = getLocations(building, '2', true);
+		var directFloors = getLocations(building, '3', true);
+		var directChilds = getLocations(building, '', true);
+
+		for (var i = 0; i < directFloors.length; i++) {
+			allSpaces.push(getLocations(directFloors[i], '2', true));
+		}
+
+		for (var j = 0; j < directChilds.length; j++) {
+			allSpaces.push(getLocations(directChilds[j], '2', true));
+		}
+
+		allSpaces = arrUtil.union(directSpaces, directFloors, directChilds);
+		for (var k = 0; k < allSpaces.length; k++) {
+			finalSpaces.push(getChildSpaces(allSpaces[k]));
+		}
+		return 'sys_idIN' + arrUtil.concat(directSpaces, finalSpaces);
+	};
+
+
+	var getChildSpaces = function(parent) {
+		var arrUtil = new global.ArrayUtil();
+		var childSpaces = [];
+		var spaces = [];
+
+		var grLocation = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		if (parent + '' !== '') {
+			grLocation.addQuery('parent', parent);
+		}
+		grLocation.addQuery('type', '2');
+		grLocation.addQuery('protection_required', true);
+		grLocation.addQuery('active', true);
+		grLocation.query();
+
+		while (grLocation.next()) {
+			spaces.push(grLocation.getUniqueValue());
+		}
+
+		if (spaces.length > 0) {
+			for (var i = 0; i < spaces.length; i++) {
+				arrUtil.concat(childSpaces, getChildSpaces(spaces[i]));
+			}
+		}
+		return arrUtil.concat(spaces, childSpaces);
+	};
+
+
+	var getSpaceParentBuilding = function (location) {
+		if (!location) {
+			return;
+		}
+
+		var parent = location;
+
+		var grLocation = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		grLocation.addQuery('protection_required', true);
+		grLocation.addQuery('active', true);
+		grLocation.addQuery('sys_id', location.toString());
+		grLocation.query();
+
+		if (grLocation.next()) {
+			if(grLocation.parent.type + '' === '1') {
+				parent = grLocation.parent.toString();
+			} else if(grLocation.parent) {
+				parent =  getSpaceParentBuilding(grLocation.parent.toString());
+			} 
+			return parent;
+		}
+		return '';
+	};
+
+
+	/**
+	 *  Used to return locations records queried from the 'x_lsmcb_fsm_fsm_locations'
+	 *  @param {String} parent - sys_id of the parent location
+	 *  @param {String} type - the type of the location we are querying for
+	 *  @param {true/false} protectionRequired - if location has protectionRequired field checked or not
+	 *  @return {array} - array with all the sys_ids of the locations that meet the requirements queried
+	 **/
+	var getLocations = function (parent, type, protectionRequired) {
+		var locations = [];
+
+		var grLocation = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		if (parent + '' !== '') {
+			grLocation.addQuery('parent', parent);
+		}
+		grLocation.addQuery('type', type + '');
+		grLocation.addQuery('protection_required', protectionRequired);
+		grLocation.addQuery('active', true);
+		grLocation.query();
+		while (grLocation.next()) {
+			locations.push(grLocation.getUniqueValue());
+		}
+		return locations;
+	};
+
+
+	/**
+	 *  Called on ref qual of 'building' and 'space' dictionary on 'x_lsmcb_fsm_guard_location' table
+	 *  If locType is 1 returns the sys_id of the buildings where 'protection required' is true
+	 and has child spaces. If locType is 2 returns the sys_id of the spaces
+	 where 'protection required' is true.
+	 *  @param {String} locType - number of the locaton type. 1 = building, 2 = space
+	 *  @return {String} - encoded query with the filtered sys_ids
+	 **/
+	var guardlLocFilter = function (locType, currBuilding) {
+		var locationsId = [];
+		var tempLocations = [];
+
+		// if the building list has more then 1 building
+		if (currBuilding.indexOf(',') !== -1) {
+			var buildings = currBuilding.split(',');
+			for (var i = 0; i < buildings.length; i++) {
+				tempLocations = getLocations(buildings[i], locType, true);
+				locationsId.push(tempLocations);
+			}
+		} else {
+			locationsId = getLocations(currBuilding, locType, true);
+		}
+		locationsId = locationsId.lenght > 0 ? locationsId.join(',') : locationsId;
+		return 'sys_idIN' + locationsId;
+	};
+
+
+	/**
+	 *  Called on guardlLocFilter function.
+	 *  Returns all the buildings that have a space as child or grand child
+	 *  @return {Array} - array with the sys_id of the buildings that has child spaces
+	 **/
+	var getBuildingsWithChild = function () {
+		var buildings =[];
+
+		var grSpaces = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		grSpaces.addQuery('type', '2');
+		grSpaces.addQuery('protection_required', true);
+		grSpaces.addQuery('active', true);
+		grSpaces.addEncodedQuery('parentISNOTEMPTY');
+		grSpaces.query();
+
+		while(grSpaces.next()) {
+			switch (grSpaces.parent.type + '') {
+				case '1':
+					buildings.push(grSpaces.parent.toString());
+					break;
+				case '3': 
+					if(grSpaces.parent.parent.type + '' === '1'){
+						buildings.push(grSpaces.parent.parent.toString());
+					}
+					break;
+				case '2':
+					buildings.push(getSpaceParentBuilding(grSpaces.getUniqueValue()));
+					break;
+			}
+		}
+		buildings = buildings.lenght > 0 ? buildings.join(',') : buildings.toString();
+		return 'sys_idIN' + buildings;
+	};
+
+
+	/**
+	 *  Called on fsm_static_protection_utils_client
+	 *  returns the parent building of a space
+	 *  @param {String} space - sys_id of the space
+	 *  @return {String} - sys_id of the building
+	 **/
+	var getParentBuilding = function (space) {
+		var building = '';
+
+		var grLocation = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		grLocation.addQuery('sys_id', space);
+		grLocation.query();
+		if (grLocation.next()) {
+			var locType = getLocationType(grLocation.getValue('parent'));
+			if (locType + '' === 1) {
+				building = grLocation.getValue('parent');
+			}
+		}
+		return building;
+	};
+
+
+	/**
+	 *  Called on getParentBuilding function
+	 *  returns the type of a location
+	 *  @param {String} LocationId - sys_id Location
+	 *  @return {String} - location type (numeric);
+	 **/
+	var getLocationType = function (locationId) {
+		var locType = '';
+
+		var grLocation = new GlideRecord(CIRConstants.Tables.SECURITY_LOCATION);
+		grLocation.addQuery('sys_id', locationId);
+		grLocation.query();
+
+		if (grLocation.next()) {
+			locType = grLocation.getValue('type');
+		}
+		return locType;
+	};
+
+
+	/**
+	 *  Called 'guards' ref qual on x_lsmcb_fsm_static_service_order
+	 *  Filters static guards (users) by space and service function form a given service
+	 *  @param {String} serviceId - sys_id of the service from the current static service order
+	 *  @return {String} - encoded query with the filtered static guards (user table sys_ids);
+	 **/
+	var filterBodyguards = function (serviceId) {
+		var filteredBgs = '';
+		var masterRec = getMasterFromService(serviceId);
+
+		var space = masterRec.space;
+		var servFunc = masterRec.service_function;
+
+		var unavailableBgByDate = filterBgByDate(serviceId);
+		var bgBySpace = filterBgBySpace(space);
+		var bgByServFunction = filterBgByFunction(servFunc);
+
+		var arrayUtil = new global.ArrayUtil();
+		filteredBgs = arrayUtil.intersect(bgByServFunction, bgBySpace);
+		filteredBgs = arrayUtil.diff(filteredBgs, unavailableBgByDate);
+
+		return 'sys_idIN' + filteredBgs.join(',');
+	};
+
+
+	/**
+	 *  Called on filterBodyguards function
+	 *  Filters static guards (users) by service date 
+	 *  Check the date form the service and returns the gurads thar already have a service for
+	 *  that date
+	 *  @param {String} serviceId - sys_id a static service
+	 *  @return {Array} - array with static guards (users) sys_id
+	 **/
+	var filterBgByDate = function (serviceId) {
+		var unavailableBgs = [];
+		var date = '';
+		var grService = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		if (grService.get(serviceId)) {
+			date = grService.date;
+		}
+
+		var grServiceOrder = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER);
+		grServiceOrder.addQuery('static_service.date', date);
+		grServiceOrder.addEncodedQuery('actual_guardISNOTEMPTY');
+		grServiceOrder.query();
+		while (grServiceOrder.next()) {
+			unavailableBgs.push(grServiceOrder.getValue('actual_guard'));
+		}
+		return unavailableBgs;
+	};
+
+
+	/**
+	 *  Called on filterBodyguards function
+	 *  Filters static guards (users) by space (table: x_lsmcb_fsm_fsm_locations where type = space)
+	 *  @param {String} space - sys_id of a location table record where type = space
+	 *  @return {Array} - array with static guards (users) sys_id
+	 **/
+	var filterBgBySpace = function (space) {
+		var bgList = [];
+
+		var grGuardSpace = new GlideRecord(CIRConstants.Tables.STATIC_GUARD_LOCATION);
+		grGuardSpace.addQuery('space', 'CONTAINS', space.toString());
+		grGuardSpace.query();
+		while (grGuardSpace.next()) {
+			bgList.push(grGuardSpace.getValue('guard'));
+		}
+		return filterSilgeIds(bgList);
+	};
+
+
+	/**
+	 *  Called on filterBodyguards function
+	 *  Filters static guards (users) by function (table: x_lsmcb_fsm_service_function)
+	 *  @param {String} funcId - sys_id of function
+	 *  @return {Array} - array with static guards (users) sys_id
+	 **/
+	var filterBgByFunction = function (funcId) {
+		var bgList = [];
+
+		var grSFunction = new GlideRecord(CIRConstants.Tables.STATIC_GUARD);
+		grSFunction.addQuery('service', funcId);
+		grSFunction.query();
+		while (grSFunction.next()) {
+			bgList.push(grSFunction.getValue('guard'));
+		}
+		return filterSilgeIds(bgList);
+	};
+
+
+	/**
+	 *  Called on filterBodyguards function
+	 *  Gets a service master glide record from a given service id
+	 *  @param {String} serviceId - sys_id of a static service record
+	 *  @return {GlideRecord} - service master GlideRecord
+	 **/
+	var getMasterFromService = function (serviceId) {
+		var masterId = '';
+
+		var grService = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		grService.addQuery('sys_id', serviceId.toString());
+		grService.query();
+
+		if (grService.next()) {
+			masterId = grService.getValue('service_master');
+		}
+		return getMasterRec(masterId);
+	};
+
+
+	/**
+	 *  Called on getMasterFromService function
+	 *  Gets a service master glide record from a given service master id
+	 *  @param {String} masterId - sys_id of a service master record
+	 *  @return {GlideRecord} - service master GlideRecord
+	 **/
+	var getMasterRec = function (masterId) {
+		var master = '';
+		var grMaster = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_MASTER);
+		grMaster.addQuery('sys_id', masterId);
+		grMaster.query();
+
+		// if finds a record where space is not empty
+		if (grMaster.next() && grMaster.space) {
+			master = grMaster;
+		}
+		return master;
+	};
+
+
+	/**
+	 *  From an array of sys_id strings(where some of those can be repeated),
+	 *  returns an array with all sys_ids but without repetitions
+	 *  @param {Array} ids - array of sys_id strings
+	 *  @return {Array} - array of sys_id strings
+	 **/
+	var filterSilgeIds = function (ids) {
+		var filteredIds = [];
+
+		if (ids.length < 2) {
+			return ids;
+		}
+
+		for (var i = 0; i < ids.length; i++) {
+			if (filteredIds.indexOf(ids[i]) === -1) {
+				filteredIds.push(ids[i]);
+			}
+		}
+		return filteredIds;
+	};
+
+
+	/**
+	 *  Called on fsm_static_protection_utils_client scrip include
+	 *  from a given list of building sys_ids and a list of spaces sys_ids checks if
+	 *  all the spaces are related with a building of the building list
+	 *  @param {String} buildingIds - buildings sys_id string (separated by ',')
+	 *  @param {String} spacesIds - spaces sys_id string (separated by ',')
+	 *  @return {Array} - array of sys_id strings
+	 **/
+	var fltrSpacesFrmBuildings = function (buildingIds, spacesIds) {
+		var unfilteredSpaces = [];
+		var filteredSpaces = [];
+		var building = '';
+
+		if (spacesIds.indexOf(',') != -1) {
+			unfilteredSpaces = spacesIds.split(',');
+		} else {
+			unfilteredSpaces.push(spacesIds);
+		}
+
+		for (var i = 0; i < unfilteredSpaces.length; i++) {
+			building = getParentBuilding(unfilteredSpaces[i]);
+
+			if (buildingIds.indexOf(building) != -1) {
+				filteredSpaces.push(unfilteredSpaces[i]);
+			}
+		}
+
+		return filteredSpaces.length < 2 ? filteredSpaces.toString() : filteredSpaces.join(',');
+	};
+
+
+	/**
+	 * Returns if the service master @param sys_id have any static services linked to it
+	 * @param {string} sys_id the sys_id of a record from x_lsmcb_fsm_static_service_master record
+	 * @return {Boolean}
+	 */
+	var staticServiceMasterHasServices = function (sys_id) {
+		var servicesRecord = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		servicesRecord.addQuery('service_master', sys_id);
+		servicesRecord.query();
+		return servicesRecord.hasNext();
+	};
+
+
+	/**
+	 * Get the sys_ids of all templates form a given static service master
+	 * @param {string} sys_id the sys_id of a record from x_lsmcb_fsm_static_service_master record
+	 * @return {Array<string>}
+	 */
+	var getTemplatesSys_idForServiceMaster = function (sys_id) {
+		var templates = [];
+		var svrMasterSvrTemplateRecord = new GlideRecord(CIRConstants.Tables.SERVICE_MASTER_SERVICE_TEMPLATE_M2M); 
+		svrMasterSvrTemplateRecord.addQuery('static_service_master', sys_id);
+		svrMasterSvrTemplateRecord.query();
+		while (svrMasterSvrTemplateRecord.next()) {
+			templates.push(svrMasterSvrTemplateRecord.getValue('static_service_order_template'));
+		}
+		return templates;
+	};
+
+
+	/**
+	 * Check given service master have templates form all the time span
+	 * @param current
+	 * @return {string} OK - Time span complete;INVALID - time span not complete
+	 */
+	var isServiceMasterTimeSpanComplete = function (current) {
+		var status = false;
+		var templates = [];
+
+		var templatesSys_ids = getTemplatesSys_idForServiceMaster(current.getUniqueValue()).join(',');
+		var staticServiceOrderTempRecord = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER_TEMPLATE); //THIS TABLE NEEDS TO BE CREATED AND THE NAME UPDATED
+		staticServiceOrderTempRecord.addEncodedQuery('sys_idIN' + templatesSys_ids);
+		staticServiceOrderTempRecord.orderBy('from_time');
+		staticServiceOrderTempRecord.query();
+		var masterToTime = new GlideDateTime(current.getValue('to_time'));
+		//used to check if the first template from time is starts before
+		//or on the from time from them master
+
+		var startDate = new GlideDateTime(current.getValue('from_time'));
+		var previousToTime = new GlideDateTime(current.getValue('from_time'));
+
+		var fromTimeCovered = false;
+		var endTimeCovered = false;
+		var spanCovered = false;
+		while (staticServiceOrderTempRecord.next()) {
+			var start = new GlideDateTime(staticServiceOrderTempRecord.getValue('from_time'));
+			var end = new GlideDateTime(staticServiceOrderTempRecord.getValue('to_time'));
+
+			if (start.equals(startDate)) {
+				fromTimeCovered = true;
+
+			} else if (start.compareTo(startDate) == -1) {
+				fromTimeCovered = false;
+			}
+
+			if (end.equals(masterToTime)) {
+				endTimeCovered = true;
+
+			} else if (end.compareTo(masterToTime) == 1) {
+				fromTimeCovered = false;
+			}
+
+			if (start.compareTo(previousToTime) != 1) {
+				spanCovered = true;
+			} else {
+				spanCovered = false;
+			}
+
+			if (end.compareTo(previousToTime) != -1) {
+				previousToTime = end;
+			}
+		}
+
+		if (endTimeCovered && fromTimeCovered && spanCovered) {
+			status = true;
+		}
+		return status;
+	};
+
+
+	/**
+	 *  Called on fsm_create_services script action (event: x_lsmcb_fsm.fsm.create.services)
+	 *  from 'Generate Services' UI Action. table: x_lsmcb_fsm_static_service_master
+	 *  Manages the Service and service orders creation
+	 *  @param {GlideRecord} master - GlideRecord of the record that calls the function
+	 **/
+	var manageServicesCreation = function (master) {
+		var reOccurrenceType = master.type_of_re_occurrence;
+		var mFromDate = master.from_date;
+		var mToDate = master.to_date;
+		var createdServices;
+		// type of re-occurrence = daily
+		if (reOccurrenceType + '' === '0') {
+			createdServices = createServices(master.sys_id, mFromDate, mToDate);
+		}
+
+		// type of re-occurrence = weekly
+		if (reOccurrenceType + '' === '1') {
+			var weekDays = getWeeklyDays(master).toString();
+			createdServices = createServices(master.sys_id, mFromDate, mToDate, weekDays);
+		}
+		var templates = getTemplateRecords(getTemplatesSys_idForServiceMaster(master.sys_id));
+		createServiceOrders(createdServices, templates);
+		master.setValue('processing', false);
+		master.update();
+	};
+
+
+	/**
+	 * Create the services for the service master
+	 * @param {string} masterId service master sys_id
+	 * @param {*}fromDay service master from date
+	 * @param {*}toDay service master to date
+	 * @param {Array<string>}weeklyDays service master checked week days if undefined
+	 creates for all days
+	 * @return {Array} Sys_ids of the created services
+	 */
+	var createServices = function (masterId, fromDay, toDay, weeklyDays) {
+		var dateFormat = gs.getProperty('glide.sys.date_format');
+		var hourFormat = gs.getProperty('glide.sys.time_format');
+		var createdRecords = [];
+
+		var toDate = new GlideDateTime();
+		toDate.setValue(toDay.toString() + ' ' + dateFormat + ' ' + hourFormat);
+
+		var tempDate = new GlideDateTime();
+		tempDate.setValue(fromDay.toString() + ' ' + dateFormat + ' ' + hourFormat);
+		var dayCode;
+
+		while (tempDate <= toDate) {
+			if (weeklyDays) {
+				dayCode = tempDate.getDayOfWeekUTC().toString();
+				if (weeklyDays.indexOf(getDayOfWeek(dayCode)) == -1) {
+					tempDate.addDaysUTC(1);
+					continue;
+				}
+			}
+
+			var grService = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+			grService.initialize();
+			grService.setValue('service_master', masterId);
+			grService.setValue('date', tempDate.getValue());
+			createdRecords.push(grService.insert());
+			tempDate.addDaysUTC(1);
+		}
+		return createdRecords;
+	};
+
+
+	/**
+	 *  Called on manageServicesCreation. Gets what week days are checked (true) on a service master
+	 *  @param {GlideRecord} master - GlideRecord of service master
+	 *  @return {Array} - array with the checked days of the week (stings with days name);
+	 **/
+	var getWeeklyDays = function (master) {
+
+		var weekDays = [];
+		if (master.getValue('monday') === '1') weekDays.push('monday');
+		if (master.getValue('tuesday') === '1') weekDays.push('tuesday');
+		if (master.getValue('wednesday') === '1') weekDays.push('wednesday');
+		if (master.getValue('thursday') === '1') weekDays.push('thursday');
+		if (master.getValue('friday') === '1') weekDays.push('friday');
+		if (master.getValue('saturday') === '1') weekDays.push('saturday');
+		if (master.getValue('sunday') === '1') weekDays.push('sunday');
+		return weekDays;
+	};
+
+
+	/**
+	 * Transforms the numeric code from GlidaDateTime getDayOfWeekUTC() into the week day name
+	 * @param {string} code - day of the week number (monday = 1, sunday = 7)
+	 * @return {string} - day of the week name
+	 */
+	var getDayOfWeek = function (code) {
+		switch (code) {
+			case '1':
+				return 'monday';
+			case '2':
+				return 'tuesday';
+			case '3':
+				return 'wednesday';
+			case '4':
+				return 'thursday';
+			case '5':
+				return 'friday';
+			case '6':
+				return 'saturday';
+			case '7':
+				return 'sunday';
+		}
+	};
+
+
+	/**
+	 * Create service orders for a set of services will create a service order per template
+	 * on the service master
+	 * @param{Array<string>} services Array of services sys_ids
+	 * @param {string} masterId service master sys_id
+	 */
+	var createServiceOrders = function (services, templates) {
+		for (var j = 0; j < templates.length; j++) {
+			for (var i = 0; i < services.length; i++) {
+				createServiceOrder(templates[j], services[i]);
+			}
+		}
+	};
+
+
+	/**
+	 * Creates a new service order with the info of @param template
+	 * @param {GlideRecord} template
+	 * @param {String} service sys_id of a static service
+	 */
+	var createServiceOrder = function (template, service) {
+		var fromTime = new GlideDateTime(template.getValue('from_time'));
+		var toTime = new GlideDateTime(template.getValue('to_time'));
+		var plannedHours = GlideTime.subtract(fromTime, toTime);
+		var plannedCost = '';
+		var serviceRecord = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		if (serviceRecord.get(service)) {
+			plannedCost = calculateTariff(serviceRecord, fromTime, toTime);
+		}
+		var serviceOrderRecord = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER);
+		serviceOrderRecord.initialize();
+		serviceOrderRecord.setValue('static_service_order_template', template.getUniqueValue());
+		serviceOrderRecord.setValue('planned_from_time', fromTime);
+		serviceOrderRecord.setValue('planned_to_time', toTime);
+		serviceOrderRecord.setValue('static_service', service);
+		serviceOrderRecord.setValue('planned_hours', plannedHours);
+		serviceOrderRecord.setValue('planned_cost', plannedCost);
+		serviceOrderRecord.insert();
+	};
+
+
+	/**
+	 * gets the GlideRecords for a set of templates
+	 * @param {Array<string>}templates Array of template sys_id
+	 * @return {Array<GlideRecord>}
+	 */
+	var getTemplateRecords = function (templates) {
+		var templateRecords = [];
+		var templateRecord;
+		templates.forEach(function (id) {
+			templateRecord = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER_TEMPLATE);
+			if (templateRecord.get(id)) {
+				templateRecords.push(templateRecord);
+			}
+		});
+		return templateRecords;
+	};
+
+
+	/**
+	 * Called from UI script Action
+	 * Handles the master update a start the process to update the services and service orders
+	 * @param {GlideRecord} master service master GlideRecord
+	 */
+	var manageServicesUpdate = function (master) {
+		var reOccurrenceType = master.getValue('type_of_re_occurrence');
+		var mFromDate = master.getValue('from_date');
+		var mToDate = master.getValue('to_date');
+		var canceledUpdatedServices = {};
+		// type of re-occurrence = daily
+		if (reOccurrenceType === '0') {
+			canceledUpdatedServices = updateServices(master.sys_id, mFromDate, mToDate);
+			manageUpdateServiceOrders(master.getValue('sys_id'), canceledUpdatedServices);
+		}
+
+		// type of re-occurrence = weekly
+		if (reOccurrenceType === '1') {
+			var weekDays = getWeeklyDays(master).toString();
+			canceledUpdatedServices = updateServices(master.sys_id, mFromDate, mToDate, weekDays);
+			manageUpdateServiceOrders(master.getValue('sys_id'), canceledUpdatedServices);
+		}
+
+		master.setValue('processing', false);
+		master.update();
+	};
+
+
+	/**
+	 * Create the services for the service master
+	 * @param {string} masterId service master sys_id
+	 * @param {*}fromDay service master from date
+	 * @param {*}toDay service master to date
+	 * @param {string}weeklyDays service master checked week days if undefined
+	 creates for all days
+	 * @return {Array} Sys_ids of the created services
+	 */
+	var updateServices = function (masterId, fromDay, toDay, weeklyDays) {
+		var dateFormat = gs.getProperty('glide.sys.date_format');
+		var hourFormat = gs.getProperty('glide.sys.time_format');
+		var canceledRecords = [];
+		var createdRecords = [];
+
+		var toDate = new GlideDateTime();
+		toDate.setValue(toDay.toString() + ' ' + dateFormat + ' ' + hourFormat);
+
+		var tempDate = new GlideDateTime();
+		tempDate.setValue(fromDay.toString() + ' ' + dateFormat + ' ' + hourFormat);
+		var recordDate = new GlideDateTime();
+		recordDate.setValue(recordDate.getDate() + ' ' + dateFormat + ' ' + hourFormat);
+		var dayCode;
+		canceledRecords = cancelServicesOutOfTimeSpan(masterId, tempDate, toDate, weeklyDays);
+
+		var grServiceNew = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		var grService = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		grService.addQuery('service_master', masterId);
+		grService.addQuery('state', '0'); //state new
+		grService.orderBy('date');
+		grService.query();
+		var hasMoreRecords = true;
+		while (tempDate <= toDate) {
+			if (weeklyDays) {
+				dayCode = tempDate.getDayOfWeekUTC().toString();
+				if (weeklyDays.indexOf(getDayOfWeek(dayCode)) === -1) {
+					tempDate.addDaysUTC(1);
+					continue;
+				}
+			}
+			while (recordDate.before(tempDate) && hasMoreRecords) {
+				hasMoreRecords = grService.next();
+
+				if (hasMoreRecords) {
+					recordDate.setValue(grService.getValue('date'));
+				}
+			}
+
+			if (hasMoreRecords && recordDate.equals(tempDate)) {
+				tempDate.addDaysUTC(1);
+				continue;
+			}
+
+			grServiceNew.initialize();
+			grServiceNew.setValue('date', tempDate.getValue());
+			grServiceNew.setValue('service_master', masterId);
+			createdRecords.push(grServiceNew.insert());
+			tempDate.addDaysUTC(1);
+		}
+		return {
+			'canceledRecords': canceledRecords,
+			'createdRecords': createdRecords
+		};
+	};
+
+
+	/**
+	 * Cancels all services for @param masterId than are out the the time span (@param fromDate to @param toDate) or
+	 * id there are any weeklyDays than are not in those weekdays.
+	 * Returns the sys_ids of the canceled records
+	 * @param {String}masterId sys_id of a service master
+	 * @param {GlideDateTime} fromDate
+	 * @param {GlideDateTime} toDate
+	 * @param {String} weeklyDays weekdays separated by comma(',')
+	 * @return {Array<string>} Array of services sys_ids
+	 */
+	var cancelServicesOutOfTimeSpan = function (masterId, fromDate, toDate, weeklyDays) {
+		var canceledServices = [];
+		var servicesRecord = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		servicesRecord.addQuery('state', '0'); //state = new
+		servicesRecord.addQuery('service_master', masterId);
+		var condition = servicesRecord.addQuery('date', '<', fromDate.getValue());
+		condition.addOrCondition('date', '>', toDate.getValue());
+		servicesRecord.query();
+		while (servicesRecord.next()) {
+			servicesRecord.setValue('state', '2'); //state cancel
+			canceledServices.push(servicesRecord.update());
+		}
+
+		if (weeklyDays) {
+			servicesRecord = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+			servicesRecord.addQuery('state', '0'); //state = new
+			servicesRecord.addQuery('service_master', masterId);
+			servicesRecord.addQuery('date', '<=', toDate.getValue());
+			servicesRecord.addQuery('date', '>=', fromDate.getValue());
+			servicesRecord.query();
+			var dayCode;
+			var dateTime = new GlideDateTime();
+			while (servicesRecord.next()) {
+				dateTime.setValue(servicesRecord.getValue('date'));
+				dayCode = dateTime.getDayOfWeekUTC().toString();
+				if (weeklyDays.indexOf(getDayOfWeek(dayCode)) === -1) {
+					servicesRecord.setValue('state', '2'); //state cancel
+					canceledServices.push(servicesRecord.update());
+				}
+			}
+		}
+		return canceledServices;
+	};
+
+
+	var manageUpdateServiceOrders = function (masterId, canceledUpdatedServices) {
+		var masterTemplates = getTemplatesSys_idForServiceMaster(masterId);
+		var masterServices = getServicesIdFromMaster(masterId);
+
+		if (canceledUpdatedServices.canceledRecords) {
+			cancelServiceOrdersFromService(canceledUpdatedServices.canceledRecords);
+		}
+
+		if (canceledUpdatedServices.createdRecords) {
+			var currentMasterTmpltRecords = getTemplateRecords(masterTemplates);
+			createServiceOrders(canceledUpdatedServices.createdRecords, currentMasterTmpltRecords);
+		}
+
+		var templWithChild = cancelOrphanServOrders(masterServices, masterTemplates);
+		var templtsToManage = getTempltsIdToManage(masterTemplates, templWithChild);
+		var tmpltRecordsForCreation = getTemplateRecords(templtsToManage.toCreate);
+		createServiceOrders(masterServices, tmpltRecordsForCreation);
+
+		var tmpltRecordsForUpdate = getTemplateRecords(templtsToManage.toUpdate);
+		updateServiceOrders(masterServices, tmpltRecordsForUpdate);
+	};
+
+
+	var updateServiceOrders = function (services, templates) {
+		var serviceRec = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+
+		for (var j = 0; j < templates.length; j++) {
+			for (var i = 0; i < services.length; i++) {
+				var plannedCost = '';
+				var fromTime = new GlideDateTime(templates[j].getValue('from_time'));
+				var toTime = new GlideDateTime(templates[j].getValue('to_time'));
+
+				if (serviceRec.get(services[i])) {
+					plannedCost = calculateTariff(serviceRec, fromTime, toTime);
+				}
+
+				var grServiceOrder = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER);
+				grServiceOrder.addQuery('static_service', services[i].toString());
+				grServiceOrder.addQuery('static_service_order_template', templates[j].getValue('sys_id'));
+				grServiceOrder.addQuery('state', '0');
+				grServiceOrder.query();
+				if (grServiceOrder.next()) {
+					var plannedHours = GlideTime.subtract(fromTime, toTime);
+					grServiceOrder.setValue('planned_from_time', templates[j].getValue('from_time'));
+					grServiceOrder.setValue('planned_to_time', templates[j].getValue('to_time'));
+					grServiceOrder.setValue('planned_cost', plannedCost);
+					grServiceOrder.update();
+				}
+			}
+		}
+	};
+
+	var cancelServiceOrdersFromService = function (canceledServices) {
+		for (var i = 0; i < canceledServices.length; i++) {
+
+			var grServiceOrder = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER);
+			grServiceOrder.addQuery('static_service', canceledServices[i]);
+			grServiceOrder.addQuery('state', '0');
+			grServiceOrder.query();
+
+			while (grServiceOrder.next()) {
+				grServiceOrder.setValue('state', '2'); // sets the state to canceled
+				grServiceOrder.update();
+			}
+		}
+	};
+
+
+	var cancelOrphanServOrders = function (servicesId, masterTemplates) {
+		var templWithChild = [];
+		var currentTemplate = '';
+
+		for (var i = 0; i < servicesId.length; i++) {
+			var grServiceOrder = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE_ORDER);
+			grServiceOrder.addQuery('static_service', servicesId[i].toString());
+			grServiceOrder.addQuery('state', '0');
+			grServiceOrder.query();
+
+			while (grServiceOrder.next()) {
+				if (masterTemplates.indexOf(grServiceOrder.getValue('static_service_order_template')) === -1) {
+					grServiceOrder.setValue('state', 2); // cancel service order
+
+					grServiceOrder.update();
+				} else {
+					currentTemplate = grServiceOrder.getValue('static_service_order_template').toString();
+					if (templWithChild.indexOf(currentTemplate) === -1) {
+						templWithChild.push(currentTemplate);
+					}
+				}
+			}
+		}
+		return templWithChild;
+	};
+
+
+	var getServicesIdFromMaster = function (masterId) {
+		var servicesIds = [];
+
+		var grService = new GlideRecord(CIRConstants.Tables.STATIC_SERVICE);
+		grService.addQuery('service_master', masterId);
+		grService.query();
+
+		while (grService.next()) {
+			servicesIds.push(grService.getValue('sys_id').toString());
+		}
+		return servicesIds;
+	};
+
+
+	var getTempltsIdToManage = function (masterTemplates, templWithChild) {
+		var templtToManage = {
+			toCreate: [],
+			toUpdate: []
+		};
+
+		for (var i = 0; i < masterTemplates.length; i++) {
+			if (templWithChild.indexOf(masterTemplates[i]) === -1) {
+				templtToManage.toCreate.push(masterTemplates[i]);
+			} else {
+				templtToManage.toUpdate.push(masterTemplates[i]);
+			}
+		}
+		return templtToManage;
+	};
+
+
+	var calculateTariff = function (service, fromTime, toTime) {
+		var totalCost = 0;
+		var currency = 'EUR';
+		var serviceDate = new GlideDateTime(service.getValue('date'));
+		var str = serviceDate.getDate() + ' ' + toTime.getTime().getDisplayValue();
+
+		if (toTime.compareTo(fromTime) === -1) {
+			toTime = new GlideDateTime();
+			toTime.setDisplayValue(str);
+			toTime.addDaysLocalTime(1);
+		} else {
+			toTime = new GlideDateTime();
+			toTime.setDisplayValue(str);
+		}
+
+		str = serviceDate.getDate() + ' ' + fromTime.getTime().getDisplayValue();
+		fromTime = new GlideDateTime();
+		fromTime.setDisplayValue(str);
+
+		if (toTime.onOrBefore(fromTime)) {
+			toTime.addDaysUTC(1);
+		}
+
+		var schedules = findTariffs(service.service_master.getRefRecord(), fromTime, toTime);
+		var timePerTariff = [];
+		var time;
+		
+		for (var i = 0; i < schedules.length; i++) {
+			if (toTime.onOrAfter(schedules[i].tariff.toDate)) {
+				time = schedules[i].schedule.duration(fromTime, schedules[i].tariff.toDate);
+			} else if (fromTime.onOrBefore(schedules[i].tariff.fromDate)) {
+				time = schedules[i].schedule.duration(schedules[i].tariff.fromDate, toTime);
+
+			} else {
+				time = schedules[i].schedule.duration(fromTime, toTime);
+			}
+
+			timePerTariff.push({
+				time: time,
+				tariff: schedules[i].tariff
+			});
+		}
+
+		timePerTariff.forEach(function (element) {
+			totalCost += (((element.time.getNumericValue() / 1000) / 60) / 60) * element.tariff.tariffPrice;
+			currency = element.tariff.tariffCurrency;
+		});
+		totalCost = (Math.round(totalCost * 100)) / 100;
+		return currency + ';' + totalCost;
+	};
+
+
+	var findTariffs = function (service_master, fromTime, toTime) {
+		var schedules = [];
+
+		var grTariff = new GlideRecord(CIRConstants.Tables.SERVICE_TARIFF);
+		grTariff.addQuery('building', service_master.building);
+		grTariff.addQuery('company', service_master.company);
+		grTariff.addQuery('service', service_master.service_function);
+
+		var conditionFrom = grTariff.addQuery('from_date', '<=', fromTime);
+		conditionFrom.addOrCondition('from_date', '<=', toTime);
+		var conditionTo = grTariff.addQuery('to_date', '>=', fromTime);
+		conditionTo.addOrCondition('to_date', '>=', toTime);
+
+		grTariff.query();
+		while (grTariff.next()) {
+			schedules.push(getSchedules(grTariff));
+		}
+		return schedules;
+	};
+
+
+	var getSchedules = function (tariff) {
+		var grSchedule = new GlideRecord('cmn_schedule');
+		grSchedule.addQuery('name', tariff.schedule.name);
+		grSchedule.query();
+
+		if (grSchedule.next()) {
+			var fromDate = new GlideDateTime();
+			var toDate = new GlideDateTime();
+			fromDate.setDisplayValue(tariff.getValue('from_date'));
+			toDate.setDisplayValue(tariff.getValue('to_date'));
+			toDate.addDaysUTC(1);
+			var schedule = {
+				'tariff': {
+					'tariffPrice': tariff.hour_cost.getCurrencyValue(),
+					'tariffCurrency': tariff.hour_cost.getCurrencyCode(),
+					'fromDate': fromDate,
+					'toDate': toDate
+				},
+				'schedule': new GlideSchedule(grSchedule.getUniqueValue())
+			};
+			return schedule;
+		}
+	};
+
+
+	CIRStaticProtectionUtilsFP.prototype = {
+		initialize: initialize,
+		GetSpacesByBuilding: getSpacesByBuilding,
+		FilterSpaces: filterSpaces,
+		GetChildSpaces: getChildSpaces,
+		GetSpaceParentBuilding: getSpaceParentBuilding,
+		GetLocations: getLocations,
+		GuardlLocFilter: guardlLocFilter,
+		GetBuildingsWithChild: getBuildingsWithChild,
+		GetParentBuilding: getParentBuilding,
+		FilterBodyguards: filterBodyguards,
+		FilterBgByDate: filterBgByDate,
+		FilterBgByFunction: filterBgByFunction,
+		GetMasterFromService: getMasterFromService,
+		FilterSilgeIds: filterSilgeIds,
+		FltrSpacesFrmBuildings: fltrSpacesFrmBuildings,
+		StaticServiceMasterHasServices: staticServiceMasterHasServices,
+		GetTemplatesSys_idForServiceMaster: getTemplatesSys_idForServiceMaster,
+		IsServiceMasterTimeSpanComplete: isServiceMasterTimeSpanComplete,
+		ManageServicesCreation: manageServicesCreation,
+		CreateServices: createServices,
+		GetWeeklyDays: getWeeklyDays,
+		GetDayOfWeek: getDayOfWeek,
+		CreateServiceOrders: createServiceOrders,
+		CreateServiceOrder: createServiceOrder,
+		GetTemplateRecords: getTemplateRecords,
+		ManageServicesUpdate: manageServicesUpdate,
+		UpdateServices: updateServices,
+		CancelServicesOutOfTimeSpan: cancelServicesOutOfTimeSpan,
+		ManageUpdateServiceOrders: manageUpdateServiceOrders,
+		UpdateServiceOrders: updateServiceOrders,
+		CancelServiceOrdersFromService: cancelServiceOrdersFromService,
+		CancelOrphanServOrders: cancelOrphanServOrders,
+		GetServicesIdFromMaster: getServicesIdFromMaster,
+		GetTempltsIdToManage: getTempltsIdToManage,
+		CalculateTariff: calculateTariff,
+		FindTariffs: findTariffs,
+		GetSchedules: getSchedules
+	};
+
+	return CIRStaticProtectionUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-27 16:51:44</sys_created_on>
+        <sys_id>b50602c1db525c10d4a73533f3961900</sys_id>
+        <sys_mod_count>41</sys_mod_count>
+        <sys_name>CIRStaticProtectionUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_b50602c1db525c10d4a73533f3961900</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-24 12:44:27</sys_updated_on>
+    </sys_script_include>
+</record_update>

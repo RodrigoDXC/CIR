@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time/>
+        <name>CIR Make online users offline</name>
+        <offset/>
+        <offset_type/>
+        <run_as/>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period>1970-01-01 00:10:00</run_period>
+        <run_start>2020-04-03 11:40:36</run_start>
+        <run_time>1970-01-01 08:00:00</run_time>
+        <run_type>periodically</run_type>
+        <script><![CDATA[var gdt = new GlideDateTime();
+var grCrisisMember = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+grCrisisMember.addQuery('online', true);
+grCrisisMember.query();
+
+while(grCrisisMember.next()) {
+	if(reachedMaxLoggedTime()) {
+		grCrisisMember.setValue('online', false);
+		grCrisisMember.setValue('last_access_time', gdt);
+		grCrisisMember.update();
+	}
+}
+
+function reachedMaxLoggedTime() {
+	var lastAccess = new GlideDateTime(grCrisisMember.last_access_time);
+	var dur = GlideDateTime.subtract(lastAccess, gdt).getNumericValue()/1000/60;
+	
+	if(dur >= 10) {
+		return true;
+	} else return false;
+}
+]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-04-03 11:42:47</sys_created_on>
+        <sys_id>ed0e78c8db44149049959a82ca961945</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>CIR Make online users offline</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sysauto_script_ed0e78c8db44149049959a82ca961945</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-27 14:51:06</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

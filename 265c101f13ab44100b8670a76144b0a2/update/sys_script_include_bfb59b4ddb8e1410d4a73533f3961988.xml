@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRGlobalHelperFPTemplate</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected script template for database manipulation on Global tables.</description>
+        <name>CIRGlobalHelperFPTemplate</name>
+        <script><![CDATA[var CIRGlobalHelperFP =  function() {
+    var createUpdateRecord = function(createUpdateProps) {
+        if(!gs.hasRole('admin') && !gs.hasRole('x_fru_cir.assessment_manager')) {
+            return undefined;
+        }
+        var grCatalog = new GlideRecord(createUpdateProps.tableName);
+        if(createUpdateProps.isCreate) {
+            grCatalog.initialize();
+        } else if(!grCatalog.get(createUpdateProps.updateRecordId)) {
+            return undefined;
+        }
+		
+        Object.keys(createUpdateProps.fieldValues).forEach(function(field) {
+            grCatalog.setValue(field, createUpdateProps.fieldValues[field]);
+        });
+
+        return (createUpdateProps.isCreate ? grCatalog.insert() : grCatalog.update());
+    };
+
+    var modifyAssessment = function(attachmentId, sectionId) {
+        var grSectionAttachment = new GlideRecord('sys_attachment');
+        if(grSectionAttachment.get(attachmentId)) {
+            grSectionAttachment.setValue('table_sys_id', sectionId);
+            grSectionAttachment.update();
+        }
+    };
+
+    var removeRecord = function(relatedData) {
+        try {
+            var grCurrent = new GlideRecord(relatedData.tableName);
+            grCurrent.get(relatedData.sysId);
+            return grCurrent.deleteRecord();
+        } catch(err) {
+            gs.info(err);
+        }
+    };
+    
+    return {
+        CreateUpdateRecord: createUpdateRecord,
+        ModifyAssessment: modifyAssessment,
+        RemoveRecord: removeRecord
+    };
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-15 11:23:58</sys_created_on>
+        <sys_id>bfb59b4ddb8e1410d4a73533f3961988</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>CIRGlobalHelperFPTemplate</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_bfb59b4ddb8e1410d4a73533f3961988</sys_update_name>
+        <sys_updated_by>jorge.diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-09 15:18:37</sys_updated_on>
+    </sys_script_include>
+</record_update>

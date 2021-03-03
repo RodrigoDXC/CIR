@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="task" label="Investigation" max_length="40" name="x_fru_cir_investigation" sizeclass="3" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Case" max_length="32" name="cir_case" read_only="true" reference="x_fru_cir_case" type="reference"/>
+        <element label="Conclusion" max_length="4000" name="conclusion" type="string"/>
+        <element label="Investigation date" max_length="40" name="investigation_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Investigation team" max_length="4000" name="investigation_team" reference="sys_user" type="glide_list"/>
+        <element label="Lessons learned" max_length="4000" name="lessons_learned" type="string"/>
+        <element label="Observations" max_length="4000" name="observations" type="string"/>
+        <element label="Root cause" max_length="4000" name="root_cause" type="string"/>
+        <element label="Summary" max_length="4000" name="summary" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Basic" sequence="10" value="basic"/>
+                <element inactive_on_update="false" label="Formal" sequence="20" value="formal"/>
+            </choice>
+        </element>
+    </element>
+</database>

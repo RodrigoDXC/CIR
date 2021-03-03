@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRCertificationUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIRCertificationUtilsFP</name>
+        <script><![CDATA[var CIRCertificationUtilsFP = (function() {
+    /**
+     * Sends the certification.expiring event to any certification for a user that expires today, in 30 days, or in 60 days
+     */
+    var notifyExpiringCertifications = function() {
+        var exipirationQuery =
+            "end_dateRELATIVEEE@dayofweek@ahead@60^ORend_dateRELATIVEEE@dayofweek@ahead@30^ORend_dateONToday@javascript:gs.daysAgoStart(0)@javascript:gs.daysAgoEnd(0)";
+        var certifications = new GlideRecord(CIRConstants.Tables.PERSONNEL_CERTIFICATION);
+        certifications.addQuery(exipirationQuery);
+        certifications.query();
+        while(certifications.next()) {
+            gs.eventQueue('x_fru_cir.certification.expiring', certifications, '', '');
+        }
+    };
+
+    /**
+     * Updates the total extensions, original date, and end date for a personal certification
+     * @param  {GlideRecord} personCertification - personal certification record being updated
+     */
+    var updateCertInformation = function(personCertification) {
+        var effectiveDate = new GlideDateTime(personCertification.getValue('effective_date'));
+        var endDate = new GlideDateTime(personCertification.getValue('valid_for'));
+        endDate.add(effectiveDate.getNumericValue());
+        personCertification.end_date.setValue(endDate);
+
+        if(personCertification.original_date != '') {
+            personCertification.total_extensions += 1;
+        } else {
+            personCertification.original_date.setValue(effectiveDate);
+        }
+        gs.debug('Updating Personnel certification to have end date: ' + endDate.getDisplayValue() +
+            ' and total extensions: ' + personCertification.total_extensions);
+    };
+	
+	/**
+     * Deactivates certifications when they cross their valid to date
+     */
+    var deactivateCertifications = function() {
+        var certifications = new GlideRecord(CIRConstants.Tables.CERTIFICATION);
+        certifications.addQuery('valid_to', '<', gs.daysAgoStart(0));
+        certifications.setValue('active', 'false');
+        certifications.updateMultiple();
+        gs.debug('Deactivated certifications with query: ' + certifications.getEncodedQuery());
+    };
+    
+    var CIRCertificationUtilsFP = Class.create();
+    var initialize = function() {};
+
+    CIRCertificationUtilsFP.prototype = {
+        initialize: initialize,
+        NotifyExpiringCertifications: notifyExpiringCertifications,
+        UpdateCertInformation: updateCertInformation,
+		DeactivateCertifications: deactivateCertifications
+    };
+
+    return CIRCertificationUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-10 10:18:26</sys_created_on>
+        <sys_id>0c959debdbf55010d4a73533f3961951</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIRCertificationUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_0c959debdbf55010d4a73533f3961951</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-12 08:52:08</sys_updated_on>
+    </sys_script_include>
+</record_update>

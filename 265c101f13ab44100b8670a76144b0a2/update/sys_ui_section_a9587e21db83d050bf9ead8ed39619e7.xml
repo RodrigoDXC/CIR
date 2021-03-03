@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="Store Product Information" section_id="a9587e21db83d050bf9ead8ed39619e7" sys_domain="global" table="x_fru_cir_action" version="3" view="product_recall_view">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>product_at_site</element>
+            <position>0</position>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:35:35</sys_created_on>
+            <sys_id>99a8b661db83d050bf9ead8ed39619b1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Store Product Information" display_value="Store Product Information" name="x_fru_cir_action" sys_domain="global" view="d03d0a65db03d050bf9ead8ed396194e">a9587e21db83d050bf9ead8ed39619e7</sys_ui_section>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:35:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>responsible_for_disposition</element>
+            <position>1</position>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:35:35</sys_created_on>
+            <sys_id>11a8b661db83d050bf9ead8ed39619b2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Store Product Information" display_value="Store Product Information" name="x_fru_cir_action" sys_domain="global" view="d03d0a65db03d050bf9ead8ed396194e">a9587e21db83d050bf9ead8ed39619e7</sys_ui_section>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:35:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>number_of_products</element>
+            <position>2</position>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:35:35</sys_created_on>
+            <sys_id>95a8b661db83d050bf9ead8ed39619b2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Store Product Information" display_value="Store Product Information" name="x_fru_cir_action" sys_domain="global" view="d03d0a65db03d050bf9ead8ed396194e">a9587e21db83d050bf9ead8ed39619e7</sys_ui_section>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:35:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>3</position>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:35:35</sys_created_on>
+            <sys_id>1da8b661db83d050bf9ead8ed39619b2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Store Product Information" display_value="Store Product Information" name="x_fru_cir_action" sys_domain="global" view="d03d0a65db03d050bf9ead8ed396194e">a9587e21db83d050bf9ead8ed39619e7</sys_ui_section>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:35:35</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>product_disposition</element>
+            <position>4</position>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:35:35</sys_created_on>
+            <sys_id>91a8b661db83d050bf9ead8ed39619b3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Store Product Information" display_value="Store Product Information" name="x_fru_cir_action" sys_domain="global" view="d03d0a65db03d050bf9ead8ed396194e">a9587e21db83d050bf9ead8ed39619e7</sys_ui_section>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:35:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>product_disposition_description</element>
+            <position>5</position>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:35:35</sys_created_on>
+            <sys_id>19a8b661db83d050bf9ead8ed39619b3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Store Product Information" display_value="Store Product Information" name="x_fru_cir_action" sys_domain="global" view="d03d0a65db03d050bf9ead8ed396194e">a9587e21db83d050bf9ead8ed39619e7</sys_ui_section>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:35:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>location</element>
+            <position>6</position>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:35:35</sys_created_on>
+            <sys_id>9da8b661db83d050bf9ead8ed39619b3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Store Product Information" display_value="Store Product Information" name="x_fru_cir_action" sys_domain="global" view="d03d0a65db03d050bf9ead8ed396194e">a9587e21db83d050bf9ead8ed39619e7</sys_ui_section>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:35:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Store Product Information</caption>
+            <header>false</header>
+            <name>x_fru_cir_action</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+            <sys_created_on>2020-09-04 15:34:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a9587e21db83d050bf9ead8ed39619e7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_fru_cir_action</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+            <sys_update_name>sys_ui_section_a9587e21db83d050bf9ead8ed39619e7</sys_update_name>
+            <sys_updated_by>Antonio.Carvalho@fruitionpartners.pt</sys_updated_by>
+            <sys_updated_on>2020-09-04 15:34:14</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Product Recall View" name="product_recall_view">d03d0a65db03d050bf9ead8ed396194e</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

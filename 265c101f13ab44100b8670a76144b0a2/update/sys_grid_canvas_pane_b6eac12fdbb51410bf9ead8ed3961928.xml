@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_grid_canvas_pane">
+    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+        <grid_canvas display_value="PA Physical Security In - New Tab">20b017261b75901024c896ce0a4bcbdb</grid_canvas>
+        <height>21</height>
+        <portal_widget display_value="Created 2020-07-10 11:25:32">3aeac12fdbb51410bf9ead8ed3961926</portal_widget>
+        <posx>0</posx>
+        <posy>17</posy>
+        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-10 09:25:32</sys_created_on>
+        <sys_id>b6eac12fdbb51410bf9ead8ed3961928</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>20b017261b75901024c896ce0a4bcbdb</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_grid_canvas_pane_b6eac12fdbb51410bf9ead8ed3961928</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-07-10 09:27:38</sys_updated_on>
+        <width>6</width>
+    </sys_grid_canvas_pane>
+</record_update>

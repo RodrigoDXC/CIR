@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="x_fru_cir_impact" label="Security Impact" max_length="40" name="x_fru_cir_security_impact" sizeclass="9" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Action taken" mandatory="true" max_length="40" name="action_taken" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Area Secured" sequence="10" value="area_secured"/>
+                <element inactive_on_update="false" label="Authorities Notified" sequence="20" value="authorities_notified"/>
+                <element inactive_on_update="false" label="Area Evacuated" sequence="30" value="area_evacuated"/>
+                <element inactive_on_update="false" label="Offenders Retained" sequence="40" value="offenders_retained"/>
+                <element inactive_on_update="false" label="Other (See Description)" sequence="50" value="other"/>
+            </choice>
+        </element>
+        <element label="Amount recovered" max_length="20" name="amount_recovered" type="currency"/>
+        <element choice="1" label="Location security risk level" max_length="40" name="location_security_risk_level" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="1" sequence="100" value="1"/>
+                <element inactive_on_update="false" label="2" sequence="200" value="2"/>
+                <element inactive_on_update="false" label="3" sequence="300" value="3"/>
+                <element inactive_on_update="false" label="4" sequence="400" value="4"/>
+                <element inactive_on_update="false" label="5" sequence="500" value="5"/>
+            </choice>
+        </element>
+        <element label="Loss amount" max_length="20" name="loss_amount" type="currency"/>
+        <element label="Maximum amount" max_length="20" name="maximum_amount" type="currency"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Bomb Threat / Hoax" sequence="10" value="bomb_threat"/>
+                <element inactive_on_update="false" label="Break-In" sequence="20" value="break_in"/>
+                <element inactive_on_update="false" label="Contraband" sequence="30" value="contraband"/>
+                <element inactive_on_update="false" label="Cyber Hacking" sequence="40" value="cyber_hacking"/>
+                <element inactive_on_update="false" label="Fire / Hazmat" sequence="50" value="fire_hazmat"/>
+                <element inactive_on_update="false" label="Kidnapping" sequence="60" value="kidnapping"/>
+                <element inactive_on_update="false" label="Offisite violence" sequence="70" value="offsite_violence"/>
+                <element inactive_on_update="false" label="Onsite Violence" sequence="80" value="onsite_violence"/>
+                <element inactive_on_update="false" label="Suspicious Package" sequence="90" value="suspicious_package"/>
+                <element inactive_on_update="false" label="System Malfunction" sequence="100" value="system_malfunction"/>
+                <element inactive_on_update="false" label="Theft of Property" sequence="110" value="theft"/>
+                <element inactive_on_update="false" label="Trespassing" sequence="120" value="trespassing"/>
+                <element inactive_on_update="false" label="Unauthorized entry" sequence="130" value="unauthorized_entry"/>
+                <element inactive_on_update="false" label="Vandalism" sequence="140" value="vandalism"/>
+                <element inactive_on_update="false" label="Vehicular" sequence="150" value="vehicular"/>
+                <element inactive_on_update="false" label="Other" sequence="160" value="other"/>
+            </choice>
+        </element>
+        <element label="Type notes" max_length="40" name="type_notes" type="string"/>
+    </element>
+</database>

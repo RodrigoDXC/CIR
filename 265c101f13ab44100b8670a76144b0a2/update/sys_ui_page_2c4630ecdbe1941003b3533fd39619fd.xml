@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[//Called when the 'OK' button gets clicked
+function continueOK(){
+	var selectedFactors = [];
+	var values = jQuery('.factor-checkbox').each(function(){
+		if(jQuery(this).is(":checked")){
+			selectedFactors.push(jQuery(this).attr('id'));
+		}
+	});
+	jQuery('#selectedFactors').val(selectedFactors.toString());
+}
+
+//Called when the 'Cancel' button gets clicked
+function continueCancel(){
+	//Close the dialog window
+	GlideDialogWindow.get().destroy();
+	return false;
+}]]></client_script>
+        <description>Allows the selection and association of contributing factors</description>
+        <direct>false</direct>
+        <endpoint>x_fru_cir_contributing_factors.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:ui_form>
+		<g:evaluate>
+			var investigation =  RP.getWindowProperties().investigation;
+			var riskManagementUtils = new CIRRiskManagementUtils();
+			var factorCategories = riskManagementUtils.GetFactorsByCategory(investigation);
+		</g:evaluate>
+		<input type="hidden" id="selectedFactors" name="selectedFactors" value=""/>
+		<input type="hidden" id="investigation" name="investigation" value="${investigation}"/>
+		<div class="col-sm-12">
+			<h2 style="margin-top: 0px">${gs.getMessage('cir_select_contributing_factors')}</h2>
+			<j:forEach items="${factorCategories}" var="jvar_category">
+				<g:evaluate jelly="true">  
+					var name = jelly.jvar_category.name;
+					var factors = jelly.jvar_category.factors;
+					var factorsHalfLength = factors.length / 2;
+					var count = 0;
+				</g:evaluate> 
+				<div class="col-sm-12" style="padding-bottom:20px">
+					<div style="font-size:16px;padding-bottom:10px"><strong>${name}</strong></div>
+					<j:set var="jvar_count" value="${count}"/>
+					<j:set var="jvar_half" value="${factorsHalfLength}"/>
+					<div style="padding-left:20px" class='col-sm-6'>
+						<j:forEach items="${factors}" var="jvar_factor">
+							<g:evaluate jelly="true">
+								var name = jelly.jvar_factor.name;
+								var factorSys = jelly.jvar_factor.sys_id;
+								var selected = jelly.jvar_factor.selected;
+								var column = 'left';
+								if(parseInt(jelly.jvar_count) >= parseInt(jelly.jvar_half))
+									column = 'right';
+								var insideCount = jelly.jvar_count;
+								insideCount++;
+							</g:evaluate>
+							<j:set var="jvar_count" value="${insideCount}"/>
+							<j:if test="${column == 'left'}">
+								<div>
+									<span style="padding-right:10px;">
+										<j:if test="${selected == true}">
+											<input type="checkbox" class="factor-checkbox" id="${factorSys}" checked="true"/>
+										</j:if>
+										<j:if test="${selected == false}">
+											<input type="checkbox" class="factor-checkbox" id="${factorSys}"/>
+										</j:if>
+									</span>
+									<span>
+										<label for="${factorSys}">${name}</label>
+									</span>
+								</div>
+							</j:if>
+						</j:forEach>
+					</div>
+					<div style="padding-left:20px" class='col-sm-6'>
+						<j:set var="jvar_count" value="${count}"/>
+						<j:set var="jvar_half" value="${factorsHalfLength}"/>
+						<j:forEach items="${factors}" var="jvar_factor">
+							<g:evaluate jelly="true">
+								var name = jelly.jvar_factor.name;
+								var factorSys = jelly.jvar_factor.sys_id;
+								var selected = jelly.jvar_factor.selected;
+								var column = 'left';
+								if(parseInt(jelly.jvar_count) >= parseInt(jelly.jvar_half))
+									column = 'right';
+								var insideCount = jelly.jvar_count;
+								insideCount++;
+							</g:evaluate>
+							<j:set var="jvar_count" value="${insideCount}"/>
+							<j:if test="${column == 'right'}">
+								<div>
+									<span style="padding-right:10px;">
+										<j:if test="${selected == true}">
+											<input type="checkbox" class="factor-checkbox" id="${factorSys}" checked="true"/>
+										</j:if>
+										<j:if test="${selected == false}">
+											<input type="checkbox" class="factor-checkbox" id="${factorSys}"/>
+										</j:if>
+									</span>
+									<span>
+										<label for="${factorSys}">${name}</label>
+									</span>
+								</div>
+							</j:if>
+						</j:forEach>
+					</div>
+				</div>
+			</j:forEach>
+		</div>
+		<div style="float:right">
+			<g:dialog_buttons_ok_cancel ok="continueOK()" cancel="return continueCancel()" cancel_type="button" />
+		</div>
+	</g:ui_form>
+</j:jelly>]]></html>
+        <name>contributing_factors</name>
+        <processing_script><![CDATA[var contributingFactors = selectedFactors.split(',');
+new CIRRiskManagementUtils().AddContributingFactors(contributingFactors, investigation);
+response.sendRedirect('x_fru_cir_investigation.do?sys_id=' + investigation);
+]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-18 13:59:21</sys_created_on>
+        <sys_id>2c4630ecdbe1941003b3533fd39619fd</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>contributing_factors</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_page_2c4630ecdbe1941003b3533fd39619fd</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-26 08:43:04</sys_updated_on>
+    </sys_ui_page>
+</record_update>

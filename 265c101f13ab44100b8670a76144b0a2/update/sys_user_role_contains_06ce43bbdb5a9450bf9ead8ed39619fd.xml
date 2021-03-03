@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+    <sys_user_role_contains action="INSERT_OR_UPDATE">
+        <contains display_value="x_fru_cir.cir_base" name="x_fru_cir.cir_base">0c3433d01b734450df7e43f4bd4bcbe5</contains>
+        <role display_value="x_fru_cir.workshop_manager" name="x_fru_cir.workshop_manager">76becb7bdb5a9450bf9ead8ed396199f</role>
+        <sys_class_name>sys_user_role_contains</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-08-05 10:11:32</sys_created_on>
+        <sys_id>06ce43bbdb5a9450bf9ead8ed39619fd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_fru_cir.cir_base.x_fru_cir.workshop_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_user_role_contains_06ce43bbdb5a9450bf9ead8ed39619fd</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-08-05 10:11:32</sys_updated_on>
+    </sys_user_role_contains>
+</record_update>

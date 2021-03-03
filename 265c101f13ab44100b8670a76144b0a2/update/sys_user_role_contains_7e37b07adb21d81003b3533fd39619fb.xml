@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+    <sys_user_role_contains action="INSERT_OR_UPDATE">
+        <contains display_value="approval_admin" name="approval_admin">85805422c61122890157c76a4036958b</contains>
+        <role display_value="x_fru_cir.approver" name="x_fru_cir.approver">e0f554b2dbed981003b3533fd3961909</role>
+        <sys_class_name>sys_user_role_contains</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-25 13:48:24</sys_created_on>
+        <sys_id>7e37b07adb21d81003b3533fd39619fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>approval_admin.x_fru_cir.approver</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_user_role_contains_7e37b07adb21d81003b3533fd39619fb</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-06-25 13:48:24</sys_updated_on>
+    </sys_user_role_contains>
+</record_update>

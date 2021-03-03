@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="update_synch=true" extends="dl_matcher" label="Severity Lookup" max_length="40" name="x_fru_cir_severity_lookup" sizeclass="25" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="likelihood" choice_table="x_fru_cir_incident" label="Future likelihood" max_length="40" name="future_likelihood" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="consequence" choice_table="x_fru_cir_incident" label="Potential consequence" max_length="40" name="potential_consequence" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="severity" choice_table="x_fru_cir_case" label="Potential severity" max_length="40" name="potential_severity" type="integer">
+            <choice/>
+        </element>
+    </element>
+</database>

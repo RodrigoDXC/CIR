@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Assessment Instance Section" max_length="40" name="x_fru_cir_assessment_instance_section" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Assessment Instance" max_length="32" name="assessment_instance" read_only="true" reference="x_fru_cir_assessment_instance" reference_cascade_rule="delete" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" display="true" label="Assessment Section" max_length="32" name="assessment_section" read_only="true" reference="x_fru_cir_assessment_section" reference_cascade_rule="delete" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Score" max_length="15" name="score" read_only="true" type="decimal"/>
+        <index name="index">
+            <element name="assessment_section"/>
+        </index>
+        <index name="index2">
+            <element name="assessment_instance"/>
+        </index>
+    </element>
+</database>

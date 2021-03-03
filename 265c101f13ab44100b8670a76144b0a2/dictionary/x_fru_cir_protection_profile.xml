@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Protection Profile" max_length="40" name="x_fru_cir_protection_profile" sizeclass="4" type="collection">
+        <element display="true" label="Alias" mandatory="true" max_length="40" name="alias" type="string"/>
+        <element attributes="edge_encryption_enabled=true,isOrder=true,max_unit=hours" label="Hours worked" max_length="40" name="hours_worked" type="glide_duration"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Role" mandatory="true" max_length="40" name="role" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="VIP" sequence="0" value="0"/>
+                <element inactive_on_update="false" label="Bodyguard" sequence="1" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User" mandatory="true" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <element label="VIP description" max_length="4000" name="vip_description" type="string"/>
+        <index name="index">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

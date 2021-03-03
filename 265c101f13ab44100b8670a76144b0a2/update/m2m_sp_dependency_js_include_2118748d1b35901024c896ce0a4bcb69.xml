@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_dependency_js_include">
+    <m2m_sp_dependency_js_include action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <sp_dependency display_value="CIRHighCharts">2cb7308d1b35901024c896ce0a4bcba6</sp_dependency>
+        <sp_js_include display_value="https://code.highcharts.com/modules/exporting.js">f208348d1b35901024c896ce0a4bcbe0</sp_js_include>
+        <sys_class_name>m2m_sp_dependency_js_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-02 13:38:27</sys_created_on>
+        <sys_id>2118748d1b35901024c896ce0a4bcb69</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIRHighCharts.https://code.highcharts.com/modules/exporting.js</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>m2m_sp_dependency_js_include_2118748d1b35901024c896ce0a4bcb69</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-02 13:38:27</sys_updated_on>
+    </m2m_sp_dependency_js_include>
+</record_update>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description/>
+        <execution_script/>
+        <name>CIR - New Injury/Illness</name>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-24 12:51:46</sys_created_on>
+        <sys_id>1e89e186db7a9810d4a73533f3961990</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>CIR - New Injury/Illness</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_1e89e186db7a9810d4a73533f3961990</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-25 10:07:39</sys_updated_on>
+        <table>x_fru_cir_injury_illness</table>
+        <template>type={{Type}}^classification={{Classification}}^justification={{Justification}}^injury_illness_caused_by={{Injury/illness caused by}}^mechanism_of_injury_illness={{Mechanism of injury/illness}}^treatment_provided_by={{Treatment provided by}}^treatment_description={{Treatment description}}^follow_up_treatment={{Follow-up treatment}}^impacted_person={{Impacted person}}^category={{Category}}^subcategory={{Subcategory}}^nature_of_illness={{Nature of illness}}^nature_of_injury={{Nature of injury}}^EQ</template>
+        <type>new</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=1e89e186db7a9810d4a73533f3961990"/>
+</record_update>

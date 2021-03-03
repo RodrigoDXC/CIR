@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRSituationAccessManager</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script include used in the ACLs</description>
+        <name>CIRSituationAccessManager</name>
+        <script><![CDATA[var CIRSituationAccessManager = (function(operation, query, parentGR, applyQueryOnParent, field) {
+
+	var tables = CIRConstants.Tables;
+	var debug = false;
+	var accessObj = [{
+		role: 'x_fru_cir.sec_admin',
+		table_access: [{
+			table: tables.DIMENSION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables, // NEEDS TO BE COMPLETED ONCE TABLE IS CREATED
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.LOCATION_GROUP,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.CONTACT_LIST,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}]
+	}, {
+		role: 'x_fru_cir.situation_administrator',
+		table_access: [{
+			table: tables.DIMENSION,
+			create: false,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.SITUATION_CATEGORY,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.RESP_PLAN_CATEGORY,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.ON_CALL_SITU_MGR,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.SITUATION_ESCALATION_LEVEL,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.MSG_SET,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.EMG_NUMBER,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.TASK_TEMPLATE,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.RESP_PLAN_TEMPLATE,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.SECURITY_VIRTUAL_LOCATION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.LOCATION_GROUP,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.CONTACT_LIST,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.PARAMETRIZATION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.ON_CALL_TEAM,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: []
+		}]
+	}, {
+		role: 'x_fru_cir.senior_situation_manager',
+		table_access: [{
+			table: tables.DIMENSION,
+			create: false,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_CATEGORY,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.RESP_PLAN_CATEGORY,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.ON_CALL_SITU_MGR,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_ESCALATION_LEVEL,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.MSG_SET,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.EMG_NUMBER,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.TASK_TEMPLATE,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.RESP_PLAN_TEMPLATE,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SECURITY_VIRTUAL_LOCATION,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.LOCATION_GROUP,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.CONTACT_LIST,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.PARAMETRIZATION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.TASK_EXECUTION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_MEMBER,
+			create: true,
+			read: true,
+			write: true,
+			del: true,
+			depending_fields: []
+		}, {
+			table: tables.RESP_PLAN_EXEC,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: operation == 'read' ? ['dimension'] : ['crisis_member'] // if it is to read, he can read if it is of the same dimension
+		}, {
+			table: tables.ON_CALL_TEAM,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.RESPONSE_TEAM,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}]
+	}, {
+		role: 'x_fru_cir.situation_manager',
+		table_access: [{
+			table: tables.DIMENSION,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_CATEGORY,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.RESP_PLAN_CATEGORY,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.ON_CALL_SITU_MGR,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_ESCALATION_LEVEL,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.MSG_SET,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.EMG_NUMBER,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.TASK_TEMPLATE,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.RESP_PLAN_TEMPLATE,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SECURITY_VIRTUAL_LOCATION, 
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.LOCATION_GROUP,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.CONTACT_LIST,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.PARAMETRIZATION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.SITUATION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.TASK_EXECUTION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_MEMBER,
+			create: true,
+			read: true,
+			write: true,
+			del: true,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.RESP_PLAN_EXEC,
+			create: true,
+			read: true,
+			write: ['assigned_to', 'none'].indexOf(field) != -1? true: false, // it is only allowed to write the assigned_to field,
+			del: false,
+			depending_fields: operation == 'read' ? ['dimension', 'country'] : ['crisis_member'] // if it is to read, he can read if it is of the same dimension and country
+		}, {
+			table: tables.ON_CALL_TEAM,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.RESPONSE_TEAM,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}]
+	}, {
+		role: 'x_fru_cir.situation_operator',
+		table_access: [{
+			table: tables.RESP_PLAN_CATEGORY,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.ON_CALL_SITU_MGR,
+			create: false,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.RESP_PLAN_EXEC,
+			create: false,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['coordinator']
+		}, {
+			table: tables.RESPONSE_TEAM,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['coordinator']
+		}, {
+			table: tables.ON_CALL_TEAM,
+			create: false,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}]
+	}, {
+		role: 'x_fru_cir.situation_initiator',
+		table_access: [{
+			table: tables.DIMENSION,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_CATEGORY,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_ESCALATION_LEVEL,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.SECURITY_VIRTUAL_LOCATION,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.LOCATION_GROUP,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.SITUATION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.TASK_EXECUTION,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.SITUATION_MEMBER,
+			create: true,
+			read: true,
+			write: true,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.RESP_PLAN_EXEC,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.TASK_TEMPLATE,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.CONTACT_LIST,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.RESPONSE_TEAM,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.RESP_PLAN_TEMPLATE,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}]
+	}, {
+		role: 'x_fru_cir.situation_user',
+		table_access: [{
+			table: tables.DIMENSION,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_CATEGORY,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.SITUATION_ESCALATION_LEVEL,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.SECURITY_VIRTUAL_LOCATION,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.LOCATION_GROUP,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension', 'country']
+		}, {
+			table: tables.SITUATION,
+			create: false,
+			read: true,
+			write: true, // this is to give him the rights to write in comments field
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.TASK_EXECUTION,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.SITUATION_MEMBER,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.TASK_TEMPLATE,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.CONTACT_LIST,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}, {
+			table: tables.RESP_PLAN_CATEGORY,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: []
+		}, {
+			table: tables.RESP_PLAN_EXEC,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.RESPONSE_TEAM,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['crisis_member']
+		}, {
+			table: tables.RESP_PLAN_TEMPLATE,
+			create: false,
+			read: true,
+			write: false,
+			del: false,
+			depending_fields: ['dimension']
+		}]
+	}, ];
+
+
+
+	var validParent = parentGR && parentGR instanceof GlideRecord && parentGR.isValidRecord();
+
+	// checking if it is in the portal to get the parent
+	// if it is from the portal, it needs to get the sys_id of record from the uri
+	if (operation === 'create' && applyQueryOnParent && gs.action.getGlideURI().toString().startsWith('api/now/sp') && !validParent) {
+		var gURI = new GlideURI();
+		var table = '';
+		var sys_id = '';
+		if (gURI.get('table')) {
+			table = gURI.get('table');
+		}
+		if (gURI.get('sys_id')) {
+			sys_id = gURI.get('sys_id');
+		}
+		if (table && sys_id) {
+			var grRec = new GlideRecord(table);
+			if (grRec.get(sys_id)) {
+				validParent = true;
+				parentGR = grRec;
+			}
+		}
+	}
+	var gf = new CIRGlideFilterHelper();
+	var tablename = current.getTableName();
+	var checkParent = applyQueryOnParent;
+
+	/**
+	 * checks if the user has access to the current table
+	 * 
+	 * @return {boolean}
+	 */
+	var checkAccess = function () {
+		var access = false;
+		var roles = [],
+			tableAccess = [];
+
+		// getting role of the current user
+		roles = getUserRoles();
+		generateLog('returned roles: ' + JSON.stringify(roles));
+		if (roles.length == 0)
+			return false;
+
+		// getting tables information by role
+		tableAccess = getTableInfo(roles);
+		generateLog('returned tables access: ' + JSON.stringify(tableAccess));
+
+		// checks if the object is not empty
+		if (tableAccess.length == 0)
+			return false;
+
+		// check if query is not empty and makes first this check
+		if (query && !current.isNewRecord() && !checkParent && !gf.checkFilter(current, query)) {
+			return false;
+		} else if (validParent && checkParent && !gf.checkFilter(parentGR, query)) {
+			return false;
+		}
+
+		// variable to check specific things like country or dimension
+		var permission = {
+			'dimension': checkDimension,
+			'country': checkCountry,
+			'crisis_member': checkCrisisMembers,
+			'response_member': checkResponseTeam,
+			'coordinator': checkCoordinator
+		};
+
+		for (var j in tableAccess) {
+			var dependentFields = tableAccess[j].depending_fields;
+
+			generateLog('Operation to be checked: ' + operation);
+			generateLog('Is it new record? -' + current.isNewRecord());
+
+			// special check for a spmodal of the portal
+			if (operation == 'create' && tablename == CIRConstants.Tables.TASK_EXECUTION
+				&& (gs.action.getGlideURI().toString().startsWith('api/now/sp/widget/cir_sit_form?api=api') || gs.action.getGlideURI().toString().startsWith('api/now/sp/uiaction'))) {
+				return true;
+			}
+
+			// checks if it needs to check dimension and/or country and table access rights and if it is a newRecord (if it is a new record, the user will be allowed to read and write)
+
+
+			var tablesCheckOnCreate = [CIRConstants.Tables.RESP_PLAN_EXEC, CIRConstants.Tables.TASK_EXECUTION, CIRConstants.Tables.SITUATION_MEMBER];
+
+			if ((operation !== 'create' && !current.isNewRecord()) ||
+				(operation == 'create' && tablesCheckOnCreate.indexOf(tablename) != -1)) {
+
+				generateLog('tableAccess depending fields: ' + JSON.stringify(tableAccess[j].depending_fields));
+				var dependentAccess = true;
+				for (var i in dependentFields) {
+
+					if (!permission[dependentFields[i]].apply(this)) {
+						dependentAccess = false;
+						break;
+					}
+				}
+
+				access = tableAccess[j][operation] && dependentAccess;
+			} else {
+				access = tableAccess[j][operation];
+			}
+			if (access) {
+				return access;
+			}
+		}
+		return access;
+	};
+
+	/**
+	 * gets the user role from the the role with more previligie until the less
+	 *
+	 * @returns {array} returns all the roles that a user has
+	 */
+	var getUserRoles = function () {
+		var roles = [];
+
+		// first gets all the roles in the object
+		var objRoles = accessObj.map(function (obj) {
+			return obj.role;
+		});
+
+		// checks if the user has a role
+		for (var i in objRoles) {
+			if (gs.hasRole(objRoles[i])) {
+				roles.push(objRoles[i]);
+			}
+		}
+		return roles;
+	};
+
+	/**
+	 * gets the table information with the access permissions
+	 * @param {array} roles - array with user's roles
+	 *
+	 * @returns {array[objects]}
+	 */
+	var getTableInfo = function (roles) {
+		var tables = [];
+		for (var i in roles) {
+
+			// gets the object with a information of the permisions for a specific role
+			var accessRole = findObjectByKey('role', roles[i]);
+
+			// gets the array with the tables' information
+			var tablesInfo = accessRole.table_access;
+			for (var j in tablesInfo) {
+				if (tablesInfo[j].table == tablename) {
+					tables.push(tablesInfo[j]);
+				}
+			}
+		}
+		return tables;
+	};
+
+	var checkDimension = function () {
+		var dimensionGR;
+		var tables = [CIRConstants.Tables.SITUATION_MEMBER, CIRConstants.Tables.TASK_EXECUTION, CIRConstants.Tables.RESP_PLAN_EXEC];
+
+		// checks if table is the crisis member because this table does not have a dimension field
+		var crisisID, crisisGR;
+		if (tables.indexOf(tablename) != -1) {
+			crisisID = current.getValue('situation') || current.getValue('parent_situation');
+			if (crisisID) {
+				crisisGR = new GlideRecord(CIRConstants.Tables.SITUATION);
+				if (crisisGR.get(crisisID)) {
+					dimensionGR = crisisGR.dimension.getRefRecord();
+				}
+			} else if (!crisisID &&validParent) {
+				dimensionGR = parentGR.dimension.getRefRecord();
+			}
+		} else if (tablename == [CIRConstants.Tables.RESPONSE_TEAM]) {
+			crisisID = current.response_execution_id.parent_situation;
+			if (crisisID) {
+				crisisGR = new GlideRecord(CIRConstants.Tables.SITUATION);
+				if (crisisGR.get(crisisID)) {
+					dimensionGR = crisisGR.dimension.getRefRecord();
+				}
+			}
+		} else {
+
+			// checks the type because it can be a choice of a reference
+			// the type of the field of the crisis dimension table is choice
+			// if it is a reference, it will get the dimension's record
+			if (current.isValidField('dimension') && current['dimension'].getED().getInternalType() === 'reference' && current.getValue('dimension') ) {
+				dimensionGR = current.dimension.getRefRecord();
+			} else {
+				dimensionGR = current;
+			}
+		}
+
+		// getting the groups of the dimensions to be compared against the groups of the user
+		if (dimensionGR && dimensionGR instanceof GlideRecord && dimensionGR.isValidRecord()) {
+			var groups = dimensionGR.getValue('groups');
+			if (groups) {
+				groups = groups.split(',');
+				for (var i in groups) {
+					if (isMemberOfForScopedApp(groups[i])) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	};
+
+	/**
+	 * checks if the user has access by country
+	 *
+	 * @returns {boolean}
+	 */
+	var checkCountry = function () {
+		// gets current display value of the country
+		var currentCountry = current.getDisplayValue('country');
+		var crisisID, crisisGR;
+		if ([CIRConstants.Tables.SITUATION_MEMBER, CIRConstants.Tables.RESP_PLAN_EXEC].indexOf(tablename) != -1) {
+			crisisID = current.getValue('situation') || current.getValue('parent_situation');
+			if (crisisID) {
+				crisisGR = new GlideRecord(CIRConstants.Tables.SITUATION);
+				if (crisisGR.get(crisisID)) {
+					currentCountry = crisisGR.getDisplayValue('country');
+				}
+			} else if (!crisisID && validParent) {
+				currentCountry = parentGR.getDisplayValue('country');
+			}
+		} else if (tablename == CIRConstants.Tables.RESPONSE_TEAM) {
+			crisisID = current.response_execution_id.parent_situation;
+			if (crisisID) {
+				crisisGR = new GlideRecord(CIRConstants.Tables.SITUATION);
+				if (crisisGR.get(crisisID)) {
+					currentCountry = crisisGR.getDisplayValue('country');
+				}
+			}
+		} 
+
+		// some tables have different name for country
+		if (!currentCountry) {
+			currentCountry = current.getDisplayValue('countries');
+		}
+		var userCountry = getCountryUser();
+
+		// comparing countries of record and user
+		// using indexOf because some country fields are lists instead of choice
+		if (userCountry && currentCountry && currentCountry.indexOf(userCountry) != -1) {
+			return true;
+		}
+		return false;
+	};
+
+	/**
+	 * checks if the current user is member of the crisis team
+	 * 
+	 * @returns {boolean}
+	 */
+	var checkCrisisMembers = function () {
+		var userID = gs.getUserID();
+		var crisisID = '';
+		switch (tablename) {
+			case CIRConstants.Tables.RESP_PLAN_EXEC:
+				crisisID = current.getValue('parent_situation');
+				break;
+			case CIRConstants.Tables.TASK_EXECUTION:
+				crisisID = current.getValue('situation');
+				break;
+			case CIRConstants.Tables.SITUATION_MEMBER:
+				crisisID = current.getValue('situation');
+				break;
+			case CIRConstants.Tables.RESPONSE_TEAM:
+				crisisID = current.response_execution_id.parent_situation;
+				break;
+			default:
+				crisisID = current.getUniqueValue();
+		}
+		if (!crisisID && validParent) {
+			crisisID = parentGR.getUniqueValue();
+		}
+		if (crisisID) {
+			var grCM = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+			grCM.addQuery('situation', crisisID);
+			grCM.addQuery('user_id', userID);
+			grCM.query();
+			if (grCM.hasNext()) {
+				return true;
+			}
+		}
+		return false;
+	};
+
+	/**
+	 * finds an object by key/value in an array of objects
+	 *
+	 * @param {string} key - key to look for
+	 * @param {string} value - value to look for on the key
+	 * @param {array} array - array with objects
+	 * @returns {object} returns the object only
+	 */
+	var findObjectByKey = function (key, value, array) {
+		array = array || accessObj;
+		for (var i = 0; i < array.length; i++) {
+			if (array[i][key] === value) {
+				return array[i];
+			}
+		}
+		return null;
+	};
+
+	/**
+	 * checks the coordinator of the response plan record
+	 *
+	 * @param {string} field - name of the field to check the value
+	 * @param {string} value - value to be checked
+	 * @returns {boolean}
+	 */
+	var checkCoordinator = function () {
+		var responseGR = current;
+		if (responseGR.getTableName() == CIRConstants.Tables.RESPONSE_TEAM) {
+			responseGR = responseGR.response_execution_id.getRefRecord();
+		}
+		if (responseGR.assigned_to + '' == gs.getUserID()) {
+			return true;
+		}
+		return false;
+	};
+
+	/**
+	 * gets the country of the user
+	 *
+	 * @returns {string} - returns the country of the user
+	 */
+	var getCountryUser = function () {
+		var country = '';
+		var grUser = new GlideRecord('sys_user');
+		if (grUser.get(gs.getUserID())) {
+
+			// if location is not empty, it will get the value of location's country
+			var loc = grUser.location.getRefRecord();
+			country = grUser.getDisplayValue('country') || loc.getDisplayValue('country') ;
+		}
+		return country;
+	};
+
+
+	/**
+	 * checks if the current user is member of the response team
+	 * 
+	 * @returns {boolean}
+	 */
+	var checkResponseTeam = function () {
+		var userID = gs.getUserID();
+		var responseID = current.getUniqueValue();
+		var grRT = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);
+		grRT.addQuery('response_execution_id', responseID);
+		grRT.addQuery('user', userID);
+		grRT.query();
+		if (grRT.hasNext()) {
+			return true;
+		}
+		return false;
+	};
+
+	/**
+	 * checks if the user is member of a group
+	 *
+	 * @param {string} groupID - sys_id of the group
+	 * @returns {boolean}
+	 */
+	var isMemberOfForScopedApp = function (groupID) {
+		var result = false;
+		if (groupID != '') {
+			var userID = gs.getUserID();
+			var gr = new GlideRecord("sys_user_grmember");
+			gr.addQuery("group", groupID);
+			gr.addQuery("user", userID);
+			gr.query();
+			if (gr.hasNext()) {
+				result = true;
+			}
+		}
+		return result;
+	};
+
+	/**
+	 * logsa message if debug is active
+	 * 
+	 * @param {string} message - message to be displayed on the syslog's table
+	 */
+	var generateLog = function (message) {
+		if (debug) {
+			var source = 'CIRSituationAccessManager script: ';
+			gs.info(source + message);
+		}
+	};
+
+	/* !!! DEPRECATED AFTER SITUATION V2 UPGRADE !!!!
+     * function that wiil check if the logged in user has access to the Situation record
+     * called in ACLs
+     * @param {GlideRecord} situation - GlideRecord of the current situation record.
+     * @return {boolean} - true if the user has access false if the user doesn't
+     **/
+	var checkSituationAccess = function(situation) {
+		if (gs.hasRole('x_fru_cir.senior_situation_manager')) {
+			return true;
+		}
+		if (checkMembership(situation.sys_id + '')) {
+			return true;
+		}
+		if (gs.hasRole('x_fru_cir.situation_manager') && checkSitCountry(situation)) {
+			return true;
+		}
+		return false;
+	};
+
+	/* !!! DEPRECATED AFTER SITUATION V2 UPGRADE !!!!
+     * function that wiil check if the user's country is the same has the situation country.
+     * called in checkSituationAccess function
+     * @param {GlideRecord} situation - GlideRecord of the current situation record.
+     * @return {boolean} - true if the country us the same false if it isn't
+     **/
+	var checkSitCountry = function(situation) {
+		var userCountry = getUserRecord().getDisplayValue('country') + '';
+		userCountry = userCountry === 'United States' ? 'USA' : userCountry;
+		var sitCountry = situation.country + '';
+
+		return userCountry === sitCountry;
+	};
+
+	/* 
+     * function that wiil get the logged in user GlideRecord
+     * called in multiple places across the Application
+     * @return {GlideRecord} - GlideRecord of the logged in user record.
+     **/
+	var getUserRecord = function() {
+		var grUser = new GlideRecord('sys_user');
+		if (grUser.get(gs.getUserID() + '')) {
+			return grUser;
+		}
+	};
+
+	/* !!! DEPRECATED AFTER SITUATION V2 UPGRADE !!!!
+     * function that wiil check if the logged in user has access to the Response Plan Execution record
+     * called in ACLs
+     * @param {GlideRecord} respPlan - GlideRecord of the Response Plan Execution record
+     * @return {boolean} - true if the user has access, false if it doesn't
+     **/
+	var checkResponsePlanAccess = function(respPlan) {
+		if (checkSituationAccess(respPlan.parent_situation)) {
+			return true;
+		} else {
+			return checkResponseTeam(respPlan.sys_id + '');
+		}
+	};
+
+	/* !!! DEPRECATED AFTER SITUATION V2 UPGRADE !!!!
+     * function that wiil check if the logged in user is part of the Response Team for a given Response Plan Execution
+     * called in the checkResponsePlanAccess function
+     * @param {String} responsePlanId - String containing ths sys_id of the Resp Plan Execution
+     * @return {boolean} - true if the user is part of the response team, false if it isn't
+     **/
+	var checkResponseTeamOld = function(responsePlanId) {
+		var respTeam = new GlideRecord(CIRConstants.Tables.RESPONSE_TEAM);
+		respTeam.addQuery('response_execution_id', responsePlanId);
+		respTeam.addQuery('user', gs.getUserID());
+		respTeam.query();
+
+		return respTeam.hasNext();
+	};
+
+	/* !!! DEPRECATED AFTER SITUATION V2 UPGRADE !!!!
+     * function that wiil check if the logged in user is a Situation Member for a given Situation
+     * called in the checkSituationAccess function
+     * @param {String} situationId - String containing ths sys_id of the Situation
+     * @return {boolean} - true if the user is a Situation Member, false if it isn't
+     **/
+	var checkMembership = function(situationId) {
+		var situation = new GlideRecord(CIRConstants.Tables.SITUATION_MEMBER);
+		situation.addQuery('situation', situationId);
+		situation.addQuery('user_id', gs.getUserID());
+		situation.query();
+
+		return situation.hasNext();
+	};
+
+	/* 
+     * function that wiil check if the logged in user has write/delete priviligies to the Response Plan Template record
+     * called in write and delete ACLs of the Response Plan Template table 
+     * @param {GlideRecord} respPlanTemplate - GlideRecord of the Response Plan Template record
+     * @return {boolean} - true if the user has access to the record, false if the user does not have access.
+     **/
+	var checkRespPlanTemplateAccess = function(respPlanTemplate) {
+		var answer = false;
+		var managers = respPlanTemplate.getValue('managers');
+		
+		
+		if ((managers && managers.indexOf(gs.getUserID()) != -1) || respPlanTemplate.isNewRecord()) {
+			answer = true;
+		}
+		return answer;
+	};
+
+	return {
+		CheckSituationAccess: checkSituationAccess,
+		CheckSitCountry: checkSitCountry,
+		GetUserRecord: getUserRecord,
+		CheckResponsePlanAccess: checkResponsePlanAccess,
+		CheckResponseTeamOld: checkResponseTeamOld,
+		CheckMembership: checkMembership,
+		CheckRespPlanTemplateAccess: checkRespPlanTemplateAccess,
+		CheckAccess: checkAccess,
+		GetUserRoles: getUserRoles,
+		GetTableInfo: getTableInfo,
+		CheckDimension: checkDimension,
+		CheckCountry: checkCountry,
+		CheckCrisisMembers: checkCrisisMembers,
+		CheckCoordinator: checkCoordinator,
+		CheckResponseTeam: checkResponseTeam,
+		GetCountryUser: getCountryUser,
+		IsMemberOfForScopedApp: isMemberOfForScopedApp, 
+	};
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-03-24 14:10:01</sys_created_on>
+        <sys_id>b67e393cdb7f845049959a82ca96193b</sys_id>
+        <sys_mod_count>112</sys_mod_count>
+        <sys_name>CIRSituationAccessManager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_b67e393cdb7f845049959a82ca96193b</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-10-22 12:02:23</sys_updated_on>
+    </sys_script_include>
+</record_update>

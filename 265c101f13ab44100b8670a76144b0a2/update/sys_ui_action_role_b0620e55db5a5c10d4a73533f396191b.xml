@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_action_role">
+    <sys_ui_action_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_ui_action_role</sys_class_name>
+        <sys_created_by>Paulo.Gomes@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-28 10:13:20</sys_created_on>
+        <sys_id>b0620e55db5a5c10d4a73533f396191b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>.x_fru_cir.personal_protection_manager</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_ui_action display_value="Generate Services">06214a55db5a5c10d4a73533f3961901</sys_ui_action>
+        <sys_update_name>sys_ui_action_role_b0620e55db5a5c10d4a73533f396191b</sys_update_name>
+        <sys_updated_by>Paulo.Gomes@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-28 10:13:20</sys_updated_on>
+        <sys_user_role display_value="x_fru_cir.personal_protection_manager" name="x_fru_cir.personal_protection_manager">a6ffcd19db561050bf9ead8ed39619a9</sys_user_role>
+    </sys_ui_action_role>
+</record_update>

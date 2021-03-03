@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_action_param_map">
+    <sys_sg_action_param_map action="INSERT_OR_UPDATE">
+        <button display_value="Reject approval">0e660293db5e5050d4a73533f39619e4</button>
+        <item_parameter display_value="cirRejectionReason">32a852dadb1edc10d4a73533f396190e</item_parameter>
+        <sys_class_name>sys_sg_action_param_map</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-08-03 15:39:12</sys_created_on>
+        <sys_id>0096c293db5e5050d4a73533f3961962</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>32a852dadb1edc10d4a73533f396190e</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_sg_action_param_map_0096c293db5e5050d4a73533f3961962</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-08-03 15:39:12</sys_updated_on>
+        <ui_parameter display_value="Rejection reason">8d86c293db5e5050d4a73533f39619c8</ui_parameter>
+    </sys_sg_action_param_map>
+</record_update>

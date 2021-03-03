@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Current version of the Global Template script of CIR that allows maniuplaution on Global tables.</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_fru_cir.global.template.current.version</name>
+        <read_roles>x_fru_cir.admin</read_roles>
+        <suffix>global.template.current.version</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-17 10:03:14</sys_created_on>
+        <sys_id>2096dd3ddb469410d4a73533f39619be</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>x_fru_cir.global.template.current.version</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_properties_2096dd3ddb469410d4a73533f39619be</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-17 10:08:57</sys_updated_on>
+        <type>string</type>
+        <value>1.0</value>
+        <write_roles>x_fru_cir.admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=2096dd3ddb469410d4a73533f39619be"/>
+</record_update>

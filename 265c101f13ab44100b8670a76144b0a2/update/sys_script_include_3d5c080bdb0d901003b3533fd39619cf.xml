@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRCaseManagementUtilsFP</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Protected script include for Server side code for the CIR Case Management functionality.</description>
+        <name>CIRCaseManagementUtilsFP</name>
+        <script><![CDATA[var CIRCaseManagementUtilsFP = (function() {
+    /**
+     * Creates a case using the System account from the report a case record producer. 
+     * USED IN - Script Action: Create Anonymous Case
+     * 
+     * @param  {String} caseObjectString - JSON encoded string with case object from RP
+     * @return {void}
+     */
+    var createAnonymousCase = function(caseObjectString) {
+        gs.debug('Creating anonymous case using object: ' + caseObjectString);
+        var caseObject = new global.JSON().decode(caseObjectString);
+        var newCase = new GlideRecord(caseObject.className);
+        newCase.initialize();
+        var user = gs.getProperty('x_fru_cir.anonymous.user');
+        newCase.reported_by = user;
+        newCase.opened_by = user;
+        newCase.occurred_on = caseObject.occurred_on;
+        newCase.location_type = caseObject.location_type;
+        newCase.location = caseObject.location;
+        newCase.location_notes = caseObject.location_notes;
+        newCase.short_description = caseObject.short_description;
+		newCase.assignment_group = caseObject.group;
+        newCase.description = caseObject.description;
+        newCase.setNewGuidValue(caseObject.sysID);
+        newCase.insert();
+    };
+
+    /**
+     * Gets all cases for a location grouped by type
+     * USED IN - 
+     * 
+     * 
+     * @param  {String} locationSys - sys_id of the location to filter by
+     * @return {Object} - returns an object by class type with arrays
+     */
+    var getCasesByTypeForLocation = function(locationSys) {
+        var result = {
+            incidents: [],
+            nearMisses: [],
+            hazards: []
+        };
+        var cases = new GlideAggregate(CIRConstants.Tables.CASE);
+        cases.addQuery('location', locationSys);
+        cases.addQuery('active', true);
+        cases.addAggregate('COUNT', 'sys_class_name');
+        cases.query();
+        var rowCount = 0;
+        while (cases.next()) {
+            var target = CIRCaseRiskImpGenericUtilsFP().CLASS_MAP[cases.sys_class_name.toString()];
+            if (target) {
+                rowCount++;
+                result[target].push(parseInt(cases.getAggregate('COUNT', 'sys_class_name')));
+            }
+        }
+        gs.debug('Searching for cases aggregates, found: ' + rowCount + ' using query: ' + cases
+            .getEncodedQuery());
+        return result;
+    };
+
+    /**
+     * Marks a location as a favorite (or not) in user preferences
+     * USED IN - 
+     * 
+     * @param  {String} locationID - SysID of the location to add/remove
+     * @return {boolean} - returns if the location is a favorite or not
+     */
+    var saveFavoriteLocation = function(locationID) {
+        // TODO: toggleFavoriteLocation is a better name for this method
+        var faveLocationIds = gs.getUser().getPreference('x_fru_cir_favorite_locations');
+        faveLocationIds = faveLocationIds ? faveLocationIds.split(',') : [];
+        var favoriteIndex = faveLocationIds.indexOf(locationID);
+        var favorite = favoriteIndex === -1;
+        if (favorite) {
+            gs.debug('Adding favorited location: ' + locationID + ' into user preference');
+            faveLocationIds.push(locationID);
+        } else {
+            gs.debug('Removing favorited location: ' + locationID + ' from user preference');
+            faveLocationIds.splice(favoriteIndex);
+        }
+
+        gs.getUser().savePreference('x_fru_cir_favorite_locations', faveLocationIds);
+        return favorite;
+    };
+
+    /**
+     * Gets a GlideRecord of locations from a set of filters
+     * USED IN - 
+     * 
+     * @param  {String} locationTypes - a string of comma separated SysIDs for location types
+     * @param  {String} caseTypes - a string of comma separated SysIDs for case types
+     * @param  {String} ignoreSysIds - a string of comma separated SysIDs to ignore
+     * @param  {boolean} favorites_only - boolean to determine if we should filter to favorites
+     * @param  {String} searchText - string with text to search name and address by
+     * @return {Object} - returns a GlideRecord with all of the locations that matched the criteria
+     */
+    var getLocationsFromFilter = function(locationTypes, caseTypes, ignoreSysIds, favorites_only, searchText) {
+        var cases = new GlideAggregate(CIRConstants.Tables.CASE);
+        if (locationTypes) {
+            cases.addQuery('location_type', 'IN', locationTypes);
+        }
+        if (caseTypes) {
+            cases.addQuery('sys_class_name', 'IN', caseTypes);
+        }
+        cases.addAggregate('COUNT', 'location');
+        cases.query();
+        var locationArr = [];
+        while (cases.next()) {
+            // TODO: Omit the blank case via a where or having restriction?
+            if (cases.location.toString() != '') {
+                locationArr.push(cases.location.toString());
+            }
+        }
+
+        var locations = new GlideRecord('cmn_location');
+        locations.addQuery('sys_id', 'IN', locationArr.toString());
+        if (favorites_only) {
+            locations.addQuery('sys_id', 'IN', gs.getUser().getPreference('x_fru_cir_favorite_locations'));
+        }
+        if (ignoreSysIds) {
+            locations.addQuery('sys_id', 'NOT IN', ignoreSysIds);
+        }
+        if (searchText) {
+            var textQuery = locations.addQuery('name', 'CONTAINS', searchText);
+            textQuery.addOrCondition('street', 'CONTAINS', searchText);
+            textQuery.addOrCondition('state', 'CONTAINS', searchText);
+            textQuery.addOrCondition('city', 'CONTAINS', searchText);
+            textQuery.addOrCondition('zip', 'CONTAINS', searchText);
+            textQuery.addOrCondition('country', 'CONTAINS', searchText);
+        }
+        locations.query();
+        return locations;
+    };
+
+    /**
+     * Gets an individual location record as an object
+     * USED IN - 
+     * 
+     * @param  {String} sys_id - the sys_id of the location to get
+     * @return {Object} - returns the location as an object
+     */
+    var getLocationRecord = function(sys_id) {
+        // TODO: Better separate view from model
+        var favelocations = _getFavoriteLocations();
+        var loc = new GlideRecord('cmn_location');
+        if (loc.get(sys_id)) {
+            var location = {
+                address: _createAddress(loc),
+                locationTypes: [],
+                caseTypes: [],
+                id: loc.sys_id.toString(),
+                lat: loc.latitude.toString(),
+                lng: loc.longitude.toString(),
+                name: loc.name.toString(),
+                nearMisses: 0,
+                incidents: 0,
+                hazards: 0,
+                url: "?id=cir_ciri_location_overview&location_id=" + loc.sys_id.toString(),
+                favorite: favelocations.indexOf(loc.sys_id.toString()) != -1
+            };
+
+            var totalCases = new GlideAggregate(CIRConstants.Tables.CASE);
+            totalCases.addQuery('location', sys_id);
+            totalCases.addQuery('active', true);
+            totalCases.addAggregate('COUNT', 'sys_class_name');
+            totalCases.query();
+            var total = 0;
+            while (totalCases.next()) {
+                var className = totalCases.getValue('sys_class_name');
+                var count = parseInt(totalCases.getAggregate('COUNT', 'sys_class_name'));
+                var target = CIRCaseRiskImpGenericUtilsFP().CLASS_MAP[className];
+                if (target) {
+                    location[target] = count;
+                    total += count;
+                }
+                if (count > 0) {
+                    location.caseTypes.push({
+                        value: className,
+                        displayValue: totalCases.sys_class_name.getDisplayValue()
+                    });
+                }
+            }
+
+            var iconImg;
+            if (total < gs.getProperty('x_fru_cir.location.yellow.threshold', 5)) {
+                location.status = 'Good';
+                iconImg = gs.getProperty('x_fru_cir.location.color.green', '#00A950');
+            } else if (total < gs.getProperty('x_fru_cir.location.orange.threshold', 10)) {
+                location.status = 'Fair';
+                iconImg = gs.getProperty('x_fru_cir.location.color.yellow', '#FFFF00');
+            } else if (total < gs.getProperty('x_fru_cir.location.red.threshold', 15)) {
+                location.status = 'Poor';
+                iconImg = gs.getProperty('x_fru_cir.location.color.orange', '#FF8C00');
+            } else {
+                location.status = 'Bad';
+                iconImg = gs.getProperty('x_fru_cir.location.color.red', '#FF0000');
+            }
+            location.icon = iconImg.replace('#', '');
+
+            var locationTypes = new GlideAggregate(CIRConstants.Tables.CASE);
+            locationTypes.addQuery('location', sys_id);
+            locationTypes.addQuery('active', true);
+            locationTypes.addQuery('location_type', '!=', '');
+            locationTypes.addAggregate('COUNT', 'location_type');
+            locationTypes.query();
+            while (locationTypes.next()) {
+                // TODO: This doesn't make a lot of sense to duplicate the location_type information
+                location.locationTypes.push(locationTypes.getValue('location_type'));
+                location.locationTypes.push({
+                    value: locationTypes.location_type.toString(),
+                    displayValue: locationTypes.location_type.getDisplayValue()
+                });
+            }
+
+            gs.debug('Got location object: ' + new global.JSON().encode(location));
+            return location;
+        }
+    };
+
+    /**
+     * Gets the list of locations marked as a following for the current users
+     * @return {Array}- retuns an array of location Sys_IDs
+     */
+    var _getFavoriteLocations = function() {
+        var faveLocationIds = gs.getUser().getPreference('x_fru_cir_favorite_locations');
+        gs.debug('Getting favorite locations from user preferences: ' + faveLocationIds);
+        return faveLocationIds ? faveLocationIds.split(',') : [];
+    };
+
+    /**
+     * Creates an address string for a location
+     * @param  {Object} location - GlideRecord to build address from
+     * @return {String} - with the full address from the location
+     */
+    var _createAddress = function(location) {
+        var address = '';
+        if (location.street.toString())
+            address += location.street.toString() + ', ';
+        if (location.city.toString())
+            address += location.city.toString() + ', ';
+        if (location.state.toString())
+            address += location.state.toString() + ', ';
+        if (location.zip.toString())
+            address += location.zip.toString() + ', ';
+        if (location.country.toString())
+            address += location.country.toString() + ', ';
+        address = address.slice(0, -2);
+        gs.debug('Creating address for location: ' + location.name + ' with address being: ' + address);
+        return address;
+    };
+
+    /**
+     * Gets all location records as objects
+     * USED IN - 
+     * 
+     * @return {Array} - returns an array of all location objects
+     */
+    var getLocationRecords = function() {
+        var showLocationsWithoutCases = gs.getProperty('x_fru_cir.show_locations_without_cases', 'false');
+        var location = new GlideRecord(CIRConstants.Tables.LOCATION);
+        location.addQuery('latitude', '!=', '');
+        location.addQuery('longitude', '!=', '');
+        if (showLocationsWithoutCases === 'false') {
+            var cases = location.addJoinQuery(CIRConstants.Tables.CASE, 'sys_id', 'location');
+            cases.addCondition('active', true);
+        }
+        location.orderBy('name');
+        location.query();
+        var locationArr = [];
+        while (location.next()) {
+            locationArr.push(getLocationRecord(location.sys_id.toString()));
+        }
+        return locationArr;
+    };
+
+    /**
+     * Gets all of the locations that have cases for them
+     * USED IN - UI Page: case_location_map
+     * 
+     * @param  {String} recordSys - the SysID of the record we are querying with
+     * @param  {String} locationSys - the SysID of the location to limit by
+     * @return {String} - returns a JSON encoded array of location objects
+     */
+    var getCaseLocations = function(recordSys, locationSys) {
+        // TODO: conversion to JSON should generally happen closer to where the data is output; that would keep this method more general
+        var locationArr = [];
+        var cases = new GlideRecord(CIRConstants.Tables.CASE);
+        cases.addQuery('location', locationSys);
+        if (recordSys)
+            cases.addQuery('sys_id', recordSys);
+        cases.addQuery('state', '!=', CIRCaseRiskImpGenericUtilsFP().GetStateValue('non_cir'));
+        cases.addQuery('state', '!=', CIRCaseRiskImpGenericUtilsFP().GetStateValue('duplicate_case'));
+        cases.addQuery('coordinates', '!=', '');
+        cases.query();
+        while (cases.next()) {
+            locationArr.push(_getLocationObject(cases));
+        }
+        var result = new global.JSON().encode(locationArr);
+        gs.debug('Created array of location objects: ' + result);
+        return result;
+    };
+
+    /**
+     * Gets an object with the coordinates of a case occurrence for a location map
+     * @param  {Object} caseRecord - GlideRecord of the case we are getting the location of
+     * @return {Object} - returns the coordinates, size, label, and coloring of the case for the map
+     */
+    var _getLocationObject = function(caseRecord) {
+        var coordinates = caseRecord.coordinates.toString().split(',');
+        var color;
+        switch (caseRecord.sys_class_name.toString()) {
+            case CIRConstants.Tables.NEAR_MISS:
+                color = 'goldenrod';
+                break;
+            case CIRConstants.Tables.HAZARD:
+                color = 'purple';
+                break;
+            default:
+                color = 'red';
+        }
+
+        var locationObject = {
+            x: parseInt(coordinates[0]),
+            y: parseInt(coordinates[1]),
+            height: 10,
+            width: 10,
+            font_size: 'inherit',
+            label: caseRecord.getDisplayValue(),
+            color: color
+        };
+        if (gs.isDebugging()) {
+            gs.debug('Returning location Object: ' + new global.JSON().encode(locationObject));
+        }
+        return locationObject;
+    };
+
+    /**
+     * Gets the map image for a location
+     * USED IN - UI Page: case_location_map
+     * 
+     * @param  {String} locationSys - SysID of the location to pull from
+     * @return {String} - returns the image path for a location within SN if found, empty otherwise
+     */
+    var getLocationMap = function(locationSys) {
+        var location = new GlideRecord(CIRConstants.Tables.LOCATION);
+        if (location.get(locationSys)) {
+            var path = location.x_fru_cir_map.getDisplayValue();
+            gs.debug('Found map in location: ' + path);
+            return path;
+        }
+        gs.debug('No map provided on location record');
+        return '';
+    };
+
+    /**
+     * Gets the status of all case types for provided locations for use on portal homepage
+     * USED IN - 
+     * 
+     * @param  {Array} locations - SysIDs of the locations to use for the querie
+     * @return {Object} - returns an object with the counts and status color for each grid column
+     */
+    var getGridStatus = function(locations) {
+        // TODO: Move foreground and background colors to CSS classes based upon a descriptive status
+        var locationArr = [];
+        while (locations.next()) {
+            locationArr.push(locations.sys_id.toString());
+        }
+        var totalLocations = locationArr.length;
+        locationArr = locationArr.toString();
+
+        gs.debug('Getting grid status for case records by class');
+        var gridStatus = {};
+        var totalCases = new GlideAggregate(CIRConstants.Tables.CASE);
+        totalCases.addQuery('location.sys_id', 'IN', locationArr);
+        totalCases.addQuery('active', true);
+        totalCases.addAggregate('COUNT', 'sys_class_name');
+        totalCases.query();
+        while (totalCases.next()) {
+            var className = totalCases.sys_class_name.toString();
+            var count = parseInt(totalCases.getAggregate('COUNT', 'sys_class_name'));
+            var status = _checkGridThreshold(className, count, totalLocations);
+            gridStatus[className] = {
+                count: count,
+                status: status,
+                color: status === 'yellow' ? 'black' : 'white'
+            };
+            gs.debug('Found table: ' + className + ' with total: ' + count + ' and status ' + status);
+        }
+
+        return gridStatus;
+    };
+
+    /**
+     * Determines the color for the threshold for a provided grid item
+     * @param  {String} gridItemName - name of the column in the grid that we are checking
+     * @param  {int} count - total number of records to compare against threshold
+     * @param  {int} totalLocations - total number of locations to multiply threshold by
+     * @return {String} - returns the color name
+     */
+    var _checkGridThreshold = function(gridItemName, count, totalLocations) {
+        var yellowThreshold = parseInt(gs.getProperty('x_fru_cir.location.yellow.threshold', 5)) *
+            totalLocations;
+        if (count < yellowThreshold) {
+            gs.debug('Count is under yellow threshold, returning green');
+            return 'green';
+        }
+
+        var orangeThreshold = parseInt(gs.getProperty('x_fru_cir.location.orange.threshold', 10)) *
+            totalLocations;
+        if (count < orangeThreshold) {
+            gs.debug('Count is under orange threshold, returning yellow');
+            return 'yellow';
+        }
+
+        var redThreshold = parseInt(gs.getProperty('x_fru_cir.location.red.threshold', 15)) *
+            totalLocations;
+        if (count < redThreshold) {
+            gs.debug('Count is under red threshold, returning orange');
+            return 'orange';
+        }
+
+        gs.debug('Count is over red threshold, returning red');
+        return 'red';
+    };
+
+    /**
+     * Returns the value of Field Label or name.
+     * USED IN - 
+     * 
+     * @param  {String} tableName - name of the table
+     * @param  {int} element - name of the element
+     * @return {Object} - returns the GlideRecord of the given query
+     */
+    var getFieldLabels = function(tableName, element) {
+        var DEFAULT_LANGUAGE = 'en';
+        var ERROR_MESSAGE = 'Unable to retrieve label for table.element:  ';
+        var userLanguage = gs.getSession().getLanguage();
+        var gr = new GlideRecord(CIRConstants.Tables.DOCUMENTATION);
+        gr.addQuery('name', tableName);
+        gr.addQuery('element', element);
+        gr.addQuery('language', userLanguage);
+        gr.query();
+        if (!gr.next()) {
+            if (userLanguage === DEFAULT_LANGUAGE) {
+                throw Error(ERROR_MESSAGE + tableName + '.' + element);
+            }
+            gr = new GlideRecord(CIRConstants.Tables.DOCUMENTATION);
+            gr.addQuery('name', tableName);
+            gr.addQuery('element', element);
+            gr.addQuery('language', DEFAULT_LANGUAGE);
+            gr.query();
+            if (!gr.next()) {
+                throw Error(ERROR_MESSAGE + tableName + '.' + element);
+            }
+        }
+        return gr;
+    };
+
+    /**
+     * Updates the days since injury and days since incident for all locations
+     * USED IN - Scheduled Script Execution: Update Location Days Without Fields
+     * 
+     * @return {void}
+     */
+    var updateLocationCounters = function() {
+        // TODO: If we actually want to materialize these values instead of calculating them, it would be done best in a business rule for case and injury_illness; this has to be scheduled to work
+        // TODO: Re-use the calculation code above?
+        var location = new GlideRecord(CIRConstants.Tables.LOCATION);
+        location.query();
+        while (location.next()) {
+            var caseRecord = new GlideRecord(CIRConstants.Tables.CASE);
+            caseRecord.addEncodedQuery(
+                "stateNOT IN96,98^occurred_onONToday@javascript:gs.daysAgoStart(0)@javascript:gs.daysAgoEnd(0)^ORoccurred_onONYesterday@javascript:gs.daysAgoStart(1)@javascript:gs.daysAgoEnd(1)"
+            );
+            caseRecord.addQuery('location', location.sys_id.toString());
+            caseRecord.setLimit(1);
+            caseRecord.query();
+            if (caseRecord.hasNext()) {
+                gs.debug(location.name + ' - New incident detected, resetting to 0 days');
+                location.x_fru_cir_days_without_incident = 0;
+            } else {
+                var incidentDays = parseInt(location.x_fru_cir_days_without_incident.toString());
+                incidentDays += 1;
+                location.x_fru_cir_days_without_incident = incidentDays;
+                gs.debug(location.name +
+                    ' - No new incidents detected, incrementing days without incident to ' +
+                    incidentDays);
+            }
+
+            var injuryRecord = new GlideRecord(CIRConstants.Tables.INJURY_ILLNESS);
+            injuryRecord.addQuery(
+                "sys_created_onONToday@javascript:gs.daysAgoStart(0)@javascript:gs.daysAgoEnd(0)^ORsys_created_onONYesterday@javascript:gs.daysAgoStart(1)@javascript:gs.daysAgoEnd(1)"
+            );
+            injuryRecord.addQuery('impacted_person.cir_case.location', location.sys_id.toString());
+            caseRecord.setLimit(1);
+            injuryRecord.query();
+            if (injuryRecord.hasNext()) {
+                gs.debug(location.name + ' - New injury detected, resetting to 0 days');
+                location.x_fru_cir_days_without_injury = 0;
+            } else {
+                var injuryDays = parseInt(location.x_fru_cir_days_without_injury.toString());
+                injuryDays += 1;
+                location.x_fru_cir_days_without_injury = injuryDays;
+                gs.debug(location.name +
+                    ' - No new injuries detected, incrementing days without injury to ' +
+                    injuryDays);
+            }
+            location.update();
+        }
+    };
+
+    /**
+     * Checks to see if there is an open investigation for a case
+     * USED IN - Pass values to Client (for Case)
+     * 
+     * @param  {sys_id} recordSys - sys_id of the case to check against
+     * @return {boolean} - returns true if an investigation already exists
+     */
+    var checkForOpenInvestigation = function(recordSys) {
+        var investigation = new GlideRecord(CIRConstants.Tables.INVESTIGATION);
+        investigation.addQuery('cir_case', recordSys);
+        investigation.addQuery('active', true);
+        investigation.setLimit(1);
+        investigation.query();
+        gs.debug('Checking for open investigations, found? ' + investigation.hasNext().toString());
+        return investigation.hasNext();
+    };
+
+    /**
+     * Cancels records associated with a case when it is cancelled
+     * USED IN - Business Rule: Cancel Investigations and Actions
+     * 
+     * @param {sys_id} caseSys - sys_id of the case we have cancelled
+     */
+    var cancelCaseAssociatedRecords = function(caseSys) {
+        CIRCaseRiskImpGenericUtilsFP().UpdateValues({
+            sysID: caseSys,
+            updateTable: CIRConstants.Tables.INVESTIGATION,
+            filterField: 'cir_case',
+            updateField: 'state',
+            newValue: CIRCaseRiskImpGenericUtilsFP().GetStateValue('closed_cancelled',
+                'investigation')
+        });
+        CIRCaseRiskImpGenericUtilsFP().UpdateValues({
+            sysID: caseSys,
+            updateTable: CIRConstants.Tables.ACTION,
+            filterField: 'parent',
+            updateField: 'state',
+            newValue: CIRCaseRiskImpGenericUtilsFP().GetStateValue('closed_incomplete', 'action')
+        });
+        CIRCaseRiskImpGenericUtilsFP().UpdateValues({
+            sysID: caseSys,
+            updateTable: CIRConstants.Tables.RISK,
+            filterField: 'parent',
+            updateField: 'state',
+            newValue: CIRCaseRiskImpGenericUtilsFP().GetStateValue('closed_incomplete', 'risk')
+        });
+    };
+
+    /**
+     * Gets the query for finding cases for the current user
+     * @return {string} - encoded query for filtering lists
+     */
+    var getMyCasesQuery = function() {
+        // TODO: Use standard Dynamic Is Me criteria instead of this entire function?
+        gs.debug('Returning Cases Query: active=true^reported_by=' + gs.getUserID() + '^ORassigned_to=' + gs
+            .getUserID());
+        return 'active=true^reported_by=' + gs.getUserID() + '^ORassigned_to=' + gs.getUserID();
+    };
+
+    /**
+     * Gets the full days since the last incident occurred
+     * @return {int} - returns an integer of the days or a string of "None"
+     */
+    var getDaysSinceLastIncident = function() {
+        var incidents = new GlideRecord(CIRConstants.Tables.INCIDENT);
+        incidents.orderByDesc('occurred_on');
+        incidents.setLimit(1);
+        incidents.query();
+        if (incidents.next()) {
+            var result = _getDaysAndSecondsSince(incidents.occurred_on.toString());
+            gs.debug('Total seconds between current moment and last incident occurred date: ' + result
+                .seconds +
+                ' which is complete days: ' + result.days);
+            return result.days;
+        }
+        gs.debug('No incidents found');
+        return gs.getMessage('None');
+    };
+
+    /**
+     * Calculates the amount of seconds and days since the last Incident
+     * @param  {Date} date - date to calculate
+     * @return {Object} - Object containing the amount of seconds and days since last Incident
+     */
+    var _getDaysAndSecondsSince = function(date) {
+        date = new GlideDateTime(date);
+        var todayDateTime = new GlideDateTime();
+        var seconds = Math.round((todayDateTime.getNumericValue() - date.getNumericValue()) / 1000);
+        return {
+            seconds: seconds,
+            days: Math.floor(seconds / 86400).toFixed(0)
+        };
+    };
+
+    /**
+     * Checks if the current user has Read access to the sys approval table
+     * @return {string} - current case SysID
+     */
+    var canApproverReadRecord = function(currentCase) {
+        var grInvestigation = new GlideRecord(CIRConstants.Tables.INVESTIGATION);
+        if (!grInvestigation.get('cir_case', currentCase)) {
+            return false;
+        }
+        return (new CIRRiskManagementUtils().CanApproverReadRecord(grInvestigation.getUniqueValue()));
+    };
+	
+	/**
+     * Checks if the current user has Read access to the sys approval table fro a Risk record
+     * @return {string} - current case SysID
+     */
+	var canApproverReadRiskRelatedCase = function(currentRisk) {
+		var cases = getCasesRelatedToRisk(currentRisk);
+		if(cases.length == 0)
+			return false;
+		
+        var answer = false;
+        cases.forEach(function(caseElement) {
+            if(canApproverReadRecord(caseElement)) {
+                answer = true;
+            }
+        });
+        return answer;
+    };
+	
+	/**
+     * gets all cases related to a case
+	 * @param {string} risk - sys_id of the risk
+     * @return {array} - array of sys_ids of related cases
+     */
+	var getCasesRelatedToRisk = function (risk) {
+		var arrayCases = [];
+		var grCaseRisk = new GlideRecord(CIRConstants.Tables.M2M_CASE_RISK);
+		grCaseRisk.addQuery('risk', risk);
+		grCaseRisk.query();
+		
+		while (grCaseRisk.next()) {
+			gs.info('HR ' + grCaseRisk.related_case.number);
+			arrayCases.push(grCaseRisk.getValue('related_case'));
+		}
+		
+		return arrayCases;
+	};
+
+
+    /**
+     * Get the Potential Severity based on the future Likelihood and Potential Consequence received
+     * @param  {String} Value of Future Likelihodd
+     * @param  {String} Value of Potential Consequence
+     *
+     * Used In Client Script - Case:  Make potential consequence - consequence
+     * Used In Client Script - Case: Make potential consequence - likelohood
+     * Used In Client Script - Risk: Make potential consequence - consequence
+     * Used In Client Script - Risk: Make potential consequence - likelohood
+     * Used In Client Script - Impact: Make potential consequence - consequence
+     * Used In Client Script - Impact: Make potential consequence - likelohood
+     *
+     * @return {String} -Value of Potential Severity that matches, false if not foud match
+     */
+    var getPotentialSeverity = function(futureLikelihood, potentialConsequence) {
+        var calculation = new GlideRecord(CIRConstants.Tables.SEVERITY_LOOKUP);
+        calculation.addQuery('potential_consequence', potentialConsequence);
+        calculation.addQuery('future_likelihood', futureLikelihood);
+        calculation.query();
+        if (calculation.next()) {
+            return calculation.getValue('potential_severity');
+        }
+        return;
+    };
+    //////////////////////////////////////REMOVE COMMENTS WHEN THE WORKFLOW CALLED RECORD IMPORT IS CREATED IN CIR
+    // /**
+    //  * Starts a data import for a request from a catalog item with an attachment and associated data source
+    //  * USED IN - Workflow: CIR Record Import
+    //  * 
+    //  * @param  {Object} request - the request item GlideRecord with the related data source and attachment to import
+    //  */
+    // var runDataImport = function(request) {
+    //     var dataSource = request.variables.data_source.toString();
+
+    //     var attachments = new GlideRecord(CIRConstants.Tables.ATTACHMENT);
+    //     attachments.addQuery('table_sys_id', dataSource);
+    //     attachments.query();
+    //     var glideSysAttachment = new GlideSysAttachment();
+    //     while(attachments.next()) {
+    //         glideSysAttachment.deleteAttachment(attachments.sys_id.toString());
+    //     }
+
+    //     GlideSysAttachment.copy('sc_req_item', request.sys_id, 'sys_data_source', dataSource);
+
+    //     var scheduledImport = new GlideRecord(CIRConstants.Tables.SCHEDULED_IMPORT_SET);
+    //     scheduledImport.addQuery('data_source', dataSource);
+    //     scheduledImport.setLimit(1);
+    //     scheduledImport.query();
+    //     if(scheduledImport.next()) {
+    //         gs.executeNow(scheduledImport);
+    //     }
+    // };
+    //////////////////////////////////////FIND WHERE THIS IS BEING USED//////////////////////////////////////
+
+    //////////////////////////////////////FIND WHERE THIS IS BEING USED//////////////////////////////////////
+    // /**
+    //  * Gets the associated contributing factors via the M2M table
+    //  * @param  {sys_id} investigationSys - the investigation we are pulling from
+    //  * @return {string} - comma-separated string of factor names
+    //  */
+    // var getSelectedFactors = function(investigationSys) {
+    //     var selectedFactors = [];
+    //     if(investigationSys) {
+    //         var factors = new GlideRecord(CIRConstants.Tables.M2M_CONTRIBUTING_FACTOR);
+    //         factors.addQuery('investigation', investigationSys);
+    //         factors.query();
+    //         while(factors.next()) {
+    //             selectedFactors.push(factors.name.toString());
+    //         }
+    //         gs.debug('Found total contributing factors in M2M: ' + selectedFactors.length +
+    //             ' for investigation: ' +
+    //             investigationSys);
+    //     }
+    //     return selectedFactors.toString();
+    // };
+    //////////////////////////////////////FIND WHERE THIS IS BEING USED//////////////////////////////////////
+
+    var CIRCaseManagementUtilsFP = Class.create();
+    var initialize = function() {};
+
+    CIRCaseManagementUtilsFP.prototype = {
+        initialize: initialize,
+        CreateAnonymousCase: createAnonymousCase,
+        GetCasesByTypeForLocation: getCasesByTypeForLocation,
+        SaveFavoriteLocation: saveFavoriteLocation,
+        GetLocationsFromFilter: getLocationsFromFilter,
+        GetLocationRecord: getLocationRecord,
+        GetLocationRecords: getLocationRecords,
+        GetCaseLocations: getCaseLocations,
+        GetLocationMap: getLocationMap,
+        GetGridStatus: getGridStatus,
+        CheckForOpenInvestigation: checkForOpenInvestigation,
+        GetFieldLabels: getFieldLabels,
+        UpdateLocationCounters: updateLocationCounters,
+        CancelCaseAssociatedRecords: cancelCaseAssociatedRecords,
+        GetMyCasesQuery: getMyCasesQuery,
+        GetDaysSinceLastIncident: getDaysSinceLastIncident,
+        CanApproverReadRecord: canApproverReadRecord,
+        GetPotentialSeverity: getPotentialSeverity, 
+		CanApproverReadRiskRelatedCase: canApproverReadRiskRelatedCase, 
+		GetCasesRelatedToRisk: getCasesRelatedToRisk
+    };
+
+    return CIRCaseManagementUtilsFP;
+})();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-01 09:38:03</sys_created_on>
+        <sys_id>3d5c080bdb0d901003b3533fd39619cf</sys_id>
+        <sys_mod_count>36</sys_mod_count>
+        <sys_name>CIRCaseManagementUtilsFP</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_3d5c080bdb0d901003b3533fd39619cf</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2020-12-09 10:34:42</sys_updated_on>
+    </sys_script_include>
+</record_update>

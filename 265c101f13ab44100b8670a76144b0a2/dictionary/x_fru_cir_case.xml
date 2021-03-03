@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="task" label="Case" max_length="40" name="x_fru_cir_case" sizeclass="36" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Category" mandatory="true" max_length="40" name="category" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Equipment Failure / Loss" sequence="20" value="equipment_damage"/>
+                <element inactive_on_update="false" label="Injury / Illness" sequence="30" value="injury_illness"/>
+                <element inactive_on_update="false" label="Non-conformance / Compliance" sequence="40" value="non_conformance"/>
+                <element inactive_on_update="false" label="Property Damage / Loss" sequence="50" value="property_damage"/>
+                <element inactive_on_update="false" label="Vehicle Damage / Loss" sequence="60" value="vehicle_damage"/>
+                <element inactive_on_update="false" label="Security" sequence="70" value="security"/>
+                <element inactive_on_update="false" label="Other" sequence="80" value="other"/>
+                <element inactive_on_update="false" label="Food Safety" sequence="90" value="food_safety"/>
+            </choice>
+        </element>
+        <element label="Category notes" max_length="40" name="category_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Potential consequence" mandatory="true" max_length="40" name="consequence" type="choice">
+            <choice/>
+        </element>
+        <element label="Coordinates" max_length="40" name="coordinates" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Duplicate Case" max_length="32" name="duplicate_case" reference="x_fru_cir_case" type="reference"/>
+        <element label="End time" max_length="40" name="end_time" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Hazard" max_length="32" name="hazard" reference="x_fru_cir_hazard" type="reference"/>
+        <element label="Immediate action" mandatory="true" max_length="4000" name="immediate_action" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Future likelihood" mandatory="true" max_length="40" name="likelihood" type="choice">
+            <choice/>
+        </element>
+        <element label="Location notes" max_length="4000" name="location_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Location type" mandatory="true" max_length="40" name="location_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Onsite" sequence="10" value="onsite"/>
+                <element inactive_on_update="false" label="Public Place" sequence="20" value="public_place"/>
+                <element inactive_on_update="false" label="Customer Site" sequence="30" value="customer_site"/>
+                <element inactive_on_update="false" label="In Transit" sequence="40" value="in_transit"/>
+                <element inactive_on_update="false" label="Other" sequence="50" value="other"/>
+            </choice>
+        </element>
+        <element label="Start time" mandatory="true" max_length="40" name="occurred_on" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" choice_field="severity" choice_table="x_fru_cir_case" default="4" label="Potential severity" max_length="40" name="potential_severity" read_only="true" type="integer">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Reported by" max_length="32" name="reported_by" reference="sys_user" type="reference"/>
+        <element default="javascript:new GlideDateTime().getDisplayValue();" label="Reported date/time" max_length="40" name="reported_date_time" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Risk" max_length="32" name="risk" reference="x_fru_cir_risk" reference_floats="true" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Actual severity" mandatory="true" max_length="40" name="severity" type="integer">
+            <choice>
+                <element inactive_on_update="false" label="Extreme" sequence="10" value="1"/>
+                <element inactive_on_update="false" label="High" sequence="20" value="2"/>
+                <element inactive_on_update="false" label="Medium" sequence="30" value="3"/>
+                <element inactive_on_update="false" label="Low" sequence="40" value="4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Total damages" max_length="20" name="total_damages" read_only="true" type="currency"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Total recovery cost" max_length="20" name="total_recovery_cost" read_only="true" type="currency"/>
+        <element attributes="edge_encryption_enabled=true" label="Total time lost" max_length="40" name="total_time_lost" read_only="true" type="glide_duration"/>
+    </element>
+</database>

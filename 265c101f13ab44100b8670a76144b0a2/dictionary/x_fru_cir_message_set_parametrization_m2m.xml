@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Message Set - Parametrization M2M" max_length="40" name="x_fru_cir_message_set_parametrization_m2m" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Message set" max_length="32" name="message_set" reference="x_fru_cir_message_set" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Situation parametrization" max_length="32" name="situation_parametrization" reference="x_fru_cir_situation_parametrization" type="reference"/>
+        <index name="index">
+            <element name="message_set"/>
+        </index>
+        <index name="index2">
+            <element name="situation_parametrization"/>
+        </index>
+    </element>
+</database>

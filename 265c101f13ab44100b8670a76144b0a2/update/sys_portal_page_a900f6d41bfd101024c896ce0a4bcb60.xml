@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update node_type="sys_portal_page" unload_date="2021-03-03 17:59:45">
+    <sys_portal_page action="INSERT_OR_UPDATE">
+        <layout display_value="layout_2_across_knowledge">46978421370031002d2440ed9dbe5db7</layout>
+        <order>3100</order>
+        <read_roles>x_fru_cir.expert,x_fru_cir.investigator</read_roles>
+        <roles/>
+        <selectable>false</selectable>
+        <sys_class_name>sys_portal_page</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-06-30 14:27:02</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a900f6d41bfd101024c896ce0a4bcb60</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIR Case Dashboard</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_portal_page_a900f6d41bfd101024c896ce0a4bcb60</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-27 14:56:00</sys_updated_on>
+        <title>CIR Case Dashboard</title>
+        <user/>
+        <view>cir_ciri_case</view>
+        <related_items_node>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone2</dropzone>
+                <offset>1</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>3781be5c1bfd101024c896ce0a4bcbe1</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3781be5c1bfd101024c896ce0a4bcbe1</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3381be5c1bfd101024c896ce0a4bcbe2</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3781be5c1bfd101024c896ce0a4bcbe1</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3381be5c1bfd101024c896ce0a4bcbe3</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Case Location Type Pyramid</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_publish</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3781be5c1bfd101024c896ce0a4bcbe1</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3781be5c1bfd101024c896ce0a4bcbe2</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3781be5c1bfd101024c896ce0a4bcbe1</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3b81be5c1bfd101024c896ce0a4bcbe2</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3781be5c1bfd101024c896ce0a4bcbe1</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3f81be5c1bfd101024c896ce0a4bcbe1</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3781be5c1bfd101024c896ce0a4bcbe1</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3f81be5c1bfd101024c896ce0a4bcbe2</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>pyramid</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3781be5c1bfd101024c896ce0a4bcbe1</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>b781be5c1bfd101024c896ce0a4bcbe1</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>61d760481b71101024c896ce0a4bcbd7</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3781be5c1bfd101024c896ce0a4bcbe1</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>b781be5c1bfd101024c896ce0a4bcbe3</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone1</dropzone>
+                <offset>2</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>3f81be5c1bfd101024c896ce0a4bcbd8</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbd8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3381be5c1bfd101024c896ce0a4bcbda</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbd8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3781be5c1bfd101024c896ce0a4bcbd9</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbd8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3781be5c1bfd101024c896ce0a4bcbda</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>pie</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbd8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3b81be5c1bfd101024c896ce0a4bcbd9</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbd8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3b81be5c1bfd101024c896ce0a4bcbda</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Cases by Type</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_publish</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbd8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3f81be5c1bfd101024c896ce0a4bcbd9</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbd8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bf81be5c1bfd101024c896ce0a4bcbd8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>00196c481b71101024c896ce0a4bcb43</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbd8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bf81be5c1bfd101024c896ce0a4bcbda</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone999</dropzone>
+                <offset>1</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>3f81be5c1bfd101024c896ce0a4bcbe9</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbe9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3781be5c1bfd101024c896ce0a4bcbea</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderFilters</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>view</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbe9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3b81be5c1bfd101024c896ce0a4bcbea</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value/>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbe9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3f81be5c1bfd101024c896ce0a4bcbea</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>My work</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbe9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>b381be5c1bfd101024c896ce0a4bcbeb</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">3f81be5c1bfd101024c896ce0a4bcbe9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bf81be5c1bfd101024c896ce0a4bcbe9</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>4419b177c611228f014c55ea1bf4b028</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone1</dropzone>
+                <offset>0</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>7381be5c1bfd101024c896ce0a4bcbc9</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbc9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3381be5c1bfd101024c896ce0a4bcbd6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.cms.RenderBlock</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbc9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3781be5c1bfd101024c896ce0a4bcbd6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Days Since Last Injury</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbc9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bb81be5c1bfd101024c896ce0a4bcbd6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>content_block_programmatic</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbc9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bf81be5c1bfd101024c896ce0a4bcbd6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbc9</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f381be5c1bfd101024c896ce0a4bcbc9</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>235568c41b71101024c896ce0a4bcb12</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone999</dropzone>
+                <offset>0</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>7381be5c1bfd101024c896ce0a4bcbe8</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbe8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7381be5c1bfd101024c896ce0a4bcbe9</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>My Groups Work</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbe8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7b81be5c1bfd101024c896ce0a4bcbe8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderFilters</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>view</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbe8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7f81be5c1bfd101024c896ce0a4bcbe8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value/>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbe8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f381be5c1bfd101024c896ce0a4bcbe8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>4b2e74081bb1101024c896ce0a4bcbdd</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7381be5c1bfd101024c896ce0a4bcbe8</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f781be5c1bfd101024c896ce0a4bcbe9</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone2</dropzone>
+                <offset>0</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>7b81be5c1bfd101024c896ce0a4bcbdf</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7b81be5c1bfd101024c896ce0a4bcbdf</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7381be5c1bfd101024c896ce0a4bcbe0</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.cms.RenderBlock</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7b81be5c1bfd101024c896ce0a4bcbdf</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7781be5c1bfd101024c896ce0a4bcbe0</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Days Since Last incident</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7b81be5c1bfd101024c896ce0a4bcbdf</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>fb81be5c1bfd101024c896ce0a4bcbdf</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>fa55a0841b71101024c896ce0a4bcbbf</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7b81be5c1bfd101024c896ce0a4bcbdf</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>fb81be5c1bfd101024c896ce0a4bcbe0</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>content_block_programmatic</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">7b81be5c1bfd101024c896ce0a4bcbdf</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>ff81be5c1bfd101024c896ce0a4bcbe0</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone1</dropzone>
+                <offset>4</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>b781be5c1bfd101024c896ce0a4bcbdd</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">b781be5c1bfd101024c896ce0a4bcbdd</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3781be5c1bfd101024c896ce0a4bcbdf</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">b781be5c1bfd101024c896ce0a4bcbdd</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3b81be5c1bfd101024c896ce0a4bcbdd</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>5e3b68c81b71101024c896ce0a4bcbb3</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">b781be5c1bfd101024c896ce0a4bcbdd</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>b381be5c1bfd101024c896ce0a4bcbde</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">b781be5c1bfd101024c896ce0a4bcbdd</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>b781be5c1bfd101024c896ce0a4bcbde</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">b781be5c1bfd101024c896ce0a4bcbdd</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bb81be5c1bfd101024c896ce0a4bcbde</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>line_bar</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">b781be5c1bfd101024c896ce0a4bcbdd</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bf81be5c1bfd101024c896ce0a4bcbdd</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">b781be5c1bfd101024c896ce0a4bcbdd</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bf81be5c1bfd101024c896ce0a4bcbde</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Cases by Day of Week</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone2</dropzone>
+                <offset>3</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>bf81be5c1bfd101024c896ce0a4bcbe5</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">bf81be5c1bfd101024c896ce0a4bcbe5</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3381be5c1bfd101024c896ce0a4bcbe6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>d6cae0c81b71101024c896ce0a4bcbf3</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">bf81be5c1bfd101024c896ce0a4bcbe5</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>3f81be5c1bfd101024c896ce0a4bcbe7</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">bf81be5c1bfd101024c896ce0a4bcbe5</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>b381be5c1bfd101024c896ce0a4bcbe7</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>bar</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">bf81be5c1bfd101024c896ce0a4bcbe5</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>b781be5c1bfd101024c896ce0a4bcbe6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">bf81be5c1bfd101024c896ce0a4bcbe5</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>b781be5c1bfd101024c896ce0a4bcbe7</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Total Recovery Costs – Top 10 Locations</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">bf81be5c1bfd101024c896ce0a4bcbe5</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bb81be5c1bfd101024c896ce0a4bcbe6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">bf81be5c1bfd101024c896ce0a4bcbe5</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>bf81be5c1bfd101024c896ce0a4bcbe6</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone1</dropzone>
+                <offset>1</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>f381be5c1bfd101024c896ce0a4bcbd7</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbd7</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7781be5c1bfd101024c896ce0a4bcbd7</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderJavascript</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbd7</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7b81be5c1bfd101024c896ce0a4bcbd7</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>846af4041bb1101024c896ce0a4bcbe9</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbd7</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7f81be5c1bfd101024c896ce0a4bcbd7</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Injuries/Illnesses</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbd7</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f381be5c1bfd101024c896ce0a4bcbd8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>x_fru_cir_body_location_map</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbd7</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f781be5c1bfd101024c896ce0a4bcbd8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone1</dropzone>
+                <offset>3</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>f381be5c1bfd101024c896ce0a4bcbdb</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbdb</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7381be5c1bfd101024c896ce0a4bcbdd</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbdb</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7781be5c1bfd101024c896ce0a4bcbdb</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a95a2c881b71101024c896ce0a4bcb88</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbdb</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f381be5c1bfd101024c896ce0a4bcbdc</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbdb</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f781be5c1bfd101024c896ce0a4bcbdc</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>bar</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbdb</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>fb81be5c1bfd101024c896ce0a4bcbdb</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbdb</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>fb81be5c1bfd101024c896ce0a4bcbdc</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Cases by State</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">f381be5c1bfd101024c896ce0a4bcbdb</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>ff81be5c1bfd101024c896ce0a4bcbdb</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone2</dropzone>
+                <offset>2</offset>
+                <page display_value="CIR Case Dashboard">a900f6d41bfd101024c896ce0a4bcb60</page>
+                <summary/>
+                <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                <sys_id>fb81be5c1bfd101024c896ce0a4bcbe3</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">fb81be5c1bfd101024c896ce0a4bcbe3</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7b81be5c1bfd101024c896ce0a4bcbe5</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>a900f6d41bfd101024c896ce0a4bcb60</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">fb81be5c1bfd101024c896ce0a4bcbe3</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>7f81be5c1bfd101024c896ce0a4bcbe3</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>56a9e0881b71101024c896ce0a4bcb10</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">fb81be5c1bfd101024c896ce0a4bcbe3</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f381be5c1bfd101024c896ce0a4bcbe4</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">fb81be5c1bfd101024c896ce0a4bcbe3</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f381be5c1bfd101024c896ce0a4bcbe5</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>CIR Case Consequence and Likelihood</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">fb81be5c1bfd101024c896ce0a4bcbe3</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>f781be5c1bfd101024c896ce0a4bcbe4</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">fb81be5c1bfd101024c896ce0a4bcbe3</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>fb81be5c1bfd101024c896ce0a4bcbe4</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 2020-06-30 16:33:44">fb81be5c1bfd101024c896ce0a4bcbe3</portal_section>
+                        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+                        <sys_created_on>2020-06-30 14:33:44</sys_created_on>
+                        <sys_id>ff81be5c1bfd101024c896ce0a4bcbe4</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+                        <sys_updated_on>2020-06-30 14:33:44</sys_updated_on>
+                        <value>pivot</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+        </related_items_node>
+    </sys_portal_page>
+</record_update>

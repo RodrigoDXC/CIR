@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Situation On Call Team" max_length="40" name="x_fru_cir_situation_on_call_team" sizeclass="2" type="collection">
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Country" mandatory="true" max_length="4000" name="country" reference="x_fru_cir_security_address_value" reference_qual="javascript: new CIRSituationUtils().GetCrisisCountries(current.country);" type="glide_list" use_reference_qualifier="advanced"/>
+        <element label="Description" max_length="1000" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" mandatory="true" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Group" mandatory="true" max_length="32" name="group" reference="sys_user_group" type="reference"/>
+        <element label="Name" max_length="255" name="name" type="string"/>
+        <index name="index">
+            <element name="dimension"/>
+        </index>
+        <index name="index2">
+            <element name="group"/>
+        </index>
+    </element>
+</database>

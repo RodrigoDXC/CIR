@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, spUtil, $location, spAriaFocusManager) {
+    var c = this;
+    c.msgs = c.data.msgs;
+
+    $scope.redirect = function(item) {
+        var url = formatRedirectUrl(item, c.options.urlAssessmentForm);
+
+        var newURL = $location.search(url);
+        spAriaFocusManager.navigateToLink(newURL.url());
+    };
+
+    var formatRedirectUrl = function(item, urlTemplate) {
+        var url;
+        var paramObj = {
+            assessment: item.sys_id
+        };
+
+        url = spUtil.format(urlTemplate, paramObj);
+        return url;
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.assessment_box {&#13;
+    position: relative;&#13;
+    cursor: pointer;&#13;
+    float: left;&#13;
+    margin: 10px;&#13;
+    height: 120px;&#13;
+    width: 160px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Widgets for the Start New Assessment page, it will show all the asessments available.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir-ciri-assessment-new</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR CIRI Assessment New</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.user</roles>
+        <script><![CDATA[(function() { 
+    initMessages();
+
+    if(!setCatalogAssessmentsData()) {
+        return;
+    }
+
+    var assessmentFormPage = CIRConstants.AssessmentPortalConstants.ASSESSMENT_PAGE;
+    options.urlAssessmentForm = 'id=' + assessmentFormPage + '&assessment={assessment}';
+
+    function setCatalogAssessmentsData() {
+        var arrAssessmentCatalogIds = [];
+        var objAssessments = {};
+        var arrAssessmentObjects = new CIRAssmtModel().GetAssessmentsInfo();
+        if(arrAssessmentObjects.length > 0) {
+            arrAssessmentObjects.forEach(function(assessment) {
+                var assessmentsCategoryDetails = new sn_sc.CatCategory(assessment.assessmentCategory.sys_id);
+                if(!assessmentsCategoryDetails.canView())
+                    return;
+
+                var assessmentCatalogId = assessment.assessmentCatalog.sys_id;
+                if(arrAssessmentCatalogIds.indexOf(assessmentCatalogId) < 0) {
+                    arrAssessmentCatalogIds.push(assessmentCatalogId);
+                }
+
+                var item = {};
+                item.sys_id = assessment.assessmentCategory.sys_id;
+                item.name = assessment.assessmentCategory.title;
+                item.description = assessment.assessmentCategory.description;
+
+                if(typeof objAssessments[assessmentCatalogId] !== 'object') {
+                    objAssessments[assessmentCatalogId] = {};
+                    objAssessments[assessmentCatalogId].assessments = [];
+                }
+                objAssessments[assessmentCatalogId].name = assessment.assessmentCatalog.title;
+                objAssessments[assessmentCatalogId].assessments.push(item);
+            });
+        }
+
+        data.assessmentCatalogs = arrAssessmentCatalogIds;
+        data.assessments = Object.keys(objAssessments).length > 0 ? objAssessments : {};
+
+        return (Object.keys(data.assessments).length > 0);
+    }
+
+    function initMessages() {
+        data.msgs = {};
+        data.msgs.assessmentChooseAssessmentMsg = gs.getMessage('cir_assmt_choose_assessment');
+        // Error messages
+        data.msgs.errorNoAssessmentsFoundMsg = gs.getMessage('cir_assmt_no_assessment_found');
+        data.msgs.errorNoAssessmentsInDataBaseMsg = gs.getMessage('cir_assmt_no_assessment_database');
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-16 12:29:17</sys_created_on>
+        <sys_id>8a4e2ce1dbca5410d4a73533f3961942</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR CIRI Assessment New</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_8a4e2ce1dbca5410d4a73533f3961942</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-27 08:55:53</sys_updated_on>
+        <template><![CDATA[<div>
+  <div ng-if="data.assessmentCatalogs && data.assessmentCatalogs.length > 0" class="panel panel-default">
+    <div class="container b-b">
+      <div class="row wrapper-sm h3">
+        <span>{{c.msgs.assessmentChooseAssessmentMsg}}</span>
+      </div>
+    </div>
+    <div ng-repeat="assessmentCatalog in data.assessmentCatalogs" class="container b-b">
+      <div class="row">
+        <div class="col-sm-12 h4">
+          <span>{{c.data.assessments[assessmentCatalog].name}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div ng-repeat="assessment in data.assessments[assessmentCatalog].assessments" class="panel panel-default assessment_box" ng-click="redirect(assessment)">
+            <div class="panel-title text-center b-b">
+              <span>{{assessment.name}}</span>
+            </div>
+            <div class="panel-body">
+              <span>{{assessment.description}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="!data.assessmentCatalogs || (data.assessmentCatalogs && data.assessmentCatalogs.length <= 0)" class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">{{c.msgs.errorNoAssessmentsFoundMsg}}</h4>
+    </div>
+    <div class="panel-body wrapper">
+      <p>{{c.msgs.errorNoAssessmentsInDataBaseMsg}}</p>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

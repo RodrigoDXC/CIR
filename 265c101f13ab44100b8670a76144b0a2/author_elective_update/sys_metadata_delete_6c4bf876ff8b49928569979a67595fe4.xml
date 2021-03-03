@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="DELETE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>locations</field>
+        <mandatory>true</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-24 13:56:37</sys_created_on>
+        <sys_id>353d39701b7f8450df7e43f4bd4bcb63</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>locations</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_ui_policy_action_353d39701b7f8450df7e43f4bd4bcb63</sys_update_name>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-24 13:56:37</sys_updated_on>
+        <table>x_fru_cir_message_set</table>
+        <ui_policy display_value="Show location">8f7b09341b7b8450df7e43f4bd4bcb15</ui_policy>
+        <visible>true</visible>
+    </sys_ui_policy_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</application>
+        <file_path/>
+        <instance_id>dd036ba12b24f0005a085b5fe8da1544</instance_id>
+        <instance_name>ignitebyte</instance_name>
+        <name>sys_ui_policy_action_353d39701b7f8450df7e43f4bd4bcb63</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>ignore</disabled><field>locations</field><mandatory>true</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>paulo.gomes</sys_created_by><sys_created_on>2020-03-24 13:56:37</sys_created_on><sys_id>353d39701b7f8450df7e43f4bd4bcb63</sys_id><sys_mod_count>0</sys_mod_count><sys_name>locations</sys_name><sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package><sys_policy/><sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope><sys_update_name>sys_ui_policy_action_353d39701b7f8450df7e43f4bd4bcb63</sys_update_name><sys_updated_by>paulo.gomes</sys_updated_by><sys_updated_on>2020-03-24 13:56:37</sys_updated_on><table>x_fru_cir_message_set</table><ui_policy display_value="Show location">8f7b09341b7b8450df7e43f4bd4bcb15</ui_policy><visible>true</visible></sys_ui_policy_action></record_update>]]></payload>
+        <payload_hash>189490659</payload_hash>
+        <record_name>locations</record_name>
+        <reverted_from/>
+        <source>e80168931b630050df7e43f4bd4bcb77</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>paulo.gomes</sys_created_by>
+        <sys_created_on>2020-03-24 13:56:37</sys_created_on>
+        <sys_id>604d79701b7f8450df7e43f4bd4bcb7e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1710cd4b0460000001</sys_recorded_at>
+        <sys_updated_by>paulo.gomes</sys_updated_by>
+        <sys_updated_on>2020-03-24 13:56:37</sys_updated_on>
+        <type>UI Policy Action</type>
+        <update_guid>684d7970477f84509353a6486e858d7d</update_guid>
+        <update_guid_history>684d7970477f84509353a6486e858d7d:189490659</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-03-26 16:31:57</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_policy_action">sys_ui_policy_action</sys_db_object>
+        <sys_id>6c4bf876ff8b49928569979a67595fe4</sys_id>
+        <sys_metadata>353d39701b7f8450df7e43f4bd4bcb63</sys_metadata>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>locations</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_parent display_value="Show location">8f7b09341b7b8450df7e43f4bd4bcb15</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_scope_delete display_value="">07be063cf98a46ca9ed21f8f03a6ec04</sys_scope_delete>
+        <sys_update_name>sys_metadata_delete_6c4bf876ff8b49928569979a67595fe4</sys_update_name>
+        <sys_update_version display_value="sys_ui_policy_action_353d39701b7f8450df7e43f4bd4bcb63">604d79701b7f8450df7e43f4bd4bcb7e</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-03-31 23:00:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

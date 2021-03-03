@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Situation Task Template - Parametrization M2M" max_length="40" name="x_fru_cir_situation_task_template_parametrization_m2m" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Situation parametrization" max_length="32" name="situation_parametrization" reference="x_fru_cir_situation_parametrization" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Situation task template" max_length="32" name="situation_task_template" reference="x_fru_cir_situation_task_template" type="reference"/>
+        <index name="index">
+            <element name="situation_parametrization"/>
+        </index>
+        <index name="index2">
+            <element name="situation_task_template"/>
+        </index>
+    </element>
+</database>

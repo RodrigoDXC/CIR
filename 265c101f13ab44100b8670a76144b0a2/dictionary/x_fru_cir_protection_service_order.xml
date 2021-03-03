@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="task" label="Protection Service Order" max_length="40" name="x_fru_cir_protection_service_order" sizeclass="2" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false,sysparm_view=vehicles" label="Assigned vehicle" max_length="32" name="assigned_vehicle" reference="x_fru_cir_vehicle" reference_qual="javascript: new CIRPersonalProtectionUtils().GetAvailableVehicles(current.sys_id, current.start_date, current.end_date)" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Bodyguards" mandatory="true" max_length="4000" name="bodyguards" reference="x_fru_cir_protection_profile" reference_qual="javascript: new CIRPersonalProtectionUtils().GetAvailableBG(current.start_date, current.end_date, current.start_time, current.end_time,current.service.vip_alias)" type="glide_list" use_reference_qualifier="advanced"/>
+        <element label="End date" mandatory="true" max_length="40" name="end_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="End time" max_length="40" name="end_time" type="glide_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Service" mandatory="true" max_length="32" name="service" reference="x_fru_cir_protection_service" reference_qual="javascript:&quot;type=&quot; + current.service_type" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Agenda" max_length="32" name="service_details" reference="x_fru_cir_protected_agenda" reference_qual="javascript: new CIRPersonalProtectionUtils().AgendaRefQual();" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="type" choice_table="x_fru_cir_protection_service" label="Service type" mandatory="true" max_length="40" name="service_type" type="choice">
+            <choice/>
+        </element>
+        <element label="Start date" mandatory="true" max_length="40" name="start_date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Start time" max_length="40" name="start_time" type="glide_time"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Tools used" max_length="4000" name="tools_used" reference="x_fru_cir_psi_tool" reference_qual="type=tool^active=true^EQ" reference_qual_condition="type=tool^active=true^EQ" type="glide_list"/>
+    </element>
+</database>

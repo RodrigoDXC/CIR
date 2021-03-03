@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_fru_cir.CIRPSIGetFMAData</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script Incldue to get Facility Types if FMA is enabled</description>
+        <name>CIRPSIGetFMAData</name>
+        <script><![CDATA[var CIRPSIGetFMAData = function() {
+	var tables = CIRConstants.Tables;
+
+	var getFacilityTypes = function (){
+
+		var facilityTypes = [];
+
+		// Get the types of buildings:
+		var buildingTypesGr = new GlideRecord("x_lsmcb_fm_facility_type");
+
+		buildingTypesGr.addEncodedQuery("table!=x_lsmcb_fm_floor");
+		buildingTypesGr.addJoinQuery(tables.SECURITY_LOCATION, "label", "building_type");
+		buildingTypesGr.query();
+
+		while (buildingTypesGr.next()) {
+
+			facilityTypes.push(buildingTypesGr.sys_id.toString());
+		}
+
+		// Get the types of spaces
+		var spaceTypeGR = new GlideRecord("x_lsmcb_fm_facility_type");
+
+		spaceTypeGR.addEncodedQuery("table!=x_lsmcb_fm_floor");
+		spaceTypeGR.addJoinQuery(tables.SECURITY_LOCATION, "label", "space_type");
+		spaceTypeGR.query();
+
+		while (spaceTypeGR.next()) {
+
+			facilityTypes.push(spaceTypeGR.sys_id.toString());
+		}
+
+		return facilityTypes.toString();
+	};
+
+	var getIncidentLocations = function(department, facilityType){
+		var type = facilityType.table == "x_lsmcb_fm_room" ? "space_type" : "building_type";
+		var query = type + "=" + facilityType.label + "^main_department=" + department;
+		return query;
+	};
+
+	
+	var getDepartments = function (facilityType) {
+
+		/*var gr = new GlideRecord("cmn_department");
+    gr.addJoinQuery("x_lsmcb_fsm_fsm_locations", "sys_id", "main_department");
+    gr.query();
+
+    var departments = [];
+
+    while (gr.next()) {
+        departments.push(gr.sys_id.toString());
+    }
+
+    return departments.toString();*/
+
+		gs.info("Facility type value: " + facilityType.value + " || Facility type label: " + facilityType.label + " || Facility type table: " + facilityType.table);
+
+		var type = facilityType.table == "x_lsmcb_fm_room" ? "space_type" : "building_type";
+
+		var gr = new GlideRecord(tables.SECURITY_LOCATION);
+		gr.addEncodedQuery(type + "=" + facilityType.label);
+		gr.addJoinQuery("cmn_department", "main_department", "sys_id");
+		gr.query();
+
+		var departments = [];
+
+		while (gr.next()) {
+
+			var departmentString = departments.toString();
+
+			if (departmentString.indexOf(gr.main_department.sys_id.toString()) == -1) {
+				departments.push(gr.main_department.sys_id);
+			}
+		}
+
+		return departments.toString();
+	};
+	
+	return {
+		GetIncidentLocations: getIncidentLocations,
+		GetFacilityTypes: getFacilityTypes,
+		GetDepartments: getDepartments
+	};
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>hugo.reis</sys_created_by>
+        <sys_created_on>2020-07-01 14:54:48</sys_created_on>
+        <sys_id>0ebf3f64dbf95010bf9ead8ed3961964</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIRPSIGetFMAData</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_script_include_0ebf3f64dbf95010bf9ead8ed3961964</sys_update_name>
+        <sys_updated_by>Hugo.Reis</sys_updated_by>
+        <sys_updated_on>2020-09-16 14:38:42</sys_updated_on>
+    </sys_script_include>
+</record_update>

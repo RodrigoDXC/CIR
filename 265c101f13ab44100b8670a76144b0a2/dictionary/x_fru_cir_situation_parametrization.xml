@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Situation Parametrization" max_length="40" name="x_fru_cir_situation_parametrization" sizeclass="1" type="collection">
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Buildings" max_length="4000" name="buildings" reference="x_fru_cir_security_location" reference_qual="javascript: new CIRSituationUtils().GetBuildingsByCountries(current.buildings,current.country);" type="glide_list" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Category" mandatory="true" max_length="32" name="category" reference="x_fru_cir_situation_category" reference_qual="javascript: var query = new CIRSituationUtils().FilterCatByDimensionQuery(current.dimension.sys_id); query" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="country" choice_table="cmn_location" label="Country" mandatory="true" max_length="40" name="country" type="choice">
+            <choice/>
+        </element>
+        <element label="Description" max_length="400" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Dimension" mandatory="true" max_length="32" name="dimension" reference="x_fru_cir_situation_dimension" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Location groups" max_length="1024" name="location_groups" reference="x_fru_cir_location_group" reference_qual="javascript: new CIRSituationUtils().GetLocationsListField(&quot;countries&quot;, current.location_groups, new CIRSituationUtils().GetCountryAddressID(current.country));" type="glide_list" use_reference_qualifier="advanced"/>
+        <element label="Name" mandatory="true" max_length="80" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="On call team" max_length="32" name="on_call_team" read_only="true" reference="x_fru_cir_situation_on_call_team" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Virtual locations" max_length="4000" name="virtual_locations" reference="x_fru_cir_security_virtual_location" reference_qual="javascript: new CIRSituationUtils().GetLocationsListField(&quot;country&quot;,  current.virtual_locations,  new CIRSituationUtils().GetCountryAddressID(current.country));" type="glide_list" use_reference_qualifier="advanced"/>
+        <index name="index">
+            <element name="category"/>
+        </index>
+        <index name="index2">
+            <element name="on_call_team"/>
+        </index>
+        <index name="index3">
+            <element name="dimension"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="task" label="Physical Security Incident" max_length="40" name="x_fru_cir_physical_security_incident" sizeclass="7" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Asset type" mandatory="true" max_length="32" name="asset_type" reference="x_fru_cir_psi_asset_type" reference_qual="active=true^class=psi^EQ" reference_qual_condition="active=true^class=psi^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Send notification after submitting?" max_length="40" name="auto_submit_notification" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false,tree_picker=true" label="Category" mandatory="true" max_length="32" name="category" reference="x_fru_cir_psi_category" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="City" max_length="32" name="city" reference="x_fru_cir_security_address_value" reference_qual="javascript:  var query = 'sys_idIN' + new CIRPSIUtils().AddrValueFilter('city',current);  + ''; query" type="reference" use_reference_qualifier="advanced"/>
+        <element label="Converted cost" max_length="40" name="converted_cost" read_only="true" type="string"/>
+        <element label="Cost of incident" max_length="40" name="cost_of_incident" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="country" choice_table="cmn_location" label="Country" max_length="40" name="country" type="choice">
+            <choice/>
+        </element>
+        <element default="javascript: var gdt = new GlideDateTime(); var date = gdt.getDate(); var gdt2 = new GlideDateTime(); gdt2.setDisplayValue(date + ' 12:00:00'); gdt2.getDisplayValue();" label="Date" mandatory="true" max_length="40" name="date_occurred" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false,ref_ac_columns=street;city;state;country,ref_ac_columns_search=true,ref_auto_completer=AJAXTableCompleter" label="Location" mandatory="true" max_length="32" name="inc_location" reference="x_fru_cir_security_location" reference_qual="javascript: var query = new CIRPSIUtils().BuildPSILocationQuery(current.country, current.state_province, current.city); query" type="reference" use_reference_qualifier="advanced"/>
+        <element label="Last report" max_length="40" name="last_report" read_only="true" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Local currency" mandatory="true" max_length="32" name="local_currency" reference="fx_currency" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Report to" max_length="4000" name="report_to" reference="sys_user" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Result" mandatory="true" max_length="40" name="result" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Accomplished" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Attempted" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="On-Going" sequence="3" value="3"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="State/Province" max_length="32" name="state_province" reference="x_fru_cir_security_address_value" reference_qual="javascript:  var query = 'sys_idIN' + new CIRPSIUtils().AddrValueFilter('state',current);  + ''; query" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true" label="Upload" max_length="40" name="upload" type="file_attachment"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" default="javascript: gs.getUserID();" label="User" mandatory="true" max_length="32" name="user" reference="sys_user" type="reference"/>
+    </element>
+</database>

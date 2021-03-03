@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function( $rootScope ,$scope, $location, $window, spUtil, amb, $http, spAriaUtil, $timeout, spNavStateManager) {
+    var c = this;
+    c.index = 0;
+    $scope.showContributingFactor = function(category, index) {
+        c.index = index;
+        c.data.viewRecords = c.data.records[index].data;
+        c.data.records.forEach(function(element, i) {
+            if (i == index) {
+                element.selected = true;
+            } else {
+                element.selected = false;
+            }
+        })
+
+
+    }
+
+    $scope.closeModal2 = function() {
+        $scope.$parent.$parent.$dismiss();
+    }
+
+
+    $scope.changeClient = function(record) {
+        if (record.data[0].updatedCheck === true || record.data[0].updatedCheck === false) {
+            record.data[0].updatedCheck = null;
+        } else {
+            record.data[0].updatedCheck = !record.data[0].check;
+        }
+    };
+
+    $scope.check = function(newcheck, oldcheck) {
+        if (newcheck === true || newcheck === false) {
+            return newcheck;
+        } else {
+            return oldcheck;
+        }
+    };
+
+    $scope.save = function(records) {
+        var filtered = [];
+
+        records.forEach(function(category) {
+            filtered = filtered.concat(
+                category.records.filter(function(value) {
+                    return value.data[0].updatedCheck === true || value.data[0].updatedCheck === false
+                }))
+        });
+
+        filtered = filtered.map(function(item) {
+            return item.data[0].sys_id
+        });
+        var inputSave = {
+            listModified: filtered,
+            investigation: c.data.investigation,
+            table: c.data.table
+        }
+        $scope.server.get(inputSave).then(function(resp) {
+			$rootScope.$broadcast('updateContributingFactorsCount', resp.data.count);
+            $scope.$parent.$parent.$dismiss();
+
+        });
+
+    }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.panel-heading {&#13;
+  padding-left: 8px;&#13;
+}&#13;
+&#13;
+thead {&#13;
+  border-bottom: 1px solid #ddd;&#13;
+}&#13;
+&#13;
+table {&#13;
+  margin-bottom: 0;&#13;
+}&#13;
+&#13;
+.table &gt; thead &gt; tr &gt; th {&#13;
+  border: 1px solid #ddd;&#13;
+  cursor: pointer;&#13;
+  vertical-align: middle;&#13;
+&#13;
+  &amp;:nth-child(2) {&#13;
+    border-left: none;&#13;
+  }&#13;
+&#13;
+&#13;
+&#13;
+  &amp;:last-child {&#13;
+    border-right: none;&#13;
+  }&#13;
+}&#13;
+&#13;
+th i {&#13;
+  display: inline-block;&#13;
+  margin-left: 5px;&#13;
+  color: #A0A0A0;&#13;
+}&#13;
+&#13;
+th .disabled{&#13;
+  color:#ddd;&#13;
+}&#13;
+&#13;
+.th-title {&#13;
+  display: inline-block;&#13;
+  color: $primary;&#13;
+}&#13;
+&#13;
+.panel-body {&#13;
+  overflow: auto;&#13;
+  padding-left: 8px;&#13;
+}&#13;
+&#13;
+&#13;
+.selected {&#13;
+  color: #fff;&#13;
+  background-color: $data-table-selected;&#13;
+  border-color: 1px solid #fff;&#13;
+}&#13;
+&#13;
+tbody tr:last-child {&#13;
+  border-bottom: none;&#13;
+}&#13;
+&#13;
+.pruned-msg {&#13;
+  padding-bottom: 10px;&#13;
+  padding-left: 4px;&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.pruned-msg-filter-pad {&#13;
+  padding-top:8px;&#13;
+}&#13;
+&#13;
+.filter-breadcrumbs {&#13;
+  border-bottom: 1px solid #ddd;&#13;
+  padding-top: 3px;&#13;
+}&#13;
+&#13;
+.dropdown-toggle {&#13;
+  background: none;&#13;
+  padding: 0 0 4px 0;&#13;
+}&#13;
+&#13;
+.sp-list-cell {&#13;
+  white-space: pre-wrap;&#13;
+}&#13;
+&#13;
+.dropdown {&#13;
+  .glyphicon-menu-hamburger:focus {&#13;
+ 		outline: thin dotted;&#13;
+		outline: 5px auto $input-border-focus;&#13;
+		outline-offset: -2px; &#13;
+	}&#13;
+}&#13;
+.category-picker {&#13;
+margin-left : 3px;&#13;
+border: 1px solid black;&#13;
+}&#13;
+input[type=checkbox]&#13;
+{&#13;
+  /* Double-sized Checkboxes */&#13;
+  -ms-transform: scale(1.5); /* IE */&#13;
+  -moz-transform: scale(1.5); /* FF */&#13;
+  -webkit-transform: scale(1.5); /* Safari and Chrome */&#13;
+  -o-transform: scale(1.5); /* Opera */&#13;
+  transform: scale(1.5);&#13;
+  margin-left: 40%;&#13;
+}&#13;
+.right{&#13;
+float: right;&#13;
+  margin-top : 10px;&#13;
+}&#13;
+.checkbox {&#13;
+	width : 30px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>cir_ciri_contributing_factors</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CIR_CIRI - Contributing Factors</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_fru_cir.investigator</roles>
+        <script><![CDATA[(function() {
+    data.investigation = input.investigation || options.investigation;
+    data.table = options.table || input.table;
+    data.fields = input.field || ['name'];
+    data.records = new CIRRiskManagementUtils().GetContributingFactors(data.table, data.fields, data.investigation);
+    data.viewRecords = data.records[0].data;
+    data.headers = [' '];
+    data.no_records = gs.getMessage('No records found');
+	data.count = new CIRRiskManagementUtils().ContributingFactorsCount(data.investigation);
+
+	if(input.listModified && input.listModified.length > 0){
+		data.count = new CIRRiskManagementUtils().SaveContributingactors(data.investigation, input.listModified);
+	}
+	
+    var fieldsAux = $sp.getFields(new GlideRecord(data.table), data.fields.toString());
+    fieldsAux.forEach(function(field) {
+        data.headers.push(field.label);
+    });
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>Antonio.Carvalho@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-10-02 09:58:06</sys_created_on>
+        <sys_id>b98b51a6dbeb5810d4a73533f3961913</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIR_CIRI - Contributing Factors</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sp_widget_b98b51a6dbeb5810d4a73533f3961913</sys_update_name>
+        <sys_updated_by>hugo.reis</sys_updated_by>
+        <sys_updated_on>2021-01-04 08:39:15</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+     
+  <span ng-repeat="cat in c.data.records" >
+  <a class='btn action-btn' ng-class=" cat.selected ? 'btn-primary' : 'btn-secondary' " ng-click="showContributingFactor(cat.value, $index)">{{cat.label}} </a>
+    </span>
+
+    <div class="panel-body">
+      <table class='table table-striped' ng-if="data.records.length > 0">
+        <thead>
+          <tr>
+            
+            <th ng-repeat="header in c.data.headers">
+              {{ header }}
+            </th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr ng-repeat="record in c.data.records[c.index].records ">
+          <td class='sp-list-cell'> 
+            <input type="checkbox"  ng-checked="check(record.data[0].updatedCheck, record.data[0].check)" ng-click="changeClient(record)" />
+            </td>
+           
+            <td class='sp-list-cell'>
+              {{ record.data[1]}} 
+            
+          </tr>
+        </tbody>
+
+      </table>
+      <div style="margin:20px" ng-if="data.records.length == 0">
+        <span style="font-weight: 500;">{{ data.no_records }}</span>
+      </div>     
+    </div>
+   
+  
+ 
+<div class="modal-footer ng-scope">
+    <button ng-click="save(c.data.records)" class="btn btn-primary action-btn btn-event right">${Save}</button>
+  </div>
+   </div>
+
+]]></template>
+    </sp_widget>
+</record_update>

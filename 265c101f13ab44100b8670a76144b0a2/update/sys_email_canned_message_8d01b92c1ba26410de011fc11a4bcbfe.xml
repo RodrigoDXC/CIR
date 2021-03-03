@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_email_canned_message">
+    <sys_email_canned_message action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <body><![CDATA[<p>Approval: ${approval}Approval: ${approval}</p>
+<p>Approval history: ${approval_history}<br /><br /><br /></p>]]></body>
+        <condition table="x_fru_cir_incident">opened_byISNOTEMPTY^EQ<item endquery="false" field="opened_by" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <group/>
+        <sys_class_name>sys_email_canned_message</sys_class_name>
+        <sys_created_by>rodrigo.ortega@dxc.com</sys_created_by>
+        <sys_created_on>2021-02-22 07:29:40</sys_created_on>
+        <sys_id>8d01b92c1ba26410de011fc11a4bcbfe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Notificar Usuario</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>sys_email_canned_message_8d01b92c1ba26410de011fc11a4bcbfe</sys_update_name>
+        <sys_updated_by>rodrigo.ortega@dxc.com</sys_updated_by>
+        <sys_updated_on>2021-02-22 07:29:40</sys_updated_on>
+        <table>x_fru_cir_incident</table>
+        <title>Notificar Usuario</title>
+        <user/>
+    </sys_email_canned_message>
+</record_update>

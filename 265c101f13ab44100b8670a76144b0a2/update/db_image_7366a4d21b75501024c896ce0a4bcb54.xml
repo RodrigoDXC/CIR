@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category/>
+        <format>png</format>
+        <height>60</height>
+        <image>4986ecd21b75501024c896ce0a4bcb96</image>
+        <name>cir_osha.png</name>
+        <size_bytes>953</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-06 09:34:00</sys_created_on>
+        <sys_id>7366a4d21b75501024c896ce0a4bcb54</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>cir_osha.png</sys_name>
+        <sys_package display_value="Corporate Incident Response" source="x_fru_cir">265c101f13ab44100b8670a76144b0a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Corporate Incident Response">265c101f13ab44100b8670a76144b0a2</sys_scope>
+        <sys_update_name>db_image_7366a4d21b75501024c896ce0a4bcb54</sys_update_name>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-06 09:34:07</sys_updated_on>
+        <thumbnail/>
+        <width>60</width>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color>#ffffff</average_image_color>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/png</content_type>
+        <file_name>image</file_name>
+        <hash>343bd1a54b21a29adf4adcf2a865fd0667914e346d3688101edc2a6d5ebcfddb</hash>
+        <image_height>60</image_height>
+        <image_width>60</image_width>
+        <size_bytes>953</size_bytes>
+        <size_compressed>976</size_compressed>
+        <state>available</state>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-06 09:34:06</sys_created_on>
+        <sys_id>4986ecd21b75501024c896ce0a4bcb96</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_updated_by>Jorge.Diogo@fruitionpartners.pt</sys_updated_by>
+        <sys_updated_on>2020-07-06 09:34:07</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>7366a4d21b75501024c896ce0a4bcb54</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="4986ecd21b75501024c896ce0a4bcb96">4986ecd21b75501024c896ce0a4bcb96</sys_attachment>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-06 09:34:06</sys_created_on>
+        <sys_id>8986ecd21b75501024c896ce0a4bcb96</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>AbkDRvyJUE5HDQoaCgAAAA1JSERSAAAAPAAAADwIAgAAALWeTiUAAAABc1JHQgCuzhzpAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xNkRpr/UAAAMpSURBVGhD7dhPTxNBGMdx3wkkvgIVrC1gxUpCPGCICeIZgwnoGwBfAS9AvFPP1HN7rlfuXOuxHMuxfsmzLNNxun/meXYJiU9+aXZnp7OfHWbZhUePFxYfXP6jb9N5tf6r1/MaDWOPPjw4uL6+nk6nv4dD75BVjNGpWKoityXaE0tV4TZDB8UUjR8/7HqdlbFBZ4g59OP01Ha+DdC5Ytk1dGvRBcVSVm4VupRYysQdj44QU39GIx493lBlE4nWiDmqnO8YtFIsuxp3abSJWCraXQ6tEZ+cnCT7TsW5S6A1Yr7OJ9tJq1Nph+IpitaIyeXlJTNt5S6EVopTKD1N3PnobDFJ9mfrX7EUbsZkKSf7ThV356BzxcGj6ek9sZTenYVWiklQRindc9FK8WqzJePEubNfwcNopdhLhFtO5A7iJoDWi9trL9fb7Y3Om3RMW7eP1otJe3Wt3+8/f7aUtpCf3W7Se7bEPegPkn2n5rln0CZistpq0f5pb89tJPjkK16JO3g06L5DW4nJ6feb03fPzrx2YuJO0EpxY2mZT5ZEcmC2hsMhc//69tr07hu0UpyGpXx8dDSZTJIe0ynbzPrSk6duN5K9vnPvyyy0/D/u6uoq2Z+t4K/Sd1tbsjakeufnK82m14dL5YKTHk4Ja97PwZ2jnOXBEMVnmrzd3Ly4uOAoS4LP0Wi00em4HfRikn8jlnI3Gw2WBIuE7c/7++Px+P32dnrUREzu0ETp5nbc3dnhnpPHCo8Ytmlh+tm1EpMZNNG4WQmN5eWVxgt3QB4x3KCGYuKjSbTb46b5evjFUEwCaBLt9sYh8/pHi0kYTUzcVYjJXDRRuisSkyw0iXDzPMv4ol5MctCklFvOWqmY5KNJQXc9YlIITXLdtYlJUTTJcPPyVJuYlECTIIuWOsWkHJp4ODHVKSal0SQl3ouYxKAJGv44uBcxiURLvh0f1y8mKnRwmqsWExWaeG4RBy+GMhETLZqkxHrExABNgGbfl4ZiYoOW1CMmlmhk+BLpbfGmaismlmjCS4g72fJubR5jNEkXSUViYo8muAf9gddomErQVecBohcW/wJBZmObC2DXlgAAAABJRU5ErkJgghgmgzK5AwAA</data>
+        <length>1288</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="4986ecd21b75501024c896ce0a4bcb96">4986ecd21b75501024c896ce0a4bcb96</sys_attachment>
+        <sys_created_by>Jorge.Diogo@fruitionpartners.pt</sys_created_by>
+        <sys_created_on>2020-07-06 09:34:06</sys_created_on>
+        <sys_id>0d86ecd21b75501024c896ce0a4bcb96</sys_id>
+    </sys_attachment_doc>
+</record_update>
